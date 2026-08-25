@@ -91,7 +91,7 @@ One task equals one logical change. Do not combine a feature, refactor, dependen
 
 - After every task that allocates materially, report host peak RSS and `torch.cuda.max_memory_allocated()` when CUDA is available.
 - The learned-fusion hard CUDA cap is **1.50 GiB on Modal**. Reaching or exceeding it is a stop condition. Do not reduce batch size, candidate depth, feature dimension, or precision silently.
-- The local 2 GiB MX130 with CPU-only PyTorch is not approved for training or retriever score extraction. Run environment probes and optimizer-bearing QARF/CARF/QPAF jobs only in the approved Modal App on `L4`. Run the L4 extraction preflight first; use `A100-40GB` only for full BGE-M3/ColQwen2.5 extraction when the frozen 23.5 GiB guard rejects L4 or measured headroom is under 15%.
+- The local 2 GiB MX130 with CPU-only PyTorch is not approved for training or retriever score extraction. Run environment probes and optimizer-bearing QARF/CARF/QPAF jobs only in the approved Modal App on `L4`. The measured L4 capacity is 22.034 GiB, below the frozen 23.5 GiB extraction guard, so run full BGE-M3/ColQwen2.5 extraction on `A100-40GB`; never weaken the guard or change batch size silently.
 - Use a pinned Modal Image, explicit Function timeout, named Secrets, and a persistent Volume. Commit the Volume only after a successful atomic artifact write; never treat container-local files as persistent results.
 - Record the Modal package version, image-definition hash, Function name, App/run identifier, requested and actual GPU, driver, CUDA, PyTorch, Volume, commit, config hash, and data hashes in every remote run manifest.
 - Stream Parquet query batches. Do not materialize all dataset features on GPU.
