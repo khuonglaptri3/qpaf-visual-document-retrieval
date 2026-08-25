@@ -15,3 +15,10 @@ def test_modal_image_uses_the_frozen_linux_lock() -> None:
     assert modal_app.REQUIREMENTS_LOCK_SHA256 == expected_lock_hash
     assert modal_app.IMAGE_DEFINITION["requirements_lock_sha256"] == expected_lock_hash
     assert modal_app.IMAGE_DEFINITION["python"] == "3.11"
+
+
+def test_modal_runtime_receives_the_lock_used_for_its_image() -> None:
+    source = (ROOT / "modal_app.py").read_text(encoding="utf-8")
+    assert ".add_local_file(" in source
+    assert 'remote_path="/root/requirements-lock.txt"' in source
+    assert "copy=True" in source

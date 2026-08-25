@@ -50,6 +50,10 @@ IMAGE_DEFINITION_SHA256 = hashlib.sha256(
 image = modal.Image.debian_slim(python_version=IMAGE_DEFINITION["python"]).pip_install_from_requirements(
     str(REQUIREMENTS_LOCK_PATH),
     extra_options="--require-hashes",
+).add_local_file(
+    str(REQUIREMENTS_LOCK_PATH),
+    remote_path="/root/requirements-lock.txt",
+    copy=True,
 )
 volume = modal.Volume.from_name(VOLUME_NAME, create_if_missing=True)
 hf_secret = modal.Secret.from_name(
