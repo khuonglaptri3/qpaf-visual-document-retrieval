@@ -1,0 +1,32 @@
+{
+  "actual_gpu": "NVIDIA A100-SXM4-40GB",
+  "actual_gpu_vram_bytes": 42405855232,
+  "actual_gpu_vram_gib": 39.494,
+  "app_name": "qpaf-research",
+  "cuda_available": true,
+  "cuda_runtime": "13.0",
+  "cudnn": 91900,
+  "driver": "580.95.05",
+  "function_call_id": "fc-01M0W0Z410FZMGENQT80BQN890",
+  "function_name": "environment-probe",
+  "function_timeout_seconds": 600,
+  "hf_secret_name": "huggingface-secret",
+  "hf_token_available": true,
+  "image_definition": {
+    "base": "modal.Image.debian_slim",
+    "pip": [
+      "torch==2.11.0"
+    ],
+    "python": "3.11"
+  },
+  "image_definition_sha256": "b82d762f59b93d22f335614e578629e9c7bcf364ac4837c57bc72861e99de650",
+  "modal": "1.4.2",
+  "modal_task_id": "ta-01M0W0Z4JGZBCVZYA7M490N1CR",
+  "platform": "Linux-4.19.0-gvisor-x86_64-with-glibc2.36",
+  "python": "3.11.12 (main, May 21 2025, 23:34:13) [GCC 12.2.0]",
+  "requested_gpu": "A100-40GB",
+  "source_commit": "355be9c65dda98489fc838bcae18d72270a4920b",
+  "torch": "2.11.0+cu130",
+  "volume_mount": "/vol",
+  "volume_name": "qpaf-artifacts"
+}
