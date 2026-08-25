@@ -14,5 +14,5 @@ secret:
 image:
   base: modal.Image.debian_slim
   python: "3.11"
-  pip:
-    - torch==2.11.0
+  requirements_lock: requirements-lock.txt
+  requirements_lock_sha256: 17e6673bc89d0e10470c27250c34961058308823399c6b003519576cdd46c1be

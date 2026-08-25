@@ -1,0 +1,57 @@
+schema_version: 1
+metadata_checked_at_utc: "2026-08-25T09:00:00Z"
+execution_boundary:
+  local_allowed:
+    - documentation
+    - non_training_tests
+    - schema_validation
+    - cached_score_analysis
+  modal_required:
+    - optimizer_steps
+    - retriever_score_extraction
+local:
+  python: "3.13"
+  dependency_policy: local tooling is separate from the Linux Modal lock
+modal:
+  python: "3.11"
+  modal: "1.4.2"
+  requirements_input: requirements-modal.in
+  requirements_lock: requirements-lock.txt
+  requirements_lock_sha256: 17e6673bc89d0e10470c27250c34961058308823399c6b003519576cdd46c1be
+  default_gpu: L4
+  score_extraction_gpu: A100-40GB
+  volume: qpaf-artifacts
+  secret: huggingface-secret
+packages:
+  torch: "2.7.1"
+  torchvision: "0.22.1"
+  vidore-benchmark: "5.0.0"
+  colpali-engine: "0.3.12"
+  transformers: "4.53.3"
+  datasets: "3.6.0"
+  numpy: "2.2.6"
+  pandas: "2.2.3"
+  pyarrow: "20.0.0"
+  Pillow: "11.3.0"
+  PyYAML: "6.0.2"
+  matplotlib: "3.10.3"
+bm25:
+  implementation: vidore_benchmark.retrievers.bm25_retriever.BM25Retriever
+  package: vidore-benchmark
+  package_version: "5.0.0"
+models:
+  bge_m3:
+    id: BAAI/bge-m3
+    revision: 5617a9f61b028005a4858fdac845db406aefb181
+    license: mit
+    gated: false
+  dse:
+    id: MrLight/dse-qwen2-2b-mrl-v1
+    revision: 3fde4464ea72da2a863ed8fa51f0f1b8045f0426
+    license: apache-2.0
+    gated: false
+  colqwen25:
+    id: vidore/colqwen2.5-v0.2
+    revision: dcbe8d9cede518bce830488364ba0e40c873645b
+    license: mit
+    gated: false

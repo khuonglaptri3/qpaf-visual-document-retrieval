@@ -1,0 +1,134 @@
+{
+  "blockers": [
+    "Dataset payloads were intentionally not downloaded.",
+    "File counts, file SHA-256 values, split hashes, and qrels hashes are unavailable.",
+    "ViMDoc page-level qrels eligibility is unresolved."
+  ],
+  "dataset_count": 4,
+  "datasets": [
+    {
+      "download_performed": false,
+      "download_status": "not_downloaded",
+      "id": "Qiuchen-Wang/ViDoSeek",
+      "key": "vidoseek",
+      "license": "apache-2.0",
+      "local_dir": "/vol/datasets/vidoseek/e91a92ba5f38690696c7e66be5c5474b54c6e791",
+      "missing_materialization_fields": [
+        "local_file_count",
+        "local_file_sha256",
+        "qrels_sha256",
+        "split_sha256"
+      ],
+      "qrels_contract": "annotations_in_vidoseek_json_unverified",
+      "remote_file_count": 6,
+      "remote_metadata_verified": true,
+      "required_files": [
+        ".gitattributes",
+        "README.md",
+        "slidevqa_pdf_document.zip",
+        "slidevqa_refined.json",
+        "vidoseek.json",
+        "vidoseek_pdf_document.zip"
+      ],
+      "revision": "e91a92ba5f38690696c7e66be5c5474b54c6e791",
+      "role": "discovery"
+    },
+    {
+      "download_performed": false,
+      "download_status": "not_downloaded",
+      "id": "kaistdata/ViMDoc",
+      "key": "vimdoc",
+      "license": "apache-2.0",
+      "local_dir": "/vol/datasets/vimdoc/25657f1fe0358f49147148ca89e231291ba42788",
+      "missing_materialization_fields": [
+        "local_file_count",
+        "local_file_sha256",
+        "qrels_sha256",
+        "split_sha256"
+      ],
+      "qrels_contract": "blocked_page_level_qrels_not_established",
+      "remote_file_count": 4,
+      "remote_metadata_verified": true,
+      "required_files": [
+        ".gitattributes",
+        "README.md",
+        "ViMDoc_pages.tar.gz",
+        "data/ViMDoc-00000-of-00001.parquet"
+      ],
+      "revision": "25657f1fe0358f49147148ca89e231291ba42788",
+      "role": "confirmation"
+    },
+    {
+      "download_performed": false,
+      "download_status": "not_downloaded",
+      "id": "vidore/vidore_v3_finance_en",
+      "key": "vidore_v3_finance_en",
+      "license": "cc-by-4.0",
+      "local_dir": "/vol/datasets/vidore_v3_finance_en/7f432c176d82e27546501ad8064a713ac3071809",
+      "missing_materialization_fields": [
+        "local_file_count",
+        "local_file_sha256",
+        "qrels_sha256",
+        "split_sha256"
+      ],
+      "qrels_contract": "page_level_graded_qrels",
+      "remote_file_count": 15,
+      "remote_metadata_verified": true,
+      "required_files": [
+        ".gitattributes",
+        "README.md",
+        "corpus/test-00000-of-00003.parquet",
+        "corpus/test-00001-of-00003.parquet",
+        "corpus/test-00002-of-00003.parquet",
+        "documents_metadata/test-00000-of-00001.parquet",
+        "pdfs/bank_of_america_2024.pdf",
+        "pdfs/citigroup_2024.pdf",
+        "pdfs/goldman_sachs_2024.pdf",
+        "pdfs/jpmorgan_chase_2024.pdf",
+        "pdfs/metadata.csv",
+        "pdfs/morgan_stanley_2024.pdf",
+        "pdfs/wells_fargo_2024.pdf",
+        "qrels/test-00000-of-00001.parquet",
+        "queries/test-00000-of-00001.parquet"
+      ],
+      "revision": "7f432c176d82e27546501ad8064a713ac3071809",
+      "role": "sealed_external_validation"
+    },
+    {
+      "download_performed": false,
+      "download_status": "not_downloaded",
+      "id": "MMDocIR/MMDocIR_Evaluation_Dataset",
+      "key": "mmdocir",
+      "license": "apache-2.0",
+      "local_dir": "/vol/datasets/mmdocir/bdcb36ecb3eee73667180ee3fb24fe433f6dd2a4",
+      "missing_materialization_fields": [
+        "local_file_count",
+        "local_file_sha256",
+        "qrels_sha256",
+        "split_sha256"
+      ],
+      "qrels_contract": "page_and_layout_annotations",
+      "remote_file_count": 11,
+      "remote_metadata_verified": true,
+      "required_files": [
+        ".gitattributes",
+        "MMDocIR_annotations.jsonl",
+        "MMDocIR_layouts.parquet",
+        "MMDocIR_pages.parquet",
+        "README.md",
+        "doc_miscellaneous/doc_pdfs.rar",
+        "doc_miscellaneous/layout_content.rar",
+        "doc_miscellaneous/layout_images.rar",
+        "doc_miscellaneous/layout_text_images.rar",
+        "doc_miscellaneous/page_content.rar",
+        "doc_miscellaneous/page_images.rar"
+      ],
+      "revision": "bdcb36ecb3eee73667180ee3fb24fe433f6dd2a4",
+      "role": "long_document_validation"
+    }
+  ],
+  "download_performed": false,
+  "generated_at_utc": "2026-08-25T13:33:29.478252+00:00",
+  "schema_version": 1,
+  "status": "BLOCKED_PENDING_DATA_DOWNLOAD"
+}

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import hashlib
+import importlib.metadata
 import json
 import os
 import platform
@@ -20,6 +21,9 @@ VOLUME_NAME = "qpaf-artifacts"
 VOLUME_MOUNT = Path("/vol")
 HF_SECRET_NAME = "huggingface-secret"
 FUNCTION_TIMEOUT_SECONDS = 600
+PROJECT_ROOT = Path(__file__).resolve().parent
+REQUIREMENTS_LOCK_PATH = PROJECT_ROOT / "requirements-lock.txt"
+REQUIREMENTS_LOCK_SHA256 = hashlib.sha256(REQUIREMENTS_LOCK_PATH.read_bytes()).hexdigest()
 
 
 def _resolve_source_commit() -> str:
@@ -36,14 +40,16 @@ SOURCE_COMMIT = _resolve_source_commit()
 IMAGE_DEFINITION: dict[str, Any] = {
     "base": "modal.Image.debian_slim",
     "python": "3.11",
-    "pip": ["torch==2.11.0"],
+    "requirements_lock": REQUIREMENTS_LOCK_PATH.name,
+    "requirements_lock_sha256": REQUIREMENTS_LOCK_SHA256,
 }
 IMAGE_DEFINITION_SHA256 = hashlib.sha256(
     json.dumps(IMAGE_DEFINITION, sort_keys=True, separators=(",", ":")).encode("utf-8")
 ).hexdigest()
 
-image = modal.Image.debian_slim(python_version=IMAGE_DEFINITION["python"]).pip_install(
-    *IMAGE_DEFINITION["pip"]
+image = modal.Image.debian_slim(python_version=IMAGE_DEFINITION["python"]).pip_install_from_requirements(
+    str(REQUIREMENTS_LOCK_PATH),
+    extra_options="--require-hashes",
 )
 volume = modal.Volume.from_name(VOLUME_NAME, create_if_missing=True)
 hf_secret = modal.Secret.from_name(
@@ -113,6 +119,7 @@ def environment_probe() -> str:
         "modal_task_id": os.environ.get("MODAL_TASK_ID"),
         "image_definition": IMAGE_DEFINITION,
         "image_definition_sha256": IMAGE_DEFINITION_SHA256,
+        "requirements_lock_sha256": REQUIREMENTS_LOCK_SHA256,
         "requested_gpu": REQUESTED_GPU,
         "function_timeout_seconds": FUNCTION_TIMEOUT_SECONDS,
         "volume_name": VOLUME_NAME,
@@ -124,6 +131,17 @@ def environment_probe() -> str:
         "platform": platform.platform(),
         "torch": torch.__version__,
         "modal": modal.__version__,
+        "packages": {
+            name: importlib.metadata.version(name)
+            for name in [
+                "colpali-engine",
+                "datasets",
+                "torch",
+                "torchvision",
+                "transformers",
+                "vidore-benchmark",
+            ]
+        },
         **_gpu_metadata(torch),
     }
 

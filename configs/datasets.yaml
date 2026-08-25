@@ -1,0 +1,92 @@
+schema_version: 1
+metadata_checked_at_utc: "2026-08-25T09:00:00Z"
+policy:
+  mode: metadata_only
+  download_performed: false
+  volume_root: /vol/datasets
+  qrels_access: hash and evaluate only in the declared protocol stage
+datasets:
+  - key: vidoseek
+    role: discovery
+    id: Qiuchen-Wang/ViDoSeek
+    revision: e91a92ba5f38690696c7e66be5c5474b54c6e791
+    license: apache-2.0
+    gated: false
+    private: false
+    local_dir: /vol/datasets/vidoseek/e91a92ba5f38690696c7e66be5c5474b54c6e791
+    download_status: not_downloaded
+    remote_file_count: 6
+    qrels_contract: annotations_in_vidoseek_json_unverified
+    required_files:
+      - .gitattributes
+      - README.md
+      - slidevqa_pdf_document.zip
+      - slidevqa_refined.json
+      - vidoseek.json
+      - vidoseek_pdf_document.zip
+  - key: vimdoc
+    role: confirmation
+    id: kaistdata/ViMDoc
+    revision: 25657f1fe0358f49147148ca89e231291ba42788
+    license: apache-2.0
+    gated: false
+    private: false
+    local_dir: /vol/datasets/vimdoc/25657f1fe0358f49147148ca89e231291ba42788
+    download_status: not_downloaded
+    remote_file_count: 4
+    qrels_contract: blocked_page_level_qrels_not_established
+    required_files:
+      - .gitattributes
+      - README.md
+      - ViMDoc_pages.tar.gz
+      - data/ViMDoc-00000-of-00001.parquet
+  - key: vidore_v3_finance_en
+    role: sealed_external_validation
+    id: vidore/vidore_v3_finance_en
+    revision: 7f432c176d82e27546501ad8064a713ac3071809
+    license: cc-by-4.0
+    gated: false
+    private: false
+    local_dir: /vol/datasets/vidore_v3_finance_en/7f432c176d82e27546501ad8064a713ac3071809
+    download_status: not_downloaded
+    remote_file_count: 15
+    qrels_contract: page_level_graded_qrels
+    required_files:
+      - .gitattributes
+      - README.md
+      - corpus/test-00000-of-00003.parquet
+      - corpus/test-00001-of-00003.parquet
+      - corpus/test-00002-of-00003.parquet
+      - documents_metadata/test-00000-of-00001.parquet
+      - pdfs/bank_of_america_2024.pdf
+      - pdfs/citigroup_2024.pdf
+      - pdfs/goldman_sachs_2024.pdf
+      - pdfs/jpmorgan_chase_2024.pdf
+      - pdfs/metadata.csv
+      - pdfs/morgan_stanley_2024.pdf
+      - pdfs/wells_fargo_2024.pdf
+      - qrels/test-00000-of-00001.parquet
+      - queries/test-00000-of-00001.parquet
+  - key: mmdocir
+    role: long_document_validation
+    id: MMDocIR/MMDocIR_Evaluation_Dataset
+    revision: bdcb36ecb3eee73667180ee3fb24fe433f6dd2a4
+    license: apache-2.0
+    gated: false
+    private: false
+    local_dir: /vol/datasets/mmdocir/bdcb36ecb3eee73667180ee3fb24fe433f6dd2a4
+    download_status: not_downloaded
+    remote_file_count: 11
+    qrels_contract: page_and_layout_annotations
+    required_files:
+      - .gitattributes
+      - MMDocIR_annotations.jsonl
+      - MMDocIR_layouts.parquet
+      - MMDocIR_pages.parquet
+      - README.md
+      - doc_miscellaneous/doc_pdfs.rar
+      - doc_miscellaneous/layout_content.rar
+      - doc_miscellaneous/layout_images.rar
+      - doc_miscellaneous/layout_text_images.rar
+      - doc_miscellaneous/page_content.rar
+      - doc_miscellaneous/page_images.rar
