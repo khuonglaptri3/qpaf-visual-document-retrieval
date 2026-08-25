@@ -1,0 +1,90 @@
+{
+  "bm25": {
+    "implementation": "vidore_benchmark.retrievers.bm25_retriever.BM25Retriever",
+    "package": "vidore-benchmark",
+    "package_version": "5.0.0"
+  },
+  "captured_at_utc": "2026-08-25T13:40:30.415846+00:00",
+  "environment_config_sha256": "7b7b2090d25aeb74ab8184f598daaebb64e0cc0a0028037f051963760a386056",
+  "local": {
+    "packages": {
+      "PyYAML": "6.0.3",
+      "modal": "1.4.2",
+      "numpy": "2.4.4",
+      "pandas": "3.0.2",
+      "pyarrow": "24.0.0",
+      "pytest": "9.1.1",
+      "torch": "2.11.0"
+    },
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.13.7 (tags/v3.13.7:bcee1c3, Aug 14 2025, 14:15:11) [MSC v.1944 64 bit (AMD64)]",
+    "score_extraction_allowed": false,
+    "training_allowed": false
+  },
+  "modal": {
+    "actual_gpu": "NVIDIA L4",
+    "actual_gpu_vram_bytes": 23659151360,
+    "actual_gpu_vram_gb": 23.659,
+    "actual_gpu_vram_gib": 22.034,
+    "app_name": "qpaf-research",
+    "cuda_available": true,
+    "cuda_runtime": "12.6",
+    "cudnn": 90501,
+    "driver": "580.95.05",
+    "function_call_id": "fc-01M0WJC4V7M58R493EVWKV26Z7",
+    "function_name": "environment-probe",
+    "function_timeout_seconds": 600,
+    "hf_secret_name": "huggingface-secret",
+    "hf_token_available": true,
+    "image_definition": {
+      "base": "modal.Image.debian_slim",
+      "python": "3.11",
+      "requirements_lock": "requirements-lock.txt",
+      "requirements_lock_sha256": "17e6673bc89d0e10470c27250c34961058308823399c6b003519576cdd46c1be"
+    },
+    "image_definition_sha256": "74c715eecc85f58c455d4e500c45716b89ea1904635718f74b405a8350b33a9e",
+    "modal": "1.4.2",
+    "modal_task_id": "ta-01M0WJC5B19XH7YN4N9QJ10NZR",
+    "packages": {
+      "colpali-engine": "0.3.12",
+      "datasets": "3.6.0",
+      "torch": "2.7.1",
+      "torchvision": "0.22.1",
+      "transformers": "4.53.3",
+      "vidore-benchmark": "5.0.0"
+    },
+    "platform": "Linux-4.19.0-gvisor-x86_64-with-glibc2.36",
+    "python": "3.11.12 (main, May 21 2025, 23:34:13) [GCC 12.2.0]",
+    "requested_gpu": "L4",
+    "requirements_lock_sha256": "17e6673bc89d0e10470c27250c34961058308823399c6b003519576cdd46c1be",
+    "source_commit": "3ad9c8b601349fcc1752a6c72c83e26c9253e5ce",
+    "torch": "2.7.1+cu126",
+    "volume_mount": "/vol",
+    "volume_name": "qpaf-artifacts"
+  },
+  "models": {
+    "bge_m3": {
+      "gated": false,
+      "id": "BAAI/bge-m3",
+      "license": "mit",
+      "revision": "5617a9f61b028005a4858fdac845db406aefb181"
+    },
+    "colqwen25": {
+      "gated": false,
+      "id": "vidore/colqwen2.5-v0.2",
+      "license": "mit",
+      "revision": "dcbe8d9cede518bce830488364ba0e40c873645b"
+    },
+    "dse": {
+      "gated": false,
+      "id": "MrLight/dse-qwen2-2b-mrl-v1",
+      "license": "apache-2.0",
+      "revision": "3fde4464ea72da2a863ed8fa51f0f1b8045f0426"
+    }
+  },
+  "requirements_lock_sha256": "17e6673bc89d0e10470c27250c34961058308823399c6b003519576cdd46c1be",
+  "schema_version": 1,
+  "source_commit": "1f422c393fa45d56fe3618c0c1468ed2e70dd4ae",
+  "status": "environment_frozen_dataset_materialization_pending",
+  "working_tree_clean": true
+}
