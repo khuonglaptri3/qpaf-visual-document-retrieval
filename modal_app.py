@@ -20,6 +20,18 @@ VOLUME_MOUNT = Path("/vol")
 HF_SECRET_NAME = "huggingface-secret"
 FUNCTION_TIMEOUT_SECONDS = 600
 
+
+def _resolve_source_commit() -> str:
+    configured = os.environ.get("QPAF_SOURCE_COMMIT")
+    if configured:
+        return configured
+    return subprocess.check_output(
+        ["git", "rev-parse", "HEAD"],
+        text=True,
+    ).strip()
+
+
+SOURCE_COMMIT = _resolve_source_commit()
 IMAGE_DEFINITION: dict[str, Any] = {
     "base": "modal.Image.debian_slim",
     "python": "3.11",
@@ -78,8 +90,9 @@ def _gpu_metadata(torch_module: Any) -> dict[str, Any]:
     timeout=FUNCTION_TIMEOUT_SECONDS,
     secrets=[hf_secret],
     volumes={str(VOLUME_MOUNT): volume},
+    env={"QPAF_SOURCE_COMMIT": SOURCE_COMMIT},
 )
-def environment_probe() -> dict[str, Any]:
+def environment_probe() -> str:
     """Capture Modal runtime metadata without loading models or training."""
     import torch
 
@@ -100,6 +113,7 @@ def environment_probe() -> dict[str, Any]:
         "volume_mount": str(VOLUME_MOUNT),
         "hf_secret_name": HF_SECRET_NAME,
         "hf_token_available": bool(os.environ.get("HF_TOKEN")),
+        "source_commit": SOURCE_COMMIT,
         "python": sys.version,
         "platform": platform.platform(),
         "torch": torch.__version__,
@@ -111,10 +125,8 @@ def environment_probe() -> dict[str, Any]:
     probe_dir.mkdir(parents=True, exist_ok=True)
     destination = probe_dir / f"{function_call_id}.json"
     temporary = destination.with_suffix(".json.tmp")
-    temporary.write_text(
-        json.dumps(result, indent=2, sort_keys=True) + "\n",
-        encoding="utf-8",
-    )
+    serialized = json.dumps(result, indent=2, sort_keys=True) + "\n"
+    temporary.write_text(serialized, encoding="utf-8")
     temporary.replace(destination)
     volume.commit()
-    return result
+    return serialized
