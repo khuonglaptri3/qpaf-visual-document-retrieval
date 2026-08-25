@@ -175,8 +175,8 @@ Trình tự dự kiến từ nghiên cứu khám phá đến kiểm chứng ngo�
 1. **ViDoSeek Discovery:** thí nghiệm bổ trợ retriever và oracle ban đầu.
 2. **ViMDoc Confirmation:** xác nhận trên tập truy vấn lớn hơn; cấu hình dự kiến 2.000 truy vấn phải được kiểm tra lại theo phiên bản dữ liệu thực tế trước khi chạy.
 3. **ViDoRe V3:** benchmark ngoài để đánh giá khả năng khái quát; không dùng cùng test qrels để chọn trọng số hoặc đặc trưng.
-4. **MMDocIR:** kiểm chứng trên bối cảnh tài liệu dài nếu cấu trúc corpus và qrels phù hợp với đánh giá page/document retrieval đã định nghĩa.
-5. **Tài liệu tiếng Việt:** ViOCRVQA và ReceiptVQA chỉ được dùng sau khi xây dựng hoặc xác minh protocol retrieval mức trang. Kết quả VQA không được trình bày như kết quả retrieval nếu không có qrels và candidate corpus tương ứng.
+
+Phạm vi thực nghiệm hiện tại chỉ gồm ba dataset trên. MMDocIR, ViOCRVQA và ReceiptVQA được giữ cho hướng mở rộng sau luận văn và không thuộc các cổng thực nghiệm hoặc bảng kết quả chính.
 
 Dataset revision, split và quy tắc nhóm các biến thể dịch phải được cố định trước thí nghiệm. Qrels không tham gia candidate generation, normalization, clustering hoặc feature construction.
 

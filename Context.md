@@ -344,7 +344,7 @@ Primary metric is mean per-query nDCG@10 using gain $2^r-1$ and discount $1/\log
 
 ### 8.4 Dataset sequence
 
-Discovery: ViDoSeek. Confirmation: a frozen 2,000-query ViMDoc sample. External validation: sealed ViDoRe V3. Long-document validation: MMDocIR. Vietnamese evaluation is separate and may use ViOCRVQA/ReceiptVQA only after page-level retrieval qrels are validated. Dataset IDs, revisions, licenses, and split hashes are Phase 0 deliverables.
+The active scope contains exactly three datasets: Discovery uses ViDoSeek, Confirmation uses a frozen 2,000-query ViMDoc development sample followed by full ViMDoc for the final HEAVEN-aligned comparison, and External validation uses sealed ViDoRe V3. Their identifiers, revisions, licenses, and split hashes are Phase 0 deliverables. MMDocIR and Vietnamese VQA datasets are future work, not executable study dependencies.
 
 ## 9. Risk and Failure Modes
 
@@ -400,3 +400,4 @@ All cells marked `—` are unmeasured. Oracle rows must remain visually separate
 - Custom CUDA kernels, distributed training, model serving, UI work, or production deployment.
 - Silent changes to datasets, splits, candidate depth, W7/W66, normalization, metrics, seeds, or thresholds.
 - Treating VQA accuracy as page-retrieval evidence without a validated retrieval corpus and qrels.
+- Adding MMDocIR or Vietnamese VQA datasets to the active three-dataset study without a new approved scope change.

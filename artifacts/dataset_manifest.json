@@ -4,7 +4,7 @@
     "File counts, file SHA-256 values, split hashes, and qrels hashes are unavailable.",
     "ViMDoc confirmation sample rule requires review because the current sampler stratifies by qrels count."
   ],
-  "dataset_count": 4,
+  "dataset_count": 3,
   "datasets": [
     {
       "download_performed": false,
@@ -117,42 +117,10 @@
       ],
       "revision": "7f432c176d82e27546501ad8064a713ac3071809",
       "role": "sealed_external_validation"
-    },
-    {
-      "download_performed": false,
-      "download_status": "not_downloaded",
-      "id": "MMDocIR/MMDocIR_Evaluation_Dataset",
-      "key": "mmdocir",
-      "license": "apache-2.0",
-      "local_dir": "/vol/datasets/mmdocir/bdcb36ecb3eee73667180ee3fb24fe433f6dd2a4",
-      "missing_materialization_fields": [
-        "local_file_count",
-        "local_file_sha256",
-        "qrels_sha256",
-        "split_sha256"
-      ],
-      "qrels_contract": "page_and_layout_annotations",
-      "remote_file_count": 11,
-      "remote_metadata_verified": true,
-      "required_files": [
-        ".gitattributes",
-        "MMDocIR_annotations.jsonl",
-        "MMDocIR_layouts.parquet",
-        "MMDocIR_pages.parquet",
-        "README.md",
-        "doc_miscellaneous/doc_pdfs.rar",
-        "doc_miscellaneous/layout_content.rar",
-        "doc_miscellaneous/layout_images.rar",
-        "doc_miscellaneous/layout_text_images.rar",
-        "doc_miscellaneous/page_content.rar",
-        "doc_miscellaneous/page_images.rar"
-      ],
-      "revision": "bdcb36ecb3eee73667180ee3fb24fe433f6dd2a4",
-      "role": "long_document_validation"
     }
   ],
   "download_performed": false,
-  "generated_at_utc": "2026-08-25T14:08:22.034692+00:00",
+  "generated_at_utc": "2026-08-25T15:00:41.504549+00:00",
   "schema_version": 1,
   "status": "BLOCKED_PENDING_DATA_DOWNLOAD"
 }
