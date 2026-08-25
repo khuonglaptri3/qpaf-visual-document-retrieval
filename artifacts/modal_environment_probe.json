@@ -5,29 +5,37 @@
   "actual_gpu_vram_gib": 22.034,
   "app_name": "qpaf-research",
   "cuda_available": true,
-  "cuda_runtime": "13.0",
-  "cudnn": 91900,
+  "cuda_runtime": "12.6",
+  "cudnn": 90501,
   "driver": "580.95.05",
-  "function_call_id": "fc-01M0W1TZKHHBR1ADQF630ST5A4",
+  "function_call_id": "fc-01M0WJC4V7M58R493EVWKV26Z7",
   "function_name": "environment-probe",
   "function_timeout_seconds": 600,
   "hf_secret_name": "huggingface-secret",
   "hf_token_available": true,
   "image_definition": {
     "base": "modal.Image.debian_slim",
-    "pip": [
-      "torch==2.11.0"
-    ],
-    "python": "3.11"
+    "python": "3.11",
+    "requirements_lock": "requirements-lock.txt",
+    "requirements_lock_sha256": "17e6673bc89d0e10470c27250c34961058308823399c6b003519576cdd46c1be"
   },
-  "image_definition_sha256": "b82d762f59b93d22f335614e578629e9c7bcf364ac4837c57bc72861e99de650",
+  "image_definition_sha256": "74c715eecc85f58c455d4e500c45716b89ea1904635718f74b405a8350b33a9e",
   "modal": "1.4.2",
-  "modal_task_id": "ta-01M0W1V038EC3MRNTVKXCQD9PR",
+  "modal_task_id": "ta-01M0WJC5B19XH7YN4N9QJ10NZR",
+  "packages": {
+    "colpali-engine": "0.3.12",
+    "datasets": "3.6.0",
+    "torch": "2.7.1",
+    "torchvision": "0.22.1",
+    "transformers": "4.53.3",
+    "vidore-benchmark": "5.0.0"
+  },
   "platform": "Linux-4.19.0-gvisor-x86_64-with-glibc2.36",
   "python": "3.11.12 (main, May 21 2025, 23:34:13) [GCC 12.2.0]",
   "requested_gpu": "L4",
-  "source_commit": "1119b407efea0cba88d2da5c799874641cf9f31c",
-  "torch": "2.11.0+cu130",
+  "requirements_lock_sha256": "17e6673bc89d0e10470c27250c34961058308823399c6b003519576cdd46c1be",
+  "source_commit": "3ad9c8b601349fcc1752a6c72c83e26c9253e5ce",
+  "torch": "2.7.1+cu126",
   "volume_mount": "/vol",
   "volume_name": "qpaf-artifacts"
 }
