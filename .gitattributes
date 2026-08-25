@@ -1,0 +1,8 @@
+.gitignore -text
+README.md -text
+pyproject.toml -text
+configs/preregistered.yaml -text
+docs/** -text
+notebooks/** -text
+src/** -text
+tests/** -text

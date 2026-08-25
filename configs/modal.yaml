@@ -1,0 +1,16 @@
+app_name: qpaf-research
+function_name: environment-probe
+requested_gpu: A100-40GB
+timeout_seconds: 600
+volume:
+  name: qpaf-artifacts
+  mount: /vol
+secret:
+  name: huggingface-secret
+  required_keys:
+    - HF_TOKEN
+image:
+  base: modal.Image.debian_slim
+  python: "3.11"
+  pip:
+    - torch==2.11.0
