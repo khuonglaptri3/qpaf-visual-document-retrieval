@@ -14,7 +14,8 @@ import modal
 
 APP_NAME = "qpaf-research"
 FUNCTION_NAME = "environment-probe"
-REQUESTED_GPU = "A100-40GB"
+REQUESTED_GPU = "L4"
+MINIMUM_GPU_MEMORY_GB = 23.5
 VOLUME_NAME = "qpaf-artifacts"
 VOLUME_MOUNT = Path("/vol")
 HF_SECRET_NAME = "huggingface-secret"
@@ -59,9 +60,13 @@ def _gpu_metadata(torch_module: Any) -> dict[str, Any]:
     device_index = torch_module.cuda.current_device()
     properties = torch_module.cuda.get_device_properties(device_index)
     total_bytes = int(properties.total_memory)
+    total_gb = total_bytes / 1_000_000_000
     total_gib = total_bytes / (1024**3)
-    if total_gib < 24.0:
-        raise RuntimeError(f"Allocated GPU has only {total_gib:.2f} GiB; 24.0 GiB required")
+    if total_gb < MINIMUM_GPU_MEMORY_GB:
+        raise RuntimeError(
+            f"Allocated GPU has only {total_gb:.2f} GB; "
+            f"{MINIMUM_GPU_MEMORY_GB:.1f} GB required"
+        )
 
     driver_version = subprocess.check_output(
         [
@@ -75,6 +80,7 @@ def _gpu_metadata(torch_module: Any) -> dict[str, Any]:
     return {
         "actual_gpu": properties.name,
         "actual_gpu_vram_bytes": total_bytes,
+        "actual_gpu_vram_gb": round(total_gb, 3),
         "actual_gpu_vram_gib": round(total_gib, 3),
         "cuda_available": True,
         "cuda_runtime": torch_module.version.cuda,

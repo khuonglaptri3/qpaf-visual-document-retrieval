@@ -1,6 +1,8 @@
 app_name: qpaf-research
 function_name: environment-probe
-requested_gpu: A100-40GB
+requested_gpu: L4
+minimum_gpu_memory_gb: 23.5
+score_extraction_fallback_gpu: A100-40GB
 timeout_seconds: 600
 volume:
   name: qpaf-artifacts
