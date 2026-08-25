@@ -1,5 +1,5 @@
 schema_version: 1
-metadata_checked_at_utc: "2026-08-25T09:00:00Z"
+metadata_checked_at_utc: "2026-08-25T14:08:02Z"
 policy:
   mode: metadata_only
   download_performed: false
@@ -34,7 +34,28 @@ datasets:
     local_dir: /vol/datasets/vimdoc/25657f1fe0358f49147148ca89e231291ba42788
     download_status: not_downloaded
     remote_file_count: 4
-    qrels_contract: blocked_page_level_qrels_not_established
+    qrels_contract: page_level_binary_qrels_eligible_pending_materialization
+    qrels_metadata:
+      query_id_field: id
+      query_text_field: query
+      page_id_field: doc_ids
+      relevance_mapping: listed_page_is_binary_relevance_1
+      granularity: page
+      multi_page_queries_supported: true
+      split: ViMDoc
+      remote_query_count: 10904
+      evidence:
+        dataset_card: https://huggingface.co/datasets/kaistdata/ViMDoc
+        paper: https://aclanthology.org/2026.findings-acl.54/
+        reference_code_revision: 3eea5ca61f492d3fa18594d455ee10024932f851
+        reference_code: https://github.com/juyeonnn/HEAVEN/tree/3eea5ca61f492d3fa18594d455ee10024932f851
+      pending_materialization_checks:
+        - every_doc_id_resolves_to_exactly_one_page_asset
+        - every_query_has_at_least_one_relevant_page
+        - query_ids_are_unique
+        - qrels_and_split_hashes_are_frozen
+    protocol_status: blocked_confirmation_sample_rule_requires_review
+    protocol_note: current sampler stratifies by doc_ids count, so the 2000-query split is label-aware
     required_files:
       - .gitattributes
       - README.md

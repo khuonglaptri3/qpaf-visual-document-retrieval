@@ -40,6 +40,9 @@ def verify_metadata(config: dict[str, Any], refresh_remote: bool) -> dict[str, A
                 "split_sha256",
             ],
         }
+        for optional_field in ("qrels_metadata", "protocol_status", "protocol_note"):
+            if optional_field in dataset:
+                record[optional_field] = dataset[optional_field]
         if refresh_remote:
             remote = _hub_metadata(dataset["id"])
             remote_files = sorted(item["rfilename"] for item in remote.get("siblings", []))
@@ -65,7 +68,7 @@ def verify_metadata(config: dict[str, Any], refresh_remote: bool) -> dict[str, A
         "blockers": [
             "Dataset payloads were intentionally not downloaded.",
             "File counts, file SHA-256 values, split hashes, and qrels hashes are unavailable.",
-            "ViMDoc page-level qrels eligibility is unresolved.",
+            "ViMDoc confirmation sample rule requires review because the current sampler stratifies by qrels count.",
         ],
     }
 

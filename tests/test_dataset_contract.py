@@ -39,4 +39,10 @@ def test_metadata_manifest_reports_materialization_blockers() -> None:
     assert manifest["dataset_count"] == 4
     assert all(item["missing_materialization_fields"] for item in manifest["datasets"])
     vimdoc = next(item for item in manifest["datasets"] if item["key"] == "vimdoc")
-    assert vimdoc["qrels_contract"] == "blocked_page_level_qrels_not_established"
+    assert vimdoc["qrels_contract"] == "page_level_binary_qrels_eligible_pending_materialization"
+    assert vimdoc["qrels_metadata"]["granularity"] == "page"
+    assert vimdoc["qrels_metadata"]["relevance_mapping"] == "listed_page_is_binary_relevance_1"
+    assert vimdoc["qrels_metadata"]["multi_page_queries_supported"] is True
+    assert vimdoc["qrels_metadata"]["remote_query_count"] == 10_904
+    assert vimdoc["protocol_status"] == "blocked_confirmation_sample_rule_requires_review"
+    assert not any("page-level qrels eligibility is unresolved" in item for item in manifest["blockers"])
