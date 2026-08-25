@@ -40,7 +40,13 @@ def verify_metadata(config: dict[str, Any], refresh_remote: bool) -> dict[str, A
                 "split_sha256",
             ],
         }
-        for optional_field in ("qrels_metadata", "protocol_status", "protocol_note"):
+        for optional_field in (
+            "qrels_metadata",
+            "protocol_status",
+            "protocol_note",
+            "confirmation_sample",
+            "page_qrels_validation",
+        ):
             if optional_field in dataset:
                 record[optional_field] = dataset[optional_field]
         if refresh_remote:
@@ -68,8 +74,53 @@ def verify_metadata(config: dict[str, Any], refresh_remote: bool) -> dict[str, A
         "blockers": [
             "Dataset payloads were intentionally not downloaded.",
             "File counts, file SHA-256 values, split hashes, and qrels hashes are unavailable.",
-            "ViMDoc confirmation sample rule requires review because the current sampler stratifies by qrels count.",
         ],
+    }
+
+
+def merge_materializations(
+    config: dict[str, Any],
+    materialization_records: list[dict[str, Any]],
+) -> dict[str, Any]:
+    records_by_key = {record["key"]: record for record in materialization_records}
+    expected_keys = [dataset["key"] for dataset in config["datasets"]]
+    unexpected = sorted(set(records_by_key) - set(expected_keys))
+    if unexpected:
+        raise ValueError(f"Unexpected materialization records: {unexpected}")
+
+    metadata_manifest = verify_metadata(config, refresh_remote=False)
+    merged_records: list[dict[str, Any]] = []
+    for metadata_record in metadata_manifest["datasets"]:
+        materialized = records_by_key.get(metadata_record["key"])
+        if materialized is None:
+            merged_records.append(metadata_record)
+            continue
+        if materialized["revision"] != metadata_record["revision"]:
+            raise ValueError(f"Revision mismatch for {metadata_record['key']}")
+        merged_records.append(materialized)
+
+    missing = [key for key in expected_keys if key not in records_by_key]
+    protocol_blockers = [
+        f"{dataset['key']}: {dataset['page_qrels_validation']['interpretation']}"
+        for dataset in config["datasets"]
+        if dataset.get("page_qrels_validation", {}).get("status") == "blocked"
+    ]
+    complete = not missing and not protocol_blockers
+    if protocol_blockers:
+        status = "BLOCKED_DATASET_PROTOCOL"
+    elif missing:
+        status = "BLOCKED_PENDING_DATA_DOWNLOAD"
+    else:
+        status = "PASS"
+    return {
+        "schema_version": 1,
+        "status": status,
+        "generated_at_utc": datetime.now(timezone.utc).isoformat(),
+        "download_performed": bool(materialization_records),
+        "dataset_count": len(merged_records),
+        "datasets": merged_records,
+        "blockers": protocol_blockers
+        + [f"Missing Modal materialization: {key}" for key in missing],
     }
 
 
@@ -89,9 +140,22 @@ def main() -> None:
         default=Path("artifacts/dataset_manifest.json"),
     )
     parser.add_argument("--refresh-remote", action="store_true")
+    parser.add_argument(
+        "--materialization-result",
+        type=Path,
+        action="append",
+        default=[],
+    )
     args = parser.parse_args()
     config = yaml.safe_load(args.config.read_text(encoding="utf-8"))
-    manifest = verify_metadata(config, refresh_remote=args.refresh_remote)
+    if args.materialization_result:
+        records = [
+            json.loads(path.read_text(encoding="utf-8"))
+            for path in args.materialization_result
+        ]
+        manifest = merge_materializations(config, records)
+    else:
+        manifest = verify_metadata(config, refresh_remote=args.refresh_remote)
     _write_json_atomic(args.output, manifest)
 
 

@@ -1,25 +1,34 @@
 {
   "blockers": [
-    "Dataset payloads were intentionally not downloaded.",
-    "File counts, file SHA-256 values, split hashes, and qrels hashes are unavailable.",
-    "ViMDoc confirmation sample rule requires review because the current sampler stratifies by qrels count."
+    "vimdoc: frozen ViMDoc is not eligible as exact page-level qrels without a human-approved protocol change",
+    "Missing Modal materialization: vimdoc",
+    "Missing Modal materialization: vidore_v3_finance_en"
   ],
   "dataset_count": 3,
   "datasets": [
     {
-      "download_performed": false,
-      "download_status": "not_downloaded",
+      "download_performed": true,
+      "download_status": "materialized",
+      "file_sha256": {
+        ".gitattributes": "e7a120ab07b1bc5b486be249e9fc6c83d59448d0093e1dfebe95d1566d9cafc0",
+        "README.md": "273f59f85f61c9c242eb9a08075563b2a969c183cb1a3bd0abf3866f2c24fd5b",
+        "slidevqa_pdf_document.zip": "8d4ad92ce8ba48200e8d469cb53ecac212eac6a89965d0f4baee876027c5aab7",
+        "slidevqa_refined.json": "84f1d5fafd9d618eff278cd4f82f9791bf1cf69e47346b2217963dd10be0ecfb",
+        "vidoseek.json": "ca4949bfc16231d129cd7565f20e07683854ab5aa8d05f05a86a12a9b71a7fab",
+        "vidoseek_pdf_document.zip": "3b999a798ceab38703118e4cc7d9b852f86538d5bb7caad64eb545251ee00454"
+      },
+      "function_call_id": "fc-01M0WSFGSZC0TCNVT2ZJSQHXCY",
       "id": "Qiuchen-Wang/ViDoSeek",
+      "image_definition_sha256": "d1ea9df294463cb91d2471e172c25d149ea6029724c30e8a2f950fd8eb23d58b",
       "key": "vidoseek",
       "license": "apache-2.0",
       "local_dir": "/vol/datasets/vidoseek/e91a92ba5f38690696c7e66be5c5474b54c6e791",
-      "missing_materialization_fields": [
-        "local_file_count",
-        "local_file_sha256",
-        "qrels_sha256",
-        "split_sha256"
-      ],
+      "local_file_count": 6,
+      "local_file_sha256": "5c70d1071a29aa3041f2697d143439e15b329a722a2099558dac7d82926addae",
+      "materialized_at_utc": "2026-08-25T15:44:31.415971+00:00",
+      "missing_materialization_fields": [],
       "qrels_contract": "annotations_in_vidoseek_json_unverified",
+      "qrels_sha256": "89a4d6046ef22525ae6c8b38f4de3deee0eb833a592d2a6c1a986ef0b1f0097a",
       "remote_file_count": 6,
       "remote_metadata_verified": true,
       "required_files": [
@@ -31,9 +40,29 @@
         "vidoseek_pdf_document.zip"
       ],
       "revision": "e91a92ba5f38690696c7e66be5c5474b54c6e791",
-      "role": "discovery"
+      "role": "discovery",
+      "source_commit": "5e9b33005c2d027a7f98aee9184af1ab012fb235",
+      "split_sha256": "89a4d6046ef22525ae6c8b38f4de3deee0eb833a592d2a6c1a986ef0b1f0097a",
+      "validation": {}
     },
     {
+      "confirmation_sample": {
+        "algorithm": "sha256_seed_colon_query_id",
+        "allowed_fields": [
+          "id"
+        ],
+        "forbidden_fields": [
+          "doc_ids",
+          "qrels",
+          "relevance_counts",
+          "document_length",
+          "retrieval_scores"
+        ],
+        "input_encoding": "UTF-8",
+        "sample_size": 2000,
+        "seed": 20260820,
+        "selection": "smallest_digest_then_query_id"
+      },
       "download_performed": false,
       "download_status": "not_downloaded",
       "id": "kaistdata/ViMDoc",
@@ -46,9 +75,16 @@
         "qrels_sha256",
         "split_sha256"
       ],
-      "protocol_note": "current sampler stratifies by doc_ids count, so the 2000-query split is label-aware",
-      "protocol_status": "blocked_confirmation_sample_rule_requires_review",
-      "qrels_contract": "page_level_binary_qrels_eligible_pending_materialization",
+      "page_qrels_validation": {
+        "checked_at_utc": "2026-08-25T15:56:10.684982+00:00",
+        "evidence_artifact": "artifacts/vimdoc_page_qrels_blocker.json",
+        "interpretation": "frozen ViMDoc is not eligible as exact page-level qrels without a human-approved protocol change",
+        "status": "blocked",
+        "unique_doc_ids_without_exact_page_asset": 362
+      },
+      "protocol_note": "select the 2000 smallest SHA-256 digests of UTF-8 \"20260820:<query_id>\"; never use doc_ids, qrels, relevance counts, document length, or retrieval scores",
+      "protocol_status": "approved_label_free_sha256_query_id_sample",
+      "qrels_contract": "blocked_page_level_binary_qrels_362_missing_page_assets",
       "qrels_metadata": {
         "evidence": {
           "dataset_card": "https://huggingface.co/datasets/kaistdata/ViMDoc",
@@ -60,7 +96,6 @@
         "multi_page_queries_supported": true,
         "page_id_field": "doc_ids",
         "pending_materialization_checks": [
-          "every_doc_id_resolves_to_exactly_one_page_asset",
           "every_query_has_at_least_one_relevant_page",
           "query_ids_are_unique",
           "qrels_and_split_hashes_are_frozen"
@@ -72,7 +107,7 @@
         "split": "ViMDoc"
       },
       "remote_file_count": 4,
-      "remote_metadata_verified": true,
+      "remote_metadata_verified": false,
       "required_files": [
         ".gitattributes",
         "README.md",
@@ -97,7 +132,7 @@
       ],
       "qrels_contract": "page_level_graded_qrels",
       "remote_file_count": 15,
-      "remote_metadata_verified": true,
+      "remote_metadata_verified": false,
       "required_files": [
         ".gitattributes",
         "README.md",
@@ -119,8 +154,8 @@
       "role": "sealed_external_validation"
     }
   ],
-  "download_performed": false,
-  "generated_at_utc": "2026-08-25T15:00:41.504549+00:00",
+  "download_performed": true,
+  "generated_at_utc": "2026-08-25T15:57:16.172557+00:00",
   "schema_version": 1,
-  "status": "BLOCKED_PENDING_DATA_DOWNLOAD"
+  "status": "BLOCKED_DATASET_PROTOCOL"
 }

@@ -1,0 +1,25 @@
+{
+  "checked_at_utc": "2026-08-25T15:56:10.684982+00:00",
+  "dataset_id": "kaistdata/ViMDoc",
+  "dataset_revision": "25657f1fe0358f49147148ca89e231291ba42788",
+  "declared_check": "every doc_id resolves to exactly one page asset by exact archive-member stem",
+  "first_missing_doc_ids": [
+    "05-03-18-political-release_10",
+    "05-03-18-political-release_11",
+    "05-03-18-political-release_12",
+    "05-03-18-political-release_13",
+    "05-03-18-political-release_16"
+  ],
+  "modal_runs": [
+    "ap-rpeyGN1JOPG85gLccEyAul",
+    "ap-a1RpEEXxmhD3B5xXCG8ju9"
+  ],
+  "observed_unique_doc_ids_without_exact_page_asset": 362,
+  "primary_sources": {
+    "dataset_card": "https://huggingface.co/datasets/kaistdata/ViMDoc/tree/25657f1fe0358f49147148ca89e231291ba42788",
+    "heaven_query_mapping": "https://github.com/juyeonnn/HEAVEN/blob/3eea5ca61f492d3fa18594d455ee10024932f851/retrieval/heaven/utils.py#L90-L101",
+    "heaven_document_evaluation": "https://github.com/juyeonnn/HEAVEN/blob/3eea5ca61f492d3fa18594d455ee10024932f851/retrieval/heaven/stage1.py#L183-L190"
+  },
+  "status": "BLOCKED_PAGE_LEVEL_QRELS_ELIGIBILITY",
+  "stop_reason": "The frozen payload does not support the declared exact page-level qrels contract. Do not drop IDs, relabel pages, or substitute document-level relevance without human approval."
+}
