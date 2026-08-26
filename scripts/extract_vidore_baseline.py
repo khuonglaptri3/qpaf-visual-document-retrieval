@@ -330,9 +330,10 @@ def run_extraction(
     cache_dir.mkdir(parents=True, exist_ok=True)
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    os.environ["HF_HOME"] = str(volume_root / "hf_cache")
-    os.environ["HF_HUB_CACHE"] = str(volume_root / "hf_cache" / "hub")
-    os.environ["HF_DATASETS_CACHE"] = str(volume_root / "hf_cache" / "datasets")
+    ephemeral_hf_root = Path("/tmp/qpaf_hf_cache")
+    os.environ["HF_HOME"] = str(ephemeral_hf_root)
+    os.environ["HF_HUB_CACHE"] = str(ephemeral_hf_root / "hub")
+    os.environ["HF_DATASETS_CACHE"] = str(ephemeral_hf_root / "datasets")
     os.environ["NLTK_DATA"] = str(volume_root / "nltk_data")
 
     from datasets import load_dataset
@@ -401,11 +402,7 @@ def run_extraction(
         checkpoint_started = time.perf_counter()
         print("BGE-M3: resolving pinned snapshot", flush=True)
         bge_snapshot = snapshot_download(repo_id=bge["id"], revision=bge["revision"])
-        print(
-            f"BGE-M3: snapshot ready in {time.perf_counter() - checkpoint_started:.1f}s; committing",
-            flush=True,
-        )
-        commit()
+        print(f"BGE-M3: snapshot ready in {time.perf_counter() - checkpoint_started:.1f}s", flush=True)
         torch.cuda.reset_peak_memory_stats()
         print("BGE-M3: loading model", flush=True)
         retriever = BGEM3DenseRetriever(model_path=bge_snapshot, device="cuda")
@@ -447,11 +444,7 @@ def run_extraction(
         checkpoint_started = time.perf_counter()
         print("DSE: resolving pinned snapshot", flush=True)
         dse_snapshot = snapshot_download(repo_id=dse["id"], revision=dse["revision"])
-        print(
-            f"DSE: snapshot ready in {time.perf_counter() - checkpoint_started:.1f}s; committing",
-            flush=True,
-        )
-        commit()
+        print(f"DSE: snapshot ready in {time.perf_counter() - checkpoint_started:.1f}s", flush=True)
         torch.cuda.reset_peak_memory_stats()
         print("DSE: loading model", flush=True)
         retriever = DSEQwen2Retriever(

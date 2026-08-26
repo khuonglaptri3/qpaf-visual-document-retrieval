@@ -35,3 +35,13 @@ def test_full_score_is_explicitly_outside_extractor_source() -> None:
     assert '"full_score": "intentionally_unavailable"' in source
     assert '"full_score_produced": False' in source
     assert "full_score =" not in source
+
+
+def test_large_model_cache_is_not_backed_by_the_modal_volume() -> None:
+    from pathlib import Path
+
+    source = (Path(__file__).resolve().parents[1] / "scripts" / "extract_vidore_baseline.py").read_text(
+        encoding="utf-8"
+    )
+    assert 'Path("/tmp/qpaf_hf_cache")' in source
+    assert 'volume_root / "hf_cache"' not in source
