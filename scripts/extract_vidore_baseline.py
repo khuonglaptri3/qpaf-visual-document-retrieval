@@ -140,6 +140,24 @@ def _clear_cuda() -> None:
         torch.cuda.empty_cache()
 
 
+def patch_dse_cache_position(retriever: Any) -> None:
+    """Correct vidore-benchmark 5.0.0's batch-sized Qwen2-VL cache position."""
+    original = retriever.model.prepare_inputs_for_generation
+
+    def prepare_inputs_for_generation(*args: Any, **kwargs: Any) -> Any:
+        input_ids = kwargs.get("input_ids")
+        cache_position = kwargs.get("cache_position")
+        if input_ids is not None and (
+            cache_position is None or cache_position.numel() != input_ids.shape[-1]
+        ):
+            kwargs["cache_position"] = torch.arange(
+                input_ids.shape[-1], device=input_ids.device
+            )
+        return original(*args, **kwargs)
+
+    retriever.model.prepare_inputs_for_generation = prepare_inputs_for_generation
+
+
 def _load_torch(path: Path) -> Any:
     return torch.load(path, map_location="cpu", weights_only=False)
 
@@ -452,6 +470,7 @@ def run_extraction(
             num_image_tokens=1024,
             device="cuda",
         )
+        patch_dse_cache_position(retriever)
         print("DSE: model loaded", flush=True)
         passage_embeddings = _encode_with_backoff(
             "dse_passages",

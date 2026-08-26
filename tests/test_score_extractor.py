@@ -1,8 +1,13 @@
 from __future__ import annotations
 
 import numpy as np
+import torch
 
-from scripts.extract_vidore_baseline import make_candidate_indices, stable_top_indices
+from scripts.extract_vidore_baseline import (
+    make_candidate_indices,
+    patch_dse_cache_position,
+    stable_top_indices,
+)
 
 
 def test_stable_top_indices_breaks_score_ties_by_page_id() -> None:
@@ -24,6 +29,26 @@ def test_candidate_union_uses_only_score_branches() -> None:
         {"stage1": 1, "bm25": 1, "dense": 1},
     )
     assert candidates[0].tolist() == [0, 1, 2]
+
+
+def test_dse_cache_position_uses_sequence_length_not_batch_size() -> None:
+    class FakeModel:
+        @staticmethod
+        def prepare_inputs_for_generation(**kwargs: object) -> dict[str, object]:
+            return kwargs
+
+    class FakeRetriever:
+        model = FakeModel()
+
+    retriever = FakeRetriever()
+    patch_dse_cache_position(retriever)
+    result = retriever.model.prepare_inputs_for_generation(
+        input_ids=torch.zeros((4, 1037), dtype=torch.long),
+        cache_position=torch.arange(4),
+        use_cache=False,
+    )
+
+    assert torch.equal(result["cache_position"], torch.arange(1037))
 
 
 def test_full_score_is_explicitly_outside_extractor_source() -> None:
