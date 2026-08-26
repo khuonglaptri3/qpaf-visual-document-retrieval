@@ -398,10 +398,18 @@ def run_extraction(
         dense_tensor = _load_torch(bge_score_path)
     else:
         bge = models["bge_m3"]
+        checkpoint_started = time.perf_counter()
+        print("BGE-M3: resolving pinned snapshot", flush=True)
         bge_snapshot = snapshot_download(repo_id=bge["id"], revision=bge["revision"])
+        print(
+            f"BGE-M3: snapshot ready in {time.perf_counter() - checkpoint_started:.1f}s; committing",
+            flush=True,
+        )
         commit()
         torch.cuda.reset_peak_memory_stats()
+        print("BGE-M3: loading model", flush=True)
         retriever = BGEM3DenseRetriever(model_path=bge_snapshot, device="cuda")
+        print("BGE-M3: model loaded", flush=True)
         passage_embeddings = _encode_with_backoff(
             "bge_passages",
             retriever.forward_passages,
@@ -436,14 +444,22 @@ def run_extraction(
         stage1_tensor = _load_torch(dse_score_path)
     else:
         dse = models["dse"]
+        checkpoint_started = time.perf_counter()
+        print("DSE: resolving pinned snapshot", flush=True)
         dse_snapshot = snapshot_download(repo_id=dse["id"], revision=dse["revision"])
+        print(
+            f"DSE: snapshot ready in {time.perf_counter() - checkpoint_started:.1f}s; committing",
+            flush=True,
+        )
         commit()
         torch.cuda.reset_peak_memory_stats()
+        print("DSE: loading model", flush=True)
         retriever = DSEQwen2Retriever(
             pretrained_model_name_or_path=dse_snapshot,
             num_image_tokens=1024,
             device="cuda",
         )
+        print("DSE: model loaded", flush=True)
         passage_embeddings = _encode_with_backoff(
             "dse_passages",
             retriever.forward_passages,
@@ -527,6 +543,7 @@ def run_extraction(
         visual_scores = np.full(expected_shape, np.nan, dtype=np.float32)
     colqwen = models["colqwen25"]
     torch.cuda.reset_peak_memory_stats()
+    print("ColQwen2.5: loading pinned base and adapter", flush=True)
     retriever = ColQwen25Retriever(
         base_model_id=colqwen["base_id"],
         base_revision=colqwen["base_revision"],
@@ -535,6 +552,7 @@ def run_extraction(
         device="cuda",
         num_workers=0,
     )
+    print("ColQwen2.5: model and processor loaded", flush=True)
     passage_embeddings = _encode_with_backoff(
         "colqwen25_passages",
         retriever.forward_passages,
