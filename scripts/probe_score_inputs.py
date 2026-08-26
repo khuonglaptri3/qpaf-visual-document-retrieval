@@ -87,6 +87,7 @@ def _retriever_signatures() -> dict[str, Any]:
         ),
         "colqwen25_processor": ("colpali_engine.models", "ColQwen2_5_Processor"),
         "local_colqwen25_adapter": ("scripts.colqwen25_retriever", "ColQwen25Retriever"),
+        "local_bge_m3_adapter": ("scripts.bge_m3_dense_retriever", "BGEM3DenseRetriever"),
     }
     imports: dict[str, Any] = {}
     for name, (module_name, class_name) in targets.items():

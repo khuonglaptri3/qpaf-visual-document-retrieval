@@ -337,10 +337,10 @@ def run_extraction(
 
     from datasets import load_dataset
     from huggingface_hub import snapshot_download
-    from vidore_benchmark.retrievers.bge_m3_retriever import BGEM3Retriever
     from vidore_benchmark.retrievers.bm25_retriever import BM25Retriever
     from vidore_benchmark.retrievers.dse_qwen2_retriever import DSEQwen2Retriever
 
+    from scripts.bge_m3_dense_retriever import BGEM3DenseRetriever
     from scripts.colqwen25_retriever import ColQwen25Retriever
 
     root = Path(dataset["local_dir"])
@@ -401,7 +401,7 @@ def run_extraction(
         bge_snapshot = snapshot_download(repo_id=bge["id"], revision=bge["revision"])
         commit()
         torch.cuda.reset_peak_memory_stats()
-        retriever = BGEM3Retriever(pretrained_model_name_or_path=bge_snapshot, device="cuda")
+        retriever = BGEM3DenseRetriever(model_path=bge_snapshot, device="cuda")
         passage_embeddings = _encode_with_backoff(
             "bge_passages",
             retriever.forward_passages,

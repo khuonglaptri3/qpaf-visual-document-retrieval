@@ -37,6 +37,7 @@ MATERIALIZER_PATH = PROJECT_ROOT / "scripts" / "materialize_datasets.py"
 SCORE_INPUT_PROBE_PATH = PROJECT_ROOT / "scripts" / "probe_score_inputs.py"
 COLQWEN25_ADAPTER_PATH = PROJECT_ROOT / "scripts" / "colqwen25_retriever.py"
 SCORE_EXTRACTOR_PATH = PROJECT_ROOT / "scripts" / "extract_vidore_baseline.py"
+BGE_M3_ADAPTER_PATH = PROJECT_ROOT / "scripts" / "bge_m3_dense_retriever.py"
 REQUIREMENTS_LOCK_SHA256 = hashlib.sha256(REQUIREMENTS_LOCK_PATH.read_bytes()).hexdigest()
 DATASETS_CONFIG_SHA256 = hashlib.sha256(DATASETS_CONFIG_PATH.read_bytes()).hexdigest()
 ENVIRONMENT_CONFIG_SHA256 = hashlib.sha256(ENVIRONMENT_CONFIG_PATH.read_bytes()).hexdigest()
@@ -44,6 +45,7 @@ MATERIALIZER_SHA256 = hashlib.sha256(MATERIALIZER_PATH.read_bytes()).hexdigest()
 SCORE_INPUT_PROBE_SHA256 = hashlib.sha256(SCORE_INPUT_PROBE_PATH.read_bytes()).hexdigest()
 COLQWEN25_ADAPTER_SHA256 = hashlib.sha256(COLQWEN25_ADAPTER_PATH.read_bytes()).hexdigest()
 SCORE_EXTRACTOR_SHA256 = hashlib.sha256(SCORE_EXTRACTOR_PATH.read_bytes()).hexdigest()
+BGE_M3_ADAPTER_SHA256 = hashlib.sha256(BGE_M3_ADAPTER_PATH.read_bytes()).hexdigest()
 
 
 def _resolve_source_commit() -> str:
@@ -68,6 +70,7 @@ IMAGE_DEFINITION: dict[str, Any] = {
     "score_input_probe_sha256": SCORE_INPUT_PROBE_SHA256,
     "colqwen25_adapter_sha256": COLQWEN25_ADAPTER_SHA256,
     "score_extractor_sha256": SCORE_EXTRACTOR_SHA256,
+    "bge_m3_adapter_sha256": BGE_M3_ADAPTER_SHA256,
 }
 IMAGE_DEFINITION_SHA256 = hashlib.sha256(
     json.dumps(IMAGE_DEFINITION, sort_keys=True, separators=(",", ":")).encode("utf-8")
@@ -103,6 +106,10 @@ image = modal.Image.debian_slim(python_version=IMAGE_DEFINITION["python"]).pip_i
 ).add_local_file(
     str(SCORE_EXTRACTOR_PATH),
     remote_path="/root/scripts/extract_vidore_baseline.py",
+    copy=True,
+).add_local_file(
+    str(BGE_M3_ADAPTER_PATH),
+    remote_path="/root/scripts/bge_m3_dense_retriever.py",
     copy=True,
 )
 volume = modal.Volume.from_name(VOLUME_NAME, create_if_missing=True)
