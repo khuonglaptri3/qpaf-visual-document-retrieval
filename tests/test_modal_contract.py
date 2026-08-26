@@ -99,3 +99,7 @@ def test_full_score_extractor_is_a100_resumable_and_bounded() -> None:
     assert modal_app.IMAGE_DEFINITION["bge_m3_adapter_sha256"] == hashlib.sha256(
         (ROOT / "scripts" / "bge_m3_dense_retriever.py").read_bytes()
     ).hexdigest()
+    assert 'remote_path="/root/scripts/dse_qwen2_retriever.py"' in source
+    assert modal_app.IMAGE_DEFINITION["dse_qwen2_adapter_sha256"] == hashlib.sha256(
+        (ROOT / "scripts" / "dse_qwen2_retriever.py").read_bytes()
+    ).hexdigest()

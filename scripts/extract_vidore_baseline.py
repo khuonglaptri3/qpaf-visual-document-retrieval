@@ -316,6 +316,7 @@ def run_extraction(
     source_commit: str,
     image_definition_sha256: str,
     extractor_sha256: str,
+    dse_adapter_sha256: str,
     function_call_id: str,
     gpu_metadata: dict[str, Any],
     commit: Callable[[], None],
@@ -337,6 +338,7 @@ def run_extraction(
         "minimum_coverage": MINIMUM_COVERAGE,
         "full_score": "intentionally_unavailable",
         "extractor_sha256": extractor_sha256,
+        "dse_adapter_sha256": dse_adapter_sha256,
     }
     protocol_sha256 = hashlib.sha256(
         json.dumps(protocol, sort_keys=True, separators=(",", ":")).encode("utf-8")
@@ -357,10 +359,10 @@ def run_extraction(
     from datasets import load_dataset
     from huggingface_hub import snapshot_download
     from vidore_benchmark.retrievers.bm25_retriever import BM25Retriever
-    from vidore_benchmark.retrievers.dse_qwen2_retriever import DSEQwen2Retriever
 
     from scripts.bge_m3_dense_retriever import BGEM3DenseRetriever
     from scripts.colqwen25_retriever import ColQwen25Retriever
+    from scripts.dse_qwen2_retriever import DSEQwen2DirectRetriever
 
     root = Path(dataset["local_dir"])
     corpus_files = sorted((root / "corpus").glob("*.parquet"))
@@ -465,7 +467,7 @@ def run_extraction(
         print(f"DSE: snapshot ready in {time.perf_counter() - checkpoint_started:.1f}s", flush=True)
         torch.cuda.reset_peak_memory_stats()
         print("DSE: loading model", flush=True)
-        retriever = DSEQwen2Retriever(
+        retriever = DSEQwen2DirectRetriever(
             pretrained_model_name_or_path=dse_snapshot,
             num_image_tokens=1024,
             device="cuda",
