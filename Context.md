@@ -9,13 +9,14 @@ This file is the standalone source of truth for implementing **Adaptive Retrieva
 | A01 | The implementation repository is not named in the proposal | Use the existing `visual-rag-oracle-study` source layout (`src/oracle_study`, `tests`, `configs`) as the baseline code interface; provenance must be frozen in Phase 0 | The inspected prior checkout already implements score-cache validation, W7/W66 profiles, Global/QARF/QPAF oracle analysis, metrics, manifests, and a CLI | A different baseline repository invalidates every path and integration task in `Tasks.md` |
 | A02 | Exact learned-fusion input features are not fixed | The minimum QPAF uses 13 label-free score/rank features defined below; query/page embeddings are an ablation, not part of the minimum method | This is the smallest dossier-consistent feature set that tests page-adaptive weighting without adding an encoder | If embeddings are essential, the minimum model may underestimate learnable QPAF performance |
 | A03 | The gating architecture permits a linear layer or shallow MLP | Use a zero-initialized linear gate for the primary implementation; use a one-hidden-layer MLP only as a preregistered ablation | A linear gate is the cheapest faithful implementation and initializes exactly to equal fusion | If nonlinear interactions are required, the primary model may underfit |
-| A04 | The training objective is not specified | Use masked listwise cross-entropy with soft targets proportional to graded relevance gain $2^r-1$ and temperature $\tau=1$ | It is differentiable, supports graded qrels, and directly trains a ranking distribution over the fixed candidate pool | A different objective can change rankings and all learned-model results |
+| A04 | The training objective is not specified | Use masked listwise cross-entropy with soft targets proportional to graded relevance gain $2^r-1$ and temperature $\tau=1$ over the declared evaluation unit: pages for page-qrels datasets and HEAVEN documents after max-over-page aggregation for ViMDoc | It is differentiable almost everywhere, supports graded qrels, and aligns training with each frozen evaluation protocol | A different objective or aggregation can change rankings and all learned-model results |
 | A05 | The proposal leaves the practical effect threshold $\delta$ open | Use $\delta=0.01$ mean per-query nDCG@10 for learned-model go/no-go decisions | It matches the existing oracle-study scale for beneficial gain and prevents treating negligible changes as success | A supervisor-approved threshold would replace all gates that cite $0.01$ |
 | A06 | Team schedule and submission deadline are absent | Use 2026-09-05 as the Phase 1 decision checkpoint, not as a submission deadline | A concrete gate date is required by the execution prompt | Any real deadline changes task priority and feasible benchmark scope |
 | A07 | Exact Modal resource settings are not declared | Use Modal as the only training and GPU score-extraction environment, with `gpu="L4"` as the human-approved default for environment probes and learned fusion; use `A100-40GB` only for full score extraction because the measured L4 capacity is below the frozen 23.5 GiB extractor guard; local execution is limited to documentation, non-training unit tests, schema checks, and optional cached-score oracle analysis | The user explicitly approved L4 on 2026-08-25 to reduce cost; learned fusion is lightweight, while full retriever extraction must preserve its frozen memory contract | A different Modal GPU/image/region changes cost, memory limits, runtime estimates, and reproducibility manifests |
 | A08 | Exact dense and visual checkpoints are not frozen in the proposal | Preserve the prior pipeline choices BGE-M3 for dense-text and ColQwen2.5 for visual scoring until Phase 0 records exact model revisions; BM25 indexes OCR Markdown | These are the concrete retrievers used by the inspected prior runbook and match the three-channel proposal | Changing a retriever invalidates cached scores and every comparison |
 | A09 | Candidate depth for the three-channel learned study is not fixed | Start with top 200 from each channel, yielding at most $C=600$ unique candidates per query; expand only through a separately recorded protocol change | It bounds memory and matches the existing candidate-pool scale while adding the third channel explicitly | A lower union recall can falsely suppress fusion headroom |
 | A10 | Number of seeds is not specified | Use seeds 20260820, 20260821, and 20260822 for learned fusion | Three seeds are the minimum planned estimate of run-to-run variability | Three seeds may still be insufficient if variance is large; Phase 3 must report this limitation |
+| A11 | ViMDoc contains 362 unique raw `doc_ids` that do not resolve to exactly one extension-stripped page ID; the archive exposes 70,080 unique extension-stripped stems from 76,347 image assets, and the official HEAVEN transform yields 1,247 evaluation groups versus the card's 1,379 source documents | Following human approval on 2026-08-26, use the official HEAVEN document mapping (remove the final underscore segment from both page names and ground-truth IDs), score each document by its maximum page score, and apply loss/metrics at document level | This preserves QPAF page-specific weights while making the ViMDoc comparison match HEAVEN instead of fabricating page labels | ViMDoc confirmation claims are invalid if page-level labels are substituted, unmatched IDs are dropped, or a different aggregation is used |
 
 ## Blocking Issues
 
@@ -54,12 +55,16 @@ There is no mathematical inconsistency in the QPAF scoring equations. The feasib
 | $X$ | $[B,C,M]$, float32 | Finite min–max-normalized retrieval scores |
 | $H$ | $[B,C,F]$, float32 | QPAF feature tensor |
 | $A$ | $[B,C]$, bool | Valid-candidate mask |
-| $R$ | $[B,C]$, float32 | Graded relevance, used only in training/evaluation |
+| $U$ | positive integer, $U\le C$ | Padded evaluation-unit count: pages normally, HEAVEN documents for ViMDoc |
+| $E$ | $[B,U]$, bool | Valid evaluation-unit mask |
+| $G$ | $[B,C]$, int64 | Page-to-evaluation-unit group index; identity for page evaluation |
+| $R^E$ | $[B,U]$, float32 | Evaluation-unit relevance, used only in training/evaluation |
 | $Z$ | $[B,C,M]$, float32 | Gate logits |
 | $W$ | $[B,C,M]$, float32 | Non-negative channel weights summing to one |
 | $S$ | $[B,C]$, float32 | Fused candidate scores |
-| $Y$ | $[B,C]$, float32 | Normalized relevance-gain target distribution |
-| $P$ | $[B,C]$, float32 | Predicted candidate distribution |
+| $T$ | $[B,U]$, float32 | Evaluation-unit scores; page scores normally, max-over-page document scores for ViMDoc |
+| $Y$ | $[B,U]$, float32 | Normalized relevance-gain target distribution |
+| $P$ | $[B,U]$, float32 | Predicted evaluation-unit distribution |
 | $\Theta,b$ | $[M,F]$, $[M]$, float32 | Linear-gate weight and bias |
 | $\tau$ | positive scalar | Listwise temperature; fixed to $1.0$ in the primary experiment |
 
@@ -123,37 +128,52 @@ $$
 S_{bi}=\sum_{m=1}^{3}W_{bim}X_{bim}. \tag{6}
 $$
 
-Padded positions are excluded by $A$ from every reduction. Initialize $\Theta=0$ and $b=0$ so Eq. 5 gives exactly $(1/3,1/3,1/3)$ at step 0.
+For page-level datasets, evaluation units are pages and $T_{bu}=S_{bu}$. For ViMDoc, apply the official HEAVEN mapping $d(p)$ that removes the final underscore-delimited segment, then aggregate pages to documents:
+
+$$
+G_{bi}=u\iff d(p_{bi})=d_u, \qquad
+T_{bu}=\max_{i:A_{bi}=1,\,G_{bi}=u}S_{bi}. \tag{6a}
+$$
+
+The max uses ascending page ID to select the gradient recipient when scores tie. It is differentiable except at ties; the accepted deterministic subgradient is
+
+$$
+\frac{\partial T_{bu}}{\partial S_{bi}}=
+\mathbf{1}\!\left[i=\operatorname*{argmax}^{\text{stable}}_{j:G_{bj}=u}S_{bj}\right]. \tag{6b}
+$$
+
+Padded positions are excluded by $A$ and $E$ from every reduction. Initialize $\Theta=0$ and $b=0$ so Eq. 5 gives exactly $(1/3,1/3,1/3)$ at step 0.
 
 ### 2.5 Training loss and backward derivation
 
 For each query containing at least one positive candidate, define relevance-gain targets and the predicted listwise distribution:
 
 $$
-Y_{bi}=\frac{A_{bi}(2^{R_{bi}}-1)}{\sum_j A_{bj}(2^{R_{bj}}-1)}, \tag{7}
+Y_{bu}=\frac{E_{bu}(2^{R^E_{bu}}-1)}{\sum_v E_{bv}(2^{R^E_{bv}}-1)}, \tag{7}
 $$
 
 $$
-P_{bi}=\frac{A_{bi}\exp(S_{bi}/\tau)}{\sum_j A_{bj}\exp(S_{bj}/\tau)}, \tag{8}
+P_{bu}=\frac{E_{bu}\exp(T_{bu}/\tau)}{\sum_v E_{bv}\exp(T_{bv}/\tau)}, \tag{8}
 $$
 
 $$
-\mathcal{L}=-\frac{1}{B}\sum_{b=1}^{B}\sum_{i=1}^{C}Y_{bi}\log P_{bi}. \tag{9}
+\mathcal{L}=-\frac{1}{B}\sum_{b=1}^{B}\sum_{u=1}^{U}Y_{bu}\log P_{bu}. \tag{9}
 $$
 
-Implementation must use masked `log_softmax` in fp32 rather than exponentiating Eq. 8 directly. For valid positions,
+Implementation must use masked `log_softmax` in fp32 rather than exponentiating Eq. 8 directly. For valid page candidates,
 
 $$
 \frac{\partial\mathcal{L}}{\partial S_{bi}}=
-\frac{P_{bi}-Y_{bi}}{B\tau}. \tag{10}
+\sum_{u=1}^{U}\frac{P_{bu}-Y_{bu}}{B\tau}
+\frac{\partial T_{bu}}{\partial S_{bi}}
+\equiv D_{bi}. \tag{10}
 $$
 
 Since $S_{bi}=W_{bi}^{\top}X_{bi}$ and $W_{bi}=\operatorname{softmax}(Z_{bi})$,
 
 $$
 \frac{\partial\mathcal{L}}{\partial Z_{bik}}=
-\frac{P_{bi}-Y_{bi}}{B\tau}
-W_{bik}\left(X_{bik}-S_{bi}\right). \tag{11}
+D_{bi}W_{bik}\left(X_{bik}-S_{bi}\right). \tag{11}
 $$
 
 For the linear gate,
@@ -166,7 +186,7 @@ $$
 =\sum_{b,i}\frac{\partial\mathcal{L}}{\partial Z_{bi}}. \tag{12}
 $$
 
-At zero initialization, $W_{bim}=1/3$ (derived). With uniform candidate predictions the initial per-query loss is $\log C_b$; for $C_b=600$, $\log 600=6.397$ (derived). The gate gradient is bounded by the normalized score range and is clipped to global norm $1.0$ as a guard. A constant score vector produces zero gate gradient via $X_{bik}-S_{bi}=0$; this is a detectable degenerate batch, not a numerical error.
+At zero initialization, $W_{bim}=1/3$ (derived). With uniform evaluation-unit predictions the initial per-query loss is $\log U_b$; the page-level upper bound $U_b=C_b=600$ gives $\log 600=6.397$ (derived), while ViMDoc uses its document count in the candidate union. The gate gradient is bounded by the normalized score range and is clipped to global norm $1.0$ as a guard. A constant score vector produces zero gate gradient via $X_{bik}-S_{bi}=0$; this is a detectable degenerate batch, not a numerical error.
 
 ### 2.6 QARF, CARF, and oracle roles
 
@@ -176,7 +196,7 @@ Oracle Global/QARF/CARF/QPAF searches only the preregistered $W_7$ and, after th
 
 ### 2.7 Complexity
 
-Feature construction is $O(BCM\log C)$ if ranks use sorting; gating and fusion are $O(BCFM)$. The linear gate has $MF+M=3\cdot13+3=42$ parameters (derived). At $B=32,C=600,F=13,M=3$, the core forward tensors $H,Z,W,S$ contain
+Feature construction is $O(BCM\log C)$ if ranks use sorting; gating and fusion are $O(BCFM)$; HEAVEN document grouping and max aggregation add $O(BC)$. The linear gate has $MF+M=3\cdot13+3=42$ parameters (derived). At $B=32,C=600,F=13,M=3$, the core forward tensors $H,Z,W,S$ contain
 
 $$
 32\cdot600\cdot(13+3+3+1)=384{,}000
@@ -196,8 +216,9 @@ float32 values, or $384{,}000\cdot4/2^{20}=1.465$ MiB (derived). Allowing three 
 | `LinearQARFGate` | Produce one query-level channel weight vector | pooled $H[B,13]$ → $W[B,1,3]$ | $\Theta[3,13],b[3]$ | All zeros | 4–5 |
 | `LinearCARFGate` | Produce one weight vector per fixed candidate cluster | cluster-pooled $H[B,k,13]$ → $W[B,k,3]$ | $\Theta[3,13],b[3]$ | All zeros | 4–5 |
 | `FusionScorer` | Apply convex fusion | $X,W,A$ → $S[B,C]$ | None | N/A | 6 |
-| `ListwiseRankLoss` | Train on graded relevance | $S,R,A$ → scalar loss | None | N/A | 7–12 |
-| `RankingEvaluator` | Deterministic ranking with page-ID tie-break | $S,R,A$ → metrics | None | N/A | Metric protocol below |
+| `HEAVENDocumentAggregator` | Map ViMDoc pages by removing the final underscore segment and take deterministic max page score per document | $S[B,C]$, page IDs → $T[B,U],G[B,C],E[B,U]$ | None | N/A | 6a–6b |
+| `ListwiseRankLoss` | Train on relevance at the declared evaluation unit | $T,R^E,E$ → scalar loss | None | N/A | 7–12 |
+| `RankingEvaluator` | Deterministic ranking with evaluation-unit ID tie-break | $T,R^E,E$ → metrics | None | N/A | Metric protocol below |
 
 No custom CUDA kernel is required or permitted for the primary implementation.
 
@@ -237,11 +258,17 @@ No custom CUDA kernel is required or permitted for the primary implementation.
                               |
                               v
                     S [B,C] f32 device
+                              |
+         HEAVENDocumentAggregator Eq. 6a-6b for ViMDoc;
+         identity mapping for page-level datasets
+                              |
+                              v
+                    T [B,U] f32 device
                        /              \
                       / train          \ eval
                      v                  v
        ListwiseRankLoss Eq. 7-12    RankingEvaluator
-       R [B,C] + A [B,C]           nDCG@10, R@1, R@3, MRR@10
+       R^E [B,U] + E [B,U]         nDCG@10, R@1, R@3, MRR@10
 ```
 
 ## 5. Tensor Shape Contract
@@ -252,11 +279,14 @@ No custom CUDA kernel is required or permitted for the primary implementation.
 | `scores` / $X$ | $[B,C,3]$ | float32 | CPU or CUDA | valid values in $[0,1]$ within $10^{-6}$ |
 | `features` / $H$ | $[B,C,13]$ | float32 | same as $X$ | finite; label-free; padded rows zero |
 | `valid_mask` / $A$ | $[B,C]$ | bool | same as $X$ | at least two valid candidates per query |
-| `relevance` / $R$ | $[B,C]$ | float32 | same as $X$ | non-negative; at least one positive per training query |
+| `evaluation_group` / $G$ | $[B,C]$ | int64 | same as $X$ | page-to-document group for ViMDoc; identity for page evaluation; $-1$ on padding |
+| `evaluation_mask` / $E$ | $[B,U]$ | bool | same as $X$ | at least two valid evaluation units per query |
+| `evaluation_relevance` / $R^E$ | $[B,U]$ | float32 | same as $X$ | non-negative; at least one positive per training query |
 | `logits` / $Z$ | $[B,C,3]$ | float32 | same as $X$ | finite on valid rows |
 | `weights` / $W$ | $[B,C,3]$ | float32 | same as $X$ | each valid row in $[0,1]$; row sum $1\pm10^{-6}$ |
 | `fused_scores` / $S$ | $[B,C]$ | float32 | same as $X$ | finite on valid positions; padded positions masked |
-| `target_distribution` / $Y$ | $[B,C]$ | float32 | same as $X$ | valid row sum $1\pm10^{-6}$ |
+| `evaluation_scores` / $T$ | $[B,U]$ | float32 | same as $X$ | finite; ViMDoc value equals max score among pages in its document group |
+| `target_distribution` / $Y$ | $[B,U]$ | float32 | same as $X$ | valid row sum $1\pm10^{-6}$ |
 | `loss` | scalar | float32 | same as $X$ | finite and non-negative |
 | `cluster_ids` / $K$ | $[B,C]$ | int64 | same as $X$ | $-1$ for padding; otherwise $0\le K<k$ |
 
@@ -272,6 +302,7 @@ No custom CUDA kernel is required or permitted for the primary implementation.
 | Gradient update | Global gradient norm clip at $1.0$ | Post-clip norm $\le1.0001$ |
 | Ranking ties | Stable descending score, ascending page ID | Repeated evaluation produces identical order |
 | Padded rows | Zero feature rows; mask before loss/metric | Changing padded values does not change loss within $10^{-7}$ |
+| ViMDoc document aggregation | Remove only the final underscore segment; stable max with ascending page-ID tie-break | Every qrels document maps to at least one page; repeated aggregation is byte-identical |
 
 Enable `torch.autograd.set_detect_anomaly(True)` only for the first 100 debug steps because it adds synchronization and memory overhead; disable it for measured runs. Fail immediately on NaN/Inf rather than replacing model outputs.
 
@@ -336,15 +367,15 @@ Acceptance is exactly 29 passed, 0 failed, 0 errors before new tests are added. 
 
 ### 8.2 Raw-score contract
 
-One row per `(dataset, query_id, page_id)` must include finite `bm25_score`, `dense_score`, and `visual_score`, plus non-negative `relevance`, `source`, split, retriever revisions, and candidate provenance. For compatibility with the inspected baseline cache builder, the imported raw table also carries `stage1_score`, `full_score`, `stage2_ms`, and `stage2_flops`; these HEAVEN fields are not QPAF input features. Duplicate keys are forbidden. The file and qrels receive SHA-256 hashes. Minimum relevant-page coverage is $0.95$ before oracle or training.
+One row per `(dataset, query_id, page_id)` must include finite `bm25_score`, `dense_score`, and `visual_score`, plus `source`, split, retriever revisions, and candidate provenance. Page-qrels datasets also carry non-negative page relevance. ViMDoc instead carries a deterministic `document_id` derived by removing the final underscore segment and joins relevance only after page scores are aggregated to documents; repeating document relevance onto pages is forbidden. For compatibility with the inspected baseline cache builder, the imported raw table also carries `stage1_score`, `full_score`, `stage2_ms`, and `stage2_flops`; these HEAVEN fields are not QPAF input features. Duplicate keys are forbidden. The score file and evaluation-unit qrels receive SHA-256 hashes. Minimum relevant evaluation-unit coverage is $0.95$ before oracle or training.
 
 ### 8.3 Metrics
 
-Primary metric is mean per-query nDCG@10 using gain $2^r-1$ and discount $1/\log_2(i+2)$. Secondary metrics are Recall@1, Recall@3, and MRR@10. Ranking sorts by descending score with ascending `page_id` as deterministic tie-break. Use `src/oracle_study/metrics.py`; do not substitute a library implementation without an equivalence test on hand-computed fixtures.
+Primary metric is mean per-query nDCG@10 using gain $2^r-1$ and discount $1/\log_2(i+2)$. Secondary metrics are Recall@1, Recall@3, and MRR@10. Ranking sorts by descending score with ascending evaluation-unit ID as deterministic tie-break: page ID for page-qrels datasets and HEAVEN document ID for ViMDoc after max-over-page aggregation. Use `src/oracle_study/metrics.py`; do not substitute a library implementation without an equivalence test on hand-computed fixtures.
 
 ### 8.4 Dataset sequence
 
-The active scope contains exactly three datasets: Discovery uses ViDoSeek, Confirmation uses a frozen 2,000-query ViMDoc development sample followed by full ViMDoc for the final HEAVEN-aligned comparison, and External validation uses sealed ViDoRe V3. The ViMDoc development sample is selected without labels: compute SHA-256 over the UTF-8 string `20260820:<query_id>`, sort by digest and then query ID, and take the first 2,000 unique query IDs. Sampling must not read `doc_ids`, qrels, relevance counts, document length, or retrieval scores. Modal materialization on 2026-08-25 found 362 unique raw ViMDoc `doc_ids` that do not resolve to an exact page asset in revision `25657f1fe0358f49147148ca89e231291ba42788`. The official HEAVEN code maps both page names and ground-truth IDs to document names before evaluation, so ViMDoc remains relevant to a HEAVEN-aligned document-level comparison but is blocked as exact page-level qrels. Do not redefine relevance, drop the unmatched IDs, or continue the confirmation protocol until a human approves a documented resolution. Their identifiers, revisions, licenses, and split hashes are Phase 0 deliverables. MMDocIR and Vietnamese VQA datasets are future work, not executable study dependencies.
+The active scope contains exactly three datasets: Discovery uses ViDoSeek, Confirmation uses a frozen 2,000-query ViMDoc development sample followed by full ViMDoc for the final HEAVEN-aligned comparison, and External validation uses sealed ViDoRe V3. The ViMDoc development sample is selected without labels: compute SHA-256 over the UTF-8 string `20260820:<query_id>`, sort by digest and then query ID, and take the first 2,000 unique query IDs. Sampling must not read `doc_ids`, qrels, relevance counts, document length, or retrieval scores. Modal materialization on 2026-08-25 found 362 unique raw ViMDoc `doc_ids` that do not resolve to exactly one extension-stripped page ID in revision `25657f1fe0358f49147148ca89e231291ba42788`; later scans measured 70,080 unique extension-stripped page stems from the card's 76,347 image assets and 1,247 HEAVEN evaluation groups versus the card's 1,379 source documents. Following human approval on 2026-08-26, ViMDoc confirmation is HEAVEN-aligned document-level retrieval: remove the final underscore segment from both archive page stems and raw ground-truth IDs, take the maximum fused page score per document with ascending page-ID tie handling, and apply loss and metrics to binary document qrels. The discrepancies remain recorded audit evidence; no ID is dropped and no page label is fabricated. Their identifiers, revisions, licenses, and split hashes are Phase 0 deliverables. MMDocIR and Vietnamese VQA datasets are future work, not executable study dependencies.
 
 ## 9. Risk and Failure Modes
 

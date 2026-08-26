@@ -173,7 +173,7 @@ Không đưa qrels, oracle profile, thống kê từ test split hoặc đặc tr
 Trình tự dự kiến từ nghiên cứu khám phá đến kiểm chứng ngoài miền:
 
 1. **ViDoSeek Discovery:** thí nghiệm bổ trợ retriever và oracle ban đầu.
-2. **ViMDoc Confirmation:** xác nhận trên tập truy vấn lớn hơn; cấu hình dự kiến 2.000 truy vấn phải được kiểm tra lại theo phiên bản dữ liệu thực tế trước khi chạy.
+2. **ViMDoc Confirmation:** xác nhận trên tập truy vấn lớn hơn bằng protocol document-level của HEAVEN. Module QPAF vẫn sinh trọng số và điểm cho từng trang; sau đó bỏ đoạn cuối sau dấu gạch dưới để ánh xạ trang sang tài liệu, lấy điểm trang lớn nhất làm điểm tài liệu, và tính loss/metric trên qrels tài liệu. Mẫu phát triển 2.000 truy vấn được chọn bằng SHA-256 chỉ từ query ID, không dùng nhãn.
 3. **ViDoRe V3:** benchmark ngoài để đánh giá khả năng khái quát; không dùng cùng test qrels để chọn trọng số hoặc đặc trưng.
 
 Phạm vi thực nghiệm hiện tại chỉ gồm ba dataset trên. MMDocIR, ViOCRVQA và ReceiptVQA được giữ cho hướng mở rộng sau luận văn và không thuộc các cổng thực nghiệm hoặc bảng kết quả chính.

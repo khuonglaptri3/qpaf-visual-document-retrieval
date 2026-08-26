@@ -36,32 +36,37 @@ def test_dataset_metadata_is_frozen_with_modal_only_payloads() -> None:
         assert len(dataset["required_files"]) == dataset["remote_file_count"]
 
 
-def test_metadata_manifest_reports_materialization_blockers() -> None:
+def test_dataset_manifest_reports_complete_materialization() -> None:
     manifest = json.loads(
         (ROOT / "artifacts" / "dataset_manifest.json").read_text(encoding="utf-8")
     )
-    assert manifest["status"] in {
-        "BLOCKED_PENDING_DATA_DOWNLOAD",
-        "BLOCKED_DATASET_PROTOCOL",
-    }
+    assert manifest["status"] == "PASS"
+    assert manifest["download_performed"] is True
     assert manifest["dataset_count"] == 3
     assert {item["key"] for item in manifest["datasets"]} == {
         "vidoseek",
         "vimdoc",
         "vidore_v3_finance_en",
     }
-    assert any(item["missing_materialization_fields"] for item in manifest["datasets"])
+    assert all(not item["missing_materialization_fields"] for item in manifest["datasets"])
     vimdoc = next(item for item in manifest["datasets"] if item["key"] == "vimdoc")
-    assert vimdoc["qrels_contract"] == "blocked_page_level_binary_qrels_362_missing_page_assets"
-    assert vimdoc["qrels_metadata"]["granularity"] == "page"
-    assert vimdoc["qrels_metadata"]["relevance_mapping"] == "listed_page_is_binary_relevance_1"
-    assert vimdoc["qrels_metadata"]["multi_page_queries_supported"] is True
+    assert vimdoc["qrels_contract"] == "heaven_aligned_document_level_binary_qrels"
+    assert vimdoc["qrels_metadata"]["granularity"] == "document"
+    assert vimdoc["qrels_metadata"]["document_id_transform"] == "remove_final_underscore_segment"
+    assert vimdoc["qrels_metadata"]["relevance_mapping"] == "transformed_document_is_binary_relevance_1"
+    assert vimdoc["qrels_metadata"]["multi_document_queries_supported"] is True
     assert vimdoc["qrels_metadata"]["remote_query_count"] == 10_904
     assert vimdoc["protocol_status"] == "approved_label_free_sha256_query_id_sample"
     assert vimdoc["confirmation_sample"]["sample_size"] == 2_000
     assert vimdoc["confirmation_sample"]["seed"] == 20_260_820
     assert vimdoc["confirmation_sample"]["allowed_fields"] == ["id"]
     assert "doc_ids" in vimdoc["confirmation_sample"]["forbidden_fields"]
-    assert vimdoc["page_qrels_validation"]["unique_doc_ids_without_exact_page_asset"] == 362
-    assert not any("page-level qrels eligibility is unresolved" in item for item in manifest["blockers"])
-    assert not any("sample rule requires review" in item for item in manifest["blockers"])
+    assert vimdoc["page_qrels_validation"]["unique_raw_ids_not_resolving_exactly_once"] == 362
+    assert vimdoc["page_qrels_validation"]["status"] == "resolved_by_document_level_protocol"
+    assert vimdoc["confirmation_evaluation"]["document_score_aggregation"] == "max_page_score"
+    assert vimdoc["validation"]["all_qrels_documents_resolve_to_pages"] is True
+    assert vimdoc["validation"]["page_asset_file_count"] == 76_347
+    assert vimdoc["validation"]["unique_extension_stripped_page_id_count"] == 70_080
+    assert vimdoc["validation"]["heaven_document_count"] == 1_247
+    assert vimdoc["validation"]["confirmation_sample"]["selected_query_count"] == 2_000
+    assert manifest["blockers"] == []

@@ -81,7 +81,7 @@ $$
 - Giữ BM25, Dense-text Retriever và Visual Retriever ở trạng thái frozen; chỉ huấn luyện module QPAF nhằm giảm chi phí tính toán và giúp xác định rõ phần cải thiện đến từ cơ chế fusion.
 - So sánh QPAF với BM25, Dense, Visual, RRF, Fixed Weighted Fusion, DAT và một phương pháp Query-Adaptive Fusion dùng chung trọng số cho mọi trang của cùng câu hỏi.
 - Đánh giá bằng nDCG@10, Recall@K, MRR và chi phí suy luận của module fusion.
-- Thực hiện discovery trên ViDoSeek, confirmation trên ViMDoc và đánh giá ngoài miền trên ViDoRe V3 đã niêm phong; MMDocIR và các tập VQA tiếng Việt nằm ngoài phạm vi thực nghiệm hiện tại.
+- Thực hiện discovery ở mức trang trên ViDoSeek, confirmation theo protocol document-level của HEAVEN trên ViMDoc (QPAF vẫn tính trọng số theo trang rồi lấy điểm trang lớn nhất cho mỗi tài liệu), và đánh giá ngoài miền ở mức trang trên ViDoRe V3 đã niêm phong; MMDocIR và các tập VQA tiếng Việt nằm ngoài phạm vi thực nghiệm hiện tại.
 
 **Đóng góp dự kiến:** Đề tài mở rộng cơ chế adaptive weighting đa scorer của mFAR từ mức câu hỏi sang mức từng cặp câu hỏi–trang, đồng thời bổ sung kênh Visual Retrieval và giữ cố định các retriever nền. Kết quả dự kiến là một module QPAF nhẹ có khả năng điều chỉnh mức đóng góp của BM25, Dense và Visual Retrieval cho từng trang ứng viên.
 

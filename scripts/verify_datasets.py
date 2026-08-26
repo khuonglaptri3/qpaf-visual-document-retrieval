@@ -46,6 +46,7 @@ def verify_metadata(config: dict[str, Any], refresh_remote: bool) -> dict[str, A
             "protocol_note",
             "confirmation_sample",
             "page_qrels_validation",
+            "confirmation_evaluation",
         ):
             if optional_field in dataset:
                 record[optional_field] = dataset[optional_field]

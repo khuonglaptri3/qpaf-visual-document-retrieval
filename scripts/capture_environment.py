@@ -37,12 +37,27 @@ def build_manifest(
     config_path: Path,
     lock_path: Path,
     modal_probe_path: Path,
+    dataset_manifest_path: Path,
 ) -> dict[str, Any]:
     config = yaml.safe_load(config_path.read_text(encoding="utf-8"))
     modal_probe = json.loads(modal_probe_path.read_text(encoding="utf-8"))
+    dataset_manifest = json.loads(dataset_manifest_path.read_text(encoding="utf-8"))
     lock_sha256 = _sha256(lock_path)
     if modal_probe.get("requirements_lock_sha256") != lock_sha256:
         raise ValueError("Modal probe was not produced from the current dependency lock")
+    if dataset_manifest.get("status") != "PASS":
+        raise ValueError("Dataset manifest has not passed materialization")
+
+    source_commit = _git_output("rev-parse", "HEAD")
+    if modal_probe.get("source_commit") != source_commit:
+        raise ValueError("Modal probe was not produced from the current source commit")
+    expected_generated_paths = {modal_probe_path.as_posix()}
+    dirty_paths = {
+        line[3:].replace("\\", "/")
+        for line in _git_output("status", "--porcelain").splitlines()
+        if line
+    }
+    unexpected_dirty_paths = sorted(dirty_paths - expected_generated_paths)
 
     local_packages = {
         name: _package_version(name)
@@ -50,12 +65,14 @@ def build_manifest(
     }
     return {
         "schema_version": 1,
-        "status": "environment_frozen_dataset_materialization_pending",
+        "status": "PASS",
         "captured_at_utc": datetime.now(timezone.utc).isoformat(),
-        "source_commit": _git_output("rev-parse", "HEAD"),
-        "working_tree_clean": not bool(_git_output("status", "--porcelain")),
+        "source_commit": source_commit,
+        "working_tree_clean_except_generated_probe": not unexpected_dirty_paths,
+        "unexpected_dirty_paths": unexpected_dirty_paths,
         "environment_config_sha256": _sha256(config_path),
         "requirements_lock_sha256": lock_sha256,
+        "dataset_manifest_sha256": _sha256(dataset_manifest_path),
         "local": {
             "python": sys.version,
             "platform": platform.platform(),
@@ -86,6 +103,11 @@ def main() -> None:
         default=Path("artifacts/modal_environment_probe.json"),
     )
     parser.add_argument(
+        "--dataset-manifest",
+        type=Path,
+        default=Path("artifacts/dataset_manifest.json"),
+    )
+    parser.add_argument(
         "--output",
         type=Path,
         default=Path("artifacts/environment_manifest.json"),
@@ -93,7 +115,12 @@ def main() -> None:
     args = parser.parse_args()
     _write_json_atomic(
         args.output,
-        build_manifest(args.config, args.lock, args.modal_probe),
+        build_manifest(
+            args.config,
+            args.lock,
+            args.modal_probe,
+            args.dataset_manifest,
+        ),
     )
 
 

@@ -38,6 +38,14 @@ def select_query_ids(query_ids: Iterable[object], sample_size: int, seed: int) -
     return ranked[:sample_size]
 
 
+def heaven_document_id(page_id: object) -> str:
+    normalized = str(page_id)
+    document_id, separator, page_suffix = normalized.rpartition("_")
+    if not separator or not document_id or not page_suffix:
+        raise ValueError(f"Invalid HEAVEN page identifier: {normalized}")
+    return document_id
+
+
 def _relative_files(root: Path) -> list[str]:
     return sorted(
         path.relative_to(root).as_posix()
@@ -58,36 +66,81 @@ def _vimdoc_checks(root: Path, dataset: dict[str, Any]) -> dict[str, Any]:
     parquet_path = root / "data" / "ViMDoc-00000-of-00001.parquet"
     table = pq.read_table(parquet_path, columns=["id", "doc_ids"])
     query_ids = table.column("id").to_pylist()
-    relevant_pages = table.column("doc_ids").to_pylist()
+    relevant_page_ids = table.column("doc_ids").to_pylist()
     if len(query_ids) != dataset["qrels_metadata"]["remote_query_count"]:
         raise ValueError("ViMDoc query count differs from frozen metadata")
-    if any(not pages for pages in relevant_pages):
-        raise ValueError("Every ViMDoc query must have at least one relevant page")
+    if any(not pages for pages in relevant_page_ids):
+        raise ValueError("Every ViMDoc query must have at least one relevant document")
 
-    required_page_ids = [str(page_id) for pages in relevant_pages for page_id in pages]
+    required_page_ids = [str(page_id) for pages in relevant_page_ids for page_id in pages]
     page_counts: dict[str, int] = {}
-    archive_member_names: list[str] = []
+    document_page_counts: dict[str, int] = {}
+    image_file_count = 0
     archive_path = root / "ViMDoc_pages.tar.gz"
     with tarfile.open(archive_path, mode="r:gz") as archive:
         for member in archive:
-            if member.isfile():
-                archive_member_names.append(member.name)
+            if member.isfile() and Path(member.name).suffix.lower() in {".jpg", ".jpeg", ".png"}:
+                image_file_count += 1
                 page_id = Path(member.name).stem
                 page_counts[page_id] = page_counts.get(page_id, 0) + 1
-    unresolved = sorted({page_id for page_id in required_page_ids if page_counts.get(page_id) != 1})
-    if unresolved:
-        diagnostic_matches = {
-            page_id: [
-                member_name
-                for member_name in archive_member_names
-                if page_id.rsplit("_", maxsplit=1)[0] in member_name
-            ][:3]
-            for page_id in unresolved[:5]
-        }
+                document_id = heaven_document_id(page_id)
+                document_page_counts[document_id] = document_page_counts.get(document_id, 0) + 1
+
+    metadata = dataset["qrels_metadata"]
+    if image_file_count != metadata["expected_page_asset_file_count"]:
         raise ValueError(
-            f"{len(unresolved)} ViMDoc doc_ids do not resolve to exactly one page asset; "
-            f"first IDs and archive matches: {diagnostic_matches}"
+            f"ViMDoc image-file count {image_file_count} differs from frozen "
+            f"{metadata['expected_page_asset_file_count']}"
         )
+    if len(page_counts) != metadata["expected_unique_extension_stripped_page_id_count"]:
+        raise ValueError(
+            f"ViMDoc unique page-ID count {len(page_counts)} differs from frozen "
+            f"{metadata['expected_unique_extension_stripped_page_id_count']}"
+        )
+    if len(document_page_counts) != metadata["expected_heaven_document_count"]:
+        raise ValueError(
+            f"ViMDoc HEAVEN document count {len(document_page_counts)} differs from frozen "
+            f"{metadata['expected_heaven_document_count']}"
+        )
+
+    raw_ids_not_resolving_exactly_once = sorted(
+        {page_id for page_id in required_page_ids if page_counts.get(page_id) != 1}
+    )
+    if (
+        len(raw_ids_not_resolving_exactly_once)
+        != metadata["expected_raw_ids_not_resolving_exactly_once"]
+    ):
+        raise ValueError("ViMDoc raw page-ID mismatch count differs from the frozen audit")
+
+    relevant_documents = [
+        sorted({heaven_document_id(page_id) for page_id in pages})
+        for pages in relevant_page_ids
+    ]
+    unresolved_documents = sorted(
+        {
+            document_id
+            for documents in relevant_documents
+            for document_id in documents
+            if document_page_counts.get(document_id, 0) < 1
+        }
+    )
+    if unresolved_documents:
+        raise ValueError(
+            f"{len(unresolved_documents)} ViMDoc qrels documents have no page assets; "
+            f"first IDs: {unresolved_documents[:5]}"
+        )
+
+    canonical_qrels = sorted(
+        (str(query_id), document_id, 1)
+        for query_id, documents in zip(query_ids, relevant_documents, strict=True)
+        for document_id in documents
+    )
+    document_qrels_sha256 = hashlib.sha256(
+        "".join(
+            f"{query_id}\t{document_id}\t{relevance}\n"
+            for query_id, document_id, relevance in canonical_qrels
+        ).encode("utf-8")
+    ).hexdigest()
 
     protocol = dataset["confirmation_sample"]
     selected = select_query_ids(
@@ -98,9 +151,19 @@ def _vimdoc_checks(root: Path, dataset: dict[str, Any]) -> dict[str, Any]:
     selected_sha256 = hashlib.sha256(("\n".join(selected) + "\n").encode("utf-8")).hexdigest()
     return {
         "query_count": len(query_ids),
-        "relevance_pair_count": len(required_page_ids),
-        "page_asset_count": len(page_counts),
-        "all_doc_ids_resolve_once": True,
+        "raw_relevance_id_count": len(required_page_ids),
+        "document_relevance_pair_count": len(canonical_qrels),
+        "page_asset_file_count": image_file_count,
+        "unique_extension_stripped_page_id_count": len(page_counts),
+        "duplicate_extension_stripped_page_asset_count": image_file_count - len(page_counts),
+        "heaven_document_count": len(document_page_counts),
+        "dataset_card_document_count": metadata["dataset_card_document_count"],
+        "raw_ids_not_resolving_exactly_once_count": len(
+            raw_ids_not_resolving_exactly_once
+        ),
+        "raw_ids_not_resolving_exactly_once_sample": raw_ids_not_resolving_exactly_once[:20],
+        "all_qrels_documents_resolve_to_pages": True,
+        "document_qrels_sha256": document_qrels_sha256,
         "confirmation_sample": {
             **protocol,
             "selected_query_count": len(selected),
@@ -135,6 +198,22 @@ def materialize_dataset(
         existing = json.loads(marker.read_text(encoding="utf-8"))
         if existing["revision"] != dataset["revision"]:
             raise ValueError("Existing materialization has a different revision")
+        if existing["qrels_contract"] != dataset["qrels_contract"]:
+            validation = existing.get("validation", {})
+            if not (
+                dataset_key == "vimdoc"
+                and dataset["qrels_contract"] == "heaven_aligned_document_level_binary_qrels"
+                and validation.get("all_qrels_documents_resolve_to_pages") is True
+            ):
+                raise ValueError("Existing materialization has a different qrels contract")
+            existing["qrels_contract"] = dataset["qrels_contract"]
+            for field in ("qrels_metadata", "confirmation_evaluation", "page_qrels_validation"):
+                existing[field] = dataset[field]
+            existing["protocol_metadata_refreshed_at_utc"] = datetime.now(timezone.utc).isoformat()
+            marker.write_text(
+                json.dumps(existing, indent=2, sort_keys=True) + "\n",
+                encoding="utf-8",
+            )
         return existing
     if destination.exists():
         raise FileExistsError(f"Refusing to overwrite incomplete destination: {destination}")
@@ -166,6 +245,8 @@ def materialize_dataset(
     validation: dict[str, Any] = {}
     if dataset_key == "vimdoc":
         validation = _vimdoc_checks(temporary, dataset)
+    source_qrels_sha256 = aggregate_sha256(qrels_file_sha256)
+    qrels_sha256 = validation.get("document_qrels_sha256", source_qrels_sha256)
 
     record: dict[str, Any] = {
         "key": dataset["key"],
@@ -181,7 +262,8 @@ def materialize_dataset(
         "local_file_count": len(actual_files),
         "file_sha256": file_sha256,
         "local_file_sha256": aggregate_sha256(file_sha256),
-        "qrels_sha256": aggregate_sha256(qrels_file_sha256),
+        "qrels_sha256": qrels_sha256,
+        "qrels_source_file_sha256": source_qrels_sha256,
         "split_sha256": aggregate_sha256(split_file_sha256),
         "qrels_contract": dataset["qrels_contract"],
         "missing_materialization_fields": [],
@@ -197,6 +279,8 @@ def materialize_dataset(
         "protocol_status",
         "protocol_note",
         "confirmation_sample",
+        "confirmation_evaluation",
+        "page_qrels_validation",
     ):
         if optional_field in dataset:
             record[optional_field] = dataset[optional_field]

@@ -38,33 +38,51 @@ datasets:
     gated: false
     private: false
     local_dir: /vol/datasets/vimdoc/25657f1fe0358f49147148ca89e231291ba42788
-    download_status: not_downloaded
+    download_status: materialized_on_modal
     remote_file_count: 4
-    qrels_contract: blocked_page_level_binary_qrels_362_missing_page_assets
+    qrels_contract: heaven_aligned_document_level_binary_qrels
     qrels_metadata:
       query_id_field: id
       query_text_field: query
-      page_id_field: doc_ids
-      relevance_mapping: listed_page_is_binary_relevance_1
-      granularity: page
-      multi_page_queries_supported: true
+      source_relevance_id_field: doc_ids
+      document_id_transform: remove_final_underscore_segment
+      relevance_mapping: transformed_document_is_binary_relevance_1
+      granularity: document
+      multi_document_queries_supported: true
       split: ViMDoc
       remote_query_count: 10904
+      dataset_card_document_count: 1379
+      expected_heaven_document_count: 1247
+      expected_page_asset_file_count: 76347
+      expected_unique_extension_stripped_page_id_count: 70080
+      expected_raw_ids_not_resolving_exactly_once: 362
       evidence:
         dataset_card: https://huggingface.co/datasets/kaistdata/ViMDoc
         paper: https://aclanthology.org/2026.findings-acl.54/
         reference_code_revision: 3eea5ca61f492d3fa18594d455ee10024932f851
         reference_code: https://github.com/juyeonnn/HEAVEN/tree/3eea5ca61f492d3fa18594d455ee10024932f851
+        mapping_code: https://github.com/juyeonnn/HEAVEN/blob/3eea5ca61f492d3fa18594d455ee10024932f851/retrieval/heaven/utils.py#L31-L101
+        evaluation_code: https://github.com/juyeonnn/HEAVEN/blob/3eea5ca61f492d3fa18594d455ee10024932f851/retrieval/heaven/stage1.py#L183-L190
       pending_materialization_checks:
-        - every_query_has_at_least_one_relevant_page
+        - every_transformed_qrels_document_resolves_to_at_least_one_page_asset
+        - archive_counts_match_frozen_asset_and_heaven_mapping_counts
+        - every_query_has_at_least_one_relevant_document
         - query_ids_are_unique
         - qrels_and_split_hashes_are_frozen
     page_qrels_validation:
-      status: blocked
+      status: resolved_by_document_level_protocol
       checked_at_utc: "2026-08-25T15:56:10.684982+00:00"
-      unique_doc_ids_without_exact_page_asset: 362
+      unique_raw_ids_not_resolving_exactly_once: 362
       evidence_artifact: artifacts/vimdoc_page_qrels_blocker.json
-      interpretation: frozen ViMDoc is not eligible as exact page-level qrels without a human-approved protocol change
+      interpretation: exact page-level qrels remain ineligible; user approved HEAVEN-aligned document-level confirmation on 2026-08-26
+    confirmation_evaluation:
+      status: approved
+      approved_at: "2026-08-26"
+      unit: document
+      page_to_document: remove_final_underscore_segment
+      document_score_aggregation: max_page_score
+      tie_break: ascending_page_id
+      qrels_use: training_loss_and_evaluation_only
     protocol_status: approved_label_free_sha256_query_id_sample
     protocol_note: select the 2000 smallest SHA-256 digests of UTF-8 "20260820:<query_id>"; never use doc_ids, qrels, relevance counts, document length, or retrieval scores
     confirmation_sample:
@@ -98,7 +116,7 @@ datasets:
     gated: false
     private: false
     local_dir: /vol/datasets/vidore_v3_finance_en/7f432c176d82e27546501ad8064a713ac3071809
-    download_status: not_downloaded
+    download_status: materialized_on_modal
     remote_file_count: 15
     qrels_contract: page_level_graded_qrels
     qrels_files:
