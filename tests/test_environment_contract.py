@@ -31,6 +31,10 @@ def test_environment_config_freezes_compatible_retriever_stack() -> None:
     assert all(HEX40.fullmatch(model["revision"]) for model in config["models"].values())
     assert config["models"]["colqwen25"]["base_id"] == "vidore/colqwen2.5-base"
     assert HEX40.fullmatch(config["models"]["colqwen25"]["base_revision"])
+    assert config["models"]["dse"]["safetensors_id"] == (
+        "ielabgroup/dse-qwen2-2b-mrl-v1-safetensor"
+    )
+    assert HEX40.fullmatch(config["models"]["dse"]["safetensors_revision"])
 
 
 def test_linux_lock_is_fully_pinned_and_hashed() -> None:

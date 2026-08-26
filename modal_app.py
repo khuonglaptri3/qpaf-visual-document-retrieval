@@ -19,6 +19,7 @@ MATERIALIZE_FUNCTION_NAME = "materialize-dataset"
 SCORE_INPUT_PROBE_FUNCTION_NAME = "score-input-probe"
 SCORE_EXTRACTION_SMOKE_FUNCTION_NAME = "score-extraction-smoke"
 SCORE_EXTRACTION_FUNCTION_NAME = "extract-scores"
+VERIFY_DSE_FUNCTION_NAME = "verify-dse-safetensors"
 REQUESTED_GPU = "L4"
 SCORE_EXTRACTION_GPU = "A100-40GB"
 SCORE_EXTRACTION_CPU = 4.0
@@ -41,6 +42,7 @@ COLQWEN25_ADAPTER_PATH = PROJECT_ROOT / "scripts" / "colqwen25_retriever.py"
 SCORE_EXTRACTOR_PATH = PROJECT_ROOT / "scripts" / "extract_vidore_baseline.py"
 BGE_M3_ADAPTER_PATH = PROJECT_ROOT / "scripts" / "bge_m3_dense_retriever.py"
 DSE_QWEN2_ADAPTER_PATH = PROJECT_ROOT / "scripts" / "dse_qwen2_retriever.py"
+VERIFY_DSE_PATH = PROJECT_ROOT / "scripts" / "verify_dse_safetensors.py"
 REQUIREMENTS_LOCK_SHA256 = hashlib.sha256(REQUIREMENTS_LOCK_PATH.read_bytes()).hexdigest()
 DATASETS_CONFIG_SHA256 = hashlib.sha256(DATASETS_CONFIG_PATH.read_bytes()).hexdigest()
 ENVIRONMENT_CONFIG_SHA256 = hashlib.sha256(ENVIRONMENT_CONFIG_PATH.read_bytes()).hexdigest()
@@ -50,6 +52,7 @@ COLQWEN25_ADAPTER_SHA256 = hashlib.sha256(COLQWEN25_ADAPTER_PATH.read_bytes()).h
 SCORE_EXTRACTOR_SHA256 = hashlib.sha256(SCORE_EXTRACTOR_PATH.read_bytes()).hexdigest()
 BGE_M3_ADAPTER_SHA256 = hashlib.sha256(BGE_M3_ADAPTER_PATH.read_bytes()).hexdigest()
 DSE_QWEN2_ADAPTER_SHA256 = hashlib.sha256(DSE_QWEN2_ADAPTER_PATH.read_bytes()).hexdigest()
+VERIFY_DSE_SHA256 = hashlib.sha256(VERIFY_DSE_PATH.read_bytes()).hexdigest()
 
 
 def _resolve_source_commit() -> str:
@@ -76,6 +79,7 @@ IMAGE_DEFINITION: dict[str, Any] = {
     "score_extractor_sha256": SCORE_EXTRACTOR_SHA256,
     "bge_m3_adapter_sha256": BGE_M3_ADAPTER_SHA256,
     "dse_qwen2_adapter_sha256": DSE_QWEN2_ADAPTER_SHA256,
+    "verify_dse_sha256": VERIFY_DSE_SHA256,
 }
 IMAGE_DEFINITION_SHA256 = hashlib.sha256(
     json.dumps(IMAGE_DEFINITION, sort_keys=True, separators=(",", ":")).encode("utf-8")
@@ -120,6 +124,10 @@ image = modal.Image.debian_slim(python_version=IMAGE_DEFINITION["python"]).pip_i
     str(DSE_QWEN2_ADAPTER_PATH),
     remote_path="/root/scripts/dse_qwen2_retriever.py",
     copy=True,
+).add_local_file(
+    str(VERIFY_DSE_PATH),
+    remote_path="/root/scripts/verify_dse_safetensors.py",
+    copy=True,
 )
 volume = modal.Volume.from_name(VOLUME_NAME, create_if_missing=True)
 hf_secret = modal.Secret.from_name(
@@ -127,6 +135,36 @@ hf_secret = modal.Secret.from_name(
     required_keys=["HF_TOKEN"],
 )
 app = modal.App(APP_NAME)
+
+
+@app.function(
+    name=VERIFY_DSE_FUNCTION_NAME,
+    image=image,
+    cpu=SCORE_EXTRACTION_CPU,
+    memory=SCORE_EXTRACTION_MEMORY_MB,
+    timeout=3_600,
+    secrets=[hf_secret],
+    volumes={str(VOLUME_MOUNT): volume},
+    env={"QPAF_SOURCE_COMMIT": SOURCE_COMMIT},
+)
+def verify_dse_safetensors() -> str:
+    """Verify a safetensors conversion against every pinned original DSE tensor."""
+    import yaml
+
+    from scripts.verify_dse_safetensors import verify_dse_safetensors as verify
+
+    function_call_id = modal.current_function_call_id()
+    if not function_call_id:
+        raise RuntimeError("Modal did not expose a Function call ID")
+    result = verify(
+        environment=yaml.safe_load(ENVIRONMENT_CONFIG_PATH.read_text(encoding="utf-8")),
+        volume_root=VOLUME_MOUNT,
+        source_commit=SOURCE_COMMIT,
+        image_definition_sha256=IMAGE_DEFINITION_SHA256,
+        function_call_id=function_call_id,
+        commit=volume.commit,
+    )
+    return json.dumps(result, indent=2, sort_keys=True) + "\n"
 
 
 def _gpu_metadata(torch_module: Any) -> dict[str, Any]:

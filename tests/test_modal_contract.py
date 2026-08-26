@@ -103,3 +103,15 @@ def test_full_score_extractor_is_a100_resumable_and_bounded() -> None:
     assert modal_app.IMAGE_DEFINITION["dse_qwen2_adapter_sha256"] == hashlib.sha256(
         (ROOT / "scripts" / "dse_qwen2_retriever.py").read_bytes()
     ).hexdigest()
+    assert 'remote_path="/root/scripts/verify_dse_safetensors.py"' in source
+
+
+def test_dse_safetensors_verification_is_cpu_only_and_volume_backed() -> None:
+    source = (ROOT / "modal_app.py").read_text(encoding="utf-8")
+    decorator = source.split("def verify_dse_safetensors", maxsplit=1)[0].rsplit(
+        "@app.function", maxsplit=1
+    )[1]
+    assert "gpu=" not in decorator
+    assert "cpu=SCORE_EXTRACTION_CPU" in decorator
+    assert "memory=SCORE_EXTRACTION_MEMORY_MB" in decorator
+    assert "volumes={str(VOLUME_MOUNT): volume}" in decorator
