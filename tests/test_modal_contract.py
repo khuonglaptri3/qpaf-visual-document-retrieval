@@ -85,8 +85,12 @@ def test_full_score_extractor_is_a100_resumable_and_bounded() -> None:
     )[1]
     body = source.split("def extract_scores", maxsplit=1)[1]
     assert "gpu=SCORE_EXTRACTION_GPU" in decorator
+    assert "cpu=SCORE_EXTRACTION_CPU" in decorator
+    assert "memory=SCORE_EXTRACTION_MEMORY_MB" in decorator
     assert "timeout=SCORE_EXTRACTION_TIMEOUT_SECONDS" in decorator
     assert modal_app.SCORE_EXTRACTION_TIMEOUT_SECONDS == 14_400
+    assert modal_app.SCORE_EXTRACTION_CPU == 4.0
+    assert modal_app.SCORE_EXTRACTION_MEMORY_MB == 32_768
     assert "commit=volume.commit" in body
     assert 'remote_path="/root/scripts/extract_vidore_baseline.py"' in source
     assert modal_app.IMAGE_DEFINITION["score_extractor_sha256"] == hashlib.sha256(
