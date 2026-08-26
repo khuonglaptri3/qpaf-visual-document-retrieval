@@ -71,6 +71,7 @@ def test_environment_manifest_requires_passed_dataset_manifest(
         lock_path,
         probe_path,
         dataset_path,
+        tmp_path / "environment_manifest.json",
     )
     assert manifest["status"] == "PASS"
     assert manifest["working_tree_clean_except_generated_probe"] is True

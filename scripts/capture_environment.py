@@ -38,6 +38,7 @@ def build_manifest(
     lock_path: Path,
     modal_probe_path: Path,
     dataset_manifest_path: Path,
+    output_path: Path,
 ) -> dict[str, Any]:
     config = yaml.safe_load(config_path.read_text(encoding="utf-8"))
     modal_probe = json.loads(modal_probe_path.read_text(encoding="utf-8"))
@@ -51,11 +52,14 @@ def build_manifest(
     source_commit = _git_output("rev-parse", "HEAD")
     if modal_probe.get("source_commit") != source_commit:
         raise ValueError("Modal probe was not produced from the current source commit")
-    expected_generated_paths = {modal_probe_path.as_posix()}
+    expected_generated_paths = {
+        modal_probe_path.as_posix(),
+        output_path.as_posix(),
+    }
     dirty_paths = {
-        line[3:].replace("\\", "/")
+        line.split(maxsplit=1)[1].replace("\\", "/")
         for line in _git_output("status", "--porcelain").splitlines()
-        if line
+        if len(line.split(maxsplit=1)) == 2
     }
     unexpected_dirty_paths = sorted(dirty_paths - expected_generated_paths)
 
@@ -120,6 +124,7 @@ def main() -> None:
             args.lock,
             args.modal_probe,
             args.dataset_manifest,
+            args.output,
         ),
     )
 
