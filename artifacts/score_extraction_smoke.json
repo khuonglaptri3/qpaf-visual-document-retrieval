@@ -1,0 +1,36 @@
+{
+  "actual_gpu": "NVIDIA A100-SXM4-40GB",
+  "actual_gpu_vram_bytes": 42405855232,
+  "actual_gpu_vram_gb": 42.406,
+  "actual_gpu_vram_gib": 39.494,
+  "app_name": "qpaf-research",
+  "base_model_id": "vidore/colqwen2.5-base",
+  "base_model_revision": "92908120384b7a2110c5beda3ab29cbdb2c08e49",
+  "cuda_available": true,
+  "cuda_runtime": "12.6",
+  "cudnn": 90501,
+  "dataset_key": "vidore_v3_finance_en",
+  "dataset_revision": "7f432c176d82e27546501ad8064a713ac3071809",
+  "driver": "580.95.05",
+  "function_call_id": "fc-01M0Y3Z28VXWAQCQVSYC10QCP9",
+  "function_name": "score-extraction-smoke",
+  "image_definition_sha256": "fac1c759dd842cca340d02d17f3ac3fbba930b7276d9d10dac90c4de6e9641cb",
+  "max_memory_allocated_bytes": 8016245760,
+  "model_id": "vidore/colqwen2.5-v0.2",
+  "model_revision": "dcbe8d9cede518bce830488364ba0e40c873645b",
+  "page_id": "0",
+  "passage_embedding_shape": [
+    755,
+    128
+  ],
+  "query_embedding_shape": [
+    37,
+    128
+  ],
+  "query_id": "0",
+  "schema_version": 1,
+  "score_extraction_started": false,
+  "score_finite": true,
+  "source_commit": "2c891795aa4527565c55102bd3a0e7d3f28da790",
+  "status": "PASS"
+}

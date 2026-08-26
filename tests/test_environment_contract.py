@@ -27,6 +27,8 @@ def test_environment_config_freezes_compatible_retriever_stack() -> None:
     assert config["modal"]["score_extraction_gpu"] == "A100-40GB"
     assert set(config["models"]) == {"bge_m3", "dse", "colqwen25"}
     assert all(HEX40.fullmatch(model["revision"]) for model in config["models"].values())
+    assert config["models"]["colqwen25"]["base_id"] == "vidore/colqwen2.5-base"
+    assert HEX40.fullmatch(config["models"]["colqwen25"]["base_revision"])
 
 
 def test_linux_lock_is_fully_pinned_and_hashed() -> None:
