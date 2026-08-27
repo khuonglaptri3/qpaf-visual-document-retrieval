@@ -50,8 +50,6 @@ models:
   dse:
     id: MrLight/dse-qwen2-2b-mrl-v1
     revision: 3fde4464ea72da2a863ed8fa51f0f1b8045f0426
-    safetensors_id: ielabgroup/dse-qwen2-2b-mrl-v1-safetensor
-    safetensors_revision: 4ada3537f664e3b5b544a38ff3f6afe038ce905e
     license: apache-2.0
     gated: false
   colqwen25:

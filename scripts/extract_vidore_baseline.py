@@ -329,6 +329,9 @@ def run_extraction(
     if dataset["revision"] != "7f432c176d82e27546501ad8064a713ac3071809":
         raise RuntimeError("ViDoRe V3 dataset revision drifted")
     models = environment["models"]
+    from scripts.verify_dse_safetensors import load_verified_conversion_manifest
+
+    _, dse_conversion = load_verified_conversion_manifest(volume_root, models["dse"])
     protocol = {
         "name": "vidore_v3_frozen_baseline_extraction_v1",
         "dataset_revision": dataset["revision"],
@@ -339,6 +342,8 @@ def run_extraction(
         "full_score": "intentionally_unavailable",
         "extractor_sha256": extractor_sha256,
         "dse_adapter_sha256": dse_adapter_sha256,
+        "dse_safetensors_sha256": dse_conversion["weights"]["safetensors_sha256"],
+        "dse_conversion_protocol_sha256": dse_conversion["protocol_sha256"],
     }
     protocol_sha256 = hashlib.sha256(
         json.dumps(protocol, sort_keys=True, separators=(",", ":")).encode("utf-8")
@@ -363,6 +368,7 @@ def run_extraction(
     from scripts.bge_m3_dense_retriever import BGEM3DenseRetriever
     from scripts.colqwen25_retriever import ColQwen25Retriever
     from scripts.dse_qwen2_retriever import DSEQwen2DirectRetriever
+    from scripts.verify_dse_safetensors import stage_verified_dse_snapshot
 
     root = Path(dataset["local_dir"])
     corpus_files = sorted((root / "corpus").glob("*.parquet"))
@@ -462,9 +468,15 @@ def run_extraction(
     else:
         dse = models["dse"]
         checkpoint_started = time.perf_counter()
-        print("DSE: resolving pinned snapshot", flush=True)
-        dse_snapshot = snapshot_download(repo_id=dse["id"], revision=dse["revision"])
-        print(f"DSE: snapshot ready in {time.perf_counter() - checkpoint_started:.1f}s", flush=True)
+        print("DSE: staging verified pinned-original safetensors", flush=True)
+        dse_snapshot, staged_conversion = stage_verified_dse_snapshot(
+            volume_root,
+            dse,
+            ephemeral_hf_root / "dse_runtime",
+        )
+        if staged_conversion["protocol_sha256"] != dse_conversion["protocol_sha256"]:
+            raise RuntimeError("DSE conversion changed after protocol construction")
+        print(f"DSE: snapshot staged in {time.perf_counter() - checkpoint_started:.1f}s", flush=True)
         torch.cuda.reset_peak_memory_stats()
         print("DSE: loading model", flush=True)
         retriever = DSEQwen2DirectRetriever(

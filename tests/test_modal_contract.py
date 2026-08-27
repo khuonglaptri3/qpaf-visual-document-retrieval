@@ -106,9 +106,9 @@ def test_full_score_extractor_is_a100_resumable_and_bounded() -> None:
     assert 'remote_path="/root/scripts/verify_dse_safetensors.py"' in source
 
 
-def test_dse_safetensors_verification_is_cpu_only_and_volume_backed() -> None:
+def test_dse_safetensors_conversion_is_cpu_only_and_volume_backed() -> None:
     source = (ROOT / "modal_app.py").read_text(encoding="utf-8")
-    decorator = source.split("def verify_dse_safetensors", maxsplit=1)[0].rsplit(
+    decorator = source.split("def convert_and_verify_dse_safetensors", maxsplit=1)[0].rsplit(
         "@app.function", maxsplit=1
     )[1]
     assert "gpu=" not in decorator

@@ -19,7 +19,7 @@ MATERIALIZE_FUNCTION_NAME = "materialize-dataset"
 SCORE_INPUT_PROBE_FUNCTION_NAME = "score-input-probe"
 SCORE_EXTRACTION_SMOKE_FUNCTION_NAME = "score-extraction-smoke"
 SCORE_EXTRACTION_FUNCTION_NAME = "extract-scores"
-VERIFY_DSE_FUNCTION_NAME = "verify-dse-safetensors"
+VERIFY_DSE_FUNCTION_NAME = "convert-and-verify-dse-safetensors"
 REQUESTED_GPU = "L4"
 SCORE_EXTRACTION_GPU = "A100-40GB"
 SCORE_EXTRACTION_CPU = 4.0
@@ -147,16 +147,16 @@ app = modal.App(APP_NAME)
     volumes={str(VOLUME_MOUNT): volume},
     env={"QPAF_SOURCE_COMMIT": SOURCE_COMMIT},
 )
-def verify_dse_safetensors() -> str:
-    """Verify a safetensors conversion against every pinned original DSE tensor."""
+def convert_and_verify_dse_safetensors() -> str:
+    """Create and verify safetensors from the pinned original DSE checkpoint."""
     import yaml
 
-    from scripts.verify_dse_safetensors import verify_dse_safetensors as verify
+    from scripts.verify_dse_safetensors import convert_and_verify_dse_safetensors as convert
 
     function_call_id = modal.current_function_call_id()
     if not function_call_id:
         raise RuntimeError("Modal did not expose a Function call ID")
-    result = verify(
+    result = convert(
         environment=yaml.safe_load(ENVIRONMENT_CONFIG_PATH.read_text(encoding="utf-8")),
         volume_root=VOLUME_MOUNT,
         source_commit=SOURCE_COMMIT,
