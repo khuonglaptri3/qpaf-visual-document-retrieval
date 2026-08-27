@@ -1,0 +1,89 @@
+{
+  "core_files": {
+    "chat_template.json": {
+      "converted_sha256": "ad60d90252ed0b0705ba14e2d0ad0fec0beac1ea955642b54059b36052d8bc96",
+      "equal": true,
+      "original_sha256": "ad60d90252ed0b0705ba14e2d0ad0fec0beac1ea955642b54059b36052d8bc96"
+    },
+    "config.json": {
+      "converted_sha256": "422adefa19e62dd175961cec85bc0400344fe5bf9b22bd1182e05aaae78556e0",
+      "equal": true,
+      "original_sha256": "422adefa19e62dd175961cec85bc0400344fe5bf9b22bd1182e05aaae78556e0"
+    },
+    "generation_config.json": {
+      "converted_sha256": "d2864bf1edea5863d331edfff48106b586a366f5a2c41aa77731fadc53aa25d2",
+      "equal": true,
+      "original_sha256": "d2864bf1edea5863d331edfff48106b586a366f5a2c41aa77731fadc53aa25d2"
+    },
+    "merges.txt": {
+      "converted_sha256": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+      "equal": true,
+      "original_sha256": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3"
+    },
+    "preprocessor_config.json": {
+      "converted_sha256": "b5eaad0c2815f07631535dcc58f3c462b0d73693638ad21d19f3c50820eae1cc",
+      "equal": true,
+      "original_sha256": "b5eaad0c2815f07631535dcc58f3c462b0d73693638ad21d19f3c50820eae1cc"
+    },
+    "tokenizer.json": {
+      "converted_sha256": "cb63a0a23eef3d5b01063a9880a1925a65aaf4d1591d519910ee3527852950a0",
+      "equal": true,
+      "original_sha256": "cb63a0a23eef3d5b01063a9880a1925a65aaf4d1591d519910ee3527852950a0"
+    },
+    "tokenizer_config.json": {
+      "converted_sha256": "ff5c4fd898fe8c39591eb70e5d39d2782802d4204d6ae9ba1223252f354842a0",
+      "equal": true,
+      "original_sha256": "ff5c4fd898fe8c39591eb70e5d39d2782802d4204d6ae9ba1223252f354842a0"
+    },
+    "vocab.json": {
+      "converted_sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910",
+      "equal": true,
+      "original_sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+    }
+  },
+  "elapsed_seconds": 574.706196009,
+  "function_call_id": "fc-01M10Q0M9T505SNB6BJ73E26Y9",
+  "image_definition_sha256": "8cb900f88aafe5b37cf1eebe53a31b31e211b338b1d7e80a6932342e06c35061",
+  "protocol": {
+    "comparison": "all_keys_shape_dtype_bitwise_equal",
+    "conversion": "torch_load_bf16_clone_all_keys_safetensors_save_file",
+    "core_files": [
+      "chat_template.json",
+      "config.json",
+      "generation_config.json",
+      "merges.txt",
+      "preprocessor_config.json",
+      "tokenizer.json",
+      "tokenizer_config.json",
+      "vocab.json"
+    ],
+    "expected_dtype": "torch.bfloat16",
+    "expected_keys": 730,
+    "original_id": "MrLight/dse-qwen2-2b-mrl-v1",
+    "original_revision": "3fde4464ea72da2a863ed8fa51f0f1b8045f0426",
+    "tied_key_groups": [
+      [
+        "model.embed_tokens.weight",
+        "lm_head.weight"
+      ]
+    ]
+  },
+  "protocol_sha256": "9e1eb557acb668c05baee6aafbcce96a9740549f720079861db714d5ed4674d9",
+  "schema_version": 1,
+  "source_commit": "898aad2551370a59b22b074a3f11b4b40b434e4c",
+  "status": "PASS",
+  "weights": {
+    "exactly_matched_keys": 730,
+    "mismatches": [],
+    "missing_keys": [],
+    "original_dtypes": {
+      "torch.bfloat16": 730
+    },
+    "original_keys": 730,
+    "original_sha256": "fb082d9efd2fd2ae5f25e0fa6c57baffd6f6d7c4e06b93f2c75c5dcecb7f622f",
+    "safetensors_keys": 730,
+    "safetensors_sha256": "22f40afa7845f739cdcd6b8b8e2cf97b6a7b01c4a72b4ec5395fb685d048080a",
+    "tied_weights_equal": true,
+    "unexpected_keys": []
+  }
+}
