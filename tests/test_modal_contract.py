@@ -64,6 +64,29 @@ def test_score_input_probe_is_read_only_cpu_and_volume_backed() -> None:
     ).hexdigest()
 
 
+def test_vidoseek_expanded_coverage_audit_is_cpu_only_and_volume_backed() -> None:
+    source = (ROOT / "modal_app.py").read_text(encoding="utf-8")
+    decorator = source.split("def audit_vidoseek_expanded_coverage", maxsplit=1)[0].rsplit(
+        "@app.function", maxsplit=1
+    )[1]
+    body = source.split("def audit_vidoseek_expanded_coverage", maxsplit=1)[1].split(
+        "@app.function", maxsplit=1
+    )[0]
+    assert "gpu=" not in decorator
+    assert "secrets=" not in decorator
+    assert "cpu=COVERAGE_AUDIT_CPU" in decorator
+    assert "memory=COVERAGE_AUDIT_MEMORY_MB" in decorator
+    assert "timeout=FUNCTION_TIMEOUT_SECONDS" in decorator
+    assert "volumes={str(VOLUME_MOUNT): volume}" in decorator
+    assert "volume.commit()" in body
+    assert modal_app.COVERAGE_AUDIT_CPU == 2.0
+    assert modal_app.COVERAGE_AUDIT_MEMORY_MB == 4_096
+    assert 'remote_path="/root/scripts/audit_vidoseek_coverage.py"' in source
+    assert modal_app.IMAGE_DEFINITION["vidoseek_coverage_audit_sha256"] == hashlib.sha256(
+        (ROOT / "scripts" / "audit_vidoseek_coverage.py").read_bytes()
+    ).hexdigest()
+
+
 def test_score_extraction_smoke_uses_reserved_gpu_without_qrels() -> None:
     source = (ROOT / "modal_app.py").read_text(encoding="utf-8")
     decorator = source.split("def score_extraction_smoke", maxsplit=1)[0].rsplit(
