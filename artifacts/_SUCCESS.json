@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "status": "PASS",
+  "phase": "P0-03",
+  "scope": "qpaf_candidate_score_bundle_not_heaven_full_score",
+  "source_commit": "86b7dccefb430f0018b6614a13f6a4795264fcf0",
+  "protocol_sha256": "ec81605f49fc045de98bf1ff7a5cef07aef9fb8823ad9931692afe3aca99c914",
+  "artifact_count": 10,
+  "artifact_manifest_sha256": "337c61d70ddb36b6ca5fcc2ddebdfb4d54a920a189d15c6ee2e17057ee028148",
+  "relevant_page_coverage": 0.9575633127994524,
+  "queries_with_zero_relevant_candidates": 0
+}

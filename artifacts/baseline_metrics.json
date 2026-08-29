@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "status": "PASS",
+  "scope": "candidate_pool_metrics_not_official_full_corpus_metrics",
+  "warning": "Use for bundle validation only; do not report as full-corpus benchmark metrics.",
+  "queries": 309,
+  "methods": {
+    "bm25": {
+      "ndcg_at_10": 0.5185109007046569,
+      "recall_at_1": 0.24370688169387056,
+      "recall_at_3": 0.38205473734988116,
+      "mrr_at_10": 0.6155789284430061
+    },
+    "dense": {
+      "ndcg_at_10": 0.4389741833172827,
+      "recall_at_1": 0.19906838136609106,
+      "recall_at_3": 0.3290597008153144,
+      "mrr_at_10": 0.5743129398469202
+    },
+    "visual": {
+      "ndcg_at_10": 0.6262000079561243,
+      "recall_at_1": 0.2895862882976,
+      "recall_at_3": 0.4671631140382569,
+      "mrr_at_10": 0.7480325679354809
+    },
+    "rrf": {
+      "ndcg_at_10": 0.6023574100328706,
+      "recall_at_1": 0.24972074084724002,
+      "recall_at_3": 0.4562991966833121,
+      "mrr_at_10": 0.698699080495197
+    },
+    "fixed_equal": {
+      "ndcg_at_10": 0.6375581748624188,
+      "recall_at_1": 0.29607041621759916,
+      "recall_at_3": 0.4639081465252716,
+      "mrr_at_10": 0.7458429650177223
+    }
+  },
+  "rrf_k": 60,
+  "fixed_equal_channels": [
+    "bm25_score",
+    "dense_score",
+    "visual_score"
+  ]
+}
