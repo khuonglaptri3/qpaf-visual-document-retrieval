@@ -3,6 +3,7 @@ function_name: environment-probe
 requested_gpu: L4
 minimum_gpu_memory_gb: 23.5
 vidoseek_calibration_gpu: L4
+vidoseek_score_extraction_gpu: L4
 score_extraction_gpu: A100-40GB
 timeout_seconds: 600
 volume:

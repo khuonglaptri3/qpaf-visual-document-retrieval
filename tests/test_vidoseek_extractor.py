@@ -84,6 +84,17 @@ def test_extraction_protocol_records_approval_and_still_enforces_review_gate() -
         "approved_on": "2026-08-29",
         "approval_text": "Approve native PDF text for P1-02",
     }
+    assert protocol["full_extraction_gpu_approval"] == {
+        "requested_gpu": "L4",
+        "approved_by": "user",
+        "approved_on": "2026-08-29",
+        "approval_text": "Approve L4 for full ViDoSeek extraction",
+        "calibration_manifest_sha256": (
+            "2213b96ee99f4e2409355db80d650590393a8953f67f90de8259cd84373499c7"
+        ),
+        "measured_gpu_vram_gib": 22.034,
+        "measured_peak_allocation_gib": 7.720,
+    }
 
     review_required = copy.deepcopy(dataset)
     review_required["discovery_extraction"]["protocol_status"] = "review_required"
@@ -129,6 +140,12 @@ def test_calibration_selects_only_queries_connected_to_rendered_pages(
             "protocol_status": "approved",
             "protocol_approval": {
                 "decision": "native_pdf_text",
+                "approved_by": "test",
+                "approved_on": "2026-08-29",
+                "approval_text": "synthetic fixture",
+            },
+            "full_extraction_gpu_approval": {
+                "requested_gpu": "L4",
                 "approved_by": "test",
                 "approved_on": "2026-08-29",
                 "approval_text": "synthetic fixture",

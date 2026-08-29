@@ -107,7 +107,7 @@ def test_full_score_extractor_is_a100_resumable_and_bounded() -> None:
     assert 'remote_path="/root/scripts/verify_dse_safetensors.py"' in source
 
 
-def test_vidoseek_calibration_is_l4_bounded_and_full_extraction_stays_a100() -> None:
+def test_vidoseek_calibration_and_full_extraction_use_approved_l4() -> None:
     source = (ROOT / "modal_app.py").read_text(encoding="utf-8")
     modal_config = yaml.safe_load((ROOT / "configs" / "modal.yaml").read_text(encoding="utf-8"))
     calibration_decorator = source.split("def calibrate_vidoseek_scores", maxsplit=1)[0].rsplit(
@@ -125,11 +125,13 @@ def test_vidoseek_calibration_is_l4_bounded_and_full_extraction_stays_a100() -> 
     )[0]
 
     assert modal_app.VIDOSEEK_CALIBRATION_GPU == "L4"
+    assert modal_app.VIDOSEEK_SCORE_EXTRACTION_GPU == "L4"
     assert modal_app.SCORE_EXTRACTION_GPU == "A100-40GB"
     assert modal_config["vidoseek_calibration_gpu"] == "L4"
+    assert modal_config["vidoseek_score_extraction_gpu"] == "L4"
     assert modal_config["score_extraction_gpu"] == "A100-40GB"
     assert "gpu=VIDOSEEK_CALIBRATION_GPU" in calibration_decorator
-    assert "gpu=SCORE_EXTRACTION_GPU" in full_decorator
+    assert "gpu=VIDOSEEK_SCORE_EXTRACTION_GPU" in full_decorator
     for decorator in [calibration_decorator, full_decorator]:
         assert "cpu=SCORE_EXTRACTION_CPU" in decorator
         assert "memory=SCORE_EXTRACTION_MEMORY_MB" in decorator

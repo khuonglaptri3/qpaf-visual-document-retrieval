@@ -153,6 +153,7 @@ def extraction_protocol(dataset: dict[str, Any], require_approved: bool = True) 
     return {
         "protocol_status": status,
         "protocol_approval": approval,
+        "full_extraction_gpu_approval": config["full_extraction_gpu_approval"],
         "annotation_file": config["annotation_file"],
         "annotation_file_sha256": dataset["qrels_metadata"]["annotation_file_sha256"],
         "pdf_archive": config["pdf_archive"],

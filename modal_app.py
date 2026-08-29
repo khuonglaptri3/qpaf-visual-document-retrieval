@@ -24,6 +24,7 @@ VIDOSEEK_SCORE_EXTRACTION_FUNCTION_NAME = "extract-vidoseek-scores"
 VERIFY_DSE_FUNCTION_NAME = "convert-and-verify-dse-safetensors"
 REQUESTED_GPU = "L4"
 VIDOSEEK_CALIBRATION_GPU = "L4"
+VIDOSEEK_SCORE_EXTRACTION_GPU = "L4"
 SCORE_EXTRACTION_GPU = "A100-40GB"
 SCORE_EXTRACTION_CPU = 4.0
 SCORE_EXTRACTION_MEMORY_MB = 32_768
@@ -543,7 +544,7 @@ def calibrate_vidoseek_scores(query_limit: int = 10, page_limit: int = 128) -> s
 @app.function(
     name=VIDOSEEK_SCORE_EXTRACTION_FUNCTION_NAME,
     image=image,
-    gpu=SCORE_EXTRACTION_GPU,
+    gpu=VIDOSEEK_SCORE_EXTRACTION_GPU,
     cpu=SCORE_EXTRACTION_CPU,
     memory=SCORE_EXTRACTION_MEMORY_MB,
     timeout=SCORE_EXTRACTION_TIMEOUT_SECONDS,
@@ -552,5 +553,5 @@ def calibrate_vidoseek_scores(query_limit: int = 10, page_limit: int = 128) -> s
     env={"QPAF_SOURCE_COMMIT": SOURCE_COMMIT},
 )
 def extract_vidoseek_scores() -> str:
-    """Extract the full ViDoSeek discovery scores on the reserved A100."""
+    """Extract full ViDoSeek discovery scores on the approved L4."""
     return _run_vidoseek_extraction(0, 0, calibration=False)
