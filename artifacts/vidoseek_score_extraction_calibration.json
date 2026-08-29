@@ -1,0 +1,14 @@
+{
+  "artifact_count": 4,
+  "coverage": 1.0,
+  "full_score_produced": false,
+  "function_call_id": "fc-01M16E91CTEN3YCAW0G1SSP5XX",
+  "manifest_sha256": "2213b96ee99f4e2409355db80d650590393a8953f67f90de8259cd84373499c7",
+  "protocol_sha256": "be7c5a4e761881fe92fb4cbf661d51586271385a3dea74d3a4d8feafac8e2a5e",
+  "queries_with_zero_relevant_candidates": 0,
+  "schema_version": 1,
+  "scope": "calibration_q10_p128",
+  "status": "complete",
+  "total_seconds": 353.25124482,
+  "volume_output_dir": "/vol/score_extraction/vidoseek/be7c5a4e761881fe92fb4cbf661d51586271385a3dea74d3a4d8feafac8e2a5e/calibration_q10_p128/output"
+}

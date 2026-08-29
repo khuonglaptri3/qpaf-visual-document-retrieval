@@ -1,0 +1,208 @@
+{
+  "artifacts": {
+    "candidate_audit.parquet": {
+      "bytes": 4451,
+      "sha256": "6c8d7c373c33d3b9dcb377955c9724b3ee1a85fe2eac88a9698b0e568d4f9b3a"
+    },
+    "candidate_raw_scores.parquet": {
+      "bytes": 24048,
+      "content_sha256": "116a0a35c54c2a32912cb8460d4afa2aed1935cf552808fee596c869d53e47f4",
+      "sha256": "0a4ed8c561fcce54bd5ee426528f38ae75676d193f050888fdd6ffd5ac55a649"
+    },
+    "coverage_report.json": {
+      "bytes": 329,
+      "sha256": "5764d9c347c83642348e14f6795c49a16ce3195055bdf8d738ebdd01e240e9be"
+    },
+    "retrieval_scores.parquet": {
+      "bytes": 59512,
+      "content_sha256": "1ba3e53b4fa3cf8ffd3f53acc55152d2cdbe3327eb3364ea5406ebf0be63ef45",
+      "sha256": "ab95af104cf1a7af4b7f0fdcee7a5f8308f794f2a49e1b4a564c75806d627806"
+    }
+  },
+  "batch_sizes": {
+    "bge_passages": 32,
+    "bge_queries": 64,
+    "colqwen25_passages": 2,
+    "colqwen25_queries": 8,
+    "dse_passages": 4,
+    "dse_queries": 16
+  },
+  "coverage": {
+    "corpus_pages": 128,
+    "dataset": "Qiuchen-Wang/ViDoSeek",
+    "expanded_once": false,
+    "final_coverage": 1.0,
+    "initial_coverage": 1.0,
+    "mean_candidates": 128.0,
+    "minimum_required": 0.95,
+    "qrels_use": "coverage_audit_and_frozen_one_time_expansion_only",
+    "queries": 10,
+    "queries_with_zero_relevant_candidates": 0
+  },
+  "dataset": {
+    "id": "Qiuchen-Wang/ViDoSeek",
+    "pages": 128,
+    "preparation": {
+      "archive_pdf_count": 292,
+      "nonempty_text_pages": 127,
+      "page_count": 128,
+      "page_limit": 128,
+      "protocol": {
+        "annotation_file": "vidoseek.json",
+        "annotation_file_sha256": "ca4949bfc16231d129cd7565f20e07683854ab5aa8d05f05a86a12a9b71a7fab",
+        "expected_archive_pdf_count": 292,
+        "expected_query_count": 1142,
+        "expected_reference_pair_count": 1142,
+        "expected_referenced_document_count": 290,
+        "jpeg_encoder": "pillow_default",
+        "official_reference": {
+          "ocr_script": "scripts/ocr_triditional.py",
+          "page_render_script": "scripts/pdf2images.py",
+          "repository": "Alibaba-NLP/ViDoRAG",
+          "revision": "2c1ec39c5e3a04daa01f91545feaaa79512134bf"
+        },
+        "page_numbering": "one_based",
+        "page_renderer": "poppler_pdftoppm",
+        "pdf_archive": "vidoseek_pdf_document.zip",
+        "pdf_archive_sha256": "3b999a798ceab38703118e4cc7d9b852f86538d5bb7caad64eb545251ee00454",
+        "protocol_approval": {
+          "approval_text": "Approve native PDF text for P1-02",
+          "approved_by": "user",
+          "approved_on": "2026-08-29",
+          "decision": "native_pdf_text"
+        },
+        "protocol_status": "approved",
+        "qrels_use": "calibration_query_eligibility_and_post_candidate_coverage_evaluation_only",
+        "render_dpi": 200,
+        "render_format": "jpeg",
+        "render_intermediate_format": "ppm",
+        "text_extractor": "poppler_pdftotext_layout",
+        "text_source": "native_pdf_text_not_ocr"
+      },
+      "referenced_document_count": 290,
+      "schema_version": 1,
+      "selected_qrel_count": 10,
+      "selected_query_count": 10,
+      "status": "complete",
+      "text_source": "native_pdf_text_not_ocr"
+    },
+    "queries": 10,
+    "revision": "e91a92ba5f38690696c7e66be5c5474b54c6e791"
+  },
+  "extractor_sha256": "25fbbb0fdc732920619b912573200a140438998498185e9cc34824474e98047a",
+  "full_score_status": "not_produced_by_human_approved_protocol",
+  "function_call_id": "fc-01M16E91CTEN3YCAW0G1SSP5XX",
+  "hardware": {
+    "actual_gpu": "NVIDIA L4",
+    "actual_gpu_vram_bytes": 23659151360,
+    "actual_gpu_vram_gb": 23.659,
+    "actual_gpu_vram_gib": 22.034,
+    "cuda_available": true,
+    "cuda_runtime": "12.6",
+    "cudnn": 90501,
+    "driver": "580.95.05"
+  },
+  "image_definition_sha256": "32163cdd1c586fc3686e69cb88cc64b829239238194b84a50b42a861700ac973",
+  "max_memory_allocated_bytes": {
+    "bge_m3": 1593392640,
+    "colqwen25": 8289260032,
+    "dse": 7764526080
+  },
+  "packages": {
+    "colpali-engine": "0.3.12",
+    "datasets": "3.6.0",
+    "torch": "2.7.1",
+    "transformers": "4.53.3",
+    "vidore-benchmark": "5.0.0"
+  },
+  "protocol": {
+    "dataset_preprocessing": {
+      "annotation_file": "vidoseek.json",
+      "annotation_file_sha256": "ca4949bfc16231d129cd7565f20e07683854ab5aa8d05f05a86a12a9b71a7fab",
+      "expected_archive_pdf_count": 292,
+      "expected_query_count": 1142,
+      "expected_reference_pair_count": 1142,
+      "expected_referenced_document_count": 290,
+      "jpeg_encoder": "pillow_default",
+      "official_reference": {
+        "ocr_script": "scripts/ocr_triditional.py",
+        "page_render_script": "scripts/pdf2images.py",
+        "repository": "Alibaba-NLP/ViDoRAG",
+        "revision": "2c1ec39c5e3a04daa01f91545feaaa79512134bf"
+      },
+      "page_numbering": "one_based",
+      "page_renderer": "poppler_pdftoppm",
+      "pdf_archive": "vidoseek_pdf_document.zip",
+      "pdf_archive_sha256": "3b999a798ceab38703118e4cc7d9b852f86538d5bb7caad64eb545251ee00454",
+      "protocol_approval": {
+        "approval_text": "Approve native PDF text for P1-02",
+        "approved_by": "user",
+        "approved_on": "2026-08-29",
+        "decision": "native_pdf_text"
+      },
+      "protocol_status": "approved",
+      "qrels_use": "calibration_query_eligibility_and_post_candidate_coverage_evaluation_only",
+      "render_dpi": 200,
+      "render_format": "jpeg",
+      "render_intermediate_format": "ppm",
+      "text_extractor": "poppler_pdftotext_layout",
+      "text_source": "native_pdf_text_not_ocr"
+    },
+    "dataset_revision": "e91a92ba5f38690696c7e66be5c5474b54c6e791",
+    "dse_adapter_sha256": "7a9030d6138808fcb4499722fb84458a08e5b0b2530790e1b043bea74f290602",
+    "dse_conversion_protocol_sha256": "9e1eb557acb668c05baee6aafbcce96a9740549f720079861db714d5ed4674d9",
+    "dse_safetensors_sha256": "22f40afa7845f739cdcd6b8b8e2cf97b6a7b01c4a72b4ec5395fb685d048080a",
+    "expanded_depths": {
+      "bm25": 200,
+      "dense": 200,
+      "stage1": 300
+    },
+    "extractor_sha256": "25fbbb0fdc732920619b912573200a140438998498185e9cc34824474e98047a",
+    "full_score": "intentionally_unavailable",
+    "initial_depths": {
+      "bm25": 100,
+      "dense": 100,
+      "stage1": 200
+    },
+    "minimum_coverage": 0.95,
+    "models": {
+      "bge_m3": {
+        "gated": false,
+        "id": "BAAI/bge-m3",
+        "license": "mit",
+        "revision": "5617a9f61b028005a4858fdac845db406aefb181"
+      },
+      "colqwen25": {
+        "base_id": "vidore/colqwen2.5-base",
+        "base_revision": "92908120384b7a2110c5beda3ab29cbdb2c08e49",
+        "gated": false,
+        "id": "vidore/colqwen2.5-v0.2",
+        "license": "mit",
+        "revision": "dcbe8d9cede518bce830488364ba0e40c873645b"
+      },
+      "dse": {
+        "gated": false,
+        "id": "MrLight/dse-qwen2-2b-mrl-v1",
+        "license": "apache-2.0",
+        "revision": "3fde4464ea72da2a863ed8fa51f0f1b8045f0426"
+      }
+    },
+    "name": "vidoseek_discovery_extraction_v1",
+    "vidoseek_adapter_sha256": "192910de09a9776f78d363703258129e654727688a5121fa6055e1b8b957c14f"
+  },
+  "protocol_sha256": "be7c5a4e761881fe92fb4cbf661d51586271385a3dea74d3a4d8feafac8e2a5e",
+  "python": "3.11.12",
+  "schema_version": 1,
+  "scientific_scope": "vidoseek_discovery_no_heaven_full_score",
+  "scope": "calibration_q10_p128",
+  "score_extraction_started": true,
+  "source_commit": "662dc335600fc21ac31fb8658ee0b991c3818774",
+  "status": "PASS",
+  "timings_seconds": {
+    "bge_m3_seconds": 25.747229106999995,
+    "bm25_seconds": 0.9083916869999982,
+    "colqwen25_seconds": 133.667038658,
+    "dse_seconds": 145.18184974599998,
+    "total": 353.25124482
+  }
+}
