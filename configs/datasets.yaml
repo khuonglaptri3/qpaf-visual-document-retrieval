@@ -45,6 +45,7 @@ datasets:
         approved_by: user
         approved_on: "2026-08-29"
         approval_text: Approve L4 for full ViDoSeek extraction
+        timeout_seconds: 86400
         calibration_manifest_sha256: 2213b96ee99f4e2409355db80d650590393a8953f67f90de8259cd84373499c7
         measured_gpu_vram_gib: 22.034
         measured_peak_allocation_gib: 7.720

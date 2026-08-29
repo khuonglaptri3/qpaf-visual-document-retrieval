@@ -26,6 +26,7 @@ def test_environment_config_freezes_compatible_retriever_stack() -> None:
     assert config["modal"]["default_gpu"] == "L4"
     assert config["modal"]["vidoseek_calibration_gpu"] == "L4"
     assert config["modal"]["vidoseek_score_extraction_gpu"] == "L4"
+    assert config["modal"]["vidoseek_score_extraction_timeout_seconds"] == 86_400
     assert config["modal"]["score_extraction_gpu"] == "A100-40GB"
     assert config["modal"]["score_extraction_cpu"] == 4.0
     assert config["modal"]["score_extraction_memory_mb"] == 32_768

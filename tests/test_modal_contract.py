@@ -126,18 +126,21 @@ def test_vidoseek_calibration_and_full_extraction_use_approved_l4() -> None:
 
     assert modal_app.VIDOSEEK_CALIBRATION_GPU == "L4"
     assert modal_app.VIDOSEEK_SCORE_EXTRACTION_GPU == "L4"
+    assert modal_app.VIDOSEEK_SCORE_EXTRACTION_TIMEOUT_SECONDS == 86_400
     assert modal_app.SCORE_EXTRACTION_GPU == "A100-40GB"
     assert modal_config["vidoseek_calibration_gpu"] == "L4"
     assert modal_config["vidoseek_score_extraction_gpu"] == "L4"
+    assert modal_config["vidoseek_score_extraction_timeout_seconds"] == 86_400
     assert modal_config["score_extraction_gpu"] == "A100-40GB"
     assert "gpu=VIDOSEEK_CALIBRATION_GPU" in calibration_decorator
     assert "gpu=VIDOSEEK_SCORE_EXTRACTION_GPU" in full_decorator
     for decorator in [calibration_decorator, full_decorator]:
         assert "cpu=SCORE_EXTRACTION_CPU" in decorator
         assert "memory=SCORE_EXTRACTION_MEMORY_MB" in decorator
-        assert "timeout=SCORE_EXTRACTION_TIMEOUT_SECONDS" in decorator
         assert "volumes={str(VOLUME_MOUNT): volume}" in decorator
         assert "secrets=[hf_secret]" in decorator
+    assert "timeout=SCORE_EXTRACTION_TIMEOUT_SECONDS" in calibration_decorator
+    assert "timeout=VIDOSEEK_SCORE_EXTRACTION_TIMEOUT_SECONDS" in full_decorator
     assert "Calibration requires positive query_limit and page_limit" in calibration_body
     assert "calibration=True" in calibration_body
     assert "calibration=False" in full_body

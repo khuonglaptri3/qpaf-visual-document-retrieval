@@ -89,6 +89,7 @@ def test_extraction_protocol_records_approval_and_still_enforces_review_gate() -
         "approved_by": "user",
         "approved_on": "2026-08-29",
         "approval_text": "Approve L4 for full ViDoSeek extraction",
+        "timeout_seconds": 86_400,
         "calibration_manifest_sha256": (
             "2213b96ee99f4e2409355db80d650590393a8953f67f90de8259cd84373499c7"
         ),
@@ -143,6 +144,7 @@ def test_calibration_selects_only_queries_connected_to_rendered_pages(
                 "approved_by": "test",
                 "approved_on": "2026-08-29",
                 "approval_text": "synthetic fixture",
+                "timeout_seconds": 86_400,
             },
             "full_extraction_gpu_approval": {
                 "requested_gpu": "L4",
