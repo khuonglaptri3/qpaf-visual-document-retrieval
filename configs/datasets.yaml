@@ -34,8 +34,13 @@ datasets:
       unique_reference_page_count: 890
       annotation_file_sha256: ca4949bfc16231d129cd7565f20e07683854ab5aa8d05f05a86a12a9b71a7fab
     discovery_extraction:
-      protocol_status: review_required
-      review_blocker: approve_native_pdf_text_or_select_a_frozen_ocr_pipeline
+      protocol_status: approved
+      protocol_approval:
+        decision: native_pdf_text
+        approved_by: user
+        approved_on: "2026-08-29"
+        approval_text: Approve native PDF text for P1-02
+      review_blocker: null
       annotation_file: vidoseek.json
       pdf_archive: vidoseek_pdf_document.zip
       pdf_archive_sha256: 3b999a798ceab38703118e4cc7d9b852f86538d5bb7caad64eb545251ee00454

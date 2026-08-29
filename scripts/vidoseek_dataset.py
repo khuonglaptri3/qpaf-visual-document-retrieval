@@ -142,13 +142,17 @@ def extraction_protocol(dataset: dict[str, Any], require_approved: bool = True) 
     if not isinstance(config, dict):
         raise RuntimeError("ViDoSeek discovery_extraction config is missing")
     status = config.get("protocol_status")
+    approval = config.get("protocol_approval")
     if require_approved and status != "approved":
         raise RuntimeError(
             "ViDoSeek extraction protocol requires human approval: "
             f"status={status!r}, blocker={config.get('review_blocker')!r}"
         )
+    if status == "approved" and not isinstance(approval, dict):
+        raise RuntimeError("Approved ViDoSeek extraction protocol is missing approval provenance")
     return {
         "protocol_status": status,
+        "protocol_approval": approval,
         "annotation_file": config["annotation_file"],
         "annotation_file_sha256": dataset["qrels_metadata"]["annotation_file_sha256"],
         "pdf_archive": config["pdf_archive"],

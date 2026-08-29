@@ -72,16 +72,25 @@ def test_annotations_reject_duplicate_query_ids() -> None:
         )
 
 
-def test_extraction_protocol_stops_until_text_policy_is_approved() -> None:
+def test_extraction_protocol_records_approval_and_still_enforces_review_gate() -> None:
     config = yaml.safe_load((ROOT / "configs" / "datasets.yaml").read_text(encoding="utf-8"))
     dataset = next(item for item in config["datasets"] if item["key"] == "vidoseek")
 
-    with pytest.raises(RuntimeError, match="requires human approval"):
-        vidoseek_dataset.extraction_protocol(dataset)
+    protocol = vidoseek_dataset.extraction_protocol(dataset)
+    assert protocol["protocol_status"] == "approved"
+    assert protocol["protocol_approval"] == {
+        "decision": "native_pdf_text",
+        "approved_by": "user",
+        "approved_on": "2026-08-29",
+        "approval_text": "Approve native PDF text for P1-02",
+    }
 
-    approved = copy.deepcopy(dataset)
-    approved["discovery_extraction"]["protocol_status"] = "approved"
-    protocol = vidoseek_dataset.extraction_protocol(approved)
+    review_required = copy.deepcopy(dataset)
+    review_required["discovery_extraction"]["protocol_status"] = "review_required"
+    review_required["discovery_extraction"]["review_blocker"] = "human_decision_required"
+    with pytest.raises(RuntimeError, match="requires human approval"):
+        vidoseek_dataset.extraction_protocol(review_required)
+
     assert protocol["page_renderer"] == "poppler_pdftoppm"
     assert protocol["render_dpi"] == 200
     assert protocol["render_intermediate_format"] == "ppm"
@@ -118,6 +127,12 @@ def test_calibration_selects_only_queries_connected_to_rendered_pages(
         },
         "discovery_extraction": {
             "protocol_status": "approved",
+            "protocol_approval": {
+                "decision": "native_pdf_text",
+                "approved_by": "test",
+                "approved_on": "2026-08-29",
+                "approval_text": "synthetic fixture",
+            },
             "annotation_file": annotation_path.name,
             "pdf_archive": archive_path.name,
             "pdf_archive_sha256": hashlib.sha256(archive_path.read_bytes()).hexdigest(),

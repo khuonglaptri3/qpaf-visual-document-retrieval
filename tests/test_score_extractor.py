@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import copy
+
 import numpy as np
 import pytest
 import torch
@@ -85,10 +87,14 @@ def test_vidoseek_protocol_gate_runs_before_dse_or_model_setup(tmp_path) -> None
     environment = yaml.safe_load(
         (root / "configs" / "environment.yaml").read_text(encoding="utf-8")
     )
+    review_required = copy.deepcopy(dataset_config)
+    vidoseek = next(item for item in review_required["datasets"] if item["key"] == "vidoseek")
+    vidoseek["discovery_extraction"]["protocol_status"] = "review_required"
+    vidoseek["discovery_extraction"]["review_blocker"] = "human_decision_required"
 
     with pytest.raises(RuntimeError, match="requires human approval"):
         run_extraction(
-            dataset_config=dataset_config,
+            dataset_config=review_required,
             environment=environment,
             volume_root=tmp_path,
             source_commit="a" * 40,
