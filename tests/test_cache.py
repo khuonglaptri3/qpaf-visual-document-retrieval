@@ -51,6 +51,12 @@ class CacheTest(unittest.TestCase):
             "official_full_corpus_export",
         )
 
+    def test_negative_relevance_is_rejected(self):
+        raw = self.raw()
+        raw.loc[0, "relevance"] = -1
+        with self.assertRaisesRegex(ValueError, "non-negative"):
+            build_cache(raw)
+
     def test_failed_coverage_reports_the_affected_query(self):
         rows = []
         for index in range(400):

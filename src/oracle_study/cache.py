@@ -103,6 +103,8 @@ def build_cache(
     ]
     if raw[numeric].isna().any().any() or not np.isfinite(raw[numeric].to_numpy(float)).all():
         raise ValueError("Raw score table contains missing or non-finite scores")
+    if raw["relevance"].lt(0).any():
+        raise ValueError("Raw score table relevance must be non-negative")
 
     for branch in ["bm25", "dense", "stage1", "visual"]:
         raw[f"{branch}_rank"] = _rank(raw, f"{branch}_score")
