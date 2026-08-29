@@ -106,6 +106,29 @@ def test_full_score_extractor_is_a100_resumable_and_bounded() -> None:
     assert 'remote_path="/root/scripts/verify_dse_safetensors.py"' in source
 
 
+def test_vidoseek_calibration_entry_is_pinned_guarded_and_a100_bounded() -> None:
+    source = (ROOT / "modal_app.py").read_text(encoding="utf-8")
+    decorator = source.split("def extract_vidoseek_scores", maxsplit=1)[0].rsplit(
+        "@app.function", maxsplit=1
+    )[1]
+    body = source.split("def extract_vidoseek_scores", maxsplit=1)[1]
+    assert "gpu=SCORE_EXTRACTION_GPU" in decorator
+    assert "cpu=SCORE_EXTRACTION_CPU" in decorator
+    assert "memory=SCORE_EXTRACTION_MEMORY_MB" in decorator
+    assert "timeout=SCORE_EXTRACTION_TIMEOUT_SECONDS" in decorator
+    assert "volumes={str(VOLUME_MOUNT): volume}" in decorator
+    assert "secrets=[hf_secret]" in decorator
+    assert "Calibration requires positive query_limit and page_limit" in body
+    assert 'dataset_key="vidoseek"' in body
+    assert "vidoseek_adapter_sha256=VIDOSEEK_ADAPTER_SHA256" in body
+    assert modal_app.SYSTEM_PACKAGES == ("poppler-utils",)
+    assert modal_app.IMAGE_DEFINITION["system_packages"] == ["poppler-utils"]
+    assert modal_app.IMAGE_DEFINITION["vidoseek_adapter_sha256"] == hashlib.sha256(
+        (ROOT / "scripts" / "vidoseek_dataset.py").read_bytes()
+    ).hexdigest()
+    assert 'remote_path="/root/scripts/vidoseek_dataset.py"' in source
+
+
 def test_dse_safetensors_conversion_is_cpu_only_and_volume_backed() -> None:
     source = (ROOT / "modal_app.py").read_text(encoding="utf-8")
     decorator = source.split("def convert_and_verify_dse_safetensors", maxsplit=1)[0].rsplit(

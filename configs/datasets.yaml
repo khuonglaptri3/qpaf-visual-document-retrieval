@@ -18,7 +18,45 @@ datasets:
     local_dir: /vol/datasets/vidoseek/e91a92ba5f38690696c7e66be5c5474b54c6e791
     download_status: materialized_on_modal
     remote_file_count: 6
-    qrels_contract: annotations_in_vidoseek_json_unverified
+    qrels_contract: page_level_binary_from_uid_prefix_and_reference_page
+    qrels_metadata:
+      query_id_field: uid
+      query_text_field: query
+      document_filename_field: meta_info.file_name
+      document_id_transform: remove_final_underscore_segment_from_uid
+      relevance_page_field: meta_info.reference_page
+      page_id_format: "<document_id>_<one_based_page_number>"
+      relevance_mapping: listed_page_is_binary_relevance_1
+      granularity: page
+      query_count: 1142
+      referenced_document_count: 290
+      reference_pair_count: 1142
+      unique_reference_page_count: 890
+      annotation_file_sha256: ca4949bfc16231d129cd7565f20e07683854ab5aa8d05f05a86a12a9b71a7fab
+    discovery_extraction:
+      protocol_status: review_required
+      review_blocker: approve_native_pdf_text_or_select_a_frozen_ocr_pipeline
+      annotation_file: vidoseek.json
+      pdf_archive: vidoseek_pdf_document.zip
+      pdf_archive_sha256: 3b999a798ceab38703118e4cc7d9b852f86538d5bb7caad64eb545251ee00454
+      expected_archive_pdf_count: 292
+      expected_query_count: 1142
+      expected_referenced_document_count: 290
+      expected_reference_pair_count: 1142
+      page_renderer: poppler_pdftoppm
+      render_dpi: 200
+      render_intermediate_format: ppm
+      render_format: jpeg
+      jpeg_encoder: pillow_default
+      page_numbering: one_based
+      text_extractor: poppler_pdftotext_layout
+      text_source: native_pdf_text_not_ocr
+      official_reference:
+        repository: Alibaba-NLP/ViDoRAG
+        revision: 2c1ec39c5e3a04daa01f91545feaaa79512134bf
+        page_render_script: scripts/pdf2images.py
+        ocr_script: scripts/ocr_triditional.py
+      qrels_use: calibration_query_eligibility_and_post_candidate_coverage_evaluation_only
     qrels_files:
       - vidoseek.json
     split_files:

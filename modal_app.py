@@ -19,6 +19,7 @@ MATERIALIZE_FUNCTION_NAME = "materialize-dataset"
 SCORE_INPUT_PROBE_FUNCTION_NAME = "score-input-probe"
 SCORE_EXTRACTION_SMOKE_FUNCTION_NAME = "score-extraction-smoke"
 SCORE_EXTRACTION_FUNCTION_NAME = "extract-scores"
+VIDOSEEK_SCORE_EXTRACTION_FUNCTION_NAME = "extract-vidoseek-scores"
 VERIFY_DSE_FUNCTION_NAME = "convert-and-verify-dse-safetensors"
 REQUESTED_GPU = "L4"
 SCORE_EXTRACTION_GPU = "A100-40GB"
@@ -33,6 +34,7 @@ MATERIALIZE_TIMEOUT_SECONDS = 14_400
 SCORE_EXTRACTION_SMOKE_TIMEOUT_SECONDS = 3_600
 SCORE_EXTRACTION_TIMEOUT_SECONDS = 14_400
 PROJECT_ROOT = Path(__file__).resolve().parent
+SYSTEM_PACKAGES = ("poppler-utils",)
 REQUIREMENTS_LOCK_PATH = PROJECT_ROOT / "requirements-lock.txt"
 DATASETS_CONFIG_PATH = PROJECT_ROOT / "configs" / "datasets.yaml"
 ENVIRONMENT_CONFIG_PATH = PROJECT_ROOT / "configs" / "environment.yaml"
@@ -40,6 +42,7 @@ MATERIALIZER_PATH = PROJECT_ROOT / "scripts" / "materialize_datasets.py"
 SCORE_INPUT_PROBE_PATH = PROJECT_ROOT / "scripts" / "probe_score_inputs.py"
 COLQWEN25_ADAPTER_PATH = PROJECT_ROOT / "scripts" / "colqwen25_retriever.py"
 SCORE_EXTRACTOR_PATH = PROJECT_ROOT / "scripts" / "extract_vidore_baseline.py"
+VIDOSEEK_ADAPTER_PATH = PROJECT_ROOT / "scripts" / "vidoseek_dataset.py"
 BGE_M3_ADAPTER_PATH = PROJECT_ROOT / "scripts" / "bge_m3_dense_retriever.py"
 DSE_QWEN2_ADAPTER_PATH = PROJECT_ROOT / "scripts" / "dse_qwen2_retriever.py"
 VERIFY_DSE_PATH = PROJECT_ROOT / "scripts" / "verify_dse_safetensors.py"
@@ -50,6 +53,7 @@ MATERIALIZER_SHA256 = hashlib.sha256(MATERIALIZER_PATH.read_bytes()).hexdigest()
 SCORE_INPUT_PROBE_SHA256 = hashlib.sha256(SCORE_INPUT_PROBE_PATH.read_bytes()).hexdigest()
 COLQWEN25_ADAPTER_SHA256 = hashlib.sha256(COLQWEN25_ADAPTER_PATH.read_bytes()).hexdigest()
 SCORE_EXTRACTOR_SHA256 = hashlib.sha256(SCORE_EXTRACTOR_PATH.read_bytes()).hexdigest()
+VIDOSEEK_ADAPTER_SHA256 = hashlib.sha256(VIDOSEEK_ADAPTER_PATH.read_bytes()).hexdigest()
 BGE_M3_ADAPTER_SHA256 = hashlib.sha256(BGE_M3_ADAPTER_PATH.read_bytes()).hexdigest()
 DSE_QWEN2_ADAPTER_SHA256 = hashlib.sha256(DSE_QWEN2_ADAPTER_PATH.read_bytes()).hexdigest()
 VERIFY_DSE_SHA256 = hashlib.sha256(VERIFY_DSE_PATH.read_bytes()).hexdigest()
@@ -69,6 +73,7 @@ SOURCE_COMMIT = _resolve_source_commit()
 IMAGE_DEFINITION: dict[str, Any] = {
     "base": "modal.Image.debian_slim",
     "python": "3.11",
+    "system_packages": list(SYSTEM_PACKAGES),
     "requirements_lock": REQUIREMENTS_LOCK_PATH.name,
     "requirements_lock_sha256": REQUIREMENTS_LOCK_SHA256,
     "datasets_config_sha256": DATASETS_CONFIG_SHA256,
@@ -77,6 +82,7 @@ IMAGE_DEFINITION: dict[str, Any] = {
     "score_input_probe_sha256": SCORE_INPUT_PROBE_SHA256,
     "colqwen25_adapter_sha256": COLQWEN25_ADAPTER_SHA256,
     "score_extractor_sha256": SCORE_EXTRACTOR_SHA256,
+    "vidoseek_adapter_sha256": VIDOSEEK_ADAPTER_SHA256,
     "bge_m3_adapter_sha256": BGE_M3_ADAPTER_SHA256,
     "dse_qwen2_adapter_sha256": DSE_QWEN2_ADAPTER_SHA256,
     "verify_dse_sha256": VERIFY_DSE_SHA256,
@@ -85,7 +91,9 @@ IMAGE_DEFINITION_SHA256 = hashlib.sha256(
     json.dumps(IMAGE_DEFINITION, sort_keys=True, separators=(",", ":")).encode("utf-8")
 ).hexdigest()
 
-image = modal.Image.debian_slim(python_version=IMAGE_DEFINITION["python"]).pip_install_from_requirements(
+image = modal.Image.debian_slim(python_version=IMAGE_DEFINITION["python"]).apt_install(
+    *SYSTEM_PACKAGES
+).pip_install_from_requirements(
     str(REQUIREMENTS_LOCK_PATH),
     extra_options="--require-hashes",
 ).add_local_file(
@@ -115,6 +123,10 @@ image = modal.Image.debian_slim(python_version=IMAGE_DEFINITION["python"]).pip_i
 ).add_local_file(
     str(SCORE_EXTRACTOR_PATH),
     remote_path="/root/scripts/extract_vidore_baseline.py",
+    copy=True,
+).add_local_file(
+    str(VIDOSEEK_ADAPTER_PATH),
+    remote_path="/root/scripts/vidoseek_dataset.py",
     copy=True,
 ).add_local_file(
     str(BGE_M3_ADAPTER_PATH),
@@ -475,5 +487,54 @@ def extract_scores(
         query_limit=query_limit,
         page_limit=page_limit,
         calibration=calibration,
+    )
+    return json.dumps(result, indent=2, sort_keys=True) + "\n"
+
+
+@app.function(
+    name=VIDOSEEK_SCORE_EXTRACTION_FUNCTION_NAME,
+    image=image,
+    gpu=SCORE_EXTRACTION_GPU,
+    cpu=SCORE_EXTRACTION_CPU,
+    memory=SCORE_EXTRACTION_MEMORY_MB,
+    timeout=SCORE_EXTRACTION_TIMEOUT_SECONDS,
+    secrets=[hf_secret],
+    volumes={str(VOLUME_MOUNT): volume},
+    env={"QPAF_SOURCE_COMMIT": SOURCE_COMMIT},
+)
+def extract_vidoseek_scores(
+    query_limit: int = 0,
+    page_limit: int = 0,
+    calibration: bool = False,
+) -> str:
+    """Extract ViDoSeek discovery scores after its preprocessing protocol is approved."""
+    import torch
+    import yaml
+
+    from scripts.extract_vidore_baseline import run_extraction
+
+    function_call_id = modal.current_function_call_id()
+    if not function_call_id:
+        raise RuntimeError("Modal did not expose a Function call ID")
+    if calibration and (query_limit <= 0 or page_limit <= 0):
+        raise ValueError("Calibration requires positive query_limit and page_limit")
+    if not calibration and (query_limit != 0 or page_limit != 0):
+        raise ValueError("Full extraction does not accept query/page limits")
+    result = run_extraction(
+        dataset_config=yaml.safe_load(DATASETS_CONFIG_PATH.read_text(encoding="utf-8")),
+        environment=yaml.safe_load(ENVIRONMENT_CONFIG_PATH.read_text(encoding="utf-8")),
+        volume_root=VOLUME_MOUNT,
+        source_commit=SOURCE_COMMIT,
+        image_definition_sha256=IMAGE_DEFINITION_SHA256,
+        extractor_sha256=SCORE_EXTRACTOR_SHA256,
+        vidoseek_adapter_sha256=VIDOSEEK_ADAPTER_SHA256,
+        dse_adapter_sha256=DSE_QWEN2_ADAPTER_SHA256,
+        function_call_id=function_call_id,
+        gpu_metadata=_gpu_metadata(torch),
+        commit=volume.commit,
+        query_limit=query_limit,
+        page_limit=page_limit,
+        calibration=calibration,
+        dataset_key="vidoseek",
     )
     return json.dumps(result, indent=2, sort_keys=True) + "\n"

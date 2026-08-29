@@ -1,11 +1,14 @@
 from __future__ import annotations
 
 import numpy as np
+import pytest
 import torch
+import yaml
 
 from scripts.extract_vidore_baseline import (
     make_candidate_indices,
     patch_dse_cache_position,
+    run_extraction,
     stable_top_indices,
 )
 
@@ -70,3 +73,34 @@ def test_large_model_cache_is_not_backed_by_the_modal_volume() -> None:
     )
     assert 'Path("/tmp/qpaf_hf_cache")' in source
     assert 'volume_root / "hf_cache"' not in source
+
+
+def test_vidoseek_protocol_gate_runs_before_dse_or_model_setup(tmp_path) -> None:
+    from pathlib import Path
+
+    root = Path(__file__).resolve().parents[1]
+    dataset_config = yaml.safe_load(
+        (root / "configs" / "datasets.yaml").read_text(encoding="utf-8")
+    )
+    environment = yaml.safe_load(
+        (root / "configs" / "environment.yaml").read_text(encoding="utf-8")
+    )
+
+    with pytest.raises(RuntimeError, match="requires human approval"):
+        run_extraction(
+            dataset_config=dataset_config,
+            environment=environment,
+            volume_root=tmp_path,
+            source_commit="a" * 40,
+            image_definition_sha256="b" * 64,
+            extractor_sha256="c" * 64,
+            dse_adapter_sha256="d" * 64,
+            function_call_id="local-test",
+            gpu_metadata={},
+            commit=lambda: None,
+            query_limit=10,
+            page_limit=128,
+            calibration=True,
+            dataset_key="vidoseek",
+            vidoseek_adapter_sha256="e" * 64,
+        )

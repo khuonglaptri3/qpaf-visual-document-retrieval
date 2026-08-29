@@ -176,7 +176,7 @@ This phase is the cheapest disproof. It uses cached scores and exhaustive prereg
 ### TASK-ID: P1-02
 **TITLE:** Run the W7 Global–QARF–QPAF oracle pilot
 **DEPENDENCIES:** P1-01
-**FILES:** `configs/pilot_w7.yaml`, `artifacts/pilot_w7/qpaf_oracle_results.jsonl`, `artifacts/pilot_w7/qpaf_summary.json`, `artifacts/pilot_w7/qpaf_query_summary.parquet`, `artifacts/pilot_w7/qpaf_subgroups.csv`, `artifacts/pilot_w7/qpaf_oracle_gain.png`, `artifacts/pilot_w7/run_manifest.json`, `artifacts/pilot_w7/decision.md`
+**FILES:** `configs/datasets.yaml`, `modal_app.py`, `scripts/vidoseek_dataset.py`, `scripts/extract_vidore_baseline.py`, `tests/test_vidoseek_extractor.py`, `tests/test_modal_contract.py`, `configs/pilot_w7.yaml`, `artifacts/vidoseek_score_extraction_calibration.json`, `artifacts/pilot_w7/qpaf_oracle_results.jsonl`, `artifacts/pilot_w7/qpaf_summary.json`, `artifacts/pilot_w7/qpaf_query_summary.parquet`, `artifacts/pilot_w7/qpaf_subgroups.csv`, `artifacts/pilot_w7/qpaf_oracle_gain.png`, `artifacts/pilot_w7/run_manifest.json`, `artifacts/pilot_w7/decision.md`
 **DESCRIPTION:**
   Execute exhaustive W7 Global, query-level QARF, and candidate-level QPAF oracle analysis using the existing `run_qpaf_oracle`. This directly tests the cheapest-disproof hypothesis: whether page-level choice adds at least 0.03 discovery mean nDCG@10 over QARF with a positive query-bootstrap interval.
 **I/O CONTRACT:**
@@ -185,6 +185,7 @@ This phase is the cheapest disproof. It uses cached scores and exhaustive prereg
   Side effects: writes a new immutable run directory; does not modify score cache or preregistered thresholds
 **IMPLEMENTATION NOTES:**
   Seed bootstrap with 20260820 and use 10,000 resamples. Label every output `oracle_upper_bound`. QPAF $\ge$ QARF $\ge$ Global alone is not evidence because it follows from nested choice sets.
+  The ViDoSeek adapter and bounded calibration entry point are prepared locally. Keep `datasets[].discovery_extraction.protocol_status` at `review_required` until the human approves native `pdftotext -layout` or selects a frozen OCR pipeline. After that explicit approval, the human-run calibration command is: `$env:PYTHONUTF8='1'; $env:PYTHONIOENCODING='utf-8'; modal run --write-result artifacts/vidoseek_score_extraction_calibration.json modal_app.py::extract_vidoseek_scores --query-limit 10 --page-limit 128 --calibration`. The preparation task does not execute this command.
 **VERIFICATION:**
   Command: `$env:PYTHONPATH='src'; python -m oracle_study.cli qpaf --scores data/cache/retrieval_scores.parquet --grids w7 --bootstrap 10000 --output-dir artifacts/pilot_w7; python -m pytest tests/test_qpaf.py tests/test_preregistration.py -v`
   Assertions:

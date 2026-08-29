@@ -19,6 +19,8 @@ from PIL import Image
 
 DATASET_KEY = "vidore_v3_finance_en"
 DATASET_ID = "vidore/vidore_v3_finance_en"
+VIDOSEEK_DATASET_KEY = "vidoseek"
+VIDOSEEK_DATASET_ID = "Qiuchen-Wang/ViDoSeek"
 EXPECTED_ENGLISH_QUERIES = 309
 EXPECTED_PAGES = 2_942
 MINIMUM_COVERAGE = 0.95
@@ -108,6 +110,7 @@ def _coverage(
     page_ids: np.ndarray,
     candidates: list[np.ndarray],
     qrel_lookup: dict[tuple[Any, Any], float],
+    dataset_id: str = DATASET_ID,
 ) -> tuple[float, pd.DataFrame]:
     selected = {
         (query_ids[query_index], page_ids[page_index])
@@ -123,7 +126,7 @@ def _coverage(
         selected_count = len(query_relevant & query_selected)
         rows.append(
             {
-                "dataset": DATASET_ID,
+                "dataset": dataset_id,
                 "query_id": str(query_id),
                 "relevant_total": len(query_relevant),
                 "relevant_selected": selected_count,
@@ -252,6 +255,7 @@ def _build_frames(
     dense_scores: np.ndarray,
     stage1_scores: np.ndarray,
     visual_scores: np.ndarray,
+    dataset_id: str = DATASET_ID,
 ) -> tuple[pd.DataFrame, pd.DataFrame]:
     raw_rows = []
     normalized_rows = []
@@ -273,7 +277,7 @@ def _build_frames(
             ranks[name] = branch_ranks
         for local_index, page_index in enumerate(pages):
             common = {
-                "dataset": DATASET_ID,
+                "dataset": dataset_id,
                 "query_id": str(query_ids[query_index]),
                 "page_id": str(page_ids[page_index]),
                 "source": query_sources[query_index],
@@ -323,33 +327,61 @@ def run_extraction(
     query_limit: int = 0,
     page_limit: int = 0,
     calibration: bool = False,
+    dataset_key: str = DATASET_KEY,
+    vidoseek_adapter_sha256: str = "",
 ) -> dict[str, Any]:
     started_at = time.perf_counter()
-    dataset = next(item for item in dataset_config["datasets"] if item["key"] == DATASET_KEY)
-    if dataset["revision"] != "7f432c176d82e27546501ad8064a713ac3071809":
-        raise RuntimeError("ViDoRe V3 dataset revision drifted")
+    dataset = next(item for item in dataset_config["datasets"] if item["key"] == dataset_key)
     models = environment["models"]
+    dataset_preprocessing: dict[str, Any] | None = None
+    if dataset_key == DATASET_KEY:
+        if dataset["revision"] != "7f432c176d82e27546501ad8064a713ac3071809":
+            raise RuntimeError("ViDoRe V3 dataset revision drifted")
+    elif dataset_key == VIDOSEEK_DATASET_KEY:
+        from scripts.vidoseek_dataset import extraction_protocol
+
+        dataset_preprocessing = extraction_protocol(dataset, require_approved=True)
+    else:
+        raise ValueError(f"Unsupported extraction dataset: {dataset_key}")
+
     from scripts.verify_dse_safetensors import load_verified_conversion_manifest
 
     _, dse_conversion = load_verified_conversion_manifest(volume_root, models["dse"])
-    protocol = {
-        "name": "vidore_v3_frozen_baseline_extraction_v1",
-        "dataset_revision": dataset["revision"],
-        "models": models,
-        "initial_depths": INITIAL_DEPTHS,
-        "expanded_depths": EXPANDED_DEPTHS,
-        "minimum_coverage": MINIMUM_COVERAGE,
-        "full_score": "intentionally_unavailable",
-        "extractor_sha256": extractor_sha256,
-        "dse_adapter_sha256": dse_adapter_sha256,
-        "dse_safetensors_sha256": dse_conversion["weights"]["safetensors_sha256"],
-        "dse_conversion_protocol_sha256": dse_conversion["protocol_sha256"],
-    }
+    if dataset_key == DATASET_KEY:
+        protocol = {
+            "name": "vidore_v3_frozen_baseline_extraction_v1",
+            "dataset_revision": dataset["revision"],
+            "models": models,
+            "initial_depths": INITIAL_DEPTHS,
+            "expanded_depths": EXPANDED_DEPTHS,
+            "minimum_coverage": MINIMUM_COVERAGE,
+            "full_score": "intentionally_unavailable",
+            "extractor_sha256": extractor_sha256,
+            "dse_adapter_sha256": dse_adapter_sha256,
+            "dse_safetensors_sha256": dse_conversion["weights"]["safetensors_sha256"],
+            "dse_conversion_protocol_sha256": dse_conversion["protocol_sha256"],
+        }
+    elif dataset_key == VIDOSEEK_DATASET_KEY:
+        protocol = {
+            "name": "vidoseek_discovery_extraction_v1",
+            "dataset_revision": dataset["revision"],
+            "dataset_preprocessing": dataset_preprocessing,
+            "models": models,
+            "initial_depths": INITIAL_DEPTHS,
+            "expanded_depths": EXPANDED_DEPTHS,
+            "minimum_coverage": MINIMUM_COVERAGE,
+            "full_score": "intentionally_unavailable",
+            "extractor_sha256": extractor_sha256,
+            "vidoseek_adapter_sha256": vidoseek_adapter_sha256,
+            "dse_adapter_sha256": dse_adapter_sha256,
+            "dse_safetensors_sha256": dse_conversion["weights"]["safetensors_sha256"],
+            "dse_conversion_protocol_sha256": dse_conversion["protocol_sha256"],
+        }
     protocol_sha256 = hashlib.sha256(
         json.dumps(protocol, sort_keys=True, separators=(",", ":")).encode("utf-8")
     ).hexdigest()
     scope = f"calibration_q{query_limit}_p{page_limit}" if calibration else "full"
-    run_root = volume_root / "score_extraction" / DATASET_KEY / protocol_sha256 / scope
+    run_root = volume_root / "score_extraction" / dataset_key / protocol_sha256 / scope
     cache_dir = run_root / "cache"
     output_dir = run_root / "output"
     cache_dir.mkdir(parents=True, exist_ok=True)
@@ -361,7 +393,6 @@ def run_extraction(
     os.environ["HF_DATASETS_CACHE"] = str(ephemeral_hf_root / "datasets")
     os.environ["NLTK_DATA"] = str(volume_root / "nltk_data")
 
-    from datasets import load_dataset
     from huggingface_hub import snapshot_download
     from vidore_benchmark.retrievers.bm25_retriever import BM25Retriever
 
@@ -371,31 +402,63 @@ def run_extraction(
     from scripts.verify_dse_safetensors import stage_verified_dse_snapshot
 
     root = Path(dataset["local_dir"])
-    corpus_files = sorted((root / "corpus").glob("*.parquet"))
-    corpus = load_dataset("parquet", data_files=[str(path) for path in corpus_files], split="train")
-    if page_limit:
-        corpus = corpus.select(range(min(page_limit, len(corpus))))
-    query_frame = pd.read_parquet(root / "queries" / "test-00000-of-00001.parquet")
-    query_frame = query_frame.loc[query_frame["language"].eq("english")].sort_values(
-        "query_id", kind="stable"
-    ).reset_index(drop=True)
-    if query_limit:
-        query_frame = query_frame.iloc[:query_limit].copy()
+    preparation_metadata: dict[str, Any] = {}
+    if dataset_key == DATASET_KEY:
+        from datasets import load_dataset
 
-    page_ids = np.asarray(corpus["corpus_id"])
-    query_ids = query_frame["query_id"].to_numpy()
-    query_texts = query_frame["query"].astype(str).tolist()
-    corpus_texts = ["" if value is None else str(value) for value in corpus["markdown"]]
-    query_sources = [_source_label(value) for value in query_frame["content_type"]]
-    if not calibration:
-        if len(page_ids) != EXPECTED_PAGES or len(query_ids) != EXPECTED_ENGLISH_QUERIES:
+        corpus_files = sorted((root / "corpus").glob("*.parquet"))
+        corpus = load_dataset(
+            "parquet", data_files=[str(path) for path in corpus_files], split="train"
+        )
+        if page_limit:
+            corpus = corpus.select(range(min(page_limit, len(corpus))))
+        query_frame = pd.read_parquet(root / "queries" / "test-00000-of-00001.parquet")
+        query_frame = query_frame.loc[query_frame["language"].eq("english")].sort_values(
+            "query_id", kind="stable"
+        ).reset_index(drop=True)
+        if query_limit:
+            query_frame = query_frame.iloc[:query_limit].copy()
+
+        page_ids = np.asarray(corpus["corpus_id"])
+        query_ids = query_frame["query_id"].to_numpy()
+        query_texts = query_frame["query"].astype(str).tolist()
+        corpus_texts = ["" if value is None else str(value) for value in corpus["markdown"]]
+        query_sources = [_source_label(value) for value in query_frame["content_type"]]
+        images = LazyCorpusImages(corpus)
+        qrel_lookup: dict[tuple[Any, Any], float] | None = None
+        dataset_id = DATASET_ID
+        scientific_scope = "frozen_vidore_baseline_no_heaven_full_score"
+        if not calibration and (
+            len(page_ids) != EXPECTED_PAGES or len(query_ids) != EXPECTED_ENGLISH_QUERIES
+        ):
             raise RuntimeError(
                 f"Frozen shape mismatch: queries={len(query_ids)}, pages={len(page_ids)}"
             )
+    else:
+        from scripts.vidoseek_dataset import load_vidoseek_inputs
+
+        inputs = load_vidoseek_inputs(
+            dataset=dataset,
+            run_root=run_root,
+            commit=commit,
+            query_limit=query_limit,
+            page_limit=page_limit,
+        )
+        page_ids = inputs.page_ids
+        query_ids = inputs.query_ids
+        query_texts = inputs.query_texts
+        corpus_texts = inputs.corpus_texts
+        query_sources = inputs.query_sources
+        images = inputs.images
+        qrel_lookup = inputs.qrel_lookup
+        preparation_metadata = inputs.metadata
+        dataset_id = VIDOSEEK_DATASET_ID
+        scientific_scope = "vidoseek_discovery_no_heaven_full_score"
     if len(set(page_ids.tolist())) != len(page_ids) or len(set(query_ids.tolist())) != len(query_ids):
         raise RuntimeError("Duplicate query or page identifiers")
+    if not len(page_ids) or not len(query_ids):
+        raise RuntimeError("Score extraction requires at least one query and page")
     expected_shape = (len(query_ids), len(page_ids))
-    images = LazyCorpusImages(corpus)
     timings: dict[str, float] = {}
     batch_sizes: dict[str, Any] = {}
     peaks: dict[str, int] = {}
@@ -517,28 +580,41 @@ def run_extraction(
     initial_candidates = make_candidate_indices(
         stage1_scores, bm25_scores, dense_scores, page_ids, INITIAL_DEPTHS
     )
-    # The frozen notebook uses qrels only for this coverage audit/one-time expansion gate.
-    qrel_frame = pd.read_parquet(root / "qrels" / "test-00000-of-00001.parquet")
-    qrel_frame = qrel_frame.loc[
-        qrel_frame["query_id"].isin(query_ids)
-        & qrel_frame["corpus_id"].isin(page_ids)
-        & qrel_frame["score"].gt(0)
-    ].copy()
-    qrel_lookup = {
-        (row.query_id, row.corpus_id): float(row.score)
-        for row in qrel_frame.itertuples(index=False)
-    }
-    initial_coverage, _ = _coverage(query_ids, page_ids, initial_candidates, qrel_lookup)
+    # Qrels enter only after score-only candidate construction, for coverage and evaluation.
+    if qrel_lookup is None:
+        qrel_frame = pd.read_parquet(root / "qrels" / "test-00000-of-00001.parquet")
+        qrel_frame = qrel_frame.loc[
+            qrel_frame["query_id"].isin(query_ids)
+            & qrel_frame["corpus_id"].isin(page_ids)
+            & qrel_frame["score"].gt(0)
+        ].copy()
+        qrel_lookup = {
+            (row.query_id, row.corpus_id): float(row.score)
+            for row in qrel_frame.itertuples(index=False)
+        }
+    initial_coverage, _ = _coverage(
+        query_ids,
+        page_ids,
+        initial_candidates,
+        qrel_lookup,
+        dataset_id=dataset_id,
+    )
     expanded_once = initial_coverage < MINIMUM_COVERAGE
     candidates = (
         make_candidate_indices(stage1_scores, bm25_scores, dense_scores, page_ids, EXPANDED_DEPTHS)
         if expanded_once
         else initial_candidates
     )
-    final_coverage, candidate_audit = _coverage(query_ids, page_ids, candidates, qrel_lookup)
+    final_coverage, candidate_audit = _coverage(
+        query_ids,
+        page_ids,
+        candidates,
+        qrel_lookup,
+        dataset_id=dataset_id,
+    )
     zero_relevant_candidates = int(candidate_audit["relevant_selected"].eq(0).sum())
     coverage_report = {
-        "dataset": DATASET_ID,
+        "dataset": dataset_id,
         "minimum_required": MINIMUM_COVERAGE,
         "initial_coverage": initial_coverage,
         "final_coverage": final_coverage,
@@ -632,6 +708,7 @@ def run_extraction(
         dense_scores,
         stage1_scores,
         visual_scores,
+        dataset_id=dataset_id,
     )
     keys = ["dataset", "query_id", "page_id"]
     if raw_scores.duplicated(keys).any() or retrieval_scores.duplicated(keys).any():
@@ -649,7 +726,7 @@ def run_extraction(
         "schema_version": 1,
         "status": "PASS",
         "scope": scope,
-        "scientific_scope": "frozen_vidore_baseline_no_heaven_full_score",
+        "scientific_scope": scientific_scope,
         "source_commit": source_commit,
         "image_definition_sha256": image_definition_sha256,
         "extractor_sha256": extractor_sha256,
@@ -661,6 +738,7 @@ def run_extraction(
             "revision": dataset["revision"],
             "queries": len(query_ids),
             "pages": len(page_ids),
+            "preparation": preparation_metadata,
         },
         "hardware": gpu_metadata,
         "packages": {
