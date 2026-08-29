@@ -176,6 +176,7 @@ This phase is the cheapest disproof. It uses cached scores and exhaustive prereg
 ### TASK-ID: P1-02
 **TITLE:** Run the W7 Global–QARF–QPAF oracle pilot
 **DEPENDENCIES:** P1-01
+**STATUS:** BLOCKED — accepted by the user under the frozen candidate protocol on 2026-08-30
 **FILES:** `configs/datasets.yaml`, `configs/environment.yaml`, `configs/modal.yaml`, `modal_app.py`, `scripts/vidoseek_dataset.py`, `scripts/extract_vidore_baseline.py`, `scripts/audit_vidoseek_coverage.py`, `tests/test_vidoseek_extractor.py`, `tests/test_vidoseek_coverage_audit.py`, `tests/test_modal_contract.py`, `configs/pilot_w7.yaml`, `artifacts/vidoseek_score_extraction_calibration.json`, `artifacts/vidoseek_score_extraction_calibration_manifest.json`, `artifacts/vidoseek_score_extraction_full.json`, `artifacts/vidoseek_expanded_coverage_audit.json`, `artifacts/pilot_w7/qpaf_oracle_results.jsonl`, `artifacts/pilot_w7/qpaf_summary.json`, `artifacts/pilot_w7/qpaf_query_summary.parquet`, `artifacts/pilot_w7/qpaf_subgroups.csv`, `artifacts/pilot_w7/qpaf_oracle_gain.png`, `artifacts/pilot_w7/run_manifest.json`, `artifacts/pilot_w7/decision.md`
 **DESCRIPTION:**
   Execute exhaustive W7 Global, query-level QARF, and candidate-level QPAF oracle analysis using the existing `run_qpaf_oracle`. This directly tests the cheapest-disproof hypothesis: whether page-level choice adds at least 0.03 discovery mean nDCG@10 over QARF with a positive query-bootstrap interval.
@@ -189,6 +190,7 @@ This phase is the cheapest disproof. It uses cached scores and exhaustive prereg
   Measured L4 calibration evidence: function call `fc-01M16E91CTEN3YCAW0G1SSP5XX`, source commit `662dc335600fc21ac31fb8658ee0b991c3818774`, protocol `be7c5a4e761881fe92fb4cbf661d51586271385a3dea74d3a4d8feafac8e2a5e`, 10 queries, 128 pages, 353.251 seconds, 127/128 non-empty native-text pages, coverage 1.0, zero uncovered queries, and 7.720 GiB peak allocation on an NVIDIA L4 with 22.034 GiB. The returned manifest hash and all four downloaded artifact byte hashes match. This is calibration evidence only, not a P1-02 oracle result.
   The first full L4 attempt on 2026-08-30 stopped at the unchanged coverage gate under source commit `0cf48ce`: 1,142 queries, 5,385 pages, initial/final coverage 0.9973730297723292, three queries with zero relevant candidates, and `expanded_once=false`. No visual scoring, extraction manifest, or success marker was produced. The committed candidate audit was downloaded locally with SHA-256 `ade973204fc1bec1f17947343a6e77fc54dd163052a9b0f8041d08c97ba325c9`. Before any protocol amendment or GPU rerun, run the CPU-only persisted-score audit to determine whether the frozen expanded depths rescue all three queries.
   Measured CPU-only audit evidence: function call `fc-01M17BMSRGAZB51F6PYEYA1ECK`, source commit `8f61c30b5745874fda514979ed8bfebafe1ca7a9`, source protocol `072599c016f836637655485fc628a20c33f7284622fe808466fb7e6626714486`, and local audit SHA-256 `80bd3fa2f9368a395a51528b484f511ad0d4a4e6a33588c52f78c4ba16001d1e`. Frozen expansion from depths `(200,100,100)` to `(300,200,200)` raises coverage from 0.9973730297723292 to 0.999124343257443 and rescues two of three queries, but `027dee01b7aced677eb5093c754ebad82a89015d_1` remains uncovered. Decision: `expanded_depths_still_fail_existing_gate`; P1-02 is BLOCKED and another GPU extraction is forbidden until a separate candidate-pool protocol amendment is explicitly approved. Do not drop the query, inject its relevant page, weaken the zero-query gate, or select new depths from its observed relevance rank.
+  On 2026-08-30 the user explicitly accepted: `Accept P1-02 BLOCKED under the frozen candidate protocol`. This closes P1-02 without a score bundle or W7 oracle run. P1-03 and all later tasks that depend on a P1-02 PASS remain blocked; no QPAF gain, confidence interval, subgroup result, or Phase 1 granularity decision may be reported.
 **VERIFICATION:**
   Command: `$env:PYTHONPATH='src'; python -m oracle_study.cli qpaf --scores data/vidoseek/cache/retrieval_scores.parquet --grids w7 --bootstrap 10000 --output-dir artifacts/pilot_w7; python -m pytest tests/test_qpaf.py tests/test_preregistration.py -v`
   Assertions:
@@ -201,6 +203,7 @@ This phase is the cheapest disproof. It uses cached scores and exhaustive prereg
 ### TASK-ID: P1-03
 **TITLE:** Run W66 sensitivity and issue the Phase 1 granularity decision
 **DEPENDENCIES:** P1-02
+**STATUS:** BLOCKED — dependency P1-02 did not pass
 **FILES:** `configs/pilot_w66.yaml`, `scripts/decide_granularity.py`, `tests/test_granularity_decision.py`, `artifacts/pilot_w66/qpaf_oracle_results.jsonl`, `artifacts/pilot_w66/qpaf_summary.json`, `artifacts/pilot_w66/qpaf_query_summary.parquet`, `artifacts/pilot_w66/qpaf_subgroups.csv`, `artifacts/pilot_w66/qpaf_oracle_gain.png`, `artifacts/pilot_w66/run_manifest.json`, `artifacts/phase1_decision.json`, `artifacts/phase1_decision.md`
 **DESCRIPTION:**
   Repeat the oracle analysis with all 66 simplex profiles at 0.1 increments, compare W7 and W66, measure gain concentration, and produce a machine-readable decision by 2026-09-05. Proceed to learned QPAF only if page-level headroom is positive, practically material, and not concentrated in a tiny query subset.
@@ -220,6 +223,8 @@ This phase is the cheapest disproof. It uses cached scores and exhaustive prereg
   HALT and report to the human if the result is `stop`, query/data hashes differ across grids, or the decision file is produced after 2026-09-05 without an approved schedule update. If mean gain is between 0.01 and 0.03 or either CI crosses zero, mark `revise` and do not enter Phase 2. This is not a retry condition. Do not attempt a workaround. Report and stop.
 
 **PHASE 1 GATE:** By 2026-09-05, W7 and W66 have identical data hashes; mean QPAF-vs-QARF discovery $\Delta\mathrm{nDCG@10}\ge0.03$ in both grids; both bootstrap lower bounds are $>0$; top-5%-gain share is $<0.90$; and P1-03 outputs `proceed_qpaf`. `revise` requires human approval for a new preregistration. `stop` kills learned QPAF.
+
+**CURRENT PHASE 1 STATUS:** BLOCKED — P1-02 was accepted as BLOCKED under the frozen candidate protocol on 2026-08-30, so the Phase 1 gate was not evaluated and Phase 2 is not dependency-unblocked.
 
 ## Phase 2 — Full Method Implementation
 
