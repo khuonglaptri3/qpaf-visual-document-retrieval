@@ -8,3 +8,4 @@ src/** -text
 tests/** -text
 artifacts/vidoseek_score_extraction_calibration.json -text -diff
 artifacts/vidoseek_score_extraction_calibration_manifest.json -text -diff
+artifacts/vidoseek_expanded_coverage_audit.json -text -diff
