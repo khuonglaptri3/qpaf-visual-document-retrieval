@@ -127,25 +127,26 @@ No new fusion-method code may be written in this phase. Failure to reproduce the
 ### TASK-ID: P0-03
 **TITLE:** Reproduce the baseline and validate the completed score bundle
 **DEPENDENCIES:** P0-02
-**FILES:** `artifacts/baseline_test_output.txt`, `data/raw_scores.parquet`, `data/official_query_metrics.parquet`, `data/cache/retrieval_scores.parquet`, `data/cache/query_metrics.parquet`, `data/cache/coverage_report.json`, `artifacts/artifact_manifest.json`, `artifacts/_SUCCESS.json`, `artifacts/preflight.json`, `artifacts/baseline_metrics.json`, `artifacts/run_manifest.json`
+**FILES:** `artifacts/baseline_test_output.txt`, `data/raw_scores.parquet`, `data/cache/retrieval_scores.parquet`, `data/cache/candidate_audit.parquet`, `data/cache/coverage_report.json`, `artifacts/extraction_manifest.json`, `artifacts/_EXTRACTION_SUCCESS.json`, `artifacts/preflight.json`, `artifacts/baseline_metrics.json`, `artifacts/run_manifest.json`, `artifacts/artifact_manifest.json`, `artifacts/_SUCCESS.json`
 **DESCRIPTION:**
-  Run the original baseline test suite before adding new tests. Submit three-channel score extraction to Modal if a completed bundle does not already exist, import the resulting bundle from the persistent Volume, verify its success marker and hashes, then run the existing local non-training preflight and metric implementations. This task validates software behavior and data integrity; it must not claim a learned or oracle improvement.
+  Run the original baseline test suite before adding new tests. Submit QPAF score extraction to Modal if a completed bundle does not already exist, import the resulting bundle from the persistent Volume, verify its extraction marker and hashes, then run the local non-training QPAF bundle finalizer. This task validates software behavior and data integrity; it must not claim a learned or oracle improvement.
 **I/O CONTRACT:**
-  Inputs: raw score rows [N, required columns] Parquet CPU — unique `(dataset,query_id,page_id)` and finite three-channel scores; official query metrics [Q,metric columns] Parquet CPU — full-corpus evaluation export; success bundle [10 artifacts] bytes CPU — matching manifest
-  Outputs: baseline test log [text] UTF-8 CPU — 29 passes; coverage report [mapping] JSON CPU — overall and per-query; baseline metrics [methods,4] float64 CPU — BM25/dense/visual/RRF/fixed; run manifest [mapping] JSON CPU — commit and data hashes
+  Inputs: imported candidate rows [N,10] Parquet CPU — unique `(dataset,query_id,page_id)`, finite BM25/BGE/DSE/ColQwen scores, explicit candidate provenance; imported normalized scores [N,10] Parquet CPU — identical keys with deterministic branch ranks; extraction manifest and marker [mapping] JSON CPU — matching protocol and SHA-256 values
+  Outputs: preserved baseline test log [text] CPU — 29 passes; coverage report [mapping] JSON CPU — overall and per-query; candidate-pool validation metrics [5 methods,4 metrics] float64 CPU — BM25/dense/visual/RRF/fixed, explicitly not full-corpus benchmark metrics; run manifest [mapping] JSON CPU — commit and data hashes; success bundle [10 artifacts] bytes CPU — matching manifest
   Side effects: may invoke `modal_app.py::extract_scores` on Modal; writes copied immutable data and artifact reports; does not train locally or change baseline source
 **IMPLEMENTATION NOTES:**
-  Run score extraction only on Modal. Run local preflight with `PYTHONPATH=src`. Reject duplicate keys, non-finite scores, missing channel provenance, mismatched hashes, or `_SUCCESS.json` absence. Candidate generation and normalization must not read qrels.
+  Run score extraction only on Modal. Finalize locally with `PYTHONPATH=src`. Reject duplicate keys, non-finite scores, missing channel provenance, mismatched hashes, invalid branch-rank permutations, `_EXTRACTION_SUCCESS.json` absence, or `_SUCCESS.json` absence. Candidate generation and normalization must not read qrels. The approved QPAF extractor intentionally does not produce HEAVEN `full_score`, Stage-2 costs, or `official_query_metrics.parquet`; do not fabricate them or route this candidate-only artifact into Budget-Aware HEAVEN reporting.
 **VERIFICATION:**
-  Command: `modal run modal_app.py::extract_scores; if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }; $env:PYTHONPATH='src'; python -m pytest -q; if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }; python -m oracle_study.cli build-cache --raw data/raw_scores.parquet --query-metrics data/official_query_metrics.parquet --output-dir data/cache; if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }; python -m oracle_study.cli preflight --scores data/cache/retrieval_scores.parquet --metrics data/cache/query_metrics.parquet --output artifacts/preflight.json`
+  Command: `$env:PYTHONPATH='src'; python -m pytest -q; if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }; python scripts/finalize_p0_03.py --root .`
   Assertions:
     - Original suite reports exactly 29 passed, 0 failed, 0 errors.
-    - `_SUCCESS.json` and all ten manifest artifacts verify; relevant-page coverage is at least 0.95 overall and no included query has zero relevant candidates.
+    - `_EXTRACTION_SUCCESS.json` matches the imported extraction manifest and all four remote payload hashes verify.
+    - `_SUCCESS.json` and all ten local manifest artifacts verify; relevant-page coverage is at least 0.95 overall and no included query has zero relevant candidates.
   Expected runtime: tests under 10 seconds; preflight under 10 minutes for 1.2 million rows
 **STOP/KILL CONDITION:**
   HALT and report to the human if `_SUCCESS.json` is absent, any artifact hash mismatches, the original suite is not exactly 29/29, or relevant-page coverage is below 0.95. This is not a retry condition. Do not attempt a workaround. Report and stop.
 
-**PHASE 0 GATE:** P0-01–P0-03 are `PASS`; baseline is a clean immutable commit; original tests are 29/29; remote environment is declared; datasets and model revisions are frozen; score bundle and ten artifacts match their hashes; relevant-page coverage is at least 0.95. Otherwise the project is `BLOCKED` and Phase 1 must not start.
+**PHASE 0 GATE:** P0-01–P0-03 are `PASS`; baseline is a clean immutable commit; original tests are 29/29; remote environment is declared; datasets and model revisions are frozen; the approved QPAF score bundle and ten local artifacts match their hashes; relevant-page coverage is at least 0.95. This gate does not imply that HEAVEN `full_score` or official full-corpus Budget-Aware metrics exist. Otherwise the project is `BLOCKED` and Phase 1 must not start.
 
 ## Phase 1 — Minimal Viable Experiment
 

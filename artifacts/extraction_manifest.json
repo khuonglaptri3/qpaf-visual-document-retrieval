@@ -1,0 +1,131 @@
+{
+  "artifacts": {
+    "candidate_audit.parquet": {
+      "bytes": 7396,
+      "sha256": "7830a9744cf4181e769f0fe226cf931199f74f054e997af8f75fe7ad6ce15c56"
+    },
+    "candidate_raw_scores.parquet": {
+      "bytes": 2591555,
+      "content_sha256": "379f24de75cea48e5cd1a752430586c3919ab23df3ae3beae64dbfb5a148eff1",
+      "sha256": "106085dad327ef303cfcdabd5e016a3830286980bd9359b962de456068abfb82"
+    },
+    "coverage_report.json": {
+      "bytes": 379,
+      "sha256": "9fea18fb60ba62b2100362923bec36ffeed9e985e4e05f32cc65664343ec1a85"
+    },
+    "retrieval_scores.parquet": {
+      "bytes": 6334274,
+      "content_sha256": "e8da062fad7e83dee19117cad5f35dc7ebb1e492efcd7bb7fb73ca63ba2a41ad",
+      "sha256": "377d569cd893074501a4eb0310e8ba3df2a20bab54c017b1585bb565ea7ae5c8"
+    }
+  },
+  "batch_sizes": {
+    "bge_passages": 32,
+    "bge_queries": 64,
+    "colqwen25_passages": 2,
+    "colqwen25_queries": 8,
+    "dse_passages": 4,
+    "dse_queries": 16
+  },
+  "coverage": {
+    "corpus_pages": 2942,
+    "dataset": "vidore/vidore_v3_finance_en",
+    "expanded_once": true,
+    "final_coverage": 0.9575633127994524,
+    "initial_coverage": 0.9151266255989049,
+    "mean_candidates": 453.34304207119743,
+    "minimum_required": 0.95,
+    "qrels_use": "coverage_audit_and_frozen_one_time_expansion_only",
+    "queries": 309,
+    "queries_with_zero_relevant_candidates": 0
+  },
+  "dataset": {
+    "id": "vidore/vidore_v3_finance_en",
+    "pages": 2942,
+    "queries": 309,
+    "revision": "7f432c176d82e27546501ad8064a713ac3071809"
+  },
+  "extractor_sha256": "f2538e3514c03e0854425c99844a5857cec73720ea11262e7d0fb70a3ea5ddfa",
+  "full_score_status": "not_produced_by_human_approved_protocol",
+  "function_call_id": "fc-01M10R4QY157YJMZPQ2CVZY04C",
+  "hardware": {
+    "actual_gpu": "NVIDIA A100-SXM4-40GB",
+    "actual_gpu_vram_bytes": 42405855232,
+    "actual_gpu_vram_gb": 42.406,
+    "actual_gpu_vram_gib": 39.494,
+    "cuda_available": true,
+    "cuda_runtime": "12.6",
+    "cudnn": 90501,
+    "driver": "580.95.05"
+  },
+  "image_definition_sha256": "8cb900f88aafe5b37cf1eebe53a31b31e211b338b1d7e80a6932342e06c35061",
+  "max_memory_allocated_bytes": {
+    "bge_m3": 4727090176,
+    "colqwen25": 8273135616,
+    "dse": 7764390912
+  },
+  "packages": {
+    "colpali-engine": "0.3.12",
+    "datasets": "3.6.0",
+    "torch": "2.7.1",
+    "transformers": "4.53.3",
+    "vidore-benchmark": "5.0.0"
+  },
+  "protocol": {
+    "dataset_revision": "7f432c176d82e27546501ad8064a713ac3071809",
+    "dse_adapter_sha256": "7a9030d6138808fcb4499722fb84458a08e5b0b2530790e1b043bea74f290602",
+    "dse_conversion_protocol_sha256": "9e1eb557acb668c05baee6aafbcce96a9740549f720079861db714d5ed4674d9",
+    "dse_safetensors_sha256": "22f40afa7845f739cdcd6b8b8e2cf97b6a7b01c4a72b4ec5395fb685d048080a",
+    "expanded_depths": {
+      "bm25": 200,
+      "dense": 200,
+      "stage1": 300
+    },
+    "extractor_sha256": "f2538e3514c03e0854425c99844a5857cec73720ea11262e7d0fb70a3ea5ddfa",
+    "full_score": "intentionally_unavailable",
+    "initial_depths": {
+      "bm25": 100,
+      "dense": 100,
+      "stage1": 200
+    },
+    "minimum_coverage": 0.95,
+    "models": {
+      "bge_m3": {
+        "gated": false,
+        "id": "BAAI/bge-m3",
+        "license": "mit",
+        "revision": "5617a9f61b028005a4858fdac845db406aefb181"
+      },
+      "colqwen25": {
+        "base_id": "vidore/colqwen2.5-base",
+        "base_revision": "92908120384b7a2110c5beda3ab29cbdb2c08e49",
+        "gated": false,
+        "id": "vidore/colqwen2.5-v0.2",
+        "license": "mit",
+        "revision": "dcbe8d9cede518bce830488364ba0e40c873645b"
+      },
+      "dse": {
+        "gated": false,
+        "id": "MrLight/dse-qwen2-2b-mrl-v1",
+        "license": "apache-2.0",
+        "revision": "3fde4464ea72da2a863ed8fa51f0f1b8045f0426"
+      }
+    },
+    "name": "vidore_v3_frozen_baseline_extraction_v1"
+  },
+  "protocol_sha256": "ec81605f49fc045de98bf1ff7a5cef07aef9fb8823ad9931692afe3aca99c914",
+  "python": "3.11.12",
+  "schema_version": 1,
+  "scientific_scope": "frozen_vidore_baseline_no_heaven_full_score",
+  "scope": "full",
+  "score_extraction_started": true,
+  "source_commit": "b81316ebeb53a19d2053ac5d480cc566e3b9edbb",
+  "status": "PASS",
+  "timings_seconds": {
+    "bge_m3_seconds": 79.33235645299999,
+    "bm25_seconds": 16.524614718,
+    "colqwen25_seconds": 1620.1023391190001,
+    "dse_seconds": 1669.527855864,
+    "total": 3411.52281263
+  }
+}

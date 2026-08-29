@@ -1,0 +1,12 @@
+{
+  "corpus_pages": 2942,
+  "dataset": "vidore/vidore_v3_finance_en",
+  "expanded_once": true,
+  "final_coverage": 0.9575633127994524,
+  "initial_coverage": 0.9151266255989049,
+  "mean_candidates": 453.34304207119743,
+  "minimum_required": 0.95,
+  "qrels_use": "coverage_audit_and_frozen_one_time_expansion_only",
+  "queries": 309,
+  "queries_with_zero_relevant_candidates": 0
+}
