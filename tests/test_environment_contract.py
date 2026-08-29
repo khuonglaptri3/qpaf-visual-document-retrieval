@@ -24,6 +24,7 @@ def test_environment_config_freezes_compatible_retriever_stack() -> None:
     assert packages["transformers"] == "4.53.3"
     assert config["modal"]["python"] == "3.11"
     assert config["modal"]["default_gpu"] == "L4"
+    assert config["modal"]["vidoseek_calibration_gpu"] == "L4"
     assert config["modal"]["score_extraction_gpu"] == "A100-40GB"
     assert config["modal"]["score_extraction_cpu"] == 4.0
     assert config["modal"]["score_extraction_memory_mb"] == 32_768

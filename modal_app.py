@@ -19,9 +19,11 @@ MATERIALIZE_FUNCTION_NAME = "materialize-dataset"
 SCORE_INPUT_PROBE_FUNCTION_NAME = "score-input-probe"
 SCORE_EXTRACTION_SMOKE_FUNCTION_NAME = "score-extraction-smoke"
 SCORE_EXTRACTION_FUNCTION_NAME = "extract-scores"
+VIDOSEEK_CALIBRATION_FUNCTION_NAME = "calibrate-vidoseek-scores"
 VIDOSEEK_SCORE_EXTRACTION_FUNCTION_NAME = "extract-vidoseek-scores"
 VERIFY_DSE_FUNCTION_NAME = "convert-and-verify-dse-safetensors"
 REQUESTED_GPU = "L4"
+VIDOSEEK_CALIBRATION_GPU = "L4"
 SCORE_EXTRACTION_GPU = "A100-40GB"
 SCORE_EXTRACTION_CPU = 4.0
 SCORE_EXTRACTION_MEMORY_MB = 32_768
@@ -491,23 +493,7 @@ def extract_scores(
     return json.dumps(result, indent=2, sort_keys=True) + "\n"
 
 
-@app.function(
-    name=VIDOSEEK_SCORE_EXTRACTION_FUNCTION_NAME,
-    image=image,
-    gpu=SCORE_EXTRACTION_GPU,
-    cpu=SCORE_EXTRACTION_CPU,
-    memory=SCORE_EXTRACTION_MEMORY_MB,
-    timeout=SCORE_EXTRACTION_TIMEOUT_SECONDS,
-    secrets=[hf_secret],
-    volumes={str(VOLUME_MOUNT): volume},
-    env={"QPAF_SOURCE_COMMIT": SOURCE_COMMIT},
-)
-def extract_vidoseek_scores(
-    query_limit: int = 0,
-    page_limit: int = 0,
-    calibration: bool = False,
-) -> str:
-    """Extract ViDoSeek discovery scores after its preprocessing protocol is approved."""
+def _run_vidoseek_extraction(query_limit: int, page_limit: int, calibration: bool) -> str:
     import torch
     import yaml
 
@@ -516,10 +502,6 @@ def extract_vidoseek_scores(
     function_call_id = modal.current_function_call_id()
     if not function_call_id:
         raise RuntimeError("Modal did not expose a Function call ID")
-    if calibration and (query_limit <= 0 or page_limit <= 0):
-        raise ValueError("Calibration requires positive query_limit and page_limit")
-    if not calibration and (query_limit != 0 or page_limit != 0):
-        raise ValueError("Full extraction does not accept query/page limits")
     result = run_extraction(
         dataset_config=yaml.safe_load(DATASETS_CONFIG_PATH.read_text(encoding="utf-8")),
         environment=yaml.safe_load(ENVIRONMENT_CONFIG_PATH.read_text(encoding="utf-8")),
@@ -538,3 +520,37 @@ def extract_vidoseek_scores(
         dataset_key="vidoseek",
     )
     return json.dumps(result, indent=2, sort_keys=True) + "\n"
+
+
+@app.function(
+    name=VIDOSEEK_CALIBRATION_FUNCTION_NAME,
+    image=image,
+    gpu=VIDOSEEK_CALIBRATION_GPU,
+    cpu=SCORE_EXTRACTION_CPU,
+    memory=SCORE_EXTRACTION_MEMORY_MB,
+    timeout=SCORE_EXTRACTION_TIMEOUT_SECONDS,
+    secrets=[hf_secret],
+    volumes={str(VOLUME_MOUNT): volume},
+    env={"QPAF_SOURCE_COMMIT": SOURCE_COMMIT},
+)
+def calibrate_vidoseek_scores(query_limit: int = 10, page_limit: int = 128) -> str:
+    """Run a bounded ViDoSeek score calibration on the approved lower-cost L4."""
+    if query_limit <= 0 or page_limit <= 0:
+        raise ValueError("Calibration requires positive query_limit and page_limit")
+    return _run_vidoseek_extraction(query_limit, page_limit, calibration=True)
+
+
+@app.function(
+    name=VIDOSEEK_SCORE_EXTRACTION_FUNCTION_NAME,
+    image=image,
+    gpu=SCORE_EXTRACTION_GPU,
+    cpu=SCORE_EXTRACTION_CPU,
+    memory=SCORE_EXTRACTION_MEMORY_MB,
+    timeout=SCORE_EXTRACTION_TIMEOUT_SECONDS,
+    secrets=[hf_secret],
+    volumes={str(VOLUME_MOUNT): volume},
+    env={"QPAF_SOURCE_COMMIT": SOURCE_COMMIT},
+)
+def extract_vidoseek_scores() -> str:
+    """Extract the full ViDoSeek discovery scores on the reserved A100."""
+    return _run_vidoseek_extraction(0, 0, calibration=False)

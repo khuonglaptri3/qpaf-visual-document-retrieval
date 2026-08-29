@@ -4,6 +4,7 @@ import hashlib
 from pathlib import Path
 
 import modal_app
+import yaml
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -106,21 +107,40 @@ def test_full_score_extractor_is_a100_resumable_and_bounded() -> None:
     assert 'remote_path="/root/scripts/verify_dse_safetensors.py"' in source
 
 
-def test_vidoseek_calibration_entry_is_pinned_guarded_and_a100_bounded() -> None:
+def test_vidoseek_calibration_is_l4_bounded_and_full_extraction_stays_a100() -> None:
     source = (ROOT / "modal_app.py").read_text(encoding="utf-8")
-    decorator = source.split("def extract_vidoseek_scores", maxsplit=1)[0].rsplit(
+    modal_config = yaml.safe_load((ROOT / "configs" / "modal.yaml").read_text(encoding="utf-8"))
+    calibration_decorator = source.split("def calibrate_vidoseek_scores", maxsplit=1)[0].rsplit(
         "@app.function", maxsplit=1
     )[1]
-    body = source.split("def extract_vidoseek_scores", maxsplit=1)[1]
-    assert "gpu=SCORE_EXTRACTION_GPU" in decorator
-    assert "cpu=SCORE_EXTRACTION_CPU" in decorator
-    assert "memory=SCORE_EXTRACTION_MEMORY_MB" in decorator
-    assert "timeout=SCORE_EXTRACTION_TIMEOUT_SECONDS" in decorator
-    assert "volumes={str(VOLUME_MOUNT): volume}" in decorator
-    assert "secrets=[hf_secret]" in decorator
-    assert "Calibration requires positive query_limit and page_limit" in body
-    assert 'dataset_key="vidoseek"' in body
-    assert "vidoseek_adapter_sha256=VIDOSEEK_ADAPTER_SHA256" in body
+    calibration_body = source.split("def calibrate_vidoseek_scores", maxsplit=1)[1].split(
+        "@app.function", maxsplit=1
+    )[0]
+    full_decorator = source.split("def extract_vidoseek_scores", maxsplit=1)[0].rsplit(
+        "@app.function", maxsplit=1
+    )[1]
+    full_body = source.split("def extract_vidoseek_scores", maxsplit=1)[1]
+    helper_body = source.split("def _run_vidoseek_extraction", maxsplit=1)[1].split(
+        "@app.function", maxsplit=1
+    )[0]
+
+    assert modal_app.VIDOSEEK_CALIBRATION_GPU == "L4"
+    assert modal_app.SCORE_EXTRACTION_GPU == "A100-40GB"
+    assert modal_config["vidoseek_calibration_gpu"] == "L4"
+    assert modal_config["score_extraction_gpu"] == "A100-40GB"
+    assert "gpu=VIDOSEEK_CALIBRATION_GPU" in calibration_decorator
+    assert "gpu=SCORE_EXTRACTION_GPU" in full_decorator
+    for decorator in [calibration_decorator, full_decorator]:
+        assert "cpu=SCORE_EXTRACTION_CPU" in decorator
+        assert "memory=SCORE_EXTRACTION_MEMORY_MB" in decorator
+        assert "timeout=SCORE_EXTRACTION_TIMEOUT_SECONDS" in decorator
+        assert "volumes={str(VOLUME_MOUNT): volume}" in decorator
+        assert "secrets=[hf_secret]" in decorator
+    assert "Calibration requires positive query_limit and page_limit" in calibration_body
+    assert "calibration=True" in calibration_body
+    assert "calibration=False" in full_body
+    assert 'dataset_key="vidoseek"' in helper_body
+    assert "vidoseek_adapter_sha256=VIDOSEEK_ADAPTER_SHA256" in helper_body
     assert modal_app.SYSTEM_PACKAGES == ("poppler-utils",)
     assert modal_app.IMAGE_DEFINITION["system_packages"] == ["poppler-utils"]
     assert modal_app.IMAGE_DEFINITION["vidoseek_adapter_sha256"] == hashlib.sha256(
