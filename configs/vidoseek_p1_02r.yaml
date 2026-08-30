@@ -1,6 +1,6 @@
 schema_version: 1
 protocol_id: vidoseek_p1_02r_all_corpus_v1
-status: approved_local_integration_only
+status: approved_cpu_audit_execution_only
 classification: post_hoc
 prepared_on: "2026-08-30"
 authorization:
@@ -17,6 +17,13 @@ authorization:
     approval_text: >-
       Approve P1-02R all-corpus protocol for local integration and CPU-audit
       preparation only. Do not execute Modal
+  cpu_audit_execution:
+    scope: p1_02r_cpu_coverage_audit_only
+    approved_by: user
+    approved_on: "2026-08-30"
+    approval_text: >-
+      Approve execution of the P1-02R CPU-only coverage audit on Modal. Do not
+      run GPU
 frozen_parent:
   task_id: P1-02
   status: BLOCKED
@@ -52,15 +59,18 @@ coverage_gate:
   maximum_queries_with_zero_relevant_candidates: 0
   qrels_use: post_candidate_coverage_audit_and_evaluation_only
 execution:
-  modal_allowed: false
+  modal_allowed: true
+  modal_execution_scope: cpu_audit_only
+  allowed_modal_function: audit-vidoseek-p1-02r-all-corpus
   modal_code_preparation_allowed: true
   cpu_audit_entrypoint_preparation_allowed: true
-  cpu_audit_execution_allowed: false
+  cpu_audit_execution_allowed: true
   gpu_execution_allowed: false
   prior_l4_approval_reused: false
   cost_review_required: true
-  explicit_execution_approval_required: true
-  next_gate: explicit_cpu_audit_execution_approval
+  cpu_audit_execution_approval_required: false
+  gpu_execution_approval_required: true
+  next_gate: measured_cpu_audit_coverage_gate
 unchanged_contracts:
   - dataset_and_preprocessing
   - retriever_implementations_and_model_revisions
@@ -73,4 +83,4 @@ prohibitions:
   - do_not_inject_a_relevant_page
   - do_not_select_depths_from_observed_relevance_rank
   - do_not_relabel_the_frozen_p1_02_result
-  - do_not_run_modal_without_new_explicit_approval
+  - do_not_run_any_modal_function_except_the_approved_cpu_audit

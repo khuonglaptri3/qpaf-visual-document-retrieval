@@ -87,7 +87,7 @@ def test_vidoseek_expanded_coverage_audit_is_cpu_only_and_volume_backed() -> Non
     ).hexdigest()
 
 
-def test_p1_02r_coverage_audit_is_cpu_only_prepared_and_execution_guarded() -> None:
+def test_p1_02r_coverage_audit_is_cpu_only_approved_and_protocol_guarded() -> None:
     source = (ROOT / "modal_app.py").read_text(encoding="utf-8")
     decorator = source.split("def audit_vidoseek_p1_02r_coverage", maxsplit=1)[0].rsplit(
         "@app.function", maxsplit=1
@@ -108,7 +108,11 @@ def test_p1_02r_coverage_audit_is_cpu_only_prepared_and_execution_guarded() -> N
     assert "require_cpu_audit_execution_approval(protocol)" in body
     assert "audit_persisted_p1_02r_coverage" in body
     assert "volume.commit()" in body
-    assert protocol["execution"]["cpu_audit_execution_allowed"] is False
+    assert protocol["execution"]["modal_execution_scope"] == "cpu_audit_only"
+    assert protocol["execution"]["allowed_modal_function"] == (
+        modal_app.VIDOSEEK_P1_02R_COVERAGE_AUDIT_FUNCTION_NAME
+    )
+    assert protocol["execution"]["cpu_audit_execution_allowed"] is True
     assert protocol["execution"]["gpu_execution_allowed"] is False
     assert 'remote_path="/root/configs/vidoseek_p1_02r.yaml"' in source
     assert 'remote_path="/root/scripts/vidoseek_p1_02r.py"' in source

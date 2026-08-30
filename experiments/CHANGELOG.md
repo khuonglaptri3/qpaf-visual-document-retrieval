@@ -1,16 +1,17 @@
 # Experiment protocol changelog
 
-## 2026-08-30 - P1-02R all-corpus candidate-pool local integration
+## 2026-08-30 - P1-02R all-corpus CPU coverage audit approval
 
-- Status: `approved_local_integration_only`; CPU-audit execution remains disabled.
+- Status: `approved_cpu_audit_execution_only`; GPU execution remains disabled.
 - Draft authorization text: `Prepare the P1-02R post-hoc protocol draft. Keep the retrievers unchanged, revise only the candidate-pool rule, add local tests, and do not run Modal.`
 - Local-integration authorization text: `Approve P1-02R all-corpus protocol for local integration and CPU-audit preparation only. Do not execute Modal`.
+- CPU-audit authorization text: `Approve execution of the P1-02R CPU-only coverage audit on Modal. Do not run GPU`.
 - Frozen parent: P1-02 remains `BLOCKED` under extraction protocol `072599c016f836637655485fc628a20c33f7284622fe808466fb7e6626714486`; this draft does not replace or retroactively pass it.
 - Change: replace score-depth shortlist membership with every prepared ViDoSeek corpus page for every query. The pool is deterministic, query-independent, score-independent, and frozen before qrels are used for coverage auditing.
 - Derived workload: 1,142 queries x 5,385 pages = 6,149,670 candidate pairs, about 9.06 times the measured expanded-pool mean of 594.1979 candidates per query.
 - CPU-audit integration: use the frozen prepared-corpus marker and annotation hash to test qrel-page membership directly, without loading score caches or materializing all candidate pairs. A separate CPU-only, Volume-backed Modal entry point is prepared behind an execution-approval guard.
 - Unchanged: dataset/preprocessing, BM25, BGE-M3, DSE, ColQwen2.5, raw-score definitions, normalization, metrics, qrels boundary, and the zero-uncovered-query gate.
-- Execution boundary: no Modal command was run. `modal_allowed=false`, `cpu_audit_execution_allowed=false`, and `gpu_execution_allowed=false`; the prior L4 approval is not reused because the candidate-scoring workload changed materially.
+- Execution boundary: no Modal command was run by the coding agent. Only `audit-vidoseek-p1-02r-all-corpus` is authorized, with no GPU or Secret; `gpu_execution_allowed=false`, and the prior L4 approval is not reused because the candidate-scoring workload changed materially.
 
 ## 2026-08-29 - ViDoSeek full extraction GPU
 

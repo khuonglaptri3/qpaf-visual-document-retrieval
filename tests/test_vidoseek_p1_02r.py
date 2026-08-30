@@ -18,11 +18,11 @@ ROOT = Path(__file__).resolve().parents[1]
 PROTOCOL_PATH = ROOT / "configs" / "vidoseek_p1_02r.yaml"
 
 
-def test_protocol_approves_local_integration_only_and_locks_unchanged_retrievers() -> None:
+def test_protocol_approves_cpu_audit_only_and_locks_unchanged_retrievers() -> None:
     protocol = vidoseek_p1_02r.load_protocol(PROTOCOL_PATH)
 
     assert protocol["classification"] == "post_hoc"
-    assert protocol["status"] == "approved_local_integration_only"
+    assert protocol["status"] == "approved_cpu_audit_execution_only"
     assert protocol["authorization"]["local_integration"] == {
         "scope": "local_integration_and_cpu_audit_preparation_only",
         "approved_by": "user",
@@ -30,6 +30,15 @@ def test_protocol_approves_local_integration_only_and_locks_unchanged_retrievers
         "approval_text": (
             "Approve P1-02R all-corpus protocol for local integration and CPU-audit "
             "preparation only. Do not execute Modal"
+        ),
+    }
+    assert protocol["authorization"]["cpu_audit_execution"] == {
+        "scope": "p1_02r_cpu_coverage_audit_only",
+        "approved_by": "user",
+        "approved_on": "2026-08-30",
+        "approval_text": (
+            "Approve execution of the P1-02R CPU-only coverage audit on Modal. "
+            "Do not run GPU"
         ),
     }
     assert protocol["retrievers"]["changed"] is False
@@ -40,13 +49,18 @@ def test_protocol_approves_local_integration_only_and_locks_unchanged_retrievers
     ).hexdigest()
     assert protocol["retrievers"]["contract_fields"] == ["bm25", "models"]
     assert protocol["retrievers"]["contract_sha256"] == expected_hash
-    assert protocol["execution"]["modal_allowed"] is False
+    assert protocol["execution"]["modal_allowed"] is True
+    assert protocol["execution"]["modal_execution_scope"] == "cpu_audit_only"
+    assert protocol["execution"]["allowed_modal_function"] == (
+        "audit-vidoseek-p1-02r-all-corpus"
+    )
     assert protocol["execution"]["modal_code_preparation_allowed"] is True
     assert protocol["execution"]["cpu_audit_entrypoint_preparation_allowed"] is True
-    assert protocol["execution"]["cpu_audit_execution_allowed"] is False
+    assert protocol["execution"]["cpu_audit_execution_allowed"] is True
     assert protocol["execution"]["gpu_execution_allowed"] is False
     assert protocol["execution"]["prior_l4_approval_reused"] is False
-    assert protocol["execution"]["explicit_execution_approval_required"] is True
+    assert protocol["execution"]["cpu_audit_execution_approval_required"] is False
+    assert protocol["execution"]["gpu_execution_approval_required"] is True
 
 
 def test_protocol_preserves_frozen_p1_02_depths_and_strict_coverage_gate() -> None:
@@ -215,11 +229,10 @@ def test_persisted_audit_uses_prepared_page_ids_without_score_caches(tmp_path: P
     assert not (run_root / "cache").exists()
 
 
-def test_cpu_audit_execution_remains_blocked() -> None:
+def test_cpu_audit_execution_is_approved() -> None:
     protocol = vidoseek_p1_02r.load_protocol(PROTOCOL_PATH)
 
-    with pytest.raises(RuntimeError, match="CPU-audit execution is not approved"):
-        vidoseek_p1_02r.require_cpu_audit_execution_approval(protocol)
+    vidoseek_p1_02r.require_cpu_audit_execution_approval(protocol)
 
 
 def test_persisted_audit_rejects_a_non_parent_protocol_path(tmp_path: Path) -> None:
@@ -234,9 +247,9 @@ def test_persisted_audit_rejects_a_non_parent_protocol_path(tmp_path: Path) -> N
         )
 
 
-def test_protocol_validation_rejects_modal_authorization() -> None:
+def test_protocol_validation_rejects_gpu_authorization() -> None:
     protocol = vidoseek_p1_02r.load_protocol(PROTOCOL_PATH)
-    protocol["execution"]["modal_allowed"] = True
+    protocol["execution"]["gpu_execution_allowed"] = True
 
-    with pytest.raises(ValueError, match="must not authorize Modal"):
+    with pytest.raises(ValueError, match="GPU execution must remain disabled"):
         vidoseek_p1_02r.validate_protocol(protocol)

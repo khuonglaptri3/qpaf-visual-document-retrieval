@@ -13,21 +13,22 @@ from scripts.extract_vidore_baseline import MINIMUM_COVERAGE
 from scripts.vidoseek_dataset import parse_annotations
 
 
-LOCAL_INTEGRATION_STATUS = "approved_local_integration_only"
+CPU_AUDIT_EXECUTION_STATUS = "approved_cpu_audit_execution_only"
 PROTOCOL_ID = "vidoseek_p1_02r_all_corpus_v1"
 CANDIDATE_METHOD = "all_corpus"
 DATASET_KEY = "vidoseek"
+CPU_AUDIT_FUNCTION_NAME = "audit-vidoseek-p1-02r-all-corpus"
 HEX64 = re.compile(r"^[0-9a-f]{64}$")
 
 
 def validate_protocol(protocol: dict[str, Any]) -> None:
-    """Validate local integration approval without authorizing Modal execution."""
+    """Validate approval for only the P1-02R CPU coverage audit."""
     if protocol.get("schema_version") != 1:
         raise ValueError("P1-02R schema_version must be 1")
     if protocol.get("protocol_id") != PROTOCOL_ID:
         raise ValueError(f"P1-02R protocol_id must be {PROTOCOL_ID}")
-    if protocol.get("status") != LOCAL_INTEGRATION_STATUS:
-        raise ValueError(f"P1-02R status must be {LOCAL_INTEGRATION_STATUS}")
+    if protocol.get("status") != CPU_AUDIT_EXECUTION_STATUS:
+        raise ValueError(f"P1-02R status must be {CPU_AUDIT_EXECUTION_STATUS}")
 
     frozen_parent = protocol.get("frozen_parent")
     if not isinstance(frozen_parent, dict) or frozen_parent.get("status") != "BLOCKED":
@@ -76,18 +77,24 @@ def validate_protocol(protocol: dict[str, Any]) -> None:
         raise ValueError("P1-02R must preserve the zero-uncovered-query gate")
 
     execution = protocol.get("execution")
-    if not isinstance(execution, dict) or execution.get("modal_allowed") is not False:
-        raise ValueError("P1-02R local integration must not authorize Modal execution")
+    if not isinstance(execution, dict) or execution.get("modal_allowed") is not True:
+        raise ValueError("P1-02R must authorize its CPU audit on Modal")
+    if execution.get("modal_execution_scope") != "cpu_audit_only":
+        raise ValueError("P1-02R Modal execution scope must be CPU audit only")
+    if execution.get("allowed_modal_function") != CPU_AUDIT_FUNCTION_NAME:
+        raise ValueError("P1-02R must authorize only its named CPU audit Function")
     if execution.get("modal_code_preparation_allowed") is not True:
         raise ValueError("P1-02R must authorize only local Modal code preparation")
     if execution.get("cpu_audit_entrypoint_preparation_allowed") is not True:
         raise ValueError("P1-02R must authorize CPU-audit entry-point preparation")
-    if execution.get("cpu_audit_execution_allowed") is not False:
-        raise ValueError("P1-02R CPU-audit execution must remain disabled")
+    if execution.get("cpu_audit_execution_allowed") is not True:
+        raise ValueError("P1-02R CPU-audit execution must be approved")
     if execution.get("gpu_execution_allowed") is not False:
         raise ValueError("P1-02R GPU execution must remain disabled")
-    if execution.get("explicit_execution_approval_required") is not True:
-        raise ValueError("P1-02R requires explicit execution approval")
+    if execution.get("cpu_audit_execution_approval_required") is not False:
+        raise ValueError("P1-02R CPU-audit approval must be recorded as satisfied")
+    if execution.get("gpu_execution_approval_required") is not True:
+        raise ValueError("P1-02R must still require explicit GPU approval")
 
 
 def load_protocol(path: Path) -> dict[str, Any]:
