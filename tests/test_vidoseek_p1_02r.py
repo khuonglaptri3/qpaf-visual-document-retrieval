@@ -19,11 +19,11 @@ PROTOCOL_PATH = ROOT / "configs" / "vidoseek_p1_02r.yaml"
 AUDIT_PATH = ROOT / "artifacts" / "vidoseek_p1_02r_coverage_audit.json"
 
 
-def test_protocol_records_cpu_audit_pass_and_prepares_calibration_only() -> None:
+def test_protocol_authorizes_only_the_bounded_l4_cost_calibration() -> None:
     protocol = vidoseek_p1_02r.load_protocol(PROTOCOL_PATH)
 
     assert protocol["classification"] == "post_hoc"
-    assert protocol["status"] == "cpu_audit_passed_cost_calibration_prepared"
+    assert protocol["status"] == "approved_l4_cost_calibration_execution_only"
     assert protocol["authorization"]["local_integration"] == {
         "scope": "local_integration_and_cpu_audit_preparation_only",
         "approved_by": "user",
@@ -51,6 +51,15 @@ def test_protocol_records_cpu_audit_pass_and_prepares_calibration_only() -> None
             "cost-calibration command locally. Do not execute Modal or GPU"
         ),
     }
+    assert protocol["authorization"]["cost_calibration_execution"] == {
+        "scope": "p1_02r_bounded_l4_cost_calibration_only",
+        "approved_by": "user",
+        "approved_on": "2026-08-30",
+        "approval_text": (
+            "Approve execution of the bounded P1-02R L4 cost calibration on Modal. "
+            "Do not run full extraction."
+        ),
+    }
     assert protocol["retrievers"]["changed"] is False
     environment = yaml.safe_load((ROOT / "configs" / "environment.yaml").read_text(encoding="utf-8"))
     retriever_contract = {name: environment[name] for name in ["bm25", "models"]}
@@ -64,7 +73,7 @@ def test_protocol_records_cpu_audit_pass_and_prepares_calibration_only() -> None
         AUDIT_PATH.read_bytes()
     ).hexdigest()
     assert protocol["cost_calibration"] == {
-        "status": "prepared_not_executed",
+        "status": "approved_for_execution",
         "function_name": "calibrate-vidoseek-p1-02r-cost",
         "gpu_if_approved": "L4",
         "query_limit": 8,
@@ -77,9 +86,11 @@ def test_protocol_records_cpu_audit_pass_and_prepares_calibration_only() -> None
         "output_artifact_path": "artifacts/vidoseek_p1_02r_l4_cost_calibration.json",
         "result_scope": "cost_projection_only_not_score_extraction",
     }
-    assert protocol["execution"]["modal_allowed"] is False
-    assert protocol["execution"]["modal_execution_scope"] == "none"
-    assert protocol["execution"]["allowed_modal_function"] is None
+    assert protocol["execution"]["modal_allowed"] is True
+    assert protocol["execution"]["modal_execution_scope"] == "l4_cost_calibration_only"
+    assert protocol["execution"]["allowed_modal_function"] == (
+        "calibrate-vidoseek-p1-02r-cost"
+    )
     assert protocol["execution"]["prepared_modal_function"] == (
         "calibrate-vidoseek-p1-02r-cost"
     )
@@ -87,12 +98,15 @@ def test_protocol_records_cpu_audit_pass_and_prepares_calibration_only() -> None
     assert protocol["execution"]["cpu_audit_entrypoint_preparation_allowed"] is True
     assert protocol["execution"]["cost_calibration_entrypoint_preparation_allowed"] is True
     assert protocol["execution"]["cpu_audit_execution_allowed"] is False
-    assert protocol["execution"]["cost_calibration_execution_allowed"] is False
-    assert protocol["execution"]["gpu_execution_allowed"] is False
+    assert protocol["execution"]["cost_calibration_execution_allowed"] is True
+    assert protocol["execution"]["gpu_execution_allowed"] is True
     assert protocol["execution"]["prior_l4_approval_reused"] is False
     assert protocol["execution"]["cpu_audit_execution_approval_required"] is False
-    assert protocol["execution"]["cost_calibration_execution_approval_required"] is True
-    assert protocol["execution"]["gpu_execution_approval_required"] is True
+    assert protocol["execution"]["cost_calibration_execution_approval_required"] is False
+    assert protocol["execution"]["gpu_execution_approval_required"] is False
+    assert protocol["execution"]["next_gate"] == (
+        "measured_l4_cost_calibration_and_human_cost_review"
+    )
 
 
 def test_protocol_preserves_frozen_p1_02_depths_and_strict_coverage_gate() -> None:
@@ -261,32 +275,32 @@ def test_persisted_audit_uses_prepared_page_ids_without_score_caches(tmp_path: P
     assert not (run_root / "cache").exists()
 
 
-def test_completed_cpu_audit_and_unapproved_gpu_calibration_are_blocked() -> None:
+def test_completed_cpu_audit_is_blocked_and_l4_calibration_is_approved() -> None:
     protocol = vidoseek_p1_02r.load_protocol(PROTOCOL_PATH)
 
     with pytest.raises(RuntimeError, match="CPU audit is complete"):
         vidoseek_p1_02r.require_cpu_audit_execution_approval(protocol)
-    with pytest.raises(RuntimeError, match="cost-calibration execution is not approved"):
-        vidoseek_p1_02r.require_cost_calibration_execution_approval(protocol)
+    vidoseek_p1_02r.require_cost_calibration_execution_approval(protocol)
 
 
-def test_only_the_explicit_l4_calibration_state_opens_the_execution_guard() -> None:
+def test_preparation_only_state_keeps_the_l4_execution_guard_closed() -> None:
     protocol = copy.deepcopy(vidoseek_p1_02r.load_protocol(PROTOCOL_PATH))
-    protocol["status"] = "approved_l4_cost_calibration_execution_only"
-    protocol["cost_calibration"]["status"] = "approved_for_execution"
+    protocol["status"] = "cpu_audit_passed_cost_calibration_prepared"
+    protocol["cost_calibration"]["status"] = "prepared_not_executed"
     protocol["execution"].update(
         {
-            "modal_allowed": True,
-            "modal_execution_scope": "l4_cost_calibration_only",
-            "allowed_modal_function": "calibrate-vidoseek-p1-02r-cost",
-            "cost_calibration_execution_allowed": True,
-            "gpu_execution_allowed": True,
-            "cost_calibration_execution_approval_required": False,
-            "gpu_execution_approval_required": False,
+            "modal_allowed": False,
+            "modal_execution_scope": "none",
+            "allowed_modal_function": None,
+            "cost_calibration_execution_allowed": False,
+            "gpu_execution_allowed": False,
+            "cost_calibration_execution_approval_required": True,
+            "gpu_execution_approval_required": True,
         }
     )
 
-    vidoseek_p1_02r.require_cost_calibration_execution_approval(protocol)
+    with pytest.raises(RuntimeError, match="cost-calibration execution is not approved"):
+        vidoseek_p1_02r.require_cost_calibration_execution_approval(protocol)
 
 
 def test_persisted_audit_rejects_a_non_parent_protocol_path(tmp_path: Path) -> None:
@@ -301,9 +315,9 @@ def test_persisted_audit_rejects_a_non_parent_protocol_path(tmp_path: Path) -> N
         )
 
 
-def test_protocol_validation_rejects_gpu_authorization() -> None:
+def test_execution_protocol_rejects_a_disabled_gpu_flag() -> None:
     protocol = vidoseek_p1_02r.load_protocol(PROTOCOL_PATH)
-    protocol["execution"]["gpu_execution_allowed"] = True
+    protocol["execution"]["gpu_execution_allowed"] = False
 
     with pytest.raises(ValueError, match="execution.gpu_execution_allowed"):
         vidoseek_p1_02r.validate_protocol(protocol)

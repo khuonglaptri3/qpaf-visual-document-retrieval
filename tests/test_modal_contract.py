@@ -109,10 +109,15 @@ def test_completed_p1_02r_coverage_audit_remains_cpu_only_and_guarded() -> None:
     assert "audit_persisted_p1_02r_coverage" in body
     assert "volume.commit()" in body
     assert protocol["coverage_audit_result"]["status"] == "PASS"
-    assert protocol["execution"]["modal_execution_scope"] == "none"
-    assert protocol["execution"]["allowed_modal_function"] is None
+    assert protocol["execution"]["modal_execution_scope"] == "l4_cost_calibration_only"
+    assert protocol["execution"]["allowed_modal_function"] != (
+        modal_app.VIDOSEEK_P1_02R_COVERAGE_AUDIT_FUNCTION_NAME
+    )
     assert protocol["execution"]["cpu_audit_execution_allowed"] is False
-    assert protocol["execution"]["gpu_execution_allowed"] is False
+    assert protocol["execution"]["gpu_execution_allowed"] is True
+    assert protocol["execution"]["allowed_modal_function"] == (
+        modal_app.VIDOSEEK_P1_02R_COST_CALIBRATION_FUNCTION_NAME
+    )
     assert 'remote_path="/root/configs/vidoseek_p1_02r.yaml"' in source
     assert 'remote_path="/root/scripts/vidoseek_p1_02r.py"' in source
     assert modal_app.IMAGE_DEFINITION["vidoseek_p1_02r_protocol_sha256"] == hashlib.sha256(
@@ -123,7 +128,7 @@ def test_completed_p1_02r_coverage_audit_remains_cpu_only_and_guarded() -> None:
     ).hexdigest()
 
 
-def test_p1_02r_l4_cost_calibration_is_fixed_bounded_and_not_authorized() -> None:
+def test_p1_02r_l4_cost_calibration_is_fixed_bounded_and_exclusively_authorized() -> None:
     source = (ROOT / "modal_app.py").read_text(encoding="utf-8")
     decorator = source.split("def calibrate_vidoseek_p1_02r_cost", maxsplit=1)[0].rsplit(
         "@app.function", maxsplit=1
@@ -150,9 +155,13 @@ def test_p1_02r_l4_cost_calibration_is_fixed_bounded_and_not_authorized() -> Non
     assert protocol["cost_calibration"]["query_limit"] == 8
     assert protocol["cost_calibration"]["page_limit"] == 512
     assert protocol["cost_calibration"]["candidate_pairs"] == 4_096
-    assert protocol["execution"]["modal_allowed"] is False
-    assert protocol["execution"]["cost_calibration_execution_allowed"] is False
-    assert protocol["execution"]["gpu_execution_allowed"] is False
+    assert protocol["execution"]["modal_allowed"] is True
+    assert protocol["execution"]["modal_execution_scope"] == "l4_cost_calibration_only"
+    assert protocol["execution"]["allowed_modal_function"] == (
+        modal_app.VIDOSEEK_P1_02R_COST_CALIBRATION_FUNCTION_NAME
+    )
+    assert protocol["execution"]["cost_calibration_execution_allowed"] is True
+    assert protocol["execution"]["gpu_execution_allowed"] is True
     assert protocol["execution"]["prepared_modal_function"] == (
         modal_app.VIDOSEEK_P1_02R_COST_CALIBRATION_FUNCTION_NAME
     )

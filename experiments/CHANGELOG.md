@@ -1,5 +1,14 @@
 # Experiment protocol changelog
 
+## 2026-08-30 - P1-02R bounded L4 cost-calibration execution approval
+
+- Status: `approved_l4_cost_calibration_execution_only`; full extraction remains unapproved under P1-02R.
+- Approval text: `Approve execution of the bounded P1-02R L4 cost calibration on Modal. Do not run full extraction.`
+- Authorized Function: only `calibrate-vidoseek-p1-02r-cost`, requesting L4 with the frozen 8-query x 512-page systematic sample, 4,096 all-corpus pairs, and visual score batch 128.
+- Unchanged: dataset/revision, prepared corpus, BM25, BGE-M3, DSE, ColQwen2.5, raw-score definition, qrels boundary, coverage gate, original P1-02 `BLOCKED` record, and P1-03 block.
+- Human-run command: `$env:PYTHONUTF8='1'; $env:PYTHONIOENCODING='utf-8'; modal run --write-result artifacts\vidoseek_p1_02r_l4_cost_calibration.json modal_app.py::calibrate_vidoseek_p1_02r_cost`.
+- Execution boundary: the coding agent did not run Modal or allocate GPU. This approval does not cover `extract_vidoseek_scores`, any other Modal Function, changed limits/batches, full score extraction, or treating the calibration projection as an experimental result.
+
 ## 2026-08-30 - P1-02R CPU audit PASS and bounded L4 calibration preparation
 
 - Status: `cpu_audit_passed_cost_calibration_prepared`; no Modal or GPU execution is currently authorized.
