@@ -87,6 +87,39 @@ def test_vidoseek_expanded_coverage_audit_is_cpu_only_and_volume_backed() -> Non
     ).hexdigest()
 
 
+def test_p1_02r_coverage_audit_is_cpu_only_prepared_and_execution_guarded() -> None:
+    source = (ROOT / "modal_app.py").read_text(encoding="utf-8")
+    decorator = source.split("def audit_vidoseek_p1_02r_coverage", maxsplit=1)[0].rsplit(
+        "@app.function", maxsplit=1
+    )[1]
+    body = source.split("def audit_vidoseek_p1_02r_coverage", maxsplit=1)[1].split(
+        "@app.function", maxsplit=1
+    )[0]
+    protocol = yaml.safe_load(
+        (ROOT / "configs" / "vidoseek_p1_02r.yaml").read_text(encoding="utf-8")
+    )
+
+    assert "gpu=" not in decorator
+    assert "secrets=" not in decorator
+    assert "cpu=COVERAGE_AUDIT_CPU" in decorator
+    assert "memory=COVERAGE_AUDIT_MEMORY_MB" in decorator
+    assert "timeout=FUNCTION_TIMEOUT_SECONDS" in decorator
+    assert "volumes={str(VOLUME_MOUNT): volume}" in decorator
+    assert "require_cpu_audit_execution_approval(protocol)" in body
+    assert "audit_persisted_p1_02r_coverage" in body
+    assert "volume.commit()" in body
+    assert protocol["execution"]["cpu_audit_execution_allowed"] is False
+    assert protocol["execution"]["gpu_execution_allowed"] is False
+    assert 'remote_path="/root/configs/vidoseek_p1_02r.yaml"' in source
+    assert 'remote_path="/root/scripts/vidoseek_p1_02r.py"' in source
+    assert modal_app.IMAGE_DEFINITION["vidoseek_p1_02r_protocol_sha256"] == hashlib.sha256(
+        (ROOT / "configs" / "vidoseek_p1_02r.yaml").read_bytes()
+    ).hexdigest()
+    assert modal_app.IMAGE_DEFINITION["vidoseek_p1_02r_sha256"] == hashlib.sha256(
+        (ROOT / "scripts" / "vidoseek_p1_02r.py").read_bytes()
+    ).hexdigest()
+
+
 def test_score_extraction_smoke_uses_reserved_gpu_without_qrels() -> None:
     source = (ROOT / "modal_app.py").read_text(encoding="utf-8")
     decorator = source.split("def score_extraction_smoke", maxsplit=1)[0].rsplit(

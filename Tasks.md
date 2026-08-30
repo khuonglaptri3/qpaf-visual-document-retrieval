@@ -200,6 +200,31 @@ This phase is the cheapest disproof. It uses cached scores and exhaustive prereg
 **STOP/KILL CONDITION:**
   HALT and report to the human if any qrels value enters score normalization/candidate construction, any query is missing from output, or mean QPAF-vs-QARF nDCG@10 is below 0.01. The last condition kills learned QPAF and selects the simpler QARF/static path. This is not a retry condition. Do not attempt a workaround. Report and stop.
 
+### TASK-ID: P1-02R
+**TITLE:** Draft a post-hoc all-corpus ViDoSeek candidate-pool protocol
+**DEPENDENCIES:** P1-01; user authorization on 2026-08-30 to prepare a local-only post-hoc draft after the accepted P1-02 block
+**STATUS:** LOCAL INTEGRATION PREPARED — CPU-audit and GPU execution remain unapproved
+**FILES:** `configs/vidoseek_p1_02r.yaml`, `scripts/vidoseek_p1_02r.py`, `tests/test_vidoseek_p1_02r.py`, `modal_app.py`, `tests/test_modal_contract.py`, `experiments/CHANGELOG.md`
+**DESCRIPTION:**
+  Preserve P1-02 as BLOCKED and define a separately versioned P1-02R candidate pool containing every prepared ViDoSeek corpus page for every query. This removes score-depth truncation without changing the dataset, preprocessing, retriever implementations/revisions, score definitions, qrels boundary, metrics, or zero-uncovered-query gate. This is post-hoc protocol preparation, not an experimental result.
+**I/O CONTRACT:**
+  Inputs: query IDs [Q] UTF-8 CPU and prepared-corpus page IDs [P] UTF-8 CPU — both non-empty and unique; no scores or qrels enter candidate construction
+  Outputs: candidate page indices [Q,P] int64 CPU — each query receives indices `0..P-1` in prepared-corpus marker order; protocol [mapping] YAML CPU — local integration approved and execution disabled; prepared audit [mapping] JSON CPU — coverage, missing relevant pairs, zero-covered queries, and provenance
+  Side effects: local config/code/tests, append-only changelog, and a guarded CPU-only Modal Function definition; no Modal invocation, score extraction, oracle analysis, or result artifact
+**IMPLEMENTATION NOTES:**
+  The frozen ViDoSeek corpus implies 1,142 x 5,385 = 6,149,670 candidate pairs. This is about 9.06 times the measured frozen-expanded mean candidate count, so the prior L4 approval is not reused. Candidate rows must be frozen before qrels; qrels may enter only the subsequent coverage audit. The CPU audit checks qrel-page membership against the prepared page-ID set in O(Q+P+R) memory instead of materializing all query-page tuples; it loads no score cache. The user approved local integration and CPU-audit preparation only on 2026-08-30 with `Approve P1-02R all-corpus protocol for local integration and CPU-audit preparation only. Do not execute Modal`. Do not change `INITIAL_DEPTHS`, `EXPANDED_DEPTHS`, `run_extraction`, or the frozen P1-02 records. P1-03 remains blocked unless a later human-approved task-graph amendment explicitly accepts a completed P1-02R run.
+**VERIFICATION:**
+  Command: `$env:PYTHONPATH='src'; python -m pytest tests/test_vidoseek_p1_02r.py tests/test_modal_contract.py tests/test_vidoseek_coverage_audit.py tests/test_score_extractor.py -v`
+  Assertions:
+    - The protocol is `post_hoc`, `approved_local_integration_only`, and retains `modal_allowed=false`, `cpu_audit_execution_allowed=false`, and `gpu_execution_allowed=false`; it locks the unchanged BM25/model definitions from `configs/environment.yaml`.
+    - Candidate construction accepts only query/page IDs, returns every page for every query, and cannot accept scores or qrels.
+    - The persisted CPU audit accepts only the frozen parent run, requires no score cache, reports coverage 1.0 when every qrel page exists in the prepared corpus, and keeps the unchanged gate red when a qrel page is absent.
+    - The prepared Modal audit Function has no GPU or Secret, is Volume-backed, and checks the execution-approval guard before reading audit data.
+    - Frozen P1-02 depth constants remain `(200,100,100)` and `(300,200,200)`.
+  Expected runtime: under 1 minute on local CPU
+**STOP/KILL CONDITION:**
+  HALT if a retriever/config revision changes, qrels or observed relevance rank enter candidate construction, the original P1-02 behavior changes, any Modal command is invoked, or CPU/GPU execution becomes authorized. Report and wait for explicit CPU-audit execution approval before providing or running the remote audit command.
+
 ### TASK-ID: P1-03
 **TITLE:** Run W66 sensitivity and issue the Phase 1 granularity decision
 **DEPENDENCIES:** P1-02

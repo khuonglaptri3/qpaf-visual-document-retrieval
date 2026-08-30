@@ -1,0 +1,76 @@
+schema_version: 1
+protocol_id: vidoseek_p1_02r_all_corpus_v1
+status: approved_local_integration_only
+classification: post_hoc
+prepared_on: "2026-08-30"
+authorization:
+  draft:
+    scope: local_protocol_and_tests_only
+    requested_by: user
+    request_text: >-
+      Prepare the P1-02R post-hoc protocol draft. Keep the retrievers unchanged,
+      revise only the candidate-pool rule, add local tests, and do not run Modal.
+  local_integration:
+    scope: local_integration_and_cpu_audit_preparation_only
+    approved_by: user
+    approved_on: "2026-08-30"
+    approval_text: >-
+      Approve P1-02R all-corpus protocol for local integration and CPU-audit
+      preparation only. Do not execute Modal
+frozen_parent:
+  task_id: P1-02
+  status: BLOCKED
+  extraction_protocol_sha256: 072599c016f836637655485fc628a20c33f7284622fe808466fb7e6626714486
+  expanded_coverage_audit_sha256: 80bd3fa2f9368a395a51528b484f511ad0d4a4e6a33588c52f78c4ba16001d1e
+  remaining_uncovered_query_id: 027dee01b7aced677eb5093c754ebad82a89015d_1
+dataset:
+  id: Qiuchen-Wang/ViDoSeek
+  revision: e91a92ba5f38690696c7e66be5c5474b54c6e791
+  expected_queries: 1142
+  expected_pages: 5385
+retrievers:
+  changed: false
+  definitions_from: configs/environment.yaml
+  contract_fields:
+    - bm25
+    - models
+  contract_sha256: a8e09f0e6999e2f033e9768ef87f668b7c236dc24c8e871638efa10006883df3
+candidate_pool:
+  method: all_corpus
+  version: 1
+  membership_rule: every_prepared_corpus_page_for_every_query
+  ordering: prepared_corpus_marker_order
+  query_independent: true
+  score_independent: true
+  qrels_used: false
+  candidate_rows_frozen_before_qrels: true
+  candidates_per_query: 5385
+  expected_candidate_pairs: 6149670
+  provenance_label: all_corpus_p1_02r_v1
+coverage_gate:
+  minimum_relevant_pair_coverage: 0.95
+  maximum_queries_with_zero_relevant_candidates: 0
+  qrels_use: post_candidate_coverage_audit_and_evaluation_only
+execution:
+  modal_allowed: false
+  modal_code_preparation_allowed: true
+  cpu_audit_entrypoint_preparation_allowed: true
+  cpu_audit_execution_allowed: false
+  gpu_execution_allowed: false
+  prior_l4_approval_reused: false
+  cost_review_required: true
+  explicit_execution_approval_required: true
+  next_gate: explicit_cpu_audit_execution_approval
+unchanged_contracts:
+  - dataset_and_preprocessing
+  - retriever_implementations_and_model_revisions
+  - raw_score_definitions
+  - normalization_and_metrics
+  - zero_uncovered_query_gate
+  - qrels_boundary
+prohibitions:
+  - do_not_drop_the_uncovered_query
+  - do_not_inject_a_relevant_page
+  - do_not_select_depths_from_observed_relevance_rank
+  - do_not_relabel_the_frozen_p1_02_result
+  - do_not_run_modal_without_new_explicit_approval
