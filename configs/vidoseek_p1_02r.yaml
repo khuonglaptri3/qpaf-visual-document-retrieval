@@ -1,6 +1,6 @@
 schema_version: 1
 protocol_id: vidoseek_p1_02r_all_corpus_v1
-status: l4_cost_calibration_recorded_chunked_full_extraction_prepared
+status: approved_l4_chunked_full_extraction_execution_only
 classification: post_hoc
 prepared_on: "2026-08-30"
 authorization:
@@ -45,6 +45,20 @@ authorization:
     approval_text: >-
       Record the P1-02R L4 calibration result and prepare a memory-safe chunked
       full-extraction implementation locally. Do not execute Modal or GPU.
+  full_extraction_execution:
+    scope: one_human_run_p1_02r_chunked_l4_full_extraction
+    approved_by: user
+    approved_on: "2026-08-30"
+    prepared_source_commit: 09aa4bad08fd5362a64537b506e48dca640cfb4e
+    prepared_protocol_sha256: 49e63f2b017fa66a43a3af4d6189a2ab218b61fff838270ebfab954f4933b421
+    authorized_invocations: 1
+    execution_actor: human
+    automatic_retry_allowed: false
+    approval_text: >-
+      Approve one human-run P1-02R chunked full-extraction invocation on Modal
+      L4 using frozen limits query=8, page=512, visual batch=128. Update and
+      commit only the execution guards and provenance. Do not execute Modal
+      yourself, run P1-03, or relabel frozen P1-02
 frozen_parent:
   task_id: P1-02
   status: BLOCKED
@@ -132,7 +146,7 @@ cost_calibration_result:
   calibration_score_cache_sha256: 9550af44e6cf89fdb8bfe4a7b9fcfd366caf27aa673ec1f79fdcdb6cd1277807
   full_extraction_started: false
 full_extraction:
-  status: prepared_not_executed
+  status: approved_for_execution
   function_name: extract-vidoseek-p1-02r-scores
   gpu_if_approved: L4
   source_score_cache_root: frozen_parent_full_run
@@ -158,9 +172,9 @@ full_extraction:
   output_artifact_path: artifacts/vidoseek_p1_02r_score_extraction_full.json
   result_scope: post_hoc_all_corpus_score_bundle_not_frozen_p1_02
 execution:
-  modal_allowed: false
-  modal_execution_scope: none
-  allowed_modal_function: null
+  modal_allowed: true
+  modal_execution_scope: l4_chunked_full_extraction_only
+  allowed_modal_function: extract-vidoseek-p1-02r-scores
   prepared_modal_function: extract-vidoseek-p1-02r-scores
   modal_code_preparation_allowed: true
   cpu_audit_entrypoint_preparation_allowed: true
@@ -168,15 +182,15 @@ execution:
   full_extraction_entrypoint_preparation_allowed: true
   cpu_audit_execution_allowed: false
   cost_calibration_execution_allowed: false
-  full_extraction_execution_allowed: false
-  gpu_execution_allowed: false
+  full_extraction_execution_allowed: true
+  gpu_execution_allowed: true
   prior_l4_approval_reused: false
-  cost_review_required: true
+  cost_review_required: false
   cpu_audit_execution_approval_required: false
   cost_calibration_execution_approval_required: false
-  full_extraction_execution_approval_required: true
-  gpu_execution_approval_required: true
-  next_gate: explicit_p1_02r_chunked_full_extraction_execution_approval
+  full_extraction_execution_approval_required: false
+  gpu_execution_approval_required: false
+  next_gate: completed_p1_02r_chunked_full_extraction_and_integrity_review
 unchanged_contracts:
   - dataset_and_preprocessing
   - retriever_implementations_and_model_revisions
@@ -192,5 +206,6 @@ prohibitions:
   - do_not_treat_cost_calibration_as_score_extraction
   - do_not_rerun_the_completed_cost_calibration
   - do_not_change_calibration_limits_or_visual_score_batch_size
-  - do_not_run_modal_or_gpu_during_local_full_extraction_preparation
-  - do_not_run_the_prepared_full_extraction_without_new_explicit_approval
+  - do_not_execute_modal_or_gpu_from_the_coding_agent
+  - do_not_exceed_one_human_run_full_extraction_invocation_without_new_approval
+  - do_not_run_p1_03_or_relabel_frozen_p1_02

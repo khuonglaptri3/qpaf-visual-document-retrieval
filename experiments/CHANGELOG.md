@@ -1,5 +1,15 @@
 # Experiment protocol changelog
 
+## 2026-08-30 - P1-02R one human-run L4 chunked full-extraction approval
+
+- Status: `approved_l4_chunked_full_extraction_execution_only`; the run is approved but not executed.
+- Approval text: `Approve one human-run P1-02R chunked full-extraction invocation on Modal L4 using frozen limits query=8, page=512, visual batch=128. Update and commit only the execution guards and provenance. Do not execute Modal yourself, run P1-03, or relabel frozen P1-02`.
+- Approved preparation: source commit `09aa4bad08fd5362a64537b506e48dca640cfb4e` and prepared protocol SHA-256 `49e63f2b017fa66a43a3af4d6189a2ab218b61fff838270ebfab954f4933b421`.
+- Authorized Function: only `extract-vidoseek-p1-02r-scores`, requesting one L4 with query chunks at most 8, page chunks at most 512, passage/query encode batches at most 2/8, and visual score batch 128.
+- Human-run command: `$env:PYTHONUTF8='1'; $env:PYTHONIOENCODING='utf-8'; modal run --write-result artifacts\vidoseek_p1_02r_score_extraction_full.json modal_app.py::extract_vidoseek_p1_02r_scores`.
+- Unchanged: dataset/revision, prepared corpus, BM25, BGE-M3, DSE, ColQwen2.5, raw-score definition, qrels boundary, coverage gate, frozen P1-02 `BLOCKED` record, and P1-03 block.
+- Execution boundary: the coding agent did not run Modal or allocate GPU. No automatic retry or second invocation is authorized; a failure requires review and new approval.
+
 ## 2026-08-30 - P1-02R L4 calibration recorded and chunked full extraction prepared
 
 - Status: `l4_cost_calibration_recorded_chunked_full_extraction_prepared`; no Modal Function or GPU execution is currently authorized.

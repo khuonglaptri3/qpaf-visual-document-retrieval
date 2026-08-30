@@ -47,6 +47,35 @@ def validate_protocol(protocol: dict[str, Any]) -> None:
     if status not in {FULL_EXTRACTION_PREPARATION_STATUS, FULL_EXTRACTION_EXECUTION_STATUS}:
         raise ValueError("P1-02R status must be a supported full-extraction state")
 
+    authorization = protocol.get("authorization")
+    if not isinstance(authorization, dict):
+        raise ValueError("P1-02R requires an authorization mapping")
+    full_execution_approval = authorization.get("full_extraction_execution")
+    if status == FULL_EXTRACTION_PREPARATION_STATUS:
+        if full_execution_approval is not None:
+            raise ValueError("P1-02R preparation state cannot include execution approval")
+    else:
+        expected_approval = {
+            "scope": "one_human_run_p1_02r_chunked_l4_full_extraction",
+            "approved_by": "user",
+            "approved_on": "2026-08-30",
+            "prepared_source_commit": "09aa4bad08fd5362a64537b506e48dca640cfb4e",
+            "prepared_protocol_sha256": (
+                "49e63f2b017fa66a43a3af4d6189a2ab218b61fff838270ebfab954f4933b421"
+            ),
+            "authorized_invocations": 1,
+            "execution_actor": "human",
+            "automatic_retry_allowed": False,
+            "approval_text": (
+                "Approve one human-run P1-02R chunked full-extraction invocation on "
+                "Modal L4 using frozen limits query=8, page=512, visual batch=128. "
+                "Update and commit only the execution guards and provenance. Do not "
+                "execute Modal yourself, run P1-03, or relabel frozen P1-02"
+            ),
+        }
+        if full_execution_approval != expected_approval:
+            raise ValueError("P1-02R full-extraction approval provenance drifted")
+
     frozen_parent = protocol.get("frozen_parent")
     if not isinstance(frozen_parent, dict) or frozen_parent.get("status") != "BLOCKED":
         raise ValueError("P1-02R must retain the BLOCKED frozen parent")

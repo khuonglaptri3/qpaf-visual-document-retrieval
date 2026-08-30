@@ -20,13 +20,11 @@ AUDIT_PATH = ROOT / "artifacts" / "vidoseek_p1_02r_coverage_audit.json"
 CALIBRATION_PATH = ROOT / "artifacts" / "vidoseek_p1_02r_l4_cost_calibration.json"
 
 
-def test_protocol_records_calibration_and_prepares_only_chunked_full_extraction() -> None:
+def test_protocol_authorizes_only_one_human_run_chunked_full_extraction() -> None:
     protocol = vidoseek_p1_02r.load_protocol(PROTOCOL_PATH)
 
     assert protocol["classification"] == "post_hoc"
-    assert protocol["status"] == (
-        "l4_cost_calibration_recorded_chunked_full_extraction_prepared"
-    )
+    assert protocol["status"] == "approved_l4_chunked_full_extraction_execution_only"
     assert protocol["authorization"]["local_integration"] == {
         "scope": "local_integration_and_cpu_audit_preparation_only",
         "approved_by": "user",
@@ -72,6 +70,24 @@ def test_protocol_records_calibration_and_prepares_only_chunked_full_extraction(
             "full-extraction implementation locally. Do not execute Modal or GPU."
         ),
     }
+    assert protocol["authorization"]["full_extraction_execution"] == {
+        "scope": "one_human_run_p1_02r_chunked_l4_full_extraction",
+        "approved_by": "user",
+        "approved_on": "2026-08-30",
+        "prepared_source_commit": "09aa4bad08fd5362a64537b506e48dca640cfb4e",
+        "prepared_protocol_sha256": (
+            "49e63f2b017fa66a43a3af4d6189a2ab218b61fff838270ebfab954f4933b421"
+        ),
+        "authorized_invocations": 1,
+        "execution_actor": "human",
+        "automatic_retry_allowed": False,
+        "approval_text": (
+            "Approve one human-run P1-02R chunked full-extraction invocation on "
+            "Modal L4 using frozen limits query=8, page=512, visual batch=128. "
+            "Update and commit only the execution guards and provenance. Do not "
+            "execute Modal yourself, run P1-03, or relabel frozen P1-02"
+        ),
+    }
     assert protocol["retrievers"]["changed"] is False
     environment = yaml.safe_load((ROOT / "configs" / "environment.yaml").read_text(encoding="utf-8"))
     retriever_contract = {name: environment[name] for name in ["bm25", "models"]}
@@ -102,7 +118,7 @@ def test_protocol_records_calibration_and_prepares_only_chunked_full_extraction(
         CALIBRATION_PATH.read_bytes()
     ).hexdigest()
     assert protocol["cost_calibration_result"]["full_extraction_started"] is False
-    assert protocol["full_extraction"]["status"] == "prepared_not_executed"
+    assert protocol["full_extraction"]["status"] == "approved_for_execution"
     assert protocol["full_extraction"]["function_name"] == (
         "extract-vidoseek-p1-02r-scores"
     )
@@ -111,9 +127,13 @@ def test_protocol_records_calibration_and_prepares_only_chunked_full_extraction(
     assert protocol["full_extraction"]["expected_query_chunks"] == 143
     assert protocol["full_extraction"]["expected_page_chunks"] == 11
     assert protocol["full_extraction"]["expected_candidate_pairs"] == 1_142 * 5_385
-    assert protocol["execution"]["modal_allowed"] is False
-    assert protocol["execution"]["modal_execution_scope"] == "none"
-    assert protocol["execution"]["allowed_modal_function"] is None
+    assert protocol["execution"]["modal_allowed"] is True
+    assert protocol["execution"]["modal_execution_scope"] == (
+        "l4_chunked_full_extraction_only"
+    )
+    assert protocol["execution"]["allowed_modal_function"] == (
+        "extract-vidoseek-p1-02r-scores"
+    )
     assert protocol["execution"]["prepared_modal_function"] == (
         "extract-vidoseek-p1-02r-scores"
     )
@@ -123,15 +143,15 @@ def test_protocol_records_calibration_and_prepares_only_chunked_full_extraction(
     assert protocol["execution"]["full_extraction_entrypoint_preparation_allowed"] is True
     assert protocol["execution"]["cpu_audit_execution_allowed"] is False
     assert protocol["execution"]["cost_calibration_execution_allowed"] is False
-    assert protocol["execution"]["full_extraction_execution_allowed"] is False
-    assert protocol["execution"]["gpu_execution_allowed"] is False
+    assert protocol["execution"]["full_extraction_execution_allowed"] is True
+    assert protocol["execution"]["gpu_execution_allowed"] is True
     assert protocol["execution"]["prior_l4_approval_reused"] is False
     assert protocol["execution"]["cpu_audit_execution_approval_required"] is False
     assert protocol["execution"]["cost_calibration_execution_approval_required"] is False
-    assert protocol["execution"]["full_extraction_execution_approval_required"] is True
-    assert protocol["execution"]["gpu_execution_approval_required"] is True
+    assert protocol["execution"]["full_extraction_execution_approval_required"] is False
+    assert protocol["execution"]["gpu_execution_approval_required"] is False
     assert protocol["execution"]["next_gate"] == (
-        "explicit_p1_02r_chunked_full_extraction_execution_approval"
+        "completed_p1_02r_chunked_full_extraction_and_integrity_review"
     )
 
 
@@ -304,36 +324,22 @@ def test_persisted_audit_uses_prepared_page_ids_without_score_caches(tmp_path: P
     assert not (run_root / "cache").exists()
 
 
-def test_completed_audit_and_calibration_are_blocked_with_full_extraction_unapproved() -> None:
+def test_completed_stages_are_blocked_and_full_extraction_is_approved() -> None:
     protocol = vidoseek_p1_02r.load_protocol(PROTOCOL_PATH)
 
     with pytest.raises(RuntimeError, match="CPU audit is complete"):
         vidoseek_p1_02r.require_cpu_audit_execution_approval(protocol)
     with pytest.raises(RuntimeError, match="cost calibration is complete"):
         vidoseek_p1_02r.require_cost_calibration_execution_approval(protocol)
-    with pytest.raises(RuntimeError, match="full-extraction execution is not approved"):
-        vidoseek_p1_02r.require_full_extraction_execution_approval(protocol)
-
-
-def test_only_the_explicit_full_extraction_state_opens_the_new_guard() -> None:
-    protocol = copy.deepcopy(vidoseek_p1_02r.load_protocol(PROTOCOL_PATH))
-    protocol["status"] = "approved_l4_chunked_full_extraction_execution_only"
-    protocol["full_extraction"]["status"] = "approved_for_execution"
-    protocol["execution"].update(
-        {
-            "modal_allowed": True,
-            "modal_execution_scope": "l4_chunked_full_extraction_only",
-            "allowed_modal_function": "extract-vidoseek-p1-02r-scores",
-            "full_extraction_execution_allowed": True,
-            "gpu_execution_allowed": True,
-            "cost_review_required": False,
-            "full_extraction_execution_approval_required": False,
-            "gpu_execution_approval_required": False,
-            "next_gate": "completed_p1_02r_chunked_full_extraction_and_integrity_review",
-        }
-    )
-
     vidoseek_p1_02r.require_full_extraction_execution_approval(protocol)
+
+
+def test_full_extraction_guard_rejects_drifted_approval_provenance() -> None:
+    protocol = copy.deepcopy(vidoseek_p1_02r.load_protocol(PROTOCOL_PATH))
+    protocol["authorization"]["full_extraction_execution"]["authorized_invocations"] = 2
+
+    with pytest.raises(ValueError, match="approval provenance drifted"):
+        vidoseek_p1_02r.require_full_extraction_execution_approval(protocol)
 
 
 def test_persisted_audit_rejects_a_non_parent_protocol_path(tmp_path: Path) -> None:
@@ -348,9 +354,9 @@ def test_persisted_audit_rejects_a_non_parent_protocol_path(tmp_path: Path) -> N
         )
 
 
-def test_preparation_protocol_rejects_an_enabled_gpu_flag() -> None:
+def test_execution_protocol_rejects_a_disabled_gpu_flag() -> None:
     protocol = vidoseek_p1_02r.load_protocol(PROTOCOL_PATH)
-    protocol["execution"]["gpu_execution_allowed"] = True
+    protocol["execution"]["gpu_execution_allowed"] = False
 
     with pytest.raises(ValueError, match="execution.gpu_execution_allowed"):
         vidoseek_p1_02r.validate_protocol(protocol)
