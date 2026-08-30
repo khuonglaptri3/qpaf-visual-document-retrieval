@@ -1,6 +1,6 @@
 schema_version: 1
 protocol_id: vidoseek_p1_02r_all_corpus_v1
-status: approved_l4_cost_calibration_execution_only
+status: l4_cost_calibration_recorded_chunked_full_extraction_prepared
 classification: post_hoc
 prepared_on: "2026-08-30"
 authorization:
@@ -38,6 +38,13 @@ authorization:
     approval_text: >-
       Approve execution of the bounded P1-02R L4 cost calibration on Modal. Do
       not run full extraction.
+  full_extraction_preparation:
+    scope: record_calibration_and_prepare_chunked_full_extraction_locally_only
+    approved_by: user
+    approved_on: "2026-08-30"
+    approval_text: >-
+      Record the P1-02R L4 calibration result and prepare a memory-safe chunked
+      full-extraction implementation locally. Do not execute Modal or GPU.
 frozen_parent:
   task_id: P1-02
   status: BLOCKED
@@ -89,7 +96,7 @@ coverage_audit_result:
   queries_with_zero_relevant_candidates: 0
   gpu_used: false
 cost_calibration:
-  status: approved_for_execution
+  status: complete
   function_name: calibrate-vidoseek-p1-02r-cost
   gpu_if_approved: L4
   query_limit: 8
@@ -101,23 +108,75 @@ cost_calibration:
   qrels_used: false
   output_artifact_path: artifacts/vidoseek_p1_02r_l4_cost_calibration.json
   result_scope: cost_projection_only_not_score_extraction
+cost_calibration_result:
+  status: complete
+  decision: requires_human_cost_review
+  completed_on: "2026-08-30"
+  artifact_path: artifacts/vidoseek_p1_02r_l4_cost_calibration.json
+  artifact_sha256: b53d0e885e9e979f7dc85b4588cae70d305a7ad17da9d303abf0b278310b93af
+  function_call_id: fc-01M18YTTTN7Y33Z8W0Z3ZQGY5J
+  source_commit: 6fdbd99ebd349ff1a9ce950faf154d6518a4b8bb
+  executed_protocol_status: approved_l4_cost_calibration_execution_only
+  executed_protocol_config_sha256: 77cd5f8920cb9f01d3a69ccd409e15391e68e4a759d8dfad9d7b889eb98307af
+  image_definition_sha256: b15c3728c3af7b08ca76f52fdf0a35fdb3c4d51196a372a6d93dc278fe0925a6
+  requested_gpu: L4
+  actual_gpu: NVIDIA L4
+  actual_gpu_vram_gib: 22.034
+  sample_queries: 8
+  sample_pages: 512
+  candidate_pairs: 4096
+  total_seconds: 588.160496293
+  peak_memory_allocated_bytes: 8288322048
+  projected_total_gpu_seconds: 7860.383886004963
+  projected_total_gpu_hours: 2.183439968334712
+  calibration_score_cache_sha256: 9550af44e6cf89fdb8bfe4a7b9fcfd366caf27aa673ec1f79fdcdb6cd1277807
+  full_extraction_started: false
+full_extraction:
+  status: prepared_not_executed
+  function_name: extract-vidoseek-p1-02r-scores
+  gpu_if_approved: L4
+  source_score_cache_root: frozen_parent_full_run
+  required_source_score_caches:
+    bm25: cache/bm25_scores.pt
+    bge_m3: cache/bge_m3_scores.pt
+    dse: cache/dse_scores.pt
+  query_chunk_size: 8
+  page_chunk_size: 512
+  passage_encode_batch_candidates:
+    - 2
+    - 1
+  query_encode_batch_candidates:
+    - 8
+    - 4
+    - 2
+  visual_score_batch_size: 128
+  expected_query_chunks: 143
+  expected_page_chunks: 11
+  expected_candidate_pairs: 6149670
+  candidate_provenance: all_corpus_p1_02r_v1
+  qrels_use: post_candidate_coverage_audit_and_evaluation_only
+  output_artifact_path: artifacts/vidoseek_p1_02r_score_extraction_full.json
+  result_scope: post_hoc_all_corpus_score_bundle_not_frozen_p1_02
 execution:
-  modal_allowed: true
-  modal_execution_scope: l4_cost_calibration_only
-  allowed_modal_function: calibrate-vidoseek-p1-02r-cost
-  prepared_modal_function: calibrate-vidoseek-p1-02r-cost
+  modal_allowed: false
+  modal_execution_scope: none
+  allowed_modal_function: null
+  prepared_modal_function: extract-vidoseek-p1-02r-scores
   modal_code_preparation_allowed: true
   cpu_audit_entrypoint_preparation_allowed: true
   cost_calibration_entrypoint_preparation_allowed: true
+  full_extraction_entrypoint_preparation_allowed: true
   cpu_audit_execution_allowed: false
-  cost_calibration_execution_allowed: true
-  gpu_execution_allowed: true
+  cost_calibration_execution_allowed: false
+  full_extraction_execution_allowed: false
+  gpu_execution_allowed: false
   prior_l4_approval_reused: false
   cost_review_required: true
   cpu_audit_execution_approval_required: false
   cost_calibration_execution_approval_required: false
-  gpu_execution_approval_required: false
-  next_gate: measured_l4_cost_calibration_and_human_cost_review
+  full_extraction_execution_approval_required: true
+  gpu_execution_approval_required: true
+  next_gate: explicit_p1_02r_chunked_full_extraction_execution_approval
 unchanged_contracts:
   - dataset_and_preprocessing
   - retriever_implementations_and_model_revisions
@@ -131,6 +190,7 @@ prohibitions:
   - do_not_select_depths_from_observed_relevance_rank
   - do_not_relabel_the_frozen_p1_02_result
   - do_not_treat_cost_calibration_as_score_extraction
-  - do_not_run_any_modal_function_except_the_bounded_cost_calibration
+  - do_not_rerun_the_completed_cost_calibration
   - do_not_change_calibration_limits_or_visual_score_batch_size
-  - do_not_run_full_extraction
+  - do_not_run_modal_or_gpu_during_local_full_extraction_preparation
+  - do_not_run_the_prepared_full_extraction_without_new_explicit_approval

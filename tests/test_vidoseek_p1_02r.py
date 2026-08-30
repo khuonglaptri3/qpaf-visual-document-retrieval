@@ -17,13 +17,16 @@ from scripts.extract_vidore_baseline import EXPANDED_DEPTHS, INITIAL_DEPTHS
 ROOT = Path(__file__).resolve().parents[1]
 PROTOCOL_PATH = ROOT / "configs" / "vidoseek_p1_02r.yaml"
 AUDIT_PATH = ROOT / "artifacts" / "vidoseek_p1_02r_coverage_audit.json"
+CALIBRATION_PATH = ROOT / "artifacts" / "vidoseek_p1_02r_l4_cost_calibration.json"
 
 
-def test_protocol_authorizes_only_the_bounded_l4_cost_calibration() -> None:
+def test_protocol_records_calibration_and_prepares_only_chunked_full_extraction() -> None:
     protocol = vidoseek_p1_02r.load_protocol(PROTOCOL_PATH)
 
     assert protocol["classification"] == "post_hoc"
-    assert protocol["status"] == "approved_l4_cost_calibration_execution_only"
+    assert protocol["status"] == (
+        "l4_cost_calibration_recorded_chunked_full_extraction_prepared"
+    )
     assert protocol["authorization"]["local_integration"] == {
         "scope": "local_integration_and_cpu_audit_preparation_only",
         "approved_by": "user",
@@ -60,6 +63,15 @@ def test_protocol_authorizes_only_the_bounded_l4_cost_calibration() -> None:
             "Do not run full extraction."
         ),
     }
+    assert protocol["authorization"]["full_extraction_preparation"] == {
+        "scope": "record_calibration_and_prepare_chunked_full_extraction_locally_only",
+        "approved_by": "user",
+        "approved_on": "2026-08-30",
+        "approval_text": (
+            "Record the P1-02R L4 calibration result and prepare a memory-safe chunked "
+            "full-extraction implementation locally. Do not execute Modal or GPU."
+        ),
+    }
     assert protocol["retrievers"]["changed"] is False
     environment = yaml.safe_load((ROOT / "configs" / "environment.yaml").read_text(encoding="utf-8"))
     retriever_contract = {name: environment[name] for name in ["bm25", "models"]}
@@ -73,7 +85,7 @@ def test_protocol_authorizes_only_the_bounded_l4_cost_calibration() -> None:
         AUDIT_PATH.read_bytes()
     ).hexdigest()
     assert protocol["cost_calibration"] == {
-        "status": "approved_for_execution",
+        "status": "complete",
         "function_name": "calibrate-vidoseek-p1-02r-cost",
         "gpu_if_approved": "L4",
         "query_limit": 8,
@@ -86,26 +98,40 @@ def test_protocol_authorizes_only_the_bounded_l4_cost_calibration() -> None:
         "output_artifact_path": "artifacts/vidoseek_p1_02r_l4_cost_calibration.json",
         "result_scope": "cost_projection_only_not_score_extraction",
     }
-    assert protocol["execution"]["modal_allowed"] is True
-    assert protocol["execution"]["modal_execution_scope"] == "l4_cost_calibration_only"
-    assert protocol["execution"]["allowed_modal_function"] == (
-        "calibrate-vidoseek-p1-02r-cost"
+    assert protocol["cost_calibration_result"]["artifact_sha256"] == hashlib.sha256(
+        CALIBRATION_PATH.read_bytes()
+    ).hexdigest()
+    assert protocol["cost_calibration_result"]["full_extraction_started"] is False
+    assert protocol["full_extraction"]["status"] == "prepared_not_executed"
+    assert protocol["full_extraction"]["function_name"] == (
+        "extract-vidoseek-p1-02r-scores"
     )
+    assert protocol["full_extraction"]["query_chunk_size"] == 8
+    assert protocol["full_extraction"]["page_chunk_size"] == 512
+    assert protocol["full_extraction"]["expected_query_chunks"] == 143
+    assert protocol["full_extraction"]["expected_page_chunks"] == 11
+    assert protocol["full_extraction"]["expected_candidate_pairs"] == 1_142 * 5_385
+    assert protocol["execution"]["modal_allowed"] is False
+    assert protocol["execution"]["modal_execution_scope"] == "none"
+    assert protocol["execution"]["allowed_modal_function"] is None
     assert protocol["execution"]["prepared_modal_function"] == (
-        "calibrate-vidoseek-p1-02r-cost"
+        "extract-vidoseek-p1-02r-scores"
     )
     assert protocol["execution"]["modal_code_preparation_allowed"] is True
     assert protocol["execution"]["cpu_audit_entrypoint_preparation_allowed"] is True
     assert protocol["execution"]["cost_calibration_entrypoint_preparation_allowed"] is True
+    assert protocol["execution"]["full_extraction_entrypoint_preparation_allowed"] is True
     assert protocol["execution"]["cpu_audit_execution_allowed"] is False
-    assert protocol["execution"]["cost_calibration_execution_allowed"] is True
-    assert protocol["execution"]["gpu_execution_allowed"] is True
+    assert protocol["execution"]["cost_calibration_execution_allowed"] is False
+    assert protocol["execution"]["full_extraction_execution_allowed"] is False
+    assert protocol["execution"]["gpu_execution_allowed"] is False
     assert protocol["execution"]["prior_l4_approval_reused"] is False
     assert protocol["execution"]["cpu_audit_execution_approval_required"] is False
     assert protocol["execution"]["cost_calibration_execution_approval_required"] is False
-    assert protocol["execution"]["gpu_execution_approval_required"] is False
+    assert protocol["execution"]["full_extraction_execution_approval_required"] is True
+    assert protocol["execution"]["gpu_execution_approval_required"] is True
     assert protocol["execution"]["next_gate"] == (
-        "measured_l4_cost_calibration_and_human_cost_review"
+        "explicit_p1_02r_chunked_full_extraction_execution_approval"
     )
 
 
@@ -251,6 +277,9 @@ def test_persisted_audit_uses_prepared_page_ids_without_score_caches(tmp_path: P
     protocol["dataset"]["expected_pages"] = 3
     protocol["candidate_pool"]["candidates_per_query"] = 3
     protocol["candidate_pool"]["expected_candidate_pairs"] = 6
+    protocol["full_extraction"]["expected_query_chunks"] = 1
+    protocol["full_extraction"]["expected_page_chunks"] = 1
+    protocol["full_extraction"]["expected_candidate_pairs"] = 6
 
     result = vidoseek_p1_02r.audit_persisted_p1_02r_coverage(
         dataset_config,
@@ -275,32 +304,36 @@ def test_persisted_audit_uses_prepared_page_ids_without_score_caches(tmp_path: P
     assert not (run_root / "cache").exists()
 
 
-def test_completed_cpu_audit_is_blocked_and_l4_calibration_is_approved() -> None:
+def test_completed_audit_and_calibration_are_blocked_with_full_extraction_unapproved() -> None:
     protocol = vidoseek_p1_02r.load_protocol(PROTOCOL_PATH)
 
     with pytest.raises(RuntimeError, match="CPU audit is complete"):
         vidoseek_p1_02r.require_cpu_audit_execution_approval(protocol)
-    vidoseek_p1_02r.require_cost_calibration_execution_approval(protocol)
+    with pytest.raises(RuntimeError, match="cost calibration is complete"):
+        vidoseek_p1_02r.require_cost_calibration_execution_approval(protocol)
+    with pytest.raises(RuntimeError, match="full-extraction execution is not approved"):
+        vidoseek_p1_02r.require_full_extraction_execution_approval(protocol)
 
 
-def test_preparation_only_state_keeps_the_l4_execution_guard_closed() -> None:
+def test_only_the_explicit_full_extraction_state_opens_the_new_guard() -> None:
     protocol = copy.deepcopy(vidoseek_p1_02r.load_protocol(PROTOCOL_PATH))
-    protocol["status"] = "cpu_audit_passed_cost_calibration_prepared"
-    protocol["cost_calibration"]["status"] = "prepared_not_executed"
+    protocol["status"] = "approved_l4_chunked_full_extraction_execution_only"
+    protocol["full_extraction"]["status"] = "approved_for_execution"
     protocol["execution"].update(
         {
-            "modal_allowed": False,
-            "modal_execution_scope": "none",
-            "allowed_modal_function": None,
-            "cost_calibration_execution_allowed": False,
-            "gpu_execution_allowed": False,
-            "cost_calibration_execution_approval_required": True,
-            "gpu_execution_approval_required": True,
+            "modal_allowed": True,
+            "modal_execution_scope": "l4_chunked_full_extraction_only",
+            "allowed_modal_function": "extract-vidoseek-p1-02r-scores",
+            "full_extraction_execution_allowed": True,
+            "gpu_execution_allowed": True,
+            "cost_review_required": False,
+            "full_extraction_execution_approval_required": False,
+            "gpu_execution_approval_required": False,
+            "next_gate": "completed_p1_02r_chunked_full_extraction_and_integrity_review",
         }
     )
 
-    with pytest.raises(RuntimeError, match="cost-calibration execution is not approved"):
-        vidoseek_p1_02r.require_cost_calibration_execution_approval(protocol)
+    vidoseek_p1_02r.require_full_extraction_execution_approval(protocol)
 
 
 def test_persisted_audit_rejects_a_non_parent_protocol_path(tmp_path: Path) -> None:
@@ -315,9 +348,9 @@ def test_persisted_audit_rejects_a_non_parent_protocol_path(tmp_path: Path) -> N
         )
 
 
-def test_execution_protocol_rejects_a_disabled_gpu_flag() -> None:
+def test_preparation_protocol_rejects_an_enabled_gpu_flag() -> None:
     protocol = vidoseek_p1_02r.load_protocol(PROTOCOL_PATH)
-    protocol["execution"]["gpu_execution_allowed"] = False
+    protocol["execution"]["gpu_execution_allowed"] = True
 
     with pytest.raises(ValueError, match="execution.gpu_execution_allowed"):
         vidoseek_p1_02r.validate_protocol(protocol)
@@ -334,6 +367,24 @@ def test_recorded_cpu_audit_artifact_matches_every_frozen_gate() -> None:
     assert artifact["queries_with_zero_relevant_candidates"] == 0
     assert artifact["gpu_used"] is False
     assert artifact["candidate_generation_used_qrels"] is False
+
+
+def test_recorded_l4_calibration_is_exact_and_remains_non_result_evidence() -> None:
+    protocol = vidoseek_p1_02r.load_protocol(PROTOCOL_PATH)
+
+    artifact = vidoseek_p1_02r.validate_recorded_cost_calibration(
+        protocol, CALIBRATION_PATH
+    )
+
+    assert artifact["function_call_id"] == "fc-01M18YTTTN7Y33Z8W0Z3ZQGY5J"
+    assert artifact["actual_gpu"] == "NVIDIA L4"
+    assert artifact["dataset"]["sample_queries"] == 8
+    assert artifact["dataset"]["sample_pages"] == 512
+    assert artifact["candidate_pool"]["candidate_pairs"] == 4_096
+    assert artifact["timings"]["total_seconds"] == 588.160496293
+    assert artifact["peak_memory_allocated_bytes"] == 8_288_322_048
+    assert artifact["projection"]["projected_total_gpu_seconds"] == 7860.383886004963
+    assert artifact["full_extraction_started"] is False
 
 
 def test_cost_calibration_sampling_is_systematic_bounded_and_qrel_free() -> None:

@@ -1,5 +1,15 @@
 # Experiment protocol changelog
 
+## 2026-08-30 - P1-02R L4 calibration recorded and chunked full extraction prepared
+
+- Status: `l4_cost_calibration_recorded_chunked_full_extraction_prepared`; no Modal Function or GPU execution is currently authorized.
+- Local-preparation authorization text: `Record the P1-02R L4 calibration result and prepare a memory-safe chunked full-extraction implementation locally. Do not execute Modal or GPU.`
+- Exact calibration evidence: `artifacts/vidoseek_p1_02r_l4_cost_calibration.json`, SHA-256 `b53d0e885e9e979f7dc85b4588cae70d305a7ad17da9d303abf0b278310b93af`, Function call `fc-01M18YTTTN7Y33Z8W0Z3ZQGY5J`, source commit `6fdbd99ebd349ff1a9ce950faf154d6518a4b8bb`, and executed protocol-config SHA-256 `77cd5f8920cb9f01d3a69ccd409e15391e68e4a759d8dfad9d7b889eb98307af`.
+- Measured calibration: NVIDIA L4 with 22.034 GiB VRAM; fixed 8-query x 512-page sample; 4,096 pairs; 588.160496293 seconds total; 8,288,322,048 bytes (7.719 GiB) peak allocation; sample-score-cache SHA-256 `9550af44e6cf89fdb8bfe4a7b9fcfd366caf27aa673ec1f79fdcdb6cd1277807`; `full_extraction_started=false`.
+- Non-result projection: 7,860.383886004963 seconds (2.183439968334712 L4-hours), excluding queueing, retry/OOM backoff, BM25/BGE/DSE regeneration, full output materialization, and price changes. This is engineering review input, not a full result or monetary estimate.
+- Prepared implementation: a separate `extract-vidoseek-p1-02r-scores` path validates/reuses the frozen parent BM25/BGE-M3/DSE matrices, caps query/page chunks at 8/512, keeps passage/query encode batches at or below 2/8 and visual scoring at 128, persists atomic resumable embedding/visual-score chunks, and streams final Parquet row groups without materializing the 6,149,670-row table in RAM.
+- Execution boundary: the completed audit and calibration are closed against rerun; `modal_allowed=false`, `full_extraction_execution_allowed=false`, and `gpu_execution_allowed=false`. No full-extraction command is authorized or recorded. Frozen P1-02 remains `BLOCKED`, and P1-03 remains blocked.
+
 ## 2026-08-30 - P1-02R bounded L4 cost-calibration execution approval
 
 - Status: `approved_l4_cost_calibration_execution_only`; full extraction remains unapproved under P1-02R.
