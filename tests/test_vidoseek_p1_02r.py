@@ -16,13 +16,14 @@ from scripts.extract_vidore_baseline import EXPANDED_DEPTHS, INITIAL_DEPTHS
 
 ROOT = Path(__file__).resolve().parents[1]
 PROTOCOL_PATH = ROOT / "configs" / "vidoseek_p1_02r.yaml"
+AUDIT_PATH = ROOT / "artifacts" / "vidoseek_p1_02r_coverage_audit.json"
 
 
-def test_protocol_approves_cpu_audit_only_and_locks_unchanged_retrievers() -> None:
+def test_protocol_records_cpu_audit_pass_and_prepares_calibration_only() -> None:
     protocol = vidoseek_p1_02r.load_protocol(PROTOCOL_PATH)
 
     assert protocol["classification"] == "post_hoc"
-    assert protocol["status"] == "approved_cpu_audit_execution_only"
+    assert protocol["status"] == "cpu_audit_passed_cost_calibration_prepared"
     assert protocol["authorization"]["local_integration"] == {
         "scope": "local_integration_and_cpu_audit_preparation_only",
         "approved_by": "user",
@@ -41,6 +42,15 @@ def test_protocol_approves_cpu_audit_only_and_locks_unchanged_retrievers() -> No
             "Do not run GPU"
         ),
     }
+    assert protocol["authorization"]["cost_calibration_preparation"] == {
+        "scope": "local_code_tests_and_command_only",
+        "approved_by": "user",
+        "approved_on": "2026-08-30",
+        "approval_text": (
+            "Record the P1-02R CPU-audit PASS and prepare a bounded L4 "
+            "cost-calibration command locally. Do not execute Modal or GPU"
+        ),
+    }
     assert protocol["retrievers"]["changed"] is False
     environment = yaml.safe_load((ROOT / "configs" / "environment.yaml").read_text(encoding="utf-8"))
     retriever_contract = {name: environment[name] for name in ["bm25", "models"]}
@@ -49,17 +59,39 @@ def test_protocol_approves_cpu_audit_only_and_locks_unchanged_retrievers() -> No
     ).hexdigest()
     assert protocol["retrievers"]["contract_fields"] == ["bm25", "models"]
     assert protocol["retrievers"]["contract_sha256"] == expected_hash
-    assert protocol["execution"]["modal_allowed"] is True
-    assert protocol["execution"]["modal_execution_scope"] == "cpu_audit_only"
-    assert protocol["execution"]["allowed_modal_function"] == (
-        "audit-vidoseek-p1-02r-all-corpus"
+    assert protocol["coverage_audit_result"]["status"] == "PASS"
+    assert protocol["coverage_audit_result"]["artifact_sha256"] == hashlib.sha256(
+        AUDIT_PATH.read_bytes()
+    ).hexdigest()
+    assert protocol["cost_calibration"] == {
+        "status": "prepared_not_executed",
+        "function_name": "calibrate-vidoseek-p1-02r-cost",
+        "gpu_if_approved": "L4",
+        "query_limit": 8,
+        "page_limit": 512,
+        "candidate_pairs": 4096,
+        "visual_score_batch_size": 128,
+        "sample_selection": "systematic_floor_indices_over_frozen_order",
+        "membership_rule": "every_sampled_page_for_every_sampled_query",
+        "qrels_used": False,
+        "output_artifact_path": "artifacts/vidoseek_p1_02r_l4_cost_calibration.json",
+        "result_scope": "cost_projection_only_not_score_extraction",
+    }
+    assert protocol["execution"]["modal_allowed"] is False
+    assert protocol["execution"]["modal_execution_scope"] == "none"
+    assert protocol["execution"]["allowed_modal_function"] is None
+    assert protocol["execution"]["prepared_modal_function"] == (
+        "calibrate-vidoseek-p1-02r-cost"
     )
     assert protocol["execution"]["modal_code_preparation_allowed"] is True
     assert protocol["execution"]["cpu_audit_entrypoint_preparation_allowed"] is True
-    assert protocol["execution"]["cpu_audit_execution_allowed"] is True
+    assert protocol["execution"]["cost_calibration_entrypoint_preparation_allowed"] is True
+    assert protocol["execution"]["cpu_audit_execution_allowed"] is False
+    assert protocol["execution"]["cost_calibration_execution_allowed"] is False
     assert protocol["execution"]["gpu_execution_allowed"] is False
     assert protocol["execution"]["prior_l4_approval_reused"] is False
     assert protocol["execution"]["cpu_audit_execution_approval_required"] is False
+    assert protocol["execution"]["cost_calibration_execution_approval_required"] is True
     assert protocol["execution"]["gpu_execution_approval_required"] is True
 
 
@@ -229,10 +261,32 @@ def test_persisted_audit_uses_prepared_page_ids_without_score_caches(tmp_path: P
     assert not (run_root / "cache").exists()
 
 
-def test_cpu_audit_execution_is_approved() -> None:
+def test_completed_cpu_audit_and_unapproved_gpu_calibration_are_blocked() -> None:
     protocol = vidoseek_p1_02r.load_protocol(PROTOCOL_PATH)
 
-    vidoseek_p1_02r.require_cpu_audit_execution_approval(protocol)
+    with pytest.raises(RuntimeError, match="CPU audit is complete"):
+        vidoseek_p1_02r.require_cpu_audit_execution_approval(protocol)
+    with pytest.raises(RuntimeError, match="cost-calibration execution is not approved"):
+        vidoseek_p1_02r.require_cost_calibration_execution_approval(protocol)
+
+
+def test_only_the_explicit_l4_calibration_state_opens_the_execution_guard() -> None:
+    protocol = copy.deepcopy(vidoseek_p1_02r.load_protocol(PROTOCOL_PATH))
+    protocol["status"] = "approved_l4_cost_calibration_execution_only"
+    protocol["cost_calibration"]["status"] = "approved_for_execution"
+    protocol["execution"].update(
+        {
+            "modal_allowed": True,
+            "modal_execution_scope": "l4_cost_calibration_only",
+            "allowed_modal_function": "calibrate-vidoseek-p1-02r-cost",
+            "cost_calibration_execution_allowed": True,
+            "gpu_execution_allowed": True,
+            "cost_calibration_execution_approval_required": False,
+            "gpu_execution_approval_required": False,
+        }
+    )
+
+    vidoseek_p1_02r.require_cost_calibration_execution_approval(protocol)
 
 
 def test_persisted_audit_rejects_a_non_parent_protocol_path(tmp_path: Path) -> None:
@@ -251,5 +305,80 @@ def test_protocol_validation_rejects_gpu_authorization() -> None:
     protocol = vidoseek_p1_02r.load_protocol(PROTOCOL_PATH)
     protocol["execution"]["gpu_execution_allowed"] = True
 
-    with pytest.raises(ValueError, match="GPU execution must remain disabled"):
+    with pytest.raises(ValueError, match="execution.gpu_execution_allowed"):
         vidoseek_p1_02r.validate_protocol(protocol)
+
+
+def test_recorded_cpu_audit_artifact_matches_every_frozen_gate() -> None:
+    protocol = vidoseek_p1_02r.load_protocol(PROTOCOL_PATH)
+
+    artifact = vidoseek_p1_02r.validate_recorded_cpu_audit(protocol, AUDIT_PATH)
+
+    assert artifact["coverage"] == 1.0
+    assert artifact["selected_relevant_pairs"] == artifact["relevant_pairs"] == 1_142
+    assert artifact["missing_relevant_pairs"] == 0
+    assert artifact["queries_with_zero_relevant_candidates"] == 0
+    assert artifact["gpu_used"] is False
+    assert artifact["candidate_generation_used_qrels"] is False
+
+
+def test_cost_calibration_sampling_is_systematic_bounded_and_qrel_free() -> None:
+    assert vidoseek_p1_02r.systematic_sample_indices(10, 4).tolist() == [0, 2, 5, 7]
+    with pytest.raises(ValueError, match="no larger"):
+        vidoseek_p1_02r.systematic_sample_indices(3, 4)
+
+    records = vidoseek_p1_02r._query_records_without_qrels(
+        {
+            "examples": [
+                {"uid": "q2", "query": "second", "meta_info": {}},
+                {"uid": "q1", "query": "first", "meta_info": {}},
+            ]
+        }
+    )
+    assert [row["query_id"] for row in records] == ["q1", "q2"]
+
+
+def test_cost_projection_is_componentwise_and_explicitly_not_a_result() -> None:
+    projection = vidoseek_p1_02r.project_full_cost_from_calibration(
+        {
+            "model_load_seconds": 10.0,
+            "passage_encoding_seconds": 20.0,
+            "query_encoding_seconds": 5.0,
+            "visual_scoring_seconds": 40.0,
+            "total_seconds": 80.0,
+        },
+        sample_queries=2,
+        sample_pages=4,
+        full_queries=4,
+        full_pages=8,
+    )
+
+    assert projection["sample_candidate_pairs"] == 8
+    assert projection["full_candidate_pairs"] == 32
+    assert projection["projected_components"] == {
+        "fixed_and_model_load_seconds": 10.0,
+        "passage_encoding_seconds": 40.0,
+        "query_encoding_seconds": 10.0,
+        "visual_scoring_seconds": 160.0,
+        "other_measured_overhead_seconds": 5.0,
+    }
+    assert projection["projected_total_gpu_seconds"] == 225.0
+    assert projection["interpretation"] == (
+        "cost_review_input_only_not_a_full_extraction_result"
+    )
+
+
+def test_cost_calibration_runner_keeps_frozen_extractor_untouched() -> None:
+    parameters = inspect.signature(
+        vidoseek_p1_02r.run_bounded_cost_calibration
+    ).parameters
+    source = inspect.getsource(vidoseek_p1_02r.run_bounded_cost_calibration)
+
+    assert "query_limit" not in parameters
+    assert "page_limit" not in parameters
+    assert "qrels" not in parameters
+    assert "run_extraction" not in source
+    assert "parse_annotations" not in source
+    assert "systematic_sample_indices" in source
+    assert "ColQwen25Retriever" in source
+    assert '"qrels_used": False' in source

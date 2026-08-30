@@ -1,6 +1,6 @@
 schema_version: 1
 protocol_id: vidoseek_p1_02r_all_corpus_v1
-status: approved_cpu_audit_execution_only
+status: cpu_audit_passed_cost_calibration_prepared
 classification: post_hoc
 prepared_on: "2026-08-30"
 authorization:
@@ -24,6 +24,13 @@ authorization:
     approval_text: >-
       Approve execution of the P1-02R CPU-only coverage audit on Modal. Do not
       run GPU
+  cost_calibration_preparation:
+    scope: local_code_tests_and_command_only
+    approved_by: user
+    approved_on: "2026-08-30"
+    approval_text: >-
+      Record the P1-02R CPU-audit PASS and prepare a bounded L4 cost-calibration
+      command locally. Do not execute Modal or GPU
 frozen_parent:
   task_id: P1-02
   status: BLOCKED
@@ -58,19 +65,52 @@ coverage_gate:
   minimum_relevant_pair_coverage: 0.95
   maximum_queries_with_zero_relevant_candidates: 0
   qrels_use: post_candidate_coverage_audit_and_evaluation_only
+coverage_audit_result:
+  status: PASS
+  decision: p1_02r_coverage_gate_passes
+  completed_on: "2026-08-30"
+  artifact_path: artifacts/vidoseek_p1_02r_coverage_audit.json
+  artifact_sha256: bbb947ca9b04bf291e94298516d8529888b677eee92e212dd8967fac413beca0
+  function_call_id: fc-01M18KYEZTRZANMQKXZ6KY467H
+  source_commit: 318b09d487eb93ea4690ebe7cb54812d4bffdc72
+  executed_protocol_config_sha256: 1411724e3bc330f1821ab75ff1bb84838334a214c1c65261c53044c7b1100c17
+  image_definition_sha256: aa154e0a604c4d82a8902a2d8956a2e40514248c527f63c83b3d08d09e487777
+  coverage: 1.0
+  relevant_pairs: 1142
+  selected_relevant_pairs: 1142
+  missing_relevant_pairs: 0
+  queries_with_zero_relevant_candidates: 0
+  gpu_used: false
+cost_calibration:
+  status: prepared_not_executed
+  function_name: calibrate-vidoseek-p1-02r-cost
+  gpu_if_approved: L4
+  query_limit: 8
+  page_limit: 512
+  candidate_pairs: 4096
+  visual_score_batch_size: 128
+  sample_selection: systematic_floor_indices_over_frozen_order
+  membership_rule: every_sampled_page_for_every_sampled_query
+  qrels_used: false
+  output_artifact_path: artifacts/vidoseek_p1_02r_l4_cost_calibration.json
+  result_scope: cost_projection_only_not_score_extraction
 execution:
-  modal_allowed: true
-  modal_execution_scope: cpu_audit_only
-  allowed_modal_function: audit-vidoseek-p1-02r-all-corpus
+  modal_allowed: false
+  modal_execution_scope: none
+  allowed_modal_function: null
+  prepared_modal_function: calibrate-vidoseek-p1-02r-cost
   modal_code_preparation_allowed: true
   cpu_audit_entrypoint_preparation_allowed: true
-  cpu_audit_execution_allowed: true
+  cost_calibration_entrypoint_preparation_allowed: true
+  cpu_audit_execution_allowed: false
+  cost_calibration_execution_allowed: false
   gpu_execution_allowed: false
   prior_l4_approval_reused: false
   cost_review_required: true
   cpu_audit_execution_approval_required: false
+  cost_calibration_execution_approval_required: true
   gpu_execution_approval_required: true
-  next_gate: measured_cpu_audit_coverage_gate
+  next_gate: explicit_p1_02r_l4_cost_calibration_execution_approval
 unchanged_contracts:
   - dataset_and_preprocessing
   - retriever_implementations_and_model_revisions
@@ -83,4 +123,6 @@ prohibitions:
   - do_not_inject_a_relevant_page
   - do_not_select_depths_from_observed_relevance_rank
   - do_not_relabel_the_frozen_p1_02_result
-  - do_not_run_any_modal_function_except_the_approved_cpu_audit
+  - do_not_run_modal_or_gpu_during_local_calibration_preparation
+  - do_not_treat_cost_calibration_as_score_extraction
+  - do_not_run_the_prepared_gpu_function_without_new_explicit_approval

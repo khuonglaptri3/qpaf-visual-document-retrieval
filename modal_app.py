@@ -23,10 +23,12 @@ VIDOSEEK_CALIBRATION_FUNCTION_NAME = "calibrate-vidoseek-scores"
 VIDOSEEK_SCORE_EXTRACTION_FUNCTION_NAME = "extract-vidoseek-scores"
 VIDOSEEK_COVERAGE_AUDIT_FUNCTION_NAME = "audit-vidoseek-expanded-coverage"
 VIDOSEEK_P1_02R_COVERAGE_AUDIT_FUNCTION_NAME = "audit-vidoseek-p1-02r-all-corpus"
+VIDOSEEK_P1_02R_COST_CALIBRATION_FUNCTION_NAME = "calibrate-vidoseek-p1-02r-cost"
 VERIFY_DSE_FUNCTION_NAME = "convert-and-verify-dse-safetensors"
 REQUESTED_GPU = "L4"
 VIDOSEEK_CALIBRATION_GPU = "L4"
 VIDOSEEK_SCORE_EXTRACTION_GPU = "L4"
+VIDOSEEK_P1_02R_CALIBRATION_GPU = "L4"
 SCORE_EXTRACTION_GPU = "A100-40GB"
 SCORE_EXTRACTION_CPU = 4.0
 SCORE_EXTRACTION_MEMORY_MB = 32_768
@@ -54,6 +56,9 @@ VIDOSEEK_ADAPTER_PATH = PROJECT_ROOT / "scripts" / "vidoseek_dataset.py"
 VIDOSEEK_COVERAGE_AUDIT_PATH = PROJECT_ROOT / "scripts" / "audit_vidoseek_coverage.py"
 VIDOSEEK_P1_02R_PROTOCOL_PATH = PROJECT_ROOT / "configs" / "vidoseek_p1_02r.yaml"
 VIDOSEEK_P1_02R_PATH = PROJECT_ROOT / "scripts" / "vidoseek_p1_02r.py"
+VIDOSEEK_P1_02R_AUDIT_ARTIFACT_PATH = (
+    PROJECT_ROOT / "artifacts" / "vidoseek_p1_02r_coverage_audit.json"
+)
 BGE_M3_ADAPTER_PATH = PROJECT_ROOT / "scripts" / "bge_m3_dense_retriever.py"
 DSE_QWEN2_ADAPTER_PATH = PROJECT_ROOT / "scripts" / "dse_qwen2_retriever.py"
 VERIFY_DSE_PATH = PROJECT_ROOT / "scripts" / "verify_dse_safetensors.py"
@@ -72,6 +77,9 @@ VIDOSEEK_P1_02R_PROTOCOL_SHA256 = hashlib.sha256(
     VIDOSEEK_P1_02R_PROTOCOL_PATH.read_bytes()
 ).hexdigest()
 VIDOSEEK_P1_02R_SHA256 = hashlib.sha256(VIDOSEEK_P1_02R_PATH.read_bytes()).hexdigest()
+VIDOSEEK_P1_02R_AUDIT_ARTIFACT_SHA256 = hashlib.sha256(
+    VIDOSEEK_P1_02R_AUDIT_ARTIFACT_PATH.read_bytes()
+).hexdigest()
 BGE_M3_ADAPTER_SHA256 = hashlib.sha256(BGE_M3_ADAPTER_PATH.read_bytes()).hexdigest()
 DSE_QWEN2_ADAPTER_SHA256 = hashlib.sha256(DSE_QWEN2_ADAPTER_PATH.read_bytes()).hexdigest()
 VERIFY_DSE_SHA256 = hashlib.sha256(VERIFY_DSE_PATH.read_bytes()).hexdigest()
@@ -104,6 +112,7 @@ IMAGE_DEFINITION: dict[str, Any] = {
     "vidoseek_coverage_audit_sha256": VIDOSEEK_COVERAGE_AUDIT_SHA256,
     "vidoseek_p1_02r_protocol_sha256": VIDOSEEK_P1_02R_PROTOCOL_SHA256,
     "vidoseek_p1_02r_sha256": VIDOSEEK_P1_02R_SHA256,
+    "vidoseek_p1_02r_audit_artifact_sha256": VIDOSEEK_P1_02R_AUDIT_ARTIFACT_SHA256,
     "bge_m3_adapter_sha256": BGE_M3_ADAPTER_SHA256,
     "dse_qwen2_adapter_sha256": DSE_QWEN2_ADAPTER_SHA256,
     "verify_dse_sha256": VERIFY_DSE_SHA256,
@@ -160,6 +169,10 @@ image = modal.Image.debian_slim(python_version=IMAGE_DEFINITION["python"]).apt_i
 ).add_local_file(
     str(VIDOSEEK_P1_02R_PATH),
     remote_path="/root/scripts/vidoseek_p1_02r.py",
+    copy=True,
+).add_local_file(
+    str(VIDOSEEK_P1_02R_AUDIT_ARTIFACT_PATH),
+    remote_path="/root/artifacts/vidoseek_p1_02r_coverage_audit.json",
     copy=True,
 ).add_local_file(
     str(BGE_M3_ADAPTER_PATH),
@@ -481,6 +494,74 @@ def audit_vidoseek_p1_02r_coverage(source_protocol_sha256: str) -> str:
     )
     audit_dir.mkdir(parents=True, exist_ok=True)
     destination = audit_dir / f"p1_02r_all_corpus_coverage_{function_call_id}.json"
+    temporary = destination.with_suffix(".json.tmp")
+    serialized = json.dumps(result, indent=2, sort_keys=True) + "\n"
+    temporary.write_text(serialized, encoding="utf-8")
+    temporary.replace(destination)
+    volume.commit()
+    return serialized
+
+
+@app.function(
+    name=VIDOSEEK_P1_02R_COST_CALIBRATION_FUNCTION_NAME,
+    image=image,
+    gpu=VIDOSEEK_P1_02R_CALIBRATION_GPU,
+    cpu=SCORE_EXTRACTION_CPU,
+    memory=SCORE_EXTRACTION_MEMORY_MB,
+    timeout=SCORE_EXTRACTION_TIMEOUT_SECONDS,
+    secrets=[hf_secret],
+    volumes={str(VOLUME_MOUNT): volume},
+    env={"QPAF_SOURCE_COMMIT": SOURCE_COMMIT},
+)
+def calibrate_vidoseek_p1_02r_cost() -> str:
+    """Run the fixed P1-02R L4 sample only after separate execution approval."""
+    import torch
+    import yaml
+
+    from scripts.vidoseek_p1_02r import (
+        load_protocol,
+        require_cost_calibration_execution_approval,
+        run_bounded_cost_calibration,
+    )
+
+    protocol = load_protocol(VIDOSEEK_P1_02R_PROTOCOL_PATH)
+    require_cost_calibration_execution_approval(protocol)
+    function_call_id = modal.current_function_call_id()
+    if not function_call_id:
+        raise RuntimeError("Modal did not expose a Function call ID")
+    result = {
+        **run_bounded_cost_calibration(
+            dataset_config=yaml.safe_load(DATASETS_CONFIG_PATH.read_text(encoding="utf-8")),
+            environment=yaml.safe_load(ENVIRONMENT_CONFIG_PATH.read_text(encoding="utf-8")),
+            protocol=protocol,
+            audit_artifact_path=VIDOSEEK_P1_02R_AUDIT_ARTIFACT_PATH,
+            volume_root=VOLUME_MOUNT,
+            source_commit=SOURCE_COMMIT,
+            image_definition_sha256=IMAGE_DEFINITION_SHA256,
+            protocol_config_sha256=VIDOSEEK_P1_02R_PROTOCOL_SHA256,
+            function_call_id=function_call_id,
+            gpu_metadata=_gpu_metadata(torch),
+            commit=volume.commit,
+        ),
+        "app_name": APP_NAME,
+        "function_name": VIDOSEEK_P1_02R_COST_CALIBRATION_FUNCTION_NAME,
+        "requested_gpu": VIDOSEEK_P1_02R_CALIBRATION_GPU,
+        "requested_cpu": SCORE_EXTRACTION_CPU,
+        "requested_memory_mb": SCORE_EXTRACTION_MEMORY_MB,
+        "timeout_seconds": SCORE_EXTRACTION_TIMEOUT_SECONDS,
+    }
+    output_dir = (
+        VOLUME_MOUNT
+        / "score_extraction"
+        / "vidoseek"
+        / protocol["protocol_id"]
+        / VIDOSEEK_P1_02R_PROTOCOL_SHA256
+        / "cost_calibration"
+        / function_call_id
+        / "output"
+    )
+    output_dir.mkdir(parents=True, exist_ok=True)
+    destination = output_dir / "manifest.json"
     temporary = destination.with_suffix(".json.tmp")
     serialized = json.dumps(result, indent=2, sort_keys=True) + "\n"
     temporary.write_text(serialized, encoding="utf-8")

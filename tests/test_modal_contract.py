@@ -87,7 +87,7 @@ def test_vidoseek_expanded_coverage_audit_is_cpu_only_and_volume_backed() -> Non
     ).hexdigest()
 
 
-def test_p1_02r_coverage_audit_is_cpu_only_approved_and_protocol_guarded() -> None:
+def test_completed_p1_02r_coverage_audit_remains_cpu_only_and_guarded() -> None:
     source = (ROOT / "modal_app.py").read_text(encoding="utf-8")
     decorator = source.split("def audit_vidoseek_p1_02r_coverage", maxsplit=1)[0].rsplit(
         "@app.function", maxsplit=1
@@ -108,11 +108,10 @@ def test_p1_02r_coverage_audit_is_cpu_only_approved_and_protocol_guarded() -> No
     assert "require_cpu_audit_execution_approval(protocol)" in body
     assert "audit_persisted_p1_02r_coverage" in body
     assert "volume.commit()" in body
-    assert protocol["execution"]["modal_execution_scope"] == "cpu_audit_only"
-    assert protocol["execution"]["allowed_modal_function"] == (
-        modal_app.VIDOSEEK_P1_02R_COVERAGE_AUDIT_FUNCTION_NAME
-    )
-    assert protocol["execution"]["cpu_audit_execution_allowed"] is True
+    assert protocol["coverage_audit_result"]["status"] == "PASS"
+    assert protocol["execution"]["modal_execution_scope"] == "none"
+    assert protocol["execution"]["allowed_modal_function"] is None
+    assert protocol["execution"]["cpu_audit_execution_allowed"] is False
     assert protocol["execution"]["gpu_execution_allowed"] is False
     assert 'remote_path="/root/configs/vidoseek_p1_02r.yaml"' in source
     assert 'remote_path="/root/scripts/vidoseek_p1_02r.py"' in source
@@ -122,6 +121,45 @@ def test_p1_02r_coverage_audit_is_cpu_only_approved_and_protocol_guarded() -> No
     assert modal_app.IMAGE_DEFINITION["vidoseek_p1_02r_sha256"] == hashlib.sha256(
         (ROOT / "scripts" / "vidoseek_p1_02r.py").read_bytes()
     ).hexdigest()
+
+
+def test_p1_02r_l4_cost_calibration_is_fixed_bounded_and_not_authorized() -> None:
+    source = (ROOT / "modal_app.py").read_text(encoding="utf-8")
+    decorator = source.split("def calibrate_vidoseek_p1_02r_cost", maxsplit=1)[0].rsplit(
+        "@app.function", maxsplit=1
+    )[1]
+    body = source.split("def calibrate_vidoseek_p1_02r_cost", maxsplit=1)[1].split(
+        "@app.function", maxsplit=1
+    )[0]
+    protocol = yaml.safe_load(
+        (ROOT / "configs" / "vidoseek_p1_02r.yaml").read_text(encoding="utf-8")
+    )
+    audit_path = ROOT / "artifacts" / "vidoseek_p1_02r_coverage_audit.json"
+
+    assert "gpu=VIDOSEEK_P1_02R_CALIBRATION_GPU" in decorator
+    assert "cpu=SCORE_EXTRACTION_CPU" in decorator
+    assert "memory=SCORE_EXTRACTION_MEMORY_MB" in decorator
+    assert "timeout=SCORE_EXTRACTION_TIMEOUT_SECONDS" in decorator
+    assert "secrets=[hf_secret]" in decorator
+    assert "volumes={str(VOLUME_MOUNT): volume}" in decorator
+    assert modal_app.VIDOSEEK_P1_02R_CALIBRATION_GPU == "L4"
+    assert "require_cost_calibration_execution_approval(protocol)" in body
+    assert "run_bounded_cost_calibration" in body
+    assert "run_extraction" not in body
+    assert "def calibrate_vidoseek_p1_02r_cost()" in source
+    assert protocol["cost_calibration"]["query_limit"] == 8
+    assert protocol["cost_calibration"]["page_limit"] == 512
+    assert protocol["cost_calibration"]["candidate_pairs"] == 4_096
+    assert protocol["execution"]["modal_allowed"] is False
+    assert protocol["execution"]["cost_calibration_execution_allowed"] is False
+    assert protocol["execution"]["gpu_execution_allowed"] is False
+    assert protocol["execution"]["prepared_modal_function"] == (
+        modal_app.VIDOSEEK_P1_02R_COST_CALIBRATION_FUNCTION_NAME
+    )
+    assert 'remote_path="/root/artifacts/vidoseek_p1_02r_coverage_audit.json"' in source
+    assert modal_app.IMAGE_DEFINITION["vidoseek_p1_02r_audit_artifact_sha256"] == (
+        hashlib.sha256(audit_path.read_bytes()).hexdigest()
+    )
 
 
 def test_score_extraction_smoke_uses_reserved_gpu_without_qrels() -> None:

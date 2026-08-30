@@ -1,5 +1,16 @@
 # Experiment protocol changelog
 
+## 2026-08-30 - P1-02R CPU audit PASS and bounded L4 calibration preparation
+
+- Status: `cpu_audit_passed_cost_calibration_prepared`; no Modal or GPU execution is currently authorized.
+- Preparation authorization text: `Record the P1-02R CPU-audit PASS and prepare a bounded L4 cost-calibration command locally. Do not execute Modal or GPU`.
+- Verified audit evidence: returned artifact `artifacts/vidoseek_p1_02r_coverage_audit.json`, SHA-256 `bbb947ca9b04bf291e94298516d8529888b677eee92e212dd8967fac413beca0`, Function call `fc-01M18KYEZTRZANMQKXZ6KY467H`, source commit `318b09d487eb93ea4690ebe7cb54812d4bffdc72`, and executed protocol-config SHA-256 `1411724e3bc330f1821ab75ff1bb84838334a214c1c65261c53044c7b1100c17`.
+- Gate result: coverage 1.0; 1,142/1,142 relevant pairs selected; zero missing relevant pairs; zero queries without a relevant candidate; 5,385 pages per query and 6,149,670 derived candidate pairs; qrels were not used to construct candidates; `gpu_used=false`.
+- Calibration preparation: add a fixed 8-query x 512-page systematic sample over frozen order, containing every sampled page for every sampled query (4,096 pairs) at the unchanged visual score batch 128. It measures ColQwen2.5 model load, passage/query encoding, visual scoring, peak allocation, and a componentwise linear full-workload projection. It does not alter or call the frozen `run_extraction` path.
+- Execution guard: the prepared Function is `calibrate-vidoseek-p1-02r-cost` on L4, but `modal_allowed=false`, `cost_calibration_execution_allowed=false`, and `gpu_execution_allowed=false`. The prior P1-02 L4 approval is not reused.
+- Prepared future command, not executed: `$env:PYTHONUTF8='1'; $env:PYTHONIOENCODING='utf-8'; modal run --write-result artifacts\vidoseek_p1_02r_l4_cost_calibration.json modal_app.py::calibrate_vidoseek_p1_02r_cost`.
+- Boundary: P1-02 remains `BLOCKED`; this PASS is only the separately versioned P1-02R coverage gate. No calibration result, full score extraction, QPAF result, P1-03 authorization, or monetary cost claim is recorded.
+
 ## 2026-08-30 - P1-02R all-corpus CPU coverage audit approval
 
 - Status: `approved_cpu_audit_execution_only`; GPU execution remains disabled.

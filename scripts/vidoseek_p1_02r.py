@@ -2,9 +2,11 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import re
+import time
 from pathlib import Path
-from typing import Any
+from typing import Any, Callable
 
 import numpy as np
 import yaml
@@ -13,22 +15,29 @@ from scripts.extract_vidore_baseline import MINIMUM_COVERAGE
 from scripts.vidoseek_dataset import parse_annotations
 
 
-CPU_AUDIT_EXECUTION_STATUS = "approved_cpu_audit_execution_only"
+CALIBRATION_PREPARATION_STATUS = "cpu_audit_passed_cost_calibration_prepared"
+CALIBRATION_EXECUTION_STATUS = "approved_l4_cost_calibration_execution_only"
 PROTOCOL_ID = "vidoseek_p1_02r_all_corpus_v1"
 CANDIDATE_METHOD = "all_corpus"
 DATASET_KEY = "vidoseek"
 CPU_AUDIT_FUNCTION_NAME = "audit-vidoseek-p1-02r-all-corpus"
+COST_CALIBRATION_FUNCTION_NAME = "calibrate-vidoseek-p1-02r-cost"
+COST_CALIBRATION_QUERY_LIMIT = 8
+COST_CALIBRATION_PAGE_LIMIT = 512
+COST_CALIBRATION_SCORE_BATCH_SIZE = 128
 HEX64 = re.compile(r"^[0-9a-f]{64}$")
+HEX40 = re.compile(r"^[0-9a-f]{40}$")
 
 
 def validate_protocol(protocol: dict[str, Any]) -> None:
-    """Validate approval for only the P1-02R CPU coverage audit."""
+    """Validate the post-audit P1-02R calibration-preparation contract."""
     if protocol.get("schema_version") != 1:
         raise ValueError("P1-02R schema_version must be 1")
     if protocol.get("protocol_id") != PROTOCOL_ID:
         raise ValueError(f"P1-02R protocol_id must be {PROTOCOL_ID}")
-    if protocol.get("status") != CPU_AUDIT_EXECUTION_STATUS:
-        raise ValueError(f"P1-02R status must be {CPU_AUDIT_EXECUTION_STATUS}")
+    status = protocol.get("status")
+    if status not in {CALIBRATION_PREPARATION_STATUS, CALIBRATION_EXECUTION_STATUS}:
+        raise ValueError("P1-02R status must be a supported cost-calibration state")
 
     frozen_parent = protocol.get("frozen_parent")
     if not isinstance(frozen_parent, dict) or frozen_parent.get("status") != "BLOCKED":
@@ -76,25 +85,100 @@ def validate_protocol(protocol: dict[str, Any]) -> None:
     if coverage_gate.get("maximum_queries_with_zero_relevant_candidates") != 0:
         raise ValueError("P1-02R must preserve the zero-uncovered-query gate")
 
+    audit = protocol.get("coverage_audit_result")
+    if not isinstance(audit, dict) or audit.get("status") != "PASS":
+        raise ValueError("P1-02R requires a recorded CPU coverage-audit PASS")
+    if audit.get("decision") != "p1_02r_coverage_gate_passes":
+        raise ValueError("P1-02R recorded coverage-audit decision must pass")
+    for field in ["artifact_sha256", "executed_protocol_config_sha256", "image_definition_sha256"]:
+        value = audit.get(field)
+        if not isinstance(value, str) or not HEX64.fullmatch(value):
+            raise ValueError(f"P1-02R coverage_audit_result.{field} must be a SHA-256")
+    if not isinstance(audit.get("source_commit"), str) or not HEX40.fullmatch(
+        audit["source_commit"]
+    ):
+        raise ValueError("P1-02R coverage_audit_result.source_commit must be a Git SHA")
+    if float(audit.get("coverage", -1.0)) < MINIMUM_COVERAGE:
+        raise ValueError("P1-02R recorded coverage must satisfy the frozen gate")
+    if audit.get("relevant_pairs") != audit.get("selected_relevant_pairs"):
+        raise ValueError("P1-02R recorded audit must cover every relevant pair")
+    if audit.get("missing_relevant_pairs") != 0:
+        raise ValueError("P1-02R recorded audit must have no missing relevant pairs")
+    if audit.get("queries_with_zero_relevant_candidates") != 0:
+        raise ValueError("P1-02R recorded audit must have no uncovered queries")
+    if audit.get("gpu_used") is not False:
+        raise ValueError("P1-02R coverage audit must remain CPU-only")
+
+    calibration = protocol.get("cost_calibration")
+    if not isinstance(calibration, dict):
+        raise ValueError("P1-02R requires a bounded cost_calibration mapping")
+    query_limit = calibration.get("query_limit")
+    page_limit = calibration.get("page_limit")
+    if query_limit != COST_CALIBRATION_QUERY_LIMIT:
+        raise ValueError("P1-02R calibration query limit must remain fixed at 8")
+    if page_limit != COST_CALIBRATION_PAGE_LIMIT:
+        raise ValueError("P1-02R calibration page limit must remain fixed at 512")
+    if calibration.get("candidate_pairs") != query_limit * page_limit:
+        raise ValueError("P1-02R calibration candidate_pairs must equal its bounded shape")
+    if calibration.get("visual_score_batch_size") != COST_CALIBRATION_SCORE_BATCH_SIZE:
+        raise ValueError("P1-02R must preserve visual score batch size 128")
+    if calibration.get("gpu_if_approved") != "L4":
+        raise ValueError("P1-02R bounded cost calibration must target L4")
+    if calibration.get("qrels_used") is not False:
+        raise ValueError("P1-02R cost-calibration sampling must not use qrels")
+    if calibration.get("membership_rule") != "every_sampled_page_for_every_sampled_query":
+        raise ValueError("P1-02R calibration must retain all-corpus membership on its sample")
+    expected_calibration_status = (
+        "prepared_not_executed"
+        if status == CALIBRATION_PREPARATION_STATUS
+        else "approved_for_execution"
+    )
+    if calibration.get("status") != expected_calibration_status:
+        raise ValueError(
+            "P1-02R cost_calibration.status must match the protocol authorization state"
+        )
+
     execution = protocol.get("execution")
-    if not isinstance(execution, dict) or execution.get("modal_allowed") is not True:
-        raise ValueError("P1-02R must authorize its CPU audit on Modal")
-    if execution.get("modal_execution_scope") != "cpu_audit_only":
-        raise ValueError("P1-02R Modal execution scope must be CPU audit only")
-    if execution.get("allowed_modal_function") != CPU_AUDIT_FUNCTION_NAME:
-        raise ValueError("P1-02R must authorize only its named CPU audit Function")
+    if not isinstance(execution, dict):
+        raise ValueError("P1-02R requires an execution mapping")
     if execution.get("modal_code_preparation_allowed") is not True:
         raise ValueError("P1-02R must authorize only local Modal code preparation")
     if execution.get("cpu_audit_entrypoint_preparation_allowed") is not True:
         raise ValueError("P1-02R must authorize CPU-audit entry-point preparation")
-    if execution.get("cpu_audit_execution_allowed") is not True:
-        raise ValueError("P1-02R CPU-audit execution must be approved")
-    if execution.get("gpu_execution_allowed") is not False:
-        raise ValueError("P1-02R GPU execution must remain disabled")
+    if execution.get("cost_calibration_entrypoint_preparation_allowed") is not True:
+        raise ValueError("P1-02R must authorize cost-calibration entry-point preparation")
+    if execution.get("prepared_modal_function") != COST_CALIBRATION_FUNCTION_NAME:
+        raise ValueError("P1-02R must name the prepared cost-calibration Function")
+    if execution.get("cpu_audit_execution_allowed") is not False:
+        raise ValueError("P1-02R completed CPU audit must no longer be executable")
     if execution.get("cpu_audit_execution_approval_required") is not False:
         raise ValueError("P1-02R CPU-audit approval must be recorded as satisfied")
-    if execution.get("gpu_execution_approval_required") is not True:
-        raise ValueError("P1-02R must still require explicit GPU approval")
+    if execution.get("prior_l4_approval_reused") is not False:
+        raise ValueError("P1-02R must not reuse the frozen P1-02 L4 approval")
+
+    if status == CALIBRATION_PREPARATION_STATUS:
+        expected = {
+            "modal_allowed": False,
+            "modal_execution_scope": "none",
+            "allowed_modal_function": None,
+            "cost_calibration_execution_allowed": False,
+            "gpu_execution_allowed": False,
+            "cost_calibration_execution_approval_required": True,
+            "gpu_execution_approval_required": True,
+        }
+    else:
+        expected = {
+            "modal_allowed": True,
+            "modal_execution_scope": "l4_cost_calibration_only",
+            "allowed_modal_function": COST_CALIBRATION_FUNCTION_NAME,
+            "cost_calibration_execution_allowed": True,
+            "gpu_execution_allowed": True,
+            "cost_calibration_execution_approval_required": False,
+            "gpu_execution_approval_required": False,
+        }
+    for field, value in expected.items():
+        if execution.get(field) != value:
+            raise ValueError(f"P1-02R execution.{field} must be {value!r} for status {status}")
 
 
 def load_protocol(path: Path) -> dict[str, Any]:
@@ -107,8 +191,13 @@ def load_protocol(path: Path) -> dict[str, Any]:
 
 def require_cpu_audit_execution_approval(protocol: dict[str, Any]) -> None:
     validate_protocol(protocol)
-    if protocol["execution"]["cpu_audit_execution_allowed"] is not True:
-        raise RuntimeError("P1-02R CPU-audit execution is not approved")
+    raise RuntimeError("P1-02R CPU audit is complete and no longer authorized")
+
+
+def require_cost_calibration_execution_approval(protocol: dict[str, Any]) -> None:
+    validate_protocol(protocol)
+    if protocol["status"] != CALIBRATION_EXECUTION_STATUS:
+        raise RuntimeError("P1-02R L4 cost-calibration execution is not approved")
 
 
 def _validated_ids(
@@ -193,6 +282,49 @@ def _file_sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
+def validate_recorded_cpu_audit(
+    protocol: dict[str, Any],
+    artifact_path: Path,
+) -> dict[str, Any]:
+    """Verify that the checked-in artifact is the exact approved CPU-audit PASS."""
+    validate_protocol(protocol)
+    evidence = protocol["coverage_audit_result"]
+    if not artifact_path.is_file():
+        raise FileNotFoundError(f"Missing P1-02R CPU-audit artifact: {artifact_path}")
+    if _file_sha256(artifact_path) != evidence["artifact_sha256"]:
+        raise RuntimeError("P1-02R CPU-audit artifact hash does not match the protocol")
+
+    artifact = json.loads(artifact_path.read_text(encoding="utf-8"))
+    expected = {
+        "status": "complete",
+        "decision": evidence["decision"],
+        "protocol_id": PROTOCOL_ID,
+        "function_call_id": evidence["function_call_id"],
+        "source_commit": evidence["source_commit"],
+        "protocol_config_sha256": evidence["executed_protocol_config_sha256"],
+        "image_definition_sha256": evidence["image_definition_sha256"],
+        "source_protocol_sha256": protocol["frozen_parent"]["extraction_protocol_sha256"],
+        "coverage": evidence["coverage"],
+        "relevant_pairs": evidence["relevant_pairs"],
+        "selected_relevant_pairs": evidence["selected_relevant_pairs"],
+        "missing_relevant_pairs": 0,
+        "queries_with_zero_relevant_candidates": 0,
+        "candidate_pairs": protocol["candidate_pool"]["expected_candidate_pairs"],
+        "gpu_used": False,
+        "candidate_generation_used_qrels": False,
+    }
+    mismatches = [
+        field for field, value in expected.items() if artifact.get(field) != value
+    ]
+    if mismatches:
+        raise RuntimeError(
+            "P1-02R CPU-audit artifact contract mismatch: " + ", ".join(mismatches)
+        )
+    if artifact.get("candidate_pool_contract", {}).get("method") != CANDIDATE_METHOD:
+        raise RuntimeError("P1-02R CPU-audit artifact candidate method is not all-corpus")
+    return artifact
+
+
 def audit_persisted_p1_02r_coverage(
     dataset_config: dict[str, Any],
     protocol: dict[str, Any],
@@ -273,4 +405,314 @@ def audit_persisted_p1_02r_coverage(
             "candidate_pairs": len(annotations.query_ids) * len(page_ids),
         },
         **coverage,
+    }
+
+
+def systematic_sample_indices(population_size: int, limit: int) -> np.ndarray:
+    """Select a deterministic spread over frozen order without scores or qrels."""
+    if not isinstance(population_size, int) or population_size <= 0:
+        raise ValueError("population_size must be a positive integer")
+    if not isinstance(limit, int) or limit <= 0 or limit > population_size:
+        raise ValueError("limit must be positive and no larger than population_size")
+    return (np.arange(limit, dtype=np.int64) * population_size) // limit
+
+
+def _query_records_without_qrels(payload: dict[str, Any]) -> list[dict[str, str]]:
+    examples = payload.get("examples")
+    if not isinstance(examples, list) or not examples:
+        raise ValueError("ViDoSeek annotations require a non-empty examples list")
+    records: list[dict[str, str]] = []
+    for example in examples:
+        if not isinstance(example, dict):
+            raise ValueError("Every ViDoSeek example must be an object")
+        query_id = str(example.get("uid", ""))
+        query_text = str(example.get("query", "")).strip()
+        meta = example.get("meta_info")
+        if not query_id or not query_text or not isinstance(meta, dict):
+            raise ValueError("ViDoSeek cost-calibration query metadata is incomplete")
+        records.append(
+            {
+                "query_id": query_id,
+                "query_text": query_text,
+                "source": (
+                    f"source_type={meta.get('source_type') or 'unknown'}|"
+                    f"query_type={meta.get('query_type') or 'unknown'}"
+                ),
+            }
+        )
+    records.sort(key=lambda row: row["query_id"])
+    if len({row["query_id"] for row in records}) != len(records):
+        raise ValueError("ViDoSeek cost-calibration query IDs must be unique")
+    return records
+
+
+def project_full_cost_from_calibration(
+    timings: dict[str, float],
+    sample_queries: int,
+    sample_pages: int,
+    full_queries: int,
+    full_pages: int,
+) -> dict[str, Any]:
+    """Produce a transparent linear GPU-time projection, never a result claim."""
+    required = [
+        "model_load_seconds",
+        "passage_encoding_seconds",
+        "query_encoding_seconds",
+        "visual_scoring_seconds",
+        "total_seconds",
+    ]
+    if any(name not in timings or float(timings[name]) < 0 for name in required):
+        raise ValueError("Calibration timings must contain non-negative required values")
+    if min(sample_queries, sample_pages, full_queries, full_pages) <= 0:
+        raise ValueError("Calibration and full dimensions must be positive")
+    if sample_queries > full_queries or sample_pages > full_pages:
+        raise ValueError("Calibration dimensions must not exceed full dimensions")
+    visual_seconds = float(timings["visual_scoring_seconds"])
+    if visual_seconds <= 0:
+        raise ValueError("visual_scoring_seconds must be positive for cost projection")
+
+    sample_pairs = sample_queries * sample_pages
+    full_pairs = full_queries * full_pages
+    components = {
+        "fixed_and_model_load_seconds": float(timings["model_load_seconds"]),
+        "passage_encoding_seconds": float(timings["passage_encoding_seconds"])
+        * full_pages
+        / sample_pages,
+        "query_encoding_seconds": float(timings["query_encoding_seconds"])
+        * full_queries
+        / sample_queries,
+        "visual_scoring_seconds": visual_seconds * full_pairs / sample_pairs,
+    }
+    measured_components = sum(float(timings[name]) for name in required[:-1])
+    unassigned_overhead = max(0.0, float(timings["total_seconds"]) - measured_components)
+    components["other_measured_overhead_seconds"] = unassigned_overhead
+    projected_seconds = sum(components.values())
+    return {
+        "method": "componentwise_linear_engineering_projection_v1",
+        "sample_candidate_pairs": sample_pairs,
+        "full_candidate_pairs": full_pairs,
+        "measured_visual_pairs_per_second": sample_pairs / visual_seconds,
+        "projected_components": components,
+        "projected_total_gpu_seconds": projected_seconds,
+        "projected_total_gpu_hours": projected_seconds / 3600.0,
+        "interpretation": "cost_review_input_only_not_a_full_extraction_result",
+        "excludes": [
+            "modal_queue_time",
+            "retries_or_oom_backoff",
+            "monetary_price_changes",
+            "bm25_bge_dse_cache_regeneration",
+            "full_output_materialization",
+        ],
+    }
+
+
+def run_bounded_cost_calibration(
+    dataset_config: dict[str, Any],
+    environment: dict[str, Any],
+    protocol: dict[str, Any],
+    audit_artifact_path: Path,
+    volume_root: Path,
+    source_commit: str,
+    image_definition_sha256: str,
+    protocol_config_sha256: str,
+    function_call_id: str,
+    gpu_metadata: dict[str, Any],
+    commit: Callable[[], None],
+) -> dict[str, Any]:
+    """Measure a fixed all-corpus sample using only the frozen ColQwen scorer."""
+    total_started = time.perf_counter()
+    require_cost_calibration_execution_approval(protocol)
+    audit = validate_recorded_cpu_audit(protocol, audit_artifact_path)
+    if not HEX64.fullmatch(protocol_config_sha256):
+        raise ValueError("protocol_config_sha256 must be 64 lowercase hex characters")
+
+    dataset = next(
+        item for item in dataset_config["datasets"] if item["key"] == DATASET_KEY
+    )
+    if dataset["id"] != protocol["dataset"]["id"]:
+        raise RuntimeError("P1-02R calibration dataset ID drifted")
+    if dataset["revision"] != protocol["dataset"]["revision"]:
+        raise RuntimeError("P1-02R calibration dataset revision drifted")
+    retriever_contract = {
+        name: environment[name] for name in protocol["retrievers"]["contract_fields"]
+    }
+    retriever_contract_sha256 = hashlib.sha256(
+        json.dumps(retriever_contract, sort_keys=True, separators=(",", ":")).encode("utf-8")
+    ).hexdigest()
+    if retriever_contract_sha256 != protocol["retrievers"]["contract_sha256"]:
+        raise RuntimeError("P1-02R frozen retriever contract drifted")
+
+    source_protocol_sha256 = protocol["frozen_parent"]["extraction_protocol_sha256"]
+    source_run_root = (
+        volume_root / "score_extraction" / DATASET_KEY / source_protocol_sha256 / "full"
+    )
+    preparation_path = source_run_root / "prepared_corpus" / "_PREPARED.json"
+    if _file_sha256(preparation_path) != audit["dataset_contract"]["preparation_marker_sha256"]:
+        raise RuntimeError("P1-02R prepared-corpus marker drifted after the CPU audit")
+    preparation = json.loads(preparation_path.read_text(encoding="utf-8"))
+    page_records = preparation.get("pages")
+    if preparation.get("status") != "complete" or not isinstance(page_records, list):
+        raise RuntimeError("P1-02R prepared corpus is incomplete")
+    if len(page_records) != protocol["dataset"]["expected_pages"]:
+        raise RuntimeError("P1-02R prepared page count drifted")
+
+    annotation_path = (
+        Path(dataset["local_dir"])
+        / dataset["discovery_extraction"]["annotation_file"]
+    )
+    if _file_sha256(annotation_path) != audit["dataset_contract"]["annotation_sha256"]:
+        raise RuntimeError("P1-02R annotation file drifted after the CPU audit")
+    queries = _query_records_without_qrels(
+        json.loads(annotation_path.read_text(encoding="utf-8"))
+    )
+    if len(queries) != protocol["dataset"]["expected_queries"]:
+        raise RuntimeError("P1-02R query count drifted")
+
+    calibration = protocol["cost_calibration"]
+    query_indices = systematic_sample_indices(len(queries), calibration["query_limit"])
+    page_indices = systematic_sample_indices(len(page_records), calibration["page_limit"])
+    selected_queries = [queries[int(index)] for index in query_indices]
+    selected_pages = [page_records[int(index)] for index in page_indices]
+    image_paths = [Path(record["image"]) for record in selected_pages]
+    if not all(path.is_file() for path in image_paths):
+        raise FileNotFoundError("P1-02R calibration sample has missing prepared page images")
+
+    run_root = (
+        volume_root
+        / "score_extraction"
+        / DATASET_KEY
+        / PROTOCOL_ID
+        / protocol_config_sha256
+        / "cost_calibration"
+        / function_call_id
+    )
+    cache_dir = run_root / "cache"
+    cache_dir.mkdir(parents=True, exist_ok=True)
+    ephemeral_hf_root = Path("/tmp/qpaf_hf_cache")
+    os.environ["HF_HOME"] = str(ephemeral_hf_root)
+    os.environ["HF_HUB_CACHE"] = str(ephemeral_hf_root / "hub")
+
+    import torch
+
+    from scripts.colqwen25_retriever import ColQwen25Retriever
+    from scripts.extract_vidore_baseline import (
+        _atomic_torch_save,
+        _clear_cuda,
+        _encode_with_backoff,
+    )
+    from scripts.vidoseek_dataset import LazyPageImages
+
+    timings: dict[str, float] = {}
+    batch_sizes: dict[str, Any] = {}
+    torch.cuda.reset_peak_memory_stats()
+    colqwen = environment["models"]["colqwen25"]
+    stage_started = time.perf_counter()
+    retriever = ColQwen25Retriever(
+        base_model_id=colqwen["base_id"],
+        base_revision=colqwen["base_revision"],
+        adapter_model_id=colqwen["id"],
+        adapter_revision=colqwen["revision"],
+        device="cuda",
+        num_workers=0,
+    )
+    timings["model_load_seconds"] = time.perf_counter() - stage_started
+
+    stage_started = time.perf_counter()
+    passage_embeddings = _encode_with_backoff(
+        "p1_02r_colqwen25_passages",
+        retriever.forward_passages,
+        LazyPageImages(image_paths),
+        cache_dir / "colqwen25_passage_embeddings.pt",
+        [2, 1],
+        batch_sizes,
+        commit,
+    )
+    timings["passage_encoding_seconds"] = time.perf_counter() - stage_started
+    stage_started = time.perf_counter()
+    query_embeddings = _encode_with_backoff(
+        "p1_02r_colqwen25_queries",
+        retriever.forward_queries,
+        [row["query_text"] for row in selected_queries],
+        cache_dir / "colqwen25_query_embeddings.pt",
+        [8, 4, 2],
+        batch_sizes,
+        commit,
+    )
+    timings["query_encoding_seconds"] = time.perf_counter() - stage_started
+
+    stage_started = time.perf_counter()
+    score_rows = []
+    for query_embedding in query_embeddings:
+        scores = retriever.get_scores(
+            [query_embedding],
+            passage_embeddings,
+            batch_size=calibration["visual_score_batch_size"],
+        )[0].float().cpu()
+        if len(scores) != len(selected_pages) or not bool(torch.isfinite(scores).all()):
+            raise RuntimeError("P1-02R bounded calibration produced invalid visual scores")
+        score_rows.append(scores)
+    timings["visual_scoring_seconds"] = time.perf_counter() - stage_started
+    candidate_scores = torch.stack(score_rows)
+    score_path = cache_dir / "colqwen25_all_corpus_sample_scores.pt"
+    _atomic_torch_save(candidate_scores, score_path)
+    commit()
+    peak_memory_allocated_bytes = int(torch.cuda.max_memory_allocated())
+    del retriever, passage_embeddings, query_embeddings, candidate_scores, score_rows
+    _clear_cuda()
+    timings["total_seconds"] = time.perf_counter() - total_started
+
+    projection = project_full_cost_from_calibration(
+        timings,
+        sample_queries=len(selected_queries),
+        sample_pages=len(selected_pages),
+        full_queries=protocol["dataset"]["expected_queries"],
+        full_pages=protocol["dataset"]["expected_pages"],
+    )
+    return {
+        "schema_version": 1,
+        "status": "complete",
+        "calibration_only": True,
+        "full_extraction_started": False,
+        "decision": "requires_human_cost_review",
+        "protocol_id": PROTOCOL_ID,
+        "protocol_status": protocol["status"],
+        "source_commit": source_commit,
+        "image_definition_sha256": image_definition_sha256,
+        "protocol_config_sha256": protocol_config_sha256,
+        "function_call_id": function_call_id,
+        "source_protocol_sha256": source_protocol_sha256,
+        "source_run_root": str(source_run_root),
+        "dataset": {
+            "id": dataset["id"],
+            "revision": dataset["revision"],
+            "full_queries": protocol["dataset"]["expected_queries"],
+            "full_pages": protocol["dataset"]["expected_pages"],
+            "sample_queries": len(selected_queries),
+            "sample_pages": len(selected_pages),
+        },
+        "sample": {
+            "selection": calibration["sample_selection"],
+            "query_ids": [row["query_id"] for row in selected_queries],
+            "page_ids": [str(row["page_id"]) for row in selected_pages],
+        },
+        "candidate_pool": {
+            "method": CANDIDATE_METHOD,
+            "membership_rule": calibration["membership_rule"],
+            "candidate_pairs": len(selected_queries) * len(selected_pages),
+            "visual_score_batch_size": calibration["visual_score_batch_size"],
+            "qrels_used": False,
+        },
+        "retrievers_changed": False,
+        "retriever_contract_sha256": retriever_contract_sha256,
+        "batch_sizes": batch_sizes,
+        "timings": timings,
+        "projection": projection,
+        "calibration_score_cache": {
+            "path": str(score_path),
+            "sha256": _file_sha256(score_path),
+            "shape": [len(selected_queries), len(selected_pages)],
+            "scope": "calibration_sample_only_not_full_scores",
+        },
+        "peak_memory_allocated_bytes": peak_memory_allocated_bytes,
+        **gpu_metadata,
     }
