@@ -18,13 +18,21 @@ ROOT = Path(__file__).resolve().parents[1]
 PROTOCOL_PATH = ROOT / "configs" / "vidoseek_p1_02r.yaml"
 AUDIT_PATH = ROOT / "artifacts" / "vidoseek_p1_02r_coverage_audit.json"
 CALIBRATION_PATH = ROOT / "artifacts" / "vidoseek_p1_02r_l4_cost_calibration.json"
+RECEIPT_PATH = ROOT / "artifacts" / "vidoseek_p1_02r_score_extraction_full.json"
+MANIFEST_PATH = (
+    ROOT / "artifacts" / "vidoseek_p1_02r_import" / "extraction_manifest.json"
+)
+SUCCESS_MARKER_PATH = (
+    ROOT / "artifacts" / "vidoseek_p1_02r_import" / "_EXTRACTION_SUCCESS.json"
+)
+INTEGRITY_REVIEW_PATH = ROOT / "artifacts" / "vidoseek_p1_02r_integrity_review.json"
 
 
-def test_protocol_authorizes_only_one_human_run_chunked_full_extraction() -> None:
+def test_protocol_records_consumed_human_run_and_closes_execution() -> None:
     protocol = vidoseek_p1_02r.load_protocol(PROTOCOL_PATH)
 
     assert protocol["classification"] == "post_hoc"
-    assert protocol["status"] == "approved_l4_chunked_full_extraction_execution_only"
+    assert protocol["status"] == "full_extraction_integrity_verified"
     assert protocol["authorization"]["local_integration"] == {
         "scope": "local_integration_and_cpu_audit_preparation_only",
         "approved_by": "user",
@@ -118,7 +126,7 @@ def test_protocol_authorizes_only_one_human_run_chunked_full_extraction() -> Non
         CALIBRATION_PATH.read_bytes()
     ).hexdigest()
     assert protocol["cost_calibration_result"]["full_extraction_started"] is False
-    assert protocol["full_extraction"]["status"] == "approved_for_execution"
+    assert protocol["full_extraction"]["status"] == "complete_integrity_verified"
     assert protocol["full_extraction"]["function_name"] == (
         "extract-vidoseek-p1-02r-scores"
     )
@@ -127,13 +135,30 @@ def test_protocol_authorizes_only_one_human_run_chunked_full_extraction() -> Non
     assert protocol["full_extraction"]["expected_query_chunks"] == 143
     assert protocol["full_extraction"]["expected_page_chunks"] == 11
     assert protocol["full_extraction"]["expected_candidate_pairs"] == 1_142 * 5_385
-    assert protocol["execution"]["modal_allowed"] is True
-    assert protocol["execution"]["modal_execution_scope"] == (
-        "l4_chunked_full_extraction_only"
-    )
-    assert protocol["execution"]["allowed_modal_function"] == (
-        "extract-vidoseek-p1-02r-scores"
-    )
+    result = protocol["full_extraction_result"]
+    assert result["status"] == "PASS"
+    assert result["decision"] == "p1_02r_full_extraction_integrity_verified"
+    assert result["function_call_id"] == "fc-01M19RE4SXMJ54M15049QSMXKA"
+    assert result["source_commit"] == "c7d84aaee0e9caab691a11bba377f4a87c6e059c"
+    assert result["authorized_invocations"] == result["consumed_invocations"] == 1
+    assert result["remaining_authorized_invocations"] == 0
+    assert result["automatic_retry_allowed"] is False
+    assert result["oracle_analysis_run"] is False
+    assert result["candidate_pairs"] == 1_142 * 5_385
+    assert result["coverage"] == 1.0
+    assert result["queries_with_zero_relevant_candidates"] == 0
+    assert result["full_score_produced"] is False
+    assert result["receipt_sha256"] == hashlib.sha256(RECEIPT_PATH.read_bytes()).hexdigest()
+    assert result["manifest_sha256"] == hashlib.sha256(MANIFEST_PATH.read_bytes()).hexdigest()
+    assert result["success_marker_sha256"] == hashlib.sha256(
+        SUCCESS_MARKER_PATH.read_bytes()
+    ).hexdigest()
+    assert result["integrity_review_sha256"] == hashlib.sha256(
+        INTEGRITY_REVIEW_PATH.read_bytes()
+    ).hexdigest()
+    assert protocol["execution"]["modal_allowed"] is False
+    assert protocol["execution"]["modal_execution_scope"] == "none"
+    assert protocol["execution"]["allowed_modal_function"] is None
     assert protocol["execution"]["prepared_modal_function"] == (
         "extract-vidoseek-p1-02r-scores"
     )
@@ -143,15 +168,15 @@ def test_protocol_authorizes_only_one_human_run_chunked_full_extraction() -> Non
     assert protocol["execution"]["full_extraction_entrypoint_preparation_allowed"] is True
     assert protocol["execution"]["cpu_audit_execution_allowed"] is False
     assert protocol["execution"]["cost_calibration_execution_allowed"] is False
-    assert protocol["execution"]["full_extraction_execution_allowed"] is True
-    assert protocol["execution"]["gpu_execution_allowed"] is True
+    assert protocol["execution"]["full_extraction_execution_allowed"] is False
+    assert protocol["execution"]["gpu_execution_allowed"] is False
     assert protocol["execution"]["prior_l4_approval_reused"] is False
     assert protocol["execution"]["cpu_audit_execution_approval_required"] is False
     assert protocol["execution"]["cost_calibration_execution_approval_required"] is False
-    assert protocol["execution"]["full_extraction_execution_approval_required"] is False
-    assert protocol["execution"]["gpu_execution_approval_required"] is False
+    assert protocol["execution"]["full_extraction_execution_approval_required"] is True
+    assert protocol["execution"]["gpu_execution_approval_required"] is True
     assert protocol["execution"]["next_gate"] == (
-        "completed_p1_02r_chunked_full_extraction_and_integrity_review"
+        "explicit_p1_02r_post_hoc_oracle_protocol_decision"
     )
 
 
@@ -300,6 +325,9 @@ def test_persisted_audit_uses_prepared_page_ids_without_score_caches(tmp_path: P
     protocol["full_extraction"]["expected_query_chunks"] = 1
     protocol["full_extraction"]["expected_page_chunks"] = 1
     protocol["full_extraction"]["expected_candidate_pairs"] = 6
+    protocol["full_extraction_result"]["queries"] = 2
+    protocol["full_extraction_result"]["pages"] = 3
+    protocol["full_extraction_result"]["candidate_pairs"] = 6
 
     result = vidoseek_p1_02r.audit_persisted_p1_02r_coverage(
         dataset_config,
@@ -324,14 +352,15 @@ def test_persisted_audit_uses_prepared_page_ids_without_score_caches(tmp_path: P
     assert not (run_root / "cache").exists()
 
 
-def test_completed_stages_are_blocked_and_full_extraction_is_approved() -> None:
+def test_completed_stages_are_blocked_including_full_extraction() -> None:
     protocol = vidoseek_p1_02r.load_protocol(PROTOCOL_PATH)
 
     with pytest.raises(RuntimeError, match="CPU audit is complete"):
         vidoseek_p1_02r.require_cpu_audit_execution_approval(protocol)
     with pytest.raises(RuntimeError, match="cost calibration is complete"):
         vidoseek_p1_02r.require_cost_calibration_execution_approval(protocol)
-    vidoseek_p1_02r.require_full_extraction_execution_approval(protocol)
+    with pytest.raises(RuntimeError, match="full extraction is complete"):
+        vidoseek_p1_02r.require_full_extraction_execution_approval(protocol)
 
 
 def test_full_extraction_guard_rejects_drifted_approval_provenance() -> None:
@@ -354,12 +383,35 @@ def test_persisted_audit_rejects_a_non_parent_protocol_path(tmp_path: Path) -> N
         )
 
 
-def test_execution_protocol_rejects_a_disabled_gpu_flag() -> None:
+def test_completed_protocol_rejects_a_reopened_gpu_flag() -> None:
     protocol = vidoseek_p1_02r.load_protocol(PROTOCOL_PATH)
-    protocol["execution"]["gpu_execution_allowed"] = False
+    protocol["execution"]["gpu_execution_allowed"] = True
 
     with pytest.raises(ValueError, match="execution.gpu_execution_allowed"):
         vidoseek_p1_02r.validate_protocol(protocol)
+
+
+def test_consumed_historical_approval_cannot_be_reopened() -> None:
+    protocol = copy.deepcopy(vidoseek_p1_02r.load_protocol(PROTOCOL_PATH))
+    protocol["status"] = vidoseek_p1_02r.FULL_EXTRACTION_EXECUTION_STATUS
+    protocol["full_extraction"]["status"] = "approved_for_execution"
+    del protocol["full_extraction_result"]
+    protocol["execution"].update(
+        {
+            "modal_allowed": True,
+            "modal_execution_scope": "l4_chunked_full_extraction_only",
+            "allowed_modal_function": "extract-vidoseek-p1-02r-scores",
+            "full_extraction_execution_allowed": True,
+            "gpu_execution_allowed": True,
+            "cost_review_required": False,
+            "full_extraction_execution_approval_required": False,
+            "gpu_execution_approval_required": False,
+            "next_gate": "completed_p1_02r_chunked_full_extraction_and_integrity_review",
+        }
+    )
+
+    with pytest.raises(ValueError, match="approval was consumed"):
+        vidoseek_p1_02r.require_full_extraction_execution_approval(protocol)
 
 
 def test_recorded_cpu_audit_artifact_matches_every_frozen_gate() -> None:
@@ -391,6 +443,25 @@ def test_recorded_l4_calibration_is_exact_and_remains_non_result_evidence() -> N
     assert artifact["peak_memory_allocated_bytes"] == 8_288_322_048
     assert artifact["projection"]["projected_total_gpu_seconds"] == 7860.383886004963
     assert artifact["full_extraction_started"] is False
+
+
+def test_recorded_full_extraction_integrity_matches_small_committed_evidence() -> None:
+    protocol = vidoseek_p1_02r.load_protocol(PROTOCOL_PATH)
+
+    review = vidoseek_p1_02r.validate_recorded_full_extraction_integrity(
+        protocol,
+        RECEIPT_PATH,
+        MANIFEST_PATH,
+        SUCCESS_MARKER_PATH,
+        INTEGRITY_REVIEW_PATH,
+    )
+
+    assert review["status"] == "PASS"
+    assert review["contract"]["candidate_pairs"] == 1_142 * 5_385
+    assert review["contract"]["coverage"] == 1.0
+    assert review["contract"]["queries_with_zero_relevant_candidates"] == 0
+    assert review["boundaries"]["remaining_authorized_invocations"] == 0
+    assert review["boundaries"]["p1_03_authorized"] is False
 
 
 def test_cost_calibration_sampling_is_systematic_bounded_and_qrel_free() -> None:

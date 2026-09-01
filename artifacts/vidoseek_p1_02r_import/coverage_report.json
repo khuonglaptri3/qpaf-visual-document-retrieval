@@ -1,0 +1,20 @@
+{
+  "candidate_generation_used_qrels": false,
+  "candidate_pairs": 6149670,
+  "candidate_pool_method": "all_corpus",
+  "candidate_provenance": "all_corpus_p1_02r_v1",
+  "corpus_pages": 5385,
+  "coverage": 1.0,
+  "dataset": "Qiuchen-Wang/ViDoSeek",
+  "decision": "p1_02r_coverage_gate_passes",
+  "mean_candidates": 5385.0,
+  "minimum_coverage": 0.95,
+  "missing_relevant_pairs": 0,
+  "protocol_id": "vidoseek_p1_02r_all_corpus_v1",
+  "qrels_use": "post_candidate_coverage_audit_and_evaluation_only",
+  "queries": 1142,
+  "queries_with_zero_relevant_candidates": 0,
+  "relevant_pairs": 1142,
+  "selected_relevant_pairs": 1142,
+  "zero_relevant_query_ids": []
+}

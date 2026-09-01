@@ -1,5 +1,15 @@
 # Experiment protocol changelog
 
+## 2026-08-31 - P1-02R full extraction integrity verified and execution closed
+
+- Status: `full_extraction_integrity_verified`; the one authorized human-run invocation completed, was consumed, and has zero remaining authorized invocations. The current checkout closes Modal, full-extraction, and GPU execution guards; any retry or second invocation requires new approval.
+- Execution provenance: Function call `fc-01M19RE4SXMJ54M15049QSMXKA`, source commit `c7d84aaee0e9caab691a11bba377f4a87c6e059c`, executed protocol status `approved_l4_chunked_full_extraction_execution_only`, and executed protocol-config SHA-256 `cfbfcb24ae477a93b3d6a65b40022d688b8172babb2e8080f82363f73fdd8be2`.
+- Imported evidence: receipt SHA-256 `467e8c32e468f065306539d0a22d161431c9af411a0e1475fc9fb297c8a88c87`, extraction-manifest SHA-256 `7600d3483d526710d2613a37f030daec71596b20ed73d9cebb3b1a1ad507b7b8`, and success-marker SHA-256 `ce95947b5a160847208dacf90bd6cc71a804007a2fc8ddd1356b1bee5101dd2b`.
+- Measured run: 1,142 queries x 5,385 pages = 6,149,670 pairs per score table in 143 query chunks and 11 page chunks, fixed query/page/visual limits 8/512/128, 7,818.803704091 seconds total on NVIDIA L4 with 22.034 GiB reported VRAM, and `full_score_produced=false` by protocol.
+- Integrity result: all four payload byte hashes and both score-table logical-content hashes match the manifest; streamed local checks passed for exact schemas and counts, unique aligned keys, finite and bounded values, exact min-max normalization, branch-rank permutations with page-ID tie-breaking, candidate provenance, coverage 1.0, zero missing relevant pairs, and zero uncovered queries.
+- Versioned evidence: commit the receipt, manifest, success marker, coverage report, 1,142-row candidate audit, and integrity review. The 82,665,894-byte raw-score and 248,445,561-byte retrieval-score Parquet payloads remain local and hash-addressed rather than stored in Git.
+- Scientific boundary: this is a verified post-hoc recovery score bundle, not a frozen P1-02 PASS, oracle analysis, learned result, HEAVEN result, deployable QPAF result, or P1-03 authorization. Frozen P1-02 and P1-03 remain blocked pending an explicit task-graph decision.
+
 ## 2026-08-30 - P1-02R one human-run L4 chunked full-extraction approval
 
 - Status: `approved_l4_chunked_full_extraction_execution_only`; the run is approved but not executed.

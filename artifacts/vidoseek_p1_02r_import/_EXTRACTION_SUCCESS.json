@@ -1,0 +1,11 @@
+{
+  "artifact_count": 4,
+  "candidate_pairs": 6149670,
+  "full_score_produced": false,
+  "manifest_sha256": "7600d3483d526710d2613a37f030daec71596b20ed73d9cebb3b1a1ad507b7b8",
+  "protocol_config_sha256": "cfbfcb24ae477a93b3d6a65b40022d688b8172babb2e8080f82363f73fdd8be2",
+  "protocol_id": "vidoseek_p1_02r_all_corpus_v1",
+  "schema_version": 1,
+  "scope": "full",
+  "status": "complete"
+}

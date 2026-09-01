@@ -20,6 +20,7 @@ FULL_EXTRACTION_PREPARATION_STATUS = (
     "l4_cost_calibration_recorded_chunked_full_extraction_prepared"
 )
 FULL_EXTRACTION_EXECUTION_STATUS = "approved_l4_chunked_full_extraction_execution_only"
+FULL_EXTRACTION_COMPLETED_STATUS = "full_extraction_integrity_verified"
 PROTOCOL_ID = "vidoseek_p1_02r_all_corpus_v1"
 CANDIDATE_METHOD = "all_corpus"
 DATASET_KEY = "vidoseek"
@@ -44,7 +45,14 @@ def validate_protocol(protocol: dict[str, Any]) -> None:
     if protocol.get("protocol_id") != PROTOCOL_ID:
         raise ValueError(f"P1-02R protocol_id must be {PROTOCOL_ID}")
     status = protocol.get("status")
-    if status not in {FULL_EXTRACTION_PREPARATION_STATUS, FULL_EXTRACTION_EXECUTION_STATUS}:
+    if status == FULL_EXTRACTION_EXECUTION_STATUS:
+        raise ValueError(
+            "P1-02R historical full-extraction approval was consumed and cannot be reopened"
+        )
+    if status not in {
+        FULL_EXTRACTION_PREPARATION_STATUS,
+        FULL_EXTRACTION_COMPLETED_STATUS,
+    }:
         raise ValueError("P1-02R status must be a supported full-extraction state")
 
     authorization = protocol.get("authorization")
@@ -218,11 +226,10 @@ def validate_protocol(protocol: dict[str, Any]) -> None:
     full_extraction = protocol.get("full_extraction")
     if not isinstance(full_extraction, dict):
         raise ValueError("P1-02R requires a chunked full_extraction mapping")
-    expected_full_status = (
-        "prepared_not_executed"
-        if status == FULL_EXTRACTION_PREPARATION_STATUS
-        else "approved_for_execution"
-    )
+    expected_full_status = {
+        FULL_EXTRACTION_PREPARATION_STATUS: "prepared_not_executed",
+        FULL_EXTRACTION_COMPLETED_STATUS: "complete_integrity_verified",
+    }[status]
     if full_extraction.get("status") != expected_full_status:
         raise ValueError("P1-02R full_extraction.status does not match protocol authorization")
     if full_extraction.get("function_name") != FULL_EXTRACTION_FUNCTION_NAME:
@@ -272,6 +279,90 @@ def validate_protocol(protocol: dict[str, Any]) -> None:
     ):
         raise ValueError("P1-02R full extraction must preserve the qrels boundary")
 
+    full_result = protocol.get("full_extraction_result")
+    if status != FULL_EXTRACTION_COMPLETED_STATUS:
+        if full_result is not None:
+            raise ValueError(
+                "P1-02R cannot record a full result before integrity verification"
+            )
+    else:
+        if not isinstance(full_result, dict):
+            raise ValueError(
+                "P1-02R completed state requires a full_extraction_result mapping"
+            )
+        expected_result = {
+            "status": "PASS",
+            "decision": "p1_02r_full_extraction_integrity_verified",
+            "completed_on": "2026-08-31",
+            "executed_protocol_status": FULL_EXTRACTION_EXECUTION_STATUS,
+            "receipt_path": full_extraction["output_artifact_path"],
+            "manifest_path": "artifacts/vidoseek_p1_02r_import/extraction_manifest.json",
+            "success_marker_path": (
+                "artifacts/vidoseek_p1_02r_import/_EXTRACTION_SUCCESS.json"
+            ),
+            "integrity_review_path": (
+                "artifacts/vidoseek_p1_02r_integrity_review.json"
+            ),
+            "retriever_contract_sha256": retrievers["contract_sha256"],
+            "authorized_invocations": 1,
+            "consumed_invocations": 1,
+            "remaining_authorized_invocations": 0,
+            "automatic_retry_allowed": False,
+            "oracle_analysis_run": False,
+            "task_graph_decision_required": True,
+            "artifact_count": 4,
+            "queries": queries,
+            "pages": pages,
+            "candidate_pairs": queries * pages,
+            "coverage": 1.0,
+            "missing_relevant_pairs": 0,
+            "queries_with_zero_relevant_candidates": 0,
+            "full_score_produced": False,
+            "actual_gpu": "NVIDIA L4",
+            "actual_gpu_vram_gib": 22.034,
+            "total_seconds": 7818.803704091,
+            "result_scope": (
+                "verified_score_bundle_not_frozen_p1_02_not_oracle_result"
+            ),
+        }
+        mismatches = [
+            field
+            for field, value in expected_result.items()
+            if full_result.get(field) != value
+        ]
+        if mismatches:
+            raise ValueError(
+                "P1-02R full_extraction_result contract mismatch: "
+                + ", ".join(mismatches)
+            )
+        for field in [
+            "executed_protocol_config_sha256",
+            "receipt_sha256",
+            "manifest_sha256",
+            "success_marker_sha256",
+            "integrity_review_sha256",
+            "image_definition_sha256",
+            "extractor_sha256",
+        ]:
+            value = full_result.get(field)
+            if not isinstance(value, str) or not HEX64.fullmatch(value):
+                raise ValueError(
+                    f"P1-02R full_extraction_result.{field} must be a SHA-256"
+                )
+        if not isinstance(full_result.get("source_commit"), str) or not HEX40.fullmatch(
+            full_result["source_commit"]
+        ):
+            raise ValueError(
+                "P1-02R full_extraction_result.source_commit must be a Git SHA"
+            )
+        function_call_id = full_result.get("function_call_id")
+        if not isinstance(function_call_id, str) or not function_call_id.startswith(
+            "fc-"
+        ):
+            raise ValueError(
+                "P1-02R full_extraction_result requires a Function call ID"
+            )
+
     execution = protocol.get("execution")
     if not isinstance(execution, dict):
         raise ValueError("P1-02R requires an execution mapping")
@@ -310,15 +401,15 @@ def validate_protocol(protocol: dict[str, Any]) -> None:
         }
     else:
         expected = {
-            "modal_allowed": True,
-            "modal_execution_scope": "l4_chunked_full_extraction_only",
-            "allowed_modal_function": FULL_EXTRACTION_FUNCTION_NAME,
-            "full_extraction_execution_allowed": True,
-            "gpu_execution_allowed": True,
+            "modal_allowed": False,
+            "modal_execution_scope": "none",
+            "allowed_modal_function": None,
+            "full_extraction_execution_allowed": False,
+            "gpu_execution_allowed": False,
             "cost_review_required": False,
-            "full_extraction_execution_approval_required": False,
-            "gpu_execution_approval_required": False,
-            "next_gate": "completed_p1_02r_chunked_full_extraction_and_integrity_review",
+            "full_extraction_execution_approval_required": True,
+            "gpu_execution_approval_required": True,
+            "next_gate": "explicit_p1_02r_post_hoc_oracle_protocol_decision",
         }
     for field, value in expected.items():
         if execution.get(field) != value:
@@ -345,6 +436,10 @@ def require_cost_calibration_execution_approval(protocol: dict[str, Any]) -> Non
 
 def require_full_extraction_execution_approval(protocol: dict[str, Any]) -> None:
     validate_protocol(protocol)
+    if protocol["status"] == FULL_EXTRACTION_COMPLETED_STATUS:
+        raise RuntimeError(
+            "P1-02R chunked full extraction is complete and no longer authorized"
+        )
     if protocol["status"] != FULL_EXTRACTION_EXECUTION_STATUS:
         raise RuntimeError("P1-02R chunked full-extraction execution is not approved")
 
@@ -557,6 +652,140 @@ def validate_recorded_cost_calibration(
     if artifact.get("cuda_available") is not True:
         raise RuntimeError("P1-02R recorded L4 calibration must report CUDA")
     return artifact
+
+
+def validate_recorded_full_extraction_integrity(
+    protocol: dict[str, Any],
+    receipt_path: Path,
+    manifest_path: Path,
+    success_marker_path: Path,
+    review_path: Path,
+) -> dict[str, Any]:
+    """Verify the small committed evidence for the completed post-hoc score bundle."""
+    validate_protocol(protocol)
+    if protocol["status"] != FULL_EXTRACTION_COMPLETED_STATUS:
+        raise RuntimeError(
+            "P1-02R full-extraction integrity is not recorded as complete"
+        )
+
+    result = protocol["full_extraction_result"]
+    records = {
+        "receipt": (receipt_path, "receipt_sha256"),
+        "manifest": (manifest_path, "manifest_sha256"),
+        "success marker": (success_marker_path, "success_marker_sha256"),
+        "integrity review": (review_path, "integrity_review_sha256"),
+    }
+    loaded: dict[str, dict[str, Any]] = {}
+    for label, (path, hash_field) in records.items():
+        if not path.is_file():
+            raise FileNotFoundError(f"Missing P1-02R {label}: {path}")
+        if _file_sha256(path) != result[hash_field]:
+            raise RuntimeError(f"P1-02R {label} hash does not match the protocol")
+        loaded[label] = json.loads(path.read_text(encoding="utf-8"))
+
+    receipt = loaded["receipt"]
+    manifest = loaded["manifest"]
+    success = loaded["success marker"]
+    review = loaded["integrity review"]
+    shared = {
+        "protocol_id": PROTOCOL_ID,
+        "candidate_pairs": result["candidate_pairs"],
+        "full_score_produced": False,
+    }
+    for label, record in [("receipt", receipt), ("success marker", success)]:
+        expected = {**shared, "status": "complete", "scope": "full"}
+        mismatches = [
+            field for field, value in expected.items() if record.get(field) != value
+        ]
+        if mismatches:
+            raise RuntimeError(
+                f"P1-02R {label} contract mismatch: " + ", ".join(mismatches)
+            )
+    if receipt.get("function_call_id") != result["function_call_id"]:
+        raise RuntimeError("P1-02R receipt Function call ID mismatch")
+    if receipt.get("coverage") != result["coverage"]:
+        raise RuntimeError("P1-02R receipt coverage mismatch")
+    if receipt.get("queries_with_zero_relevant_candidates") != 0:
+        raise RuntimeError("P1-02R receipt violates the zero-uncovered-query gate")
+    if receipt.get("manifest_sha256") != result["manifest_sha256"]:
+        raise RuntimeError("P1-02R receipt manifest hash mismatch")
+    if success.get("manifest_sha256") != result["manifest_sha256"]:
+        raise RuntimeError("P1-02R success-marker manifest hash mismatch")
+    if (
+        receipt.get("protocol_config_sha256")
+        != result["executed_protocol_config_sha256"]
+    ):
+        raise RuntimeError("P1-02R receipt executed protocol hash mismatch")
+    if (
+        success.get("protocol_config_sha256")
+        != result["executed_protocol_config_sha256"]
+    ):
+        raise RuntimeError("P1-02R success-marker executed protocol hash mismatch")
+
+    expected_manifest = {
+        "status": "PASS",
+        "scope": "full",
+        "protocol_id": PROTOCOL_ID,
+        "protocol_status": result["executed_protocol_status"],
+        "protocol_config_sha256": result["executed_protocol_config_sha256"],
+        "source_commit": result["source_commit"],
+        "function_call_id": result["function_call_id"],
+        "image_definition_sha256": result["image_definition_sha256"],
+        "extractor_sha256": result["extractor_sha256"],
+        "retriever_contract_sha256": result["retriever_contract_sha256"],
+        "retrievers_changed": False,
+        "full_score_status": "not_produced_by_human_approved_protocol",
+    }
+    mismatches = [
+        field
+        for field, value in expected_manifest.items()
+        if manifest.get(field) != value
+    ]
+    if mismatches:
+        raise RuntimeError(
+            "P1-02R extraction manifest contract mismatch: " + ", ".join(mismatches)
+        )
+    if manifest.get("dataset", {}).get("candidate_pairs") != result["candidate_pairs"]:
+        raise RuntimeError("P1-02R extraction manifest pair count mismatch")
+    if manifest.get("coverage", {}).get("coverage") != 1.0:
+        raise RuntimeError("P1-02R extraction manifest coverage mismatch")
+    if manifest.get("coverage", {}).get("queries_with_zero_relevant_candidates") != 0:
+        raise RuntimeError("P1-02R extraction manifest has uncovered queries")
+    if (
+        manifest.get("candidate_pool", {}).get("qrels_used_for_construction")
+        is not False
+    ):
+        raise RuntimeError("P1-02R extraction manifest violates the qrels boundary")
+    if set(manifest.get("artifacts", {})) != {
+        "candidate_raw_scores.parquet",
+        "retrieval_scores.parquet",
+        "candidate_audit.parquet",
+        "coverage_report.json",
+    }:
+        raise RuntimeError("P1-02R extraction manifest artifact set mismatch")
+
+    if review.get("status") != "PASS" or review.get("decision") != result["decision"]:
+        raise RuntimeError("P1-02R integrity-review decision mismatch")
+    if review.get("scientific_scope") != result["result_scope"]:
+        raise RuntimeError(
+            "P1-02R integrity review was relabeled as an experimental result"
+        )
+    if not review.get("checks") or not all(review["checks"].values()):
+        raise RuntimeError("P1-02R integrity review contains a failed check")
+    if review.get("boundaries", {}).get("consumed_invocations") != 1:
+        raise RuntimeError(
+            "P1-02R integrity review must consume the one approved invocation"
+        )
+    if review.get("boundaries", {}).get("remaining_authorized_invocations") != 0:
+        raise RuntimeError("P1-02R integrity review must close further invocations")
+    if review.get("boundaries", {}).get("p1_03_authorized") is not False:
+        raise RuntimeError("P1-02R integrity review must not authorize P1-03")
+    for name, artifact in manifest["artifacts"].items():
+        recorded = review.get("payloads", {}).get(name, {})
+        for field in ["bytes", "sha256", "rows", "content_sha256"]:
+            if field in artifact and recorded.get(field) != artifact[field]:
+                raise RuntimeError(f"P1-02R integrity-review {name} {field} mismatch")
+    return review
 
 
 def audit_persisted_p1_02r_coverage(

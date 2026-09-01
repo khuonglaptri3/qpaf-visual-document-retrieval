@@ -1,0 +1,122 @@
+{
+  "boundaries": {
+    "automatic_retry_allowed": false,
+    "authorized_invocations": 1,
+    "consumed_invocations": 1,
+    "frozen_p1_02_status": "BLOCKED",
+    "learned_qpaf_result_produced": false,
+    "modal_execution_allowed_after_review": false,
+    "oracle_analysis_performed": false,
+    "p1_03_authorized": false,
+    "remaining_authorized_invocations": 0,
+    "task_graph_decision_required": true
+  },
+  "checks": {
+    "all_corpus_membership_exact": true,
+    "artifact_set_exact": true,
+    "branch_rank_permutations_and_page_id_ties_exact": true,
+    "byte_hashes_match_manifest": true,
+    "candidate_audit_matches_score_rows": true,
+    "candidate_provenance_exact": true,
+    "common_raw_and_normalized_values_match": true,
+    "content_hashes_match_manifest": true,
+    "coverage_report_matches_manifest": true,
+    "dataset_and_retriever_provenance_match": true,
+    "execution_limits_match": true,
+    "keys_unique_and_aligned": true,
+    "manifest_hash_matches_receipt_and_success_marker": true,
+    "normalization_matches_raw_scores": true,
+    "normalized_scores_bounded": true,
+    "numeric_values_finite": true,
+    "query_and_page_counts_exact": true,
+    "receipt_manifest_and_success_fields_agree": true,
+    "source_commit_matches_approved_checkout": true,
+    "zero_uncovered_query_gate_passes": true
+  },
+  "classification": "post_hoc",
+  "contract": {
+    "actual_gpu": "NVIDIA L4",
+    "actual_gpu_vram_gib": 22.034,
+    "artifact_count": 4,
+    "candidate_pairs": 6149670,
+    "candidate_pool_method": "all_corpus",
+    "coverage": 1.0,
+    "full_score_produced": false,
+    "missing_relevant_pairs": 0,
+    "page_chunk_size": 512,
+    "page_chunks": 11,
+    "pages_per_query": 5385,
+    "qrels_used_for_candidate_construction": false,
+    "queries": 1142,
+    "queries_with_zero_relevant_candidates": 0,
+    "query_chunk_size": 8,
+    "query_chunks": 143,
+    "rows_checked_each_score_file": 6149670,
+    "total_seconds": 7818.803704091,
+    "visual_score_batch_size": 128
+  },
+  "decision": "p1_02r_full_extraction_integrity_verified",
+  "manifest": {
+    "executed_protocol_config_sha256": "cfbfcb24ae477a93b3d6a65b40022d688b8172babb2e8080f82363f73fdd8be2",
+    "extractor_sha256": "c328088abe849c18e160ba2d127c16609f1429a657f4389a346c5c80cd02c244",
+    "function_call_id": "fc-01M19RE4SXMJ54M15049QSMXKA",
+    "image_definition_sha256": "bae5ac751ab0a22ca31b22a5f9a217d696da4b3fc0f3ea88e3a02e898807d637",
+    "path": "artifacts/vidoseek_p1_02r_import/extraction_manifest.json",
+    "retriever_contract_sha256": "a8e09f0e6999e2f033e9768ef87f668b7c236dc24c8e871638efa10006883df3",
+    "sha256": "7600d3483d526710d2613a37f030daec71596b20ed73d9cebb3b1a1ad507b7b8",
+    "source_commit": "c7d84aaee0e9caab691a11bba377f4a87c6e059c",
+    "status": "PASS"
+  },
+  "payloads": {
+    "candidate_audit.parquet": {
+      "bytes": 21687,
+      "rows": 1142,
+      "sha256": "938aab50bbf981c7b5d4609a6345be18f9a9c7797714a2c42bea099f8ad39151"
+    },
+    "candidate_raw_scores.parquet": {
+      "bytes": 82665894,
+      "content_sha256": "4ff9024b3057d332445c856d0e5f8e51fe496c008cc38214e85c7ce5e850ee24",
+      "rows": 6149670,
+      "sha256": "78e01ba6e5111864462cd843aa11d6ceb33bcb264afb82f3c1442414e21a926d"
+    },
+    "coverage_report.json": {
+      "bytes": 659,
+      "sha256": "5d5858406379b3e1cfd7e4a811feef4eb71230ac148f9b3d5e7e5802368b5fd1"
+    },
+    "retrieval_scores.parquet": {
+      "bytes": 248445561,
+      "content_sha256": "41c55a82fd4cd3607347aba68461a11dd4a0781f1e6825a107e44bb4544315e7",
+      "rows": 6149670,
+      "sha256": "32b39da19e9507a0a5060157630cb40bf5c6bcf6464d88e4bb6136888473173b"
+    }
+  },
+  "protocol_id": "vidoseek_p1_02r_all_corpus_v1",
+  "receipt": {
+    "candidate_pairs": 6149670,
+    "coverage": 1.0,
+    "full_score_produced": false,
+    "function_call_id": "fc-01M19RE4SXMJ54M15049QSMXKA",
+    "path": "artifacts/vidoseek_p1_02r_score_extraction_full.json",
+    "queries_with_zero_relevant_candidates": 0,
+    "sha256": "467e8c32e468f065306539d0a22d161431c9af411a0e1475fc9fb297c8a88c87",
+    "status": "complete"
+  },
+  "schema_version": 1,
+  "scientific_scope": "verified_score_bundle_not_frozen_p1_02_not_oracle_result",
+  "status": "PASS",
+  "success_marker": {
+    "path": "artifacts/vidoseek_p1_02r_import/_EXTRACTION_SUCCESS.json",
+    "sha256": "ce95947b5a160847208dacf90bd6cc71a804007a2fc8ddd1356b1bee5101dd2b",
+    "status": "complete"
+  },
+  "verification_environment": {
+    "content_hash_compatibility": "cast string columns to the Parquet-recorded object dtype before hashing",
+    "local_numpy": "2.4.4",
+    "local_pandas": "3.0.2",
+    "local_pyarrow": "24.0.0",
+    "local_python": "3.13.7",
+    "remote_pandas": "2.2.3",
+    "streaming": "one Parquet row group at a time"
+  },
+  "verified_on": "2026-08-31"
+}

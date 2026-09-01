@@ -9,3 +9,9 @@ tests/** -text
 artifacts/vidoseek_score_extraction_calibration.json -text -diff
 artifacts/vidoseek_score_extraction_calibration_manifest.json -text -diff
 artifacts/vidoseek_expanded_coverage_audit.json -text -diff
+artifacts/vidoseek_p1_02r_score_extraction_full.json -text -diff
+artifacts/vidoseek_p1_02r_import/extraction_manifest.json -text -diff
+artifacts/vidoseek_p1_02r_import/_EXTRACTION_SUCCESS.json -text -diff
+artifacts/vidoseek_p1_02r_import/coverage_report.json -text -diff
+artifacts/vidoseek_p1_02r_import/candidate_audit.parquet -text -diff
+artifacts/vidoseek_p1_02r_integrity_review.json -text -diff
