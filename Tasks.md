@@ -232,6 +232,34 @@ This phase is the cheapest disproof. It uses cached scores and exhaustive prereg
 **STOP/KILL CONDITION:**
   HALT on any new Modal/GPU invocation from this checkout, any retriever/config revision change, any required frozen parent score cache that is missing/non-finite/wrong-shaped, any use of qrels or observed relevance rank in candidate construction or score-chunk selection, or any change to the original P1-02 behavior. The historical L4 invocation used fixed query/page/visual limits 8/512/128 and is consumed; any retry or second invocation requires a new explicit approval and provenance patch. P1-02 remains BLOCKED, and P1-03 remains unauthorized.
 
+### TASK-ID: P1-02R-O1
+**TITLE:** Preregister the separately versioned P1-02R post-hoc W7 oracle amendment
+**DEPENDENCIES:** P1-02R
+**STATUS:** PREPARED — protocol and tests only; human review required; oracle execution is not authorized
+**FILES:** `configs/vidoseek_p1_02r_oracle_w7_v1.yaml`, `tests/test_vidoseek_p1_02r_oracle_protocol.py`, `Tasks.md`, `Context.md`, `experiments/CHANGELOG.md`
+**DESCRIPTION:**
+  Freeze a separately versioned, post-hoc W7 oracle-upper-bound protocol over the verified P1-02R all-corpus score bundle. This amendment records inputs, source hashes, W7 profiles, oracle semantics, metrics, bootstrap settings, planned outputs, interpretation gates, and scientific boundaries before any result is observed. It does not execute the oracle or change the frozen P1-02/P1-03 task graph.
+**I/O CONTRACT:**
+  Inputs for a future separately approved run: the hash-pinned P1-02R `retrieval_scores.parquet` with 6,149,670 rows, 1,142 queries, 5,385 pages per query, coverage 1.0, and normalized BM25/dense/visual channels; qrels/relevance may enter only oracle selection and evaluation after candidates and scores are frozen.
+  Outputs prepared now: one YAML protocol and one static contract test. Planned but not produced: W7 oracle JSONL/JSON/Parquet/CSV/PNG outputs plus an immutable `run_manifest.json` under `artifacts/vidoseek_p1_02r_oracle_w7_v1/`.
+  Side effects: local text/test changes and one provenance commit only; no oracle output, Modal/GPU allocation, P1-03 execution, learned-QPAF work, or frozen P1-02 relabel.
+**IMPLEMENTATION NOTES:**
+  Authorization text: `Approve creating and committing a separately versioned P1-02R post-hoc oracle/task-graph amendment using the verified local score bundle. Prepare the protocol and tests only. Do not execute oracle analysis, Modal/GPU work, or P1-03, and do not relabel frozen P1-02. Return the complete amendment diff and stop/go gates for review.`
+  The protocol freezes the existing implementation rather than adding a runner: Global searches all seven W7 profiles once for the dataset, QARF searches all seven per query, and QPAF starts from QARF then performs fixed-order coordinate ascent for at most two sweeps. Candidate visits follow descending QARF score with ascending page-ID ties; only nDCG@10 improvements greater than `1e-12` are accepted. The three fusion channels are BM25, dense, and visual; `stage1_score` remains present for provenance but is not a fusion feature.
+  The prior under-30-minute estimate applied to the frozen shortlist, not the 5,385-page all-corpus pool. P1-02R-O1 therefore records all-corpus runtime as unmeasured and `ready_for_execution_approval=false`. Before any run, a separate human decision must review a protocol-bound preflight, immutable run-manifest writer, and bounded CPU runtime evidence or resource plan without changing oracle semantics.
+**VERIFICATION:**
+  Command: `$env:PYTHONPATH='src'; C:\Python313\python.exe -m pytest tests/test_vidoseek_p1_02r_oracle_protocol.py tests/test_qpaf.py tests/test_preregistration.py -v`
+  Assertions:
+    - The approval is protocol/tests-only; all local-oracle, output-write, Modal, GPU, P1-03, and learned-QPAF execution flags remain false.
+    - The parent config, extraction manifest, integrity review, retrieval-score byte/content hashes, row/query/page counts, coverage, and no-`full_score` boundary cross-match committed evidence without requiring the ignored large payload in CI.
+    - The seven W7 profiles, score-channel order, two-sweep constrained QPAF semantics, source-file hashes, metric, tie-break, seed, resample count, and decision thresholds match the current implementation and preregistration.
+    - P1-02 remains BLOCKED, P1-02R remains PASS, and P1-03 keeps dependency `P1-02` and status BLOCKED.
+  Expected runtime: under 1 minute on local CPU; this runs tests only, not oracle analysis.
+**STOP/GO GATES FOR REVIEW:**
+  `STOP-LEARNED-QPAF` if a future approved W7 run has mean per-query QPAF-vs-QARF delta nDCG@10 `<0.01`; report and do not retry. `W66-REVIEW-ELIGIBLE` only if the mean is `>=0.03`, the query-bootstrap 95% lower bound is `>0`, and top-5%-gain share is `<0.90`; this permits only a human decision on a separate W66 protocol. All other outcomes are `REVISE-OR-STOP-AFTER-REVIEW`. W7 alone never authorizes P1-03 or Phase 2.
+**STOP/KILL CONDITION:**
+  HALT before execution on any input byte/content hash, schema, row/query/page, or coverage mismatch; any source/profile/metric/seed/bootstrap/tie-break drift; any qrels use in candidate construction or score normalization; any missing/duplicate/non-finite value; an existing output directory; missing protocol-bound preflight or run-manifest support; absent reviewed all-corpus runtime evidence; or any attempted Modal/GPU/P1-03/learned-QPAF execution or P1-02 relabel. A change requires a new protocol version and explicit human approval, not an automatic workaround.
+
 ### TASK-ID: P1-03
 **TITLE:** Run W66 sensitivity and issue the Phase 1 granularity decision
 **DEPENDENCIES:** P1-02

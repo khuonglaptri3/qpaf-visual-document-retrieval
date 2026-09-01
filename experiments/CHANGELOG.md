@@ -1,5 +1,15 @@
 # Experiment protocol changelog
 
+## 2026-09-01 - P1-02R post-hoc W7 oracle amendment prepared for review
+
+- Status: `protocol_prepared_review_required`; only the separately versioned protocol, task-graph record, and static contract tests are prepared. No oracle command or output was produced.
+- Authorization text: `Approve creating and committing a separately versioned P1-02R post-hoc oracle/task-graph amendment using the verified local score bundle. Prepare the protocol and tests only. Do not execute oracle analysis, Modal/GPU work, or P1-03, and do not relabel frozen P1-02. Return the complete amendment diff and stop/go gates for review.`
+- Frozen input: `artifacts/vidoseek_p1_02r_import/retrieval_scores.parquet`, 248,445,561 bytes and 6,149,670 rows, byte SHA-256 `32b39da19e9507a0a5060157630cb40bf5c6bcf6464d88e4bb6136888473173b`, logical-content SHA-256 `41c55a82fd4cd3607347aba68461a11dd4a0781f1e6825a107e44bb4544315e7`, coverage 1.0, and zero uncovered queries. `full_score` remains unavailable and unnecessary for this QPAF-only oracle contract.
+- Frozen design: W7 over BM25/dense/visual scores; exhaustive Global and per-query QARF profile search; QARF-initialized, fixed-order, at-most-two-sweep candidate-level coordinate ascent; mean per-query nDCG@10; page-ID tie-break; seed 20260820; 10,000 query-bootstrap resamples.
+- Readiness boundary: all-corpus runtime is unmeasured, and protocol-bound preflight/run-manifest support is not implemented. All local-oracle, output-write, Modal, GPU, P1-03, and learned-QPAF execution flags remain false pending review and a separate approval.
+- Outcome gates for a future separately approved W7 run: stop learned QPAF below mean delta 0.01; permit only W66 protocol review at mean delta at least 0.03 with CI95 lower bound above 0 and top-5%-gain share below 0.90; otherwise revise or stop after human review. No W7 outcome automatically unblocks P1-03 or Phase 2.
+- Scientific boundary: P1-02 remains `BLOCKED`; P1-02R remains a verified post-hoc score-bundle `PASS`; P1-02R-O1 is a preregistered post-hoc oracle upper-bound protocol, not a result, HEAVEN claim, learned model, deployment result, or task-graph relabel.
+
 ## 2026-08-31 - P1-02R full extraction integrity verified and execution closed
 
 - Status: `full_extraction_integrity_verified`; the one authorized human-run invocation completed, was consumed, and has zero remaining authorized invocations. The current checkout closes Modal, full-extraction, and GPU execution guards; any retry or second invocation requires new approval.

@@ -1,0 +1,200 @@
+schema_version: 1
+protocol_id: vidoseek_p1_02r_oracle_w7_v1
+task_id: P1-02R-O1
+version: 1
+status: protocol_prepared_review_required
+classification: post_hoc_oracle_upper_bound
+prepared_on: "2026-09-01"
+
+authorization:
+  scope: create_and_commit_protocol_and_tests_only
+  approved_by: user
+  approved_on: "2026-09-01"
+  approval_text: >-
+    Approve creating and committing a separately versioned P1-02R post-hoc
+    oracle/task-graph amendment using the verified local score bundle. Prepare
+    the protocol and tests only. Do not execute oracle analysis, Modal/GPU work,
+    or P1-03, and do not relabel frozen P1-02. Return the complete amendment diff
+    and stop/go gates for review.
+
+parent_task_graph:
+  frozen_p1_02:
+    task_id: P1-02
+    status: BLOCKED
+    relabel_allowed: false
+  verified_recovery:
+    task_id: P1-02R
+    status: PASS
+    protocol_id: vidoseek_p1_02r_all_corpus_v1
+    base_commit: 19371627eaed86fc509adc8f0935a6eb4d7fa876
+    config_path: configs/vidoseek_p1_02r.yaml
+    config_sha256: b26d4f76206ed9fe74b4b508392a3228e799138f2c372863dc983744ebbcab87
+    config_sha256_basis: utf8_lf_bytes
+    full_score_produced: false
+  frozen_p1_03:
+    task_id: P1-03
+    status: BLOCKED
+    dependency_rewritten: false
+    execution_authorized: false
+
+input_bundle:
+  retrieval_scores:
+    path: artifacts/vidoseek_p1_02r_import/retrieval_scores.parquet
+    manifest_path: artifacts/vidoseek_p1_02r_import/extraction_manifest.json
+    manifest_sha256: 7600d3483d526710d2613a37f030daec71596b20ed73d9cebb3b1a1ad507b7b8
+    integrity_review_path: artifacts/vidoseek_p1_02r_integrity_review.json
+    integrity_review_sha256: d2b704252c3973dfd2a19053560dd13a84f940bccd378f89028a60f49deb773c
+    bytes: 248445561
+    rows: 6149670
+    byte_sha256: 32b39da19e9507a0a5060157630cb40bf5c6bcf6464d88e4bb6136888473173b
+    content_sha256: 41c55a82fd4cd3607347aba68461a11dd4a0781f1e6825a107e44bb4544315e7
+    queries: 1142
+    pages_per_query: 5385
+    coverage: 1.0
+    missing_relevant_pairs: 0
+    queries_with_zero_relevant_candidates: 0
+    columns:
+      - dataset
+      - query_id
+      - page_id
+      - source
+      - relevance
+      - bm25_score
+      - dense_score
+      - stage1_score
+      - visual_score
+      - branch_ranks
+  immutable: true
+  full_score_required: false
+  heaven_preflight_eligible: false
+
+implementation_contract:
+  source_commit: 19371627eaed86fc509adc8f0935a6eb4d7fa876
+  source_sha256_basis: utf8_lf_bytes
+  source_files:
+    - path: src/oracle_study/constants.py
+      sha256: 26a4898dfb86d4b0380e917ad1aabd78e77bbdef3aee848a970c2319324de2df
+    - path: src/oracle_study/profiles.py
+      sha256: 8dec9449b6d54651a10dc51d22fc7245fadd35a48b6d988261392260ab3a0999
+    - path: src/oracle_study/metrics.py
+      sha256: bfa630a5450e23f5aab7269aedcb96172bc3096d16e1e3078af5e7b26f97e0f9
+    - path: src/oracle_study/bootstrap.py
+      sha256: 3e9f588dcde3930406700e417f25b322f2755fe2b02c1fe9fb075c63767da3bd
+    - path: src/oracle_study/qpaf.py
+      sha256: 00ce93a76cf80d43b9df394550b1e6799de8285772b12811b19c768f7ea44d53
+    - path: src/oracle_study/cli.py
+      sha256: 6de6b782238b3de19d637edd263869835a9f53acb47caab490ce79963f263955
+  source_drift_requires_new_protocol_version: true
+
+oracle_design:
+  grid: w7
+  profiles:
+    - [1.0, 0.0, 0.0]
+    - [0.0, 1.0, 0.0]
+    - [0.0, 0.0, 1.0]
+    - [0.5, 0.5, 0.0]
+    - [0.5, 0.0, 0.5]
+    - [0.0, 0.5, 0.5]
+    - [0.3333333333333333, 0.3333333333333333, 0.3333333333333333]
+  channel_order: [bm25_score, dense_score, visual_score]
+  input_scores_are_frozen_per_query_minmax: true
+  renormalize_at_oracle_runtime: false
+  global_search: exhaustive_over_w7
+  qarf_search: exhaustive_over_w7_per_query
+  qpaf_search: fixed_order_coordinate_ascent_over_w7
+  qpaf_initialization: qarf_assignment
+  qpaf_max_sweeps: 2
+  strict_improvement_tolerance: 1.0e-12
+  candidate_visit_order: descending_qarf_score_then_ascending_page_id
+  global_and_qarf_profile_tie_policy: retain_earliest_w7_profile
+  qpaf_profile_tie_policy: retain_current_assignment_without_strict_improvement
+  relevance_use: oracle_selection_and_evaluation_only
+  qrels_used_for_candidate_construction_or_score_normalization: false
+
+metrics:
+  primary: mean_per_query_ndcg_at_10
+  gain: two_power_relevance_minus_one
+  discount: one_over_log2_rank_plus_one
+  ranking_tie_break: ascending_page_id
+  secondary: [recall_at_1, recall_at_3, mrr_at_10]
+  global_and_qarf_profile_tie_break: [ndcg_at_10, recall_at_3, mrr_at_10]
+
+bootstrap:
+  unit: query
+  seed: 20260820
+  resamples: 10000
+  confidence: 0.95
+  interval: percentile
+
+planned_outputs:
+  produced: false
+  immutable_output_dir: artifacts/vidoseek_p1_02r_oracle_w7_v1
+  files:
+    - qpaf_oracle_results.jsonl
+    - qpaf_summary.json
+    - qpaf_query_summary.parquet
+    - qpaf_subgroups.csv
+    - qpaf_oracle_gain.png
+    - run_manifest.json
+  label: oracle_upper_bound_post_hoc
+
+decision_gates:
+  stop_learned_qpaf:
+    mean_delta_qpaf_vs_qarf_ndcg_at_10:
+      operator: "<"
+      threshold: 0.01
+    effect: report_and_stop_no_retry
+  eligible_for_separate_w66_protocol_review:
+    mean_delta_qpaf_vs_qarf_ndcg_at_10:
+      operator: ">="
+      threshold: 0.03
+    bootstrap_ci95_lower:
+      operator: ">"
+      threshold: 0.0
+    top_5pct_gain_share:
+      operator: "<"
+      threshold: 0.90
+    effect: human_review_only_not_execution_authorization
+  otherwise:
+    effect: revise_or_stop_after_human_review
+  w7_alone_can_unblock_p1_03: false
+  w7_alone_can_enter_phase_2: false
+
+execution_readiness:
+  oracle_runner_exists: true
+  protocol_bound_preflight_exists: false
+  immutable_run_manifest_writer_exists: false
+  all_corpus_runtime_measured: false
+  ready_for_execution_approval: false
+  performance_probe_authorized: false
+  next_gate: review_protocol_diff_and_choose_preexecution_preparation
+
+execution:
+  local_cpu_oracle_allowed: false
+  modal_allowed: false
+  gpu_allowed: false
+  oracle_analysis_allowed: false
+  p1_03_allowed: false
+  learned_qpaf_allowed: false
+  output_writes_allowed: false
+
+stop_conditions:
+  - input_byte_or_content_hash_mismatch
+  - input_schema_row_query_page_or_coverage_mismatch
+  - source_file_hash_or_oracle_semantics_drift
+  - qrels_used_for_candidate_construction_or_score_normalization
+  - w7_profile_metric_seed_bootstrap_or_tie_break_drift
+  - missing_duplicate_or_nonfinite_query_page_score_values
+  - output_directory_already_exists
+  - missing_protocol_bound_preflight_or_run_manifest_writer
+  - no_reviewed_all_corpus_runtime_evidence
+  - any_modal_gpu_p1_03_or_learned_qpaf_execution
+  - any_frozen_p1_02_relabel
+
+scientific_boundaries:
+  - post_hoc_not_frozen_p1_02
+  - oracle_upper_bound_not_learned_or_deployable_qpaf
+  - qrels_are_allowed_only_for_oracle_selection_and_evaluation
+  - not_heaven_and_no_full_score_claim
+  - no_oracle_result_has_been_produced
+  - no_p1_03_or_phase_2_dependency_is_unblocked
