@@ -2,7 +2,7 @@ schema_version: 1
 protocol_id: vidoseek_p1_02r_oracle_w7_v1
 task_id: P1-02R-O1
 version: 1
-status: protocol_prepared_review_required
+status: preexecution_safeguards_prepared_review_required
 classification: post_hoc_oracle_upper_bound
 prepared_on: "2026-09-01"
 
@@ -16,6 +16,18 @@ authorization:
     the protocol and tests only. Do not execute oracle analysis, Modal/GPU work,
     or P1-03, and do not relabel frozen P1-02. Return the complete amendment diff
     and stop/go gates for review.
+  preexecution_preparation:
+    scope: local_preexecution_safeguards_code_and_tests_only
+    approved_by: user
+    approved_on: "2026-09-01"
+    approval_text: >-
+      Approve local preparation and commit of the P1-02R-O1 pre-execution
+      safeguards: add a protocol-bound input preflight, an immutable run-manifest
+      writer, and a bounded CPU performance-probe entry point with tests. Do not
+      execute the performance probe or W7 oracle, do not write oracle results, do
+      not run Modal/GPU or P1-03, and do not relabel P1-02. Return the complete
+      diff, proposed probe limits, runtime stop condition, and exact future command
+      for review.
 
 parent_task_graph:
   frozen_p1_02:
@@ -41,11 +53,14 @@ input_bundle:
   retrieval_scores:
     path: artifacts/vidoseek_p1_02r_import/retrieval_scores.parquet
     manifest_path: artifacts/vidoseek_p1_02r_import/extraction_manifest.json
+    manifest_bytes: 62794
     manifest_sha256: 7600d3483d526710d2613a37f030daec71596b20ed73d9cebb3b1a1ad507b7b8
     integrity_review_path: artifacts/vidoseek_p1_02r_integrity_review.json
+    integrity_review_bytes: 4795
     integrity_review_sha256: d2b704252c3973dfd2a19053560dd13a84f940bccd378f89028a60f49deb773c
     bytes: 248445561
     rows: 6149670
+    row_groups: 143
     byte_sha256: 32b39da19e9507a0a5060157630cb40bf5c6bcf6464d88e4bb6136888473173b
     content_sha256: 41c55a82fd4cd3607347aba68461a11dd4a0781f1e6825a107e44bb4544315e7
     queries: 1142
@@ -64,12 +79,44 @@ input_bundle:
       - stage1_score
       - visual_score
       - branch_ranks
+    column_types:
+      dataset: string
+      query_id: string
+      page_id: string
+      source: string
+      relevance: double
+      bm25_score: double
+      dense_score: double
+      stage1_score: double
+      visual_score: double
+      branch_ranks: string
+  candidate_audit:
+    path: artifacts/vidoseek_p1_02r_import/candidate_audit.parquet
+    bytes: 21687
+    rows: 1142
+    row_groups: 1
+    byte_sha256: 938aab50bbf981c7b5d4609a6345be18f9a9c7797714a2c42bea099f8ad39151
+    columns:
+      - dataset
+      - query_id
+      - relevant_total
+      - relevant_selected
+      - coverage
+      - candidate_count
+    column_types:
+      dataset: string
+      query_id: string
+      relevant_total: int64
+      relevant_selected: int64
+      coverage: double
+      candidate_count: int64
   immutable: true
   full_score_required: false
   heaven_preflight_eligible: false
 
 implementation_contract:
   source_commit: 19371627eaed86fc509adc8f0935a6eb4d7fa876
+  safeguards_base_commit: 6b3c2fff6da684799b8169adb696a69dfba8308d
   source_sha256_basis: utf8_lf_bytes
   source_files:
     - path: src/oracle_study/constants.py
@@ -84,6 +131,8 @@ implementation_contract:
       sha256: 00ce93a76cf80d43b9df394550b1e6799de8285772b12811b19c768f7ea44d53
     - path: src/oracle_study/cli.py
       sha256: 6de6b782238b3de19d637edd263869835a9f53acb47caab490ce79963f263955
+    - path: src/oracle_study/vidoseek_p1_02r_oracle.py
+      sha256: 235b4dd760b64d73e17aaed4ba07e8ef95890361c90fa7bf1855a9ec383d4275
   source_drift_requires_new_protocol_version: true
 
 oracle_design:
@@ -126,6 +175,53 @@ bootstrap:
   confidence: 0.95
   interval: percentile
 
+preflight_contract:
+  mode: read_only
+  command: >-
+    set PYTHONUTF8=1 && set PYTHONIOENCODING=utf-8 && set PYTHONPATH=src &&
+    C:\Python313\python.exe -m oracle_study.vidoseek_p1_02r_oracle preflight
+    --protocol configs\vidoseek_p1_02r_oracle_w7_v1.yaml
+  verifies_input_bytes_hashes_parquet_metadata_and_evidence_cross_links: true
+  actual_relevance_values_loaded: false
+  report_persisted: false
+  oracle_executed: false
+
+run_manifest_contract:
+  write_mode: atomic_create_once_no_overwrite
+  classification: engineering_performance_probe_not_result
+  path: artifacts/vidoseek_p1_02r_oracle_w7_v1_probe/run_manifest.json
+  actual_relevance_values_allowed: false
+  oracle_result_fields_allowed: false
+
+performance_probe:
+  classification: engineering_performance_probe_not_result
+  device: cpu
+  grid: w7
+  query_selection: systematic_floor_indices_over_candidate_audit_order
+  query_indices: [0, 570, 1141]
+  page_selection: systematic_floor_indices_over_ascending_page_id
+  page_limits: [128, 256, 512]
+  max_case_candidate_rows: 1536
+  max_concurrent_cases: 1
+  cpu_thread_limit: 1
+  bootstrap_resamples: 100
+  repetitions: 1
+  actual_relevance_loaded: false
+  synthetic_relevance_rule: first_and_middle_sampled_page_binary_relevant
+  unused_required_columns_rule: deterministic_stage1_and_branch_rank_placeholders
+  per_case_timeout_seconds: 120
+  ladder_timeout_seconds: 300
+  automatic_retry_allowed: false
+  output_manifest_path: artifacts/vidoseek_p1_02r_oracle_w7_v1_probe/run_manifest.json
+  output_manifest_produced: false
+  future_command_cmd: >-
+    set OMP_NUM_THREADS=1 && set MKL_NUM_THREADS=1 &&
+    set OPENBLAS_NUM_THREADS=1 && set NUMEXPR_NUM_THREADS=1 &&
+    set PYTHONUTF8=1 && set PYTHONIOENCODING=utf-8 && set PYTHONPATH=src &&
+    C:\Python313\python.exe -m oracle_study.vidoseek_p1_02r_oracle
+    performance-probe --protocol configs\vidoseek_p1_02r_oracle_w7_v1.yaml
+  command_currently_authorized: false
+
 planned_outputs:
   produced: false
   immutable_output_dir: artifacts/vidoseek_p1_02r_oracle_w7_v1
@@ -162,14 +258,19 @@ decision_gates:
 
 execution_readiness:
   oracle_runner_exists: true
-  protocol_bound_preflight_exists: false
-  immutable_run_manifest_writer_exists: false
+  protocol_bound_preflight_exists: true
+  immutable_run_manifest_writer_exists: true
+  performance_probe_entrypoint_exists: true
+  ready_for_performance_probe_execution_approval: true
+  full_oracle_protocol_wrapper_exists: false
   all_corpus_runtime_measured: false
   ready_for_execution_approval: false
   performance_probe_authorized: false
-  next_gate: review_protocol_diff_and_choose_preexecution_preparation
+  next_gate: explicit_bounded_cpu_performance_probe_execution_decision
 
 execution:
+  performance_probe_allowed: false
+  performance_probe_output_write_allowed: false
   local_cpu_oracle_allowed: false
   modal_allowed: false
   gpu_allowed: false
@@ -186,7 +287,10 @@ stop_conditions:
   - w7_profile_metric_seed_bootstrap_or_tie_break_drift
   - missing_duplicate_or_nonfinite_query_page_score_values
   - output_directory_already_exists
-  - missing_protocol_bound_preflight_or_run_manifest_writer
+  - protocol_bound_preflight_or_immutable_manifest_write_failure
+  - performance_probe_authorization_or_checkout_provenance_missing
+  - performance_probe_case_exceeds_120_seconds
+  - performance_probe_ladder_exceeds_300_seconds
   - no_reviewed_all_corpus_runtime_evidence
   - any_modal_gpu_p1_03_or_learned_qpaf_execution
   - any_frozen_p1_02_relabel
@@ -197,4 +301,6 @@ scientific_boundaries:
   - qrels_are_allowed_only_for_oracle_selection_and_evaluation
   - not_heaven_and_no_full_score_claim
   - no_oracle_result_has_been_produced
+  - performance_probe_uses_synthetic_relevance_and_is_not_an_oracle_result
+  - performance_probe_is_prepared_but_not_authorized
   - no_p1_03_or_phase_2_dependency_is_unblocked

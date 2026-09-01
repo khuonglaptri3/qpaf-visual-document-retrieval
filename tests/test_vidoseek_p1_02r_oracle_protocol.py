@@ -10,6 +10,11 @@ import yaml
 from oracle_study.constants import PREREGISTERED_THRESHOLDS, SCORE_COLUMNS, SEED
 from oracle_study.profiles import W7
 from oracle_study.qpaf import TOLERANCE, _candidate_oracle
+from oracle_study.vidoseek_p1_02r_oracle import (
+    PREPARATION_APPROVAL_TEXT,
+    PREPARED_STATUS,
+    PROBE_SCORE_COLUMNS,
+)
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -20,6 +25,13 @@ APPROVAL_TEXT = (
     "the protocol and tests only. Do not execute oracle analysis, Modal/GPU work, "
     "or P1-03, and do not relabel frozen P1-02. Return the complete amendment diff "
     "and stop/go gates for review."
+)
+FUTURE_PROBE_COMMAND = (
+    "set OMP_NUM_THREADS=1 && set MKL_NUM_THREADS=1 && "
+    "set OPENBLAS_NUM_THREADS=1 && set NUMEXPR_NUM_THREADS=1 && "
+    "set PYTHONUTF8=1 && set PYTHONIOENCODING=utf-8 && set PYTHONPATH=src && "
+    "C:\\Python313\\python.exe -m oracle_study.vidoseek_p1_02r_oracle "
+    "performance-probe --protocol configs\\vidoseek_p1_02r_oracle_w7_v1.yaml"
 )
 
 
@@ -40,23 +52,31 @@ class VidoseekP102ROracleProtocolTest(unittest.TestCase):
     def setUpClass(cls) -> None:
         cls.protocol = yaml.safe_load(PROTOCOL_PATH.read_text(encoding="utf-8"))
 
-    def test_records_protocol_only_authorization_and_closed_execution(self) -> None:
+    def test_records_safeguard_preparation_and_closed_execution(self) -> None:
         protocol = self.protocol
         self.assertEqual(protocol["protocol_id"], "vidoseek_p1_02r_oracle_w7_v1")
         self.assertEqual(protocol["task_id"], "P1-02R-O1")
-        self.assertEqual(protocol["status"], "protocol_prepared_review_required")
+        self.assertEqual(protocol["status"], PREPARED_STATUS)
         self.assertEqual(protocol["authorization"]["approval_text"], APPROVAL_TEXT)
+        self.assertEqual(
+            protocol["authorization"]["preexecution_preparation"]["approval_text"],
+            PREPARATION_APPROVAL_TEXT,
+        )
 
         execution = protocol["execution"]
         self.assertTrue(execution)
         self.assertTrue(all(value is False for value in execution.values()))
         self.assertFalse(protocol["planned_outputs"]["produced"])
-        self.assertFalse(
-            protocol["execution_readiness"]["ready_for_execution_approval"]
-        )
+        readiness = protocol["execution_readiness"]
+        self.assertTrue(readiness["protocol_bound_preflight_exists"])
+        self.assertTrue(readiness["immutable_run_manifest_writer_exists"])
+        self.assertTrue(readiness["performance_probe_entrypoint_exists"])
+        self.assertTrue(readiness["ready_for_performance_probe_execution_approval"])
+        self.assertFalse(readiness["performance_probe_authorized"])
+        self.assertFalse(readiness["ready_for_execution_approval"])
         self.assertEqual(
-            protocol["execution_readiness"]["next_gate"],
-            "review_protocol_diff_and_choose_preexecution_preparation",
+            readiness["next_gate"],
+            "explicit_bounded_cpu_performance_probe_execution_decision",
         )
 
     def test_preserves_frozen_parent_task_graph(self) -> None:
@@ -100,6 +120,12 @@ class VidoseekP102ROracleProtocolTest(unittest.TestCase):
         self.assertEqual(artifact["sha256"], scores["byte_sha256"])
         self.assertEqual(artifact["content_sha256"], scores["content_sha256"])
 
+        audit = self.protocol["input_bundle"]["candidate_audit"]
+        audit_artifact = manifest["artifacts"]["candidate_audit.parquet"]
+        self.assertEqual(audit_artifact["bytes"], audit["bytes"])
+        self.assertEqual(audit_artifact["rows"], audit["rows"])
+        self.assertEqual(audit_artifact["sha256"], audit["byte_sha256"])
+
         review = json.loads(review_path.read_text(encoding="utf-8"))
         self.assertEqual(review["status"], "PASS")
         self.assertTrue(all(review["checks"].values()))
@@ -115,6 +141,30 @@ class VidoseekP102ROracleProtocolTest(unittest.TestCase):
         self.assertEqual(scores["columns"], expected_columns)
         self.assertFalse(self.protocol["input_bundle"]["full_score_required"])
         self.assertFalse(self.protocol["input_bundle"]["heaven_preflight_eligible"])
+
+    def test_bounds_non_result_cpu_probe_without_authorizing_it(self) -> None:
+        probe = self.protocol["performance_probe"]
+        self.assertEqual(probe["device"], "cpu")
+        self.assertEqual(probe["grid"], "w7")
+        self.assertEqual(probe["query_indices"], [0, 570, 1141])
+        self.assertEqual(probe["page_limits"], [128, 256, 512])
+        self.assertEqual(probe["max_case_candidate_rows"], 1536)
+        self.assertEqual(probe["max_concurrent_cases"], 1)
+        self.assertEqual(probe["cpu_thread_limit"], 1)
+        self.assertEqual(probe["bootstrap_resamples"], 100)
+        self.assertEqual(probe["repetitions"], 1)
+        self.assertEqual(probe["per_case_timeout_seconds"], 120)
+        self.assertEqual(probe["ladder_timeout_seconds"], 300)
+        self.assertFalse(probe["actual_relevance_loaded"])
+        self.assertFalse(probe["automatic_retry_allowed"])
+        self.assertFalse(probe["command_currently_authorized"])
+        self.assertFalse(probe["output_manifest_produced"])
+        self.assertEqual(probe["future_command_cmd"], FUTURE_PROBE_COMMAND)
+        self.assertNotIn("relevance", PROBE_SCORE_COLUMNS)
+        self.assertEqual(
+            self.protocol["run_manifest_contract"]["write_mode"],
+            "atomic_create_once_no_overwrite",
+        )
 
     def test_freezes_current_w7_oracle_semantics_and_source_files(self) -> None:
         contract = self.protocol["implementation_contract"]

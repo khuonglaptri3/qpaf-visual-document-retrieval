@@ -1,5 +1,15 @@
 # Experiment protocol changelog
 
+## 2026-09-01 - P1-02R-O1 pre-execution safeguards prepared for review
+
+- Status: `preexecution_safeguards_prepared_review_required`; the protocol-bound input preflight, immutable engineering run-manifest writer, and bounded CPU performance-probe entry point are prepared and tested locally. The performance probe and W7 oracle were not executed, and no manifest or oracle result was written.
+- Authorization text: `Approve local preparation and commit of the P1-02R-O1 pre-execution safeguards: add a protocol-bound input preflight, an immutable run-manifest writer, and a bounded CPU performance-probe entry point with tests. Do not execute the performance probe or W7 oracle, do not write oracle results, do not run Modal/GPU or P1-03, and do not relabel P1-02. Return the complete diff, proposed probe limits, runtime stop condition, and exact future command for review.`
+- Preflight contract: read-only validation of pinned source/input bytes and hashes, Parquet metadata, manifest cross-links, integrity-review PASS, and frozen task boundaries; no relevance values, oracle computation, or persisted report.
+- Proposed probe limits: CPU-only W7 timing; fixed candidate-audit query indices `[0,570,1141]`; systematic page ladders `[128,256,512]`; one repetition; 100 bootstrap resamples; no actual relevance; at most 1,536 rows per case; one sequential worker with one CPU thread; one create-once engineering manifest containing timings/provenance only.
+- Runtime stop: terminate the active child at 120 seconds or when the 300-second ladder budget is exhausted; write no manifest on failure and never retry automatically. A protocol/source/input/approval/checkout mismatch or pre-existing output is an earlier hard stop.
+- Exact future CMD command for review only: `set OMP_NUM_THREADS=1 && set MKL_NUM_THREADS=1 && set OPENBLAS_NUM_THREADS=1 && set NUMEXPR_NUM_THREADS=1 && set PYTHONUTF8=1 && set PYTHONIOENCODING=utf-8 && set PYTHONPATH=src && C:\Python313\python.exe -m oracle_study.vidoseek_p1_02r_oracle performance-probe --protocol configs\vidoseek_p1_02r_oracle_w7_v1.yaml`. It is currently fail-closed and requires a separate explicit one-invocation human approval/provenance patch.
+- Scientific boundary: all performance-probe, oracle/output-write, Modal/GPU, P1-03, and learned-QPAF guards remain false. Full W7 remains unready and unmeasured; P1-02 remains `BLOCKED`, P1-02R remains `PASS`, and no P1-03 or Phase 2 dependency changes.
+
 ## 2026-09-01 - P1-02R post-hoc W7 oracle amendment prepared for review
 
 - Status: `protocol_prepared_review_required`; only the separately versioned protocol, task-graph record, and static contract tests are prepared. No oracle command or output was produced.
