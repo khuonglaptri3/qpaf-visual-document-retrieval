@@ -27,11 +27,13 @@ from .qpaf import run_qpaf_oracle
 PROTOCOL_ID = "vidoseek_p1_02r_oracle_w7_v1"
 PREPARED_STATUS = "preexecution_safeguards_prepared_review_required"
 APPROVED_STATUS = "bounded_cpu_performance_probe_replacement_execution_approved"
+RECORDED_STATUS = "bounded_cpu_performance_probe_pass_recorded"
 ORIGINAL_PROBE_SCOPE = "one_local_cpu_non_result_performance_probe"
 PROBE_SCOPE = "one_replacement_local_cpu_non_result_performance_probe"
 APPROVED_SAFEGUARD_COMMIT = "024f2f0a0998f0c781ac738d259603c6bbf29ba9"
 FAILED_EXECUTION_APPROVAL_COMMIT = "fd2f411214b4b47750ffe6488bb0b5b654b55f66"
 REPLACEMENT_APPROVAL_PARENT_COMMIT = FAILED_EXECUTION_APPROVAL_COMMIT
+EXECUTED_PROBE_COMMIT = "aebeef11d5964b9c45ea56242f41ad4202aec95c"
 EXECUTION_COMMIT_RULE = "single_non_merge_direct_child_with_exact_changed_paths"
 APPROVAL_COMMIT_PATHS = [
     "Context.md",
@@ -81,6 +83,14 @@ EXECUTION_APPROVAL_TEXT = (
     "Replace the command with quoted CMD assignments, preserve all fixed limits and "
     "no-retry rules, and do not execute the probe yourself, W7 oracle, Modal/GPU, or "
     "P1-03, and do not relabel P1-02."
+)
+RECORDING_APPROVAL_TEXT = (
+    "Approve preparing and committing the P1-02R-O1 bounded CPU performance-probe "
+    "PASS recording using the existing immutable attempt marker and run manifest. "
+    "Close the consumed probe authorization, update only provenance, task state, "
+    "protocol, and tests, and return a review-only full-W7 runtime/resource "
+    "recommendation. Do not execute or authorize W7, Modal/GPU, P1-03/P1-03R, "
+    "learned QPAF, or relabel P1-02"
 )
 FAILED_PYTHON_ERROR = (
     "Fatal Python error: preconfig_init_utf8_mode: invalid PYTHONUTF8 environment "
@@ -146,7 +156,7 @@ def validate_protocol(protocol: dict[str, Any], repo_root: Path) -> None:
     ):
         raise ValueError("Unsupported P1-02R-O1 protocol identity")
     status = protocol.get("status")
-    if status not in {PREPARED_STATUS, APPROVED_STATUS}:
+    if status not in {PREPARED_STATUS, APPROVED_STATUS, RECORDED_STATUS}:
         raise ValueError("Unsupported P1-02R-O1 protocol status")
     if (
         protocol.get("authorization", {})
@@ -203,12 +213,11 @@ def validate_protocol(protocol: dict[str, Any], repo_root: Path) -> None:
         "deterministic_stage1_and_branch_rank_placeholders"
     ):
         raise ValueError("Performance probe placeholder rule drifted")
-    if probe.get("output_manifest_produced") is not False:
-        raise ValueError(
-            "Performance-probe manifest must remain unproduced in the protocol"
-        )
-    if probe.get("attempt_marker_produced") is not False:
-        raise ValueError("Performance-probe attempt marker must remain unproduced")
+    evidence_produced = status == RECORDED_STATUS
+    if probe.get("output_manifest_produced") is not evidence_produced:
+        raise ValueError("Performance-probe manifest production state drifted")
+    if probe.get("attempt_marker_produced") is not evidence_produced:
+        raise ValueError("Performance-probe attempt-marker production state drifted")
     if probe.get("future_command_cmd") != PERFORMANCE_PROBE_COMMAND_CMD:
         raise ValueError("Performance-probe CMD command must use quoted assignments")
 
@@ -269,8 +278,13 @@ def validate_protocol(protocol: dict[str, Any], repo_root: Path) -> None:
         raise ValueError("All-corpus runtime must remain unmeasured")
     if readiness.get("ready_for_execution_approval") is not False:
         raise ValueError("Full W7 execution must remain unready")
+    if readiness.get("full_oracle_protocol_wrapper_exists") is not False:
+        raise ValueError("Full W7 protocol wrapper must remain absent")
+    if readiness.get("performance_probe_runtime_measured") is not evidence_produced:
+        raise ValueError("Performance-probe runtime measurement state drifted")
 
     execution = protocol.get("execution", {})
+    authorization = protocol.get("authorization", {})
     if status == PREPARED_STATUS:
         if readiness.get("ready_for_performance_probe_execution_approval") is not True:
             raise ValueError("Prepared performance probe must be ready for approval")
@@ -282,39 +296,12 @@ def validate_protocol(protocol: dict[str, Any], repo_root: Path) -> None:
             raise ValueError(
                 "Prepared P1-02R-O1 execution guards must all remain closed"
             )
-        if "performance_probe_execution" in protocol.get("authorization", {}):
+        if "performance_probe_execution" in authorization:
             raise ValueError(
                 "Prepared protocol must not claim probe execution approval"
             )
     else:
-        if readiness.get("ready_for_performance_probe_execution_approval") is not False:
-            raise ValueError("Approved performance probe must not await approval")
-        if probe.get("command_currently_authorized") is not True:
-            raise ValueError(
-                "Approved performance-probe command must be marked authorized"
-            )
-        if readiness.get("performance_probe_authorized") is not True:
-            raise ValueError("Approved performance probe must be authorized")
-        if readiness.get("performance_probe_executed") is not False:
-            raise ValueError("Approved performance probe must remain unexecuted")
-        if execution.get("performance_probe_allowed") is not True:
-            raise ValueError("Approved performance-probe execution guard is closed")
-        if execution.get("performance_probe_output_write_allowed") is not True:
-            raise ValueError("Approved performance-probe output guard is closed")
-        for field in [
-            "local_cpu_oracle_allowed",
-            "modal_allowed",
-            "gpu_allowed",
-            "oracle_analysis_allowed",
-            "p1_03_allowed",
-            "learned_qpaf_allowed",
-            "output_writes_allowed",
-        ]:
-            if execution.get(field) is not False:
-                raise ValueError(f"Approved protocol opened forbidden guard: {field}")
-        prior_approval = protocol.get("authorization", {}).get(
-            "performance_probe_execution", {}
-        )
+        prior_approval = authorization.get("performance_probe_execution", {})
         expected_failure = {
             "outcome": "failed_before_python_runtime_initialization_and_project_import",
             "failure_stage": "cpython_preinitialization",
@@ -349,11 +336,89 @@ def validate_protocol(protocol: dict[str, Any], repo_root: Path) -> None:
             or prior_approval.get("failure_record") != expected_failure
         ):
             raise ValueError("P1-02R-O1 failed original invocation provenance drifted")
-        approval = protocol.get("authorization", {}).get(
-            "replacement_performance_probe_execution", {}
-        )
-        if approval.get("approval_text") != EXECUTION_APPROVAL_TEXT:
-            raise ValueError("P1-02R-O1 replacement execution approval text drifted")
+        replacement = authorization.get("replacement_performance_probe_execution", {})
+        if (
+            replacement.get("approval_text") != EXECUTION_APPROVAL_TEXT
+            or replacement.get("authorized_invocations") != 1
+            or replacement.get("automatic_retry_allowed") is not False
+            or replacement.get("execution_actor") != "human"
+        ):
+            raise ValueError("P1-02R-O1 replacement execution approval drifted")
+
+    if status == APPROVED_STATUS:
+        if readiness.get("ready_for_performance_probe_execution_approval") is not False:
+            raise ValueError("Approved performance probe must not await approval")
+        if probe.get("command_currently_authorized") is not True:
+            raise ValueError(
+                "Approved performance-probe command must be marked authorized"
+            )
+        if readiness.get("performance_probe_authorized") is not True:
+            raise ValueError("Approved performance probe must be authorized")
+        if readiness.get("performance_probe_executed") is not False:
+            raise ValueError("Approved performance probe must remain unexecuted")
+        if execution.get("performance_probe_allowed") is not True:
+            raise ValueError("Approved performance-probe execution guard is closed")
+        if execution.get("performance_probe_output_write_allowed") is not True:
+            raise ValueError("Approved performance-probe output guard is closed")
+        for field in [
+            "local_cpu_oracle_allowed",
+            "modal_allowed",
+            "gpu_allowed",
+            "oracle_analysis_allowed",
+            "p1_03_allowed",
+            "learned_qpaf_allowed",
+            "output_writes_allowed",
+        ]:
+            if execution.get(field) is not False:
+                raise ValueError(f"Approved protocol opened forbidden guard: {field}")
+        replacement = authorization["replacement_performance_probe_execution"]
+        if (
+            replacement.get("consumed_invocations") != 0
+            or replacement.get("remaining_authorized_invocations") != 1
+        ):
+            raise ValueError("Approved replacement invocation count drifted")
+    elif status == RECORDED_STATUS:
+        if readiness.get("ready_for_performance_probe_execution_approval") is not False:
+            raise ValueError("Recorded performance probe must not await approval")
+        if probe.get("command_currently_authorized") is not False:
+            raise ValueError("Recorded performance-probe command must be closed")
+        if readiness.get("performance_probe_authorized") is not False:
+            raise ValueError("Recorded performance probe must be unauthorized")
+        if readiness.get("performance_probe_executed") is not True:
+            raise ValueError("Recorded performance probe must be marked executed")
+        if readiness.get("next_gate") != "human_review_full_w7_resource_plan_only":
+            raise ValueError("Recorded performance-probe next gate drifted")
+        if not execution or any(value is not False for value in execution.values()):
+            raise ValueError("Recorded P1-02R-O1 execution guards must all be closed")
+        replacement = authorization["replacement_performance_probe_execution"]
+        if (
+            replacement.get("consumed_invocations") != 1
+            or replacement.get("remaining_authorized_invocations") != 0
+            or replacement.get("outcome") != "PASS"
+        ):
+            raise ValueError("Recorded replacement invocation closure drifted")
+        recording = authorization.get("performance_probe_pass_recording", {})
+        if recording != {
+            "scope": "local_probe_pass_recording_and_runtime_resource_review_only",
+            "approved_by": "user",
+            "approved_on": "2026-09-02",
+            "approval_text": RECORDING_APPROVAL_TEXT,
+            "execution_authorized": False,
+        }:
+            raise ValueError("P1-02R-O1 PASS-recording approval drifted")
+        resource_review = protocol.get("full_w7_runtime_resource_review", {})
+        if (
+            resource_review.get("classification")
+            != "engineering_estimate_review_only_not_execution_authorization"
+            or resource_review.get("evidence_basis")
+            != "recorded_three_query_synthetic_relevance_probe"
+            or resource_review.get("estimate_status") != "derived_not_measured"
+            or resource_review.get("recommendation")
+            != "no_go_current_monolithic_single_worker_full_w7"
+            or resource_review.get("execution_authorized") is not False
+        ):
+            raise ValueError("Full-W7 runtime/resource review boundary drifted")
+        validate_recorded_probe_evidence(protocol, repo_root)
 
     source_contract = protocol.get("implementation_contract", {})
     if source_contract.get("source_sha256_basis") != "utf8_lf_bytes":
@@ -926,6 +991,101 @@ def validate_probe_attempt_marker(marker: dict[str, Any]) -> None:
         raise ValueError("Performance-probe attempt-marker authorization drifted")
     if marker.get("boundaries") != expected_boundaries:
         raise ValueError("Performance-probe attempt-marker boundaries drifted")
+
+
+def validate_recorded_probe_evidence(protocol: dict[str, Any], repo_root: Path) -> None:
+    result = protocol.get("performance_probe_result")
+    expected_fields = {
+        "status",
+        "classification",
+        "recorded_on",
+        "executed_source_commit",
+        "executed_protocol_sha256",
+        "attempt_marker",
+        "run_manifest",
+        "started_at",
+        "completed_at",
+        "case_elapsed_seconds_total",
+        "full_w7_runtime_measured",
+        "scientific_result_produced",
+    }
+    if not isinstance(result, dict) or set(result) != expected_fields:
+        raise ValueError("Recorded performance-probe result fields drifted")
+    if (
+        result.get("status") != "PASS"
+        or result.get("classification") != "engineering_performance_probe_not_result"
+        or result.get("recorded_on") != "2026-09-02"
+        or result.get("executed_source_commit") != EXECUTED_PROBE_COMMIT
+        or result.get("full_w7_runtime_measured") is not False
+        or result.get("scientific_result_produced") is not False
+    ):
+        raise ValueError("Recorded performance-probe result contract drifted")
+
+    probe = protocol["performance_probe"]
+    marker_record = result.get("attempt_marker")
+    manifest_record = result.get("run_manifest")
+    for record, expected_path, label in [
+        (marker_record, probe["attempt_marker_path"], "attempt marker"),
+        (manifest_record, probe["output_manifest_path"], "run manifest"),
+    ]:
+        if not isinstance(record, dict) or set(record) != {
+            "path",
+            "bytes",
+            "sha256",
+        }:
+            raise ValueError(f"Recorded performance-probe {label} metadata drifted")
+        if record.get("path") != expected_path:
+            raise ValueError(f"Recorded performance-probe {label} path drifted")
+        if not isinstance(record.get("bytes"), int) or record["bytes"] <= 0:
+            raise ValueError(
+                f"Recorded performance-probe {label} byte count is invalid"
+            )
+        if not isinstance(record.get("sha256"), str) or len(record["sha256"]) != 64:
+            raise ValueError(f"Recorded performance-probe {label} hash is invalid")
+
+    marker_path = _repo_path(repo_root, marker_record["path"])
+    manifest_path = _repo_path(repo_root, manifest_record["path"])
+    _check_file(
+        marker_path,
+        marker_record["bytes"],
+        marker_record["sha256"],
+        "recorded performance-probe attempt marker",
+    )
+    _check_file(
+        manifest_path,
+        manifest_record["bytes"],
+        manifest_record["sha256"],
+        "recorded performance-probe run manifest",
+    )
+    marker = json.loads(marker_path.read_text(encoding="utf-8"))
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    validate_probe_attempt_marker(marker)
+    validate_probe_run_manifest(manifest)
+
+    executed_protocol_sha256 = result.get("executed_protocol_sha256")
+    if (
+        not isinstance(executed_protocol_sha256, str)
+        or len(executed_protocol_sha256) != 64
+        or marker.get("protocol_sha256") != executed_protocol_sha256
+        or manifest.get("protocol_sha256") != executed_protocol_sha256
+    ):
+        raise ValueError("Recorded performance-probe protocol provenance drifted")
+    if (
+        marker.get("approval_commit") != EXECUTED_PROBE_COMMIT
+        or manifest.get("source_commit") != EXECUTED_PROBE_COMMIT
+        or manifest.get("attempt_marker_sha256") != marker_record["sha256"]
+    ):
+        raise ValueError("Recorded performance-probe source/attempt provenance drifted")
+    if result.get("started_at") != marker.get("started_at") or result.get(
+        "completed_at"
+    ) != manifest.get("completed_at"):
+        raise ValueError("Recorded performance-probe timestamps drifted")
+    elapsed_total = sum(item["elapsed_seconds"] for item in manifest["timings"])
+    if (
+        not isinstance(result.get("case_elapsed_seconds_total"), (int, float))
+        or abs(result["case_elapsed_seconds_total"] - elapsed_total) > 1e-12
+    ):
+        raise ValueError("Recorded performance-probe elapsed-time total drifted")
 
 
 def _write_json_atomic_create_once(path: Path, value: dict[str, Any]) -> None:

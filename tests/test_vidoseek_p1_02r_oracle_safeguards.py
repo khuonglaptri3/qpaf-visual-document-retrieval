@@ -3,7 +3,6 @@ import json
 import multiprocessing as mp
 import time
 from pathlib import Path
-from types import SimpleNamespace
 
 import pandas as pd
 import pyarrow.parquet as pq
@@ -51,6 +50,30 @@ def _parquet_contract(path: Path) -> dict:
 
 def _make_fixture_bundle(tmp_path: Path) -> Path:
     protocol = yaml.safe_load(PROTOCOL_PATH.read_text(encoding="utf-8"))
+    protocol["status"] = safeguards.PREPARED_STATUS
+    authorization = protocol["authorization"]
+    authorization.pop("performance_probe_execution", None)
+    authorization.pop("replacement_performance_probe_execution", None)
+    authorization.pop("performance_probe_pass_recording", None)
+    protocol.pop("performance_probe_result", None)
+    protocol.pop("full_w7_runtime_resource_review", None)
+    protocol["performance_probe"].update(
+        {
+            "attempt_marker_produced": False,
+            "output_manifest_produced": False,
+            "command_currently_authorized": False,
+        }
+    )
+    protocol["execution_readiness"].update(
+        {
+            "ready_for_performance_probe_execution_approval": True,
+            "performance_probe_runtime_measured": False,
+            "performance_probe_authorized": False,
+            "performance_probe_executed": False,
+            "next_gate": "separate_human_performance_probe_execution_approval",
+        }
+    )
+    protocol["execution"] = {field: False for field in protocol["execution"]}
     for index, source in enumerate(protocol["implementation_contract"]["source_files"]):
         source_path = tmp_path / source["path"]
         source_path.parent.mkdir(parents=True, exist_ok=True)
@@ -283,48 +306,19 @@ def test_protocol_bound_preflight_rejects_changed_payload(tmp_path: Path) -> Non
         safeguards.protocol_bound_preflight(protocol_path)
 
 
-def test_replacement_probe_guard_requires_corrective_direct_child_allowlist(
+def test_recorded_probe_guard_is_closed_before_git_checks(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     protocol = safeguards.load_protocol(PROTOCOL_PATH)
-    live_commit = "d" * 40
-    outputs = iter(
-        [
-            live_commit + "\n",
-            f"{live_commit} {safeguards.REPLACEMENT_APPROVAL_PARENT_COMMIT}\n",
-            "\n".join(safeguards.APPROVAL_COMMIT_PATHS) + "\n",
-            "",
-        ]
-    )
-    for name in safeguards.CPU_THREAD_ENV:
-        monkeypatch.setenv(name, "1")
 
-    def fake_run(*args, **kwargs):
-        return SimpleNamespace(stdout=next(outputs))
+    def fail_if_called(*args, **kwargs):
+        raise AssertionError(
+            "closed recorded state must not inspect an execution checkout"
+        )
 
-    monkeypatch.setattr(safeguards.subprocess, "run", fake_run)
+    monkeypatch.setattr(safeguards.subprocess, "run", fail_if_called)
 
-    assert (
-        safeguards.require_performance_probe_execution_approval(protocol, ROOT)
-        == live_commit
-    )
-
-
-def test_probe_guard_rejects_non_direct_child(
-    monkeypatch: pytest.MonkeyPatch,
-) -> None:
-    protocol = safeguards.load_protocol(PROTOCOL_PATH)
-    live_commit = "d" * 40
-    outputs = iter([live_commit + "\n", f"{live_commit} {'e' * 40}\n"])
-    for name in safeguards.CPU_THREAD_ENV:
-        monkeypatch.setenv(name, "1")
-
-    def fake_run(*args, **kwargs):
-        return SimpleNamespace(stdout=next(outputs))
-
-    monkeypatch.setattr(safeguards.subprocess, "run", fake_run)
-
-    with pytest.raises(RuntimeError, match="non-merge direct child"):
+    with pytest.raises(RuntimeError, match="not authorized"):
         safeguards.require_performance_probe_execution_approval(protocol, ROOT)
 
 

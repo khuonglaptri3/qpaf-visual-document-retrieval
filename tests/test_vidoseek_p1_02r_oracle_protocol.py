@@ -1,6 +1,7 @@
 import hashlib
 import inspect
 import json
+import math
 import unittest
 from pathlib import Path
 
@@ -13,9 +14,9 @@ from oracle_study.qpaf import TOLERANCE, _candidate_oracle
 from oracle_study.vidoseek_p1_02r_oracle import (
     APPROVAL_COMMIT_PATHS,
     APPROVED_SAFEGUARD_COMMIT,
-    APPROVED_STATUS,
     EXECUTION_APPROVAL_TEXT,
     EXECUTION_COMMIT_RULE,
+    EXECUTED_PROBE_COMMIT,
     FAILED_EXECUTION_APPROVAL_COMMIT,
     FAILED_PERFORMANCE_PROBE_COMMAND_CMD,
     FAILED_PYTHON_ERROR,
@@ -25,7 +26,12 @@ from oracle_study.vidoseek_p1_02r_oracle import (
     PREFLIGHT_COMMAND_CMD,
     PROBE_SCORE_COLUMNS,
     PROBE_SCOPE,
+    RECORDED_STATUS,
+    RECORDING_APPROVAL_TEXT,
     REPLACEMENT_APPROVAL_PARENT_COMMIT,
+    validate_probe_attempt_marker,
+    validate_probe_run_manifest,
+    validate_protocol,
 )
 
 
@@ -65,11 +71,11 @@ class VidoseekP102ROracleProtocolTest(unittest.TestCase):
     def setUpClass(cls) -> None:
         cls.protocol = yaml.safe_load(PROTOCOL_PATH.read_text(encoding="utf-8"))
 
-    def test_records_failed_original_and_one_replacement_probe_approval(self) -> None:
+    def test_records_failed_original_and_closes_replacement_probe(self) -> None:
         protocol = self.protocol
         self.assertEqual(protocol["protocol_id"], "vidoseek_p1_02r_oracle_w7_v1")
         self.assertEqual(protocol["task_id"], "P1-02R-O1")
-        self.assertEqual(protocol["status"], APPROVED_STATUS)
+        self.assertEqual(protocol["status"], RECORDED_STATUS)
         self.assertEqual(protocol["authorization"]["approval_text"], APPROVAL_TEXT)
         self.assertEqual(
             protocol["authorization"]["preexecution_preparation"]["approval_text"],
@@ -119,33 +125,42 @@ class VidoseekP102ROracleProtocolTest(unittest.TestCase):
             approval["approval_commit_changed_paths"], APPROVAL_COMMIT_PATHS
         )
         self.assertEqual(approval["authorized_invocations"], 1)
-        self.assertEqual(approval["consumed_invocations"], 0)
-        self.assertEqual(approval["remaining_authorized_invocations"], 1)
+        self.assertEqual(approval["consumed_invocations"], 1)
+        self.assertEqual(approval["remaining_authorized_invocations"], 0)
         self.assertFalse(approval["automatic_retry_allowed"])
         self.assertEqual(approval["execution_actor"], "human")
+        self.assertEqual(approval["outcome"], "PASS")
+
+        recording = protocol["authorization"]["performance_probe_pass_recording"]
+        self.assertEqual(
+            recording["scope"],
+            "local_probe_pass_recording_and_runtime_resource_review_only",
+        )
+        self.assertEqual(recording["approval_text"], RECORDING_APPROVAL_TEXT)
+        self.assertFalse(recording["execution_authorized"])
 
         execution = protocol["execution"]
-        self.assertTrue(execution["performance_probe_allowed"])
-        self.assertTrue(execution["performance_probe_output_write_allowed"])
+        self.assertTrue(execution)
         for field, value in execution.items():
-            if field not in {
-                "performance_probe_allowed",
-                "performance_probe_output_write_allowed",
-            }:
-                self.assertFalse(value, field)
+            self.assertFalse(value, field)
         self.assertFalse(protocol["planned_outputs"]["produced"])
         readiness = protocol["execution_readiness"]
         self.assertTrue(readiness["protocol_bound_preflight_exists"])
         self.assertTrue(readiness["immutable_run_manifest_writer_exists"])
         self.assertTrue(readiness["performance_probe_entrypoint_exists"])
         self.assertFalse(readiness["ready_for_performance_probe_execution_approval"])
-        self.assertTrue(readiness["performance_probe_authorized"])
-        self.assertFalse(readiness["performance_probe_executed"])
+        self.assertTrue(readiness["performance_probe_runtime_measured"])
+        self.assertFalse(readiness["performance_probe_authorized"])
+        self.assertTrue(readiness["performance_probe_executed"])
+        self.assertFalse(readiness["full_oracle_protocol_wrapper_exists"])
+        self.assertFalse(readiness["all_corpus_runtime_measured"])
         self.assertFalse(readiness["ready_for_execution_approval"])
         self.assertEqual(
             readiness["next_gate"],
-            "exactly_one_human_run_corrective_replacement_bounded_cpu_performance_probe",
+            "human_review_full_w7_resource_plan_only",
         )
+
+        validate_protocol(protocol, ROOT)
 
     def test_preserves_frozen_parent_task_graph(self) -> None:
         graph = self.protocol["parent_task_graph"]
@@ -210,7 +225,7 @@ class VidoseekP102ROracleProtocolTest(unittest.TestCase):
         self.assertFalse(self.protocol["input_bundle"]["full_score_required"])
         self.assertFalse(self.protocol["input_bundle"]["heaven_preflight_eligible"])
 
-    def test_bounds_authorized_non_result_cpu_probe(self) -> None:
+    def test_records_closed_non_result_cpu_probe_bounds(self) -> None:
         probe = self.protocol["performance_probe"]
         self.assertEqual(probe["device"], "cpu")
         self.assertEqual(probe["grid"], "w7")
@@ -225,9 +240,9 @@ class VidoseekP102ROracleProtocolTest(unittest.TestCase):
         self.assertEqual(probe["ladder_timeout_seconds"], 300)
         self.assertFalse(probe["actual_relevance_loaded"])
         self.assertFalse(probe["automatic_retry_allowed"])
-        self.assertTrue(probe["command_currently_authorized"])
-        self.assertFalse(probe["attempt_marker_produced"])
-        self.assertFalse(probe["output_manifest_produced"])
+        self.assertFalse(probe["command_currently_authorized"])
+        self.assertTrue(probe["attempt_marker_produced"])
+        self.assertTrue(probe["output_manifest_produced"])
         self.assertEqual(probe["future_command_cmd"], FUTURE_PROBE_COMMAND)
         self.assertEqual(
             self.protocol["preflight_contract"]["command"], PREFLIGHT_COMMAND_CMD
@@ -257,6 +272,125 @@ class VidoseekP102ROracleProtocolTest(unittest.TestCase):
                 "consumes_authorization_before_preflight"
             ]
         )
+
+    def test_pins_immutable_probe_pass_evidence(self) -> None:
+        result = self.protocol["performance_probe_result"]
+        self.assertEqual(result["status"], "PASS")
+        self.assertEqual(
+            result["classification"], "engineering_performance_probe_not_result"
+        )
+        self.assertEqual(result["executed_source_commit"], EXECUTED_PROBE_COMMIT)
+        self.assertFalse(result["full_w7_runtime_measured"])
+        self.assertFalse(result["scientific_result_produced"])
+
+        marker_record = result["attempt_marker"]
+        manifest_record = result["run_manifest"]
+        marker_path = ROOT / marker_record["path"]
+        manifest_path = ROOT / manifest_record["path"]
+        for path, record in [
+            (marker_path, marker_record),
+            (manifest_path, manifest_record),
+        ]:
+            self.assertEqual(path.stat().st_size, record["bytes"])
+            self.assertEqual(sha256(path), record["sha256"])
+        attributes = (ROOT / ".gitattributes").read_text(encoding="utf-8")
+        for record in [marker_record, manifest_record]:
+            self.assertIn(f"{record['path']} -text -diff", attributes)
+
+        marker = json.loads(marker_path.read_text(encoding="utf-8"))
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        validate_probe_attempt_marker(marker)
+        validate_probe_run_manifest(manifest)
+        self.assertEqual(marker["approval_commit"], EXECUTED_PROBE_COMMIT)
+        self.assertEqual(manifest["source_commit"], EXECUTED_PROBE_COMMIT)
+        self.assertEqual(marker["protocol_sha256"], result["executed_protocol_sha256"])
+        self.assertEqual(
+            manifest["protocol_sha256"], result["executed_protocol_sha256"]
+        )
+        self.assertEqual(manifest["attempt_marker_sha256"], marker_record["sha256"])
+        self.assertEqual(
+            [case["elapsed_seconds"] for case in manifest["timings"]],
+            [0.6704216001089662, 3.7113504000008106, 13.628036600071937],
+        )
+        self.assertAlmostEqual(
+            sum(case["elapsed_seconds"] for case in manifest["timings"]),
+            result["case_elapsed_seconds_total"],
+            places=12,
+        )
+        for field, value in manifest["boundaries"].items():
+            if field != "frozen_p1_02_status":
+                self.assertFalse(value, field)
+        self.assertEqual(manifest["boundaries"]["frozen_p1_02_status"], "BLOCKED")
+
+    def test_records_review_only_full_w7_resource_estimate(self) -> None:
+        review = self.protocol["full_w7_runtime_resource_review"]
+        manifest_path = (
+            ROOT / self.protocol["performance_probe_result"]["run_manifest"]["path"]
+        )
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        self.assertEqual(
+            review["measured_query_count"], manifest["timings"][0]["queries"]
+        )
+        self.assertEqual(
+            review["measured_page_limits"],
+            [case["pages_per_query"] for case in manifest["timings"]],
+        )
+        self.assertEqual(
+            review["measured_case_seconds"],
+            [case["elapsed_seconds"] for case in manifest["timings"]],
+        )
+        self.assertEqual(review["full_shape_queries"], manifest["preflight"]["queries"])
+        self.assertEqual(
+            review["full_shape_pages_per_query"],
+            manifest["preflight"]["pages_per_query"],
+        )
+        pages = np.asarray(review["measured_page_limits"], dtype=float)
+        seconds = np.asarray(review["measured_case_seconds"], dtype=float)
+        local_exponents = np.log(seconds[1:] / seconds[:-1]) / math.log(2.0)
+        fit_exponent, fit_intercept = np.polyfit(np.log(pages), np.log(seconds), 1)
+        np.testing.assert_allclose(
+            review["empirical_page_doubling_exponents"],
+            local_exponents,
+            rtol=0,
+            atol=1e-12,
+        )
+        self.assertAlmostEqual(
+            review["three_point_power_fit_exponent"], fit_exponent, places=12
+        )
+
+        query_scale = review["full_shape_queries"] / review["measured_query_count"]
+        page_scale = review["full_shape_pages_per_query"] / pages[-1]
+        derived = review["derived_single_worker_days"]
+        expected = {
+            "lower_local_exponent": (
+                seconds[-1] * query_scale * page_scale ** min(local_exponents) / 86400
+            ),
+            "three_point_power_fit": (
+                math.exp(fit_intercept)
+                * review["full_shape_pages_per_query"] ** fit_exponent
+                * query_scale
+                / 86400
+            ),
+            "quadratic_log_complexity": (
+                seconds[-1]
+                * query_scale
+                * page_scale**2
+                * math.log(review["full_shape_pages_per_query"])
+                / math.log(pages[-1])
+                / 86400
+            ),
+            "upper_local_exponent": (
+                seconds[-1] * query_scale * page_scale ** max(local_exponents) / 86400
+            ),
+        }
+        for name, value in expected.items():
+            self.assertAlmostEqual(derived[name], value, places=12, msg=name)
+        self.assertEqual(review["estimate_status"], "derived_not_measured")
+        self.assertEqual(
+            review["recommendation"],
+            "no_go_current_monolithic_single_worker_full_w7",
+        )
+        self.assertFalse(review["execution_authorized"])
 
     def test_freezes_current_w7_oracle_semantics_and_source_files(self) -> None:
         contract = self.protocol["implementation_contract"]

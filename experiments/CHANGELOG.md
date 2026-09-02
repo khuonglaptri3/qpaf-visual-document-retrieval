@@ -1,5 +1,14 @@
 # Experiment protocol changelog
 
+## 2026-09-02 - P1-02R-O1 bounded CPU probe PASS recorded and authorization closed
+
+- Recording authorization text: `Approve preparing and committing the P1-02R-O1 bounded CPU performance-probe PASS recording using the existing immutable attempt marker and run manifest. Close the consumed probe authorization, update only provenance, task state, protocol, and tests, and return a review-only full-W7 runtime/resource recommendation. Do not execute or authorize W7, Modal/GPU, P1-03/P1-03R, learned QPAF, or relabel P1-02`
+- Execution provenance: the one corrective human invocation ran from commit `aebeef11d5964b9c45ea56242f41ad4202aec95c` against protocol SHA-256 `2965484635457fd8a54fa6bb7821a530df7904b348eb2871b90752d70863db13`. The replacement authorization is consumed (`1/1`), has zero invocations remaining, and cannot be retried automatically.
+- Immutable engineering evidence: `_ATTEMPTED.json` is 908 bytes with SHA-256 `f394faa42c3ac324e4378bde332a01794848780248b86cda12ccf8bc7fc61ace`; `run_manifest.json` is 2,894 bytes with SHA-256 `2b030610ad7f8fb261799aa1d972ae47ee86724ea536eb4f317e6c2d71704549`. Their schema, protocol/source/attempt cross-links, one-thread CPU environment, and non-result boundaries validate.
+- Measured bounded cases: three systematic queries with deterministic synthetic relevance completed at 128/256/512 pages in `0.6704216001089662`/`3.7113504000008106`/`13.628036600071937` seconds. No actual relevance, oracle result, scientific result, full W7, Modal, or GPU was used.
+- Review-only resource estimate: linear query scaling plus the measured page-growth range implies 4.97–20.02 single-worker days for 1,142 queries x 5,385 pages; the three-point power fit gives 10.68 days, and a quadratic-log model gives 9.15 days. These derived values exclude full 10,000-resample bootstrap, I/O/materialization, process/checkpoint, contention, and thermal overheads. They are not full-corpus measurements.
+- Recommendation and boundary: `NO-GO` for the current monolithic single-worker full W7. A query-sharded/resumable CPU wrapper with exact-semantic equivalence tests is the recommended next preparation for a separate review; it is not authorized here. All probe/oracle/output, Modal/GPU, P1-03/P1-03R, and learned-QPAF guards are closed; P1-02 remains `BLOCKED`, P1-02R remains `PASS`, and no dependency is rewritten.
+
 ## 2026-09-02 - Corrective one-replacement P1-02R-O1 CPU probe authorized, not executed
 
 - Prior invocation: the human invoked the command authorized by `fd2f411214b4b47750ffe6488bb0b5b654b55f66`, but CPython stopped during preinitialization with `preconfig_init_utf8_mode: invalid PYTHONUTF8 environment variable value`. The unquoted CMD form stored `PYTHONUTF8` as `1 ` with a trailing space, so the project module never loaded.

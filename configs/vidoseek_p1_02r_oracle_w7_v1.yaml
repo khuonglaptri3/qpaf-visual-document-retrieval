@@ -2,7 +2,7 @@ schema_version: 1
 protocol_id: vidoseek_p1_02r_oracle_w7_v1
 task_id: P1-02R-O1
 version: 1
-status: bounded_cpu_performance_probe_replacement_execution_approved
+status: bounded_cpu_performance_probe_pass_recorded
 classification: post_hoc_oracle_upper_bound
 prepared_on: "2026-09-01"
 
@@ -102,9 +102,22 @@ authorization:
       - tests/test_vidoseek_p1_02r_oracle_protocol.py
       - tests/test_vidoseek_p1_02r_oracle_safeguards.py
     authorized_invocations: 1
-    consumed_invocations: 0
-    remaining_authorized_invocations: 1
+    consumed_invocations: 1
+    remaining_authorized_invocations: 0
     automatic_retry_allowed: false
+    outcome: PASS
+  performance_probe_pass_recording:
+    scope: local_probe_pass_recording_and_runtime_resource_review_only
+    approved_by: user
+    approved_on: "2026-09-02"
+    approval_text: >-
+      Approve preparing and committing the P1-02R-O1 bounded CPU
+      performance-probe PASS recording using the existing immutable attempt marker
+      and run manifest. Close the consumed probe authorization, update only
+      provenance, task state, protocol, and tests, and return a review-only full-W7
+      runtime/resource recommendation. Do not execute or authorize W7, Modal/GPU,
+      P1-03/P1-03R, learned QPAF, or relabel P1-02
+    execution_authorized: false
 
 parent_task_graph:
   frozen_p1_02:
@@ -209,7 +222,7 @@ implementation_contract:
     - path: src/oracle_study/cli.py
       sha256: 6de6b782238b3de19d637edd263869835a9f53acb47caab490ce79963f263955
     - path: src/oracle_study/vidoseek_p1_02r_oracle.py
-      sha256: ec88d0340c4df5a14129734a08bf9f72306234a0a64c6c98e55427442fedf0a6
+      sha256: 151a5c4d5d548c561d4d7885b7df1f683c00bd70ae3e78a7965ee7c2b20ba902
   source_drift_requires_new_protocol_version: true
 
 oracle_design:
@@ -298,16 +311,69 @@ performance_probe:
   ladder_timeout_seconds: 300
   automatic_retry_allowed: false
   attempt_marker_path: artifacts/vidoseek_p1_02r_oracle_w7_v1_probe/_ATTEMPTED.json
-  attempt_marker_produced: false
+  attempt_marker_produced: true
   output_manifest_path: artifacts/vidoseek_p1_02r_oracle_w7_v1_probe/run_manifest.json
-  output_manifest_produced: false
+  output_manifest_produced: true
   future_command_cmd: >-
     set "OMP_NUM_THREADS=1" && set "MKL_NUM_THREADS=1" &&
     set "OPENBLAS_NUM_THREADS=1" && set "NUMEXPR_NUM_THREADS=1" &&
     set "PYTHONUTF8=1" && set "PYTHONIOENCODING=utf-8" && set "PYTHONPATH=src" &&
     C:\Python313\python.exe -m oracle_study.vidoseek_p1_02r_oracle
     performance-probe --protocol configs\vidoseek_p1_02r_oracle_w7_v1.yaml
-  command_currently_authorized: true
+  command_currently_authorized: false
+
+performance_probe_result:
+  status: PASS
+  classification: engineering_performance_probe_not_result
+  recorded_on: "2026-09-02"
+  executed_source_commit: aebeef11d5964b9c45ea56242f41ad4202aec95c
+  executed_protocol_sha256: 2965484635457fd8a54fa6bb7821a530df7904b348eb2871b90752d70863db13
+  attempt_marker:
+    path: artifacts/vidoseek_p1_02r_oracle_w7_v1_probe/_ATTEMPTED.json
+    bytes: 908
+    sha256: f394faa42c3ac324e4378bde332a01794848780248b86cda12ccf8bc7fc61ace
+  run_manifest:
+    path: artifacts/vidoseek_p1_02r_oracle_w7_v1_probe/run_manifest.json
+    bytes: 2894
+    sha256: 2b030610ad7f8fb261799aa1d972ae47ee86724ea536eb4f317e6c2d71704549
+  started_at: "2026-09-02T03:20:20.811791+00:00"
+  completed_at: "2026-09-02T03:20:43.244790+00:00"
+  case_elapsed_seconds_total: 18.009808600181714
+  full_w7_runtime_measured: false
+  scientific_result_produced: false
+
+full_w7_runtime_resource_review:
+  classification: engineering_estimate_review_only_not_execution_authorization
+  evidence_basis: recorded_three_query_synthetic_relevance_probe
+  measured_query_count: 3
+  measured_page_limits: [128, 256, 512]
+  measured_case_seconds: [0.6704216001089662, 3.7113504000008106, 13.628036600071937]
+  full_shape_queries: 1142
+  full_shape_pages_per_query: 5385
+  query_scaling_assumption: linear
+  empirical_page_doubling_exponents: [2.4688036800897817, 1.8765616052667655]
+  three_point_power_fit_exponent: 2.1726826426782733
+  derived_single_worker_days:
+    lower_local_exponent: 4.967664438828757
+    three_point_power_fit: 10.677676883163887
+    quadratic_log_complexity: 9.147248439094271
+    upper_local_exponent: 20.015836926108243
+  estimate_status: derived_not_measured
+  estimate_excludes:
+    - full_10000_resample_bootstrap_overhead
+    - full_input_output_materialization
+    - process_startup_and_checkpointing
+    - host_contention_and_thermal_throttling
+  inspected_local_cpu: Intel Core i7-10510U
+  inspected_physical_cores: 4
+  inspected_logical_processors: 8
+  inspected_total_memory_gib: 15.81
+  recommendation: no_go_current_monolithic_single_worker_full_w7
+  proposed_next_preparation: >-
+    query-sharded resumable CPU wrapper with exact-semantic equivalence tests,
+    followed only after separate approval by one full-page single-query calibration
+    with one thread, one worker, a 45-minute hard stop, and no retry
+  execution_authorized: false
 
 planned_outputs:
   produced: false
@@ -352,13 +418,14 @@ execution_readiness:
   full_oracle_protocol_wrapper_exists: false
   all_corpus_runtime_measured: false
   ready_for_execution_approval: false
-  performance_probe_authorized: true
-  performance_probe_executed: false
-  next_gate: exactly_one_human_run_corrective_replacement_bounded_cpu_performance_probe
+  performance_probe_runtime_measured: true
+  performance_probe_authorized: false
+  performance_probe_executed: true
+  next_gate: human_review_full_w7_resource_plan_only
 
 execution:
-  performance_probe_allowed: true
-  performance_probe_output_write_allowed: true
+  performance_probe_allowed: false
+  performance_probe_output_write_allowed: false
   local_cpu_oracle_allowed: false
   modal_allowed: false
   gpu_allowed: false
@@ -379,6 +446,7 @@ stop_conditions:
   - performance_probe_authorization_or_checkout_provenance_missing
   - any_retry_under_consumed_prior_performance_probe_authorization
   - performance_probe_attempt_marker_already_exists
+  - any_performance_probe_retry_after_recorded_pass
   - performance_probe_case_exceeds_120_seconds
   - performance_probe_ladder_exceeds_300_seconds
   - no_reviewed_all_corpus_runtime_evidence
@@ -392,5 +460,5 @@ scientific_boundaries:
   - not_heaven_and_no_full_score_claim
   - no_oracle_result_has_been_produced
   - performance_probe_uses_synthetic_relevance_and_is_not_an_oracle_result
-  - corrective_performance_probe_replacement_authorized_for_one_human_run_but_not_executed
+  - bounded_cpu_performance_probe_pass_recorded_as_engineering_non_result
   - no_p1_03_or_phase_2_dependency_is_unblocked

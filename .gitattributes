@@ -15,3 +15,5 @@ artifacts/vidoseek_p1_02r_import/_EXTRACTION_SUCCESS.json -text -diff
 artifacts/vidoseek_p1_02r_import/coverage_report.json -text -diff
 artifacts/vidoseek_p1_02r_import/candidate_audit.parquet -text -diff
 artifacts/vidoseek_p1_02r_integrity_review.json -text -diff
+artifacts/vidoseek_p1_02r_oracle_w7_v1_probe/_ATTEMPTED.json -text -diff
+artifacts/vidoseek_p1_02r_oracle_w7_v1_probe/run_manifest.json -text -diff

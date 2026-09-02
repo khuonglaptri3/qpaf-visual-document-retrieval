@@ -1,0 +1,95 @@
+{
+  "attempt_marker_sha256": "f394faa42c3ac324e4378bde332a01794848780248b86cda12ccf8bc7fc61ace",
+  "boundaries": {
+    "actual_relevance_loaded": false,
+    "frozen_p1_02_status": "BLOCKED",
+    "full_w7_oracle_executed": false,
+    "learned_qpaf_executed": false,
+    "modal_or_gpu_used": false,
+    "oracle_results_persisted": false,
+    "p1_03_authorized": false,
+    "scientific_oracle_analysis_executed": false
+  },
+  "classification": "engineering_performance_probe_not_result",
+  "completed_at": "2026-09-02T03:20:43.244790+00:00",
+  "environment": {
+    "device": "cpu",
+    "packages": {
+      "PyYAML": "6.0.3",
+      "numpy": "2.4.4",
+      "pandas": "3.0.2",
+      "pyarrow": "24.0.0"
+    },
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.13.7 (tags/v3.13.7:bcee1c3, Aug 14 2025, 14:15:11) [MSC v.1944 64 bit (AMD64)]",
+    "thread_limits": {
+      "MKL_NUM_THREADS": "1",
+      "NUMEXPR_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1"
+    }
+  },
+  "preflight": {
+    "actual_relevance_loaded": false,
+    "authorization_attempt_consumed": true,
+    "coverage": 1.0,
+    "oracle_executed": false,
+    "pages_per_query": 5385,
+    "protocol_id": "vidoseek_p1_02r_oracle_w7_v1",
+    "protocol_sha256": "2965484635457fd8a54fa6bb7821a530df7904b348eb2871b90752d70863db13",
+    "queries": 1142,
+    "retrieval_score_content_sha256": "41c55a82fd4cd3607347aba68461a11dd4a0781f1e6825a107e44bb4544315e7",
+    "retrieval_score_sha256": "32b39da19e9507a0a5060157630cb40bf5c6bcf6464d88e4bb6136888473173b",
+    "rows": 6149670,
+    "schema_version": 1,
+    "scientific_result_produced": false,
+    "semantic_integrity_inherited_from_hash_pinned_review": true,
+    "status": "PASS"
+  },
+  "probe_contract": {
+    "actual_relevance_loaded": false,
+    "bootstrap_resamples": 100,
+    "cpu_thread_limit": 1,
+    "ladder_timeout_seconds": 300,
+    "max_case_candidate_rows": 1536,
+    "max_concurrent_cases": 1,
+    "page_limits": [
+      128,
+      256,
+      512
+    ],
+    "per_case_timeout_seconds": 120,
+    "query_indices": [
+      0,
+      570,
+      1141
+    ],
+    "repetitions": 1,
+    "synthetic_relevance_rule": "first_and_middle_sampled_page_binary_relevant"
+  },
+  "protocol_id": "vidoseek_p1_02r_oracle_w7_v1",
+  "protocol_sha256": "2965484635457fd8a54fa6bb7821a530df7904b348eb2871b90752d70863db13",
+  "schema_version": 1,
+  "source_commit": "aebeef11d5964b9c45ea56242f41ad4202aec95c",
+  "status": "PASS",
+  "timings": [
+    {
+      "candidate_rows": 384,
+      "elapsed_seconds": 0.6704216001089662,
+      "pages_per_query": 128,
+      "queries": 3
+    },
+    {
+      "candidate_rows": 768,
+      "elapsed_seconds": 3.7113504000008106,
+      "pages_per_query": 256,
+      "queries": 3
+    },
+    {
+      "candidate_rows": 1536,
+      "elapsed_seconds": 13.628036600071937,
+      "pages_per_query": 512,
+      "queries": 3
+    }
+  ]
+}
