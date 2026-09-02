@@ -2,7 +2,7 @@ schema_version: 1
 protocol_id: vidoseek_p1_02r_oracle_w7_v1
 task_id: P1-02R-O1
 version: 1
-status: bounded_cpu_performance_probe_execution_approved
+status: bounded_cpu_performance_probe_replacement_execution_approved
 classification: post_hoc_oracle_upper_bound
 prepared_on: "2026-09-01"
 
@@ -40,6 +40,58 @@ authorization:
       P1-03, and do not relabel P1-02.
     execution_actor: human
     approved_safeguard_commit: 024f2f0a0998f0c781ac738d259603c6bbf29ba9
+    approval_commit: fd2f411214b4b47750ffe6488bb0b5b654b55f66
+    execution_commit_rule: single_non_merge_direct_child_with_exact_changed_paths
+    approval_commit_changed_paths:
+      - Context.md
+      - Tasks.md
+      - configs/vidoseek_p1_02r_oracle_w7_v1.yaml
+      - experiments/CHANGELOG.md
+      - src/oracle_study/vidoseek_p1_02r_oracle.py
+      - tests/test_vidoseek_p1_02r_oracle_protocol.py
+      - tests/test_vidoseek_p1_02r_oracle_safeguards.py
+    authorized_invocations: 1
+    consumed_invocations: 1
+    remaining_authorized_invocations: 0
+    automatic_retry_allowed: false
+    failure_record:
+      outcome: failed_before_python_runtime_initialization_and_project_import
+      failure_stage: cpython_preinitialization
+      failure_cause: unquoted_cmd_set_assignment_added_trailing_space
+      error: >-
+        Fatal Python error: preconfig_init_utf8_mode: invalid PYTHONUTF8 environment
+        variable value
+      failed_command_cmd: >-
+        set OMP_NUM_THREADS=1 && set MKL_NUM_THREADS=1 &&
+        set OPENBLAS_NUM_THREADS=1 && set NUMEXPR_NUM_THREADS=1 &&
+        set PYTHONUTF8=1 && set PYTHONIOENCODING=utf-8 && set PYTHONPATH=src &&
+        C:\Python313\python.exe -m oracle_study.vidoseek_p1_02r_oracle
+        performance-probe --protocol configs\vidoseek_p1_02r_oracle_w7_v1.yaml
+      pythonutf8_observed_value: "1 "
+      python_runtime_initialized: false
+      project_module_imported: false
+      attempt_marker_produced: false
+      preflight_executed: false
+      performance_probe_executed: false
+      probe_manifest_produced: false
+      oracle_result_produced: false
+  replacement_performance_probe_execution:
+    scope: one_replacement_local_cpu_non_result_performance_probe
+    approved_by: user
+    approved_on: "2026-09-02"
+    approval_text: >-
+      Approve preparing and committing a corrective P1-02R-O1
+      execution-guard/provenance amendment for exactly one replacement human-run CPU
+      performance-probe invocation. Record the prior invocation as failed before
+      Python/project startup because the approved CMD used unquoted set assignments
+      and set PYTHONUTF8 to 1 ; no attempt marker preflight, probe, manifest, or
+      oracle result was produced. Replace the command with quoted CMD assignments,
+      preserve all fixed limits and no-retry rules, and do not execute the probe
+      yourself, W7 oracle, Modal/GPU, or P1-03, and do not relabel P1-02.
+    execution_actor: human
+    replaces_failed_approval_commit: fd2f411214b4b47750ffe6488bb0b5b654b55f66
+    approved_correction_base_commit: fd2f411214b4b47750ffe6488bb0b5b654b55f66
+    automatic_retry_under_prior_authorization: false
     execution_commit_rule: single_non_merge_direct_child_with_exact_changed_paths
     approval_commit_changed_paths:
       - Context.md
@@ -157,7 +209,7 @@ implementation_contract:
     - path: src/oracle_study/cli.py
       sha256: 6de6b782238b3de19d637edd263869835a9f53acb47caab490ce79963f263955
     - path: src/oracle_study/vidoseek_p1_02r_oracle.py
-      sha256: 8dcd25528b1c78e555dba77dcb62af7624ff6db6f55e442eb7a1235c84b4db8b
+      sha256: ec88d0340c4df5a14129734a08bf9f72306234a0a64c6c98e55427442fedf0a6
   source_drift_requires_new_protocol_version: true
 
 oracle_design:
@@ -203,7 +255,7 @@ bootstrap:
 preflight_contract:
   mode: read_only
   command: >-
-    set PYTHONUTF8=1 && set PYTHONIOENCODING=utf-8 && set PYTHONPATH=src &&
+    set "PYTHONUTF8=1" && set "PYTHONIOENCODING=utf-8" && set "PYTHONPATH=src" &&
     C:\Python313\python.exe -m oracle_study.vidoseek_p1_02r_oracle preflight
     --protocol configs\vidoseek_p1_02r_oracle_w7_v1.yaml
   verifies_input_bytes_hashes_parquet_metadata_and_evidence_cross_links: true
@@ -250,9 +302,9 @@ performance_probe:
   output_manifest_path: artifacts/vidoseek_p1_02r_oracle_w7_v1_probe/run_manifest.json
   output_manifest_produced: false
   future_command_cmd: >-
-    set OMP_NUM_THREADS=1 && set MKL_NUM_THREADS=1 &&
-    set OPENBLAS_NUM_THREADS=1 && set NUMEXPR_NUM_THREADS=1 &&
-    set PYTHONUTF8=1 && set PYTHONIOENCODING=utf-8 && set PYTHONPATH=src &&
+    set "OMP_NUM_THREADS=1" && set "MKL_NUM_THREADS=1" &&
+    set "OPENBLAS_NUM_THREADS=1" && set "NUMEXPR_NUM_THREADS=1" &&
+    set "PYTHONUTF8=1" && set "PYTHONIOENCODING=utf-8" && set "PYTHONPATH=src" &&
     C:\Python313\python.exe -m oracle_study.vidoseek_p1_02r_oracle
     performance-probe --protocol configs\vidoseek_p1_02r_oracle_w7_v1.yaml
   command_currently_authorized: true
@@ -302,7 +354,7 @@ execution_readiness:
   ready_for_execution_approval: false
   performance_probe_authorized: true
   performance_probe_executed: false
-  next_gate: exactly_one_human_run_bounded_cpu_performance_probe
+  next_gate: exactly_one_human_run_corrective_replacement_bounded_cpu_performance_probe
 
 execution:
   performance_probe_allowed: true
@@ -325,6 +377,7 @@ stop_conditions:
   - output_directory_already_exists
   - protocol_bound_preflight_or_immutable_manifest_write_failure
   - performance_probe_authorization_or_checkout_provenance_missing
+  - any_retry_under_consumed_prior_performance_probe_authorization
   - performance_probe_attempt_marker_already_exists
   - performance_probe_case_exceeds_120_seconds
   - performance_probe_ladder_exceeds_300_seconds
@@ -339,5 +392,5 @@ scientific_boundaries:
   - not_heaven_and_no_full_score_claim
   - no_oracle_result_has_been_produced
   - performance_probe_uses_synthetic_relevance_and_is_not_an_oracle_result
-  - performance_probe_authorized_for_one_human_run_but_not_executed
+  - corrective_performance_probe_replacement_authorized_for_one_human_run_but_not_executed
   - no_p1_03_or_phase_2_dependency_is_unblocked

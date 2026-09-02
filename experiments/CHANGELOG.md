@@ -1,5 +1,15 @@
 # Experiment protocol changelog
 
+## 2026-09-02 - Corrective one-replacement P1-02R-O1 CPU probe authorized, not executed
+
+- Prior invocation: the human invoked the command authorized by `fd2f411214b4b47750ffe6488bb0b5b654b55f66`, but CPython stopped during preinitialization with `preconfig_init_utf8_mode: invalid PYTHONUTF8 environment variable value`. The unquoted CMD form stored `PYTHONUTF8` as `1 ` with a trailing space, so the project module never loaded.
+- Produced state: no `_ATTEMPTED.json`, input preflight, performance probe, run manifest, or oracle result was produced. The prior one-invocation authorization is nevertheless consumed under its fixed no-retry rule; this amendment does not reopen or retry it.
+- Corrective authorization text: `Approve preparing and committing a corrective P1-02R-O1 execution-guard/provenance amendment for exactly one replacement human-run CPU performance-probe invocation. Record the prior invocation as failed before Python/project startup because the approved CMD used unquoted set assignments and set PYTHONUTF8 to 1 ; no attempt marker preflight, probe, manifest, or oracle result was produced. Replace the command with quoted CMD assignments, preserve all fixed limits and no-retry rules, and do not execute the probe yourself, W7 oracle, Modal/GPU, or P1-03, and do not relabel P1-02.`
+- Replacement provenance: exactly one separately approved human invocation is available from one clean, non-merge direct child of `fd2f411214b4b47750ffe6488bb0b5b654b55f66` whose changed paths exactly equal the seven guard/provenance files. It is not an automatic retry under the consumed approval.
+- Corrected future CMD command: `set "OMP_NUM_THREADS=1" && set "MKL_NUM_THREADS=1" && set "OPENBLAS_NUM_THREADS=1" && set "NUMEXPR_NUM_THREADS=1" && set "PYTHONUTF8=1" && set "PYTHONIOENCODING=utf-8" && set "PYTHONPATH=src" && C:\Python313\python.exe -m oracle_study.vidoseek_p1_02r_oracle performance-probe --protocol configs\vidoseek_p1_02r_oracle_w7_v1.yaml`.
+- Unchanged limits and stop rule: CPU-only, one worker/thread, query indices `[0,570,1141]`, page ladders `[128,256,512]`, one repetition, 100 bootstrap resamples, at most 1,536 rows per case, synthetic relevance only, 120 seconds per case, 300 seconds total, and no automatic retry after the replacement starts.
+- Scientific boundary: Codex did not execute the replacement, W7 oracle, Modal/GPU, P1-03, or learned QPAF and produced no result. P1-02 remains `BLOCKED`, P1-02R remains `PASS`, P1-03 remains blocked, and no task dependency is rewritten.
+
 ## 2026-09-02 - One human-run P1-02R-O1 CPU probe authorized, not executed
 
 - Status: `bounded_cpu_performance_probe_execution_approved`; exactly one human invocation is authorized from the reviewed safeguard baseline `024f2f0a0998f0c781ac738d259603c6bbf29ba9`. Codex did not execute the command, and no attempt marker, probe manifest, W7 oracle result, Modal/GPU work, or P1-03 work was produced.

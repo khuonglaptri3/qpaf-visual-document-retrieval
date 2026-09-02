@@ -16,8 +16,16 @@ from oracle_study.vidoseek_p1_02r_oracle import (
     APPROVED_STATUS,
     EXECUTION_APPROVAL_TEXT,
     EXECUTION_COMMIT_RULE,
+    FAILED_EXECUTION_APPROVAL_COMMIT,
+    FAILED_PERFORMANCE_PROBE_COMMAND_CMD,
+    FAILED_PYTHON_ERROR,
+    ORIGINAL_EXECUTION_APPROVAL_TEXT,
+    ORIGINAL_PROBE_SCOPE,
     PREPARATION_APPROVAL_TEXT,
+    PREFLIGHT_COMMAND_CMD,
     PROBE_SCORE_COLUMNS,
+    PROBE_SCOPE,
+    REPLACEMENT_APPROVAL_PARENT_COMMIT,
 )
 
 
@@ -31,9 +39,10 @@ APPROVAL_TEXT = (
     "and stop/go gates for review."
 )
 FUTURE_PROBE_COMMAND = (
-    "set OMP_NUM_THREADS=1 && set MKL_NUM_THREADS=1 && "
-    "set OPENBLAS_NUM_THREADS=1 && set NUMEXPR_NUM_THREADS=1 && "
-    "set PYTHONUTF8=1 && set PYTHONIOENCODING=utf-8 && set PYTHONPATH=src && "
+    'set "OMP_NUM_THREADS=1" && set "MKL_NUM_THREADS=1" && '
+    'set "OPENBLAS_NUM_THREADS=1" && set "NUMEXPR_NUM_THREADS=1" && '
+    'set "PYTHONUTF8=1" && set "PYTHONIOENCODING=utf-8" && '
+    'set "PYTHONPATH=src" && '
     "C:\\Python313\\python.exe -m oracle_study.vidoseek_p1_02r_oracle "
     "performance-probe --protocol configs\\vidoseek_p1_02r_oracle_w7_v1.yaml"
 )
@@ -56,7 +65,7 @@ class VidoseekP102ROracleProtocolTest(unittest.TestCase):
     def setUpClass(cls) -> None:
         cls.protocol = yaml.safe_load(PROTOCOL_PATH.read_text(encoding="utf-8"))
 
-    def test_records_exactly_one_human_probe_approval(self) -> None:
+    def test_records_failed_original_and_one_replacement_probe_approval(self) -> None:
         protocol = self.protocol
         self.assertEqual(protocol["protocol_id"], "vidoseek_p1_02r_oracle_w7_v1")
         self.assertEqual(protocol["task_id"], "P1-02R-O1")
@@ -66,11 +75,45 @@ class VidoseekP102ROracleProtocolTest(unittest.TestCase):
             protocol["authorization"]["preexecution_preparation"]["approval_text"],
             PREPARATION_APPROVAL_TEXT,
         )
-        approval = protocol["authorization"]["performance_probe_execution"]
+        prior = protocol["authorization"]["performance_probe_execution"]
+        self.assertEqual(prior["scope"], ORIGINAL_PROBE_SCOPE)
+        self.assertEqual(prior["approval_text"], ORIGINAL_EXECUTION_APPROVAL_TEXT)
+        self.assertEqual(prior["approved_safeguard_commit"], APPROVED_SAFEGUARD_COMMIT)
+        self.assertEqual(prior["approval_commit"], FAILED_EXECUTION_APPROVAL_COMMIT)
+        self.assertEqual(prior["authorized_invocations"], 1)
+        self.assertEqual(prior["consumed_invocations"], 1)
+        self.assertEqual(prior["remaining_authorized_invocations"], 0)
+        self.assertFalse(prior["automatic_retry_allowed"])
+        failure = prior["failure_record"]
+        self.assertEqual(failure["failure_stage"], "cpython_preinitialization")
+        self.assertEqual(failure["error"], FAILED_PYTHON_ERROR)
+        self.assertEqual(
+            failure["failed_command_cmd"], FAILED_PERFORMANCE_PROBE_COMMAND_CMD
+        )
+        self.assertEqual(failure["pythonutf8_observed_value"], "1 ")
+        for field in [
+            "python_runtime_initialized",
+            "project_module_imported",
+            "attempt_marker_produced",
+            "preflight_executed",
+            "performance_probe_executed",
+            "probe_manifest_produced",
+            "oracle_result_produced",
+        ]:
+            self.assertFalse(failure[field], field)
+
+        approval = protocol["authorization"]["replacement_performance_probe_execution"]
+        self.assertEqual(approval["scope"], PROBE_SCOPE)
         self.assertEqual(approval["approval_text"], EXECUTION_APPROVAL_TEXT)
         self.assertEqual(
-            approval["approved_safeguard_commit"], APPROVED_SAFEGUARD_COMMIT
+            approval["replaces_failed_approval_commit"],
+            FAILED_EXECUTION_APPROVAL_COMMIT,
         )
+        self.assertEqual(
+            approval["approved_correction_base_commit"],
+            REPLACEMENT_APPROVAL_PARENT_COMMIT,
+        )
+        self.assertFalse(approval["automatic_retry_under_prior_authorization"])
         self.assertEqual(approval["execution_commit_rule"], EXECUTION_COMMIT_RULE)
         self.assertEqual(
             approval["approval_commit_changed_paths"], APPROVAL_COMMIT_PATHS
@@ -101,7 +144,7 @@ class VidoseekP102ROracleProtocolTest(unittest.TestCase):
         self.assertFalse(readiness["ready_for_execution_approval"])
         self.assertEqual(
             readiness["next_gate"],
-            "exactly_one_human_run_bounded_cpu_performance_probe",
+            "exactly_one_human_run_corrective_replacement_bounded_cpu_performance_probe",
         )
 
     def test_preserves_frozen_parent_task_graph(self) -> None:
@@ -186,6 +229,20 @@ class VidoseekP102ROracleProtocolTest(unittest.TestCase):
         self.assertFalse(probe["attempt_marker_produced"])
         self.assertFalse(probe["output_manifest_produced"])
         self.assertEqual(probe["future_command_cmd"], FUTURE_PROBE_COMMAND)
+        self.assertEqual(
+            self.protocol["preflight_contract"]["command"], PREFLIGHT_COMMAND_CMD
+        )
+        for assignment in [
+            "OMP_NUM_THREADS=1",
+            "MKL_NUM_THREADS=1",
+            "OPENBLAS_NUM_THREADS=1",
+            "NUMEXPR_NUM_THREADS=1",
+            "PYTHONUTF8=1",
+            "PYTHONIOENCODING=utf-8",
+            "PYTHONPATH=src",
+        ]:
+            self.assertIn(f'set "{assignment}"', FUTURE_PROBE_COMMAND)
+            self.assertNotIn(f"set {assignment} &&", FUTURE_PROBE_COMMAND)
         self.assertNotIn("relevance", PROBE_SCORE_COLUMNS)
         self.assertEqual(
             self.protocol["run_manifest_contract"]["write_mode"],

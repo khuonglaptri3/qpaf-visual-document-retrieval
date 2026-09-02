@@ -283,7 +283,7 @@ def test_protocol_bound_preflight_rejects_changed_payload(tmp_path: Path) -> Non
         safeguards.protocol_bound_preflight(protocol_path)
 
 
-def test_approved_probe_guard_requires_direct_child_allowlist(
+def test_replacement_probe_guard_requires_corrective_direct_child_allowlist(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     protocol = safeguards.load_protocol(PROTOCOL_PATH)
@@ -291,7 +291,7 @@ def test_approved_probe_guard_requires_direct_child_allowlist(
     outputs = iter(
         [
             live_commit + "\n",
-            f"{live_commit} {safeguards.APPROVED_SAFEGUARD_COMMIT}\n",
+            f"{live_commit} {safeguards.REPLACEMENT_APPROVAL_PARENT_COMMIT}\n",
             "\n".join(safeguards.APPROVAL_COMMIT_PATHS) + "\n",
             "",
         ]

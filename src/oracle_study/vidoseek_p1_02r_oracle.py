@@ -26,9 +26,12 @@ from .qpaf import run_qpaf_oracle
 
 PROTOCOL_ID = "vidoseek_p1_02r_oracle_w7_v1"
 PREPARED_STATUS = "preexecution_safeguards_prepared_review_required"
-APPROVED_STATUS = "bounded_cpu_performance_probe_execution_approved"
-PROBE_SCOPE = "one_local_cpu_non_result_performance_probe"
+APPROVED_STATUS = "bounded_cpu_performance_probe_replacement_execution_approved"
+ORIGINAL_PROBE_SCOPE = "one_local_cpu_non_result_performance_probe"
+PROBE_SCOPE = "one_replacement_local_cpu_non_result_performance_probe"
 APPROVED_SAFEGUARD_COMMIT = "024f2f0a0998f0c781ac738d259603c6bbf29ba9"
+FAILED_EXECUTION_APPROVAL_COMMIT = "fd2f411214b4b47750ffe6488bb0b5b654b55f66"
+REPLACEMENT_APPROVAL_PARENT_COMMIT = FAILED_EXECUTION_APPROVAL_COMMIT
 EXECUTION_COMMIT_RULE = "single_non_merge_direct_child_with_exact_changed_paths"
 APPROVAL_COMMIT_PATHS = [
     "Context.md",
@@ -62,12 +65,47 @@ PREPARATION_APPROVAL_TEXT = (
     "or P1-03, and do not relabel P1-02. Return the complete diff, proposed probe "
     "limits, runtime stop condition, and exact future command for review."
 )
-EXECUTION_APPROVAL_TEXT = (
+ORIGINAL_EXECUTION_APPROVAL_TEXT = (
     "Approve preparing and committing the execution-guard/provenance amendment for "
     "exactly one human-run P1-02R-O1 bounded CPU performance probe from commit "
     "024f2f0a0998f0c781ac738d259603c6bbf29ba9. Keep the fixed limits and no-retry "
     "rule. Do not execute the probe yourself, W7 oracle, Modal/GPU, or P1-03, and "
     "do not relabel P1-02."
+)
+EXECUTION_APPROVAL_TEXT = (
+    "Approve preparing and committing a corrective P1-02R-O1 execution-guard/"
+    "provenance amendment for exactly one replacement human-run CPU performance-probe "
+    "invocation. Record the prior invocation as failed before Python/project startup "
+    "because the approved CMD used unquoted set assignments and set PYTHONUTF8 to 1 ; "
+    "no attempt marker preflight, probe, manifest, or oracle result was produced. "
+    "Replace the command with quoted CMD assignments, preserve all fixed limits and "
+    "no-retry rules, and do not execute the probe yourself, W7 oracle, Modal/GPU, or "
+    "P1-03, and do not relabel P1-02."
+)
+FAILED_PYTHON_ERROR = (
+    "Fatal Python error: preconfig_init_utf8_mode: invalid PYTHONUTF8 environment "
+    "variable value"
+)
+FAILED_PERFORMANCE_PROBE_COMMAND_CMD = (
+    "set OMP_NUM_THREADS=1 && set MKL_NUM_THREADS=1 && "
+    "set OPENBLAS_NUM_THREADS=1 && set NUMEXPR_NUM_THREADS=1 && "
+    "set PYTHONUTF8=1 && set PYTHONIOENCODING=utf-8 && set PYTHONPATH=src && "
+    "C:\\Python313\\python.exe -m oracle_study.vidoseek_p1_02r_oracle "
+    "performance-probe --protocol configs\\vidoseek_p1_02r_oracle_w7_v1.yaml"
+)
+PREFLIGHT_COMMAND_CMD = (
+    'set "PYTHONUTF8=1" && set "PYTHONIOENCODING=utf-8" && '
+    'set "PYTHONPATH=src" && C:\\Python313\\python.exe -m '
+    "oracle_study.vidoseek_p1_02r_oracle preflight --protocol "
+    "configs\\vidoseek_p1_02r_oracle_w7_v1.yaml"
+)
+PERFORMANCE_PROBE_COMMAND_CMD = (
+    'set "OMP_NUM_THREADS=1" && set "MKL_NUM_THREADS=1" && '
+    'set "OPENBLAS_NUM_THREADS=1" && set "NUMEXPR_NUM_THREADS=1" && '
+    'set "PYTHONUTF8=1" && set "PYTHONIOENCODING=utf-8" && '
+    'set "PYTHONPATH=src" && C:\\Python313\\python.exe -m '
+    "oracle_study.vidoseek_p1_02r_oracle performance-probe --protocol "
+    "configs\\vidoseek_p1_02r_oracle_w7_v1.yaml"
 )
 
 
@@ -171,10 +209,14 @@ def validate_protocol(protocol: dict[str, Any], repo_root: Path) -> None:
         )
     if probe.get("attempt_marker_produced") is not False:
         raise ValueError("Performance-probe attempt marker must remain unproduced")
+    if probe.get("future_command_cmd") != PERFORMANCE_PROBE_COMMAND_CMD:
+        raise ValueError("Performance-probe CMD command must use quoted assignments")
 
     preflight = protocol.get("preflight_contract", {})
     if preflight.get("mode") != "read_only":
         raise ValueError("P1-02R-O1 preflight must remain read-only")
+    if preflight.get("command") != PREFLIGHT_COMMAND_CMD:
+        raise ValueError("Preflight CMD command must use quoted assignments")
     for field in [
         "actual_relevance_values_loaded",
         "report_persisted",
@@ -270,11 +312,48 @@ def validate_protocol(protocol: dict[str, Any], repo_root: Path) -> None:
         ]:
             if execution.get(field) is not False:
                 raise ValueError(f"Approved protocol opened forbidden guard: {field}")
-        approval = protocol.get("authorization", {}).get(
+        prior_approval = protocol.get("authorization", {}).get(
             "performance_probe_execution", {}
         )
+        expected_failure = {
+            "outcome": "failed_before_python_runtime_initialization_and_project_import",
+            "failure_stage": "cpython_preinitialization",
+            "failure_cause": "unquoted_cmd_set_assignment_added_trailing_space",
+            "error": FAILED_PYTHON_ERROR,
+            "failed_command_cmd": FAILED_PERFORMANCE_PROBE_COMMAND_CMD,
+            "pythonutf8_observed_value": "1 ",
+            "python_runtime_initialized": False,
+            "project_module_imported": False,
+            "attempt_marker_produced": False,
+            "preflight_executed": False,
+            "performance_probe_executed": False,
+            "probe_manifest_produced": False,
+            "oracle_result_produced": False,
+        }
+        if (
+            prior_approval.get("scope") != ORIGINAL_PROBE_SCOPE
+            or prior_approval.get("approved_by") != "user"
+            or prior_approval.get("approved_on") != "2026-09-02"
+            or prior_approval.get("approval_text") != ORIGINAL_EXECUTION_APPROVAL_TEXT
+            or prior_approval.get("execution_actor") != "human"
+            or prior_approval.get("approved_safeguard_commit")
+            != APPROVED_SAFEGUARD_COMMIT
+            or prior_approval.get("approval_commit") != FAILED_EXECUTION_APPROVAL_COMMIT
+            or prior_approval.get("execution_commit_rule") != EXECUTION_COMMIT_RULE
+            or prior_approval.get("approval_commit_changed_paths")
+            != APPROVAL_COMMIT_PATHS
+            or prior_approval.get("authorized_invocations") != 1
+            or prior_approval.get("consumed_invocations") != 1
+            or prior_approval.get("remaining_authorized_invocations") != 0
+            or prior_approval.get("automatic_retry_allowed") is not False
+            or prior_approval.get("failure_record") != expected_failure
+        ):
+            raise ValueError("P1-02R-O1 failed original invocation provenance drifted")
+        approval = protocol.get("authorization", {}).get(
+            "replacement_performance_probe_execution", {}
+        )
         if approval.get("approval_text") != EXECUTION_APPROVAL_TEXT:
-            raise ValueError("P1-02R-O1 execution approval text drifted")
+            raise ValueError("P1-02R-O1 replacement execution approval text drifted")
 
     source_contract = protocol.get("implementation_contract", {})
     if source_contract.get("source_sha256_basis") != "utf8_lf_bytes":
@@ -474,7 +553,9 @@ def require_performance_probe_execution_approval(
     if execution.get("performance_probe_output_write_allowed") is not True:
         raise RuntimeError("P1-02R-O1 performance-probe output guard is closed")
 
-    approval = protocol.get("authorization", {}).get("performance_probe_execution")
+    approval = protocol.get("authorization", {}).get(
+        "replacement_performance_probe_execution"
+    )
     required = {
         "scope": PROBE_SCOPE,
         "approved_by": "user",
@@ -485,7 +566,9 @@ def require_performance_probe_execution_approval(
         "remaining_authorized_invocations": 1,
         "automatic_retry_allowed": False,
         "execution_actor": "human",
-        "approved_safeguard_commit": APPROVED_SAFEGUARD_COMMIT,
+        "replaces_failed_approval_commit": FAILED_EXECUTION_APPROVAL_COMMIT,
+        "approved_correction_base_commit": REPLACEMENT_APPROVAL_PARENT_COMMIT,
+        "automatic_retry_under_prior_authorization": False,
         "execution_commit_rule": EXECUTION_COMMIT_RULE,
         "approval_commit_changed_paths": APPROVAL_COMMIT_PATHS,
     }
@@ -513,17 +596,17 @@ def require_performance_probe_execution_approval(
         text=True,
         timeout=30,
     ).stdout.split()
-    if commit_and_parents != [live_commit, APPROVED_SAFEGUARD_COMMIT]:
+    if commit_and_parents != [live_commit, REPLACEMENT_APPROVAL_PARENT_COMMIT]:
         raise RuntimeError(
             "P1-02R-O1 execution checkout must be one non-merge direct child of the "
-            "approved safeguard commit"
+            "approved corrective parent commit"
         )
     changed_paths = subprocess.run(
         [
             "git",
             "diff",
             "--name-only",
-            APPROVED_SAFEGUARD_COMMIT,
+            REPLACEMENT_APPROVAL_PARENT_COMMIT,
             "HEAD",
             "--",
         ],
