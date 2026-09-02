@@ -20,15 +20,18 @@ from oracle_study.vidoseek_p1_02r_oracle import (
     FAILED_EXECUTION_APPROVAL_COMMIT,
     FAILED_PERFORMANCE_PROBE_COMMAND_CMD,
     FAILED_PYTHON_ERROR,
+    FULL_PAGE_CALIBRATION_COMMAND_CMD,
+    FULL_W7_COMMAND_CMD,
     ORIGINAL_EXECUTION_APPROVAL_TEXT,
     ORIGINAL_PROBE_SCOPE,
     PREPARATION_APPROVAL_TEXT,
     PREFLIGHT_COMMAND_CMD,
     PROBE_SCORE_COLUMNS,
     PROBE_SCOPE,
-    RECORDED_STATUS,
     RECORDING_APPROVAL_TEXT,
     REPLACEMENT_APPROVAL_PARENT_COMMIT,
+    SHARDED_PREPARATION_APPROVAL_TEXT,
+    SHARDED_PREPARED_STATUS,
     validate_probe_attempt_marker,
     validate_probe_run_manifest,
     validate_protocol,
@@ -75,7 +78,7 @@ class VidoseekP102ROracleProtocolTest(unittest.TestCase):
         protocol = self.protocol
         self.assertEqual(protocol["protocol_id"], "vidoseek_p1_02r_oracle_w7_v1")
         self.assertEqual(protocol["task_id"], "P1-02R-O1")
-        self.assertEqual(protocol["status"], RECORDED_STATUS)
+        self.assertEqual(protocol["status"], SHARDED_PREPARED_STATUS)
         self.assertEqual(protocol["authorization"]["approval_text"], APPROVAL_TEXT)
         self.assertEqual(
             protocol["authorization"]["preexecution_preparation"]["approval_text"],
@@ -152,12 +155,17 @@ class VidoseekP102ROracleProtocolTest(unittest.TestCase):
         self.assertTrue(readiness["performance_probe_runtime_measured"])
         self.assertFalse(readiness["performance_probe_authorized"])
         self.assertTrue(readiness["performance_probe_executed"])
-        self.assertFalse(readiness["full_oracle_protocol_wrapper_exists"])
+        self.assertTrue(readiness["full_oracle_protocol_wrapper_exists"])
+        self.assertTrue(readiness["query_sharded_resume_contract_exists"])
+        self.assertTrue(readiness["exact_semantic_equivalence_tests_exist"])
+        self.assertTrue(readiness["ready_for_full_page_calibration_approval"])
+        self.assertFalse(readiness["full_page_calibration_authorized"])
+        self.assertFalse(readiness["full_page_calibration_executed"])
         self.assertFalse(readiness["all_corpus_runtime_measured"])
         self.assertFalse(readiness["ready_for_execution_approval"])
         self.assertEqual(
             readiness["next_gate"],
-            "human_review_full_w7_resource_plan_only",
+            "separate_human_full_page_single_query_calibration_approval",
         )
 
         validate_protocol(protocol, ROOT)
@@ -391,6 +399,86 @@ class VidoseekP102ROracleProtocolTest(unittest.TestCase):
             "no_go_current_monolithic_single_worker_full_w7",
         )
         self.assertFalse(review["execution_authorized"])
+
+    def test_records_prepared_sharded_wrapper_and_future_calibration(self) -> None:
+        authorization = self.protocol["authorization"]["sharded_wrapper_preparation"]
+        self.assertEqual(
+            authorization["scope"],
+            "local_query_sharded_resumable_wrapper_preparation_only",
+        )
+        self.assertEqual(
+            authorization["approval_text"], SHARDED_PREPARATION_APPROVAL_TEXT
+        )
+        self.assertFalse(authorization["execution_authorized"])
+
+        scores = self.protocol["input_bundle"]["retrieval_scores"]
+        wrapper = self.protocol["sharded_wrapper"]
+        self.assertEqual(wrapper["grid"], "w7")
+        self.assertEqual(wrapper["expected_queries"], scores["queries"])
+        self.assertEqual(wrapper["expected_pages_per_query"], scores["pages_per_query"])
+        self.assertEqual(wrapper["input_row_groups"], scores["row_groups"])
+        self.assertEqual(wrapper["input_query_chunk_size"], 8)
+        self.assertEqual(
+            wrapper["checkpoint_write_mode"],
+            "atomic_create_once_no_overwrite",
+        )
+        self.assertEqual(
+            wrapper["checkpoint_envelope"],
+            {
+                "schema_version": 1,
+                "canonical_json_sha256": "required",
+                "run_identity_sha256": "required",
+                "input_query_sha256": "required_per_query",
+            },
+        )
+        self.assertEqual(
+            wrapper["resume_policy"],
+            "reuse_existing_only_after_exact_identity_and_content_hash_validation",
+        )
+        self.assertEqual(
+            wrapper["absent_expected_checkpoint_action"],
+            "compute_once_in_canonical_pass",
+        )
+        self.assertEqual(
+            wrapper["invalid_existing_or_unexpected_checkpoint_action"],
+            "fail_closed_no_overwrite",
+        )
+        self.assertTrue(
+            wrapper["phases"]["global_profile"][
+                "reduce_across_all_queries_before_query_oracle"
+            ]
+        )
+        self.assertTrue(wrapper["phases"]["query_oracle"]["checkpoint_per_query"])
+        self.assertEqual(wrapper["phases"]["query_oracle"]["qpaf_max_sweeps"], 2)
+        self.assertTrue(
+            wrapper["phases"]["finalization"]["bootstrap_once_after_canonical_merge"]
+        )
+        self.assertEqual(
+            wrapper["exact_semantic_equivalence"],
+            {
+                "reference": "frozen_run_qpaf_oracle_w7",
+                "rows": "exact",
+                "summary": "exact",
+                "subgroups": "exact",
+                "numeric_tolerance": 0.0,
+            },
+        )
+        self.assertEqual(wrapper["full_w7_future_command_cmd"], FULL_W7_COMMAND_CMD)
+        self.assertFalse(wrapper["command_currently_authorized"])
+
+        calibration = self.protocol["full_page_calibration"]
+        self.assertEqual(calibration["query_index"], 570)
+        self.assertEqual(calibration["pages_per_query"], 5385)
+        self.assertEqual(calibration["bootstrap_resamples"], 100)
+        self.assertEqual(calibration["max_workers"], 1)
+        self.assertEqual(calibration["cpu_thread_limit"], 1)
+        self.assertEqual(calibration["hard_timeout_seconds"], 2700)
+        self.assertFalse(calibration["actual_relevance_loaded"])
+        self.assertFalse(calibration["automatic_retry_allowed"])
+        self.assertEqual(
+            calibration["future_command_cmd"], FULL_PAGE_CALIBRATION_COMMAND_CMD
+        )
+        self.assertFalse(calibration["command_currently_authorized"])
 
     def test_freezes_current_w7_oracle_semantics_and_source_files(self) -> None:
         contract = self.protocol["implementation_contract"]

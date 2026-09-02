@@ -1,5 +1,14 @@
 # Experiment protocol changelog
 
+## 2026-09-02 - P1-02R-O1 query-sharded resumable W7 wrapper prepared; execution closed
+
+- Recorded the user's preparation-only approval verbatim and advanced only the P1-02R-O1 protocol state to `query_sharded_resumable_wrapper_prepared_review_required`.
+- Added a two-pass local CPU wrapper without changing `src/oracle_study/qpaf.py`: pass 1 checkpoints all seven W7 Global-profile metrics per query and freezes the shared dataset-level profile only after canonical all-query reduction; pass 2 runs the unchanged query-local QARF/QPAF primitives and checkpoints one result per query.
+- Checkpoints use atomic create-once JSON envelopes with a canonical content SHA-256, run-identity SHA-256, per-query input SHA-256, fixed candidate-audit order, and exact phase inventories. Resume reuses only exact validated checkpoints, computes an absent expected checkpoint once, and fails closed without overwrite on invalid existing state, unexpected files, or an incomplete post-pass inventory.
+- Added deterministic exact-equivalence tests against frozen `run_qpaf_oracle(..., grids=("w7",))` for rows, summary/bootstrap, and subgroups, plus byte-preserving complete/partial resume and tamper/identity/inventory rejection tests.
+- Proposed, but did not authorize or run, one synthetic full-page calibration at candidate-audit index 570 over all 5,385 pages: one CPU worker/thread, 100 bootstrap resamples, a 2,700-second hard stop, and no retry. The quoted CMD command remains closed in the protocol.
+- Kept every live execution/output guard false. No live checkpoint, calibration attempt/manifest, W7 result, Modal/GPU work, P1-03/P1-03R work, learned QPAF, or frozen P1-02 relabel was performed.
+
 ## 2026-09-02 - P1-02R-O1 bounded CPU probe PASS recorded and authorization closed
 
 - Recording authorization text: `Approve preparing and committing the P1-02R-O1 bounded CPU performance-probe PASS recording using the existing immutable attempt marker and run manifest. Close the consumed probe authorization, update only provenance, task state, protocol, and tests, and return a review-only full-W7 runtime/resource recommendation. Do not execute or authorize W7, Modal/GPU, P1-03/P1-03R, learned QPAF, or relabel P1-02`

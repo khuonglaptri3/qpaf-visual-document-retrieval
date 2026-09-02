@@ -2,7 +2,7 @@ schema_version: 1
 protocol_id: vidoseek_p1_02r_oracle_w7_v1
 task_id: P1-02R-O1
 version: 1
-status: bounded_cpu_performance_probe_pass_recorded
+status: query_sharded_resumable_wrapper_prepared_review_required
 classification: post_hoc_oracle_upper_bound
 prepared_on: "2026-09-01"
 
@@ -118,6 +118,20 @@ authorization:
       runtime/resource recommendation. Do not execute or authorize W7, Modal/GPU,
       P1-03/P1-03R, learned QPAF, or relabel P1-02
     execution_authorized: false
+  sharded_wrapper_preparation:
+    scope: local_query_sharded_resumable_wrapper_preparation_only
+    approved_by: user
+    approved_on: "2026-09-02"
+    approval_text: >-
+      Approve local preparation and commit of a query-sharded, resumable CPU wrapper
+      for P1-02R-O1 with exact-semantic equivalence tests against the frozen monolithic
+      W7 implementation. Preparation only: do not run the full-page calibration or W7
+      oracle, do not write live oracle results, do not run Modal/GPU, P1-03/P1-03R, or
+      learned QPAF, and do not relabel P1-02. Keep all current input hashes, W7 profiles,
+      metrics, tie-breaks, seed, bootstrap semantics,and execution guards unchanged.
+      Return the complete allowlisted diff, tests, checkpoint/resume contract,
+      proposedone-query calibration command, and stop/go gates for review.
+    execution_authorized: false
 
 parent_task_graph:
   frozen_p1_02:
@@ -207,6 +221,7 @@ input_bundle:
 implementation_contract:
   source_commit: 19371627eaed86fc509adc8f0935a6eb4d7fa876
   safeguards_base_commit: 6b3c2fff6da684799b8169adb696a69dfba8308d
+  sharded_wrapper_parent_commit: f0e17596afff5ea48b6c6e5fed6ac69ce7563109
   source_sha256_basis: utf8_lf_bytes
   source_files:
     - path: src/oracle_study/constants.py
@@ -222,7 +237,9 @@ implementation_contract:
     - path: src/oracle_study/cli.py
       sha256: 6de6b782238b3de19d637edd263869835a9f53acb47caab490ce79963f263955
     - path: src/oracle_study/vidoseek_p1_02r_oracle.py
-      sha256: 151a5c4d5d548c561d4d7885b7df1f683c00bd70ae3e78a7965ee7c2b20ba902
+      sha256: a385e38e00666fdb57f69276c91bde1ab1664911695ab069e9004cc18baf3678
+    - path: src/oracle_study/vidoseek_p1_02r_sharded.py
+      sha256: fbca4c63c0be438269c3ad1796178a3eb9cfa6465d364430a66c57da20aa83f7
   source_drift_requires_new_protocol_version: true
 
 oracle_design:
@@ -375,6 +392,87 @@ full_w7_runtime_resource_review:
     with one thread, one worker, a 45-minute hard stop, and no retry
   execution_authorized: false
 
+sharded_wrapper:
+  classification: preparation_only_no_live_oracle_result
+  grid: w7
+  query_order: candidate_audit_row_order
+  input_scan: parquet_row_groups_in_file_order
+  input_row_groups: 143
+  input_query_chunk_size: 8
+  expected_queries: 1142
+  expected_pages_per_query: 5385
+  checkpoint_root: artifacts/vidoseek_p1_02r_oracle_w7_v1_checkpoints
+  checkpoint_write_mode: atomic_create_once_no_overwrite
+  checkpoint_envelope:
+    schema_version: 1
+    canonical_json_sha256: required
+    run_identity_sha256: required
+    input_query_sha256: required_per_query
+  files:
+    run_plan: run_plan.json
+    global_profile_metrics: global/{query_index_06d}.json
+    global_selection: global_selection.json
+    query_oracle_result: queries/{query_index_06d}.json
+  phases:
+    global_profile:
+      profiles_per_query: 7
+      checkpoint_per_query: true
+      reduce_across_all_queries_before_query_oracle: true
+      reduction_order: candidate_audit_row_order
+      profile_tie_break: [ndcg_at_10, recall_at_3, mrr_at_10]
+      retain_earliest_profile_within_tolerance: 1.0e-12
+    query_oracle:
+      checkpoint_per_query: true
+      requires_frozen_global_selection: true
+      canonical_order: candidate_audit_row_order
+      qarf_and_qpaf_are_query_local: true
+      qpaf_max_sweeps: 2
+    finalization:
+      requires_exact_unique_query_count: 1142
+      rejects_missing_duplicate_or_unexpected_checkpoints: true
+      bootstrap_once_after_canonical_merge: true
+      immutable_output_directory: artifacts/vidoseek_p1_02r_oracle_w7_v1
+  resume_policy: reuse_existing_only_after_exact_identity_and_content_hash_validation
+  absent_expected_checkpoint_action: compute_once_in_canonical_pass
+  invalid_existing_or_unexpected_checkpoint_action: fail_closed_no_overwrite
+  exact_semantic_equivalence:
+    reference: frozen_run_qpaf_oracle_w7
+    rows: exact
+    summary: exact
+    subgroups: exact
+    numeric_tolerance: 0.0
+  full_w7_future_command_cmd: >-
+    set "OMP_NUM_THREADS=1" && set "MKL_NUM_THREADS=1" &&
+    set "OPENBLAS_NUM_THREADS=1" && set "NUMEXPR_NUM_THREADS=1" &&
+    set "PYTHONUTF8=1" && set "PYTHONIOENCODING=utf-8" && set "PYTHONPATH=src" &&
+    C:\Python313\python.exe -m oracle_study.vidoseek_p1_02r_oracle full-w7
+    --protocol configs\vidoseek_p1_02r_oracle_w7_v1.yaml
+  command_currently_authorized: false
+
+full_page_calibration:
+  classification: engineering_full_page_calibration_not_result
+  device: cpu
+  grid: w7
+  query_selection: candidate_audit_fixed_index
+  query_index: 570
+  pages_per_query: 5385
+  bootstrap_resamples: 100
+  max_workers: 1
+  cpu_thread_limit: 1
+  hard_timeout_seconds: 2700
+  actual_relevance_loaded: false
+  synthetic_relevance_rule: first_and_middle_page_binary_relevant
+  automatic_retry_allowed: false
+  attempt_marker_path: artifacts/vidoseek_p1_02r_oracle_w7_v1_full_page_calibration/_ATTEMPTED.json
+  output_manifest_path: artifacts/vidoseek_p1_02r_oracle_w7_v1_full_page_calibration/run_manifest.json
+  future_command_cmd: >-
+    set "OMP_NUM_THREADS=1" && set "MKL_NUM_THREADS=1" &&
+    set "OPENBLAS_NUM_THREADS=1" && set "NUMEXPR_NUM_THREADS=1" &&
+    set "PYTHONUTF8=1" && set "PYTHONIOENCODING=utf-8" && set "PYTHONPATH=src" &&
+    C:\Python313\python.exe -m oracle_study.vidoseek_p1_02r_oracle
+    full-page-calibration --protocol configs\vidoseek_p1_02r_oracle_w7_v1.yaml
+  command_currently_authorized: false
+
 planned_outputs:
   produced: false
   immutable_output_dir: artifacts/vidoseek_p1_02r_oracle_w7_v1
@@ -415,21 +513,30 @@ execution_readiness:
   immutable_run_manifest_writer_exists: true
   performance_probe_entrypoint_exists: true
   ready_for_performance_probe_execution_approval: false
-  full_oracle_protocol_wrapper_exists: false
+  full_oracle_protocol_wrapper_exists: true
+  query_sharded_resume_contract_exists: true
+  exact_semantic_equivalence_tests_exist: true
+  ready_for_full_page_calibration_approval: true
+  full_page_calibration_authorized: false
+  full_page_calibration_executed: false
   all_corpus_runtime_measured: false
   ready_for_execution_approval: false
   performance_probe_runtime_measured: true
   performance_probe_authorized: false
   performance_probe_executed: true
-  next_gate: human_review_full_w7_resource_plan_only
+  next_gate: separate_human_full_page_single_query_calibration_approval
 
 execution:
   performance_probe_allowed: false
   performance_probe_output_write_allowed: false
+  full_page_calibration_allowed: false
+  full_page_calibration_output_write_allowed: false
   local_cpu_oracle_allowed: false
   modal_allowed: false
   gpu_allowed: false
   oracle_analysis_allowed: false
+  full_w7_sharded_allowed: false
+  checkpoint_writes_allowed: false
   p1_03_allowed: false
   learned_qpaf_allowed: false
   output_writes_allowed: false
@@ -450,6 +557,13 @@ stop_conditions:
   - performance_probe_case_exceeds_120_seconds
   - performance_probe_ladder_exceeds_300_seconds
   - no_reviewed_all_corpus_runtime_evidence
+  - checkpoint_run_identity_or_content_hash_mismatch
+  - incomplete_post_pass_or_invalid_existing_or_unexpected_checkpoint
+  - query_order_or_page_count_differs_from_frozen_contract
+  - global_profile_not_reduced_across_all_queries_before_query_oracle
+  - any_full_page_calibration_without_separate_human_approval
+  - full_page_calibration_exceeds_2700_seconds
+  - any_retry_after_a_full_page_calibration_attempt
   - any_modal_gpu_p1_03_or_learned_qpaf_execution
   - any_frozen_p1_02_relabel
 
@@ -461,4 +575,6 @@ scientific_boundaries:
   - no_oracle_result_has_been_produced
   - performance_probe_uses_synthetic_relevance_and_is_not_an_oracle_result
   - bounded_cpu_performance_probe_pass_recorded_as_engineering_non_result
+  - query_sharded_wrapper_prepared_and_equivalence_tested_not_executed_on_live_bundle
+  - full_page_single_query_calibration_not_executed_or_authorized
   - no_p1_03_or_phase_2_dependency_is_unblocked

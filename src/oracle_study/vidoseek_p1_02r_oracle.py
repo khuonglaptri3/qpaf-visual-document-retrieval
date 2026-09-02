@@ -28,6 +28,7 @@ PROTOCOL_ID = "vidoseek_p1_02r_oracle_w7_v1"
 PREPARED_STATUS = "preexecution_safeguards_prepared_review_required"
 APPROVED_STATUS = "bounded_cpu_performance_probe_replacement_execution_approved"
 RECORDED_STATUS = "bounded_cpu_performance_probe_pass_recorded"
+SHARDED_PREPARED_STATUS = "query_sharded_resumable_wrapper_prepared_review_required"
 ORIGINAL_PROBE_SCOPE = "one_local_cpu_non_result_performance_probe"
 PROBE_SCOPE = "one_replacement_local_cpu_non_result_performance_probe"
 APPROVED_SAFEGUARD_COMMIT = "024f2f0a0998f0c781ac738d259603c6bbf29ba9"
@@ -92,6 +93,16 @@ RECORDING_APPROVAL_TEXT = (
     "recommendation. Do not execute or authorize W7, Modal/GPU, P1-03/P1-03R, "
     "learned QPAF, or relabel P1-02"
 )
+SHARDED_PREPARATION_APPROVAL_TEXT = (
+    "Approve local preparation and commit of a query-sharded, resumable CPU wrapper "
+    "for P1-02R-O1 with exact-semantic equivalence tests against the frozen monolithic "
+    "W7 implementation. Preparation only: do not run the full-page calibration or W7 "
+    "oracle, do not write live oracle results, do not run Modal/GPU, P1-03/P1-03R, or "
+    "learned QPAF, and do not relabel P1-02. Keep all current input hashes, W7 profiles, "
+    "metrics, tie-breaks, seed, bootstrap semantics,and execution guards unchanged. "
+    "Return the complete allowlisted diff, tests, checkpoint/resume contract, "
+    "proposedone-query calibration command, and stop/go gates for review."
+)
 FAILED_PYTHON_ERROR = (
     "Fatal Python error: preconfig_init_utf8_mode: invalid PYTHONUTF8 environment "
     "variable value"
@@ -116,6 +127,23 @@ PERFORMANCE_PROBE_COMMAND_CMD = (
     'set "PYTHONPATH=src" && C:\\Python313\\python.exe -m '
     "oracle_study.vidoseek_p1_02r_oracle performance-probe --protocol "
     "configs\\vidoseek_p1_02r_oracle_w7_v1.yaml"
+)
+FULL_PAGE_CALIBRATION_COMMAND_CMD = (
+    'set "OMP_NUM_THREADS=1" && set "MKL_NUM_THREADS=1" && '
+    'set "OPENBLAS_NUM_THREADS=1" && set "NUMEXPR_NUM_THREADS=1" && '
+    'set "PYTHONUTF8=1" && set "PYTHONIOENCODING=utf-8" && '
+    'set "PYTHONPATH=src" && '
+    "C:\\Python313\\python.exe -m oracle_study.vidoseek_p1_02r_oracle "
+    "full-page-calibration --protocol "
+    "configs\\vidoseek_p1_02r_oracle_w7_v1.yaml"
+)
+FULL_W7_COMMAND_CMD = (
+    'set "OMP_NUM_THREADS=1" && set "MKL_NUM_THREADS=1" && '
+    'set "OPENBLAS_NUM_THREADS=1" && set "NUMEXPR_NUM_THREADS=1" && '
+    'set "PYTHONUTF8=1" && set "PYTHONIOENCODING=utf-8" && '
+    'set "PYTHONPATH=src" && '
+    "C:\\Python313\\python.exe -m oracle_study.vidoseek_p1_02r_oracle "
+    "full-w7 --protocol configs\\vidoseek_p1_02r_oracle_w7_v1.yaml"
 )
 
 
@@ -149,6 +177,144 @@ def _repo_path(repo_root: Path, relative: str) -> Path:
     return resolved
 
 
+def _validate_sharded_preparation(protocol: dict[str, Any]) -> None:
+    authorization = protocol.get("authorization", {}).get(
+        "sharded_wrapper_preparation", {}
+    )
+    if authorization != {
+        "scope": "local_query_sharded_resumable_wrapper_preparation_only",
+        "approved_by": "user",
+        "approved_on": "2026-09-02",
+        "approval_text": SHARDED_PREPARATION_APPROVAL_TEXT,
+        "execution_authorized": False,
+    }:
+        raise ValueError("P1-02R-O1 sharded-wrapper preparation approval drifted")
+
+    scores = protocol.get("input_bundle", {}).get("retrieval_scores", {})
+    wrapper = protocol.get("sharded_wrapper", {})
+    expected_wrapper_fields = {
+        "classification": "preparation_only_no_live_oracle_result",
+        "grid": "w7",
+        "query_order": "candidate_audit_row_order",
+        "input_scan": "parquet_row_groups_in_file_order",
+        "input_row_groups": scores.get("row_groups"),
+        "input_query_chunk_size": 8,
+        "expected_queries": scores.get("queries"),
+        "expected_pages_per_query": scores.get("pages_per_query"),
+        "checkpoint_root": "artifacts/vidoseek_p1_02r_oracle_w7_v1_checkpoints",
+        "checkpoint_write_mode": "atomic_create_once_no_overwrite",
+        "resume_policy": (
+            "reuse_existing_only_after_exact_identity_and_content_hash_validation"
+        ),
+        "absent_expected_checkpoint_action": "compute_once_in_canonical_pass",
+        "invalid_existing_or_unexpected_checkpoint_action": (
+            "fail_closed_no_overwrite"
+        ),
+        "full_w7_future_command_cmd": FULL_W7_COMMAND_CMD,
+        "command_currently_authorized": False,
+    }
+    for field, expected in expected_wrapper_fields.items():
+        if wrapper.get(field) != expected:
+            raise ValueError(f"P1-02R-O1 sharded-wrapper contract drifted: {field}")
+    phases = wrapper.get("phases", {})
+    global_phase = phases.get("global_profile", {})
+    query_phase = phases.get("query_oracle", {})
+    finalization = phases.get("finalization", {})
+    if wrapper.get("checkpoint_envelope") != {
+        "schema_version": 1,
+        "canonical_json_sha256": "required",
+        "run_identity_sha256": "required",
+        "input_query_sha256": "required_per_query",
+    }:
+        raise ValueError("P1-02R-O1 checkpoint-envelope contract drifted")
+    if (
+        global_phase.get("profiles_per_query") != 7
+        or global_phase.get("checkpoint_per_query") is not True
+        or global_phase.get("reduce_across_all_queries_before_query_oracle") is not True
+        or global_phase.get("reduction_order") != "candidate_audit_row_order"
+        or global_phase.get("profile_tie_break")
+        != ["ndcg_at_10", "recall_at_3", "mrr_at_10"]
+        or global_phase.get("retain_earliest_profile_within_tolerance") != 1e-12
+    ):
+        raise ValueError("P1-02R-O1 global-profile sharding semantics drifted")
+    if (
+        query_phase.get("checkpoint_per_query") is not True
+        or query_phase.get("requires_frozen_global_selection") is not True
+        or query_phase.get("canonical_order") != "candidate_audit_row_order"
+        or query_phase.get("qarf_and_qpaf_are_query_local") is not True
+        or query_phase.get("qpaf_max_sweeps") != 2
+    ):
+        raise ValueError("P1-02R-O1 query-oracle sharding semantics drifted")
+    if (
+        finalization.get("requires_exact_unique_query_count") != scores.get("queries")
+        or finalization.get("rejects_missing_duplicate_or_unexpected_checkpoints")
+        is not True
+        or finalization.get("bootstrap_once_after_canonical_merge") is not True
+        or finalization.get("immutable_output_directory")
+        != protocol.get("planned_outputs", {}).get("immutable_output_dir")
+    ):
+        raise ValueError("P1-02R-O1 sharded finalization semantics drifted")
+    equivalence = wrapper.get("exact_semantic_equivalence", {})
+    if (
+        equivalence.get("reference") != "frozen_run_qpaf_oracle_w7"
+        or equivalence.get("rows") != "exact"
+        or equivalence.get("summary") != "exact"
+        or equivalence.get("subgroups") != "exact"
+        or equivalence.get("numeric_tolerance") != 0.0
+    ):
+        raise ValueError("P1-02R-O1 exact-semantic equivalence contract drifted")
+
+    calibration = protocol.get("full_page_calibration", {})
+    expected_calibration_fields = {
+        "classification": "engineering_full_page_calibration_not_result",
+        "device": "cpu",
+        "grid": "w7",
+        "query_selection": "candidate_audit_fixed_index",
+        "query_index": 570,
+        "pages_per_query": scores.get("pages_per_query"),
+        "bootstrap_resamples": 100,
+        "max_workers": 1,
+        "cpu_thread_limit": 1,
+        "hard_timeout_seconds": 2700,
+        "actual_relevance_loaded": False,
+        "synthetic_relevance_rule": "first_and_middle_page_binary_relevant",
+        "automatic_retry_allowed": False,
+        "attempt_marker_path": (
+            "artifacts/vidoseek_p1_02r_oracle_w7_v1_full_page_calibration/"
+            "_ATTEMPTED.json"
+        ),
+        "output_manifest_path": (
+            "artifacts/vidoseek_p1_02r_oracle_w7_v1_full_page_calibration/"
+            "run_manifest.json"
+        ),
+        "future_command_cmd": FULL_PAGE_CALIBRATION_COMMAND_CMD,
+        "command_currently_authorized": False,
+    }
+    for field, expected in expected_calibration_fields.items():
+        if calibration.get(field) != expected:
+            raise ValueError(f"P1-02R-O1 full-page calibration drifted: {field}")
+
+    readiness = protocol.get("execution_readiness", {})
+    expected_readiness = {
+        "full_oracle_protocol_wrapper_exists": True,
+        "query_sharded_resume_contract_exists": True,
+        "exact_semantic_equivalence_tests_exist": True,
+        "ready_for_full_page_calibration_approval": True,
+        "full_page_calibration_authorized": False,
+        "full_page_calibration_executed": False,
+        "ready_for_execution_approval": False,
+        "next_gate": "separate_human_full_page_single_query_calibration_approval",
+    }
+    for field, expected in expected_readiness.items():
+        if readiness.get(field) != expected:
+            raise ValueError(f"P1-02R-O1 sharded readiness drifted: {field}")
+    execution = protocol.get("execution", {})
+    if not execution or any(value is not False for value in execution.values()):
+        raise ValueError(
+            "Prepared P1-02R-O1 sharded execution guards must all be closed"
+        )
+
+
 def validate_protocol(protocol: dict[str, Any], repo_root: Path) -> None:
     if (
         protocol.get("schema_version") != 1
@@ -156,7 +322,12 @@ def validate_protocol(protocol: dict[str, Any], repo_root: Path) -> None:
     ):
         raise ValueError("Unsupported P1-02R-O1 protocol identity")
     status = protocol.get("status")
-    if status not in {PREPARED_STATUS, APPROVED_STATUS, RECORDED_STATUS}:
+    if status not in {
+        PREPARED_STATUS,
+        APPROVED_STATUS,
+        RECORDED_STATUS,
+        SHARDED_PREPARED_STATUS,
+    }:
         raise ValueError("Unsupported P1-02R-O1 protocol status")
     if (
         protocol.get("authorization", {})
@@ -213,7 +384,7 @@ def validate_protocol(protocol: dict[str, Any], repo_root: Path) -> None:
         "deterministic_stage1_and_branch_rank_placeholders"
     ):
         raise ValueError("Performance probe placeholder rule drifted")
-    evidence_produced = status == RECORDED_STATUS
+    evidence_produced = status in {RECORDED_STATUS, SHARDED_PREPARED_STATUS}
     if probe.get("output_manifest_produced") is not evidence_produced:
         raise ValueError("Performance-probe manifest production state drifted")
     if probe.get("attempt_marker_produced") is not evidence_produced:
@@ -278,8 +449,9 @@ def validate_protocol(protocol: dict[str, Any], repo_root: Path) -> None:
         raise ValueError("All-corpus runtime must remain unmeasured")
     if readiness.get("ready_for_execution_approval") is not False:
         raise ValueError("Full W7 execution must remain unready")
-    if readiness.get("full_oracle_protocol_wrapper_exists") is not False:
-        raise ValueError("Full W7 protocol wrapper must remain absent")
+    wrapper_exists = status == SHARDED_PREPARED_STATUS
+    if readiness.get("full_oracle_protocol_wrapper_exists") is not wrapper_exists:
+        raise ValueError("Full W7 protocol-wrapper readiness drifted")
     if readiness.get("performance_probe_runtime_measured") is not evidence_produced:
         raise ValueError("Performance-probe runtime measurement state drifted")
 
@@ -377,7 +549,7 @@ def validate_protocol(protocol: dict[str, Any], repo_root: Path) -> None:
             or replacement.get("remaining_authorized_invocations") != 1
         ):
             raise ValueError("Approved replacement invocation count drifted")
-    elif status == RECORDED_STATUS:
+    elif status in {RECORDED_STATUS, SHARDED_PREPARED_STATUS}:
         if readiness.get("ready_for_performance_probe_execution_approval") is not False:
             raise ValueError("Recorded performance probe must not await approval")
         if probe.get("command_currently_authorized") is not False:
@@ -386,8 +558,13 @@ def validate_protocol(protocol: dict[str, Any], repo_root: Path) -> None:
             raise ValueError("Recorded performance probe must be unauthorized")
         if readiness.get("performance_probe_executed") is not True:
             raise ValueError("Recorded performance probe must be marked executed")
-        if readiness.get("next_gate") != "human_review_full_w7_resource_plan_only":
-            raise ValueError("Recorded performance-probe next gate drifted")
+        expected_next_gate = (
+            "separate_human_full_page_single_query_calibration_approval"
+            if status == SHARDED_PREPARED_STATUS
+            else "human_review_full_w7_resource_plan_only"
+        )
+        if readiness.get("next_gate") != expected_next_gate:
+            raise ValueError("Recorded P1-02R-O1 next gate drifted")
         if not execution or any(value is not False for value in execution.values()):
             raise ValueError("Recorded P1-02R-O1 execution guards must all be closed")
         replacement = authorization["replacement_performance_probe_execution"]
@@ -419,6 +596,8 @@ def validate_protocol(protocol: dict[str, Any], repo_root: Path) -> None:
         ):
             raise ValueError("Full-W7 runtime/resource review boundary drifted")
         validate_recorded_probe_evidence(protocol, repo_root)
+        if status == SHARDED_PREPARED_STATUS:
+            _validate_sharded_preparation(protocol)
 
     source_contract = protocol.get("implementation_contract", {})
     if source_contract.get("source_sha256_basis") != "utf8_lf_bytes":
@@ -458,6 +637,7 @@ def protocol_bound_preflight(
     repo_root: Path | None = None,
     *,
     allow_consumed_attempt: bool = False,
+    allow_recorded_probe_evidence: bool = False,
 ) -> dict[str, Any]:
     protocol_path = protocol_path.resolve()
     root = (repo_root or protocol_path.parents[1]).resolve()
@@ -563,16 +743,26 @@ def protocol_bound_preflight(
         raise FileExistsError(
             f"Oracle output directory already exists: {oracle_output}"
         )
-    if probe_manifest.exists():
+    if probe_manifest.exists() and not allow_recorded_probe_evidence:
         raise FileExistsError(
             f"Performance-probe manifest already exists: {probe_manifest}"
         )
-    if attempt_marker.exists() and not allow_consumed_attempt:
+    if (
+        attempt_marker.exists()
+        and not allow_consumed_attempt
+        and not allow_recorded_probe_evidence
+    ):
         raise FileExistsError(
             f"Performance-probe authorization is already consumed: {attempt_marker}"
         )
     if allow_consumed_attempt and not attempt_marker.is_file():
         raise FileNotFoundError("Performance-probe attempt marker was not created")
+    if allow_recorded_probe_evidence:
+        if allow_consumed_attempt:
+            raise ValueError(
+                "Recorded-probe and in-progress-attempt preflight modes are exclusive"
+            )
+        validate_recorded_probe_evidence(protocol, root)
 
     return {
         "schema_version": 1,
@@ -590,6 +780,7 @@ def protocol_bound_preflight(
         "oracle_executed": False,
         "scientific_result_produced": False,
         "authorization_attempt_consumed": allow_consumed_attempt,
+        "recorded_probe_evidence_accepted": allow_recorded_probe_evidence,
     }
 
 
@@ -1275,6 +1466,16 @@ def parser() -> argparse.ArgumentParser:
         help="Run the separately approved CPU-only non-result timing ladder",
     )
     probe.add_argument("--protocol", type=Path, required=True)
+    calibration = commands.add_parser(
+        "full-page-calibration",
+        help="Run the separately approved one-query engineering calibration",
+    )
+    calibration.add_argument("--protocol", type=Path, required=True)
+    full_w7 = commands.add_parser(
+        "full-w7",
+        help="Run the separately approved query-sharded W7 oracle",
+    )
+    full_w7.add_argument("--protocol", type=Path, required=True)
     return root
 
 
@@ -1286,8 +1487,16 @@ def main() -> None:
                 protocol_bound_preflight(args.protocol), indent=2, sort_keys=True
             )
         )
-    else:
+    elif args.command == "performance-probe":
         print(run_bounded_performance_probe(args.protocol))
+    elif args.command == "full-page-calibration":
+        from .vidoseek_p1_02r_sharded import run_protocol_full_page_calibration
+
+        print(run_protocol_full_page_calibration(args.protocol))
+    else:
+        from .vidoseek_p1_02r_sharded import run_protocol_sharded_w7
+
+        print(run_protocol_sharded_w7(args.protocol))
 
 
 if __name__ == "__main__":

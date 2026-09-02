@@ -7,3 +7,4 @@ dist/
 runs/
 /artifacts/vidoseek_p1_02r_import/candidate_raw_scores.parquet
 /artifacts/vidoseek_p1_02r_import/retrieval_scores.parquet
+/artifacts/vidoseek_p1_02r_oracle_w7_v1_checkpoints/

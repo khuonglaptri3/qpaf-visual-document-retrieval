@@ -10,6 +10,7 @@ import pytest
 import yaml
 
 import oracle_study.vidoseek_p1_02r_oracle as safeguards
+import oracle_study.vidoseek_p1_02r_sharded as sharded
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -55,8 +56,11 @@ def _make_fixture_bundle(tmp_path: Path) -> Path:
     authorization.pop("performance_probe_execution", None)
     authorization.pop("replacement_performance_probe_execution", None)
     authorization.pop("performance_probe_pass_recording", None)
+    authorization.pop("sharded_wrapper_preparation", None)
     protocol.pop("performance_probe_result", None)
     protocol.pop("full_w7_runtime_resource_review", None)
+    protocol.pop("sharded_wrapper", None)
+    protocol.pop("full_page_calibration", None)
     protocol["performance_probe"].update(
         {
             "attempt_marker_produced": False,
@@ -70,9 +74,18 @@ def _make_fixture_bundle(tmp_path: Path) -> Path:
             "performance_probe_runtime_measured": False,
             "performance_probe_authorized": False,
             "performance_probe_executed": False,
+            "full_oracle_protocol_wrapper_exists": False,
             "next_gate": "separate_human_performance_probe_execution_approval",
         }
     )
+    for field in [
+        "query_sharded_resume_contract_exists",
+        "exact_semantic_equivalence_tests_exist",
+        "ready_for_full_page_calibration_approval",
+        "full_page_calibration_authorized",
+        "full_page_calibration_executed",
+    ]:
+        protocol["execution_readiness"].pop(field, None)
     protocol["execution"] = {field: False for field in protocol["execution"]}
     for index, source in enumerate(protocol["implementation_contract"]["source_files"]):
         source_path = tmp_path / source["path"]
@@ -322,6 +335,15 @@ def test_recorded_probe_guard_is_closed_before_git_checks(
         safeguards.require_performance_probe_execution_approval(protocol, ROOT)
 
 
+def test_prepared_sharded_execution_guards_are_closed() -> None:
+    protocol = safeguards.load_protocol(PROTOCOL_PATH)
+
+    with pytest.raises(RuntimeError, match="full-page calibration.*not authorized"):
+        sharded.require_full_page_calibration_execution_approval(protocol, ROOT)
+    with pytest.raises(RuntimeError, match="full W7.*not authorized"):
+        sharded.require_full_w7_execution_approval(protocol, ROOT)
+
+
 def test_probe_case_uses_only_synthetic_relevance() -> None:
     rows = []
     query_ids = ["q0", "q1", "q2"]
@@ -408,7 +430,7 @@ def test_timeout_terminates_worker() -> None:
     assert not process.is_alive()
 
 
-def test_cli_exposes_no_full_oracle_entry_point() -> None:
+def test_cli_exposes_prepared_but_unauthorized_wrapper_entry_points() -> None:
     parser = safeguards.parser()
     assert (
         parser.parse_args(["preflight", "--protocol", "protocol.yaml"]).command
@@ -417,6 +439,16 @@ def test_cli_exposes_no_full_oracle_entry_point() -> None:
     assert (
         parser.parse_args(["performance-probe", "--protocol", "protocol.yaml"]).command
         == "performance-probe"
+    )
+    assert (
+        parser.parse_args(
+            ["full-page-calibration", "--protocol", "protocol.yaml"]
+        ).command
+        == "full-page-calibration"
+    )
+    assert (
+        parser.parse_args(["full-w7", "--protocol", "protocol.yaml"]).command
+        == "full-w7"
     )
     with pytest.raises(SystemExit):
         parser.parse_args(["oracle", "--protocol", "protocol.yaml"])
