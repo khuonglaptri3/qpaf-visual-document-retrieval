@@ -181,6 +181,7 @@ def _valid_manifest() -> dict:
         "protocol_id": safeguards.PROTOCOL_ID,
         "protocol_sha256": "a" * 64,
         "source_commit": "b" * 40,
+        "attempt_marker_sha256": "c" * 64,
         "completed_at": "2026-09-01T00:00:00+00:00",
         "environment": {
             "device": "cpu",
@@ -228,6 +229,35 @@ def _valid_manifest() -> dict:
     }
 
 
+def _valid_attempt_marker() -> dict:
+    return {
+        "schema_version": 1,
+        "status": "STARTED",
+        "classification": "engineering_probe_attempt_not_result",
+        "protocol_id": safeguards.PROTOCOL_ID,
+        "protocol_sha256": "a" * 64,
+        "approval_commit": "b" * 40,
+        "started_at": "2026-09-02T00:00:00+00:00",
+        "authorization": {
+            "authorized_invocations": 1,
+            "attempt_number": 1,
+            "remaining_authorized_invocations_after_start": 0,
+        },
+        "boundaries": {
+            "authorization_attempt_consumed": True,
+            "automatic_retry_allowed": False,
+            "actual_relevance_loaded": False,
+            "scientific_oracle_analysis_executed": False,
+            "oracle_results_persisted": False,
+            "full_w7_oracle_executed": False,
+            "modal_or_gpu_used": False,
+            "p1_03_authorized": False,
+            "learned_qpaf_executed": False,
+            "frozen_p1_02_status": "BLOCKED",
+        },
+    }
+
+
 def test_protocol_bound_preflight_accepts_exact_fixture_bundle(tmp_path: Path) -> None:
     protocol_path = _make_fixture_bundle(tmp_path)
 
@@ -253,37 +283,19 @@ def test_protocol_bound_preflight_rejects_changed_payload(tmp_path: Path) -> Non
         safeguards.protocol_bound_preflight(protocol_path)
 
 
-def test_prepared_probe_guard_stops_before_preflight(
-    monkeypatch: pytest.MonkeyPatch,
-) -> None:
-    def fail_if_called(*args, **kwargs):
-        raise AssertionError("payload preflight must not run before execution approval")
-
-    monkeypatch.setattr(safeguards, "protocol_bound_preflight", fail_if_called)
-
-    with pytest.raises(RuntimeError, match="prepared but not authorized"):
-        safeguards.run_bounded_performance_probe(PROTOCOL_PATH)
-
-
-def test_separate_approval_shape_opens_only_probe_guard(
+def test_approved_probe_guard_requires_direct_child_allowlist(
     monkeypatch: pytest.MonkeyPatch,
 ) -> None:
     protocol = safeguards.load_protocol(PROTOCOL_PATH)
-    approved_commit = "c" * 40
-    protocol["status"] = safeguards.APPROVED_STATUS
-    protocol["performance_probe"]["command_currently_authorized"] = True
-    protocol["execution_readiness"]["performance_probe_authorized"] = True
-    protocol["execution"]["performance_probe_allowed"] = True
-    protocol["execution"]["performance_probe_output_write_allowed"] = True
-    protocol["authorization"]["performance_probe_execution"] = {
-        "scope": safeguards.PROBE_SCOPE,
-        "approved_by": "user",
-        "authorized_invocations": 1,
-        "automatic_retry_allowed": False,
-        "execution_actor": "human",
-        "approved_source_commit": approved_commit,
-    }
-    outputs = iter([approved_commit + "\n", ""])
+    live_commit = "d" * 40
+    outputs = iter(
+        [
+            live_commit + "\n",
+            f"{live_commit} {safeguards.APPROVED_SAFEGUARD_COMMIT}\n",
+            "\n".join(safeguards.APPROVAL_COMMIT_PATHS) + "\n",
+            "",
+        ]
+    )
     for name in safeguards.CPU_THREAD_ENV:
         monkeypatch.setenv(name, "1")
 
@@ -294,8 +306,26 @@ def test_separate_approval_shape_opens_only_probe_guard(
 
     assert (
         safeguards.require_performance_probe_execution_approval(protocol, ROOT)
-        == approved_commit
+        == live_commit
     )
+
+
+def test_probe_guard_rejects_non_direct_child(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    protocol = safeguards.load_protocol(PROTOCOL_PATH)
+    live_commit = "d" * 40
+    outputs = iter([live_commit + "\n", f"{live_commit} {'e' * 40}\n"])
+    for name in safeguards.CPU_THREAD_ENV:
+        monkeypatch.setenv(name, "1")
+
+    def fake_run(*args, **kwargs):
+        return SimpleNamespace(stdout=next(outputs))
+
+    monkeypatch.setattr(safeguards.subprocess, "run", fake_run)
+
+    with pytest.raises(RuntimeError, match="non-merge direct child"):
+        safeguards.require_performance_probe_execution_approval(protocol, ROOT)
 
 
 def test_probe_case_uses_only_synthetic_relevance() -> None:
@@ -342,6 +372,26 @@ def test_immutable_manifest_writer_refuses_overwrite(tmp_path: Path) -> None:
         safeguards.write_immutable_run_manifest(path, second)
 
     assert path.read_bytes() == original
+
+
+def test_attempt_marker_consumes_authorization_and_refuses_retry(
+    tmp_path: Path,
+) -> None:
+    protocol_path = _make_fixture_bundle(tmp_path)
+    protocol = safeguards.load_protocol(protocol_path)
+    marker_path = tmp_path / protocol["performance_probe"]["attempt_marker_path"]
+    marker = _valid_attempt_marker()
+    safeguards.write_immutable_attempt_marker(marker_path, marker)
+
+    with pytest.raises(FileExistsError, match="already consumed"):
+        safeguards.protocol_bound_preflight(protocol_path)
+    report = safeguards.protocol_bound_preflight(
+        protocol_path,
+        allow_consumed_attempt=True,
+    )
+    assert report["authorization_attempt_consumed"] is True
+    with pytest.raises(FileExistsError):
+        safeguards.write_immutable_attempt_marker(marker_path, marker)
 
 
 def test_manifest_writer_rejects_scientific_result_fields(tmp_path: Path) -> None:

@@ -1,5 +1,14 @@
 # Experiment protocol changelog
 
+## 2026-09-02 - One human-run P1-02R-O1 CPU probe authorized, not executed
+
+- Status: `bounded_cpu_performance_probe_execution_approved`; exactly one human invocation is authorized from the reviewed safeguard baseline `024f2f0a0998f0c781ac738d259603c6bbf29ba9`. Codex did not execute the command, and no attempt marker, probe manifest, W7 oracle result, Modal/GPU work, or P1-03 work was produced.
+- Authorization text: `Approve preparing and committing the execution-guard/provenance amendment for exactly one human-run P1-02R-O1 bounded CPU performance probe from commit 024f2f0a0998f0c781ac738d259603c6bbf29ba9. Keep the fixed limits and no-retry rule. Do not execute the probe yourself, W7 oracle, Modal/GPU, or P1-03, and do not relabel P1-02.`
+- Checkout provenance: execution requires one clean, non-merge direct child of `024f2f0a0998f0c781ac738d259603c6bbf29ba9`; its changed paths must exactly equal the seven guard/provenance files recorded in the protocol. Any later commit or tracked modification closes the guard.
+- One-attempt enforcement: the command atomically creates `artifacts/vidoseek_p1_02r_oracle_w7_v1_probe/_ATTEMPTED.json` before input preflight. Creation consumes the authorization; any failure stops without a PASS manifest, and an existing marker prevents retry.
+- Fixed limits are unchanged: CPU-only, one worker/thread, query indices `[0,570,1141]`, page ladders `[128,256,512]`, one repetition, 100 bootstrap resamples, at most 1,536 rows per case, synthetic relevance only, 120 seconds per case, and 300 seconds total.
+- Scientific boundary: only the probe-specific execution/engineering-output guards are open. Full W7 oracle/output, Modal/GPU, P1-03, learned-QPAF, and general output guards remain false; P1-02 remains `BLOCKED`, P1-02R remains `PASS`, and no task dependency is rewritten.
+
 ## 2026-09-01 - P1-02R-O1 pre-execution safeguards prepared for review
 
 - Status: `preexecution_safeguards_prepared_review_required`; the protocol-bound input preflight, immutable engineering run-manifest writer, and bounded CPU performance-probe entry point are prepared and tested locally. The performance probe and W7 oracle were not executed, and no manifest or oracle result was written.

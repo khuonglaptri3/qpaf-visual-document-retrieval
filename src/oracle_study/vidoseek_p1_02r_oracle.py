@@ -28,6 +28,17 @@ PROTOCOL_ID = "vidoseek_p1_02r_oracle_w7_v1"
 PREPARED_STATUS = "preexecution_safeguards_prepared_review_required"
 APPROVED_STATUS = "bounded_cpu_performance_probe_execution_approved"
 PROBE_SCOPE = "one_local_cpu_non_result_performance_probe"
+APPROVED_SAFEGUARD_COMMIT = "024f2f0a0998f0c781ac738d259603c6bbf29ba9"
+EXECUTION_COMMIT_RULE = "single_non_merge_direct_child_with_exact_changed_paths"
+APPROVAL_COMMIT_PATHS = [
+    "Context.md",
+    "Tasks.md",
+    "configs/vidoseek_p1_02r_oracle_w7_v1.yaml",
+    "experiments/CHANGELOG.md",
+    "src/oracle_study/vidoseek_p1_02r_oracle.py",
+    "tests/test_vidoseek_p1_02r_oracle_protocol.py",
+    "tests/test_vidoseek_p1_02r_oracle_safeguards.py",
+]
 CPU_THREAD_ENV = (
     "OMP_NUM_THREADS",
     "MKL_NUM_THREADS",
@@ -50,6 +61,13 @@ PREPARATION_APPROVAL_TEXT = (
     "performance probe or W7 oracle, do not write oracle results, do not run Modal/GPU "
     "or P1-03, and do not relabel P1-02. Return the complete diff, proposed probe "
     "limits, runtime stop condition, and exact future command for review."
+)
+EXECUTION_APPROVAL_TEXT = (
+    "Approve preparing and committing the execution-guard/provenance amendment for "
+    "exactly one human-run P1-02R-O1 bounded CPU performance probe from commit "
+    "024f2f0a0998f0c781ac738d259603c6bbf29ba9. Keep the fixed limits and no-retry "
+    "rule. Do not execute the probe yourself, W7 oracle, Modal/GPU, or P1-03, and "
+    "do not relabel P1-02."
 )
 
 
@@ -151,6 +169,8 @@ def validate_protocol(protocol: dict[str, Any], repo_root: Path) -> None:
         raise ValueError(
             "Performance-probe manifest must remain unproduced in the protocol"
         )
+    if probe.get("attempt_marker_produced") is not False:
+        raise ValueError("Performance-probe attempt marker must remain unproduced")
 
     preflight = protocol.get("preflight_contract", {})
     if preflight.get("mode") != "read_only":
@@ -177,16 +197,29 @@ def validate_protocol(protocol: dict[str, Any], repo_root: Path) -> None:
         raise ValueError("P1-02R-O1 run-manifest classification drifted")
     if manifest_contract.get("path") != probe.get("output_manifest_path"):
         raise ValueError("P1-02R-O1 run-manifest path drifted")
+    if manifest_contract.get("attempt_marker_sha256_required") is not True:
+        raise ValueError("P1-02R-O1 run manifest must link the consumed attempt")
     for field in ["actual_relevance_values_allowed", "oracle_result_fields_allowed"]:
         if manifest_contract.get(field) is not False:
             raise ValueError(f"P1-02R-O1 run-manifest boundary drifted: {field}")
+
+    attempt_contract = protocol.get("attempt_marker_contract", {})
+    if attempt_contract.get("write_mode") != "atomic_create_once_no_overwrite":
+        raise ValueError("P1-02R-O1 attempt marker must remain immutable")
+    if attempt_contract.get("classification") != "engineering_probe_attempt_not_result":
+        raise ValueError("P1-02R-O1 attempt-marker classification drifted")
+    if attempt_contract.get("path") != probe.get("attempt_marker_path"):
+        raise ValueError("P1-02R-O1 attempt-marker path drifted")
+    if attempt_contract.get("consumes_authorization_before_preflight") is not True:
+        raise ValueError("P1-02R-O1 attempt marker must consume before preflight")
+    if attempt_contract.get("automatic_retry_allowed") is not False:
+        raise ValueError("P1-02R-O1 attempt marker must forbid retry")
 
     readiness = protocol.get("execution_readiness", {})
     for field in [
         "protocol_bound_preflight_exists",
         "immutable_run_manifest_writer_exists",
         "performance_probe_entrypoint_exists",
-        "ready_for_performance_probe_execution_approval",
     ]:
         if readiness.get(field) is not True:
             raise ValueError(f"P1-02R-O1 readiness field must be true: {field}")
@@ -197,6 +230,8 @@ def validate_protocol(protocol: dict[str, Any], repo_root: Path) -> None:
 
     execution = protocol.get("execution", {})
     if status == PREPARED_STATUS:
+        if readiness.get("ready_for_performance_probe_execution_approval") is not True:
+            raise ValueError("Prepared performance probe must be ready for approval")
         if probe.get("command_currently_authorized") is not False:
             raise ValueError("Reviewed future command must remain unauthorized")
         if readiness.get("performance_probe_authorized") is not False:
@@ -209,8 +244,37 @@ def validate_protocol(protocol: dict[str, Any], repo_root: Path) -> None:
             raise ValueError(
                 "Prepared protocol must not claim probe execution approval"
             )
-    elif probe.get("command_currently_authorized") is not True:
-        raise ValueError("Approved performance-probe command must be marked authorized")
+    else:
+        if readiness.get("ready_for_performance_probe_execution_approval") is not False:
+            raise ValueError("Approved performance probe must not await approval")
+        if probe.get("command_currently_authorized") is not True:
+            raise ValueError(
+                "Approved performance-probe command must be marked authorized"
+            )
+        if readiness.get("performance_probe_authorized") is not True:
+            raise ValueError("Approved performance probe must be authorized")
+        if readiness.get("performance_probe_executed") is not False:
+            raise ValueError("Approved performance probe must remain unexecuted")
+        if execution.get("performance_probe_allowed") is not True:
+            raise ValueError("Approved performance-probe execution guard is closed")
+        if execution.get("performance_probe_output_write_allowed") is not True:
+            raise ValueError("Approved performance-probe output guard is closed")
+        for field in [
+            "local_cpu_oracle_allowed",
+            "modal_allowed",
+            "gpu_allowed",
+            "oracle_analysis_allowed",
+            "p1_03_allowed",
+            "learned_qpaf_allowed",
+            "output_writes_allowed",
+        ]:
+            if execution.get(field) is not False:
+                raise ValueError(f"Approved protocol opened forbidden guard: {field}")
+        approval = protocol.get("authorization", {}).get(
+            "performance_probe_execution", {}
+        )
+        if approval.get("approval_text") != EXECUTION_APPROVAL_TEXT:
+            raise ValueError("P1-02R-O1 execution approval text drifted")
 
     source_contract = protocol.get("implementation_contract", {})
     if source_contract.get("source_sha256_basis") != "utf8_lf_bytes":
@@ -248,6 +312,8 @@ def _check_file(
 def protocol_bound_preflight(
     protocol_path: Path,
     repo_root: Path | None = None,
+    *,
+    allow_consumed_attempt: bool = False,
 ) -> dict[str, Any]:
     protocol_path = protocol_path.resolve()
     root = (repo_root or protocol_path.parents[1]).resolve()
@@ -346,6 +412,9 @@ def protocol_bound_preflight(
     probe_manifest = _repo_path(
         root, protocol["performance_probe"]["output_manifest_path"]
     )
+    attempt_marker = _repo_path(
+        root, protocol["performance_probe"]["attempt_marker_path"]
+    )
     if oracle_output.exists():
         raise FileExistsError(
             f"Oracle output directory already exists: {oracle_output}"
@@ -354,6 +423,12 @@ def protocol_bound_preflight(
         raise FileExistsError(
             f"Performance-probe manifest already exists: {probe_manifest}"
         )
+    if attempt_marker.exists() and not allow_consumed_attempt:
+        raise FileExistsError(
+            f"Performance-probe authorization is already consumed: {attempt_marker}"
+        )
+    if allow_consumed_attempt and not attempt_marker.is_file():
+        raise FileNotFoundError("Performance-probe attempt marker was not created")
 
     return {
         "schema_version": 1,
@@ -370,6 +445,7 @@ def protocol_bound_preflight(
         "actual_relevance_loaded": False,
         "oracle_executed": False,
         "scientific_result_produced": False,
+        "authorization_attempt_consumed": allow_consumed_attempt,
     }
 
 
@@ -402,9 +478,16 @@ def require_performance_probe_execution_approval(
     required = {
         "scope": PROBE_SCOPE,
         "approved_by": "user",
+        "approved_on": "2026-09-02",
+        "approval_text": EXECUTION_APPROVAL_TEXT,
         "authorized_invocations": 1,
+        "consumed_invocations": 0,
+        "remaining_authorized_invocations": 1,
         "automatic_retry_allowed": False,
         "execution_actor": "human",
+        "approved_safeguard_commit": APPROVED_SAFEGUARD_COMMIT,
+        "execution_commit_rule": EXECUTION_COMMIT_RULE,
+        "approval_commit_changed_paths": APPROVAL_COMMIT_PATHS,
     }
     if not isinstance(approval, dict) or any(
         approval.get(field) != expected for field, expected in required.items()
@@ -414,9 +497,6 @@ def require_performance_probe_execution_approval(
         )
     if any(os.environ.get(name) != "1" for name in CPU_THREAD_ENV):
         raise RuntimeError("P1-02R-O1 CPU thread limits are not pinned to one")
-    approved_commit = approval.get("approved_source_commit")
-    if not isinstance(approved_commit, str) or len(approved_commit) != 40:
-        raise RuntimeError("P1-02R-O1 approved source commit is missing")
     live_commit = subprocess.run(
         ["git", "rev-parse", "HEAD"],
         cwd=repo_root,
@@ -425,10 +505,36 @@ def require_performance_probe_execution_approval(
         text=True,
         timeout=30,
     ).stdout.strip()
-    if live_commit != approved_commit:
+    commit_and_parents = subprocess.run(
+        ["git", "rev-list", "--parents", "-n", "1", "HEAD"],
+        cwd=repo_root,
+        check=True,
+        capture_output=True,
+        text=True,
+        timeout=30,
+    ).stdout.split()
+    if commit_and_parents != [live_commit, APPROVED_SAFEGUARD_COMMIT]:
         raise RuntimeError(
-            "P1-02R-O1 checkout does not match the approved source commit"
+            "P1-02R-O1 execution checkout must be one non-merge direct child of the "
+            "approved safeguard commit"
         )
+    changed_paths = subprocess.run(
+        [
+            "git",
+            "diff",
+            "--name-only",
+            APPROVED_SAFEGUARD_COMMIT,
+            "HEAD",
+            "--",
+        ],
+        cwd=repo_root,
+        check=True,
+        capture_output=True,
+        text=True,
+        timeout=30,
+    ).stdout.splitlines()
+    if changed_paths != APPROVAL_COMMIT_PATHS:
+        raise RuntimeError("P1-02R-O1 approval commit changed-path allowlist drifted")
     tracked_status = subprocess.run(
         ["git", "status", "--porcelain", "--untracked-files=no"],
         cwd=repo_root,
@@ -559,6 +665,7 @@ def validate_probe_run_manifest(manifest: dict[str, Any]) -> None:
         "protocol_id",
         "protocol_sha256",
         "source_commit",
+        "attempt_marker_sha256",
         "completed_at",
         "environment",
         "preflight",
@@ -586,6 +693,11 @@ def validate_probe_run_manifest(manifest: dict[str, Any]) -> None:
         or len(manifest["source_commit"]) != 40
     ):
         raise ValueError("Run manifest source commit is invalid")
+    if (
+        not isinstance(manifest.get("attempt_marker_sha256"), str)
+        or len(manifest["attempt_marker_sha256"]) != 64
+    ):
+        raise ValueError("Run manifest attempt-marker SHA-256 is invalid")
     if not isinstance(manifest.get("completed_at"), str):
         raise ValueError("Run manifest completion time is invalid")
     if manifest.get("classification") != "engineering_performance_probe_not_result":
@@ -679,11 +791,64 @@ def validate_probe_run_manifest(manifest: dict[str, Any]) -> None:
         )
 
 
-def write_immutable_run_manifest(path: Path, manifest: dict[str, Any]) -> None:
-    validate_probe_run_manifest(manifest)
+def validate_probe_attempt_marker(marker: dict[str, Any]) -> None:
+    expected_boundaries = {
+        "authorization_attempt_consumed": True,
+        "automatic_retry_allowed": False,
+        "actual_relevance_loaded": False,
+        "scientific_oracle_analysis_executed": False,
+        "oracle_results_persisted": False,
+        "full_w7_oracle_executed": False,
+        "modal_or_gpu_used": False,
+        "p1_03_authorized": False,
+        "learned_qpaf_executed": False,
+        "frozen_p1_02_status": "BLOCKED",
+    }
+    expected_fields = {
+        "schema_version",
+        "status",
+        "classification",
+        "protocol_id",
+        "protocol_sha256",
+        "approval_commit",
+        "started_at",
+        "authorization",
+        "boundaries",
+    }
+    if set(marker) != expected_fields:
+        raise ValueError("Performance-probe attempt-marker fields drifted")
+    if marker.get("schema_version") != 1 or marker.get("status") != "STARTED":
+        raise ValueError("Performance-probe attempt-marker identity/status is invalid")
+    if marker.get("classification") != "engineering_probe_attempt_not_result":
+        raise ValueError("Performance-probe attempt-marker classification is invalid")
+    if marker.get("protocol_id") != PROTOCOL_ID:
+        raise ValueError("Performance-probe attempt-marker protocol is invalid")
+    if (
+        not isinstance(marker.get("protocol_sha256"), str)
+        or len(marker["protocol_sha256"]) != 64
+    ):
+        raise ValueError("Performance-probe attempt-marker protocol hash is invalid")
+    if (
+        not isinstance(marker.get("approval_commit"), str)
+        or len(marker["approval_commit"]) != 40
+    ):
+        raise ValueError("Performance-probe attempt-marker approval commit is invalid")
+    if not isinstance(marker.get("started_at"), str):
+        raise ValueError("Performance-probe attempt-marker start time is invalid")
+    if marker.get("authorization") != {
+        "authorized_invocations": 1,
+        "attempt_number": 1,
+        "remaining_authorized_invocations_after_start": 0,
+    }:
+        raise ValueError("Performance-probe attempt-marker authorization drifted")
+    if marker.get("boundaries") != expected_boundaries:
+        raise ValueError("Performance-probe attempt-marker boundaries drifted")
+
+
+def _write_json_atomic_create_once(path: Path, value: dict[str, Any]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     payload = (
-        json.dumps(manifest, ensure_ascii=False, indent=2, sort_keys=True) + "\n"
+        json.dumps(value, ensure_ascii=False, indent=2, sort_keys=True) + "\n"
     ).encode("utf-8")
     descriptor, temporary_name = tempfile.mkstemp(
         prefix=f".{path.name}.", suffix=".tmp", dir=path.parent
@@ -699,12 +864,69 @@ def write_immutable_run_manifest(path: Path, manifest: dict[str, Any]) -> None:
         temporary.unlink(missing_ok=True)
 
 
+def write_immutable_run_manifest(path: Path, manifest: dict[str, Any]) -> None:
+    validate_probe_run_manifest(manifest)
+    _write_json_atomic_create_once(path, manifest)
+
+
+def write_immutable_attempt_marker(path: Path, marker: dict[str, Any]) -> None:
+    validate_probe_attempt_marker(marker)
+    _write_json_atomic_create_once(path, marker)
+
+
+def consume_performance_probe_authorization(
+    protocol_path: Path,
+    protocol: dict[str, Any],
+    repo_root: Path,
+    approval_commit: str,
+) -> Path:
+    marker = {
+        "schema_version": 1,
+        "status": "STARTED",
+        "classification": "engineering_probe_attempt_not_result",
+        "protocol_id": PROTOCOL_ID,
+        "protocol_sha256": text_sha256(protocol_path),
+        "approval_commit": approval_commit,
+        "started_at": datetime.now(timezone.utc).isoformat(),
+        "authorization": {
+            "authorized_invocations": 1,
+            "attempt_number": 1,
+            "remaining_authorized_invocations_after_start": 0,
+        },
+        "boundaries": {
+            "authorization_attempt_consumed": True,
+            "automatic_retry_allowed": False,
+            "actual_relevance_loaded": False,
+            "scientific_oracle_analysis_executed": False,
+            "oracle_results_persisted": False,
+            "full_w7_oracle_executed": False,
+            "modal_or_gpu_used": False,
+            "p1_03_authorized": False,
+            "learned_qpaf_executed": False,
+            "frozen_p1_02_status": "BLOCKED",
+        },
+    }
+    path = _repo_path(repo_root, protocol["performance_probe"]["attempt_marker_path"])
+    write_immutable_attempt_marker(path, marker)
+    return path
+
+
 def run_bounded_performance_probe(protocol_path: Path) -> Path:
     protocol_path = protocol_path.resolve()
     repo_root = protocol_path.parents[1]
     protocol = load_protocol(protocol_path)
     source_commit = require_performance_probe_execution_approval(protocol, repo_root)
-    preflight = protocol_bound_preflight(protocol_path, repo_root)
+    attempt_marker = consume_performance_probe_authorization(
+        protocol_path,
+        protocol,
+        repo_root,
+        source_commit,
+    )
+    preflight = protocol_bound_preflight(
+        protocol_path,
+        repo_root,
+        allow_consumed_attempt=True,
+    )
     probe = protocol["performance_probe"]
     candidates, query_ids = load_probe_candidates(protocol, repo_root)
 
@@ -755,6 +977,7 @@ def run_bounded_performance_probe(protocol_path: Path) -> Path:
         "protocol_id": PROTOCOL_ID,
         "protocol_sha256": preflight["protocol_sha256"],
         "source_commit": source_commit,
+        "attempt_marker_sha256": file_sha256(attempt_marker),
         "completed_at": completed,
         "environment": {
             "python": sys.version,

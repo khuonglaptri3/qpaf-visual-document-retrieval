@@ -2,7 +2,7 @@ schema_version: 1
 protocol_id: vidoseek_p1_02r_oracle_w7_v1
 task_id: P1-02R-O1
 version: 1
-status: preexecution_safeguards_prepared_review_required
+status: bounded_cpu_performance_probe_execution_approved
 classification: post_hoc_oracle_upper_bound
 prepared_on: "2026-09-01"
 
@@ -28,6 +28,31 @@ authorization:
       not run Modal/GPU or P1-03, and do not relabel P1-02. Return the complete
       diff, proposed probe limits, runtime stop condition, and exact future command
       for review.
+  performance_probe_execution:
+    scope: one_local_cpu_non_result_performance_probe
+    approved_by: user
+    approved_on: "2026-09-02"
+    approval_text: >-
+      Approve preparing and committing the execution-guard/provenance amendment
+      for exactly one human-run P1-02R-O1 bounded CPU performance probe from
+      commit 024f2f0a0998f0c781ac738d259603c6bbf29ba9. Keep the fixed limits and
+      no-retry rule. Do not execute the probe yourself, W7 oracle, Modal/GPU, or
+      P1-03, and do not relabel P1-02.
+    execution_actor: human
+    approved_safeguard_commit: 024f2f0a0998f0c781ac738d259603c6bbf29ba9
+    execution_commit_rule: single_non_merge_direct_child_with_exact_changed_paths
+    approval_commit_changed_paths:
+      - Context.md
+      - Tasks.md
+      - configs/vidoseek_p1_02r_oracle_w7_v1.yaml
+      - experiments/CHANGELOG.md
+      - src/oracle_study/vidoseek_p1_02r_oracle.py
+      - tests/test_vidoseek_p1_02r_oracle_protocol.py
+      - tests/test_vidoseek_p1_02r_oracle_safeguards.py
+    authorized_invocations: 1
+    consumed_invocations: 0
+    remaining_authorized_invocations: 1
+    automatic_retry_allowed: false
 
 parent_task_graph:
   frozen_p1_02:
@@ -132,7 +157,7 @@ implementation_contract:
     - path: src/oracle_study/cli.py
       sha256: 6de6b782238b3de19d637edd263869835a9f53acb47caab490ce79963f263955
     - path: src/oracle_study/vidoseek_p1_02r_oracle.py
-      sha256: 235b4dd760b64d73e17aaed4ba07e8ef95890361c90fa7bf1855a9ec383d4275
+      sha256: 8dcd25528b1c78e555dba77dcb62af7624ff6db6f55e442eb7a1235c84b4db8b
   source_drift_requires_new_protocol_version: true
 
 oracle_design:
@@ -192,6 +217,14 @@ run_manifest_contract:
   path: artifacts/vidoseek_p1_02r_oracle_w7_v1_probe/run_manifest.json
   actual_relevance_values_allowed: false
   oracle_result_fields_allowed: false
+  attempt_marker_sha256_required: true
+
+attempt_marker_contract:
+  write_mode: atomic_create_once_no_overwrite
+  classification: engineering_probe_attempt_not_result
+  path: artifacts/vidoseek_p1_02r_oracle_w7_v1_probe/_ATTEMPTED.json
+  consumes_authorization_before_preflight: true
+  automatic_retry_allowed: false
 
 performance_probe:
   classification: engineering_performance_probe_not_result
@@ -212,6 +245,8 @@ performance_probe:
   per_case_timeout_seconds: 120
   ladder_timeout_seconds: 300
   automatic_retry_allowed: false
+  attempt_marker_path: artifacts/vidoseek_p1_02r_oracle_w7_v1_probe/_ATTEMPTED.json
+  attempt_marker_produced: false
   output_manifest_path: artifacts/vidoseek_p1_02r_oracle_w7_v1_probe/run_manifest.json
   output_manifest_produced: false
   future_command_cmd: >-
@@ -220,7 +255,7 @@ performance_probe:
     set PYTHONUTF8=1 && set PYTHONIOENCODING=utf-8 && set PYTHONPATH=src &&
     C:\Python313\python.exe -m oracle_study.vidoseek_p1_02r_oracle
     performance-probe --protocol configs\vidoseek_p1_02r_oracle_w7_v1.yaml
-  command_currently_authorized: false
+  command_currently_authorized: true
 
 planned_outputs:
   produced: false
@@ -261,16 +296,17 @@ execution_readiness:
   protocol_bound_preflight_exists: true
   immutable_run_manifest_writer_exists: true
   performance_probe_entrypoint_exists: true
-  ready_for_performance_probe_execution_approval: true
+  ready_for_performance_probe_execution_approval: false
   full_oracle_protocol_wrapper_exists: false
   all_corpus_runtime_measured: false
   ready_for_execution_approval: false
-  performance_probe_authorized: false
-  next_gate: explicit_bounded_cpu_performance_probe_execution_decision
+  performance_probe_authorized: true
+  performance_probe_executed: false
+  next_gate: exactly_one_human_run_bounded_cpu_performance_probe
 
 execution:
-  performance_probe_allowed: false
-  performance_probe_output_write_allowed: false
+  performance_probe_allowed: true
+  performance_probe_output_write_allowed: true
   local_cpu_oracle_allowed: false
   modal_allowed: false
   gpu_allowed: false
@@ -289,6 +325,7 @@ stop_conditions:
   - output_directory_already_exists
   - protocol_bound_preflight_or_immutable_manifest_write_failure
   - performance_probe_authorization_or_checkout_provenance_missing
+  - performance_probe_attempt_marker_already_exists
   - performance_probe_case_exceeds_120_seconds
   - performance_probe_ladder_exceeds_300_seconds
   - no_reviewed_all_corpus_runtime_evidence
@@ -302,5 +339,5 @@ scientific_boundaries:
   - not_heaven_and_no_full_score_claim
   - no_oracle_result_has_been_produced
   - performance_probe_uses_synthetic_relevance_and_is_not_an_oracle_result
-  - performance_probe_is_prepared_but_not_authorized
+  - performance_probe_authorized_for_one_human_run_but_not_executed
   - no_p1_03_or_phase_2_dependency_is_unblocked
