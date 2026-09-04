@@ -1,5 +1,12 @@
 # Experiment protocol changelog
 
+## 2026-09-05 - One human P1-02R-O1 full-page calibration authorized, not executed
+
+- Authorization text: `Approve local preparation and commit of the guard/provenance amendment for exactly one human-run P1-02R-O1 full-page synthetic calibration from parent commit 9821d100a4d64d73e8772f48f68f30388f851c06, using query index 570, 5,385 pages, 100 resamples, one CPU worker/thread, a 2,700-second hard stop, and no retry. Use an explicit commit allowlist. Do not execute the calibration, W7, Modal/GPU, P1-03/P1-03R, or learned QPAF, and keep P1-02 BLOCKED`
+- Bound the approval commit to parent `9821d100a4d64d73e8772f48f68f30388f851c06`, the non-merge direct-child rule, and an exact seven-path allowlist. The live guard also requires a clean tracked checkout and one-thread CPU environment.
+- Opened only the full-page calibration, its engineering-manifest write, and temporary checkpoint permissions for one unconsumed human invocation. The immutable attempt marker is created before preflight and forbids retry after either success or failure.
+- Did not execute calibration or create its marker/manifest. Full W7, general oracle/output, performance-probe, Modal/GPU, P1-03/P1-03R, and learned-QPAF permissions remain closed; P1-02 remains `BLOCKED` and the task graph and September 5 schedule are unchanged.
+
 ## 2026-09-04 - P1-02R-O1 local review hardening committed; execution closed
 
 - Review-hardening authorization text: `Go ahead with a local-only P1-02R-O1 review-hardening patch and commit it using an explicit allowlist. Fix the recorded-state CLI preflight, add Git provenance enforcement for future calibration/full-W7 guards, and add synthetic end-to-end calibration tests. Do not run calibration, W7, Modal/GPU, P1-03/P1-03R, or learned QPAF, and do not relabel P1-02.`

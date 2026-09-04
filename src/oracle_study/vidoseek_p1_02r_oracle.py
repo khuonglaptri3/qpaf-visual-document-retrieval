@@ -29,6 +29,9 @@ PREPARED_STATUS = "preexecution_safeguards_prepared_review_required"
 APPROVED_STATUS = "bounded_cpu_performance_probe_replacement_execution_approved"
 RECORDED_STATUS = "bounded_cpu_performance_probe_pass_recorded"
 SHARDED_PREPARED_STATUS = "query_sharded_resumable_wrapper_prepared_review_required"
+FULL_PAGE_CALIBRATION_APPROVED_STATUS = (
+    "one_human_full_page_synthetic_calibration_execution_approved"
+)
 ORIGINAL_PROBE_SCOPE = "one_local_cpu_non_result_performance_probe"
 PROBE_SCOPE = "one_replacement_local_cpu_non_result_performance_probe"
 APPROVED_SAFEGUARD_COMMIT = "024f2f0a0998f0c781ac738d259603c6bbf29ba9"
@@ -37,6 +40,18 @@ REPLACEMENT_APPROVAL_PARENT_COMMIT = FAILED_EXECUTION_APPROVAL_COMMIT
 EXECUTED_PROBE_COMMIT = "aebeef11d5964b9c45ea56242f41ad4202aec95c"
 EXECUTION_COMMIT_RULE = "single_non_merge_direct_child_with_exact_changed_paths"
 APPROVAL_COMMIT_PATHS = [
+    "Context.md",
+    "Tasks.md",
+    "configs/vidoseek_p1_02r_oracle_w7_v1.yaml",
+    "experiments/CHANGELOG.md",
+    "src/oracle_study/vidoseek_p1_02r_oracle.py",
+    "tests/test_vidoseek_p1_02r_oracle_protocol.py",
+    "tests/test_vidoseek_p1_02r_oracle_safeguards.py",
+]
+FULL_PAGE_CALIBRATION_APPROVAL_PARENT_COMMIT = (
+    "9821d100a4d64d73e8772f48f68f30388f851c06"
+)
+FULL_PAGE_CALIBRATION_APPROVAL_COMMIT_PATHS = [
     "Context.md",
     "Tasks.md",
     "configs/vidoseek_p1_02r_oracle_w7_v1.yaml",
@@ -109,6 +124,14 @@ REVIEW_HARDENING_APPROVAL_TEXT = (
     "provenance enforcement for future calibration/full-W7 guards, and add "
     "synthetic end-to-end calibration tests. Do not run calibration, W7, "
     "Modal/GPU, P1-03/P1-03R, or learned QPAF, and do not relabel P1-02."
+)
+FULL_PAGE_CALIBRATION_APPROVAL_TEXT = (
+    "Approve local preparation and commit of the guard/provenance amendment for "
+    "exactly one human-run P1-02R-O1 full-page synthetic calibration from parent "
+    "commit 9821d100a4d64d73e8772f48f68f30388f851c06, using query index 570, "
+    "5,385 pages, 100 resamples, one CPU worker/thread, a 2,700-second hard stop, "
+    "and no retry. Use an explicit commit allowlist. Do not execute the calibration, "
+    "W7, Modal/GPU, P1-03/P1-03R, or learned QPAF, and keep P1-02 BLOCKED"
 )
 FAILED_PYTHON_ERROR = (
     "Fatal Python error: preconfig_init_utf8_mode: invalid PYTHONUTF8 environment "
@@ -185,6 +208,9 @@ def _repo_path(repo_root: Path, relative: str) -> Path:
 
 
 def _validate_sharded_preparation(protocol: dict[str, Any]) -> None:
+    calibration_authorized = (
+        protocol.get("status") == FULL_PAGE_CALIBRATION_APPROVED_STATUS
+    )
     authorization = protocol.get("authorization", {}).get(
         "sharded_wrapper_preparation", {}
     )
@@ -205,6 +231,31 @@ def _validate_sharded_preparation(protocol: dict[str, Any]) -> None:
         "execution_authorized": False,
     }:
         raise ValueError("P1-02R-O1 review-hardening approval drifted")
+    calibration_approval = protocol.get("authorization", {}).get(
+        "full_page_calibration_execution"
+    )
+    if calibration_authorized:
+        if calibration_approval != {
+            "scope": "one_human_p1_02r_o1_full_page_synthetic_cpu_calibration",
+            "approved_by": "user",
+            "approved_on": "2026-09-05",
+            "approval_text": FULL_PAGE_CALIBRATION_APPROVAL_TEXT,
+            "execution_actor": "human",
+            "approved_parent_commit": FULL_PAGE_CALIBRATION_APPROVAL_PARENT_COMMIT,
+            "execution_commit_rule": EXECUTION_COMMIT_RULE,
+            "approval_commit_changed_paths": (
+                FULL_PAGE_CALIBRATION_APPROVAL_COMMIT_PATHS
+            ),
+            "authorized_invocations": 1,
+            "consumed_invocations": 0,
+            "remaining_authorized_invocations": 1,
+            "automatic_retry_allowed": False,
+        }:
+            raise ValueError("P1-02R-O1 full-page calibration approval drifted")
+    elif calibration_approval is not None:
+        raise ValueError(
+            "Prepared P1-02R-O1 must not claim calibration execution approval"
+        )
 
     scores = protocol.get("input_bundle", {}).get("retrieval_scores", {})
     wrapper = protocol.get("sharded_wrapper", {})
@@ -304,7 +355,7 @@ def _validate_sharded_preparation(protocol: dict[str, Any]) -> None:
             "run_manifest.json"
         ),
         "future_command_cmd": FULL_PAGE_CALIBRATION_COMMAND_CMD,
-        "command_currently_authorized": False,
+        "command_currently_authorized": calibration_authorized,
     }
     for field, expected in expected_calibration_fields.items():
         if calibration.get(field) != expected:
@@ -315,20 +366,36 @@ def _validate_sharded_preparation(protocol: dict[str, Any]) -> None:
         "full_oracle_protocol_wrapper_exists": True,
         "query_sharded_resume_contract_exists": True,
         "exact_semantic_equivalence_tests_exist": True,
-        "ready_for_full_page_calibration_approval": True,
-        "full_page_calibration_authorized": False,
+        "ready_for_full_page_calibration_approval": not calibration_authorized,
+        "full_page_calibration_authorized": calibration_authorized,
         "full_page_calibration_executed": False,
         "ready_for_execution_approval": False,
-        "next_gate": "separate_human_full_page_single_query_calibration_approval",
+        "next_gate": (
+            "one_human_full_page_single_query_calibration_execution_then_review"
+            if calibration_authorized
+            else "separate_human_full_page_single_query_calibration_approval"
+        ),
     }
     for field, expected in expected_readiness.items():
         if readiness.get(field) != expected:
             raise ValueError(f"P1-02R-O1 sharded readiness drifted: {field}")
-    execution = protocol.get("execution", {})
-    if not execution or any(value is not False for value in execution.values()):
-        raise ValueError(
-            "Prepared P1-02R-O1 sharded execution guards must all be closed"
-        )
+    expected_execution = {
+        "performance_probe_allowed": False,
+        "performance_probe_output_write_allowed": False,
+        "full_page_calibration_allowed": calibration_authorized,
+        "full_page_calibration_output_write_allowed": calibration_authorized,
+        "local_cpu_oracle_allowed": False,
+        "modal_allowed": False,
+        "gpu_allowed": False,
+        "oracle_analysis_allowed": False,
+        "full_w7_sharded_allowed": False,
+        "checkpoint_writes_allowed": calibration_authorized,
+        "p1_03_allowed": False,
+        "learned_qpaf_allowed": False,
+        "output_writes_allowed": False,
+    }
+    if protocol.get("execution") != expected_execution:
+        raise ValueError("P1-02R-O1 sharded execution guards drifted")
 
 
 def validate_protocol(protocol: dict[str, Any], repo_root: Path) -> None:
@@ -343,6 +410,7 @@ def validate_protocol(protocol: dict[str, Any], repo_root: Path) -> None:
         APPROVED_STATUS,
         RECORDED_STATUS,
         SHARDED_PREPARED_STATUS,
+        FULL_PAGE_CALIBRATION_APPROVED_STATUS,
     }:
         raise ValueError("Unsupported P1-02R-O1 protocol status")
     if (
@@ -400,7 +468,11 @@ def validate_protocol(protocol: dict[str, Any], repo_root: Path) -> None:
         "deterministic_stage1_and_branch_rank_placeholders"
     ):
         raise ValueError("Performance probe placeholder rule drifted")
-    evidence_produced = status in {RECORDED_STATUS, SHARDED_PREPARED_STATUS}
+    evidence_produced = status in {
+        RECORDED_STATUS,
+        SHARDED_PREPARED_STATUS,
+        FULL_PAGE_CALIBRATION_APPROVED_STATUS,
+    }
     if probe.get("output_manifest_produced") is not evidence_produced:
         raise ValueError("Performance-probe manifest production state drifted")
     if probe.get("attempt_marker_produced") is not evidence_produced:
@@ -465,7 +537,10 @@ def validate_protocol(protocol: dict[str, Any], repo_root: Path) -> None:
         raise ValueError("All-corpus runtime must remain unmeasured")
     if readiness.get("ready_for_execution_approval") is not False:
         raise ValueError("Full W7 execution must remain unready")
-    wrapper_exists = status == SHARDED_PREPARED_STATUS
+    wrapper_exists = status in {
+        SHARDED_PREPARED_STATUS,
+        FULL_PAGE_CALIBRATION_APPROVED_STATUS,
+    }
     if readiness.get("full_oracle_protocol_wrapper_exists") is not wrapper_exists:
         raise ValueError("Full W7 protocol-wrapper readiness drifted")
     if readiness.get("performance_probe_runtime_measured") is not evidence_produced:
@@ -565,7 +640,11 @@ def validate_protocol(protocol: dict[str, Any], repo_root: Path) -> None:
             or replacement.get("remaining_authorized_invocations") != 1
         ):
             raise ValueError("Approved replacement invocation count drifted")
-    elif status in {RECORDED_STATUS, SHARDED_PREPARED_STATUS}:
+    elif status in {
+        RECORDED_STATUS,
+        SHARDED_PREPARED_STATUS,
+        FULL_PAGE_CALIBRATION_APPROVED_STATUS,
+    }:
         if readiness.get("ready_for_performance_probe_execution_approval") is not False:
             raise ValueError("Recorded performance probe must not await approval")
         if probe.get("command_currently_authorized") is not False:
@@ -574,14 +653,20 @@ def validate_protocol(protocol: dict[str, Any], repo_root: Path) -> None:
             raise ValueError("Recorded performance probe must be unauthorized")
         if readiness.get("performance_probe_executed") is not True:
             raise ValueError("Recorded performance probe must be marked executed")
-        expected_next_gate = (
-            "separate_human_full_page_single_query_calibration_approval"
-            if status == SHARDED_PREPARED_STATUS
-            else "human_review_full_w7_resource_plan_only"
-        )
+        expected_next_gate = {
+            RECORDED_STATUS: "human_review_full_w7_resource_plan_only",
+            SHARDED_PREPARED_STATUS: (
+                "separate_human_full_page_single_query_calibration_approval"
+            ),
+            FULL_PAGE_CALIBRATION_APPROVED_STATUS: (
+                "one_human_full_page_single_query_calibration_execution_then_review"
+            ),
+        }[status]
         if readiness.get("next_gate") != expected_next_gate:
             raise ValueError("Recorded P1-02R-O1 next gate drifted")
-        if not execution or any(value is not False for value in execution.values()):
+        if status == RECORDED_STATUS and (
+            not execution or any(value is not False for value in execution.values())
+        ):
             raise ValueError("Recorded P1-02R-O1 execution guards must all be closed")
         replacement = authorization["replacement_performance_probe_execution"]
         if (
@@ -612,7 +697,10 @@ def validate_protocol(protocol: dict[str, Any], repo_root: Path) -> None:
         ):
             raise ValueError("Full-W7 runtime/resource review boundary drifted")
         validate_recorded_probe_evidence(protocol, repo_root)
-        if status == SHARDED_PREPARED_STATUS:
+        if status in {
+            SHARDED_PREPARED_STATUS,
+            FULL_PAGE_CALIBRATION_APPROVED_STATUS,
+        }:
             _validate_sharded_preparation(protocol)
 
     source_contract = protocol.get("implementation_contract", {})
@@ -1523,7 +1611,11 @@ def run_cli_preflight(protocol_path: Path) -> dict[str, Any]:
     return protocol_bound_preflight(
         protocol_path,
         allow_recorded_probe_evidence=status
-        in {RECORDED_STATUS, SHARDED_PREPARED_STATUS},
+        in {
+            RECORDED_STATUS,
+            SHARDED_PREPARED_STATUS,
+            FULL_PAGE_CALIBRATION_APPROVED_STATUS,
+        },
     )
 
 

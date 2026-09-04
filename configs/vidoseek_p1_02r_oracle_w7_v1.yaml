@@ -2,7 +2,7 @@ schema_version: 1
 protocol_id: vidoseek_p1_02r_oracle_w7_v1
 task_id: P1-02R-O1
 version: 1
-status: query_sharded_resumable_wrapper_prepared_review_required
+status: one_human_full_page_synthetic_calibration_execution_approved
 classification: post_hoc_oracle_upper_bound
 prepared_on: "2026-09-01"
 
@@ -143,6 +143,32 @@ authorization:
       synthetic end-to-end calibration tests. Do not run calibration, W7,
       Modal/GPU, P1-03/P1-03R, or learned QPAF, and do not relabel P1-02.
     execution_authorized: false
+  full_page_calibration_execution:
+    scope: one_human_p1_02r_o1_full_page_synthetic_cpu_calibration
+    approved_by: user
+    approved_on: "2026-09-05"
+    approval_text: >-
+      Approve local preparation and commit of the guard/provenance amendment for
+      exactly one human-run P1-02R-O1 full-page synthetic calibration from parent
+      commit 9821d100a4d64d73e8772f48f68f30388f851c06, using query index 570,
+      5,385 pages, 100 resamples, one CPU worker/thread, a 2,700-second hard stop,
+      and no retry. Use an explicit commit allowlist. Do not execute the calibration,
+      W7, Modal/GPU, P1-03/P1-03R, or learned QPAF, and keep P1-02 BLOCKED
+    execution_actor: human
+    approved_parent_commit: 9821d100a4d64d73e8772f48f68f30388f851c06
+    execution_commit_rule: single_non_merge_direct_child_with_exact_changed_paths
+    approval_commit_changed_paths:
+      - Context.md
+      - Tasks.md
+      - configs/vidoseek_p1_02r_oracle_w7_v1.yaml
+      - experiments/CHANGELOG.md
+      - src/oracle_study/vidoseek_p1_02r_oracle.py
+      - tests/test_vidoseek_p1_02r_oracle_protocol.py
+      - tests/test_vidoseek_p1_02r_oracle_safeguards.py
+    authorized_invocations: 1
+    consumed_invocations: 0
+    remaining_authorized_invocations: 1
+    automatic_retry_allowed: false
 
 parent_task_graph:
   frozen_p1_02:
@@ -248,7 +274,7 @@ implementation_contract:
     - path: src/oracle_study/cli.py
       sha256: 6de6b782238b3de19d637edd263869835a9f53acb47caab490ce79963f263955
     - path: src/oracle_study/vidoseek_p1_02r_oracle.py
-      sha256: 79789565669708536228b018045dc5cb631a78e5c112b12cd79b2d75992eadb6
+      sha256: ed21096e68a77c2b0dcbe597ad9848396e93a4058ef275783f976d930bc362dd
     - path: src/oracle_study/vidoseek_p1_02r_sharded.py
       sha256: a6cbe4eb155b502da507630c486bcc8a06849aaacb77a3fc54c7e96ef67eab17
   source_drift_requires_new_protocol_version: true
@@ -482,7 +508,7 @@ full_page_calibration:
     set "PYTHONUTF8=1" && set "PYTHONIOENCODING=utf-8" && set "PYTHONPATH=src" &&
     C:\Python313\python.exe -m oracle_study.vidoseek_p1_02r_oracle
     full-page-calibration --protocol configs\vidoseek_p1_02r_oracle_w7_v1.yaml
-  command_currently_authorized: false
+  command_currently_authorized: true
 
 planned_outputs:
   produced: false
@@ -527,27 +553,27 @@ execution_readiness:
   full_oracle_protocol_wrapper_exists: true
   query_sharded_resume_contract_exists: true
   exact_semantic_equivalence_tests_exist: true
-  ready_for_full_page_calibration_approval: true
-  full_page_calibration_authorized: false
+  ready_for_full_page_calibration_approval: false
+  full_page_calibration_authorized: true
   full_page_calibration_executed: false
   all_corpus_runtime_measured: false
   ready_for_execution_approval: false
   performance_probe_runtime_measured: true
   performance_probe_authorized: false
   performance_probe_executed: true
-  next_gate: separate_human_full_page_single_query_calibration_approval
+  next_gate: one_human_full_page_single_query_calibration_execution_then_review
 
 execution:
   performance_probe_allowed: false
   performance_probe_output_write_allowed: false
-  full_page_calibration_allowed: false
-  full_page_calibration_output_write_allowed: false
+  full_page_calibration_allowed: true
+  full_page_calibration_output_write_allowed: true
   local_cpu_oracle_allowed: false
   modal_allowed: false
   gpu_allowed: false
   oracle_analysis_allowed: false
   full_w7_sharded_allowed: false
-  checkpoint_writes_allowed: false
+  checkpoint_writes_allowed: true
   p1_03_allowed: false
   learned_qpaf_allowed: false
   output_writes_allowed: false

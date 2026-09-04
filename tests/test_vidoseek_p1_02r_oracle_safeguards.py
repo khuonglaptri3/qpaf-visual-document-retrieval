@@ -68,6 +68,7 @@ def _make_fixture_bundle(tmp_path: Path) -> Path:
     authorization.pop("replacement_performance_probe_execution", None)
     authorization.pop("performance_probe_pass_recording", None)
     authorization.pop("sharded_wrapper_preparation", None)
+    authorization.pop("full_page_calibration_execution", None)
     protocol.pop("performance_probe_result", None)
     protocol.pop("full_w7_runtime_resource_review", None)
     protocol.pop("sharded_wrapper", None)
@@ -348,7 +349,11 @@ def test_recorded_probe_guard_is_closed_before_git_checks(
 
 @pytest.mark.parametrize(
     "status",
-    [safeguards.RECORDED_STATUS, safeguards.SHARDED_PREPARED_STATUS],
+    [
+        safeguards.RECORDED_STATUS,
+        safeguards.SHARDED_PREPARED_STATUS,
+        safeguards.FULL_PAGE_CALIBRATION_APPROVED_STATUS,
+    ],
 )
 def test_cli_preflight_accepts_recorded_probe_evidence(
     status: str,
@@ -498,11 +503,38 @@ def test_future_calibration_and_full_w7_guards_enforce_live_git_provenance(
     ]
 
 
-def test_prepared_sharded_execution_guards_are_closed() -> None:
+def test_approved_calibration_guard_uses_exact_provenance_and_keeps_w7_closed(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
     protocol = safeguards.load_protocol(PROTOCOL_PATH)
+    observed: dict[str, object] = {}
 
-    with pytest.raises(RuntimeError, match="full-page calibration.*not authorized"):
+    def fake_git_guard(repo_root: Path, **kwargs) -> str:
+        observed.update({"repo_root": repo_root, **kwargs})
+        return "c" * 40
+
+    monkeypatch.setattr(
+        safeguards,
+        "require_exact_git_execution_checkout",
+        fake_git_guard,
+    )
+    for name in safeguards.CPU_THREAD_ENV:
+        monkeypatch.setenv(name, "1")
+
+    assert (
         sharded.require_full_page_calibration_execution_approval(protocol, ROOT)
+        == "c" * 40
+    )
+    assert observed == {
+        "repo_root": ROOT,
+        "approved_parent_commit": (
+            safeguards.FULL_PAGE_CALIBRATION_APPROVAL_PARENT_COMMIT
+        ),
+        "approval_commit_changed_paths": (
+            safeguards.FULL_PAGE_CALIBRATION_APPROVAL_COMMIT_PATHS
+        ),
+        "execution_label": "P1-02R-O1 full-page calibration",
+    }
     with pytest.raises(RuntimeError, match="full W7.*not authorized"):
         sharded.require_full_w7_execution_approval(protocol, ROOT)
 

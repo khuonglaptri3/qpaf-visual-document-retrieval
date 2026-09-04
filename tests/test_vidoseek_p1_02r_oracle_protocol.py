@@ -20,6 +20,10 @@ from oracle_study.vidoseek_p1_02r_oracle import (
     FAILED_EXECUTION_APPROVAL_COMMIT,
     FAILED_PERFORMANCE_PROBE_COMMAND_CMD,
     FAILED_PYTHON_ERROR,
+    FULL_PAGE_CALIBRATION_APPROVAL_COMMIT_PATHS,
+    FULL_PAGE_CALIBRATION_APPROVAL_PARENT_COMMIT,
+    FULL_PAGE_CALIBRATION_APPROVAL_TEXT,
+    FULL_PAGE_CALIBRATION_APPROVED_STATUS,
     FULL_PAGE_CALIBRATION_COMMAND_CMD,
     FULL_W7_COMMAND_CMD,
     ORIGINAL_EXECUTION_APPROVAL_TEXT,
@@ -32,7 +36,6 @@ from oracle_study.vidoseek_p1_02r_oracle import (
     REPLACEMENT_APPROVAL_PARENT_COMMIT,
     REVIEW_HARDENING_APPROVAL_TEXT,
     SHARDED_PREPARATION_APPROVAL_TEXT,
-    SHARDED_PREPARED_STATUS,
     validate_probe_attempt_marker,
     validate_probe_run_manifest,
     validate_protocol,
@@ -79,7 +82,7 @@ class VidoseekP102ROracleProtocolTest(unittest.TestCase):
         protocol = self.protocol
         self.assertEqual(protocol["protocol_id"], "vidoseek_p1_02r_oracle_w7_v1")
         self.assertEqual(protocol["task_id"], "P1-02R-O1")
-        self.assertEqual(protocol["status"], SHARDED_PREPARED_STATUS)
+        self.assertEqual(protocol["status"], FULL_PAGE_CALIBRATION_APPROVED_STATUS)
         self.assertEqual(protocol["authorization"]["approval_text"], APPROVAL_TEXT)
         self.assertEqual(
             protocol["authorization"]["preexecution_preparation"]["approval_text"],
@@ -145,8 +148,13 @@ class VidoseekP102ROracleProtocolTest(unittest.TestCase):
 
         execution = protocol["execution"]
         self.assertTrue(execution)
+        calibration_fields = {
+            "full_page_calibration_allowed",
+            "full_page_calibration_output_write_allowed",
+            "checkpoint_writes_allowed",
+        }
         for field, value in execution.items():
-            self.assertFalse(value, field)
+            self.assertEqual(value, field in calibration_fields, field)
         self.assertFalse(protocol["planned_outputs"]["produced"])
         readiness = protocol["execution_readiness"]
         self.assertTrue(readiness["protocol_bound_preflight_exists"])
@@ -159,14 +167,14 @@ class VidoseekP102ROracleProtocolTest(unittest.TestCase):
         self.assertTrue(readiness["full_oracle_protocol_wrapper_exists"])
         self.assertTrue(readiness["query_sharded_resume_contract_exists"])
         self.assertTrue(readiness["exact_semantic_equivalence_tests_exist"])
-        self.assertTrue(readiness["ready_for_full_page_calibration_approval"])
-        self.assertFalse(readiness["full_page_calibration_authorized"])
+        self.assertFalse(readiness["ready_for_full_page_calibration_approval"])
+        self.assertTrue(readiness["full_page_calibration_authorized"])
         self.assertFalse(readiness["full_page_calibration_executed"])
         self.assertFalse(readiness["all_corpus_runtime_measured"])
         self.assertFalse(readiness["ready_for_execution_approval"])
         self.assertEqual(
             readiness["next_gate"],
-            "separate_human_full_page_single_query_calibration_approval",
+            "one_human_full_page_single_query_calibration_execution_then_review",
         )
 
         validate_protocol(protocol, ROOT)
@@ -401,7 +409,7 @@ class VidoseekP102ROracleProtocolTest(unittest.TestCase):
         )
         self.assertFalse(review["execution_authorized"])
 
-    def test_records_prepared_sharded_wrapper_and_future_calibration(self) -> None:
+    def test_records_sharded_wrapper_and_authorized_calibration(self) -> None:
         authorization = self.protocol["authorization"]["sharded_wrapper_preparation"]
         self.assertEqual(
             authorization["scope"],
@@ -418,6 +426,34 @@ class VidoseekP102ROracleProtocolTest(unittest.TestCase):
         )
         self.assertEqual(hardening["approval_text"], REVIEW_HARDENING_APPROVAL_TEXT)
         self.assertFalse(hardening["execution_authorized"])
+        calibration_approval = self.protocol["authorization"][
+            "full_page_calibration_execution"
+        ]
+        self.assertEqual(
+            calibration_approval["scope"],
+            "one_human_p1_02r_o1_full_page_synthetic_cpu_calibration",
+        )
+        self.assertEqual(
+            calibration_approval["approval_text"],
+            FULL_PAGE_CALIBRATION_APPROVAL_TEXT,
+        )
+        self.assertEqual(calibration_approval["execution_actor"], "human")
+        self.assertEqual(
+            calibration_approval["approved_parent_commit"],
+            FULL_PAGE_CALIBRATION_APPROVAL_PARENT_COMMIT,
+        )
+        self.assertEqual(
+            calibration_approval["execution_commit_rule"],
+            EXECUTION_COMMIT_RULE,
+        )
+        self.assertEqual(
+            calibration_approval["approval_commit_changed_paths"],
+            FULL_PAGE_CALIBRATION_APPROVAL_COMMIT_PATHS,
+        )
+        self.assertEqual(calibration_approval["authorized_invocations"], 1)
+        self.assertEqual(calibration_approval["consumed_invocations"], 0)
+        self.assertEqual(calibration_approval["remaining_authorized_invocations"], 1)
+        self.assertFalse(calibration_approval["automatic_retry_allowed"])
 
         scores = self.protocol["input_bundle"]["retrieval_scores"]
         wrapper = self.protocol["sharded_wrapper"]
@@ -486,7 +522,7 @@ class VidoseekP102ROracleProtocolTest(unittest.TestCase):
         self.assertEqual(
             calibration["future_command_cmd"], FULL_PAGE_CALIBRATION_COMMAND_CMD
         )
-        self.assertFalse(calibration["command_currently_authorized"])
+        self.assertTrue(calibration["command_currently_authorized"])
 
     def test_freezes_current_w7_oracle_semantics_and_source_files(self) -> None:
         contract = self.protocol["implementation_contract"]
