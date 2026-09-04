@@ -1,6 +1,7 @@
 import hashlib
 import json
 import multiprocessing as mp
+import subprocess
 import time
 from pathlib import Path
 
@@ -15,6 +16,16 @@ import oracle_study.vidoseek_p1_02r_sharded as sharded
 
 ROOT = Path(__file__).resolve().parents[1]
 PROTOCOL_PATH = ROOT / "configs" / "vidoseek_p1_02r_oracle_w7_v1.yaml"
+
+
+def _git(repo: Path, *args: str) -> str:
+    return subprocess.run(
+        ["git", *args],
+        cwd=repo,
+        check=True,
+        capture_output=True,
+        text=True,
+    ).stdout.strip()
 
 
 def _sha256(path: Path) -> str:
@@ -333,6 +344,158 @@ def test_recorded_probe_guard_is_closed_before_git_checks(
 
     with pytest.raises(RuntimeError, match="not authorized"):
         safeguards.require_performance_probe_execution_approval(protocol, ROOT)
+
+
+@pytest.mark.parametrize(
+    "status",
+    [safeguards.RECORDED_STATUS, safeguards.SHARDED_PREPARED_STATUS],
+)
+def test_cli_preflight_accepts_recorded_probe_evidence(
+    status: str,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    protocol_path = Path("recorded-protocol.yaml")
+    observed: dict[str, object] = {}
+
+    monkeypatch.setattr(
+        safeguards,
+        "load_protocol",
+        lambda path: {"status": status},
+    )
+
+    def fake_preflight(path: Path, **kwargs):
+        observed["path"] = path
+        observed.update(kwargs)
+        return {"status": "PASS"}
+
+    monkeypatch.setattr(safeguards, "protocol_bound_preflight", fake_preflight)
+
+    assert safeguards.run_cli_preflight(protocol_path) == {"status": "PASS"}
+    assert observed == {
+        "path": protocol_path,
+        "allow_recorded_probe_evidence": True,
+    }
+
+
+def test_exact_git_execution_checkout_enforces_parent_allowlist_and_cleanliness(
+    tmp_path: Path,
+) -> None:
+    repo = tmp_path / "repo"
+    repo.mkdir()
+    _git(repo, "init")
+    _git(repo, "config", "user.email", "fixture@example.invalid")
+    _git(repo, "config", "user.name", "Fixture")
+    tracked = repo / "approved.txt"
+    tracked.write_text("base\n", encoding="utf-8")
+    _git(repo, "add", "--", "approved.txt")
+    _git(repo, "commit", "-m", "base")
+    parent = _git(repo, "rev-parse", "HEAD")
+    tracked.write_text("approved child\n", encoding="utf-8")
+    _git(repo, "add", "--", "approved.txt")
+    _git(repo, "commit", "-m", "approved child")
+    head = _git(repo, "rev-parse", "HEAD")
+
+    assert (
+        safeguards.require_exact_git_execution_checkout(
+            repo,
+            approved_parent_commit=parent,
+            approval_commit_changed_paths=["approved.txt"],
+            execution_label="fixture execution",
+        )
+        == head
+    )
+    with pytest.raises(RuntimeError, match="changed-path drifted"):
+        safeguards.require_exact_git_execution_checkout(
+            repo,
+            approved_parent_commit=parent,
+            approval_commit_changed_paths=["other.txt"],
+            execution_label="fixture execution",
+        )
+
+    tracked.write_text("dirty\n", encoding="utf-8")
+    with pytest.raises(RuntimeError, match="clean tracked checkout"):
+        safeguards.require_exact_git_execution_checkout(
+            repo,
+            approved_parent_commit=parent,
+            approval_commit_changed_paths=["approved.txt"],
+            execution_label="fixture execution",
+        )
+
+
+def test_future_calibration_and_full_w7_guards_enforce_live_git_provenance(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    protocol = safeguards.load_protocol(PROTOCOL_PATH)
+    parent = "a" * 40
+    changed_paths = ["approval.txt"]
+    approval = {
+        "approved_by": "user",
+        "execution_actor": "human",
+        "authorized_invocations": 1,
+        "consumed_invocations": 0,
+        "remaining_authorized_invocations": 1,
+        "automatic_retry_allowed": False,
+        "approved_parent_commit": parent,
+        "execution_commit_rule": safeguards.EXECUTION_COMMIT_RULE,
+        "approval_commit_changed_paths": changed_paths,
+    }
+    observed: list[dict[str, object]] = []
+
+    monkeypatch.setattr(safeguards, "validate_protocol", lambda *args: None)
+
+    def fake_git_guard(repo_root: Path, **kwargs) -> str:
+        observed.append({"repo_root": repo_root, **kwargs})
+        return "b" * 40
+
+    monkeypatch.setattr(
+        safeguards,
+        "require_exact_git_execution_checkout",
+        fake_git_guard,
+    )
+    for name in safeguards.CPU_THREAD_ENV:
+        monkeypatch.setenv(name, "1")
+
+    protocol["execution"] = {field: False for field in protocol["execution"]}
+    protocol["execution_readiness"]["full_page_calibration_authorized"] = True
+    protocol["full_page_calibration"]["command_currently_authorized"] = True
+    for field in [
+        "full_page_calibration_allowed",
+        "full_page_calibration_output_write_allowed",
+        "checkpoint_writes_allowed",
+    ]:
+        protocol["execution"][field] = True
+    protocol["authorization"]["full_page_calibration_execution"] = approval
+    assert (
+        sharded.require_full_page_calibration_execution_approval(protocol, ROOT)
+        == "b" * 40
+    )
+
+    protocol["execution"] = {field: False for field in protocol["execution"]}
+    protocol["execution_readiness"]["ready_for_execution_approval"] = True
+    for field in [
+        "local_cpu_oracle_allowed",
+        "oracle_analysis_allowed",
+        "full_w7_sharded_allowed",
+        "checkpoint_writes_allowed",
+        "output_writes_allowed",
+    ]:
+        protocol["execution"][field] = True
+    protocol["authorization"]["full_w7_execution"] = approval
+    assert sharded.require_full_w7_execution_approval(protocol, ROOT) == "b" * 40
+    assert observed == [
+        {
+            "repo_root": ROOT,
+            "approved_parent_commit": parent,
+            "approval_commit_changed_paths": changed_paths,
+            "execution_label": "P1-02R-O1 full-page calibration",
+        },
+        {
+            "repo_root": ROOT,
+            "approved_parent_commit": parent,
+            "approval_commit_changed_paths": changed_paths,
+            "execution_label": "P1-02R-O1 full W7",
+        },
+    ]
 
 
 def test_prepared_sharded_execution_guards_are_closed() -> None:

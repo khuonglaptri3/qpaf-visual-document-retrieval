@@ -103,6 +103,13 @@ SHARDED_PREPARATION_APPROVAL_TEXT = (
     "Return the complete allowlisted diff, tests, checkpoint/resume contract, "
     "proposedone-query calibration command, and stop/go gates for review."
 )
+REVIEW_HARDENING_APPROVAL_TEXT = (
+    "Go ahead with a local-only P1-02R-O1 review-hardening patch and commit it "
+    "using an explicit allowlist. Fix the recorded-state CLI preflight, add Git "
+    "provenance enforcement for future calibration/full-W7 guards, and add "
+    "synthetic end-to-end calibration tests. Do not run calibration, W7, "
+    "Modal/GPU, P1-03/P1-03R, or learned QPAF, and do not relabel P1-02."
+)
 FAILED_PYTHON_ERROR = (
     "Fatal Python error: preconfig_init_utf8_mode: invalid PYTHONUTF8 environment "
     "variable value"
@@ -189,6 +196,15 @@ def _validate_sharded_preparation(protocol: dict[str, Any]) -> None:
         "execution_authorized": False,
     }:
         raise ValueError("P1-02R-O1 sharded-wrapper preparation approval drifted")
+    hardening = protocol.get("authorization", {}).get("review_hardening", {})
+    if hardening != {
+        "scope": "local_review_hardening_code_protocol_docs_and_tests_only",
+        "approved_by": "user",
+        "approved_on": "2026-09-04",
+        "approval_text": REVIEW_HARDENING_APPROVAL_TEXT,
+        "execution_authorized": False,
+    }:
+        raise ValueError("P1-02R-O1 review-hardening approval drifted")
 
     scores = protocol.get("input_bundle", {}).get("retrieval_scores", {})
     wrapper = protocol.get("sharded_wrapper", {})
@@ -784,6 +800,74 @@ def protocol_bound_preflight(
     }
 
 
+def require_exact_git_execution_checkout(
+    repo_root: Path,
+    *,
+    approved_parent_commit: str,
+    approval_commit_changed_paths: list[str],
+    execution_label: str,
+) -> str:
+    if (
+        len(approved_parent_commit) != 40
+        or any(
+            character not in "0123456789abcdef" for character in approved_parent_commit
+        )
+        or not approval_commit_changed_paths
+        or any(
+            not isinstance(path, str)
+            or not path
+            or "\\" in path
+            or Path(path).is_absolute()
+            or ".." in Path(path).parts
+            for path in approval_commit_changed_paths
+        )
+        or len(set(approval_commit_changed_paths)) != len(approval_commit_changed_paths)
+    ):
+        raise RuntimeError(f"{execution_label} approval Git provenance is incomplete")
+    live_commit = subprocess.run(
+        ["git", "rev-parse", "HEAD"],
+        cwd=repo_root,
+        check=True,
+        capture_output=True,
+        text=True,
+        timeout=30,
+    ).stdout.strip()
+    commit_and_parents = subprocess.run(
+        ["git", "rev-list", "--parents", "-n", "1", "HEAD"],
+        cwd=repo_root,
+        check=True,
+        capture_output=True,
+        text=True,
+        timeout=30,
+    ).stdout.split()
+    if commit_and_parents != [live_commit, approved_parent_commit]:
+        raise RuntimeError(
+            f"{execution_label} checkout must be one non-merge direct child of "
+            "the approved parent commit"
+        )
+    changed_paths = subprocess.run(
+        ["git", "diff", "--name-only", approved_parent_commit, "HEAD", "--"],
+        cwd=repo_root,
+        check=True,
+        capture_output=True,
+        text=True,
+        timeout=30,
+    ).stdout.splitlines()
+    if changed_paths != approval_commit_changed_paths:
+        raise RuntimeError(f"{execution_label} approval commit changed-path drifted")
+    tracked_status = subprocess.run(
+        ["git", "status", "--porcelain", "--untracked-files=no"],
+        cwd=repo_root,
+        check=True,
+        capture_output=True,
+        text=True,
+        timeout=30,
+    ).stdout.strip()
+    if tracked_status:
+        raise RuntimeError(f"{execution_label} requires a clean tracked checkout")
+    return live_commit
+
+
 def require_performance_probe_execution_approval(
     protocol: dict[str, Any],
     repo_root: Path,
@@ -836,57 +920,12 @@ def require_performance_probe_execution_approval(
         )
     if any(os.environ.get(name) != "1" for name in CPU_THREAD_ENV):
         raise RuntimeError("P1-02R-O1 CPU thread limits are not pinned to one")
-    live_commit = subprocess.run(
-        ["git", "rev-parse", "HEAD"],
-        cwd=repo_root,
-        check=True,
-        capture_output=True,
-        text=True,
-        timeout=30,
-    ).stdout.strip()
-    commit_and_parents = subprocess.run(
-        ["git", "rev-list", "--parents", "-n", "1", "HEAD"],
-        cwd=repo_root,
-        check=True,
-        capture_output=True,
-        text=True,
-        timeout=30,
-    ).stdout.split()
-    if commit_and_parents != [live_commit, REPLACEMENT_APPROVAL_PARENT_COMMIT]:
-        raise RuntimeError(
-            "P1-02R-O1 execution checkout must be one non-merge direct child of the "
-            "approved corrective parent commit"
-        )
-    changed_paths = subprocess.run(
-        [
-            "git",
-            "diff",
-            "--name-only",
-            REPLACEMENT_APPROVAL_PARENT_COMMIT,
-            "HEAD",
-            "--",
-        ],
-        cwd=repo_root,
-        check=True,
-        capture_output=True,
-        text=True,
-        timeout=30,
-    ).stdout.splitlines()
-    if changed_paths != APPROVAL_COMMIT_PATHS:
-        raise RuntimeError("P1-02R-O1 approval commit changed-path allowlist drifted")
-    tracked_status = subprocess.run(
-        ["git", "status", "--porcelain", "--untracked-files=no"],
-        cwd=repo_root,
-        check=True,
-        capture_output=True,
-        text=True,
-        timeout=30,
-    ).stdout.strip()
-    if tracked_status:
-        raise RuntimeError(
-            "P1-02R-O1 performance probe requires a clean tracked checkout"
-        )
-    return live_commit
+    return require_exact_git_execution_checkout(
+        repo_root,
+        approved_parent_commit=REPLACEMENT_APPROVAL_PARENT_COMMIT,
+        approval_commit_changed_paths=APPROVAL_COMMIT_PATHS,
+        execution_label="P1-02R-O1 performance probe",
+    )
 
 
 def _systematic_positions(total: int, count: int) -> np.ndarray:
@@ -1479,14 +1518,19 @@ def parser() -> argparse.ArgumentParser:
     return root
 
 
+def run_cli_preflight(protocol_path: Path) -> dict[str, Any]:
+    status = load_protocol(protocol_path).get("status")
+    return protocol_bound_preflight(
+        protocol_path,
+        allow_recorded_probe_evidence=status
+        in {RECORDED_STATUS, SHARDED_PREPARED_STATUS},
+    )
+
+
 def main() -> None:
     args = parser().parse_args()
     if args.command == "preflight":
-        print(
-            json.dumps(
-                protocol_bound_preflight(args.protocol), indent=2, sort_keys=True
-            )
-        )
+        print(json.dumps(run_cli_preflight(args.protocol), indent=2, sort_keys=True))
     elif args.command == "performance-probe":
         print(run_bounded_performance_probe(args.protocol))
     elif args.command == "full-page-calibration":

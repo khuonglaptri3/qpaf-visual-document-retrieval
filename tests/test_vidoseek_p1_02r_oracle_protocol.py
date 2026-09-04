@@ -30,6 +30,7 @@ from oracle_study.vidoseek_p1_02r_oracle import (
     PROBE_SCOPE,
     RECORDING_APPROVAL_TEXT,
     REPLACEMENT_APPROVAL_PARENT_COMMIT,
+    REVIEW_HARDENING_APPROVAL_TEXT,
     SHARDED_PREPARATION_APPROVAL_TEXT,
     SHARDED_PREPARED_STATUS,
     validate_probe_attempt_marker,
@@ -410,6 +411,13 @@ class VidoseekP102ROracleProtocolTest(unittest.TestCase):
             authorization["approval_text"], SHARDED_PREPARATION_APPROVAL_TEXT
         )
         self.assertFalse(authorization["execution_authorized"])
+        hardening = self.protocol["authorization"]["review_hardening"]
+        self.assertEqual(
+            hardening["scope"],
+            "local_review_hardening_code_protocol_docs_and_tests_only",
+        )
+        self.assertEqual(hardening["approval_text"], REVIEW_HARDENING_APPROVAL_TEXT)
+        self.assertFalse(hardening["execution_authorized"])
 
         scores = self.protocol["input_bundle"]["retrieval_scores"]
         wrapper = self.protocol["sharded_wrapper"]

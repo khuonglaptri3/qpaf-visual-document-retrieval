@@ -894,7 +894,12 @@ def require_full_w7_execution_approval(
     protocol: dict[str, Any],
     repo_root: Path,
 ) -> str:
-    from .vidoseek_p1_02r_oracle import CPU_THREAD_ENV, validate_protocol
+    from .vidoseek_p1_02r_oracle import (
+        CPU_THREAD_ENV,
+        EXECUTION_COMMIT_RULE,
+        require_exact_git_execution_checkout,
+        validate_protocol,
+    )
 
     validate_protocol(protocol, repo_root)
     readiness = protocol["execution_readiness"]
@@ -923,6 +928,8 @@ def require_full_w7_execution_approval(
         if execution.get(field) is not False:
             raise RuntimeError(f"P1-02R-O1 forbidden execution flag opened: {field}")
     approval = protocol.get("authorization", {}).get("full_w7_execution", {})
+    approved_parent_commit = approval.get("approved_parent_commit")
+    changed_paths = approval.get("approval_commit_changed_paths")
     if (
         approval.get("approved_by") != "user"
         or approval.get("execution_actor") != "human"
@@ -930,13 +937,19 @@ def require_full_w7_execution_approval(
         or approval.get("consumed_invocations") != 0
         or approval.get("remaining_authorized_invocations") != 1
         or approval.get("automatic_retry_allowed") is not False
-        or not isinstance(approval.get("approval_commit"), str)
-        or len(approval["approval_commit"]) != 40
+        or approval.get("execution_commit_rule") != EXECUTION_COMMIT_RULE
+        or not isinstance(approved_parent_commit, str)
+        or not isinstance(changed_paths, list)
     ):
         raise RuntimeError("P1-02R-O1 full-W7 approval provenance is incomplete")
     if any(os.environ.get(name) != "1" for name in CPU_THREAD_ENV):
         raise RuntimeError("P1-02R-O1 CPU thread limits are not pinned to one")
-    return approval["approval_commit"]
+    return require_exact_git_execution_checkout(
+        repo_root,
+        approved_parent_commit=approved_parent_commit,
+        approval_commit_changed_paths=changed_paths,
+        execution_label="P1-02R-O1 full W7",
+    )
 
 
 def run_protocol_sharded_w7(protocol_path: Path) -> Path:
@@ -1005,7 +1018,12 @@ def require_full_page_calibration_execution_approval(
     protocol: dict[str, Any],
     repo_root: Path,
 ) -> str:
-    from .vidoseek_p1_02r_oracle import CPU_THREAD_ENV, validate_protocol
+    from .vidoseek_p1_02r_oracle import (
+        CPU_THREAD_ENV,
+        EXECUTION_COMMIT_RULE,
+        require_exact_git_execution_checkout,
+        validate_protocol,
+    )
 
     validate_protocol(protocol, repo_root)
     readiness = protocol["execution_readiness"]
@@ -1043,6 +1061,8 @@ def require_full_page_calibration_execution_approval(
     approval = protocol.get("authorization", {}).get(
         "full_page_calibration_execution", {}
     )
+    approved_parent_commit = approval.get("approved_parent_commit")
+    changed_paths = approval.get("approval_commit_changed_paths")
     if (
         approval.get("approved_by") != "user"
         or approval.get("execution_actor") != "human"
@@ -1050,15 +1070,21 @@ def require_full_page_calibration_execution_approval(
         or approval.get("consumed_invocations") != 0
         or approval.get("remaining_authorized_invocations") != 1
         or approval.get("automatic_retry_allowed") is not False
-        or not isinstance(approval.get("approval_commit"), str)
-        or len(approval["approval_commit"]) != 40
+        or approval.get("execution_commit_rule") != EXECUTION_COMMIT_RULE
+        or not isinstance(approved_parent_commit, str)
+        or not isinstance(changed_paths, list)
     ):
         raise RuntimeError(
             "P1-02R-O1 full-page calibration approval provenance is incomplete"
         )
     if any(os.environ.get(name) != "1" for name in CPU_THREAD_ENV):
         raise RuntimeError("P1-02R-O1 CPU thread limits are not pinned to one")
-    return approval["approval_commit"]
+    return require_exact_git_execution_checkout(
+        repo_root,
+        approved_parent_commit=approved_parent_commit,
+        approval_commit_changed_paths=changed_paths,
+        execution_label="P1-02R-O1 full-page calibration",
+    )
 
 
 def _calibration_attempt_marker(
@@ -1197,14 +1223,17 @@ def run_protocol_full_page_calibration(protocol_path: Path) -> Path:
             result_queue,
         ),
     )
-    complete_process_with_timeout(
-        process,
-        float(calibration["hard_timeout_seconds"]),
-    )
     try:
-        result = result_queue.get(timeout=5)
-    except queue.Empty as error:
-        raise RuntimeError("Full-page calibration worker returned no timing") from error
+        complete_process_with_timeout(
+            process,
+            float(calibration["hard_timeout_seconds"]),
+        )
+        try:
+            result = result_queue.get(timeout=5)
+        except queue.Empty as error:
+            raise RuntimeError(
+                "Full-page calibration worker returned no timing"
+            ) from error
     finally:
         result_queue.close()
     if "error" in result:

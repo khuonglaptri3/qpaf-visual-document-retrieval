@@ -132,6 +132,17 @@ authorization:
       Return the complete allowlisted diff, tests, checkpoint/resume contract,
       proposedone-query calibration command, and stop/go gates for review.
     execution_authorized: false
+  review_hardening:
+    scope: local_review_hardening_code_protocol_docs_and_tests_only
+    approved_by: user
+    approved_on: "2026-09-04"
+    approval_text: >-
+      Go ahead with a local-only P1-02R-O1 review-hardening patch and commit it
+      using an explicit allowlist. Fix the recorded-state CLI preflight, add Git
+      provenance enforcement for future calibration/full-W7 guards, and add
+      synthetic end-to-end calibration tests. Do not run calibration, W7,
+      Modal/GPU, P1-03/P1-03R, or learned QPAF, and do not relabel P1-02.
+    execution_authorized: false
 
 parent_task_graph:
   frozen_p1_02:
@@ -237,9 +248,9 @@ implementation_contract:
     - path: src/oracle_study/cli.py
       sha256: 6de6b782238b3de19d637edd263869835a9f53acb47caab490ce79963f263955
     - path: src/oracle_study/vidoseek_p1_02r_oracle.py
-      sha256: a385e38e00666fdb57f69276c91bde1ab1664911695ab069e9004cc18baf3678
+      sha256: 79789565669708536228b018045dc5cb631a78e5c112b12cd79b2d75992eadb6
     - path: src/oracle_study/vidoseek_p1_02r_sharded.py
-      sha256: fbca4c63c0be438269c3ad1796178a3eb9cfa6465d364430a66c57da20aa83f7
+      sha256: a6cbe4eb155b502da507630c486bcc8a06849aaacb77a3fc54c7e96ef67eab17
   source_drift_requires_new_protocol_version: true
 
 oracle_design:
@@ -558,6 +569,7 @@ stop_conditions:
   - performance_probe_ladder_exceeds_300_seconds
   - no_reviewed_all_corpus_runtime_evidence
   - checkpoint_run_identity_or_content_hash_mismatch
+  - future_calibration_or_full_w7_git_provenance_mismatch
   - incomplete_post_pass_or_invalid_existing_or_unexpected_checkpoint
   - query_order_or_page_count_differs_from_frozen_contract
   - global_profile_not_reduced_across_all_queries_before_query_oracle

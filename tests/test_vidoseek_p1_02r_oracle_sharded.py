@@ -1,4 +1,5 @@
 import json
+import queue
 from pathlib import Path
 
 import numpy as np
@@ -6,6 +7,8 @@ import pandas as pd
 import pytest
 
 from oracle_study.qpaf import run_qpaf_oracle
+import oracle_study.vidoseek_p1_02r_oracle as safeguards
+import oracle_study.vidoseek_p1_02r_sharded as sharded
 from oracle_study.vidoseek_p1_02r_sharded import (
     _write_immutable_oracle_outputs,
     build_run_identity,
@@ -51,6 +54,109 @@ def _fixture_paths(tmp_path: Path) -> tuple[pd.DataFrame, Path, Path]:
         }
     ).to_parquet(audit_path, index=False)
     return scores, scores_path, audit_path
+
+
+class _InlineQueue:
+    def __init__(self) -> None:
+        self._queue: queue.Queue = queue.Queue()
+        self.closed = False
+
+    def put(self, value: dict) -> None:
+        self._queue.put(value)
+
+    def get(self, timeout: float) -> dict:
+        return self._queue.get(timeout=timeout)
+
+    def close(self) -> None:
+        self.closed = True
+
+
+class _InlineProcess:
+    def __init__(self, target, args: tuple) -> None:
+        self.target = target
+        self.args = args
+        self.exitcode = None
+        self._alive = False
+
+    def start(self) -> None:
+        self._alive = True
+        try:
+            self.target(*self.args)
+            self.exitcode = 0
+        finally:
+            self._alive = False
+
+    def join(self, timeout: float) -> None:
+        del timeout
+
+    def is_alive(self) -> bool:
+        return self._alive
+
+    def terminate(self) -> None:
+        self._alive = False
+
+    def kill(self) -> None:
+        self._alive = False
+
+
+class _InlineContext:
+    def __init__(self) -> None:
+        self.queues: list[_InlineQueue] = []
+        self.processes: list[_InlineProcess] = []
+
+    def Queue(self) -> _InlineQueue:
+        result = _InlineQueue()
+        self.queues.append(result)
+        return result
+
+    def Process(self, *, target, args: tuple) -> _InlineProcess:
+        result = _InlineProcess(target, args)
+        self.processes.append(result)
+        return result
+
+
+def _calibration_fixture(tmp_path: Path) -> tuple[Path, dict, Path, Path]:
+    _, scores_path, audit_path = _fixture_paths(tmp_path)
+    protocol_path = tmp_path / "configs" / "fixture.yaml"
+    protocol_path.parent.mkdir()
+    protocol_path.write_text("fixture: true\n", encoding="utf-8")
+    attempt_path = tmp_path / "artifacts" / "calibration" / "_ATTEMPTED.json"
+    output_path = tmp_path / "artifacts" / "calibration" / "run_manifest.json"
+    protocol = {
+        "protocol_id": "synthetic_calibration_fixture",
+        "input_bundle": {
+            "retrieval_scores": {"path": scores_path.relative_to(tmp_path).as_posix()},
+            "candidate_audit": {"path": audit_path.relative_to(tmp_path).as_posix()},
+        },
+        "full_page_calibration": {
+            "query_index": 2,
+            "pages_per_query": 7,
+            "bootstrap_resamples": 10,
+            "cpu_thread_limit": 1,
+            "max_workers": 1,
+            "hard_timeout_seconds": 30,
+            "synthetic_relevance_rule": "first_and_middle_page_binary_relevant",
+            "attempt_marker_path": attempt_path.relative_to(tmp_path).as_posix(),
+            "output_manifest_path": output_path.relative_to(tmp_path).as_posix(),
+        },
+    }
+    return protocol_path, protocol, attempt_path, output_path
+
+
+def _patch_calibration_boundaries(
+    monkeypatch: pytest.MonkeyPatch,
+    protocol: dict,
+    preflight,
+) -> None:
+    monkeypatch.setattr(safeguards, "load_protocol", lambda path: protocol)
+    monkeypatch.setattr(safeguards, "protocol_bound_preflight", preflight)
+    monkeypatch.setattr(
+        sharded,
+        "require_full_page_calibration_execution_approval",
+        lambda protocol, repo_root: "f" * 40,
+    )
+    for name in safeguards.CPU_THREAD_ENV:
+        monkeypatch.setenv(name, "1")
 
 
 def _run_fixture(
@@ -322,3 +428,114 @@ def test_sharded_wrapper_rejects_unexpected_checkpoint(tmp_path: Path) -> None:
 
     with pytest.raises(ValueError, match="checkpoint inventory mismatch"):
         _run_fixture(tmp_path, checkpoint_root)
+
+
+def test_synthetic_calibration_runs_end_to_end_and_refuses_retry(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    protocol_path, protocol, attempt_path, output_path = _calibration_fixture(tmp_path)
+    context = _InlineContext()
+    preflight_calls = 0
+
+    def preflight(path: Path, repo_root: Path, **kwargs) -> dict:
+        nonlocal preflight_calls
+        preflight_calls += 1
+        assert path == protocol_path.resolve()
+        assert repo_root == tmp_path.resolve()
+        assert attempt_path.is_file()
+        assert kwargs == {"allow_recorded_probe_evidence": True}
+        return {
+            "retrieval_score_sha256": "a" * 64,
+            "retrieval_score_content_sha256": "b" * 64,
+        }
+
+    _patch_calibration_boundaries(monkeypatch, protocol, preflight)
+    monkeypatch.setattr(sharded.mp, "get_context", lambda method: context)
+
+    assert sharded.run_protocol_full_page_calibration(protocol_path) == output_path
+    assert preflight_calls == 1
+    assert context.queues[0].closed
+    frame = context.processes[0].args[0]
+    assert frame["relevance"].sum() == 2.0
+    assert frame["stage1_score"].eq(0.0).all()
+    assert frame["branch_ranks"].eq("synthetic_probe_placeholder").all()
+    manifest = json.loads(output_path.read_text(encoding="utf-8"))
+    assert manifest["status"] == "PASS"
+    assert manifest["classification"] == (
+        "engineering_full_page_calibration_not_result"
+    )
+    assert manifest["source_commit"] == "f" * 40
+    assert manifest["calibration_contract"] == {
+        "query_index": 2,
+        "query_id": "q2",
+        "pages_per_query": 7,
+        "bootstrap_resamples": 10,
+        "cpu_thread_limit": 1,
+        "max_workers": 1,
+        "hard_timeout_seconds": 30,
+        "actual_relevance_loaded": False,
+        "synthetic_relevance_rule": "first_and_middle_page_binary_relevant",
+    }
+    assert manifest["boundaries"]["frozen_p1_02_status"] == "BLOCKED"
+    assert manifest["boundaries"]["full_w7_oracle_executed"] is False
+    assert manifest["boundaries"]["modal_or_gpu_used"] is False
+
+    with pytest.raises(FileExistsError):
+        sharded.run_protocol_full_page_calibration(protocol_path)
+    assert preflight_calls == 1
+
+
+def test_synthetic_calibration_consumes_attempt_before_failed_preflight(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    protocol_path, protocol, attempt_path, output_path = _calibration_fixture(tmp_path)
+    preflight_calls = 0
+
+    def failing_preflight(path: Path, repo_root: Path, **kwargs) -> dict:
+        nonlocal preflight_calls
+        preflight_calls += 1
+        assert attempt_path.is_file()
+        raise RuntimeError("synthetic preflight failure")
+
+    _patch_calibration_boundaries(monkeypatch, protocol, failing_preflight)
+
+    with pytest.raises(RuntimeError, match="synthetic preflight failure"):
+        sharded.run_protocol_full_page_calibration(protocol_path)
+    assert attempt_path.is_file()
+    assert not output_path.exists()
+    with pytest.raises(FileExistsError):
+        sharded.run_protocol_full_page_calibration(protocol_path)
+    assert preflight_calls == 1
+
+
+def test_synthetic_calibration_timeout_closes_queue_and_refuses_retry(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    protocol_path, protocol, attempt_path, output_path = _calibration_fixture(tmp_path)
+    context = _InlineContext()
+
+    def preflight(path: Path, repo_root: Path, **kwargs) -> dict:
+        return {
+            "retrieval_score_sha256": "a" * 64,
+            "retrieval_score_content_sha256": "b" * 64,
+        }
+
+    def timeout(process: _InlineProcess, timeout_seconds: float) -> None:
+        assert process is context.processes[0]
+        assert timeout_seconds == 30.0
+        raise TimeoutError("synthetic calibration timeout")
+
+    _patch_calibration_boundaries(monkeypatch, protocol, preflight)
+    monkeypatch.setattr(sharded.mp, "get_context", lambda method: context)
+    monkeypatch.setattr(safeguards, "complete_process_with_timeout", timeout)
+
+    with pytest.raises(TimeoutError, match="synthetic calibration timeout"):
+        sharded.run_protocol_full_page_calibration(protocol_path)
+    assert attempt_path.is_file()
+    assert not output_path.exists()
+    assert context.queues[0].closed
+    with pytest.raises(FileExistsError):
+        sharded.run_protocol_full_page_calibration(protocol_path)

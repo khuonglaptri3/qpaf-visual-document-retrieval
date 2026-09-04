@@ -1,5 +1,13 @@
 # Experiment protocol changelog
 
+## 2026-09-04 - P1-02R-O1 local review hardening committed; execution closed
+
+- Review-hardening authorization text: `Go ahead with a local-only P1-02R-O1 review-hardening patch and commit it using an explicit allowlist. Fix the recorded-state CLI preflight, add Git provenance enforcement for future calibration/full-W7 guards, and add synthetic end-to-end calibration tests. Do not run calibration, W7, Modal/GPU, P1-03/P1-03R, or learned QPAF, and do not relabel P1-02.`
+- Fixed the read-only CLI preflight to accept the already-recorded performance-probe marker and manifest only in recorded/sharded-prepared protocol states; exact evidence hashes, schemas, cross-links, and non-result boundaries are still validated.
+- Reused one Git checkout guard for the consumed performance probe and both future calibration/full-W7 paths. A future execution approval must name an exact parent commit and exact changed-path allowlist, and the live checkout must be its clean tracked, non-merge direct child.
+- Added temporary-fixture calibration coverage for success, create-before-preflight consumption, failed preflight, timeout queue cleanup, immutable manifest creation, synthetic relevance, and retry refusal. No live calibration or W7 path was invoked.
+- Kept the protocol status and every execution/readiness flag unchanged: calibration, W7, Modal/GPU, P1-03/P1-03R, and learned QPAF remain unauthorized; P1-02 remains `BLOCKED`.
+
 ## 2026-09-02 - P1-02R-O1 query-sharded resumable W7 wrapper prepared; execution closed
 
 - Recorded the user's preparation-only approval verbatim and advanced only the P1-02R-O1 protocol state to `query_sharded_resumable_wrapper_prepared_review_required`.
