@@ -33,6 +33,9 @@ htmlcov/
 # Local AI-agent instructions
 /.AGENTS/
 
+# Local CodeGraph index
+/.codegraph/
+
 # Editors and operating systems
 .vscode/
 .idea/
