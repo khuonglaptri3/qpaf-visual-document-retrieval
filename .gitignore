@@ -1,10 +1,62 @@
+# Local environments and secrets
+.env
+.env.*
+!.env.example
 .venv/
+venv/
+
+# Python bytecode and packages
 __pycache__/
 *.py[cod]
+*$py.class
+*.egg
 *.egg-info/
+.eggs/
 build/
 dist/
-runs/
+
+# Test, lint, type-check, and coverage output
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.pyright/
+.tox/
+.nox/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Editors and operating systems
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*~
+
+# Logs and temporary files
+*.log
+*.tmp
+*.temp
+
+# Model checkpoints and tensor caches
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.onnx
+
+# Local experiment outputs and materialized datasets
+/runs/
+/vidoseek/
+/artifacts/vidoseek_full_failed_output
+
+# Large hash-addressed payloads retained locally
 /artifacts/vidoseek_p1_02r_import/candidate_raw_scores.parquet
 /artifacts/vidoseek_p1_02r_import/retrieval_scores.parquet
 /artifacts/vidoseek_p1_02r_oracle_w7_v1_checkpoints/
