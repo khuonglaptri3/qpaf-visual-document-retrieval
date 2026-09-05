@@ -30,6 +30,9 @@ htmlcov/
 # Jupyter
 .ipynb_checkpoints/
 
+# Local AI-agent instructions
+/.AGENTS/
+
 # Editors and operating systems
 .vscode/
 .idea/
