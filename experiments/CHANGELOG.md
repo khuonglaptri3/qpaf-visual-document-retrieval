@@ -1,5 +1,12 @@
 # Experiment protocol changelog
 
+## 2026-09-08 - Exploratory-24 W66 sensitivity prepared; execution closed
+
+- Bound a separate W66 proposal and runner to the exact 24-query W7 selection, normalized score bytes, metric/tie-break semantics, bootstrap settings and existing oracle primitives. The query-list SHA-256 is unchanged, and the 66-profile canonical SHA-256 is `c04139858954fd0a7f7baa5dad548f3675a41b8682e9798039508e4077da5973`.
+- Added immutable W66 Global and query checkpoints, complete-only finalization, source/environment/Git guards, and synthetic equivalence, resume, tamper, failure and no-retry tests.
+- The closed config records pending resource review, zero approved timeout and zero invocations. Preparation and tests produce no live W66 metric, attempt directory, formal P1-03 decision, training, Modal/GPU work or frozen P1-02 status change.
+- `docs/QPAF_W66_EXPLORATORY24_EXECUTION_REVIEW.md` records the exact scope, resource uncertainty, proposed command and separate future approval boundary.
+
 ## 2026-09-08 - Exploratory-24 W7 completed and independently verified
 
 - The user approved the exact prepared scope with “ok I approved”. One Codex local CPU invocation completed 24 frozen additional queries and 129,240 query-page pairs in 8,700.394 seconds, using one worker/thread under the 43,200-second cap with zero retries.

@@ -1,0 +1,96 @@
+{
+  "proposal_id": "vidoseek_p1_02r_w66_exploratory24_v1",
+  "status": "PREPARED_RESOURCE_REVIEW_REQUIRED_EXECUTION_CLOSED",
+  "execution_authorized": false,
+  "classification": "proposed_w66_sensitivity_on_frozen_exploratory24_subset_not_phase_gate",
+  "parent_w7_evidence": {
+    "proposal_path": "docs/vidoseek_w7_exploratory24_proposal.json",
+    "proposal_sha256": "1f3d76ce5976a8568fac1119e7de5791af0550ddea8331641613ff7a91a086b2",
+    "result_review_path": "artifacts/vidoseek_exploratory24_review/result_integrity_review.json",
+    "result_review_sha256": "716a184eedcbe73c34dc166bcaa60d594546625dcb288049fd71807f63b61319",
+    "run_manifest_sha256": "0fcfbceee0e581240f241447abae1cb85cbb4f11cfee4f4d5343c2f81e06d9ee",
+    "mean_qpaf_vs_qarf_delta_ndcg10": 0.05001054981241935,
+    "qpaf_vs_qarf_ci95": [
+      0.008343883145752686,
+      0.10192128410987107
+    ],
+    "qpaf_vs_qarf_top_5pct_gain_share": 0.6663150804360639,
+    "interpretation": "Exploratory W7 continuation signals passed; this does not authorize W66 or training"
+  },
+  "selection": {
+    "rule": "Reuse the exact 24 ordered queries already frozen before the W7 exploratory run; do not resample or filter after observing W7 outcomes",
+    "parent_selection_path": "docs/vidoseek_w7_exploratory24_proposal.json",
+    "queries": 24,
+    "pages_per_query": 5385,
+    "candidate_pairs": 129240,
+    "canonical_query_list_sha256": "95715b6a8c0c2d684b3a34e9130eca25ea641aafb62678f7daa764f0ab585f5b",
+    "outcome_dependent_reselection_allowed": false
+  },
+  "input": {
+    "retrieval_scores_path": "artifacts/vidoseek_p1_02r_import/retrieval_scores.parquet",
+    "retrieval_scores_byte_sha256": "32b39da19e9507a0a5060157630cb40bf5c6bcf6464d88e4bb6136888473173b",
+    "pages_per_query": 5385,
+    "candidate_pairs": 129240,
+    "normalization": "reuse_frozen_per_query_minmax_no_changes"
+  },
+  "oracle": {
+    "grid": "w66",
+    "profile_count": 66,
+    "profiles_canonical_sha256": "c04139858954fd0a7f7baa5dad548f3675a41b8682e9798039508e4077da5973",
+    "global_scope": "one_w66_profile_selected_across_only_the_same_24_frozen_queries",
+    "global_is_full_1142_query_global": false,
+    "qarf": "same_exhaustive_query_local_profile_selection_with_66_profiles",
+    "qpaf": "same_qarf_initialized_fixed_order_coordinate_ascent_max_two_sweeps_with_66_profiles",
+    "ranking_tie_break": "ascending_page_id",
+    "profile_selection_tie_break": [
+      "ndcg10",
+      "recall3",
+      "mrr10"
+    ],
+    "strict_improvement_tolerance": 1e-12,
+    "bootstrap_resamples": 10000,
+    "bootstrap_seed": 20260820,
+    "primary_metric": "ndcg_at_10",
+    "relevance_use": "oracle_selection_and_evaluation_only_after_attempt_consumption_and_preflight"
+  },
+  "resource_review": {
+    "status": "PENDING_SEPARATE_RESOURCE_REVIEW",
+    "measured_parent_w7_elapsed_seconds": 8700.394427099993,
+    "w7_profiles": 7,
+    "w7_alternative_profiles_per_candidate": 6,
+    "w66_profiles": 66,
+    "w66_alternative_profiles_per_candidate": 65,
+    "profile_count_ratio_w66_over_w7": 9.428571428571429,
+    "candidate_alternative_ratio_w66_over_w7": 10.833333333333334,
+    "interpretation": "Ratios expose additional work but are not a runtime estimate; accepted updates, ranking changes, I/O and checkpoint costs can differ",
+    "approved_wall_timeout_seconds": 0,
+    "approved_invocations": 0
+  },
+  "decision_policy": {
+    "can_pass_or_fail_full_phase1": false,
+    "can_authorize_training": false,
+    "compare_only_with_parent_w7_same_24_queries": true,
+    "w66_review_signal": "mean_delta_at_least_0.03_and_ci95_lower_above_0_and_top5pct_gain_share_below_0.90",
+    "learned_qpaf_stop_signal": "mean_delta_below_0.01",
+    "formal_task_graph_amendment_required_after_result": true
+  },
+  "prepared_limits": {
+    "device": "cpu",
+    "workers": 1,
+    "threads_per_library": 1,
+    "total_wall_timeout_seconds": 0,
+    "automatic_retries": 0,
+    "invocations": 0,
+    "checkpoint_policy": "hash_bound_two_pass_query checkpoints; any execution or recovery requires separate explicit approval",
+    "timeout_result": "incomplete_no_partial_mean_or_phase_claim"
+  },
+  "unchanged_boundaries": {
+    "p1_02": "BLOCKED",
+    "full_w7_authorized": false,
+    "p1_03_authorized": false,
+    "learned_qpaf_authorized": false,
+    "training_authorized": false,
+    "modal_gpu_authorized": false,
+    "vidore_external_labels_used": false
+  }
+}

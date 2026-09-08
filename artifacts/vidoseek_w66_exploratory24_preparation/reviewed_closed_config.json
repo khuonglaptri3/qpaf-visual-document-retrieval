@@ -1,0 +1,17 @@
+{
+  "status": "PASS_CLOSED_CONFIG_REVIEW",
+  "verified_at": "2026-09-08T14:42:05.6753700+00:00",
+  "classification": "preparation_review_not_w66_result",
+  "config_path": "configs/vidoseek_w66_exploratory24_v1.json",
+  "config_sha256": "776d454c317a784c4a46bcf606c75c4f567297f8e0daedcb2a2d3a90107489dd",
+  "source_inventory_pins": 27,
+  "resource_budget_status": "PENDING_SEPARATE_RESOURCE_REVIEW",
+  "approved_wall_timeout_seconds": 0,
+  "approved_invocations": 0,
+  "protocol_adopted": false,
+  "resource_budget_approved": false,
+  "execution_authorized": false,
+  "scientific_result_produced": false,
+  "formal_p1_03_changed": false,
+  "frozen_p1_02_status": "BLOCKED"
+}

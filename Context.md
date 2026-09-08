@@ -454,6 +454,8 @@ Exploratory-24 preparation (2026-09-08): the bounded representative page-level f
 
 Exploratory-24 closeout (2026-09-08): the user approved the reviewed one-invocation contract, and the local CPU run completed all 24 frozen additional queries and 129,240 query-page pairs in 8,700.394 seconds with one worker/thread and no retry. Independent review verified 82 manifest artifacts, 50 checkpoint envelopes, 25 source snapshots, 960 raw ranking metrics and 415 aggregate comparisons. Mean nDCG@10 is Global 0.817634, QARF 0.853845 and QPAF 0.903856. QPAF-minus-QARF is 0.050011 with bootstrap CI95 [0.008344, 0.101921], win/tie/loss 5/19/0 and top-5% gain share 0.666315; six page assignments changed across five queries. This clears the exploratory W7 continuation signals but remains a subset oracle upper bound, not a formal Phase 1 or learned-model result. See `docs/QPAF_EXPLORATORY24_RESULTS.md`; W66, full W7, training, Modal/GPU, P1-03 and frozen P1-02 remain closed.
 
+Exploratory-24 W66 preparation (2026-09-08): the same 24 ordered queries and existing normalized score bytes are now bound to a separate W66 proposal, guarded two-pass runner, closed config, synthetic equivalence/checkpoint tests and execution-review document. The query-list SHA-256 remains `95715b6a8c0c2d684b3a34e9130eca25ea641aafb62678f7daa764f0ab585f5b`; the 66-profile canonical SHA-256 is `c04139858954fd0a7f7baa5dad548f3675a41b8682e9798039508e4077da5973`. Resource status is pending, with zero approved seconds and invocations. This preparation runs no W66 oracle and cannot amend formal P1-03, which remains blocked on P1-02. See `docs/QPAF_W66_EXPLORATORY24_EXECUTION_REVIEW.md`.
+
 ## 11. Out of Scope
 
 - Fine-tuning BM25, BGE-M3, ColQwen2.5, OCR, or any document encoder.
