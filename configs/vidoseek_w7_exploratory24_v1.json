@@ -1,0 +1,61 @@
+{
+  "protocol_id": "vidoseek_p1_02r_w7_exploratory24_v1",
+  "classification": "exploratory24_subset_oracle_not_full_w7_or_phase_gate",
+  "proposal_path": "docs/vidoseek_w7_exploratory24_proposal.json",
+  "base_protocol_path": "configs/vidoseek_p1_02r_oracle_w7_v1.yaml",
+  "output_path": "runs/vidoseek_w7_exploratory24_v1",
+  "total_wall_timeout_seconds": 43200,
+  "bootstrap_resamples": 10000,
+  "seed": 20260820,
+  "queries": 24,
+  "pages_per_query": 5385,
+  "workers": 1,
+  "threads_per_library": 1,
+  "invocations": 1,
+  "automatic_retries": 0,
+  "base_git_commit": "99823b96c9afd52e11e7ddb001f5b74bf0a1e314",
+  "source_sha256": {
+    "artifacts/vidoseek_fixed_profile_audit_review/result_integrity_review.json": "9358ba32f0dd5015685efb34f007abb6bd59ec1ec66668bc6d39b08955eac176",
+    "configs/vidoseek_p1_02r.yaml": "b26d4f76206ed9fe74b4b508392a3228e799138f2c372863dc983744ebbcab87",
+    "configs/vidoseek_p1_02r_oracle_w7_v1.yaml": "8d37e6c4dbe46146e9f2d5d3da439a2c72f4e06f3d9c8ce33511484fceccbe34",
+    "docs/vidoseek_w7_exploratory12_proposal.json": "ccc0c9469c0ee42e540ece1b5aefc8acf82c3117b8db77affb748799495c08f6",
+    "docs/vidoseek_w7_exploratory24_proposal.json": "1f3d76ce5976a8568fac1119e7de5791af0550ddea8331641613ff7a91a086b2",
+    "scripts/run_vidoseek_exploratory24.py": "7165db755bc9f53fec96489464113ae36274f666ea1d1180b33ab1953bca04e7",
+    "src/oracle_study/__init__.py": "a9dc3cd08f28e8be03f2c7847993697d2334e2318d56fea269ebaf1ddbb0d7b0",
+    "src/oracle_study/bootstrap.py": "3e9f588dcde3930406700e417f25b322f2755fe2b02c1fe9fb075c63767da3bd",
+    "src/oracle_study/budget.py": "f9d08dcfbd484cee2e76719e7f2051fa9541dca6ca507e5c9b3672e5119b8b81",
+    "src/oracle_study/cache.py": "cee2c06caa72ed6d729ab2ef563ff897ce2fe4fd86d7ef45e3e49cf0641009b5",
+    "src/oracle_study/cli.py": "6de6b782238b3de19d637edd263869835a9f53acb47caab490ce79963f263955",
+    "src/oracle_study/constants.py": "26a4898dfb86d4b0380e917ad1aabd78e77bbdef3aee848a970c2319324de2df",
+    "src/oracle_study/decision.py": "8654517ee39802f53b0612882180625d0bb7eb9ba014125db5649486cfb9292e",
+    "src/oracle_study/feasibility.py": "32f2fbffee309a6670c44677cbbd568a08e7fe906ae46cc6600c252c2b654c73",
+    "src/oracle_study/io.py": "aeb48dffea3e453fb8150e330644e45265e350c8e47db5cc7099826afa5c1212",
+    "src/oracle_study/manifest.py": "2264bd3ed23e5df87be2fac31f9f0f9468aed8303e9aa9d30b2c991500790307",
+    "src/oracle_study/metrics.py": "bfa630a5450e23f5aab7269aedcb96172bc3096d16e1e3078af5e7b26f97e0f9",
+    "src/oracle_study/preflight.py": "427e91853f58836ae91ea5ad1abf7004b04b9d4455fae39faad313970642b4e2",
+    "src/oracle_study/profiles.py": "8dec9449b6d54651a10dc51d22fc7245fadd35a48b6d988261392260ab3a0999",
+    "src/oracle_study/qpaf.py": "00ce93a76cf80d43b9df394550b1e6799de8285772b12811b19c768f7ea44d53",
+    "src/oracle_study/report.py": "78904de8655a9dfc8df4894355e9bd22e5da72e67ff659d728df73c023ba425f",
+    "src/oracle_study/sampling.py": "9c24dae0c1c9e769b97ba05e977fa95fcb262293712b3ca2b10a82ff6629d1e8",
+    "src/oracle_study/vidoseek_exploratory12.py": "21ed853bbbda0ad66cc391935c3eeb93e7800c1dcf73768812aa7eabfd7d7d6f",
+    "src/oracle_study/vidoseek_p1_02r_oracle.py": "ed21096e68a77c2b0dcbe597ad9848396e93a4058ef275783f976d930bc362dd",
+    "src/oracle_study/vidoseek_p1_02r_sharded.py": "a6cbe4eb155b502da507630c486bcc8a06849aaacb77a3fc54c7e96ef67eab17"
+  },
+  "environment": {
+    "python": "3.13.7",
+    "packages": {
+      "numpy": "2.4.4",
+      "pandas": "3.0.2",
+      "pyarrow": "24.0.0",
+      "PyYAML": "6.0.3"
+    }
+  },
+  "authorization": {
+    "protocol_adopted": true,
+    "execution_authorized": true,
+    "approved_by": "user",
+    "execution_actor": "codex",
+    "approval_text": "Approve the prepared exploratory-24 page-level QPAF feasibility study: the 24 published additional ViDoSeek queries, all 5,385 pages/query, exact existing W7/Global/QARF/QPAF semantics, 10,000-resample bootstrap, one Codex local CPU invocation with one worker/thread, a 43,200-second cap and no automatic retry, followed by independent result verification and separate reporting from exploratory-12. Do not run full W7/W66, training, Modal/GPU, ViDoRe, P1-03, or change frozen P1-02 and formal phase gates.",
+    "approved_at": "2026-09-08T03:54:57.5368702Z"
+  }
+}

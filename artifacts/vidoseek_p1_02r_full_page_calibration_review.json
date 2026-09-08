@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "status": "PASS",
+  "classification": "engineering_calibration_integrity_review_not_scientific_result",
+  "verified_at": "2026-09-06T15:25:19.735585+00:00",
+  "protocol_id": "vidoseek_p1_02r_oracle_w7_v1",
+  "source_commit": "b252080d4ea32ea7b5b11450b54a7cb58f214990",
+  "protocol_sha256": "8d37e6c4dbe46146e9f2d5d3da439a2c72f4e06f3d9c8ce33511484fceccbe34",
+  "artifacts": {
+    "_ATTEMPTED.json": {
+      "bytes": 924,
+      "sha256": "9e555783f6d4f3d4de7015cbf0614b8301c4ddad643a4cec90a080e26c20b6d7"
+    },
+    "run_manifest.json": {
+      "bytes": 1671,
+      "sha256": "622d2d946bfddd9ff7571626e6ac31b3b45a7b41789413bec9864f6b43078629"
+    }
+  },
+  "checks": {
+    "approved_git_parent_and_allowlist": true,
+    "clean_tracked_execution_checkout": true,
+    "input_preflight": true,
+    "evidence_protocol_and_source_identity": true,
+    "attempt_marker_hash_link": true,
+    "calibration_limits": true,
+    "query_id_matches_audit_index_570": true,
+    "one_thread_cpu_environment": true,
+    "timing_and_timestamp_consistency": true,
+    "non_scientific_boundaries": true,
+    "no_full_w7_output": true
+  },
+  "measured": {
+    "worker_elapsed_seconds": 752.7996488000001,
+    "worker_elapsed_minutes": 12.546660813333336,
+    "attempt_to_completion_wall_seconds": 755.77775,
+    "queries": 1,
+    "pages": 5385,
+    "synthetic_relevance": true
+  },
+  "authorization": {
+    "calibration_attempts_consumed": 1,
+    "calibration_attempts_remaining": 0,
+    "retry_allowed": false,
+    "full_w7_authorized": false,
+    "enforcement": "immutable_attempt_marker_in_both_checkouts_after_import",
+    "executed_protocol_retained_as_historical_approval_snapshot": true
+  },
+  "runtime_review": {
+    "classification": "illustrative_linear_projection_not_measured_full_runtime",
+    "assumption": "each real query costs the same as this one synthetic query",
+    "projected_full_1142_query_seconds": 859697.1989296002,
+    "projected_full_1142_query_days": 9.950199061685188,
+    "projected_12_query_hours": 2.5093321626666674,
+    "uncertainties": [
+      "real relevance changes accepted coordinate updates and sweep duration",
+      "single query does not estimate query-to-query runtime variation",
+      "full-global reduction, full 10000-resample bootstrap, final output and process overhead differ",
+      "checkpoint IO, sustained host contention, sleep and thermal behavior are unmeasured"
+    ],
+    "recommendation": "do_not_start_full_1142_query_job_for_first_signal; review_a_separately_versioned_bounded_discovery_pilot"
+  },
+  "scientific_result_produced": false,
+  "frozen_p1_02_status": "BLOCKED",
+  "p1_03_authorized": false,
+  "learned_qpaf_authorized": false
+}

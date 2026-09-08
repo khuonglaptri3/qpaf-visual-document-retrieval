@@ -1,0 +1,66 @@
+{
+  "status": "PASS_FIXED_PROFILE_AUDIT_CLOSEOUT",
+  "checked_at": "2026-09-08T02:51:41.3909334+00:00",
+  "execution": {
+    "status": "COMPLETE",
+    "elapsed_seconds": 561.4847150999994,
+    "queries": 1142,
+    "pages_per_query": 5385,
+    "query_page_pairs": 6149670,
+    "remaining_authorized_invocations": 0,
+    "automatic_retries": 0
+  },
+  "verified_result": {
+    "global_mean_ndcg10": 0.8751382164365616,
+    "qarf_mean_ndcg10": 0.9082676416252466,
+    "mean_fixed_profile_gain": 0.033129425188685,
+    "mean_qpaf_gain_upper_bound": 0.09173235837475333,
+    "queries_with_positive_headroom": 216,
+    "queries_with_headroom_ge_003": 216,
+    "review_advice": "HEADROOM_POSSIBLE_REVIEW_COMPUTE",
+    "qpaf_measured": false,
+    "formal_phase_decision": false
+  },
+  "independent_review": {
+    "artifact_hashes_checked": 1171,
+    "checkpoint_envelopes_checked": 1142,
+    "profile_metric_values_recomputed": 32012,
+    "raw_query_page_pairs_recomputed": 6149670,
+    "status": "PASS"
+  },
+  "verification": {
+    "focused_tests": "31 passed in 2.77s",
+    "full_test_suite": "213 passed in 21.86s",
+    "ruff_check": "PASS",
+    "ruff_format_check": "PASS",
+    "git_diff_check": "PASS",
+    "document_links": "PASS",
+    "visual_qa": {
+      "status": "PASS",
+      "method": "Codex inspected the complete headroom.png image in conversation; the population title, histogram, threshold line, source labels and subgroup bars agree with the verified tables"
+    }
+  },
+  "sha256": {
+    "run_manifest": "7f58280aed8e9376e53adf4cfa8e527a0189ee6ad196df59d22706539ad8008e",
+    "result_integrity_review": "9358ba32f0dd5015685efb34f007abb6bd59ec1ec66668bc6d39b08955eac176",
+    "query_headroom_csv": "1741f1b28fe3c19a147f5a23618f87922dcd163599eec09df1eb13c033dd2814",
+    "source_summary_csv": "0d26b0aaa5af7a840433c434905c595b4adf9b45034c7f3d50f9b90843252ddc",
+    "headroom_png": "ee325a73bc6eb30b3b46508f13d0044b6fbd757067382555de30dd2d0def5a39",
+    "result_document": "a36517a02ccc08bb49581ef5d2c4830800886d820cb728ef985406dcbee2c776",
+    "execution_approval": "c972e582637ed492e3e387a65998d82620cab34454d57ef6efbd913b3c71e06f",
+    "review_script": "e5c855be945a4dc1aa3033effcdeca40fda806e2d765164c21eb3d01002b63b1",
+    "approved_config": "551d4976cd5028ad8048759027fc2aa1b8155a4dddf0a14d015d89d264d3c2a9",
+    "runner": "2eebbb6db9853eacedcfe143d5cac6910e116e6c469ed64d9cf0cbaab52b1e6f",
+    "lifecycle_test": "84cd26ad09c729a03602fe2f49f158f41b3be2323360ad4d2c728fca54ab329b"
+  },
+  "boundaries": {
+    "qpaf_search_executed": false,
+    "w66_executed": false,
+    "training_executed": false,
+    "modal_gpu_used": false,
+    "phase1_decision": "NOT_APPLICABLE_FIXED_PROFILE_AUDIT",
+    "frozen_p1_02_status": "BLOCKED",
+    "further_execution_authorized": false
+  },
+  "git_state": "local uncommitted work preserved; no commit or push performed"
+}

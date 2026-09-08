@@ -1,0 +1,9 @@
+{
+  "status": "PASS_CLOSED_BEFORE_INPUT_OR_WRITES",
+  "command": "C:\\Python313\\python.exe scripts\\run_vidoseek_exploratory24.py run --actor codex",
+  "exit_code": 1,
+  "error_type": "PermissionError",
+  "error": "Separate exploratory-24 execution approval pending; no attempt consumed",
+  "output_directory_exists_after_refusal": false,
+  "attempt_consumed": false
+}

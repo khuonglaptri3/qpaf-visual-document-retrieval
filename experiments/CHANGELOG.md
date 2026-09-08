@@ -1,5 +1,77 @@
 # Experiment protocol changelog
 
+## 2026-09-08 - Exploratory-24 W7 completed and independently verified
+
+- The user approved the exact prepared scope with “ok I approved”. One Codex local CPU invocation completed 24 frozen additional queries and 129,240 query-page pairs in 8,700.394 seconds, using one worker/thread under the 43,200-second cap with zero retries.
+- Mean nDCG@10 is Global 0.817634, QARF 0.853845 and QPAF 0.903856. QPAF-minus-QARF is 0.050011 with query-bootstrap CI95 [0.008344, 0.101921], win/tie/loss 5/19/0 and top-5% gain share 0.666315. Six page assignments changed across five queries.
+- Independent review verified 82 manifest artifacts, 50 checkpoint envelopes, 25 source snapshots, 960 raw ranking metrics and 415 aggregate metric/delta comparisons. The chart passed visual inspection. Evidence is in `runs/vidoseek_w7_exploratory24_v1/`, `artifacts/vidoseek_exploratory24_review/` and `docs/QPAF_EXPLORATORY24_RESULTS.md`.
+- The W7 subset clears its exploratory continuation signals but cannot pass the formal Phase 1 gate. Full W7/W66, P1-03, training, Modal/GPU and frozen P1-02 remain closed; any later execution requires a separate approval.
+
+## 2026-09-08 - Exploratory-24 page-level feasibility prepared; execution closed
+
+- Froze the predeclared uniform 24-query sample from the 1,130-query remainder after excluding the original exploratory-12 indices. The exact audit indices and IDs are published with canonical query-list SHA-256 `95715b6a8c0c2d684b3a34e9130eca25ea641aafb62678f7daa764f0ab585f5b`; selection used no relevance, scores, fixed-audit per-query metrics or page-level outcomes.
+- Added a separate guarded runner and closed config that reuse the unchanged W7/Global/QARF/QPAF query-sharded primitives for all 5,385 pages/query, with one CPU worker/thread, a 43,200-second cap, one invocation, zero retries and complete-only reporting. Existing run/config/source bytes remain unchanged.
+- Nineteen focused tests and the 232-test full suite pass. Read-only preflight validates the 129,240-pair selection, input and headroom-trigger evidence without relevance loading or attempt consumption; the live command refuses before writes while approval is closed.
+- This preparation produced no page-level oracle result, new retrieval metric, formal phase decision, training, Modal/GPU action or P1-02/P1-03 change. `docs/QPAF_EXPLORATORY24_EXECUTION_REVIEW.md` contains the exact future command and separate approval boundary.
+
+## 2026-09-08 - Fixed-profile discovery audit completed and independently verified
+
+- The user approved one Codex local CPU invocation for all 1,142 frozen ViDoSeek discovery queries, 5,385 pages/query and seven fixed W7 profiles, with one worker/thread, a 1,800-second cap and zero retries. The create-once attempt completed in 561.485 seconds; the authorization is consumed.
+- Global selected visual-only and reached mean nDCG@10 0.875138; QARF reached 0.908268. The mean theoretical QPAF-over-QARF gain bound is 0.091732, with 216 queries retaining positive headroom and 926 already at the QARF ceiling. The review advice is `HEADROOM_POSSIBLE_REVIEW_COMPUTE`.
+- Independent verification checked 1,171 artifact hashes and all 1,142 checkpoint envelopes, then recomputed 32,012 metric values from all 6,149,670 raw pairs. The report, per-query table, source summary and visually checked chart are recorded under `docs/QPAF_FIXED_PROFILE_AUDIT_RESULTS.md` and `artifacts/vidoseek_fixed_profile_audit_review/`.
+- This audit measured fixed-profile Global/QARF and a mathematical QPAF headroom bound only. It did not execute page-level QPAF search, W66, training, Modal/GPU or a formal phase decision; P1-02/P1-03 remain frozen and every later invocation still requires separate approval.
+
+## 2026-09-07 - Fixed-profile discovery audit prepared; execution closed
+
+- Prepared a separate fixed-W7-profile discovery audit runner, hash-pinned closed config and synthetic fixtures after the user approved implementation/testing. It streams one query at a time, preserves existing Global/QARF metric and tie-break semantics, and reports only the theoretical remaining QPAF gain bound; no page-level search is called.
+- Added explicit NumPy/library and Arrow thread limits, source/environment guards, a separate create-once attempt, 1,800-second worker deadline, immutable query checkpoints, complete-only summaries and no-retry refusal. Existing frozen source/configs and all old experiment outputs remain unchanged.
+- Live preparation performed only read-only byte-hash/metadata/ID preflight and closed-CLI refusal. Final tests, pins and preservation checks are recorded in `artifacts/vidoseek_fixed_profile_audit_preparation/verification_receipt.json`; the proposed command and approval scope are in `docs/QPAF_FIXED_PROFILE_AUDIT_EXECUTION_REVIEW.md`.
+- No execution approval, live audit attempt, new metric, QPAF search, W66, training, Modal/GPU, schedule change or formal phase decision was produced. No previous result is invalidated.
+
+## 2026-09-07 - Exploratory-12 recovery closed out and saved-ranking case study verified
+
+- Recovery completed at 11:42:29 UTC: 12 results, four inherited and eight newly computed. The existing independent review passed 16 checks; the completion audit rechecked all 78 artifact hashes and seven report/review pins. The original report and chart remain byte-identical; chart visual QA passed.
+- Added `scripts/inspect_exploratory12_saved_rankings.py` and a separate diagnostic artifact directory. Reconstruction passed 144 existing metric checks without oracle search. Query 797's relevant page moves 4/3/1 under Global/QARF/QPAF; two saved BM25-to-dense page assignments explain the improvement. The other eleven queries are at the Global ceiling.
+- Updated current status/tracking and added `docs/QPAF_QUERY797_CASE_STUDY.md` plus a review-only next-evaluation proposal. Historical approval records and all original/recovery run bytes remain preserved. No metric, protocol, source pin, threshold or earlier result was changed or invalidated; no new execution, full phase decision, training or Modal/GPU action occurred.
+
+## 2026-09-07 - One checkpoint recovery invocation approved and launched
+
+- The user replied "OK now continue" to the exact recovery approval request. Recorded actual approval and reviewed/approved hashes in `runs/exploratory12_recovery_preparation_20260907/execution_approval.json`; opened only the separate recovery authorization block.
+- Launched one Codex CPU recovery at 10:02 UTC: four saved results reused, eight absent queries to compute, one worker/thread, additional 21,600-second cap, no automatic retry. No original source/config/evidence changed. Result status remains incomplete until all twelve outputs and the manifest are independently verified.
+- Current logs and no-retry boundary are in `docs/QPAF_EXPLORATORY12_RECOVERY_RUN_STATUS.md`. This approval does not open full W7/W66, formal phase decisions, training, Modal/GPU, or frozen P1-02.
+
+## 2026-09-07 - Separate checkpoint recovery prepared; execution closed
+
+- Added `scripts/recover_vidoseek_exploratory12.py`, its closed config, and fixture tests. The launcher preserves the original run, validates/copies its reviewed checkpoints to a new output directory, retains the parent science identity, and computes only absent queries after new approval. Original oracle source and config pins are unchanged.
+- Added a separate create-once recovery marker, one-worker/thread and additional six-hour deadline guards, lineage/output hashes, incomplete-output handling, and explicit reused-versus-new timing labels. No execution permission was opened and no recovery run was launched.
+- Updated two original pilot lifecycle tests to reflect the consumed approved snapshot and to make draft-refusal setup explicit. Recovery fixture equivalence and read-only preflight passed; verification evidence and future execution scope are in `docs/QPAF_EXPLORATORY12_RECOVERY_EXECUTION_REVIEW.md`.
+
+## 2026-09-07 - Exploratory-12 interruption audited; no retry
+
+- Resumed the unfinished follow-up after the earlier Codex session ended with `usage_limit_exceeded`. The experiment continued beyond that session, but its Python processes are now gone; the exact termination cause is unknown. Four query checkpoints exist and no complete or handled-failure manifest exists.
+- Verified all 12 Global checkpoints, four saved query results, 18 checkpoint envelopes, source/config pins, input hashes, shared Global selection, and reconstructed saved-ranking metrics. Audit status: `PASS_SAVED_CHECKPOINTS_ONLY`, recorded separately under `artifacts/vidoseek_exploratory12_interruption_review_20260907/`. No oracle search or partial aggregate result was produced; original run bytes are unchanged.
+- Corrected the current tracker status from Running to Interrupted / incomplete and saved `docs/QPAF_EXPLORATORY12_INTERRUPTION_HANDOFF.md`. Eight query searches and final statistics/report remain. The consumed no-retry authorization was not reopened; recovery implementation and separate execution review remain necessary. No scientific protocol, source pin, or phase gate changed.
+
+## 2026-09-07 - One Codex exploratory-12 CPU invocation approved
+
+- The user accepted the prepared exploratory protocol and one-run resource/retry scope: "So do it for me, I need to reach the goal to see the result as soon as possible". Recorded actual approval text, timestamp, review hashes, and scope in the separate pilot config and `runs/exploratory12_preparation_20260907/execution_approval.json`.
+- Opened only this pilot's protocol-adoption and execution fields for actor `codex`. The reviewed source, 12 fixed IDs, all 5,385 pages/query, W7 primitives, bootstrap, one-worker/thread resources, six-hour limit, and no-retry policy are unchanged. Full W7/W66, formal phase decisions, training, Modal/GPU, and frozen P1-02 remain outside this authorization.
+
+## 2026-09-07 - Separate exploratory-12 implementation prepared; execution closed
+
+- Added a separate runner and hash-pinned closed configuration for the existing fixed 12-query proposal, using the frozen W7 search/checkpoint primitives without editing them. The proposed change selects Global only across those 12 queries; it is explicitly ineligible for formal Phase 1 gates.
+- Added synthetic equivalence and lifecycle/guard tests, reverified the score-bundle preflight and calibration evidence, and prepared the exact invocation/output contract in `docs/QPAF_EXPLORATORY12_EXECUTION_REVIEW.md`.
+- No protocol adoption or live execution was authorized or performed. No real-label oracle result, full W7, W66, GPU/extraction, or learned result was produced. Prior score outputs, original proposal bytes, scientific thresholds, phase schedule, and P1-02 status are unchanged. Existing user changes remain uncommitted and preserved.
+
+## 2026-09-06 - Full-page synthetic CPU calibration PASS reviewed; attempt consumed
+
+- Verified the human-run outputs from approved commit `b252080d4ea32ea7b5b11450b54a7cb58f214990` and protocol SHA-256 `8d37e6c4dbe46146e9f2d5d3da439a2c72f4e06f3d9c8ce33511484fceccbe34`. Copied immutable marker and manifest bytes into `artifacts/vidoseek_p1_02r_oracle_w7_v1_full_page_calibration/`; originals remain intact.
+- Attempt marker: 924 bytes, SHA-256 `9e555783f6d4f3d4de7015cbf0614b8301c4ddad643a4cec90a080e26c20b6d7`. Manifest: 1,671 bytes, SHA-256 `622d2d946bfddd9ff7571626e6ac31b3b45a7b41789413bec9864f6b43078629`.
+- PASS: query index 570, 5,385 pages, synthetic relevance, 100 resamples, one CPU worker/thread, 752.7996488000001 seconds worker time, below the 2,700-second limit. Attempt-to-completion timestamps span 755.77775 seconds. Review evidence: `artifacts/vidoseek_p1_02r_full_page_calibration_review.json`.
+- The calibration invocation is consumed (zero remaining); the create-once marker is now present in both checkouts. The executed YAML is retained unchanged as the historical approval snapshot; its pre-run counter is not a new authorization. No rerun is allowed.
+- Resource review: assuming the same cost for every real query gives 9.950199061685188 CPU days for 1,142 queries. This is an illustrative projection from one synthetic query, not a measured full-W7 duration. A 12-query discovery alternative is drafted in `docs/vidoseek_w7_exploratory12_proposal.json`; it is not approved, implemented, or runnable.
+- No W7, W66, Modal/GPU, or learned run was started. P1-02 remains BLOCKED, and no phase gate or scientific threshold was changed.
+
 ## 2026-09-05 - One human P1-02R-O1 full-page calibration authorized, not executed
 
 - Authorization text: `Approve local preparation and commit of the guard/provenance amendment for exactly one human-run P1-02R-O1 full-page synthetic calibration from parent commit 9821d100a4d64d73e8772f48f68f30388f851c06, using query index 570, 5,385 pages, 100 resamples, one CPU worker/thread, a 2,700-second hard stop, and no retry. Use an explicit commit allowlist. Do not execute the calibration, W7, Modal/GPU, P1-03/P1-03R, or learned QPAF, and keep P1-02 BLOCKED`

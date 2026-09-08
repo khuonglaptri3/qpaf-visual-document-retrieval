@@ -1,0 +1,137 @@
+{
+  "aggregate_metrics_reported": false,
+  "artifact_sha256": {
+    "_ATTEMPTED.json": "602e279ef1d27a910ab99a452dadf0822f81db31cd65e9547c41f15921090a27",
+    "checkpoints/global/000000.json": "3f84a73b2029b159dc9a4a506290d00a92a450c346ed744af7d893dfe5f13a04",
+    "checkpoints/global/000001.json": "8ba4443520b54c16a9d18afce82b65057c024f85c898c9b2df5e30ebc83ad01c",
+    "checkpoints/global/000002.json": "eefdbb89b74f7ccb3d3d10c6329c5c8dbfbb433a3a142eacdf81dedf1d12338d",
+    "checkpoints/global/000003.json": "d6e0db2b9cfbab6fc2e2511e596a60598158986bd805f83ea61668bb8a579ed5",
+    "checkpoints/global/000004.json": "1b1511c9799cfc64e25660e76f9c32eb68511da7b3e0a74b51b025e0689ae526",
+    "checkpoints/global/000005.json": "cfe0a5559d8398e2aede43fdcef05f8d52ac0e2e8792f97bd11035295942cfc7",
+    "checkpoints/global/000006.json": "e152a4cd2ec3973e43078e36e43811fb176c49e5e8b593df78c884e3a5380ac5",
+    "checkpoints/global/000007.json": "f4ca3efa9776a1e1a66f6bfa82d81ca149549aaa2a7b792e72e77a50df450eae",
+    "checkpoints/global/000008.json": "6e165af1887687348ff60911066d9883db353984430a09e8772e1626adfaf198",
+    "checkpoints/global/000009.json": "a2bdc87c6b8ea7519ce99fa4f017007fa21093cdfe4f304c70b079e41edc399a",
+    "checkpoints/global/000010.json": "ebc6ebac79a75ef6149f65d0594bff242a2dd198f52509075e7dba390ac66688",
+    "checkpoints/global/000011.json": "0ab16cbe10c519cc94efbda72f80dcda9acb68b48f2ec6e88bef94bd26ee7a10",
+    "checkpoints/global_selection.json": "e677c19c60777cb389dc95bccb6fdccc5d1d3cf85075fb55dae76855e27ff158",
+    "checkpoints/queries/000000.json": "84e81a441e5d33c428ffe5af31234a27d68be346d5a4a660397a44a371f497ad",
+    "checkpoints/queries/000001.json": "5363647334bba1ff076fb1b425b943909d1ef972468d65eb4272e4a05a39943f",
+    "checkpoints/queries/000002.json": "c1bf46661b56910cffc2837bf7a93525f74f946bcc844c7c8b49bd8051547266",
+    "checkpoints/queries/000003.json": "829c2002dd5e0f9dc83764988209be5082fa178c812be678dcf5b2fc996ab4dd",
+    "checkpoints/run_plan.json": "60e5d83ef32edf950b8f682427b2ca2ff13eed17e5bd1524f0c54d1ed0138115",
+    "resolved_config.json": "89d9bb7adcf533b453e5f117ab8488a2a9eddc8d37ec407d027db75ef40a3309",
+    "source_snapshot/configs/vidoseek_p1_02r.yaml": "b26d4f76206ed9fe74b4b508392a3228e799138f2c372863dc983744ebbcab87",
+    "source_snapshot/configs/vidoseek_p1_02r_oracle_w7_v1.yaml": "8d37e6c4dbe46146e9f2d5d3da439a2c72f4e06f3d9c8ce33511484fceccbe34",
+    "source_snapshot/docs/vidoseek_w7_exploratory12_proposal.json": "ccc0c9469c0ee42e540ece1b5aefc8acf82c3117b8db77affb748799495c08f6",
+    "source_snapshot/src/oracle_study/__init__.py": "a9dc3cd08f28e8be03f2c7847993697d2334e2318d56fea269ebaf1ddbb0d7b0",
+    "source_snapshot/src/oracle_study/bootstrap.py": "3e9f588dcde3930406700e417f25b322f2755fe2b02c1fe9fb075c63767da3bd",
+    "source_snapshot/src/oracle_study/budget.py": "f9d08dcfbd484cee2e76719e7f2051fa9541dca6ca507e5c9b3672e5119b8b81",
+    "source_snapshot/src/oracle_study/cache.py": "cee2c06caa72ed6d729ab2ef563ff897ce2fe4fd86d7ef45e3e49cf0641009b5",
+    "source_snapshot/src/oracle_study/cli.py": "6de6b782238b3de19d637edd263869835a9f53acb47caab490ce79963f263955",
+    "source_snapshot/src/oracle_study/constants.py": "26a4898dfb86d4b0380e917ad1aabd78e77bbdef3aee848a970c2319324de2df",
+    "source_snapshot/src/oracle_study/decision.py": "8654517ee39802f53b0612882180625d0bb7eb9ba014125db5649486cfb9292e",
+    "source_snapshot/src/oracle_study/feasibility.py": "32f2fbffee309a6670c44677cbbd568a08e7fe906ae46cc6600c252c2b654c73",
+    "source_snapshot/src/oracle_study/io.py": "aeb48dffea3e453fb8150e330644e45265e350c8e47db5cc7099826afa5c1212",
+    "source_snapshot/src/oracle_study/manifest.py": "2264bd3ed23e5df87be2fac31f9f0f9468aed8303e9aa9d30b2c991500790307",
+    "source_snapshot/src/oracle_study/metrics.py": "bfa630a5450e23f5aab7269aedcb96172bc3096d16e1e3078af5e7b26f97e0f9",
+    "source_snapshot/src/oracle_study/preflight.py": "427e91853f58836ae91ea5ad1abf7004b04b9d4455fae39faad313970642b4e2",
+    "source_snapshot/src/oracle_study/profiles.py": "8dec9449b6d54651a10dc51d22fc7245fadd35a48b6d988261392260ab3a0999",
+    "source_snapshot/src/oracle_study/qpaf.py": "00ce93a76cf80d43b9df394550b1e6799de8285772b12811b19c768f7ea44d53",
+    "source_snapshot/src/oracle_study/report.py": "78904de8655a9dfc8df4894355e9bd22e5da72e67ff659d728df73c023ba425f",
+    "source_snapshot/src/oracle_study/sampling.py": "9c24dae0c1c9e769b97ba05e977fa95fcb262293712b3ca2b10a82ff6629d1e8",
+    "source_snapshot/src/oracle_study/vidoseek_exploratory12.py": "21ed853bbbda0ad66cc391935c3eeb93e7800c1dcf73768812aa7eabfd7d7d6f",
+    "source_snapshot/src/oracle_study/vidoseek_p1_02r_oracle.py": "ed21096e68a77c2b0dcbe597ad9848396e93a4058ef275783f976d930bc362dd",
+    "source_snapshot/src/oracle_study/vidoseek_p1_02r_sharded.py": "a6cbe4eb155b502da507630c486bcc8a06849aaacb77a3fc54c7e96ef67eab17",
+    "tracked_changes.patch": "5e297b6bcb1c3a5678c28c16ddee57d3bab35dde68568aaa810862cf408af5a6"
+  },
+  "audit_script_sha256": "d53f7c4e8b117f8837779b60d45e9b88876850ccae8df46b21cbf9417c1c89cb",
+  "audit_status": "PASS_SAVED_CHECKPOINTS_ONLY",
+  "checks": {
+    "all_12_input_query_hashes_match": true,
+    "all_four_saved_query_rankings_and_metrics_recomputed": true,
+    "approved_config_source_snapshot_and_environment_match": true,
+    "attempt_consumed_zero_remaining": true,
+    "checkpoint_envelopes_hashes_identities_and_order": true,
+    "global_selection_chain_and_all_12_global_metrics_recomputed": true,
+    "original_run_inventory_unchanged_by_audit": true
+  },
+  "classification": "interruption_integrity_audit_not_completed_experiment",
+  "completed_queries": [
+    {
+      "audit_index": 147,
+      "dataset": "Qiuchen-Wang/ViDoSeek",
+      "query_id": "009e328fc7136f2a006b114ff3154d3eafd04ecb_2"
+    },
+    {
+      "audit_index": 396,
+      "dataset": "Qiuchen-Wang/ViDoSeek",
+      "query_id": "01dc52ed80b475c6ac81bc9def3e03dad93e33de_0"
+    },
+    {
+      "audit_index": 510,
+      "dataset": "Qiuchen-Wang/ViDoSeek",
+      "query_id": "02d9d6c3d872469119ce9ff49442967c9209d1cd_3"
+    },
+    {
+      "audit_index": 682,
+      "dataset": "Qiuchen-Wang/ViDoSeek",
+      "query_id": "0362524caefe112f57cbfa547ad8a1b3be756e08_0"
+    }
+  ],
+  "completed_result_available": false,
+  "config_canonical_sha256": "ebff9cd0f3194530d3d4408bd7a657229641e83cf5e8a7ae576ff02a2edc354e",
+  "missing_queries": [
+    {
+      "audit_index": 792,
+      "dataset": "Qiuchen-Wang/ViDoSeek",
+      "query_id": "0441317ce9deb3da74c85d08fe3a2137d7832df0_1"
+    },
+    {
+      "audit_index": 797,
+      "dataset": "Qiuchen-Wang/ViDoSeek",
+      "query_id": "04450a0f59f81025574451222aa26322ae7ede42_1"
+    },
+    {
+      "audit_index": 848,
+      "dataset": "Qiuchen-Wang/ViDoSeek",
+      "query_id": "04877fbd1a0ba6c62b516596391983ab8e3f47ef_0"
+    },
+    {
+      "audit_index": 880,
+      "dataset": "Qiuchen-Wang/ViDoSeek",
+      "query_id": "04973d056d9522006d5bdaefd92627ebedea7ba1_2"
+    },
+    {
+      "audit_index": 881,
+      "dataset": "Qiuchen-Wang/ViDoSeek",
+      "query_id": "04a385633c2c14185d3ca288083efdcc6350420e_0"
+    },
+    {
+      "audit_index": 940,
+      "dataset": "Qiuchen-Wang/ViDoSeek",
+      "query_id": "04dc0db4eefee1ab8f9d77c40047cce2d0a5f087_3"
+    },
+    {
+      "audit_index": 1023,
+      "dataset": "Qiuchen-Wang/ViDoSeek",
+      "query_id": "0541896ed71e7eb1098ad3dbee66bf4444855b17_2"
+    },
+    {
+      "audit_index": 1081,
+      "dataset": "Qiuchen-Wang/ViDoSeek",
+      "query_id": "05a312877bb2a2360f336e7a99bb52ec6f313339_1"
+    }
+  ],
+  "missing_query_checkpoints": 8,
+  "oracle_search_executed_during_audit": false,
+  "original_run_directory_modified": false,
+  "phase1_decision": "NOT_APPLICABLE_EXPLORATORY_SUBSET",
+  "remaining_authorized_invocations": 0,
+  "run_identity_sha256": "1b4e382fc32114aff97e1123c6a390a29037ab2a071d42aa419011c2897193a9",
+  "run_status": "INTERRUPTED_INCOMPLETE",
+  "termination_cause": "UNKNOWN_NO_EXCEPTION_OR_EXIT_RECEIPT",
+  "verified_at": "2026-09-07T09:34:09.497957+00:00",
+  "verified_global_checkpoints": 12,
+  "verified_query_checkpoints": 4
+}
