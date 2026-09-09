@@ -1,5 +1,13 @@
 # Experiment protocol changelog
 
+## 2026-09-09 - W66 synthetic resource calibration interrupted; attempt consumed
+
+- The user approved exactly one Codex invocation of `vidoseek_w66_resource_calibration_v1`. The admitted attempt started at `2026-09-09T08:29:35.312311+00:00` from commit `90719a8cbbdf5cc8fe7c31020b3b60810c297b09`; `_ATTEMPTED.json` records one consumed and zero remaining invocations.
+- A 1,296.325-second telemetry gap aligned with Windows Kernel-Power sleep reason `Button or Lid`, violating the approved one-second telemetry contract. The run was stopped fail-closed and was not retried.
+- Independent review verified the config, all 29 source snapshots, single-thread runtime pools, and the hash-sealed run-plan, 66-profile Global, and Global-selection checkpoints. No query checkpoint, calibration result, complete manifest, actual-label W66 result or scientific result exists.
+- Partial resource evidence stayed within size limits but is not a completed runtime: 2,353 samples, 466,206,720-byte peak process-tree private memory, 4,262,223,872-byte minimum free RAM, 1,670,379-byte maximum output, and 2,290.438 final worker CPU-seconds.
+- Next preparation is an exactly equivalent faster W66 candidate search and a separate recovery protocol with an automatic telemetry-cadence abort. Any live recovery requires new explicit approval; P1-02/P1-03, training and Modal/GPU remain unchanged.
+
 ## 2026-09-09 - W66 resource calibration prepared; execution closed
 
 - Independently rechecked the completed W7 timing evidence and current W66 pins. The full 24-query W66 invocation remains a resource `NO-GO`: the available data support only conditional scenarios of about 21.76--43.51 hours and a 99.84-hour stress illustration, not a safe timeout.
