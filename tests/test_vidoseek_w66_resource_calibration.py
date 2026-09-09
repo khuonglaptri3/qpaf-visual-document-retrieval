@@ -23,8 +23,26 @@ def prepared_checkout(monkeypatch: pytest.MonkeyPatch) -> None:
         monkeypatch.setenv(name, "1")
 
 
-def closed_config() -> dict:
+def live_config() -> dict:
     return study.read_json(ROOT / study.CONFIG_PATH)
+
+
+def closed_config() -> dict:
+    config = copy.deepcopy(live_config())
+    config["resource_budget_status"] = study.PREPARATION_STATUS
+    config["approved_wall_timeout_seconds"] = 0
+    config["invocations"] = 0
+    config["approval_git"]["approved_parent_commit"] = None
+    config["authorization"] = {
+        "protocol_adopted": False,
+        "resource_budget_approved": False,
+        "execution_authorized": False,
+        "approved_by": None,
+        "execution_actor": None,
+        "approval_text": None,
+        "approved_at": None,
+    }
+    return config
 
 
 def approved_config() -> dict:
@@ -94,14 +112,22 @@ def synthetic_query_frame() -> pd.DataFrame:
     )
 
 
-def test_live_config_is_closed_hash_pinned_and_matches_review():
-    config = closed_config()
+def test_live_config_records_exact_approved_scope_and_matches_review():
+    config = live_config()
     validated = study.validate_config(ROOT, config)
-    assert validated["state"] == "closed"
-    assert config["resource_budget_status"] == study.PREPARATION_STATUS
-    assert config["approved_wall_timeout_seconds"] == 0
-    assert config["invocations"] == 0
-    assert config["authorization"]["execution_authorized"] is False
+    assert validated["state"] == "approved"
+    assert config["resource_budget_status"] == study.APPROVED_STATUS
+    assert config["approved_wall_timeout_seconds"] == study.PROPOSED_TIMEOUT_SECONDS
+    assert config["invocations"] == 1
+    assert config["authorization"] == {
+        "protocol_adopted": True,
+        "resource_budget_approved": True,
+        "execution_authorized": True,
+        "approved_by": "user",
+        "execution_actor": "codex",
+        "approval_text": "Ok I approved, you can do whatever it need to proceed w66 but precisely",
+        "approved_at": "2026-09-09T08:23:12.8745123Z",
+    }
     assert study.selected_queries(ROOT)[-1]["audit_index"] >= 0
     review = study.read_json(ROOT / study.RESOURCE_REVIEW_JSON)
     assert (

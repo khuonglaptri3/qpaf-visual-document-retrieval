@@ -1,6 +1,8 @@
 # W66 synthetic resource calibration: preparation and execution review
 
-**PREPARED; EXECUTION REMAINS CLOSED.** The full exploratory-24 W66 invocation is a resource NO-GO under the current evidence. This separate engineering calibration measures one synthetic full-page W66 search and the missing runtime/resource controls. It is not a W66 retrieval result, a formal P1-03 run, training, or permission to execute the 24-query study.
+**APPROVED FOR ONE CODEX INVOCATION; NOT YET STARTED.** The full exploratory-24 W66 invocation remains a resource NO-GO under the current evidence. This separate engineering calibration measures one synthetic full-page W66 search and the missing runtime/resource controls. It is not a W66 retrieval result, a formal P1-03 run, training, or permission to execute the 24-query study.
+
+Approval recorded at `2026-09-09T08:23:12.8745123Z`. The user's exact text was: "Ok I approved, you can do whatever it need to proceed w66 but precisely". This approval is bound only to protocol `vidoseek_w66_resource_calibration_v1`, actor `codex`, one local CPU invocation, a 21,600-second total cap, one worker/thread, Arrow CPU/I/O pools fixed at one, the 2-GiB process-tree private-byte limit, 100-MiB output limit, admission thresholds, and zero retries. It does not authorize the full 24-query W66 run.
 
 ## Frozen calibration contract
 
@@ -16,7 +18,7 @@
 | Memory | Combined parent/worker private bytes at most 2 GiB; abort below 2 GiB host-free memory |
 | Admission | At least 4 GiB free physical memory, 5 GiB free disk, and absent output namespace |
 | Output | At most 100 MiB in `runs/vidoseek_w66_resource_calibration_v1/` |
-| Attempts | Zero authorized now; future proposal is exactly one invocation and zero retries |
+| Attempts | Exactly one Codex invocation approved; zero retries; the attempt is consumed when `_ATTEMPTED.json` is created |
 
 The worker reads the Parquet table with an explicit column projection that excludes `relevance`, adds only the deterministic synthetic label after validation, and stores synthetic metrics only inside hash-sealed calibration checkpoints. The engineering result reports timing, memory, thread-pool, checkpoint, and sweep-path evidence; it must not interpret synthetic metrics as retrieval quality.
 
@@ -35,7 +37,7 @@ $env:PYTHONIOENCODING='utf-8'
 C:\Python313\python.exe scripts\calibrate_vidoseek_w66_resources.py preflight
 ```
 
-The following future command is documented but **not authorized**:
+The following command is authorized exactly once under the approval recorded above:
 
 ```powershell
 $env:PYTHONPATH='src'
@@ -48,6 +50,6 @@ $env:NUMEXPR_NUM_THREADS='1'
 C:\Python313\python.exe scripts\calibrate_vidoseek_w66_resources.py run --actor codex
 ```
 
-A future approval must name this exact protocol, accept the 21,600-second cost cap and one-invocation/no-retry rule, set actor `codex`, and be recorded with timestamp in a clean direct-child commit that changes only this review and the calibration config. Preparation or a passing preflight does not authorize the command.
+The authorization is valid only from a clean direct-child commit that changes this review, the calibration config, and the focused test that separates the live approved state from a deep-copied closed refusal fixture. If admission, provenance, source, environment, or thread guards fail before `_ATTEMPTED.json` is created, the run must not start. After that marker exists, completion or failure consumes the sole invocation and no automatic retry is allowed.
 
 Completion would still be engineering evidence only. The full 24-query W66 timeout remains unset until the calibration output is independently reviewed; a failure consumes the one attempt and requires a new recovery/resource decision.

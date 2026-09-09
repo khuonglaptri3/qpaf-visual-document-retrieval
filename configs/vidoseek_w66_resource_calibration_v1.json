@@ -51,9 +51,9 @@
   "formal_p1_03_allowed": false,
   "training_allowed": false,
   "modal_gpu_allowed": false,
-  "resource_budget_status": "PREPARED_CALIBRATION_EXECUTION_CLOSED",
-  "approved_wall_timeout_seconds": 0,
-  "invocations": 0,
+  "resource_budget_status": "APPROVED_FOR_ONE_CALIBRATION_INVOCATION",
+  "approved_wall_timeout_seconds": 21600,
+  "invocations": 1,
   "preparation_git": {
     "prepared_parent_commit": "592846a5ea8c680a66297144aca13a2ba8411f9d",
     "preparation_commit_rule": "single_non_merge_direct_child_with_exact_changed_paths",
@@ -75,11 +75,12 @@
     ]
   },
   "approval_git": {
-    "approved_parent_commit": null,
+    "approved_parent_commit": "023a21619ef7b9aff295ecb7504efde114f4122b",
     "approval_commit_rule": "single_non_merge_direct_child_with_exact_changed_paths",
     "approval_commit_changed_paths": [
       "configs/vidoseek_w66_resource_calibration_v1.json",
-      "docs/QPAF_W66_RESOURCE_CALIBRATION_EXECUTION_REVIEW.md"
+      "docs/QPAF_W66_RESOURCE_CALIBRATION_EXECUTION_REVIEW.md",
+      "tests/test_vidoseek_w66_resource_calibration.py"
     ]
   },
   "source_sha256": {
@@ -88,7 +89,7 @@
     "configs/vidoseek_p1_02r_oracle_w7_v1.yaml": "8d37e6c4dbe46146e9f2d5d3da439a2c72f4e06f3d9c8ce33511484fceccbe34",
     "docs/QPAF_W66_RESOURCE_BUDGET_REVIEW.json": "dfda8e5ef9d8129d3d3526218691b6ab68df5337034946e5a33afc29f5bbe05d",
     "docs/QPAF_W66_RESOURCE_BUDGET_REVIEW.md": "df6c1608610f8c0607dd2e80a60019a01fe980c29207011c770f345b1921383f",
-    "docs/QPAF_W66_RESOURCE_CALIBRATION_EXECUTION_REVIEW.md": "57c3adde333cddaa34eb5425d519140b6c866736396bc21102447e89e0905d51",
+    "docs/QPAF_W66_RESOURCE_CALIBRATION_EXECUTION_REVIEW.md": "3ea21cf21d5d210355e95f2dedb686a649e0dba1eded73d1d92a39dac77537c1",
     "docs/vidoseek_w66_resource_calibration_proposal.json": "f5a247f10b80047653e36b47eb1f8fb17ca506185a682994f8da0a38ab3f94ee",
     "docs/vidoseek_w7_exploratory24_proposal.json": "1f3d76ce5976a8568fac1119e7de5791af0550ddea8331641613ff7a91a086b2",
     "scripts/calibrate_vidoseek_w66_resources.py": "9dc61f8feaef3f3cc987a856c9844da80c4d50b730956b7a130814619b3b24c7",
@@ -125,12 +126,12 @@
     }
   },
   "authorization": {
-    "protocol_adopted": false,
-    "resource_budget_approved": false,
-    "execution_authorized": false,
-    "approved_by": null,
-    "execution_actor": null,
-    "approval_text": null,
-    "approved_at": null
+    "protocol_adopted": true,
+    "resource_budget_approved": true,
+    "execution_authorized": true,
+    "approved_by": "user",
+    "execution_actor": "codex",
+    "approval_text": "Ok I approved, you can do whatever it need to proceed w66 but precisely",
+    "approved_at": "2026-09-09T08:23:12.8745123Z"
   }
 }
