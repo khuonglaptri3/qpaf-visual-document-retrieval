@@ -1,5 +1,12 @@
 # Experiment protocol changelog
 
+## 2026-09-09 - W66 resource calibration prepared; execution closed
+
+- Independently rechecked the completed W7 timing evidence and current W66 pins. The full 24-query W66 invocation remains a resource `NO-GO`: the available data support only conditional scenarios of about 21.76--43.51 hours and a 99.84-hour stress illustration, not a safe timeout.
+- Prepared a separate synthetic calibration for audit index 1129. It loads the frozen 24-query subset with an explicit projection that excludes actual relevance, then applies one deterministic synthetic label to the selected 5,385-page query and runs the unchanged W66 query search plus fixed bootstrap probes.
+- Added one-thread numeric/Arrow verification, parent-worker liveness checks, sleep inhibition, one-second CPU/memory/disk/output telemetry, 2-GiB private-byte and 100-MiB output limits, immutable checkpoint replay, complete-only finalization and no-retry failure evidence.
+- The proposed 21,600-second cap is not execution permission. The closed config has zero approved seconds and zero invocations; no calibration output, W66 retrieval result, phase decision, training, Modal/GPU action or frozen P1-02 change was produced.
+
 ## 2026-09-08 - Exploratory-24 W66 sensitivity prepared; execution closed
 
 - Bound a separate W66 proposal and runner to the exact 24-query W7 selection, normalized score bytes, metric/tie-break semantics, bootstrap settings and existing oracle primitives. The query-list SHA-256 is unchanged, and the 66-profile canonical SHA-256 is `c04139858954fd0a7f7baa5dad548f3675a41b8682e9798039508e4077da5973`.
