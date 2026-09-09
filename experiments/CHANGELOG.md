@@ -1,5 +1,13 @@
 # Experiment protocol changelog
 
+## 2026-09-09 - W66 calibration recovery prepared; execution closed
+
+- Added `candidate_oracle_exact_fast`, an exact-output optimization that computes candidate-invariant order, position, gain, discount and ideal-DCG state once per candidate while retaining the frozen candidate/profile iteration and update rules.
+- Exact tests cover W7/W66 random inputs, ties, zero relevance, a bounded larger fixture, serialized query-result equality, and immutable checkpoint replay. A 512-page, one-thread synthetic benchmark matched assignments, scores, metrics and accepted updates exactly: 53.405 seconds frozen versus 1.471 seconds optimized (36.296x).
+- The benchmark's quadratic 162.764-second 5,385-page illustration is conditional engineering evidence, not measured full-page timing or a completion guarantee. The recovery cost cap is proposed at 3,600 seconds.
+- Prepared `vidoseek_w66_resource_calibration_recovery_v1` in a fresh output namespace with no prior-checkpoint reuse, the existing one-worker/thread and resource guards, and automatic abort when either wall or monotonic telemetry gaps exceed five seconds.
+- Recovery authorization remains closed at zero seconds and zero invocations. No calibration recovery, actual-label W66, formal P1-03, training or Modal/GPU execution occurred.
+
 ## 2026-09-09 - W66 synthetic resource calibration interrupted; attempt consumed
 
 - The user approved exactly one Codex invocation of `vidoseek_w66_resource_calibration_v1`. The admitted attempt started at `2026-09-09T08:29:35.312311+00:00` from commit `90719a8cbbdf5cc8fe7c31020b3b60810c297b09`; `_ATTEMPTED.json` records one consumed and zero remaining invocations.

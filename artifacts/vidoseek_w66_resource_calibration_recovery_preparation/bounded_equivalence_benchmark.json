@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "classification": "bounded_synthetic_engineering_benchmark_not_w66_result",
+  "recorded_at": "2026-09-09T10:03:16.4157870Z",
+  "platform": "Microsoft Windows NT 10.0.26200.0",
+  "processor": "Intel(R) Core(TM) i7-10510U CPU @ 1.80GHz",
+  "python": "3.13.7",
+  "numpy": "2.4.4",
+  "numeric_threads": 1,
+  "numeric_pool": {
+    "internal_api": "openblas",
+    "num_threads": 1,
+    "version": "0.3.31.188.0",
+    "architecture": "Haswell"
+  },
+  "fixture": {
+    "size": 512,
+    "seed": 20260909,
+    "score_channels": 3,
+    "relevance_levels": 4,
+    "grid": "w66",
+    "profiles": 66,
+    "maximum_sweeps": 2
+  },
+  "result": {
+    "frozen_seconds": 53.405035300000236,
+    "optimized_seconds": 1.4713878000002296,
+    "speedup": 36.29568989221733,
+    "accepted_updates": 17,
+    "exact_assignments_scores_metrics_changes": true
+  },
+  "conditional_timeout_reasoning": {
+    "quadratic_page_count_scale_512_to_5385": 110.61944961547852,
+    "scaled_optimized_core_seconds": 162.76410860695518,
+    "proposed_cost_cap_seconds": 3600,
+    "cost_cap_over_scaled_core": 22.117898293494946,
+    "is_runtime_guarantee": false,
+    "excludes": [
+      "real full-page optimized calibration timing",
+      "input loading",
+      "checkpointing",
+      "bootstrap",
+      "supervision",
+      "finalization"
+    ]
+  },
+  "boundaries": {
+    "actual_relevance_loaded": false,
+    "calibration_executed": false,
+    "scientific_result_produced": false,
+    "full_w66_executed": false,
+    "formal_p1_03_executed": false
+  }
+}

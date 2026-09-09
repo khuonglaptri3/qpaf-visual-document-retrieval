@@ -1,0 +1,132 @@
+{
+  "schema_version": 1,
+  "protocol_id": "vidoseek_w66_resource_calibration_recovery_v1",
+  "status": "PREPARED_EXECUTION_CLOSED",
+  "classification": "synthetic_w66_engineering_recovery_not_retrieval_result",
+  "execution_authorized": false,
+  "purpose": "Recover the interrupted engineering calibration with an exact-output optimized candidate oracle and an automatic telemetry-cadence abort before any full exploratory-24 W66 resource decision.",
+  "prior_attempt": {
+    "protocol_id": "vidoseek_w66_resource_calibration_v1",
+    "status": "FAIL_CONSUMED_TELEMETRY_GAP_NO_RESULT",
+    "remaining_authorized_invocations": 0,
+    "partial_output_reused": false,
+    "partial_output_modified": false,
+    "review_path": "artifacts/vidoseek_w66_resource_calibration_interruption_review/review.json"
+  },
+  "selection": {
+    "rule": "Same frozen synthetic engineering fixture as the consumed calibration",
+    "audit_index": 1129,
+    "dataset": "Qiuchen-Wang/ViDoSeek",
+    "query_id": "05e2dbaf2d299e33a0e7bf92a434214c84381bf1_5",
+    "pages": 5385,
+    "parent_query_list_sha256": "95715b6a8c0c2d684b3a34e9130eca25ea641aafb62678f7daa764f0ab585f5b"
+  },
+  "input_loading": {
+    "queries": 24,
+    "pairs": 129240,
+    "columns": [
+      "dataset",
+      "query_id",
+      "page_id",
+      "source",
+      "bm25_score",
+      "dense_score",
+      "stage1_score",
+      "visual_score",
+      "branch_ranks"
+    ],
+    "actual_relevance_column_allowed": false,
+    "retrieval_score_sha256": "32b39da19e9507a0a5060157630cb40bf5c6bcf6464d88e4bb6136888473173b"
+  },
+  "synthetic_relevance": {
+    "sort": "ascending_page_id",
+    "sorted_page_index": 2692,
+    "selected_relevance": 1.0,
+    "all_other_relevance": 0.0
+  },
+  "search": {
+    "grid": "w66",
+    "profile_count": 66,
+    "profiles_canonical_sha256": "c04139858954fd0a7f7baa5dad548f3675a41b8682e9798039508e4077da5973",
+    "global_scope": "one_synthetic_recovery_query_only",
+    "global_checkpoint": "freshly recomputed in the recovery namespace",
+    "query_candidate_oracle": "candidate_oracle_exact_fast",
+    "equivalence_contract": "exact assignments, scores, metrics, accepted updates, tie behavior, and serialized query-result row",
+    "candidate_invariant_work_reused": [
+      "stable ranking order",
+      "candidate positions and non-candidate keys",
+      "ranked gains and discount shifts",
+      "ideal DCG"
+    ],
+    "maximum_sweeps": 2,
+    "profile_tie_break": [
+      "ndcg10",
+      "recall3",
+      "mrr10"
+    ],
+    "ranking_tie_break": "ascending_page_id"
+  },
+  "bounded_benchmark": {
+    "path": "artifacts/vidoseek_w66_resource_calibration_recovery_preparation/bounded_equivalence_benchmark.json",
+    "pages": 512,
+    "seed": 20260909,
+    "frozen_seconds": 53.405035300000236,
+    "optimized_seconds": 1.4713878000002296,
+    "speedup": 36.29568989221733,
+    "exact_output": true,
+    "conditional_scaled_core_seconds": 162.76410860695518,
+    "is_full_page_timing_or_completion_guarantee": false
+  },
+  "bootstrap_probe": {
+    "sample": "v[i]=i/23 for i=0..23; denominator is 1",
+    "functions": [
+      "bootstrap_mean_ci",
+      "bootstrap_ratio_ci"
+    ],
+    "resamples": 10000,
+    "seed": 20260820
+  },
+  "resources": {
+    "proposed_wall_timeout_seconds": 3600,
+    "timeout_is_cost_cap_not_completion_guarantee": true,
+    "proposed_invocations": 1,
+    "currently_authorized_invocations": 0,
+    "automatic_retries": 0,
+    "workers": 1,
+    "numeric_threads": 1,
+    "arrow_cpu_threads": 1,
+    "arrow_io_threads": 1,
+    "process_tree_private_bytes_limit": 2147483648,
+    "prestart_free_physical_bytes_min": 4294967296,
+    "abort_free_physical_bytes_below": 2147483648,
+    "prestart_disk_free_bytes_min": 5368709120,
+    "output_byte_limit": 104857600,
+    "sample_interval_seconds": 1,
+    "maximum_telemetry_gap_seconds": 5.0
+  },
+  "lifecycle": {
+    "output_path": "runs/vidoseek_w66_resource_calibration_recovery_v1",
+    "output_must_be_absent_at_admission": true,
+    "one_create_once_attempt": true,
+    "fresh_global_and_query_checkpoints": true,
+    "previous_checkpoint_reuse_allowed": false,
+    "parent_supervises_worker": true,
+    "worker_watches_parent_identity": true,
+    "system_sleep_inhibited_during_attempt": true,
+    "telemetry_gap_aborts_automatically": true,
+    "persistent_stage_and_resource_logs": true,
+    "immutable_checkpoint_replay_required": true,
+    "failure_consumes_attempt": true,
+    "further_recovery_requires_separate_approval": true
+  },
+  "interpretation": {
+    "engineering_timing_and_resource_evidence_only": true,
+    "synthetic_metrics_are_retrieval_results": false,
+    "checkpoint_reuse_into_scientific_run_allowed": false,
+    "full_w66_timeout_established_by_this_proposal": false,
+    "formal_p1_03_decision_allowed": false,
+    "training_allowed": false,
+    "modal_gpu_allowed": false,
+    "frozen_p1_02_status": "BLOCKED"
+  }
+}
