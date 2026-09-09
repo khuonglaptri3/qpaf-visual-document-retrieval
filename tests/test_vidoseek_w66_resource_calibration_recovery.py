@@ -12,6 +12,13 @@ from scripts import recover_vidoseek_w66_resource_calibration as recovery
 
 
 ROOT = Path(__file__).resolve().parents[1]
+APPROVAL_TEXT = (
+    "I approve exactly one Codex invocation of "
+    "vidoseek_w66_resource_calibration_recovery_v1 under the prepared "
+    "3,600-second, one-worker/thread, five-second telemetry-gap, zero-retry contract."
+)
+APPROVED_AT = "2026-09-09T15:40:28.5187698Z"
+APPROVED_PARENT_COMMIT = "213ad8ff7e0339a0ecb3a495f3ada0f67e1c8a73"
 
 
 @pytest.fixture(autouse=True)
@@ -47,6 +54,24 @@ def approved_config() -> dict:
     return config
 
 
+def closed_config() -> dict:
+    config = copy.deepcopy(live_config())
+    config["resource_budget_status"] = recovery.PREPARATION_STATUS
+    config["approved_wall_timeout_seconds"] = 0
+    config["invocations"] = 0
+    config["approval_git"]["approved_parent_commit"] = None
+    config["authorization"] = {
+        "protocol_adopted": False,
+        "resource_budget_approved": False,
+        "execution_authorized": False,
+        "approved_by": None,
+        "execution_actor": None,
+        "approval_text": None,
+        "approved_at": None,
+    }
+    return config
+
+
 def synthetic_query_frame(size: int = 12) -> pd.DataFrame:
     return pd.DataFrame(
         [
@@ -67,23 +92,24 @@ def synthetic_query_frame(size: int = 12) -> pd.DataFrame:
     )
 
 
-def test_live_config_is_closed_and_matches_prepared_scope():
+def test_live_config_is_approved_once_and_matches_prepared_scope():
     config = live_config()
     validated = recovery.validate_config(ROOT, config)
-    assert validated["state"] == "closed"
-    assert config["resource_budget_status"] == recovery.PREPARATION_STATUS
-    assert config["approved_wall_timeout_seconds"] == 0
-    assert config["invocations"] == 0
+    assert validated["state"] == "approved"
+    assert config["resource_budget_status"] == recovery.APPROVED_STATUS
+    assert config["approved_wall_timeout_seconds"] == recovery.PROPOSED_TIMEOUT_SECONDS
+    assert config["invocations"] == 1
     assert config["maximum_telemetry_gap_seconds"] == 5.0
     assert config["previous_checkpoint_reuse_allowed"] is False
+    assert config["approval_git"]["approved_parent_commit"] == APPROVED_PARENT_COMMIT
     assert config["authorization"] == {
-        "protocol_adopted": False,
-        "resource_budget_approved": False,
-        "execution_authorized": False,
-        "approved_by": None,
-        "execution_actor": None,
-        "approval_text": None,
-        "approved_at": None,
+        "protocol_adopted": True,
+        "resource_budget_approved": True,
+        "execution_authorized": True,
+        "approved_by": "user",
+        "execution_actor": "codex",
+        "approval_text": APPROVAL_TEXT,
+        "approved_at": APPROVED_AT,
     }
 
 
@@ -118,7 +144,7 @@ def test_scope_drift_is_rejected(field, value):
     ],
 )
 def test_partial_approval_is_rejected(update):
-    config = live_config()
+    config = closed_config()
     config.update(update)
     with pytest.raises(ValueError, match="authorization/resource state drift"):
         recovery.validate_config(ROOT, config)
@@ -133,7 +159,7 @@ def test_closed_run_refuses_before_validation_or_output(tmp_path, monkeypatch):
 
     monkeypatch.setattr(recovery, "validate_config", validate)
     with pytest.raises(PermissionError, match="approval pending"):
-        recovery.run(tmp_path, live_config(), "codex")
+        recovery.run(tmp_path, closed_config(), "codex")
     assert called is False
     assert not (tmp_path / recovery.OUTPUT_PATH).exists()
 

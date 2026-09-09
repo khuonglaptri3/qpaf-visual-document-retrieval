@@ -56,9 +56,9 @@
   "formal_p1_03_allowed": false,
   "training_allowed": false,
   "modal_gpu_allowed": false,
-  "resource_budget_status": "PREPARED_RECOVERY_EXECUTION_CLOSED",
-  "approved_wall_timeout_seconds": 0,
-  "invocations": 0,
+  "resource_budget_status": "APPROVED_FOR_ONE_RECOVERY_INVOCATION",
+  "approved_wall_timeout_seconds": 3600,
+  "invocations": 1,
   "preparation_git": {
     "prepared_parent_commit": "560fa256505432634cd29d987d89bc59f92d4809",
     "preparation_commit_rule": "single_non_merge_direct_child_with_exact_changed_paths",
@@ -80,7 +80,7 @@
     ]
   },
   "approval_git": {
-    "approved_parent_commit": null,
+    "approved_parent_commit": "213ad8ff7e0339a0ecb3a495f3ada0f67e1c8a73",
     "approval_commit_rule": "single_non_merge_direct_child_with_exact_changed_paths",
     "approval_commit_changed_paths": [
       "configs/vidoseek_w66_resource_calibration_recovery_v1.json",
@@ -96,7 +96,7 @@
     "configs/vidoseek_p1_02r_oracle_w7_v1.yaml": "8d37e6c4dbe46146e9f2d5d3da439a2c72f4e06f3d9c8ce33511484fceccbe34",
     "docs/QPAF_W66_RESOURCE_BUDGET_REVIEW.json": "dfda8e5ef9d8129d3d3526218691b6ab68df5337034946e5a33afc29f5bbe05d",
     "docs/QPAF_W66_RESOURCE_BUDGET_REVIEW.md": "df6c1608610f8c0607dd2e80a60019a01fe980c29207011c770f345b1921383f",
-    "docs/QPAF_W66_RESOURCE_CALIBRATION_RECOVERY_EXECUTION_REVIEW.md": "d31ff266782dd6da02a43e27de4c322437c4719935be41a7c52a80b5a3b3d7fa",
+    "docs/QPAF_W66_RESOURCE_CALIBRATION_RECOVERY_EXECUTION_REVIEW.md": "0cb6b01c418d184d026f77d2e9b121d260d5c76ab21502c64b58f73316ab73bc",
     "docs/vidoseek_w66_resource_calibration_recovery_proposal.json": "6dccec3e7c0331f031ac2f8e661ff7fe7bf0abc9940c29fb0405a4a52f063c9a",
     "docs/vidoseek_w7_exploratory24_proposal.json": "1f3d76ce5976a8568fac1119e7de5791af0550ddea8331641613ff7a91a086b2",
     "scripts/calibrate_vidoseek_w66_resources.py": "9dc61f8feaef3f3cc987a856c9844da80c4d50b730956b7a130814619b3b24c7",
@@ -135,12 +135,12 @@
     }
   },
   "authorization": {
-    "protocol_adopted": false,
-    "resource_budget_approved": false,
-    "execution_authorized": false,
-    "approved_by": null,
-    "execution_actor": null,
-    "approval_text": null,
-    "approved_at": null
+    "protocol_adopted": true,
+    "resource_budget_approved": true,
+    "execution_authorized": true,
+    "approved_by": "user",
+    "execution_actor": "codex",
+    "approval_text": "I approve exactly one Codex invocation of vidoseek_w66_resource_calibration_recovery_v1 under the prepared 3,600-second, one-worker/thread, five-second telemetry-gap, zero-retry contract.",
+    "approved_at": "2026-09-09T15:40:28.5187698Z"
   }
 }

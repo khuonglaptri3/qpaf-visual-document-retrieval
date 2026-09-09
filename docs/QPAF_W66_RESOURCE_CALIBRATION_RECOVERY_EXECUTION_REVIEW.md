@@ -1,6 +1,6 @@
 # W66 synthetic resource calibration recovery: preparation and execution review
 
-**PREPARED; EXECUTION CLOSED.** The prior `vidoseek_w66_resource_calibration_v1` invocation is consumed and produced no calibration or W66 result. This separate protocol prepares one fresh engineering calibration in a new output namespace. It does not reuse or modify the partial run, authorize the 24-query W66 study, or change the blocked P1-02/P1-03 boundary.
+**APPROVED FOR EXACTLY ONE RECOVERY INVOCATION; NOT YET EXECUTED.** The prior `vidoseek_w66_resource_calibration_v1` invocation is consumed and produced no calibration or W66 result. This separate protocol authorizes one fresh engineering calibration in a new output namespace. It does not reuse or modify the partial run, authorize the 24-query W66 study, or change the blocked P1-02/P1-03 boundary.
 
 ## Why this recovery is materially different
 
@@ -10,7 +10,7 @@ Exact-equality tests cover W7 and W66, random sizes and seeds, score/page-ID tie
 
 ## Frozen recovery contract
 
-| Item | Prepared contract |
+| Item | Approved contract |
 | --- | --- |
 | Prior output | Read-only provenance only; no file or checkpoint is reused or modified |
 | Input | Same 24-query, 129,240-row non-label projection; selected 5,385-page query at audit index 1129 |
@@ -18,12 +18,12 @@ Exact-equality tests cover W7 and W66, random sizes and seeds, score/page-ID tie
 | Search | Fresh one-query W66 Global pass plus exact-output optimized QPAF candidate search, at most two sweeps |
 | Bootstrap | Existing mean and ratio functions, fixed 24-element synthetic input, 10,000 resamples, seed 20260820 |
 | CPU | Local CPU, one worker, one numeric thread, Arrow CPU/I/O pools each fixed and checked at 1 |
-| Cost cap | Proposed 3,600 seconds; not a completion guarantee |
+| Cost cap | Approved 3,600 seconds; not a completion guarantee |
 | Memory | Parent-plus-worker private bytes at most 2 GiB; abort below 2 GiB host-free memory |
 | Admission | At least 4 GiB free physical memory, 5 GiB free disk, and absent recovery namespace |
 | Telemetry | One-second target; automatically abort when wall or monotonic gap exceeds 5 seconds |
 | Output | At most 100 MiB in `runs/vidoseek_w66_resource_calibration_recovery_v1/` |
-| Attempts | Currently zero; if separately approved, exactly one invocation and zero retries |
+| Attempts | Exactly one invocation approved for actor `codex`; zero retries |
 
 The worker still loads the real score bundle through an explicit projection that excludes `relevance`, validates all 129,240 rows, and creates the deterministic synthetic label only after validation. Fresh run-plan, Global, Global-selection and optimized query checkpoints are hash-sealed and replayed without search. They remain ineligible for a scientific W66 run.
 
@@ -40,7 +40,7 @@ $env:PYTHONIOENCODING='utf-8'
 C:\Python313\python.exe scripts\recover_vidoseek_w66_resource_calibration.py preflight
 ```
 
-The following command is **not authorized**:
+The following command is authorized **exactly once** under the recorded contract:
 
 ```powershell
 $env:PYTHONPATH='src'
@@ -53,6 +53,6 @@ $env:NUMEXPR_NUM_THREADS='1'
 C:\Python313\python.exe scripts\recover_vidoseek_w66_resource_calibration.py run --actor codex
 ```
 
-A live recovery requires a new explicit user approval bound to protocol `vidoseek_w66_resource_calibration_recovery_v1`, actor `codex`, one local invocation, a 3,600-second total cap, one worker/thread, the existing memory/disk/output limits, a five-second maximum telemetry gap, and zero retries. Approval must be recorded in a clean direct-child commit changing only the config, this review, and the focused test. Preparation or test execution does not consume or imply that approval.
+The user approved exactly one Codex invocation of protocol `vidoseek_w66_resource_calibration_recovery_v1` under the prepared 3,600-second, one-worker/thread, five-second telemetry-gap, zero-retry contract. The approval was recorded at `2026-09-09T15:40:28.5187698Z`, is bound to actor `codex`, and must be sealed in a clean direct-child commit of preparation commit `213ad8ff7e0339a0ecb3a495f3ada0f67e1c8a73` changing only the config, this review, and the focused test. Starting the command consumes the sole invocation before preflight; failure does not authorize a retry.
 
 Even a completed recovery would be engineering evidence only. It must be independently reviewed before setting a full exploratory-24 W66 timeout or deciding whether that separate scientific run is feasible.
