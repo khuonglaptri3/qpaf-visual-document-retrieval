@@ -1,0 +1,114 @@
+{
+  "schema_version": 1,
+  "status": "PASS_PREPARATION_ONLY_EXECUTION_CLOSED",
+  "recorded_at": "2026-09-09T17:19:00.7596708Z",
+  "protocol_id": "vidoseek_p1_02r_w66_exploratory24_optimized_v1",
+  "classification": "preparation_verification_not_w66_result",
+  "preparation_parent_commit": "61a5c8dcdd3d6ef4da77225881d4456c7dbdf130",
+  "preparation_commit_rule": "single_non_merge_direct_child_with_exact_changed_paths",
+  "preparation_commit_changed_paths": [
+    "Context.md",
+    "Tasks.md",
+    "artifacts/vidoseek_w66_exploratory24_optimized_preparation/closed_cli_refusal.json",
+    "artifacts/vidoseek_w66_exploratory24_optimized_preparation/preflight.json",
+    "artifacts/vidoseek_w66_exploratory24_optimized_preparation/verification_receipt.json",
+    "configs/vidoseek_w66_exploratory24_optimized_v1.json",
+    "docs/QPAF_W66_EXPLORATORY24_OPTIMIZED_EXECUTION_REVIEW.md",
+    "docs/vidoseek_w66_exploratory24_optimized_proposal.json",
+    "experiments/CHANGELOG.md",
+    "scripts/run_vidoseek_exploratory24_w66_optimized.py",
+    "tests/test_vidoseek_exploratory24_w66_optimized.py"
+  ],
+  "artifacts": {
+    "config_path": "configs/vidoseek_w66_exploratory24_optimized_v1.json",
+    "config_byte_sha256": "a956e5dc4543747473815b3f1e9f8bcd133477dae25220721a1887dff1e7a017",
+    "config_canonical_sha256": "32e1cefbf7177ae1097187bd7ed35a357c0b410ff120b44df1715c1eafa29064",
+    "proposal_sha256": "043736c86473a89b31a1a54d804155b0cf3fa24a75d5df782c612cd529d9e726",
+    "execution_review_sha256": "47a1cbc12f91ce2539ab050013182224bdd49ef1b1ab95de8a820a0df43b0a3e",
+    "runner_sha256": "0534a4dfe8e1b064d4d66d2c267030d62e8219b4eba54603302c6e43d20501f3",
+    "focused_test_sha256": "f853e952c0723d5f207530a92bde55ea11af3b18e65e99be87737b10b181f34b",
+    "preflight_sha256": "58ac63f9dde94279d11d2ee389b6fb5cd383c386be2a5ea77117fc98ed3ea695",
+    "closed_cli_refusal_sha256": "608242b01bd0e1b9d4ad0a0accdd2e22a53e65ffad9a7de7a78810b078a2ed2a"
+  },
+  "checks": {
+    "json_parse": "PASS",
+    "python_compile": "PASS",
+    "ruff_check": "PASS",
+    "ruff_format_check": "PASS",
+    "git_diff_check": "PASS",
+    "source_inventory_exact": true,
+    "source_hash_mismatches": [],
+    "focused_optimized_runner": {
+      "status": "PASS",
+      "passed": 28,
+      "elapsed_seconds": 26.33
+    },
+    "w66_focused_family": {
+      "status": "PASS",
+      "passed": 141,
+      "elapsed_seconds": 73.91,
+      "files": [
+        "tests/test_qpaf_optimized.py",
+        "tests/test_vidoseek_exploratory24_w66.py",
+        "tests/test_vidoseek_w66_resource_calibration.py",
+        "tests/test_vidoseek_w66_resource_calibration_recovery.py",
+        "tests/test_vidoseek_exploratory24_w66_optimized.py"
+      ]
+    },
+    "repository_suite": {
+      "status": "NOT_GREEN_UNRELATED_LOCAL_TORCH_INSTALLATION",
+      "default_collection_error": "safetensors.torch requires torch.Tensor, but the installed torch namespace exposes no Tensor",
+      "safetensors_test_module_excluded": {
+        "passed": 366,
+        "failed": 4,
+        "elapsed_seconds": 179.07,
+        "failure_reason": "The same incomplete torch namespace lacks zeros, tensor, arange, ones, and save APIs",
+        "failed_test_files": [
+          "tests/test_score_extractor.py",
+          "tests/test_vidoseek_coverage_audit.py",
+          "tests/test_vidoseek_p1_02r_full.py"
+        ]
+      },
+      "unrelated_test_or_environment_changes_made": false
+    }
+  },
+  "preflight": {
+    "status": "PASS",
+    "actual_relevance_loaded": false,
+    "w66_oracle_executed": false,
+    "scientific_result_produced": false,
+    "candidate_pairs": 129240,
+    "coverage": 1.0,
+    "output_exists": false,
+    "attempt_exists": false,
+    "observed_free_physical_bytes": 3003899904,
+    "prestart_free_physical_bytes_min": 4294967296,
+    "admission_thresholds_currently_met": false
+  },
+  "closed_cli": {
+    "status": "PASS_CLOSED_REFUSAL",
+    "exit_code": 1,
+    "error": "Separate optimized exploratory-24 W66 execution approval pending; no attempt consumed",
+    "output_exists_after_refusal": false,
+    "attempt_exists_after_refusal": false
+  },
+  "resource_review": {
+    "proposed_wall_timeout_seconds": 7200,
+    "approved_wall_timeout_seconds": 0,
+    "authorized_invocations": 0,
+    "one_sweep_total_illustration_seconds": 1533.8114459999944,
+    "conservative_two_times_total_illustration_seconds": 3035.602354800025,
+    "proposed_over_conservative_illustration_ratio": 2.3718521592971658,
+    "is_runtime_guarantee": false,
+    "execution_authorized": false
+  },
+  "boundaries": {
+    "actual_relevance_w66_executed": false,
+    "scientific_result_produced": false,
+    "formal_p1_03_executed": false,
+    "training_executed": false,
+    "modal_gpu_used": false,
+    "frozen_p1_02_status": "BLOCKED"
+  },
+  "post_commit_provenance_recheck_required": true
+}

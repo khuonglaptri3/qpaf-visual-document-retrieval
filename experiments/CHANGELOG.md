@@ -1,5 +1,14 @@
 # Experiment protocol changelog
 
+## 2026-09-10 - Exact-output optimized exploratory-24 W66 prepared; execution closed
+
+- Added a separately versioned scientific runner for the frozen 24-query W66 sensitivity. It binds `candidate_oracle_exact_fast` by SHA-256, uses a fresh output namespace and checkpoint kinds, and rejects historical W66 or calibration checkpoints while leaving the frozen runner unchanged.
+- The scientific contract remains fixed at the same 24 ordered queries, 129,240 query-page pairs, 66 profiles, normalization, metrics, tie-breaks, two-sweep cap, 10,000-resample bootstrap and seed `20260820`. Optimized-runner verification passed 28 tests, and the combined W66/optimizer/calibration family passed 141.
+- The completed resource review converts the 1,533.811-second one-sweep and 3,035.602-second doubled-search illustrations into a proposed 7,200-second one-attempt cost cap. This cap is not a runtime guarantee or approval. One-worker/thread and Arrow limits, sleep inhibition, one-second telemetry, a five-second telemetry-gap abort and memory/disk/output guards are pinned.
+- Read-only preflight passed without loading relevance or running the oracle; the closed CLI refused before output creation or attempt consumption. The observed host snapshot had about 3.00 GB free, below the 4-GiB future-admission threshold, so a future approved attempt would currently be denied until resources are rechecked.
+- The full repository suite is not claimable as green in the current `C:\Python313` environment: one safetensors test module fails collection and four additional tests fail because the installed `torch` namespace lacks normal tensor APIs. With the safetensors module excluded, 366 tests passed. No unrelated PyTorch/test changes were made.
+- Resource status, approved timeout and authorized invocations remain closed at zero. No full W66 attempt, metric, scientific result, P1-03 decision, training, Modal/GPU work or P1-02 change occurred.
+
 ## 2026-09-09 - W66 calibration recovery completed and independently verified
 
 - The user approved exactly one `vidoseek_w66_resource_calibration_recovery_v1` Codex invocation under the prepared 3,600-second, one-worker/thread, five-second telemetry-gap and zero-retry contract. Approval commit `c94fb8e` changed exactly the config, execution review and focused test.
