@@ -1,5 +1,13 @@
 # Experiment protocol changelog
 
+## 2026-09-09 - W66 calibration recovery completed and independently verified
+
+- The user approved exactly one `vidoseek_w66_resource_calibration_recovery_v1` Codex invocation under the prepared 3,600-second, one-worker/thread, five-second telemetry-gap and zero-retry contract. Approval commit `c94fb8e` changed exactly the config, execution review and focused test.
+- The invocation completed in 70.611 seconds. Input loading took 1.064 seconds, one-query W66 Global evaluation 0.999 seconds, optimized query-oracle search 62.575 seconds and immutable checkpoint replay 0.069 seconds.
+- Independent review passed all 49 manifest-bound artifact hashes, 33 source snapshots, four checkpoint envelopes, 129,240 non-label input rows, thread limits and 69 telemetry samples. Peak process-tree private memory was 442,408,960 bytes; maximum output was 487,694 bytes; maximum wall/monotonic gaps were below 1.08 seconds.
+- The synthetic query accepted zero updates and exercised one sweep. Conditional 24-query illustrations of 1,501.791 seconds for one-sweep query search and 3,003.582 seconds for doubled query search are not measured full-W66 runtime or an approved timeout.
+- The sole recovery invocation is consumed. The result supports preparation of a separately versioned exact-output optimized full-W66 runner and resource review only; it does not authorize the scientific W66 study, P1-03, training or Modal/GPU work.
+
 ## 2026-09-09 - W66 calibration recovery prepared; execution closed
 
 - Added `candidate_oracle_exact_fast`, an exact-output optimization that computes candidate-invariant order, position, gain, discount and ideal-DCG state once per candidate while retaining the frozen candidate/profile iteration and update rules.
