@@ -50,9 +50,9 @@
   "formal_p1_03_allowed": false,
   "training_allowed": false,
   "modal_gpu_allowed": false,
-  "resource_budget_status": "PREPARED_RESOURCE_REVIEW_COMPLETE_EXECUTION_CLOSED",
-  "approved_wall_timeout_seconds": 0,
-  "invocations": 0,
+  "resource_budget_status": "APPROVED_FOR_ONE_OPTIMIZED_W66_INVOCATION",
+  "approved_wall_timeout_seconds": 7200,
+  "invocations": 1,
   "preparation_git": {
     "prepared_parent_commit": "61a5c8dcdd3d6ef4da77225881d4456c7dbdf130",
     "preparation_commit_rule": "single_non_merge_direct_child_with_exact_changed_paths",
@@ -71,7 +71,7 @@
     ]
   },
   "approval_git": {
-    "approved_parent_commit": null,
+    "approved_parent_commit": "aea9e31fb0ccf8eab65e4735e76ad950c25eb103",
     "approval_commit_rule": "single_non_merge_direct_child_with_exact_changed_paths",
     "approval_commit_changed_paths": [
       "configs/vidoseek_w66_exploratory24_optimized_v1.json",
@@ -85,7 +85,7 @@
     "configs/vidoseek_p1_02r.yaml": "b26d4f76206ed9fe74b4b508392a3228e799138f2c372863dc983744ebbcab87",
     "configs/vidoseek_p1_02r_oracle_w7_v1.yaml": "8d37e6c4dbe46146e9f2d5d3da439a2c72f4e06f3d9c8ce33511484fceccbe34",
     "configs/vidoseek_w7_exploratory24_v1.json": "6214fc6f11259dc20609bf9e305be3f1f1411d65aa281ff57e81c19fe17acbb9",
-    "docs/QPAF_W66_EXPLORATORY24_OPTIMIZED_EXECUTION_REVIEW.md": "47a1cbc12f91ce2539ab050013182224bdd49ef1b1ab95de8a820a0df43b0a3e",
+    "docs/QPAF_W66_EXPLORATORY24_OPTIMIZED_EXECUTION_REVIEW.md": "543dcd23276068ddf82399e8708ba36e7939c8717a58cf8b14d13f63e7cf649c",
     "docs/vidoseek_w66_exploratory24_optimized_proposal.json": "043736c86473a89b31a1a54d804155b0cf3fa24a75d5df782c612cd529d9e726",
     "docs/vidoseek_w7_exploratory24_proposal.json": "1f3d76ce5976a8568fac1119e7de5791af0550ddea8331641613ff7a91a086b2",
     "scripts/calibrate_vidoseek_w66_resources.py": "9dc61f8feaef3f3cc987a856c9844da80c4d50b730956b7a130814619b3b24c7",
@@ -125,12 +125,12 @@
     }
   },
   "authorization": {
-    "protocol_adopted": false,
-    "resource_budget_approved": false,
-    "execution_authorized": false,
-    "approved_by": null,
-    "execution_actor": null,
-    "approval_text": null,
-    "approved_at": null
+    "protocol_adopted": true,
+    "resource_budget_approved": true,
+    "execution_authorized": true,
+    "approved_by": "user",
+    "execution_actor": "codex",
+    "approval_text": "Approve exactly one Codex local-CPU invocation of the optimized exploratory-24 W66 protocol from preparation commit aea9e31, with a 7,200-second cap, one worker/thread, five-second telemetry-gap limit, and zero retries. Prepare the allowlisted approval commit, rerun preflight, then execute and monitor it. Do not run P1-03, training, Modal/GPU, or change P1-02",
+    "approved_at": "2026-09-09T17:40:40.9893617Z"
   }
 }

@@ -10,6 +10,14 @@ from scripts import run_vidoseek_exploratory24_w66_optimized as study
 
 
 ROOT = Path(__file__).resolve().parents[1]
+APPROVAL_TEXT = (
+    "Approve exactly one Codex local-CPU invocation of the optimized "
+    "exploratory-24 W66 protocol from preparation commit aea9e31, with a "
+    "7,200-second cap, one worker/thread, five-second telemetry-gap limit, and "
+    "zero retries. Prepare the allowlisted approval commit, rerun preflight, "
+    "then execute and monitor it. Do not run P1-03, training, Modal/GPU, or "
+    "change P1-02"
+)
 
 
 @pytest.fixture(autouse=True)
@@ -56,18 +64,21 @@ def fixture_identity(order: list[tuple[str, str]]) -> dict:
     )
 
 
-def test_live_config_is_closed_hash_pinned_and_resource_reviewed():
+def closed_config() -> dict:
     config = study.read_json(ROOT / study.CONFIG_PATH)
-    validated = study.validate_config(ROOT, config)
-    proposal = validated["proposal"]
-    calibration = validated["calibration"]
-    assert proposal["status"] == study.PREPARATION_STATUS
-    assert proposal["execution_authorized"] is False
-    assert config["resource_budget_status"] == study.PREPARATION_STATUS
-    assert config["proposed_wall_timeout_seconds"] == 7200
-    assert config["approved_wall_timeout_seconds"] == 0
-    assert config["invocations"] == 0
-    assert config["authorization"] == {
+    config["resource_budget_status"] = study.PREPARATION_STATUS
+    config["approved_wall_timeout_seconds"] = 0
+    config["invocations"] = 0
+    config["approval_git"] = {
+        "approved_parent_commit": None,
+        "approval_commit_rule": study.GIT_RULE,
+        "approval_commit_changed_paths": [
+            study.CONFIG_PATH,
+            study.EXECUTION_REVIEW_PATH,
+            study.TEST_PATH,
+        ],
+    }
+    config["authorization"] = {
         "protocol_adopted": False,
         "resource_budget_approved": False,
         "execution_authorized": False,
@@ -75,6 +86,32 @@ def test_live_config_is_closed_hash_pinned_and_resource_reviewed():
         "execution_actor": None,
         "approval_text": None,
         "approved_at": None,
+    }
+    return config
+
+
+def test_live_config_is_approved_once_and_hash_pinned():
+    config = study.read_json(ROOT / study.CONFIG_PATH)
+    validated = study.validate_config(ROOT, config)
+    proposal = validated["proposal"]
+    calibration = validated["calibration"]
+    assert proposal["status"] == study.PREPARATION_STATUS
+    assert proposal["execution_authorized"] is False
+    assert config["resource_budget_status"] == study.APPROVED_STATUS
+    assert config["proposed_wall_timeout_seconds"] == 7200
+    assert config["approved_wall_timeout_seconds"] == 7200
+    assert config["invocations"] == 1
+    assert config["approval_git"]["approved_parent_commit"] == (
+        "aea9e31fb0ccf8eab65e4735e76ad950c25eb103"
+    )
+    assert config["authorization"] == {
+        "protocol_adopted": True,
+        "resource_budget_approved": True,
+        "execution_authorized": True,
+        "approved_by": "user",
+        "execution_actor": "codex",
+        "approval_text": APPROVAL_TEXT,
+        "approved_at": "2026-09-09T17:40:40.9893617Z",
     }
     assert (
         calibration["decision"] == "GO_PREPARE_EXACT_OPTIMIZED_FULL_W66_PROTOCOL_ONLY"
@@ -129,7 +166,7 @@ def test_scope_drift_is_rejected(field, value):
     ],
 )
 def test_partial_approval_is_rejected(updates):
-    config = study.read_json(ROOT / study.CONFIG_PATH)
+    config = closed_config()
     config.update(updates)
     with pytest.raises(ValueError, match="authorization/resource state drift"):
         study.validate_config(ROOT, config)
@@ -151,7 +188,7 @@ def test_source_environment_and_calibration_drift_are_rejected():
 
 
 def test_closed_run_refuses_before_validation_input_or_writes(tmp_path, monkeypatch):
-    config = study.read_json(ROOT / study.CONFIG_PATH)
+    config = closed_config()
     monkeypatch.setattr(
         study, "validate_config", lambda *args: pytest.fail("validation reached")
     )
@@ -163,7 +200,7 @@ def test_closed_run_refuses_before_validation_input_or_writes(tmp_path, monkeypa
     assert list(tmp_path.iterdir()) == []
 
 
-def test_live_preflight_is_read_only_and_does_not_create_attempt():
+def test_live_preflight_is_approved_read_only_and_does_not_create_attempt():
     config = study.read_json(ROOT / study.CONFIG_PATH)
     evidence = study.preflight(ROOT, config)
     assert evidence["status"] == "PASS"
@@ -173,9 +210,9 @@ def test_live_preflight_is_read_only_and_does_not_create_attempt():
     assert evidence["actual_relevance_loaded"] is False
     assert evidence["w66_oracle_executed"] is False
     assert evidence["scientific_result_produced"] is False
-    assert evidence["approved_wall_timeout_seconds"] == 0
-    assert evidence["authorized_invocations"] == 0
-    assert evidence["execution_authorized"] is False
+    assert evidence["approved_wall_timeout_seconds"] == 7200
+    assert evidence["authorized_invocations"] == 1
+    assert evidence["execution_authorized"] is True
     assert evidence["attempt_exists"] is False
     assert not (ROOT / study.OUTPUT_PATH).exists()
 

@@ -1,6 +1,6 @@
 # Optimized exploratory-24 W66: resource and execution review
 
-**PREPARED AND RESOURCE-REVIEWED; EXECUTION REMAINS CLOSED.** This is a new, separately versioned protocol for the same frozen 24-query W66 sensitivity. It approves zero seconds and zero invocations. Preparation and preflight do not load relevance values, run the W66 oracle, create the live output directory, produce a scientific result, or change P1-02/P1-03.
+**AUTHORIZED FOR EXACTLY ONE CODEX INVOCATION; NOT YET EXECUTED.** The user approved this separately versioned protocol from preparation commit `aea9e31fb0ccf8eab65e4735e76ad950c25eb103` with a 7,200-second cap, one local CPU worker/thread, a five-second telemetry-gap limit, and zero retries. The authorization changes no scientific or resource parameter and does not authorize P1-03, training, Modal/GPU, or a P1-02 status change.
 
 ## Frozen scientific contract
 
@@ -23,7 +23,7 @@ The historical runner remains byte-unchanged. The new runner calls `candidate_or
 
 The optimized candidate search reuses candidate-invariant ranking state but preserves candidate order, profile order, tie handling, accepted-update rule, maximum sweeps, and serialized result fields. Deterministic tests compare it with the frozen oracle on W7/W66 random, tie-heavy, zero-relevance, bounded larger, complete-row, and checkpoint-replay fixtures.
 
-The independently reviewed synthetic full-page recovery completed in 70.611111 seconds. Its optimized one-query search took 62.574621 seconds and matched immutable replay; all 49 manifest-bound artifacts, 33 source snapshots, four checkpoints, thread pools, and telemetry checks passed. This was engineering evidence with one synthetic relevant page, zero accepted updates, and one exercised sweep—not a retrieval result or a measurement of the actual-label 24-query study.
+The independently reviewed synthetic full-page recovery completed in 70.611111 seconds. Its optimized one-query search took 62.574621 seconds and matched immutable replay; all 49 manifest-bound artifacts, 33 source snapshots, four checkpoints, thread pools, and telemetry checks passed. This was engineering evidence with one synthetic relevant page, zero accepted updates, and one exercised sweep--not a retrieval result or a measurement of the actual-label 24-query study.
 
 ## Resource review
 
@@ -31,15 +31,15 @@ Scaling the measured one-sweep query search across 24 queries plus observed over
 
 The prepared cost cap is 7,200 seconds: approximately 2.37 times the conservative illustration. A future approved attempt would use one local CPU worker, one thread for each numeric and Arrow pool, one-second telemetry, a five-second maximum wall/monotonic telemetry gap, Windows sleep inhibition, a 2-GiB process-tree private-memory limit, a 2-GiB free-memory abort threshold, a 5-GiB prestart disk threshold, a 100-MiB output limit, and zero automatic retries. Crossing any bound makes the consumed attempt incomplete; partial checkpoints or metrics are not a result.
 
-The 7,200-second cap is reviewed as a bounded cost ceiling only. It is not currently approved and does not promise completion.
+The 7,200-second cap is approved for exactly one invocation as a bounded cost ceiling. It does not promise completion and authorizes no retry.
 
 ## Lifecycle and evidence gates
 
-The normal command refuses before validation, input access, or writes unless a future clean direct-child approval commit records the exact actor, approval text and timestamp, 7,200 approved seconds, and exactly one invocation. Once admitted, the create-once `_ATTEMPTED.json` consumes that invocation. Existing output is rejected; any recovery needs another versioned protocol and explicit approval.
+The approval must be recorded in a clean direct-child commit changing exactly this review, the config, and the focused test. A fresh preflight and admission check must pass from that exact commit before execution. Once admitted, the create-once `_ATTEMPTED.json` consumes the invocation. Existing output is rejected; any incomplete attempt is consumed and any recovery needs another versioned protocol and explicit approval.
 
 Completion requires 24 Global checkpoints, one shared Global-selection checkpoint, 24 optimized query checkpoints, all output files, a complete hash manifest, and a separate independent review of input identity, checkpoint envelopes, query coverage, rankings, metrics, bootstrap values, resources, and Git provenance. Until then, no W66 comparison or result may be reported.
 
-## Closed command for future review only
+## Authorized command
 
 ```powershell
 $env:PYTHONPATH='src'
@@ -52,4 +52,6 @@ $env:NUMEXPR_NUM_THREADS='1'
 C:\Python313\python.exe scripts\run_vidoseek_exploratory24_w66_optimized.py run --actor codex
 ```
 
-Do not run this command from the prepared closed config. A separate explicit user approval and allowlisted approval commit are required. Preparation does not authorize W66 execution, P1-03, training, Modal/GPU work, or a P1-02 status change.
+Authorization text recorded at `2026-09-09T17:40:40.9893617Z`: "Approve exactly one Codex local-CPU invocation of the optimized exploratory-24 W66 protocol from preparation commit aea9e31, with a 7,200-second cap, one worker/thread, five-second telemetry-gap limit, and zero retries. Prepare the allowlisted approval commit, rerun preflight, then execute and monitor it. Do not run P1-03, training, Modal/GPU, or change P1-02".
+
+Run the command only after the exact approval commit and fresh preflight/admission checks pass. This approval does not authorize P1-03, training, Modal/GPU work, a retry, or a P1-02 status change.
