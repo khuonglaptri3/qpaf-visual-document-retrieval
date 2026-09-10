@@ -1,17 +1,23 @@
 {
   "schema_version": 1,
   "package_id": "vimdoc_archive_content_audit_v1_preparation",
-  "verified_at_utc": "2026-09-10T16:40:16.7693552Z",
-  "source_head": "181047598e8e22627b9f3b1a06b68ba140b6c98e",
+  "verified_at_utc": "2026-09-10T17:01:44.6907489Z",
+  "source_head": "87656b9be98302b9735f3fe8df898dd9fdbe366c",
   "dirty_worktree": true,
+  "tracked_worktree_clean_at_source_commit": true,
+  "excluded_untracked_paths": [
+    "Vietnamese_Visual_RAG_Milestone_Plan.xlsx",
+    "prompting.md",
+    "refs_from_scibot.txt"
+  ],
   "status": "PASS_LOCAL_PACKAGE_ONLY_EXECUTION_CLOSED",
   "hashes": {
     "configs/vimdoc_archive_content_audit_v1.json": "a5d12b2a74ca14af24eb93f9a01b0bbc45dc1441289547ad14b12744cbf6bce8",
     "scripts/run_vimdoc_archive_content_audit.py": "7dfe3daa01f61d66476df03a9e85248468c44e95d1bdf6b6e05ec8aed34b3c00",
     "tests/test_vimdoc_archive_content_audit.py": "4855a15edfb262c74b4ff697c6218fbf229a4a0d939378d9a694b210d1293f15",
     "docs/VIMDOC_ARCHIVE_CONTENT_AUDIT_EXECUTION_REVIEW.md": "0a154561b2f624a0dc717cfc455678a1035f7b94467e53207d87909bb2b5bc65",
-    "artifacts/vimdoc_archive_content_audit_v1_preparation/package_manifest.json": "44c94602d9332acfbc614f47abe2c257caadb52bb578dbf0a76cc2214c0c0d39",
-    "artifacts/vimdoc_m3_local_v1/package_manifest.json": "9068b1e45e5f1b3e0ab267a7703792c739cdfd6250641313ee786c41b569c809"
+    "artifacts/vimdoc_archive_content_audit_v1_preparation/package_manifest.json": "947b54537abc2dbe3679682c4fb66fa3ba4f7da286805069b34fbc0e434b7df6",
+    "artifacts/vimdoc_m3_local_v1/package_manifest.json": "3377b7dfe997a43640d345ac608a1b51d616d55055673ee40cf3f6e6644b3b4f"
   },
   "checks": [
     {
@@ -24,7 +30,7 @@
       "name": "focused_archive_identity_and_m3_tests",
       "command": "$env:PYTHONPATH='src'; C:/Python313/python.exe -m pytest tests/test_vimdoc_archive_content_audit.py tests/test_vimdoc_ocr_page_identity.py tests/test_vimdoc_m3_preparation.py tests/test_features.py tests/test_models.py tests/test_losses.py tests/test_gradients.py -q",
       "exit_code": 0,
-      "summary": "75 passed in 5.60s"
+      "summary": "75 passed"
     },
     {
       "name": "broader_non_training_regression",
@@ -68,6 +74,14 @@
     "approved_timeout_seconds": 0,
     "approved_retries": 0
   },
+  "dormant_approval_package": {
+    "status": "AWAITING_EXPLICIT_USER_APPROVAL_DO_NOT_EXECUTE",
+    "request_path": "artifacts/vimdoc_archive_content_audit_v1_preparation/authorization_request.json",
+    "request_sha256": "a6c6f858ecb0af22c68b3acf25a14ba01a790ffc0066eb4f0f27659406e7ae3c",
+    "candidate_path": "artifacts/vimdoc_archive_content_audit_v1_preparation/proposed_approved_config.json",
+    "candidate_sha256": "baeb51bd5429a32443c64d4620928c75b06e65f722c33f24ec3c1a8f924d4013",
+    "live_config_remains_closed": true
+  },
   "actual_data_status": {
     "live_archive_opened": false,
     "live_archive_content_audited": false,
@@ -87,5 +101,5 @@
     "optimizer step",
     "training"
   ],
-  "next_boundary": "Human review only. Any future CPU audit requires a separately frozen approval snapshot with actor, clean commit, exact config hash, one invocation, zero retries, and the reviewed timeout."
+  "next_boundary": "Explicit user approval of the exact dormant candidate is required. The live config remains closed; no invocation may occur before the one-path activation commit and repeated hash/guard checks."
 }

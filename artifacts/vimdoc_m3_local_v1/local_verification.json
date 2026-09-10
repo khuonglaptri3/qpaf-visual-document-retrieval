@@ -1,15 +1,22 @@
 {
   "schema_version": 1,
   "package_id": "vimdoc_m3_local_v1",
-  "verified_at_utc": "2026-09-10T16:40:16.7693552Z",
-  "source_head": "181047598e8e22627b9f3b1a06b68ba140b6c98e",
+  "verified_at_utc": "2026-09-10T17:01:44.6907489Z",
+  "source_head": "87656b9be98302b9735f3fe8df898dd9fdbe366c",
+  "dirty_worktree": true,
+  "tracked_worktree_clean_at_source_commit": true,
+  "excluded_untracked_paths": [
+    "Vietnamese_Visual_RAG_Milestone_Plan.xlsx",
+    "prompting.md",
+    "refs_from_scibot.txt"
+  ],
   "scope": "LOCAL_OCR_PAGE_IDENTITY_AND_ARCHIVE_AUDIT_PREPARATION_ONLY",
   "hashes": {
     "configs/vimdoc_m3_local_v1.json": "0a68c19688519822e4ac58afa51e08ca43ad6350d849f642bac23115bc64be9d",
     "configs/vimdoc_ocr_page_identity_v1.json": "804f555703e02d44e1d182bdda1a9c5a3f0ad8f12cb64276c4f10a17fbd513ac",
     "configs/vimdoc_archive_content_audit_v1.json": "a5d12b2a74ca14af24eb93f9a01b0bbc45dc1441289547ad14b12744cbf6bce8",
-    "artifacts/vimdoc_m3_local_v1/package_manifest.json": "9068b1e45e5f1b3e0ab267a7703792c739cdfd6250641313ee786c41b569c809",
-    "artifacts/vimdoc_archive_content_audit_v1_preparation/package_manifest.json": "44c94602d9332acfbc614f47abe2c257caadb52bb578dbf0a76cc2214c0c0d39",
+    "artifacts/vimdoc_m3_local_v1/package_manifest.json": "3377b7dfe997a43640d345ac608a1b51d616d55055673ee40cf3f6e6644b3b4f",
+    "artifacts/vimdoc_archive_content_audit_v1_preparation/package_manifest.json": "947b54537abc2dbe3679682c4fb66fa3ba4f7da286805069b34fbc0e434b7df6",
     "scripts/validate_vimdoc_ocr_page_identity.py": "96ec7e72871b403cc712e439462b669e2f1b067161b4d42e6747ca49784b5367",
     "scripts/run_vimdoc_archive_content_audit.py": "7dfe3daa01f61d66476df03a9e85248468c44e95d1bdf6b6e05ec8aed34b3c00",
     "docs/VIMDOC_OCR_PAGE_IDENTITY_SPEC.md": "8cdd05587de071df22a3193e989bc530c05ae8c5c8fa0c4e6033bf190f12742d",
@@ -38,7 +45,7 @@
       "name": "focused_m3_non_training_tests",
       "command": "$env:PYTHONPATH='src'; C:/Python313/python.exe -m pytest tests/test_vimdoc_archive_content_audit.py tests/test_vimdoc_ocr_page_identity.py tests/test_vimdoc_m3_preparation.py tests/test_features.py tests/test_models.py tests/test_losses.py tests/test_gradients.py -q",
       "exit_code": 0,
-      "summary": "75 passed in 5.60s; includes archive-audit preparation and persisted JSONL tamper checks"
+      "summary": "75 passed; includes archive-audit preparation and persisted JSONL tamper checks"
     },
     {
       "name": "broader_non_training_regression",

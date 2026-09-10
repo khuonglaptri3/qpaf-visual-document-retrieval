@@ -2,8 +2,14 @@
   "schema_version": 1,
   "package_id": "vimdoc_m3_local_v1",
   "created_at_utc": "2026-09-10T09:28:19.9523596Z",
-  "source_head": "181047598e8e22627b9f3b1a06b68ba140b6c98e",
+  "source_head": "87656b9be98302b9735f3fe8df898dd9fdbe366c",
   "dirty_worktree": true,
+  "tracked_worktree_clean_at_source_commit": true,
+  "excluded_untracked_paths": [
+    "Vietnamese_Visual_RAG_Milestone_Plan.xlsx",
+    "prompting.md",
+    "refs_from_scibot.txt"
+  ],
   "scope": "local preparation snapshot, not execution approval",
   "files": [
     {
@@ -108,8 +114,8 @@
     },
     {
       "path": "artifacts/vimdoc_archive_content_audit_v1_preparation/package_manifest.json",
-      "sha256": "44c94602d9332acfbc614f47abe2c257caadb52bb578dbf0a76cc2214c0c0d39",
-      "bytes": 2323
+      "sha256": "947b54537abc2dbe3679682c4fb66fa3ba4f7da286805069b34fbc0e434b7df6",
+      "bytes": 2507
     },
     {
       "path": "artifacts/score_input_probe_vimdoc.json",
