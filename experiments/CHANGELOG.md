@@ -1,5 +1,38 @@
 # Experiment protocol changelog
 
+## 2026-09-10 - ViMDoc archive content-audit package prepared; execution closed
+
+- Added a separate CPU-only Modal wrapper and create-once audit runner for a future content-hash classification of the 6,267 extra same-page-ID assets. The audit reads only the frozen archive and writes hash/count/source evidence to a separate directory; it never reads queries/qrels, decodes images, runs OCR/retrievers or computes metrics.
+- Proposed one physical CPU core, 4,096 MiB, a six-hour timeout, zero retries, no GPU/secret/network/region and a 128-MiB evidence cap. Current base-rate arithmetic is `$0.474768` at timeout with a `$0.60` review budget, subject to a mandatory live rate refresh before approval.
+- Authorization remains false with zero invocations and zero approved seconds. Local contract tests use synthetic tar files only; no Modal call, archive audit, OCR, extraction, training, or push occurred during preparation. A separate approval snapshot must bind actor, clean commit and hashes before any execution.
+
+## 2026-09-10 - ViMDoc OCR and page identity specified locally
+
+- Froze `configs/vimdoc_ocr_page_identity_v1.json` and its Vietnamese review document. The OCR semantic contract follows pinned HEAVEN source: Tesseract plain text for BM25/BGE-M3, with explicit English/OEM3/PSM3 and dependency versions; errors cannot be represented as empty text.
+- Defined page identity from safe tar path plus uncompressed-content SHA-256. Same-stem/same-content assets collapse as fully retained aliases; same-stem/different-content assets block. Same-content/different-page IDs remain separate. Added a read-only tar/OCR-manifest validator and 16 synthetic contract tests.
+- This completes local specification only. No live archive content audit, OCR, Modal/GPU, extraction or training ran. Runtime/image/resource evidence remains missing and M3 execution stays blocked.
+
+## 2026-09-10 - ViMDoc matched M3 local review package; no execution
+
+- User explicitly approved local preparation only, excluding Modal/GPU and training. Added `configs/vimdoc_m3_local_v1.json`, `scripts/prepare_vimdoc_m3.py`, synthetic/metadata tests, a Vietnamese review document and the hash-bound package inventory under `artifacts/vimdoc_m3_local_v1/`.
+- Preserved existing dataset/model pins, document-level qrels and three-channel top-200 union semantics. Resolved QARF/QPAF configs differ only in gate granularity. A deterministic 1,600/400 development split and new optimization settings are review proposals, not adopted changes.
+- M3 execution readiness remains blocked by OCR/canonical asset identity, protocol decisions, real score-cache verification, implementation/runtime parity and bounded resource review. No retriever, optimizer, Modal/GPU, trained checkpoint or learned metric was produced. See `local_verification.json` for actual local checks; no formal P1-03 or learned-improvement claim changes.
+
+## 2026-09-10 - Structured QPAF team research plan added; gates unchanged
+
+- Added `docs/QPAF_TEAM_RESEARCH_EXECUTION_PLAN.md` with a claim ladder, explicit definition of “good enough,” team ownership, independent-review separation, target dates, milestone exit gates, stop conditions, handoff requirements, and the G0→M7 critical path.
+- The plan keeps QPAF as the proposed method, learned QARF as the mandatory matched baseline, and CARF as the P3-02 oracle granularity ablation. It does not treat CARF as a deployable co-primary model.
+- The immediate action is G0: explicitly resolve the formally blocked P1-03 path before method execution. Planning targets do not authorize training, Modal/GPU work, new oracle execution, retries, or changes to frozen P1-02/P1-03 status.
+
+## 2026-09-10 - Optimized exploratory-24 W66 completed, independently verified, and QPAF-centered plan clarified
+
+- The separately approved one-invocation local CPU run completed all 24 frozen queries, 66 profiles and 129,240 query-page pairs from commit `181047598e8e22627b9f3b1a06b68ba140b6c98e` in `1551.236275000003` seconds under the 7,200-second cap, with one worker/thread and zero retries.
+- Exact mean nDCG@10 is Global `0.8296782270669829`, QARF `0.8538451195715936`, and QPAF `0.8859108127976215`. QPAF-minus-QARF is `0.03206569322602797`, with query-bootstrap CI95 `[0.002888476746941956, 0.07116543024082586]`, win/tie/loss `4/20/0`, top-5% gain share `0.7397878446931598`, and five changed page assignments across four queries.
+- Independent review passed 97 manifest artifacts, 50 checkpoint envelopes, 32 source snapshots, 1,503 telemetry samples, 1,584 fixed-profile ranking reconstructions, 72 final method ranking reconstructions, 6,624 raw metric values and 127 aggregate/delta comparisons. The run-manifest SHA-256 is `9e691aa27bddfdaa92728da171128ceadf64e1f21863acf2c221b7e5dde5c78f`.
+- W66 clears the bounded exploratory continuation thresholds but does not outperform W7: W66 QPAF is lower by `0.0179448565863913`. The entire gap is attributable to audit index 798, where tied zero-nDCG QARF profiles select different frozen QPAF initializations under W7 versus W66 grid order. This is algorithm-order sensitivity, not evidence that the W66 candidate menu is intrinsically worse.
+- Updated the task DAG, research proposal, tracker, and Vietnamese project guide so QPAF remains the main method, learned QARF remains the mandatory matched baseline, and CARF moves from the Phase 2 gate to the P3-02 label-free granularity ablation/diagnostic with K=2/3/4 sensitivity. P3-01 now benchmarks deployable QARF and QPAF without presenting CARF as a learned deployable method.
+- This closeout is exploratory subset oracle evidence only. Frozen P1-02 and formal P1-03 remain `BLOCKED`; no formal phase decision, training, optimizer step, Modal/GPU use, or new oracle invocation was authorized or executed by the documentation amendment.
+
 ## 2026-09-10 - Exact-output optimized exploratory-24 W66 prepared; execution closed
 
 - Added a separately versioned scientific runner for the frozen 24-query W66 sensitivity. It binds `candidate_oracle_exact_fast` by SHA-256, uses a fresh output namespace and checkpoint kinds, and rejects historical W66 or calibration checkpoints while leaving the frozen runner unchanged.

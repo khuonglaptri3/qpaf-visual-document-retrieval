@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "package_id": "vimdoc_archive_content_audit_v1_preparation",
+  "verified_at_utc": "2026-09-10T16:40:16.7693552Z",
+  "source_head": "181047598e8e22627b9f3b1a06b68ba140b6c98e",
+  "dirty_worktree": true,
+  "status": "PASS_LOCAL_PACKAGE_ONLY_EXECUTION_CLOSED",
+  "hashes": {
+    "configs/vimdoc_archive_content_audit_v1.json": "a5d12b2a74ca14af24eb93f9a01b0bbc45dc1441289547ad14b12744cbf6bce8",
+    "scripts/run_vimdoc_archive_content_audit.py": "7dfe3daa01f61d66476df03a9e85248468c44e95d1bdf6b6e05ec8aed34b3c00",
+    "tests/test_vimdoc_archive_content_audit.py": "4855a15edfb262c74b4ff697c6218fbf229a4a0d939378d9a694b210d1293f15",
+    "docs/VIMDOC_ARCHIVE_CONTENT_AUDIT_EXECUTION_REVIEW.md": "0a154561b2f624a0dc717cfc455678a1035f7b94467e53207d87909bb2b5bc65",
+    "artifacts/vimdoc_archive_content_audit_v1_preparation/package_manifest.json": "44c94602d9332acfbc614f47abe2c257caadb52bb578dbf0a76cc2214c0c0d39",
+    "artifacts/vimdoc_m3_local_v1/package_manifest.json": "9068b1e45e5f1b3e0ab267a7703792c739cdfd6250641313ee786c41b569c809"
+  },
+  "checks": [
+    {
+      "name": "audit_package_preflight",
+      "command": "C:/Python313/python.exe scripts/prepare_vimdoc_archive_content_audit.py",
+      "exit_code": 0,
+      "summary": "10 files and 5 pinned execution sources verified; Modal not called; archive not opened; execution remains unauthorized."
+    },
+    {
+      "name": "focused_archive_identity_and_m3_tests",
+      "command": "$env:PYTHONPATH='src'; C:/Python313/python.exe -m pytest tests/test_vimdoc_archive_content_audit.py tests/test_vimdoc_ocr_page_identity.py tests/test_vimdoc_m3_preparation.py tests/test_features.py tests/test_models.py tests/test_losses.py tests/test_gradients.py -q",
+      "exit_code": 0,
+      "summary": "75 passed in 5.60s"
+    },
+    {
+      "name": "broader_non_training_regression",
+      "command": "$env:PYTHONPATH='src'; C:/Python313/python.exe -m pytest -q -k \"not test_live_preflight_is_approved_read_only_and_does_not_create_attempt\"",
+      "exit_code": 0,
+      "summary": "447 passed, 1 deselected in 45.28s",
+      "excluded_test": "tests/test_vidoseek_exploratory24_w66_optimized.py::test_live_preflight_is_approved_read_only_and_does_not_create_attempt",
+      "exclusion_reason": "Historical hash-pinned test asserts a now-completed W66 attempt/output does not exist and execution remains authorized; it was preserved."
+    },
+    {
+      "name": "m3_package_preflight",
+      "command": "C:/Python313/python.exe scripts/prepare_vimdoc_m3.py",
+      "exit_code": 0,
+      "summary": "32 files verified; local package integrity PASS; execution readiness BLOCKED."
+    },
+    {
+      "name": "focused_lint",
+      "exit_code": 0,
+      "summary": "Ruff passed on the learned core and all new ViMDoc preparation, audit, validator, wrapper, and test files."
+    },
+    {
+      "name": "syntax_and_whitespace",
+      "exit_code": 0,
+      "summary": "Audit preparation, runner, identity validator, and CPU-only Modal wrapper compile; git diff --check reports no whitespace errors."
+    }
+  ],
+  "proposed_future_resources": {
+    "cpu_physical_cores": 1,
+    "memory_mb": 4096,
+    "timeout_seconds": 21600,
+    "retries": 0,
+    "gpu": null,
+    "maximum_reserved_compute_usd_at_reviewed_rates": 0.474768,
+    "pricing_must_be_refreshed_before_any_future_approval": true
+  },
+  "authorization": {
+    "execution_authorized": false,
+    "approved_actor": null,
+    "required_source_commit": null,
+    "approved_invocations": 0,
+    "approved_timeout_seconds": 0,
+    "approved_retries": 0
+  },
+  "actual_data_status": {
+    "live_archive_opened": false,
+    "live_archive_content_audited": false,
+    "archive_extracted": false,
+    "ocr_executed": false,
+    "score_extraction_executed": false,
+    "training_executed": false,
+    "scientific_metrics_computed": false
+  },
+  "actions_not_performed": [
+    "Modal invocation",
+    "GPU execution",
+    "live ViMDoc archive access",
+    "archive extraction",
+    "OCR execution",
+    "retriever score extraction",
+    "optimizer step",
+    "training"
+  ],
+  "next_boundary": "Human review only. Any future CPU audit requires a separately frozen approval snapshot with actor, clean commit, exact config hash, one invocation, zero retries, and the reviewed timeout."
+}

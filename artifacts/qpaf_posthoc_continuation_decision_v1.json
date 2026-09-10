@@ -1,0 +1,58 @@
+{
+  "decision_id": "qpaf_posthoc_continuation_decision_v1",
+  "status": "PROCEED_LOCAL_METHOD_CORE_ONLY",
+  "recorded_at": "2026-09-10T06:55:12.3226883Z",
+  "decision_actor": "user",
+  "approval_text": "oke let proceed until reach the recommendations to confirm that QPAF is really improved",
+  "interpretation": "Continue QPAF through local non-training P2-01 and P2-02 implementation, then prepare a separately reviewable matched learned QARF-versus-QPAF confirmation protocol.",
+  "evidence": {
+    "classification": "bounded_exploratory_oracle_upper_bound_not_learned_performance",
+    "dataset": "Qiuchen-Wang/ViDoSeek",
+    "queries": 24,
+    "pages_per_query": 5385,
+    "query_list_sha256": "95715b6a8c0c2d684b3a34e9130eca25ea641aafb62678f7daa764f0ab585f5b",
+    "retrieval_scores_sha256": "32b39da19e9507a0a5060157630cb40bf5c6bcf6464d88e4bb6136888473173b",
+    "w7": {
+      "mean_qpaf_vs_qarf_delta_ndcg10": 0.05001054981241935,
+      "ci95": [0.008344, 0.101921],
+      "top_5pct_gain_share": 0.666315,
+      "result_report_sha256": "f6d86cfba35a28e211632d0b209a66bef8d36f2cafdd505cb9a556212b20e4f3",
+      "independent_review_sha256": "716a184eedcbe73c34dc166bcaa60d594546625dcb288049fd71807f63b61319"
+    },
+    "w66": {
+      "mean_qpaf_vs_qarf_delta_ndcg10": 0.03206569322602797,
+      "ci95": [0.002888476746941956, 0.07116543024082586],
+      "top_5pct_gain_share": 0.7397878446931598,
+      "result_report_sha256": "1b8f3b7c6807e36de4a4db43d6c6c0674f020b5d9105e71a1962d00c2cb3974e",
+      "independent_review_sha256": "a84036ba16639b4938c19a7272d9384cbed4e0f9f9e1846e2963f70d15113ee8"
+    }
+  },
+  "authorization": {
+    "allowed_tasks": ["P2-01", "P2-02"],
+    "allowed_actor": "codex",
+    "allowed_device": "local_cpu",
+    "implementation_and_tests_only": true,
+    "optimizer_steps": 0,
+    "training_authorized": false,
+    "modal_gpu_authorized": false,
+    "new_oracle_invocation_authorized": false,
+    "formal_p1_03_authorized": false
+  },
+  "scientific_boundary": {
+    "frozen_p1_02_status": "BLOCKED",
+    "formal_p1_03_status": "BLOCKED",
+    "formal_phase1_pass": false,
+    "learned_qpaf_improvement_confirmed": false,
+    "permitted_claim": "Exploratory oracle evidence supports implementing learned QPAF for matched confirmation.",
+    "forbidden_claim": "Learned or deployable QPAF has already improved retrieval performance."
+  },
+  "next_execution_gate": {
+    "comparison": "learned QPAF versus matched learned QARF and strongest deployable fixed baseline",
+    "required_mean_delta_ndcg10_min": 0.01,
+    "required_query_bootstrap_ci95_lower_exclusive": 0.0,
+    "required_seeds": [20260820, 20260821, 20260822],
+    "required_median_added_latency_ms_max": 10.0,
+    "required_peak_cuda_gib_exclusive_max": 1.5,
+    "requires_separate_execution_approval": true
+  }
+}

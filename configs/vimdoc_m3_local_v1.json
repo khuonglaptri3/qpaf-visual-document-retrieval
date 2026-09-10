@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "package_id": "vimdoc_m3_local_v1",
+  "status": "PREPARED_FOR_LOCAL_REVIEW_NOT_EXECUTION",
+  "authorization": {
+    "local_preparation_approved": true,
+    "protocol_proposals_adopted": false,
+    "modal_execution_approved": false,
+    "gpu_execution_approved": false,
+    "score_extraction_approved": false,
+    "training_approved": false,
+    "optimizer_steps_approved": false,
+    "approved_invocations": 0,
+    "approved_timeout_seconds": 0,
+    "approved_retries": 0
+  },
+  "dataset": {
+    "id": "kaistdata/ViMDoc",
+    "revision": "25657f1fe0358f49147148ca89e231291ba42788",
+    "materialization_receipt": "artifacts/dataset_materialization_vimdoc.json",
+    "historical_input_probe": "artifacts/score_input_probe_vimdoc.json",
+    "archive_sha256": "de569c8d4d499b8fac84d4d03a0ddb59054e30351dcb7b1e6da3d1945d2d2c71",
+    "query_parquet_sha256": "7ccac6c8715cc338c041e9276583b9dbd79a818131a9b13a5abf4b9ced73bcc0",
+    "document_qrels_sha256": "3643e70c02b777b45a88a8f1489d88db1d53255ef9dea5caf3796b64218a70a0",
+    "sample_count": 2000,
+    "sample_ids_sha256": "0fc5a2f0de3eb1afa0b14e82e9f143dd57743864ac9468b5a112defb96a3482a",
+    "evidence_scope": "local_historical_receipts_not_live_remote_verification"
+  },
+  "retrievers": {
+    "bm25": {
+      "implementation": "vidore_benchmark.retrievers.bm25_retriever.BM25Retriever",
+      "package_version": "5.0.0"
+    },
+    "dense": {
+      "id": "BAAI/bge-m3",
+      "revision": "5617a9f61b028005a4858fdac845db406aefb181"
+    },
+    "visual": {
+      "id": "vidore/colqwen2.5-v0.2",
+      "revision": "dcbe8d9cede518bce830488364ba0e40c873645b",
+      "base_id": "vidore/colqwen2.5-base",
+      "base_revision": "92908120384b7a2110c5beda3ab29cbdb2c08e49"
+    }
+  },
+  "score_contract": {
+    "ocr_and_page_identity_spec": "configs/vimdoc_ocr_page_identity_v1.json",
+    "channels": ["bm25", "dense", "visual"],
+    "candidate_top_k_per_channel": 200,
+    "candidate_union_max_pages": 600,
+    "candidate_ties": "ascending_page_id",
+    "candidate_output_order": "ascending_page_id",
+    "candidate_qrels_access": false,
+    "all_three_scores_required_for_every_union_page": true,
+    "normalization": "per_query_per_channel_min_max_over_frozen_union",
+    "normalization_range_epsilon": 1e-15,
+    "constant_channel_value": 0.0,
+    "cache_score_dtype": "float64",
+    "model_input_dtype": "float32",
+    "evaluation_unit": "document",
+    "page_to_document": "remove_final_underscore_segment",
+    "document_score": "max_fused_page_score",
+    "max_gradient_tie": "ascending_page_id",
+    "qrels_storage": "separate_binary_document_table_never_repeated_onto_pages",
+    "minimum_candidate_document_recall": 0.95,
+    "maximum_queries_without_positive_candidate": 0,
+    "drop_uncovered_queries": false
+  },
+  "split_proposal": {
+    "status": "PROPOSED_NOT_ADOPTED",
+    "input": "frozen_2000_query_ids_only",
+    "algorithm": "sha256_namespace_colon_query_id_then_query_id",
+    "namespace": "vimdoc_m3_local_v1:dev_split:20260820",
+    "train_count": 1600,
+    "validation_count": 400,
+    "same_split_for_all_methods_and_seeds": true,
+    "untouched_confirmation_proposal": "remaining_8904_queries_excluding_all_2000_development_ids",
+    "untouched_confirmation_ids_sha256": null,
+    "query_disjoint_does_not_imply_document_disjoint": true
+  },
+  "matched_methods": {
+    "QARF": {"gate_granularity": "query_masked_mean"},
+    "QPAF": {"gate_granularity": "page"}
+  },
+  "shared_training": {
+    "status": "PROPOSED_NOT_ADOPTED_NO_TRAINER",
+    "architecture": "zero_initialized_linear_13_to_3_softmax",
+    "parameter_count": 42,
+    "feature_count": 13,
+    "loss": "document_gain_normalized_listwise_cross_entropy",
+    "temperature": 1.0,
+    "batch_size_queries": 32,
+    "optimizer": "AdamW",
+    "learning_rate": 0.001,
+    "weight_decay": 0.01,
+    "betas": [0.9, 0.999],
+    "epsilon": 1e-8,
+    "gradient_clip_global_norm": 1.0,
+    "maximum_epochs": 50,
+    "early_stopping_patience_epochs": 5,
+    "early_stopping_min_delta": 0.0,
+    "selection_metric": "validation_document_ndcg_at_10",
+    "checkpoint_tie_break": "earliest_epoch",
+    "scheduler": "none",
+    "precision": "float32_autocast_disabled",
+    "seeds": [20260820, 20260821, 20260822],
+    "retrievers_frozen": true,
+    "qrels_in_features_or_inference": false
+  },
+  "evaluation_contract": {
+    "primary_metric": "document_ndcg_at_10",
+    "ranking_tie_break": "ascending_document_id",
+    "idcg_uses_all_query_document_qrels": true,
+    "minimum_mean_delta_qpaf_minus_qarf": 0.01,
+    "must_also_beat_strongest_deployable_baseline": true,
+    "bootstrap_unit": "query_with_paired_seed_averaged_metric_differences",
+    "bootstrap_resamples": 10000,
+    "bootstrap_seed": 20260820,
+    "ci_method": "percentile_2.5_97.5",
+    "minimum_ci95_lower_bound_exclusive": 0.0,
+    "latency_warmup_queries": 20,
+    "latency_measurement_minimum_queries": 1000,
+    "maximum_median_added_fusion_latency_ms": 10.0,
+    "maximum_fusion_cuda_allocation_gib_exclusive": 1.5,
+    "checkpoint_reload_score_atol": 1e-7,
+    "claim_from_validation_only": "development_signal_not_untouched_confirmation"
+  },
+  "future_execution": {
+    "environment_config": "configs/environment.yaml",
+    "remote_requirements_lock": "requirements-lock.txt",
+    "remote_python": "3.11",
+    "remote_torch": "2.7.1",
+    "learned_gpu_proposal": "L4",
+    "extraction_gpu": null,
+    "extraction_batch_sizes": null,
+    "extraction_timeout_seconds": null,
+    "training_timeout_seconds": null,
+    "cost_cap": null,
+    "image_definition_sha256": null,
+    "run_commands": [],
+    "runner_implemented": false
+  },
+  "unresolved_before_execution": [
+    "Execute the frozen page-identity audit on the live archive and require zero different-content page-ID collisions; no content audit has run locally.",
+    "Build and verify the pinned OCR runtime, resource limits and per-page text hashes; no OCR text payload has been produced or verified.",
+    "Review proposed train/validation split, untouched confirmation protocol and new optimizer/early-stopping settings.",
+    "Freeze deployable baseline roster and train-only fitted Global/RRF settings before any confirmation evaluation.",
+    "Implement and test ViMDoc extraction adapter; historical DSE-based candidate runner is not the intended BM25/dense/visual top-200 union.",
+    "Implement and test matched collation/training/evaluation and immutable failure/checkpoint/manifest writers; no trainer exists in this package.",
+    "Bind calibrated GPU, batch sizes, image, timeout, cost cap, fresh attempt identity and separately approved invocation counts.",
+    "Verify real score-cache hashes, exact candidate replay, document-qrels coverage and runtime fp32/parity under remote PyTorch 2.7.1."
+  ]
+}

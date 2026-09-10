@@ -51,8 +51,6 @@ P2-02 Implement linear gates and listwise loss
   |                                             |
   +----> P2-04 Implement QPAF training ----------+
                                                 |
-                         P1-03 --> P2-05 CARF diagnostic
-                                                |
   +================ PHASE 2 GATE ================+
   |  Full confirmation run completes; peak VRAM  |
   |  <1.50 GiB; QPAF validation delta >=.01 over |
@@ -64,7 +62,7 @@ PHASE 3 — BENCHMARK, ABLATION, REPRODUCIBILITY
 
 P3-01 Run three-seed benchmark
   |
-  +--> P3-02 Run ablations --------+
+  +--> P3-02 Run ablations + CARF diagnostic ---+
   |                                |
   +--> P3-03 Run sealed external validation
                                    |
@@ -340,8 +338,14 @@ Interruption review (2026-09-07, 09:34 UTC): the approved exploratory-12 attempt
     - W66 has exactly 66 unique simplex profiles and W7/W66 use identical query IDs and data hashes.
     - `proceed_qpaf` requires mean QPAF-vs-QARF delta at least 0.03, bootstrap lower bound above 0 in both W7 and W66, and top-5%-gain share below 0.90.
   Expected runtime: under 4 hours on CPU after caching
-**STOP/KILL CONDITION:**
-  HALT and report to the human if the result is `stop`, query/data hashes differ across grids, or the decision file is produced after 2026-09-05 without an approved schedule update. If mean gain is between 0.01 and 0.03 or either CI crosses zero, mark `revise` and do not enter Phase 2. This is not a retry condition. Do not attempt a workaround. Report and stop.
+  **STOP/KILL CONDITION:**
+    HALT and report to the human if the result is `stop`, query/data hashes differ across grids, or the decision file is produced after 2026-09-05 without an approved schedule update. If mean gain is between 0.01 and 0.03 or either CI crosses zero, mark `revise` and do not enter Phase 2. This is not a retry condition. Do not attempt a workaround. Report and stop.
+
+**EXPLORATORY W66 CLOSEOUT AND RESEARCH-FOCUS AMENDMENT (2026-09-10):** The separately approved optimized W66 run on the frozen exploratory-24 subset completed and passed independent review. Mean nDCG@10 is Global `0.8296782270669829`, QARF `0.8538451195715936`, and QPAF `0.8859108127976215`; QPAF-minus-QARF is `0.03206569322602797`, with CI95 `[0.002888476746941956, 0.07116543024082586]`, win/tie/loss `4/20/0`, and top-5% gain share `0.7397878446931598`. W66 passes the exploratory numeric continuation signals but is `0.0179448565863913` below W7 QPAF, entirely explained by one tied-QARF-profile initialization-order case. This subset result does not execute formal P1-03 or change its `BLOCKED` status.
+
+The approved project framing is QPAF-centered: learned QARF remains the mandatory matched query-adaptive baseline; CARF is moved from the Phase 2 gate to the P3-02 granularity ablation/diagnostic. The next reviewable step is local preparation of P2-01 and P2-02. This amendment does not authorize optimizer steps, P2-03/P2-04 training, Modal/GPU use, or any new oracle invocation.
+
+**POST-HOC LOCAL METHOD-CORE CONTINUATION (2026-09-10):** The user directed Codex to continue toward the recommended learned confirmation. `artifacts/qpaf_posthoc_continuation_decision_v1.json` records `PROCEED_LOCAL_METHOD_CORE_ONLY`: P2-01 and P2-02 implementation and tests are allowed on local CPU, while optimizer steps, trained checkpoints, P2-03/P2-04 execution, Modal/GPU use, new oracle execution, and a learned-improvement claim remain closed. This narrow amendment does not relabel P1-02, execute formal P1-03, or claim a formal Phase 1 `PASS`.
 
 **PHASE 1 GATE:** By 2026-09-05, W7 and W66 have identical data hashes; mean QPAF-vs-QARF discovery $\Delta\mathrm{nDCG@10}\ge0.03$ in both grids; both bootstrap lower bounds are $>0$; top-5%-gain share is $<0.90$; and P1-03 outputs `proceed_qpaf`. `revise` requires human approval for a new preregistration. `stop` kills learned QPAF.
 
@@ -351,8 +355,9 @@ Interruption review (2026-09-07, 09:34 UTC): the approved exploratory-12 attempt
 
 ### TASK-ID: P2-01
 **TITLE:** Implement the deterministic 13-feature builder
-**DEPENDENCIES:** P1-03
-**FILES:** `src/oracle_study/features.py`, `tests/test_features.py`
+**DEPENDENCIES:** P1-03, or the 2026-09-10 post-hoc continuation amendment for local non-training method-core validation only
+**STATUS:** PASS — local method-core contract only; learned performance remains unmeasured
+**FILES:** `src/oracle_study/learned/features.py`, `tests/test_features.py`
 **DESCRIPTION:**
   Implement Eq. 3 exactly: three normalized scores, three normalized ranks, three median-relative score margins, three query-level top-1/top-2 gaps, and one rank-disagreement value. Use page ID as the deterministic tie-break and never read labels.
 **I/O CONTRACT:**
@@ -373,7 +378,8 @@ Interruption review (2026-09-07, 09:34 UTC): the approved exploratory-12 attempt
 ### TASK-ID: P2-02
 **TITLE:** Implement linear QARF/QPAF gates and masked listwise ranking loss
 **DEPENDENCIES:** P2-01
-**FILES:** `src/oracle_study/models.py`, `src/oracle_study/losses.py`, `tests/test_models.py`, `tests/test_losses.py`, `tests/test_gradients.py`
+**STATUS:** PASS — local forward/loss/gradient contract only; zero optimizer steps and no trained checkpoint
+**FILES:** `src/oracle_study/learned/models.py`, `src/oracle_study/learned/losses.py`, `tests/test_models.py`, `tests/test_losses.py`, `tests/test_gradients.py`
 **DESCRIPTION:**
   Implement Eq. 4–12 with `LinearQPAFGate`, `LinearQARFGate`, `FusionScorer`, and `ListwiseRankLoss`. Initialize all gate parameters to zero, keep logits/softmax/log-softmax/loss in fp32, and use native PyTorch autograd; no custom backward or CUDA code.
 **I/O CONTRACT:**
@@ -392,6 +398,10 @@ Interruption review (2026-09-07, 09:34 UTC): the approved exploratory-12 attempt
   HALT and report to the human if gradcheck fails after two implementation attempts, loss is non-finite on any boundary fixture, or the derived gradient in Eq. 11 disagrees with autograd by more than $10^{-4}$. This is not a retry condition. Do not attempt a workaround. Report and stop.
 
 ### TASK-ID: P2-03
+**M3 LOCAL PREPARATION UPDATE (2026-09-10):** The user explicitly approved local package preparation only. `docs/VIMDOC_M3_LOCAL_PACKAGE.md`, `configs/vimdoc_m3_local_v1.json`, the read-only preparation script and its tests provide a hash-bound review package. OCR/page-identity semantics are now frozen in `configs/vimdoc_ocr_page_identity_v1.json`: source-aligned Tesseract plain text, explicit versions/options, byte-hash page identity, deterministic identical-content alias collapse, and a hard block on same-page-ID/different-content collisions. The live 17.5-GB archive was not audited and no OCR ran, so runtime/content evidence remains unavailable. The 1,600/400 split and new optimizer/early-stopping settings are proposals, not adopted protocol. Baseline/held-out protocol, runtime adapter/trainer and resource contracts remain unresolved. M3 execution readiness is `BLOCKED`; P2-03/P2-04 execution, Modal/GPU and optimizer steps remain unauthorized. Historical verification commands below are task specifications, not permission to execute them.
+
+**VIMDOC ARCHIVE AUDIT PREPARATION (2026-09-10):** The user approved preparation only of a read-only content-audit package and explicitly prohibited Modal/GPU, OCR, extraction and training. `configs/vimdoc_archive_content_audit_v1.json`, `scripts/run_vimdoc_archive_content_audit.py`, `vimdoc_archive_audit_modal.py` and their synthetic tests now define a create-once CPU-only future audit. Proposed resources are one physical core, 4,096 MiB, a 21,600-second cap, zero retries, no GPU/Secret/network and a $0.60 review budget based on a $0.474768 base-rate reservation estimate. Execution remains closed with zero approved invocations. No archive bytes were opened, no remote state was checked and no attempt/output exists. See `docs/VIMDOC_ARCHIVE_CONTENT_AUDIT_EXECUTION_REVIEW.md`.
+
 **TITLE:** Implement the learned QARF training and evaluation baseline
 **DEPENDENCIES:** P2-02
 **FILES:** `modal_app.py`, `src/oracle_study/dataset.py`, `src/oracle_study/train.py`, `src/oracle_study/evaluate.py`, `configs/qarf_train.yaml`, `tests/test_dataset.py`, `tests/test_evaluation.py`, `tests/test_modal_training_contract.py`
@@ -428,33 +438,17 @@ Interruption review (2026-09-07, 09:34 UTC): the approved exploratory-12 attempt
   Command: `$env:PYTHONPATH='src'; python -m pytest tests/test_qpaf_remote_contract.py -v; if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }; modal run modal_app.py::train_qpaf`
   Assertions:
     - Full confirmation run completes with finite loss/gradients, peak CUDA allocation below 1.50 GiB when CUDA is used, and no data-hash change from QARF.
-    - Validation mean nDCG@10 exceeds the strongest deployable baseline by at least 0.01 and median added fusion latency is at most 10.0 ms/query.
+    - Across the preregistered comparison, mean QPAF-minus-QARF nDCG@10 is at least 0.01 with paired query-bootstrap CI95 lower bound above 0; QPAF also exceeds the strongest deployable baseline, and median added fusion latency is at most 10.0 ms/query.
   Expected runtime: local non-training test under 30 seconds; full cached-score Modal run under 4 hours excluding cold image build
 **STOP/KILL CONDITION:**
-  HALT and report to the human if peak VRAM reaches 1.50 GiB, any NaN/Inf occurs, data hashes differ from QARF, or validation gain is below 0.01. Do not reduce batch size or alter thresholds. This is not a retry condition. Do not attempt a workaround. Report and stop.
+  HALT and report to the human if peak VRAM reaches 1.50 GiB, any NaN/Inf occurs, data hashes differ from QARF, QPAF-minus-QARF mean nDCG@10 is below 0.01, its paired query-bootstrap CI95 lower bound is not above 0, or QPAF fails to beat the strongest deployable baseline. Do not reduce batch size or alter thresholds. This is not a retry condition. Do not attempt a workaround. Report and stop.
 
-### TASK-ID: P2-05
-**TITLE:** Implement the preregistered CARF diagnostic without qrels leakage
-**DEPENDENCIES:** P1-03, P2-01
-**FILES:** `src/oracle_study/carf.py`, `configs/carf_k3.yaml`, `tests/test_carf.py`, `artifacts/carf_oracle_summary.json`, `artifacts/carf_cluster_manifest.json`
-**DESCRIPTION:**
-  Cluster each query's candidates using only normalized score/rank features, with $K=3$, seed 20260820, and sensitivity $K=2,4$. Freeze cluster assignments before joining qrels, then compute CARF oracle profiles to locate headroom between QARF and QPAF.
-**I/O CONTRACT:**
-  Inputs: label-free features [C,13] float32 CPU; valid mask [C] bool CPU; profile grid [7 or 66,3] float64 CPU; relevance [C] float64 CPU — joined only after clustering
-  Outputs: cluster IDs [C] int64 CPU — values $0..K-1$; cluster manifest [mapping] JSON CPU — feature/data hashes; CARF metrics [4] float64 CPU
-  Side effects: writes frozen cluster assignments and CARF oracle summary; does not change learned QPAF
-**IMPLEMENTATION NOTES:**
-  The clustering function signature must not accept relevance. Assert cluster artifact timestamp/hash precedes the qrels join. Empty clusters are an observable failure; do not silently reduce $K$.
-**VERIFICATION:**
-  Command: `$env:PYTHONPATH='src'; python -m pytest tests/test_carf.py -v; python -m oracle_study.carf --config configs/carf_k3.yaml --scores data/raw_scores.parquet --output artifacts/carf_oracle_summary.json`
-  Assertions:
-    - Cluster IDs are byte-identical across two runs with seed 20260820 and unchanged after relevance-label permutation.
-    - CARF nDCG@10 lies between QARF and QPAF oracle within $10^{-12}$ for the reference fixture; $K=2,3,4$ all produce no empty cluster.
-  Expected runtime: tests under 10 seconds; full diagnostic under 2 hours on CPU
-**STOP/KILL CONDITION:**
-  HALT and report to the human if clustering reads qrels, any cluster is empty for more than 1% of queries, or CARF/QPAF ordering violates the nested reference fixture. This is not a retry condition. Do not attempt a workaround. Report and stop.
+### TASK-ID: P2-05 — MOVED TO P3-02
+**STATUS:** RETIRED FROM PHASE 2 by the 2026-09-10 research-focus amendment.
 
-**PHASE 2 GATE:** P2-01–P2-04 are `PASS`; P2-05 is `PASS` or explicitly `KILLED` because the approved CARF condition did not hold; the confirmation run completes without NaN/Inf; peak CUDA allocation is below 1.50 GiB; learned QPAF validation nDCG@10 is at least 0.01 above the strongest deployable baseline; and median fusion latency is at most 10.0 ms/query.
+The CARF label-free clustering and oracle diagnostic contract is preserved under P3-02. It no longer blocks initial QPAF implementation, QARF training, or the Phase 2 learned-QPAF gate. It must still be completed or explicitly reported not run before making the final granularity claim that page-level adaptation is necessary.
+
+**PHASE 2 GATE:** P2-01–P2-04 are `PASS`; the confirmation run completes without NaN/Inf; peak CUDA allocation is below 1.50 GiB; mean learned QPAF-minus-QARF nDCG@10 is at least 0.01 with paired query-bootstrap CI95 lower bound above 0; learned QPAF also beats the strongest deployable baseline; and median fusion latency is at most 10.0 ms/query. CARF is evaluated later under P3-02 and is not part of this gate.
 
 ## Phase 3 — Benchmark and Ablation Suite
 
@@ -463,7 +457,7 @@ Interruption review (2026-09-07, 09:34 UTC): the approved exploratory-12 attempt
 **DEPENDENCIES:** P2-04
 **FILES:** `modal_app.py`, `configs/benchmark.yaml`, `experiments/benchmark/**`, `artifacts/benchmark_results.parquet`, `artifacts/benchmark_summary.json`, `artifacts/bootstrap_comparisons.json`, `artifacts/results_table.md`
 **DESCRIPTION:**
-  Run fixed fusion, RRF, learned QARF, eligible learned CARF, and learned QPAF with seeds 20260820–20260822 under identical confirmation protocol. Aggregate query-level predictions, mean/std across seeds, and 10,000-resample query-bootstrap comparisons. Fill the confirmation columns of Context Table 1.
+  Run fixed fusion, RRF, learned QARF, and learned QPAF with seeds 20260820–20260822 under identical confirmation protocol. Aggregate query-level predictions, mean/std across seeds, and 10,000-resample query-bootstrap comparisons. Fill the confirmation columns of Context Table 1. CARF remains an oracle granularity diagnostic in P3-02 and is not represented as a deployable learned method in this benchmark.
 **I/O CONTRACT:**
   Inputs: frozen confirmation data [N rows] Parquet CPU; resolved configs [methods,seeds] YAML CPU; checkpoints [methods,seeds] bytes CPU
   Outputs: result rows [methods,seeds,metrics] float64 CPU; bootstrap comparisons [pairs,CI] float64 CPU; table [Markdown] UTF-8 CPU
@@ -480,25 +474,26 @@ Interruption review (2026-09-07, 09:34 UTC): the approved exploratory-12 attempt
   HALT and report to the human if any run uses a different split/candidate hash, fewer than three seeds complete, or a result row is overwritten rather than appended. This is not a retry condition. Do not attempt a workaround. Report and stop.
 
 ### TASK-ID: P3-02
-**TITLE:** Run channel, feature, gate, normalization, and candidate-depth ablations
+**TITLE:** Run channel, feature, gate, granularity/CARF, normalization, and candidate-depth ablations
 **DEPENDENCIES:** P3-01
-**FILES:** `modal_app.py`, `configs/ablations.yaml`, `experiments/ablations/**`, `artifacts/ablation_results.parquet`, `artifacts/ablation_table.md`, `tests/test_ablation_config.py`
+**FILES:** `modal_app.py`, `configs/ablations.yaml`, `experiments/ablations/**`, `artifacts/ablation_results.parquet`, `artifacts/ablation_table.md`, `tests/test_ablation_config.py`, `src/oracle_study/carf.py`, `configs/carf_k3.yaml`, `tests/test_carf.py`, `artifacts/carf_oracle_summary.json`, `artifacts/carf_cluster_manifest.json`
 **DESCRIPTION:**
-  Run the dossier-required ablations: remove each channel; scores/ranks only versus all 13 features; linear gate versus one-hidden-layer MLP; QARF/CARF/QPAF with matched budget; W7/W66 oracle; candidate depth sensitivity; and min–max versus one preregistered alternative normalization. Change one factor per run.
+  Run the dossier-required ablations: remove each channel; scores/ranks only versus all 13 features; linear gate versus one-hidden-layer MLP; learned QARF versus learned QPAF with matched budget; W7/W66 oracle; candidate depth sensitivity; and min–max versus one preregistered alternative normalization. As the granularity diagnostic, cluster each query's candidates using only normalized score/rank features with $K=3$, seed 20260820, and sensitivity $K=2,4$; freeze cluster assignments before joining qrels, then compare QARF, CARF, and QPAF oracle headroom. Change one experimental factor per learned ablation run.
 **I/O CONTRACT:**
-  Inputs: base config [mapping] YAML CPU; ablation matrix [rows,one changed field] YAML CPU; frozen data [N] Parquet CPU
-  Outputs: ablation metrics [rows,seeds,4] float64 CPU; config diff [rows,1 changed field] JSON CPU; ablation table [Markdown] UTF-8 CPU
-  Side effects: creates immutable run directories and appends ledger rows
+  Inputs: base config [mapping] YAML CPU; ablation matrix [rows,one changed field] YAML CPU; frozen data [N] Parquet CPU; label-free CARF features [C,13] float32 CPU; valid mask [C] bool CPU; profile grid [7 or 66,3] float64 CPU; relevance [C] float64 CPU — joined only after clustering
+  Outputs: ablation metrics [rows,seeds,4] float64 CPU; config diff [rows,1 changed field] JSON CPU; ablation table [Markdown] UTF-8 CPU; cluster IDs [C] int64 CPU; frozen cluster manifest [mapping] JSON CPU; CARF oracle metrics [4] float64 CPU
+  Side effects: creates immutable run directories, appends ledger rows, and writes frozen CARF cluster assignments and its separately labeled oracle summary
 **IMPLEMENTATION NOTES:**
-  Each ablation inherits the exact base config and changes one field. A candidate-depth or normalization change receives a new cache/data hash and must not be compared as if protocol-identical without labeling it.
+  Each learned ablation inherits the exact base config and changes one field. A candidate-depth or normalization change receives a new cache/data hash and must not be compared as if protocol-identical without labeling it. The CARF clustering function must not accept relevance; its assignment timestamp/hash must precede the qrels join, and empty clusters must remain observable rather than silently reducing $K$. CARF is an oracle diagnostic and must be visually and semantically separated from deployable learned results.
 **VERIFICATION:**
-  Command: `$env:PYTHONPATH='src'; python -m pytest tests/test_ablation_config.py -v; if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }; modal run modal_app.py::run_ablations`
+  Command: `$env:PYTHONPATH='src'; python -m pytest tests/test_ablation_config.py tests/test_carf.py -v; if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }; python -m oracle_study.carf --config configs/carf_k3.yaml --scores data/raw_scores.parquet --output artifacts/carf_oracle_summary.json; if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }; modal run modal_app.py::run_ablations`
   Assertions:
     - Every ablation config differs from its parent in exactly one declared field and has three seeds or is marked not run with a reason.
-    - Table contains all seven ablation families and every reported metric is finite in $[0,1]$.
+    - CARF cluster IDs are byte-identical across two runs with seed 20260820 and unchanged after relevance-label permutation; $K=2,3,4$ produce no empty cluster on the reference fixture.
+    - CARF nDCG@10 lies between QARF and QPAF oracle within $10^{-12}$ for the nested reference fixture; the table labels CARF as oracle-only, contains all seven ablation families, and every reported metric is finite in $[0,1]$.
   Expected runtime: configuration/test under 10 minutes; compute bounded by declared job budget
 **STOP/KILL CONDITION:**
-  HALT and report to the human if any ablation changes more than one experimental factor, uses test metrics for selection, or exceeds the declared total compute budget. This is not a retry condition. Do not attempt a workaround. Report and stop.
+  HALT and report to the human if any ablation changes more than one experimental factor, uses test metrics for selection, exceeds the declared total compute budget, allows CARF clustering to read qrels, produces empty CARF clusters for more than 1% of queries, or violates the nested QARF/CARF/QPAF reference ordering. This is not a retry condition. Do not attempt a workaround. Report and stop.
 
 ### TASK-ID: P3-03
 **TITLE:** Run sealed ViDoRe V3 external validation

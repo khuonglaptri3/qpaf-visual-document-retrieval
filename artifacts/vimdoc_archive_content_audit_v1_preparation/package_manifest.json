@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "package_id": "vimdoc_archive_content_audit_v1_preparation",
+  "status": "PREPARED_LOCAL_REVIEW_EXECUTION_CLOSED",
+  "created_at_utc": "2026-09-10T09:27:36.8442239Z",
+  "source_head": "181047598e8e22627b9f3b1a06b68ba140b6c98e",
+  "dirty_worktree": true,
+  "scope": "Local package bytes only; no Modal/archive/OCR/extraction/training execution.",
+  "authorization": {
+    "execution_authorized": false,
+    "approved_invocations": 0,
+    "approved_timeout_seconds": 0,
+    "approved_retries": 0
+  },
+  "files": [
+    {
+      "path": "configs/vimdoc_archive_content_audit_v1.json",
+      "sha256": "a5d12b2a74ca14af24eb93f9a01b0bbc45dc1441289547ad14b12744cbf6bce8",
+      "bytes": 6100
+    },
+    {
+      "path": "configs/vimdoc_ocr_page_identity_v1.json",
+      "sha256": "804f555703e02d44e1d182bdda1a9c5a3f0ad8f12cb64276c4f10a17fbd513ac",
+      "bytes": 5797
+    },
+    {
+      "path": "scripts/prepare_vimdoc_archive_content_audit.py",
+      "sha256": "cf7cb56348e734209d754f5375408552d8a430e99432276b8e18ba3ba609195d",
+      "bytes": 2338
+    },
+    {
+      "path": "scripts/run_vimdoc_archive_content_audit.py",
+      "sha256": "7dfe3daa01f61d66476df03a9e85248468c44e95d1bdf6b6e05ec8aed34b3c00",
+      "bytes": 14615
+    },
+    {
+      "path": "scripts/validate_vimdoc_ocr_page_identity.py",
+      "sha256": "96ec7e72871b403cc712e439462b669e2f1b067161b4d42e6747ca49784b5367",
+      "bytes": 12750
+    },
+    {
+      "path": "vimdoc_archive_audit_modal.py",
+      "sha256": "6f5e10652a35cc7db5f0cdd4d4ecffc33c62cb9c2a932f3742f27a3903499e2b",
+      "bytes": 2170
+    },
+    {
+      "path": "tests/test_vimdoc_archive_content_audit.py",
+      "sha256": "4855a15edfb262c74b4ff697c6218fbf229a4a0d939378d9a694b210d1293f15",
+      "bytes": 10542
+    },
+    {
+      "path": "tests/test_vimdoc_ocr_page_identity.py",
+      "sha256": "39ea65ea697eab2cdb03867f3ef4c52ec1a930061b67986088590518c4a0c6fa",
+      "bytes": 8586
+    },
+    {
+      "path": "docs/VIMDOC_ARCHIVE_CONTENT_AUDIT_EXECUTION_REVIEW.md",
+      "sha256": "0a154561b2f624a0dc717cfc455678a1035f7b94467e53207d87909bb2b5bc65",
+      "bytes": 5955
+    },
+    {
+      "path": "artifacts/dataset_materialization_vimdoc.json",
+      "sha256": "20ececf7be4e2e726a0e657de32e80dfc5b380130d907626269cec54a11f1d9d",
+      "bytes": 40891
+    }
+  ]
+}
