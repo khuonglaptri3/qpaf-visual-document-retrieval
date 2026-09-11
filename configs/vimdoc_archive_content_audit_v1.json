@@ -1,17 +1,17 @@
 {
   "schema_version": 1,
   "package_id": "vimdoc_archive_content_audit_v1",
-  "status": "APPROVED_FOR_ONE_INVOCATION",
-  "prepared_at_utc": "2026-09-10T16:50:36.2971780Z",
+  "status": "PREPARED_LOCAL_REVIEW_EXECUTION_CLOSED",
+  "prepared_at_utc": "2026-09-11T04:02:10.6468310Z",
   "purpose": "Classify ViMDoc duplicate page-name assets by uncompressed content hash and freeze canonical page identity before OCR.",
   "classification": "DATA_INTEGRITY_ONLY_NOT_OCR_NOT_SCORE_EXTRACTION_NOT_TRAINING",
   "authorization": {
-    "execution_authorized": true,
-    "approved_actor": "codex",
-    "required_source_commit": "87656b9be98302b9735f3fe8df898dd9fdbe366c",
-    "approved_invocations": 1,
+    "execution_authorized": false,
+    "approved_actor": null,
+    "required_source_commit": null,
+    "approved_invocations": 0,
     "approved_retries": 0,
-    "approved_timeout_seconds": 21600
+    "approved_timeout_seconds": 0
   },
   "input": {
     "volume_name": "qpaf-artifacts",
@@ -27,7 +27,7 @@
     "query_table_access": false
   },
   "resources": {
-    "cpu_physical_cores": 1.0,
+    "cpu_physical_cores": 1,
     "memory_mb": 4096,
     "gpu": null,
     "timeout_seconds": 21600,
@@ -80,7 +80,7 @@
     "canonical_pages_hash_match": true
   },
   "pricing_snapshot": {
-    "checked_at_utc": "2026-09-10T16:50:36.2971780Z",
+    "checked_at_utc": "2026-09-11T04:02:10.6468310Z",
     "source": "https://modal.com/pricing",
     "refresh_method": "official pricing page; Modal CLI 1.4.2 has no billing rates subcommand",
     "cpu_usd_per_core_second": 0.0000131,
@@ -95,23 +95,46 @@
     "expected_runtime_seconds": null,
     "reason": "No prior full content-hash/decompression timing exists for the 17.5-GB archive. Timeout is a cost/resource cap, not a runtime prediction.",
     "preemption_policy": "Attempt marker is committed before scanning; any restart sees the create-once output and must refuse. No scientific or OCR result is at risk.",
-    "retry_policy": "No automatic or manual retry. Any failure or interruption consumes the one-shot authorization and requires review."
+    "retry_policy": "No automatic or manual retry. Any failure or interruption consumes the future one-shot authorization and requires review."
   },
   "source_files": {
     "configs/vimdoc_ocr_page_identity_v1.json": "804f555703e02d44e1d182bdda1a9c5a3f0ad8f12cb64276c4f10a17fbd513ac",
     "artifacts/dataset_materialization_vimdoc.json": "20ececf7be4e2e726a0e657de32e80dfc5b380130d907626269cec54a11f1d9d",
     "scripts/validate_vimdoc_ocr_page_identity.py": "96ec7e72871b403cc712e439462b669e2f1b067161b4d42e6747ca49784b5367",
     "scripts/run_vimdoc_archive_content_audit.py": "7dfe3daa01f61d66476df03a9e85248468c44e95d1bdf6b6e05ec8aed34b3c00",
-    "vimdoc_archive_audit_modal.py": "6f5e10652a35cc7db5f0cdd4d4ecffc33c62cb9c2a932f3742f27a3903499e2b"
+    "vimdoc_archive_audit_modal.py": "5d7d03bc576a89b526a43803c13d2ae8729793ee5f082e8b35b1ff90411fde5a"
   },
-  "activation": {
-    "live_config_path": "configs/vimdoc_archive_content_audit_v1.json",
-    "candidate_path": "artifacts/vimdoc_archive_content_audit_v1_preparation/proposed_approved_config.json",
-    "requires_exact_explicit_user_approval": true,
-    "must_copy_candidate_bytes_exactly": true,
-    "approval_commit_changed_paths": [
-      "configs/vimdoc_archive_content_audit_v1.json"
-    ]
+  "superseded_local_submission": {
+    "activation_commit": "20b65c0b7e2d0733f94fc50025342563f751aaac",
+    "activated_config_sha256": "baeb51bd5429a32443c64d4620928c75b06e65f722c33f24ec3c1a8f924d4013",
+    "outcome": "LOCAL_IMPORT_REFUSAL_BEFORE_MODAL_FUNCTION_INVOCATION",
+    "error": "Modal requires absolute POSIX image remote_path values; Windows pathlib serialized /root as \\root.",
+    "remote_function_invocation_started": false,
+    "audit_attempt_marker_created": false,
+    "authorization_reusable": false
+  },
+  "local_review": {
+    "command": "C:/Python313/python.exe scripts/prepare_vimdoc_archive_content_audit.py",
+    "opens_archive": false,
+    "writes_files": false
+  },
+  "future_execution": {
+    "current_command_must_refuse": "modal run vimdoc_archive_audit_modal.py::audit_vimdoc_archive --config-sha256 <CONFIG_SHA256> --actor <APPROVED_ACTOR> --source-commit <APPROVAL_COMMIT>",
+    "approval_amendment_required": true,
+    "approval_must_bind": [
+      "actor",
+      "clean source commit",
+      "config SHA-256",
+      "source file hashes",
+      "input archive SHA-256",
+      "CPU",
+      "memory",
+      "timeout",
+      "one invocation",
+      "zero retries",
+      "pricing refresh"
+    ],
+    "note": "Do not run this command from the closed preparation config. The superseded baeb51bd config and its command are non-reusable."
   },
   "stop_conditions": [
     "Config/source/archive hash mismatch.",

@@ -2,8 +2,8 @@
   "schema_version": 1,
   "package_id": "vimdoc_archive_content_audit_v1_preparation",
   "status": "PREPARED_LOCAL_REVIEW_EXECUTION_CLOSED",
-  "created_at_utc": "2026-09-10T09:27:36.8442239Z",
-  "source_head": "87656b9be98302b9735f3fe8df898dd9fdbe366c",
+  "created_at_utc": "2026-09-11T04:02:10.6468310Z",
+  "source_head": "20b65c0b7e2d0733f94fc50025342563f751aaac",
   "dirty_worktree": true,
   "tracked_worktree_clean_at_source_commit": true,
   "excluded_untracked_paths": [
@@ -11,6 +11,13 @@
     "prompting.md",
     "refs_from_scibot.txt"
   ],
+  "repair": {
+    "superseded_activation_commit": "20b65c0b7e2d0733f94fc50025342563f751aaac",
+    "superseded_config_sha256": "baeb51bd5429a32443c64d4620928c75b06e65f722c33f24ec3c1a8f924d4013",
+    "failure_stage": "LOCAL_WRAPPER_IMPORT_BEFORE_MODAL_FUNCTION_INVOCATION",
+    "retry_performed": false,
+    "remote_attempt_created": false
+  },
   "scope": "Local package bytes only; no Modal/archive/OCR/extraction/training execution.",
   "authorization": {
     "execution_authorized": false,
@@ -21,8 +28,8 @@
   "files": [
     {
       "path": "configs/vimdoc_archive_content_audit_v1.json",
-      "sha256": "a5d12b2a74ca14af24eb93f9a01b0bbc45dc1441289547ad14b12744cbf6bce8",
-      "bytes": 6100
+      "sha256": "0ed2df0a6c634dbce1dea56ea4e7dee42463d37db21ae00877ccf6d754a7452c",
+      "bytes": 6805
     },
     {
       "path": "configs/vimdoc_ocr_page_identity_v1.json",
@@ -46,13 +53,13 @@
     },
     {
       "path": "vimdoc_archive_audit_modal.py",
-      "sha256": "6f5e10652a35cc7db5f0cdd4d4ecffc33c62cb9c2a932f3742f27a3903499e2b",
-      "bytes": 2170
+      "sha256": "5d7d03bc576a89b526a43803c13d2ae8729793ee5f082e8b35b1ff90411fde5a",
+      "bytes": 2225
     },
     {
       "path": "tests/test_vimdoc_archive_content_audit.py",
-      "sha256": "4855a15edfb262c74b4ff697c6218fbf229a4a0d939378d9a694b210d1293f15",
-      "bytes": 10542
+      "sha256": "715c1f77f146124ec8b79f5c3944a7301e8438072e69bbc567521f763038d6cf",
+      "bytes": 11400
     },
     {
       "path": "tests/test_vimdoc_ocr_page_identity.py",
@@ -61,8 +68,8 @@
     },
     {
       "path": "docs/VIMDOC_ARCHIVE_CONTENT_AUDIT_EXECUTION_REVIEW.md",
-      "sha256": "0a154561b2f624a0dc717cfc455678a1035f7b94467e53207d87909bb2b5bc65",
-      "bytes": 5955
+      "sha256": "ffee9bab498079bf39e67b984b54166b3a5af6ed91ef5289fbc0824d6f1e04b9",
+      "bytes": 7184
     },
     {
       "path": "artifacts/dataset_materialization_vimdoc.json",

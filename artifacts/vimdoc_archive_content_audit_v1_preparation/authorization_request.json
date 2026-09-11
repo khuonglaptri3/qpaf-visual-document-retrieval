@@ -1,37 +1,49 @@
 {
   "schema_version": 1,
-  "request_id": "vimdoc_archive_content_audit_v1_one_shot_authorization_request",
-  "status": "AWAITING_EXPLICIT_USER_APPROVAL_DO_NOT_EXECUTE",
-  "prepared_at_utc": "2026-09-10T16:50:36.2971780Z",
-  "prepared_source_commit": "87656b9be98302b9735f3fe8df898dd9fdbe366c",
+  "request_id": "vimdoc_archive_content_audit_v1_repair_v2_one_shot_authorization_request",
+  "status": "REPAIR_PREPARED_AWAITING_SOURCE_COMMIT_BINDING_DO_NOT_EXECUTE",
+  "prepared_at_utc": "2026-09-11T04:06:52.6798965Z",
+  "prepared_source_commit": null,
   "approval_package_commit": "REPORT_AFTER_COMMIT_TO_AVOID_SELF_REFERENCE",
   "live_closed_config": {
     "path": "configs/vimdoc_archive_content_audit_v1.json",
-    "sha256": "a5d12b2a74ca14af24eb93f9a01b0bbc45dc1441289547ad14b12744cbf6bce8",
+    "sha256": "0ed2df0a6c634dbce1dea56ea4e7dee42463d37db21ae00877ccf6d754a7452c",
     "execution_authorized": false,
     "approved_invocations": 0
   },
   "proposed_approved_config": {
     "path": "artifacts/vimdoc_archive_content_audit_v1_preparation/proposed_approved_config.json",
-    "sha256": "baeb51bd5429a32443c64d4620928c75b06e65f722c33f24ec3c1a8f924d4013",
-    "bytes": 5862,
-    "activation_rule": "After exact user approval, copy these bytes unchanged to the live config path in one allowlisted approval commit changing only that path. Recheck the resulting live SHA-256 before invocation."
+    "sha256": "8f18dfbe9a2aa613f3b15e7c477a3fbec71784514a5af75353f658fd10f69af2",
+    "bytes": 6201,
+    "activation_rule": "Interim closed candidate only. Do not approve or activate until the repaired source commit and final candidate hash are bound."
+  },
+  "superseded_submission": {
+    "activation_commit": "20b65c0b7e2d0733f94fc50025342563f751aaac",
+    "approved_config_sha256": "baeb51bd5429a32443c64d4620928c75b06e65f722c33f24ec3c1a8f924d4013",
+    "command_exit_code": 1,
+    "failure_stage": "LOCAL_WRAPPER_IMPORT_BEFORE_MODAL_FUNCTION_INVOCATION",
+    "error": "image.add_local_file requires an absolute remote_path; Windows pathlib serialized /root as \\root.",
+    "function_call_id_created": false,
+    "run_audit_entered": false,
+    "remote_attempt_consumed": false,
+    "retry_performed": false,
+    "authorization_reusable": false
   },
   "execution": {
-    "actor": "codex",
-    "command": "modal run vimdoc_archive_audit_modal.py::audit_vimdoc_archive --config-sha256 baeb51bd5429a32443c64d4620928c75b06e65f722c33f24ec3c1a8f924d4013 --actor codex --source-commit 87656b9be98302b9735f3fe8df898dd9fdbe366c",
+    "actor": null,
+    "command": null,
     "cpu_physical_cores": 1.0,
     "memory_mb": 4096,
     "gpu": null,
-    "timeout_seconds": 21600,
+    "timeout_seconds": 0,
     "cost_ceiling_usd": 0.6,
     "base_reserved_resource_estimate_usd_at_timeout": 0.474768,
-    "invocations": 1,
+    "invocations": 0,
     "retries": 0,
     "create_once_output": "qpaf-artifacts:/audits/vimdoc/vimdoc_archive_content_audit_v1"
   },
   "pricing_refresh": {
-    "checked_at_utc": "2026-09-10T16:50:36.2971780Z",
+    "checked_at_utc": "2026-09-11T04:02:10.6468310Z",
     "official_source": "https://modal.com/pricing",
     "cpu_usd_per_physical_core_second": 0.0000131,
     "memory_usd_per_gib_second": 0.00000222,
@@ -41,6 +53,7 @@
     "non_preemptible_multiplier_authorized": false
   },
   "remote_read_only_review": {
+    "status": "NOT_REFRESHED_AFTER_LOCAL_FAILURE_NO_MODAL_ACTION_AUTHORIZED",
     "checked_at_utc": "2026-09-10T16:50:36.2971780Z",
     "volume": "qpaf-artifacts",
     "volume_exists": true,
@@ -51,7 +64,8 @@
     "archive_expected_sha256": "de569c8d4d499b8fac84d4d03a0ddb59054e30351dcb7b1e6da3d1945d2d2c71",
     "archive_hash_recomputed_in_this_review": false,
     "reason_hash_not_recomputed": "Rehashing the remote 17.5-GB payload requires a Modal execution; the audit itself performs the bounded hash and content scan and stops on mismatch.",
-    "output_path_absent": true,
+    "output_path_absent_at_last_review": true,
+    "current_output_path_state": "NOT_RECHECKED",
     "free_space_precheck_deferred": "The runner checks at least 1 GiB free before creating the output directory or attempt marker."
   },
   "expected_outputs": [
@@ -93,5 +107,5 @@
     "frozen_p1_02_status": "BLOCKED",
     "formal_p1_03_status": "BLOCKED"
   },
-  "approval_sentence": "I approve Codex to install the exact proposed ViMDoc archive-audit config with SHA-256 baeb51bd5429a32443c64d4620928c75b06e65f722c33f24ec3c1a8f924d4013 in one allowlisted commit changing only configs/vimdoc_archive_content_audit_v1.json, then execute exactly one invocation of the recorded command as actor codex from prepared source commit 87656b9be98302b9735f3fe8df898dd9fdbe366c, using one physical CPU core, 4096 MiB memory, no GPU or secrets, a 21600-second timeout, a USD 0.60 cost ceiling, one invocation, zero retries, and the create-once output qpaf-artifacts:/audits/vimdoc/vimdoc_archive_content_audit_v1. Stop without retry on any recorded stop condition. This approval does not authorize OCR, score extraction, training, optimizer steps, or any QPAF performance claim."
+  "approval_sentence": null
 }

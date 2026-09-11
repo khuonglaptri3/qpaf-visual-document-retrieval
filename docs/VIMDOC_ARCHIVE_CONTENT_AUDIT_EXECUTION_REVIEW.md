@@ -1,12 +1,18 @@
 # ViMDoc archive content audit v1 — local preparation review
 
-Prepared: 2026-09-10. Status: `PREPARED_LOCAL_REVIEW_EXECUTION_CLOSED`.
+Prepared: 2026-09-10; locally repaired and reclosed 2026-09-11. Status: `PREPARED_LOCAL_REVIEW_EXECUTION_CLOSED`.
 
 ## Outcome
 
 The package for a future read-only source-archive audit is implemented and locally testable. It is not approved to execute: `execution_authorized=false`, approved invocations/time/retries are all zero, and the current Modal command must refuse before an attempt directory is created. This preparation did not contact Modal, open the 17.5-GB archive, run OCR, extract retriever scores, use a GPU, or train a model.
 
 The audit has one scientific purpose: determine whether the 6,267 assets that share extension-stripped page IDs are safe byte-identical aliases or conflicting images. It reads only `ViMDoc_pages.tar.gz`; it does not read query text, qrels or the query Parquet.
+
+## Superseded local submission and repair
+
+The approved config `baeb51bd5429a32443c64d4620928c75b06e65f722c33f24ec3c1a8f924d4013` was activated in commit `20b65c0b7e2d0733f94fc50025342563f751aaac`. Its recorded `modal run` command exited locally while importing this wrapper, before app submission or Function-call creation: on Windows, `str(Path("/root"))` produced `\root`, which `modal.Image.add_local_file` rejected as a non-absolute remote path. `run_audit` was never entered, no `_ATTEMPTED.json` was created by that control flow, and no archive, OCR, extraction, GPU or training work ran. The old authorization and command are non-reusable; no retry occurred.
+
+The repaired wrapper keeps Modal-facing `/root` and `/vol` values as literal POSIX strings and converts them to `Path` only inside the Linux Function body. A source-level regression test freezes those two absolute strings, the Volume mount key and the absence of local Windows `Path` serialization. This repair is local preparation only and does not authorize a Modal invocation.
 
 ## Frozen input and decision
 
@@ -23,11 +29,11 @@ The semantic rules are frozen in `configs/vimdoc_ocr_page_identity_v1.json`. The
 
 The separate app `qpaf-vimdoc-archive-audit-v1` uses one physical CPU core, 4,096 MiB memory, no GPU, no secret, no region constraint, no network requirement and no Python package installation. Timeout is 21,600 seconds (six hours), retries zero, evidence cap 128 MiB and required free Volume space 1 GiB. The timeout is an uncalibrated resource cap, not a runtime prediction.
 
-The Modal pricing snapshot checked 2026-09-10 lists `$0.0000131/core-second` and `$0.00000222/GiB-second`. At exactly the requested reservation for six hours, the arithmetic ceiling is `(1 × 0.0000131 + 4 × 0.00000222) × 21,600 = $0.474768`. The review budget is `$0.60`. This is not a guaranteed bill because pricing and actual metered usage can change; `modal billing rates --json` must be checked before approval. A region or non-preemptible multiplier is not authorized.
+The Modal pricing snapshot refreshed from the official pricing page on 2026-09-11 lists `$0.0000131/core-second` and `$0.00000222/GiB-second`. At exactly the requested reservation for six hours, the arithmetic ceiling is `(1 × 0.0000131 + 4 × 0.00000222) × 21,600 = $0.474768`. The review budget is `$0.60`. This is not a guaranteed bill because pricing and actual metered usage can change. Pricing must be refreshed again before approval; a region or non-preemptible multiplier is not authorized.
 
 ## Execution and immutability contract
 
-`vimdoc_archive_audit_modal.py` is separate from the historical `modal_app.py`. It attaches the existing Volume with `create_if_missing=false`, includes no `gpu=`, no Secret, no `.remote()` call and no local entrypoint. Importing or testing the package cannot invoke Modal.
+`vimdoc_archive_audit_modal.py` is separate from the historical `modal_app.py`. It uses literal POSIX remote roots, attaches the existing Volume with `create_if_missing=false`, includes no `gpu=`, no Secret, no `.remote()` call and no local entrypoint. Importing or testing the package cannot invoke a Function.
 
 The future function first verifies exact config/source hashes, actor, source commit, timeout, one approved invocation and zero retries. It verifies input/output paths and free space before creating output. The create-once output is `/vol/audits/vimdoc/vimdoc_archive_content_audit_v1`; its `_ATTEMPTED.json` is committed before scanning. Therefore a failure, timeout, interruption or platform reschedule leaves a consumed attempt, and any later start refuses because the output already exists.
 
@@ -53,13 +59,13 @@ $env:PYTHONPATH = 'src'
 C:\Python313\python.exe -m pytest tests/test_vimdoc_archive_content_audit.py tests/test_vimdoc_ocr_page_identity.py -q
 ```
 
-The currently resolved config SHA-256 is `a5d12b2a74ca14af24eb93f9a01b0bbc45dc1441289547ad14b12744cbf6bce8`. The following command shape is documented for review only and **must not be run now**:
+The currently resolved closed config SHA-256 is `0ed2df0a6c634dbce1dea56ea4e7dee42463d37db21ae00877ccf6d754a7452c`. The following command shape is documented for review only and **must not be run now**:
 
 ```powershell
 modal run vimdoc_archive_audit_modal.py::audit_vimdoc_archive --config-sha256 <APPROVED_CONFIG_SHA256> --actor <APPROVED_ACTOR> --source-commit <CLEAN_APPROVAL_COMMIT>
 ```
 
-There is deliberately no executable live command yet. A later authorization amendment must bind the clean commit, actor, approved config hash, refreshed pricing and exactly one invocation with the same CPU/memory/timeout and zero retries. The approved config will be a separately preserved snapshot rather than a silent rewrite of this closed preparation record.
+There is deliberately no executable live command yet. The superseded `baeb51bd...` command must not be reused. A later authorization amendment must bind the repaired clean commit, actor, new approved config hash, refreshed pricing and exactly one invocation with the same CPU/memory/timeout and zero retries. The approved config will be a separately preserved snapshot rather than a silent rewrite of this closed preparation record.
 
 ## Stop conditions and interpretation
 

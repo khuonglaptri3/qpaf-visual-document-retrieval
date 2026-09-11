@@ -9,8 +9,8 @@ import modal
 
 APP_NAME = "qpaf-vimdoc-archive-audit-v1"
 PROJECT_ROOT = Path(__file__).resolve().parent
-REMOTE_ROOT = Path("/root")
-VOLUME_ROOT = Path("/vol")
+REMOTE_ROOT = "/root"
+VOLUME_ROOT = "/vol"
 CONFIG_PATH = PROJECT_ROOT / "configs/vimdoc_archive_content_audit_v1.json"
 IDENTITY_SPEC_PATH = PROJECT_ROOT / "configs/vimdoc_ocr_page_identity_v1.json"
 RUNNER_PATH = PROJECT_ROOT / "scripts/run_vimdoc_archive_content_audit.py"
@@ -35,7 +35,7 @@ volume = modal.Volume.from_name(config["modal"]["volume_name"], create_if_missin
     memory=resources["memory_mb"],
     timeout=resources["timeout_seconds"],
     retries=resources["retries"],
-    volumes={str(VOLUME_ROOT): volume},
+    volumes={VOLUME_ROOT: volume},
 )
 def audit_vimdoc_archive(config_sha256: str, actor: str, source_commit: str) -> str:
     from scripts.run_vimdoc_archive_content_audit import run_audit
@@ -43,10 +43,12 @@ def audit_vimdoc_archive(config_sha256: str, actor: str, source_commit: str) -> 
     function_call_id = modal.current_function_call_id()
     if not function_call_id:
         raise RuntimeError("Modal did not expose a Function call ID")
+    remote_root = Path(REMOTE_ROOT)
+    volume_root = Path(VOLUME_ROOT)
     result = run_audit(
-        REMOTE_ROOT,
-        VOLUME_ROOT,
-        REMOTE_ROOT / "configs/vimdoc_archive_content_audit_v1.json",
+        remote_root,
+        volume_root,
+        remote_root / "configs/vimdoc_archive_content_audit_v1.json",
         config_sha256,
         actor,
         source_commit,

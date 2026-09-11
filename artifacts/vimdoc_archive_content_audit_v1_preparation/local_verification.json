@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "package_id": "vimdoc_archive_content_audit_v1_preparation",
-  "verified_at_utc": "2026-09-10T17:01:44.6907489Z",
-  "source_head": "87656b9be98302b9735f3fe8df898dd9fdbe366c",
+  "verified_at_utc": "2026-09-11T04:06:52.6798965Z",
+  "source_head": "20b65c0b7e2d0733f94fc50025342563f751aaac",
   "dirty_worktree": true,
   "tracked_worktree_clean_at_source_commit": true,
   "excluded_untracked_paths": [
@@ -12,12 +12,12 @@
   ],
   "status": "PASS_LOCAL_PACKAGE_ONLY_EXECUTION_CLOSED",
   "hashes": {
-    "configs/vimdoc_archive_content_audit_v1.json": "a5d12b2a74ca14af24eb93f9a01b0bbc45dc1441289547ad14b12744cbf6bce8",
+    "configs/vimdoc_archive_content_audit_v1.json": "0ed2df0a6c634dbce1dea56ea4e7dee42463d37db21ae00877ccf6d754a7452c",
     "scripts/run_vimdoc_archive_content_audit.py": "7dfe3daa01f61d66476df03a9e85248468c44e95d1bdf6b6e05ec8aed34b3c00",
-    "tests/test_vimdoc_archive_content_audit.py": "4855a15edfb262c74b4ff697c6218fbf229a4a0d939378d9a694b210d1293f15",
-    "docs/VIMDOC_ARCHIVE_CONTENT_AUDIT_EXECUTION_REVIEW.md": "0a154561b2f624a0dc717cfc455678a1035f7b94467e53207d87909bb2b5bc65",
-    "artifacts/vimdoc_archive_content_audit_v1_preparation/package_manifest.json": "947b54537abc2dbe3679682c4fb66fa3ba4f7da286805069b34fbc0e434b7df6",
-    "artifacts/vimdoc_m3_local_v1/package_manifest.json": "3377b7dfe997a43640d345ac608a1b51d616d55055673ee40cf3f6e6644b3b4f"
+    "tests/test_vimdoc_archive_content_audit.py": "715c1f77f146124ec8b79f5c3944a7301e8438072e69bbc567521f763038d6cf",
+    "docs/VIMDOC_ARCHIVE_CONTENT_AUDIT_EXECUTION_REVIEW.md": "ffee9bab498079bf39e67b984b54166b3a5af6ed91ef5289fbc0824d6f1e04b9",
+    "artifacts/vimdoc_archive_content_audit_v1_preparation/package_manifest.json": "6bf0fae95800f5ccd957ccda113c44b6e44d82e5c6a0b354ce5b1ea3cd318b0b",
+    "artifacts/vimdoc_m3_local_v1/package_manifest.json": "8f8cb13bf8319eec711df650cd88ef9f915c51057ff6c0e6e09d085b0a45820e"
   },
   "checks": [
     {
@@ -30,13 +30,13 @@
       "name": "focused_archive_identity_and_m3_tests",
       "command": "$env:PYTHONPATH='src'; C:/Python313/python.exe -m pytest tests/test_vimdoc_archive_content_audit.py tests/test_vimdoc_ocr_page_identity.py tests/test_vimdoc_m3_preparation.py tests/test_features.py tests/test_models.py tests/test_losses.py tests/test_gradients.py -q",
       "exit_code": 0,
-      "summary": "75 passed"
+      "summary": "76 passed in 7.05s; includes Windows-to-POSIX Modal remote-path regression"
     },
     {
       "name": "broader_non_training_regression",
       "command": "$env:PYTHONPATH='src'; C:/Python313/python.exe -m pytest -q -k \"not test_live_preflight_is_approved_read_only_and_does_not_create_attempt\"",
       "exit_code": 0,
-      "summary": "447 passed, 1 deselected in 45.28s",
+      "summary": "448 passed, 1 deselected in 44.41s",
       "excluded_test": "tests/test_vidoseek_exploratory24_w66_optimized.py::test_live_preflight_is_approved_read_only_and_does_not_create_attempt",
       "exclusion_reason": "Historical hash-pinned test asserts a now-completed W66 attempt/output does not exist and execution remains authorized; it was preserved."
     },
@@ -75,12 +75,21 @@
     "approved_retries": 0
   },
   "dormant_approval_package": {
-    "status": "AWAITING_EXPLICIT_USER_APPROVAL_DO_NOT_EXECUTE",
+    "status": "REPAIR_PREPARED_AWAITING_SOURCE_COMMIT_BINDING_DO_NOT_EXECUTE",
     "request_path": "artifacts/vimdoc_archive_content_audit_v1_preparation/authorization_request.json",
-    "request_sha256": "a6c6f858ecb0af22c68b3acf25a14ba01a790ffc0066eb4f0f27659406e7ae3c",
+    "request_sha256": "6fdb95550142a4b5b74d85a8104b200f2d6205c9d63aa7162f944cd13be46b99",
     "candidate_path": "artifacts/vimdoc_archive_content_audit_v1_preparation/proposed_approved_config.json",
-    "candidate_sha256": "baeb51bd5429a32443c64d4620928c75b06e65f722c33f24ec3c1a8f924d4013",
+    "candidate_sha256": "8f18dfbe9a2aa613f3b15e7c477a3fbec71784514a5af75353f658fd10f69af2",
     "live_config_remains_closed": true
+  },
+  "superseded_submission": {
+    "activation_commit": "20b65c0b7e2d0733f94fc50025342563f751aaac",
+    "config_sha256": "baeb51bd5429a32443c64d4620928c75b06e65f722c33f24ec3c1a8f924d4013",
+    "outcome": "LOCAL_WRAPPER_IMPORT_REFUSAL_BEFORE_MODAL_FUNCTION_INVOCATION",
+    "function_call_id_created": false,
+    "run_audit_entered": false,
+    "retry_performed": false,
+    "authorization_reusable": false
   },
   "actual_data_status": {
     "live_archive_opened": false,
@@ -89,10 +98,11 @@
     "ocr_executed": false,
     "score_extraction_executed": false,
     "training_executed": false,
-    "scientific_metrics_computed": false
+    "scientific_metrics_computed": false,
+    "modal_function_invocation_started": false
   },
   "actions_not_performed": [
-    "Modal invocation",
+    "Modal Function invocation during repair",
     "GPU execution",
     "live ViMDoc archive access",
     "archive extraction",
@@ -101,5 +111,5 @@
     "optimizer step",
     "training"
   ],
-  "next_boundary": "Explicit user approval of the exact dormant candidate is required. The live config remains closed; no invocation may occur before the one-path activation commit and repeated hash/guard checks."
+  "next_boundary": "Commit the repaired closed source package, bind that commit into a new dormant candidate and authorization request, then require a fresh exact user approval."
 }

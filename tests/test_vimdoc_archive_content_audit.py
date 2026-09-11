@@ -217,6 +217,26 @@ def test_modal_wrapper_is_cpu_only_without_secret_remote_call_or_local_entrypoin
                    for call in calls)
 
 
+def test_modal_wrapper_uses_posix_absolute_remote_paths_on_windows():
+    source = (ROOT / "vimdoc_archive_audit_modal.py").read_text()
+    tree = ast.parse(source)
+    remote_roots = {}
+    for node in tree.body:
+        if not isinstance(node, ast.Assign) or len(node.targets) != 1:
+            continue
+        target = node.targets[0]
+        if (
+            isinstance(target, ast.Name)
+            and target.id in {"REMOTE_ROOT", "VOLUME_ROOT"}
+            and isinstance(node.value, ast.Constant)
+        ):
+            remote_roots[target.id] = node.value.value
+    assert remote_roots == {"REMOTE_ROOT": "/root", "VOLUME_ROOT": "/vol"}
+    assert "str(REMOTE_ROOT)" not in source and "str(VOLUME_ROOT)" not in source
+    assert "volumes={VOLUME_ROOT: volume}" in source
+    assert "Path(REMOTE_ROOT)" in source and "Path(VOLUME_ROOT)" in source
+
+
 def test_preparation_cli_passes_without_modal_or_archive_access():
     result = subprocess.run(
         [sys.executable, str(ROOT / "scripts/prepare_vimdoc_archive_content_audit.py")],
