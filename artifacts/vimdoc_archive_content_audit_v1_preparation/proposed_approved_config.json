@@ -1,17 +1,17 @@
 {
   "schema_version": 1,
   "package_id": "vimdoc_archive_content_audit_v1",
-  "status": "REPAIR_PREPARED_AWAITING_SOURCE_COMMIT_BINDING_EXECUTION_CLOSED",
+  "status": "APPROVED_FOR_ONE_INVOCATION",
   "prepared_at_utc": "2026-09-11T04:06:52.6798965Z",
   "purpose": "Classify ViMDoc duplicate page-name assets by uncompressed content hash and freeze canonical page identity before OCR.",
   "classification": "DATA_INTEGRITY_ONLY_NOT_OCR_NOT_SCORE_EXTRACTION_NOT_TRAINING",
   "authorization": {
-    "execution_authorized": false,
-    "approved_actor": null,
-    "required_source_commit": null,
-    "approved_invocations": 0,
+    "execution_authorized": true,
+    "approved_actor": "codex",
+    "required_source_commit": "f25b0f39d06925c5cc45f8ede9e5d3a15898d394",
+    "approved_invocations": 1,
     "approved_retries": 0,
-    "approved_timeout_seconds": 0
+    "approved_timeout_seconds": 21600
   },
   "input": {
     "volume_name": "qpaf-artifacts",

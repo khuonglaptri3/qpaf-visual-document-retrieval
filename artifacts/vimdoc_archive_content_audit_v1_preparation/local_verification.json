@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "package_id": "vimdoc_archive_content_audit_v1_preparation",
-  "verified_at_utc": "2026-09-11T04:06:52.6798965Z",
-  "source_head": "20b65c0b7e2d0733f94fc50025342563f751aaac",
+  "verified_at_utc": "2026-09-11T04:11:06.9445971Z",
+  "source_head": "f25b0f39d06925c5cc45f8ede9e5d3a15898d394",
   "dirty_worktree": true,
   "tracked_worktree_clean_at_source_commit": true,
   "excluded_untracked_paths": [
@@ -16,8 +16,8 @@
     "scripts/run_vimdoc_archive_content_audit.py": "7dfe3daa01f61d66476df03a9e85248468c44e95d1bdf6b6e05ec8aed34b3c00",
     "tests/test_vimdoc_archive_content_audit.py": "715c1f77f146124ec8b79f5c3944a7301e8438072e69bbc567521f763038d6cf",
     "docs/VIMDOC_ARCHIVE_CONTENT_AUDIT_EXECUTION_REVIEW.md": "ffee9bab498079bf39e67b984b54166b3a5af6ed91ef5289fbc0824d6f1e04b9",
-    "artifacts/vimdoc_archive_content_audit_v1_preparation/package_manifest.json": "6bf0fae95800f5ccd957ccda113c44b6e44d82e5c6a0b354ce5b1ea3cd318b0b",
-    "artifacts/vimdoc_m3_local_v1/package_manifest.json": "8f8cb13bf8319eec711df650cd88ef9f915c51057ff6c0e6e09d085b0a45820e"
+    "artifacts/vimdoc_archive_content_audit_v1_preparation/package_manifest.json": "76e0e2c0fa8bebc6eee1d278c1f53971c853d1b8a0222506572821a4cff3ff2d",
+    "artifacts/vimdoc_m3_local_v1/package_manifest.json": "c704081596d6e645d5dfd3f421da0c7a0cc2b21b304103a882f9c9732009be15"
   },
   "checks": [
     {
@@ -75,11 +75,11 @@
     "approved_retries": 0
   },
   "dormant_approval_package": {
-    "status": "REPAIR_PREPARED_AWAITING_SOURCE_COMMIT_BINDING_DO_NOT_EXECUTE",
+    "status": "AWAITING_EXPLICIT_USER_APPROVAL_DO_NOT_EXECUTE",
     "request_path": "artifacts/vimdoc_archive_content_audit_v1_preparation/authorization_request.json",
-    "request_sha256": "6fdb95550142a4b5b74d85a8104b200f2d6205c9d63aa7162f944cd13be46b99",
+    "request_sha256": "3362cb92d07d8c993036a1922d133bb23190ad04f7dffd155568ad16d98e3e98",
     "candidate_path": "artifacts/vimdoc_archive_content_audit_v1_preparation/proposed_approved_config.json",
-    "candidate_sha256": "8f18dfbe9a2aa613f3b15e7c477a3fbec71784514a5af75353f658fd10f69af2",
+    "candidate_sha256": "f3eadaa97ff0df20f5e2ad288aed5cea920502321cd42b18cf2d687192950014",
     "live_config_remains_closed": true
   },
   "superseded_submission": {
@@ -111,5 +111,5 @@
     "optimizer step",
     "training"
   ],
-  "next_boundary": "Commit the repaired closed source package, bind that commit into a new dormant candidate and authorization request, then require a fresh exact user approval."
+  "next_boundary": "Explicit user approval of the exact repaired dormant candidate is required. The live config remains closed; no invocation may occur before a one-path activation commit and repeated hash/guard checks."
 }

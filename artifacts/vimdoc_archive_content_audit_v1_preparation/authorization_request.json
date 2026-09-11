@@ -1,9 +1,9 @@
 {
   "schema_version": 1,
   "request_id": "vimdoc_archive_content_audit_v1_repair_v2_one_shot_authorization_request",
-  "status": "REPAIR_PREPARED_AWAITING_SOURCE_COMMIT_BINDING_DO_NOT_EXECUTE",
+  "status": "AWAITING_EXPLICIT_USER_APPROVAL_DO_NOT_EXECUTE",
   "prepared_at_utc": "2026-09-11T04:06:52.6798965Z",
-  "prepared_source_commit": null,
+  "prepared_source_commit": "f25b0f39d06925c5cc45f8ede9e5d3a15898d394",
   "approval_package_commit": "REPORT_AFTER_COMMIT_TO_AVOID_SELF_REFERENCE",
   "live_closed_config": {
     "path": "configs/vimdoc_archive_content_audit_v1.json",
@@ -13,9 +13,9 @@
   },
   "proposed_approved_config": {
     "path": "artifacts/vimdoc_archive_content_audit_v1_preparation/proposed_approved_config.json",
-    "sha256": "8f18dfbe9a2aa613f3b15e7c477a3fbec71784514a5af75353f658fd10f69af2",
-    "bytes": 6201,
-    "activation_rule": "Interim closed candidate only. Do not approve or activate until the repaired source commit and final candidate hash are bound."
+    "sha256": "f3eadaa97ff0df20f5e2ad288aed5cea920502321cd42b18cf2d687192950014",
+    "bytes": 6209,
+    "activation_rule": "After exact user approval, copy these bytes unchanged to the live config path in one allowlisted approval commit changing only that path. Recheck the resulting live SHA-256 before invocation."
   },
   "superseded_submission": {
     "activation_commit": "20b65c0b7e2d0733f94fc50025342563f751aaac",
@@ -30,15 +30,15 @@
     "authorization_reusable": false
   },
   "execution": {
-    "actor": null,
-    "command": null,
+    "actor": "codex",
+    "command": "modal run vimdoc_archive_audit_modal.py::audit_vimdoc_archive --config-sha256 f3eadaa97ff0df20f5e2ad288aed5cea920502321cd42b18cf2d687192950014 --actor codex --source-commit f25b0f39d06925c5cc45f8ede9e5d3a15898d394",
     "cpu_physical_cores": 1.0,
     "memory_mb": 4096,
     "gpu": null,
-    "timeout_seconds": 0,
+    "timeout_seconds": 21600,
     "cost_ceiling_usd": 0.6,
     "base_reserved_resource_estimate_usd_at_timeout": 0.474768,
-    "invocations": 0,
+    "invocations": 1,
     "retries": 0,
     "create_once_output": "qpaf-artifacts:/audits/vimdoc/vimdoc_archive_content_audit_v1"
   },
@@ -107,5 +107,5 @@
     "frozen_p1_02_status": "BLOCKED",
     "formal_p1_03_status": "BLOCKED"
   },
-  "approval_sentence": null
+  "approval_sentence": "I approve Codex to install the exact repaired ViMDoc archive-audit config with SHA-256 f3eadaa97ff0df20f5e2ad288aed5cea920502321cd42b18cf2d687192950014 in one allowlisted commit changing only configs/vimdoc_archive_content_audit_v1.json, then execute exactly one invocation of the recorded command as actor codex from repaired source commit f25b0f39d06925c5cc45f8ede9e5d3a15898d394, using one physical CPU core, 4096 MiB memory, no GPU or secrets, a 21600-second timeout, a USD 0.60 review budget, one invocation, zero retries, and the create-once output qpaf-artifacts:/audits/vimdoc/vimdoc_archive_content_audit_v1. Stop without retry on any recorded stop condition. This approval does not authorize OCR, score extraction, training, optimizer steps, or any QPAF performance claim."
 }

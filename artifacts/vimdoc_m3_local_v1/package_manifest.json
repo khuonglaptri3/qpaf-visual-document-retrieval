@@ -2,7 +2,7 @@
   "schema_version": 1,
   "package_id": "vimdoc_m3_local_v1",
   "created_at_utc": "2026-09-11T04:02:10.6468310Z",
-  "source_head": "20b65c0b7e2d0733f94fc50025342563f751aaac",
+  "source_head": "f25b0f39d06925c5cc45f8ede9e5d3a15898d394",
   "dirty_worktree": true,
   "tracked_worktree_clean_at_source_commit": true,
   "excluded_untracked_paths": [
@@ -121,7 +121,7 @@
     },
     {
       "path": "artifacts/vimdoc_archive_content_audit_v1_preparation/package_manifest.json",
-      "sha256": "6bf0fae95800f5ccd957ccda113c44b6e44d82e5c6a0b354ce5b1ea3cd318b0b",
+      "sha256": "76e0e2c0fa8bebc6eee1d278c1f53971c853d1b8a0222506572821a4cff3ff2d",
       "bytes": 2850
     },
     {

@@ -3,7 +3,7 @@
   "package_id": "vimdoc_archive_content_audit_v1_preparation",
   "status": "PREPARED_LOCAL_REVIEW_EXECUTION_CLOSED",
   "created_at_utc": "2026-09-11T04:02:10.6468310Z",
-  "source_head": "20b65c0b7e2d0733f94fc50025342563f751aaac",
+  "source_head": "f25b0f39d06925c5cc45f8ede9e5d3a15898d394",
   "dirty_worktree": true,
   "tracked_worktree_clean_at_source_commit": true,
   "excluded_untracked_paths": [
