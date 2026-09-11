@@ -2,8 +2,8 @@
   "schema_version": 1,
   "package_id": "vimdoc_archive_content_audit_v1_preparation",
   "status": "PREPARED_LOCAL_REVIEW_EXECUTION_CLOSED",
-  "created_at_utc": "2026-09-11T04:02:10.6468310Z",
-  "source_head": "f25b0f39d06925c5cc45f8ede9e5d3a15898d394",
+  "created_at_utc": "2026-09-11T05:12:53.7762589Z",
+  "source_head": "d3b0f16aea6acbc3d110f8ca73c5511de3460b29",
   "dirty_worktree": true,
   "tracked_worktree_clean_at_source_commit": true,
   "excluded_untracked_paths": [
@@ -12,13 +12,18 @@
     "refs_from_scibot.txt"
   ],
   "repair": {
-    "superseded_activation_commit": "20b65c0b7e2d0733f94fc50025342563f751aaac",
-    "superseded_config_sha256": "baeb51bd5429a32443c64d4620928c75b06e65f722c33f24ec3c1a8f924d4013",
-    "failure_stage": "LOCAL_WRAPPER_IMPORT_BEFORE_MODAL_FUNCTION_INVOCATION",
+    "classification": "LOCAL_MODAL_MATERIALIZATION_MOUNT_REPAIR_ONLY",
+    "consumed_activation_commit": "6a0db676a8b5b43d14081463f835ec6b0fcb8abc",
+    "consumed_config_sha256": "f3eadaa97ff0df20f5e2ad288aed5cea920502321cd42b18cf2d687192950014",
+    "failure_stage": "REMOTE_FUNCTION_SOURCE_VALIDATION_BEFORE_ARCHIVE_OR_OUTPUT",
+    "modal_function_invoked": true,
     "retry_performed": false,
-    "remote_attempt_created": false
+    "remote_attempt_created": false,
+    "archive_opened": false,
+    "modal_invoked_during_this_repair": false,
+    "prior_local_import_failure_retained_in_closed_config": true
   },
-  "scope": "Local package bytes only; no Modal/archive/OCR/extraction/training execution.",
+  "scope": "Local repair/package bytes only; no Modal invocation or archive/OCR/extraction/training execution during this repair.",
   "authorization": {
     "execution_authorized": false,
     "approved_invocations": 0,
@@ -28,8 +33,8 @@
   "files": [
     {
       "path": "configs/vimdoc_archive_content_audit_v1.json",
-      "sha256": "0ed2df0a6c634dbce1dea56ea4e7dee42463d37db21ae00877ccf6d754a7452c",
-      "bytes": 6805
+      "sha256": "d68aa576a088081002d1e938e19a2c443ad8cd570c35c618173d54be26609253",
+      "bytes": 7453
     },
     {
       "path": "configs/vimdoc_ocr_page_identity_v1.json",
@@ -53,13 +58,13 @@
     },
     {
       "path": "vimdoc_archive_audit_modal.py",
-      "sha256": "5d7d03bc576a89b526a43803c13d2ae8729793ee5f082e8b35b1ff90411fde5a",
-      "bytes": 2225
+      "sha256": "3e18aeee78c4cc119f7c394d0d1dabda477254d9aa7fd7d175f3fb5fab1dbe53",
+      "bytes": 2437
     },
     {
       "path": "tests/test_vimdoc_archive_content_audit.py",
-      "sha256": "715c1f77f146124ec8b79f5c3944a7301e8438072e69bbc567521f763038d6cf",
-      "bytes": 11400
+      "sha256": "8343f79f41759c95106679b22ae58f4ea66b1502720eff0e70390c6c978b22e9",
+      "bytes": 11853
     },
     {
       "path": "tests/test_vimdoc_ocr_page_identity.py",
@@ -68,8 +73,8 @@
     },
     {
       "path": "docs/VIMDOC_ARCHIVE_CONTENT_AUDIT_EXECUTION_REVIEW.md",
-      "sha256": "ffee9bab498079bf39e67b984b54166b3a5af6ed91ef5289fbc0824d6f1e04b9",
-      "bytes": 7184
+      "sha256": "0a1ed860b7124001072638874d1dea93d9de5b53dfc4163ff698e6ae9bc45230",
+      "bytes": 8525
     },
     {
       "path": "artifacts/dataset_materialization_vimdoc.json",
