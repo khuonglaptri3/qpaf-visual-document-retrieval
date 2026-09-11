@@ -237,6 +237,19 @@ def test_modal_wrapper_uses_posix_absolute_remote_paths_on_windows():
     assert "Path(REMOTE_ROOT)" in source and "Path(VOLUME_ROOT)" in source
 
 
+def test_modal_wrapper_mounts_materialization_receipt_at_required_posix_path():
+    source = (ROOT / "vimdoc_archive_audit_modal.py").read_text()
+    assert (
+        'MATERIALIZATION_PATH = PROJECT_ROOT / "artifacts/dataset_materialization_vimdoc.json"'
+        in source
+    )
+    assert source.count("str(MATERIALIZATION_PATH)") == 1
+    assert (
+        'remote_path=f"{REMOTE_ROOT}/artifacts/{MATERIALIZATION_PATH.name}"'
+        in source
+    )
+
+
 def test_preparation_cli_passes_without_modal_or_archive_access():
     result = subprocess.run(
         [sys.executable, str(ROOT / "scripts/prepare_vimdoc_archive_content_audit.py")],

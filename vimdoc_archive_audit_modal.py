@@ -13,6 +13,7 @@ REMOTE_ROOT = "/root"
 VOLUME_ROOT = "/vol"
 CONFIG_PATH = PROJECT_ROOT / "configs/vimdoc_archive_content_audit_v1.json"
 IDENTITY_SPEC_PATH = PROJECT_ROOT / "configs/vimdoc_ocr_page_identity_v1.json"
+MATERIALIZATION_PATH = PROJECT_ROOT / "artifacts/dataset_materialization_vimdoc.json"
 RUNNER_PATH = PROJECT_ROOT / "scripts/run_vimdoc_archive_content_audit.py"
 VALIDATOR_PATH = PROJECT_ROOT / "scripts/validate_vimdoc_ocr_page_identity.py"
 
@@ -23,6 +24,7 @@ image = (
     modal.Image.debian_slim(python_version="3.11")
     .add_local_file(str(CONFIG_PATH), remote_path=f"{REMOTE_ROOT}/configs/{CONFIG_PATH.name}", copy=True)
     .add_local_file(str(IDENTITY_SPEC_PATH), remote_path=f"{REMOTE_ROOT}/configs/{IDENTITY_SPEC_PATH.name}", copy=True)
+    .add_local_file(str(MATERIALIZATION_PATH), remote_path=f"{REMOTE_ROOT}/artifacts/{MATERIALIZATION_PATH.name}", copy=True)
     .add_local_file(str(RUNNER_PATH), remote_path=f"{REMOTE_ROOT}/scripts/{RUNNER_PATH.name}", copy=True)
     .add_local_file(str(VALIDATOR_PATH), remote_path=f"{REMOTE_ROOT}/scripts/{VALIDATOR_PATH.name}", copy=True)
 )
