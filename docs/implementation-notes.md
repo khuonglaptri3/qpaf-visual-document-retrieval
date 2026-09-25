@@ -28,3 +28,26 @@ This record describes software preparation, not research acceptance.
 
 If these assumptions change, update the relevant docs on a new feature branch
 and generate a new audit snapshot; preserve existing snapshots.
+
+## Team handoff from M1.1 and M1.2
+
+The owner subsequently requested publication of the research documents and
+detailed README assignments for Thanh (M1.1) and Phát (M1.2). This is a
+documentation/reference handoff; method core, Oracle reproduction and data
+payloads are deliverables for the assigned teammates.
+
+- The earlier environment/Git notes above describe bootstrap execution.
+- The supplied workbook and timeline remain unchanged. Current handoff
+  status is explicit in README and `docs/m1-restart-handoff.md`, because
+  the historical Done cells are not a verification of this checkout.
+- A later supplied Oracle progress report contains reported ViDoSeek
+  results. Its original bytes are stored in `results/m1.1/reference/`,
+  with an import timestamp and SHA-256. Import time is not run time.
+- Reported aggregate metrics remain separate from reproduced per-query
+  evidence. No raw Oracle outputs, corpus, method implementation or
+  independent QA sign-off are fabricated.
+- The handoff uses a feature branch from `develop`. A new snapshot at
+  `evidence/revisions/m1.4-002-handoff/` records the committed source tree;
+  its evidence commit follows the audited source commit.
+- The original audit snapshot is preserved. Verify historical snapshots
+  against their recorded source revision, not a later modified README.

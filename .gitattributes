@@ -1,5 +1,5 @@
 * text=auto eol=lf
 *.xlsx binary
+*.docx binary
 # Preserve the supplied planning document byte-for-byte for provenance.
 /TIMELINE_fixed.md -text
-

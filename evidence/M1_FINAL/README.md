@@ -1,5 +1,10 @@
 # M1 evidence package
 
+Đợt bàn giao M1.1/M1.2 và trạng thái mới nhất được mô tả tại
+[README chính](../../README.md) và
+[trạng thái bàn giao](../../docs/m1-restart-handoff.md).
+Snapshot mới nằm tại `evidence/revisions/m1.4-002-handoff/`.
+
 Đây là **bộ bàn giao đang chuẩn bị**, không phải quyết định M1 CLOSED.
 Từ `FINAL` trong tên thư mục là cấu trúc bắt buộc của timeline, không mô tả
 trạng thái nghiệm thu. File có sẵn không đồng nghĩa task đã hoàn thành.
