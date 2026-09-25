@@ -10,7 +10,9 @@
 - Trần Huỳnh Xuân Thanh — 23110060
 - Bùi Trần Tấn Phát — 23110052
 
-**Trạng thái tài liệu:** Đề xuất nghiên cứu; chưa triển khai đầy đủ và chưa có kết quả thực nghiệm. Các đóng góp và mức cải thiện được trình bày dưới dạng giả thuyết cần kiểm chứng.
+**Trạng thái tài liệu:** Đề xuất nghiên cứu; chưa triển khai đầy đủ và chưa có kết quả learned fusion được kiểm chứng trong repo. Các đóng góp và mức cải thiện được trình bày dưới dạng giả thuyết cần kiểm chứng.
+
+**Cập nhật bằng chứng Oracle:** repo đã nhận [báo cáo Oracle trên ViDoSeek](../results/m1.1/README.md). Đây là số liệu được cung cấp, còn chờ đối chiếu artifact từng query; không thay thế kết quả learned QPAF.
 
 ---
 
@@ -32,7 +34,7 @@ Khoảng trống mà đề tài kiểm tra là mức thích ứng chi tiết hơ
 
 ## 3. Vấn đề nghiên cứu
 
-Cho truy vấn $q$, tập trang $mathcal{P}$ và ba retriever $m\in\mathcal{M}=\{B,D,V\}$ tương ứng với BM25, dense-text và visual retrieval, mỗi retriever sinh điểm thô $s_m(q,p)$. Do thang đo và phân phối điểm khác nhau, không thể cộng trực tiếp các điểm này một cách có kiểm soát.
+Cho truy vấn $q$, tập trang $\mathcal{P}$ và ba retriever $m\in\mathcal{M}=\{B,D,V\}$ tương ứng với BM25, dense-text và visual retrieval, mỗi retriever sinh điểm thô $s_m(q,p)$. Do thang đo và phân phối điểm khác nhau, không thể cộng trực tiếp các điểm này một cách có kiểm soát.
 
 Sau khi chuẩn hóa bằng một phép biến đổi được cố định theo protocol,
 

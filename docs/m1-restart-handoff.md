@@ -14,10 +14,9 @@ hiện tại, không thay thế việc nhóm review hoặc quyết định G1.
   audit corpus để kiểm chứng. Không suy ra chưa từng có code/file ở nơi khác.
 - Workbook và `TIMELINE_fixed.md` được giữ nguyên để truy nguồn. Các ngày,
   trạng thái trong chúng là thông tin của bản kế hoạch/snapshot trước.
-- Hai tài liệu định hướng mô tả nghiên cứu dự kiến. Câu “chưa có kết quả
-  thực nghiệm” trong đề xuất cần được đọc cùng báo cáo Oracle đã nhận:
-  Oracle đã có số liệu được cung cấp; learned QPAF chưa có kết quả kiểm
-  chứng ở checkout này.
+- Hai tài liệu định hướng mô tả nghiên cứu dự kiến. Đề xuất đã thêm ghi
+  chú tới báo cáo Oracle: Oracle có số liệu được cung cấp; learned QPAF
+  chưa có kết quả kiểm chứng ở checkout này.
 
 ## Đầu vào cần bàn giao hoặc tạo mới
 

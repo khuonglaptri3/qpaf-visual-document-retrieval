@@ -63,11 +63,11 @@ Repo đã có công cụ audit, nhưng đang thiếu tài sản nghiên cứu đ
 Sau khi bổ sung asset, chạy snapshot mới từ thư mục gốc repo:
 
 ```bash
-python scripts/audit_repository.py --root . --output evidence/revisions/m1.4-002
-python scripts/audit_repository.py --root . --verify evidence/revisions/m1.4-002/hash_manifest.csv
+python scripts/audit_repository.py --root . --output evidence/revisions/m1.4-003
+python scripts/audit_repository.py --root . --verify evidence/revisions/m1.4-003/hash_manifest.csv
 ```
 
-Snapshot cũ được giữ lại. Nếu corpus nằm ngoài repo, cần kiểm kê/hash riêng vì công cụ hiện tại chỉ quét bên trong repo. M1.4 được chốt sau khi review các gap và liên kết nguồn gốc.
+Snapshot của đợt bàn giao nằm tại `evidence/revisions/m1.4-002-handoff/`; ví dụ trên dùng ID mới `m1.4-003` nếu chưa tồn tại. Snapshot cũ được giữ lại. Nếu corpus nằm ngoài repo, cần kiểm kê/hash riêng vì công cụ hiện tại chỉ quét bên trong repo. M1.4 được chốt sau khi review các gap và liên kết nguồn gốc.
 
 ---
 
@@ -104,10 +104,12 @@ Các kết quả cần chủ động lấy từ Phát và Thanh có thứ tự r
 
 Bạn có thể **làm ngay** phần tập hợp asset, kiểm kê, hash, kiểm ID/duplicate và soạn checklist OCR. Phần phải chờ đầu vào cụ thể là chốt leakage theo split của Phát và chốt namespace theo naming của Thanh. Phát cũng cần inventory của bạn để freeze protocol, nên nên bàn giao từng phần đã đủ sớm.
 
-Hiện đã là tối **25/9**, repo vẫn thiếu đầu vào của M1.4/M1.6. Để giữ mục tiêu đóng M1 ngày 27/9, thứ tự bù việc thực tế là:
+Với đợt bàn giao lại từ M1.1/M1.2, thứ tự phối hợp hiện tại là:
 
-- **Tối 25/9**: lấy vị trí code/corpus/output cũ; nhận protocol và registry hiện có; cập nhật gap/blocker, bàn giao trạng thái cho Phát.
-- **26/9**: hoàn tất kiểm kê còn thiếu, collision audit và OCR policy trong phạm vi M1; gửi Thanh kiểm ngay từng bộ, sửa findings và tổ chức G1 recheck khi đủ evidence.
-- **27/9**: chốt revision, hoàn thành technical review và QA, rồi chuyển Phát chốt gate/report.
+- **Trước hết**: Thanh xác định artifact của báo cáo Oracle; Phát bắt đầu method core và đặc tả còn thiếu. Khương ghi người cung cấp, vị trí và gap của từng đầu vào.
+- **Khi nhận được đầu vào tương ứng**: kiểm gói M1.3 trong phạm vi cho phép, bổ sung M1.4, chạy M1.6 và chuẩn bị M1.8 theo phạm vi nhóm chốt. Bàn giao từng phần đã có cho review.
+- **Khi đủ evidence**: chốt revision, technical review và QA, rồi chuyển Phát xem xét gate/report.
 
-Kế hoạch bù này phụ thuộc vào việc **asset thật được cung cấp kịp** và **Phát/Thanh hoàn thành phần protocol, registry, review**. Nếu đến 26/9 vẫn chỉ có báo cáo Word mà thiếu corpus/code/output cần kiểm, chưa có căn cứ để cam kết M1 đạt điều kiện đóng ngày 27/9.
+Các mốc 25–27/9 ở lịch cũ là mốc tham chiếu. Phát và cả nhóm cần đối chiếu
+lại lịch với đầu vào và tiến độ thực tế của đợt làm lại; chưa có căn cứ
+cam kết đóng M1 chỉ từ báo cáo Word hoặc từ số file đã tạo trong repo.
