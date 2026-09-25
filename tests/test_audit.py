@@ -1,15 +1,22 @@
 """Filesystem/CLI contracts for M1.4; fixtures are not research evidence."""
 
 import csv
+from contextlib import contextmanager
 import json
+import os
 from pathlib import Path
 import subprocess
 import sys
 import tempfile
+from types import SimpleNamespace
 import unittest
+from unittest.mock import patch
 
 
 SCRIPT = Path(__file__).resolve().parents[1] / "scripts" / "audit_repository.py"
+sys.path.insert(0, str(SCRIPT.parents[1] / "src"))
+from qpaf import audit
+
 ABC_SHA256 = "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad"
 
 
@@ -153,6 +160,61 @@ class AuditTests(unittest.TestCase):
         self.write("README.md")
         self.generate()
         self.assertEqual([row["path"] for row in self.rows("hash_manifest.csv")], ["README.md"])
+
+    @unittest.skipUnless(os.name == "nt", "Windows junction compatibility")
+    def test_junction_is_excluded_without_path_is_junction(self):
+        outside = self.root.parent / "external"
+        outside.mkdir()
+        (outside / "outside.txt").write_bytes(b"abc")
+        link = self.root / "linked-directory"
+        quote = lambda value: "'" + str(value).replace("'", "''") + "'"
+        command = f"$ErrorActionPreference = 'Stop'; New-Item -ItemType Junction -Path {quote(link)} -Target {quote(outside)} | Out-Null"
+        result = subprocess.run(["powershell", "-NoProfile", "-Command", command], capture_output=True, text=True, timeout=30)
+        if result.returncode:
+            self.skipTest("Host does not permit directory junctions: " + result.stderr.strip())
+        self.write("README.md")
+        # Emulate the missing Path helper on 3.11, while using a real junction.
+        with patch.object(Path, "is_junction", return_value=False, create=True):
+            rows, excluded, _ = audit.collect_files(self.root, self.output)
+        self.assertEqual([row["path"] for row in rows], ["README.md"])
+        self.assertIn("linked-directory/", excluded)
+
+    def test_replaced_file_with_same_size_and_mtime_has_no_valid_hash(self):
+        target = self.write("data/raw/page.txt")
+        before = target.stat()
+        replacement = self.root.parent / "replacement.txt"
+        replacement.write_bytes(b"xyz")
+        os.utime(replacement, ns=(before.st_atime_ns, before.st_mtime_ns))
+        original_open = Path.open
+
+        @contextmanager
+        def replacing_open(path, *args, **kwargs):
+            with original_open(path, *args, **kwargs) as stream:
+                yield stream
+            if path == target:
+                os.replace(replacement, target)
+
+        # The real file changes immediately after its read handle closes.
+        with patch.object(Path, "open", replacing_open):
+            rows, _, errors = audit.collect_files(self.root, self.output)
+        self.assertEqual(target.read_bytes(), b"xyz")
+        self.assertEqual(rows[0]["status"], "ERROR")
+        self.assertEqual(rows[0]["sha256"], "")
+        self.assertTrue(errors)
+
+    def test_path_and_descriptor_change_times_are_compared_separately(self):
+        target = self.write("data/raw/page.txt")
+        original_fstat = os.fstat
+
+        def descriptor_stat(fd):
+            info = original_fstat(fd)
+            values = {key: getattr(info, key) for key in ("st_dev", "st_ino", "st_size", "st_mtime_ns", "st_ctime_ns")}
+            # Windows stat and fstat can expose different ctime semantics.
+            values["st_ctime_ns"] += 1_000_000
+            return SimpleNamespace(**values)
+
+        with patch.object(audit.os, "fstat", descriptor_stat):
+            self.assertEqual(audit.digest_file(target), (3, ABC_SHA256))
 
 
 if __name__ == "__main__":

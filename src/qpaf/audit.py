@@ -8,6 +8,7 @@ import json
 import os
 from pathlib import Path, PurePosixPath, PureWindowsPath
 import re
+import stat
 import subprocess
 import sys
 
@@ -24,17 +25,37 @@ INFRASTRUCTURE = {
 
 
 def is_link(path):
-    return path.is_symlink() or getattr(path, "is_junction", lambda: False)()
+    if path.is_symlink() or getattr(path, "is_junction", lambda: False)():
+        return True
+    try:
+        # Path.is_junction was added in 3.12; lstat supports 3.11 on Windows.
+        tag = getattr(path.lstat(), "st_reparse_tag", 0)
+    except FileNotFoundError:
+        return False
+    return tag == getattr(stat, "IO_REPARSE_TAG_MOUNT_POINT", 0xA0000003)
+
+
+def file_signature(info):
+    return (info.st_dev, info.st_ino, info.st_size, info.st_mtime_ns)
 
 
 def digest_file(path):
     before = path.stat()
     digest = hashlib.sha256()
     with path.open("rb") as stream:
+        opened = os.fstat(stream.fileno())
+        if file_signature(before) != file_signature(opened):
+            raise OSError("File changed before hashing")
         for block in iter(lambda: stream.read(1024 * 1024), b""):
             digest.update(block)
+        read = os.fstat(stream.fileno())
+        # Compare ctime only within the same API: Windows stat and fstat may
+        # report creation time and change time differently.
+        if file_signature(opened) != file_signature(read) or opened.st_ctime_ns != read.st_ctime_ns:
+            raise OSError("File changed during hashing")
     after = path.stat()
-    if (before.st_size, before.st_mtime_ns) != (after.st_size, after.st_mtime_ns):
+    if (file_signature(before) != file_signature(after)
+            or before.st_ctime_ns != after.st_ctime_ns or is_link(path)):
         raise OSError("File changed during hashing")
     return after.st_size, digest.hexdigest()
 
