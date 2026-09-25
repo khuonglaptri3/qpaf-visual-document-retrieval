@@ -22,6 +22,48 @@ khác; không dùng nó để mở rộng phạm vi hiện tại.
 Repo khởi đầu từ hai tài liệu kế hoạch. Source nghiên cứu, corpus, config thí
 nghiệm và kết quả cũ chưa được cung cấp trong workspace này.
 
+## Bắt đầu với M1.4
+
+Yêu cầu: Python **3.11 trở lên** và Git. Công cụ audit dùng thư viện chuẩn,
+không cần cài package hoặc tải model.
+
+```sh
+python -m unittest discover -s tests -v
+python scripts/audit_repository.py --root . --verify evidence/M1_FINAL/01_repository_audit/hash_manifest.csv
+```
+
+Lần audit đầu được lưu tại `evidence/M1_FINAL/01_repository_audit/`. Khi có
+code/data/config mới, tạo snapshot mới để bảo toàn bằng chứng trước đó:
+
+```sh
+python scripts/audit_repository.py --root . --output evidence/revisions/m1.4-002
+python scripts/audit_repository.py --root . --verify evidence/revisions/m1.4-002/hash_manifest.csv
+```
+
+Lệnh tạo báo cáo trả về exit code 0 khi tạo file thành công. Trạng thái
+`PARTIAL` trong báo cáo vẫn yêu cầu review; nó không có nghĩa M1.4/G1 đã đạt.
+Lệnh verify thất bại nếu file bị sửa/xóa, hash sai hoặc manifest không hợp lệ.
+Snapshot không ghi đè; các lần sau dùng tên mới. Commit trong snapshot là
+revision được kiểm kê, trước commit bổ sung chính báo cáo đó.
+
+## Cấu trúc
+
+```text
+configs/                Cấu hình thí nghiệm; chưa có config nghiên cứu
+data/                   Hướng dẫn dữ liệu; payload lớn nằm ngoài Git
+docs/                   Checklist, thiết kế và kế hoạch triển khai
+manifests/              Định danh, split và hash của dữ liệu khi được cung cấp
+results/                Bảng kết quả nhỏ có nguồn gốc rõ ràng
+scripts/                Lệnh chạy audit từ checkout
+src/qpaf/               Công cụ hỗ trợ; method QPAF chưa được đưa vào repo
+tests/                  Fixture tổng hợp cho phần mềm, không phải corpus
+evidence/M1_FINAL/      Bảy thư mục bàn giao theo TIMELINE_fixed.md
+```
+
+Xem [checklist của Khương](docs/khuong-m1-checklist.md) và
+[bộ bàn giao M1](evidence/M1_FINAL/README.md). Chưa có giấy phép phân phối
+được cả nhóm thống nhất; không tự gán giấy phép cho dữ liệu/model bên ngoài.
+
 ## Gitflow
 
 - `main`: mốc ổn định hoặc bản phát hành; commit đầu tiên là mốc khởi tạo.
@@ -32,4 +74,3 @@ nghiệm và kết quả cũ chưa được cung cấp trong workspace này.
 
 Phần M1.4 được triển khai trên `feature/m1-repository-audit`.
 Xem [quy trình đóng góp](CONTRIBUTING.md).
-

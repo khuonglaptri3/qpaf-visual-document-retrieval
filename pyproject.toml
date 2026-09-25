@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "qpaf-visual-document-retrieval"
+version = "0.1.0.dev0"
+description = "Research tooling for Query-Page Adaptive Fusion for Visual Document Retrieval"
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [{name = "Group 01"}]
+dependencies = []
+
+[project.scripts]
+qpaf-audit = "qpaf.audit:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
