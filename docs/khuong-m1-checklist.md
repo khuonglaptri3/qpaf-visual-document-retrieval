@@ -1,5 +1,10 @@
 # Khương — làm lại M1 theo lịch 23–27/09/2026
 
+**Bàn giao hiện tại bắt đầu từ M1.1/M1.2:** xem
+[trạng thái đầu vào](m1-restart-handoff.md) và [README](../README.md).
+M1.1 đã có báo cáo Oracle nhưng thiếu artifact gốc; M1.3 chưa có gói audit
+để kiểm chứng. Bảng dưới là lịch tham chiếu cho phần Khương từ M1.4.
+
 Nguồn: `TIMELINE_fixed.md`, phần 3, 9, 10 và 11.
 Ngày trong bảng là ngày kế hoạch; thời điểm quan sát nằm trong audit metadata
 và lịch sử Git. Không backdate để biến việc thực hiện sau thành đúng hạn.
@@ -24,12 +29,17 @@ và lịch sử Git. Không backdate để biến việc thực hiện sau thàn
 
 ## Việc tiếp theo của Khương
 
+Trước khi coi M1.3 hoàn tất, xác định với Phát corpus/revision/phạm vi và
+gói audit cần kiểm chứng. Không yêu cầu “khôi phục” một gói chưa từng nhận.
+
 1. Xác định research code cũ ở đâu, hoặc xác nhận chưa có để nhóm cập nhật scope.
 2. Nhận nguồn/phiên bản corpus và split/qrels theo protocol của Phát.
 3. Nhận config/output/log cũ nếu có; yêu cầu đủ liên kết để Thanh audit.
 4. Đưa asset hợp lệ vào cấu trúc, tạo snapshot M1.4 mới, xử lý từng gap.
 5. Chạy M1.6 trên corpus thật; review aliases, trùng/xung đột và leakage.
-6. Calibration OCR, chốt threshold với protocol, cập nhật policy rồi mới sign-off.
+6. Chốt với Phát phạm vi M1.8 so với calibration M2.3; chuẩn bị OCR policy,
+   ghi ngưỡng chưa đo là dự kiến. Full OCR thuộc M2.6. Cập nhật tiêu chí
+   review/sign-off theo phạm vi nhóm thống nhất.
 
 ## Phối hợp và cách báo tiến độ
 
