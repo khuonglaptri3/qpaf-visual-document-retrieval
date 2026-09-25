@@ -1,0 +1,44 @@
+# Local environments and generated files
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.ruff_cache/
+.cache/
+.coverage
+htmlcov/
+.superpowers/
+.worktrees/
+.codex/
+.agents/
+.DS_Store
+Thumbs.db
+
+# Credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+
+# Research payloads are stored outside Git; manifests remain versioned.
+data/raw/
+data/processed/
+data/external/
+artifacts/
+checkpoints/
+indexes/
+cache/
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.npy
+*.npz
+*.parquet
+
