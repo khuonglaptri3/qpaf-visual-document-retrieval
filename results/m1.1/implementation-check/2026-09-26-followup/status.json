@@ -1,0 +1,12 @@
+{
+  "software_verification": "passed",
+  "tests_run": 44,
+  "tests_passed": 43,
+  "tests_skipped": 1,
+  "m11_tests_passed": 29,
+  "modal_execution": "not_run",
+  "independent_review": "pending",
+  "finished_utc": "2026-09-25T18:23:58.284154+00:00",
+  "checks": "checks-final.json",
+  "documentation_diff_check_exit_code": 0
+}

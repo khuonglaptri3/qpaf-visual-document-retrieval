@@ -1,0 +1,15 @@
+2026-09-26 01:21:12,593 INFO stage started: prepare
+2026-09-26 01:21:12,600 INFO stage completed
+2026-09-26 01:21:12,858 INFO stage started: bm25
+2026-09-26 01:21:12,863 INFO saved bm25 scores: (2, 3)
+2026-09-26 01:21:12,864 INFO stage completed
+2026-09-26 01:21:13,083 INFO stage started: dense
+2026-09-26 01:21:13,132 INFO stage completed
+2026-09-26 01:21:13,330 INFO stage started: visual
+2026-09-26 01:21:13,353 INFO stage completed
+2026-09-26 01:21:13,611 INFO stage started: oracle
+2026-09-26 01:21:13,638 INFO evaluated 2 queries; independent QA remains pending
+2026-09-26 01:21:13,639 INFO stage completed
+PASS: real BM25, synthetic dense/visual caches, Oracle resume, evidence ZIP and local evaluator CLI.
+Software fixture only; no ViDoSeek/model/Modal run performed.
+Artifacts: C:\Users\lanph\OneDrive\Desktop\Artificial_Intelligent_Project\results\m1.1\implementation-check\2026-09-26-followup\software-fixture-final

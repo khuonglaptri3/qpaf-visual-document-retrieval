@@ -1,0 +1,18 @@
+{
+  "channel": "visual",
+  "query_ids": [
+    "q1",
+    "q2"
+  ],
+  "page_ids": [
+    "a",
+    "b",
+    "c"
+  ],
+  "shape": [
+    2,
+    3
+  ],
+  "dtype": "float64",
+  "sha256": "bee69c26906307e3ce6952d1e179796dbb98d581593d7ccd78f1f81079b51932"
+}

@@ -1,0 +1,26 @@
+[
+  {
+    "path": "features.json",
+    "local_sha256": "03fe2e40d4e02e7275ca902ac1206baa49d659f5cd833952adfebf2fff9c3e9e",
+    "clean_sha256": "03fe2e40d4e02e7275ca902ac1206baa49d659f5cd833952adfebf2fff9c3e9e",
+    "equal": true
+  },
+  {
+    "path": "predictions.json",
+    "local_sha256": "b1327f9e733902e28e3a689508711cca9ae4a1e477f4226fe51d1be7d7f66493",
+    "clean_sha256": "b1327f9e733902e28e3a689508711cca9ae4a1e477f4226fe51d1be7d7f66493",
+    "equal": true
+  },
+  {
+    "path": "gate_parameters.json",
+    "local_sha256": "5c0c0775227366bca7c8947f0c8ef659196830a00b2dc7d08ad96ed5ceb7364d",
+    "clean_sha256": "5c0c0775227366bca7c8947f0c8ef659196830a00b2dc7d08ad96ed5ceb7364d",
+    "equal": true
+  },
+  {
+    "path": "learning_trace.csv",
+    "local_sha256": "500047db7566e9c2ca38e7e459b1ba9d20bc837c72588758bef0b93e18f46a06",
+    "clean_sha256": "500047db7566e9c2ca38e7e459b1ba9d20bc837c72588758bef0b93e18f46a06",
+    "equal": true
+  }
+]

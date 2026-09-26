@@ -1,0 +1,113 @@
+[
+  {
+    "name": "tests-final",
+    "command": [
+      "C:\\Users\\lanph\\OneDrive\\Desktop\\Artificial_Intelligent_Project\\.venv\\Scripts\\python.exe",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-v"
+    ],
+    "started_utc": "2026-09-25T18:21:00.031764+00:00",
+    "finished_utc": "2026-09-25T18:21:11.795406+00:00",
+    "exit_code": 0,
+    "log": "tests-final.log"
+  },
+  {
+    "name": "fixture-smoke-final",
+    "command": [
+      "C:\\Users\\lanph\\OneDrive\\Desktop\\Artificial_Intelligent_Project\\.venv\\Scripts\\python.exe",
+      "results\\m1.1\\implementation-check\\2026-09-26-followup\\fixture_smoke.py",
+      "--output",
+      "results\\m1.1\\implementation-check\\2026-09-26-followup\\software-fixture-final"
+    ],
+    "started_utc": "2026-09-25T18:21:11.795406+00:00",
+    "finished_utc": "2026-09-25T18:21:15.154651+00:00",
+    "exit_code": 0,
+    "log": "fixture-smoke-final.log"
+  },
+  {
+    "name": "compile-final",
+    "command": [
+      "C:\\Users\\lanph\\OneDrive\\Desktop\\Artificial_Intelligent_Project\\.venv\\Scripts\\python.exe",
+      "-m",
+      "compileall",
+      "-q",
+      "src",
+      "scripts",
+      "tests"
+    ],
+    "started_utc": "2026-09-25T18:21:15.154651+00:00",
+    "finished_utc": "2026-09-25T18:21:15.367651+00:00",
+    "exit_code": 0,
+    "log": "compile-final.log"
+  },
+  {
+    "name": "modal-sdk-final",
+    "command": [
+      "C:\\Users\\lanph\\OneDrive\\Desktop\\Artificial_Intelligent_Project\\.venv\\Scripts\\python.exe",
+      "scripts/run_m11_modal.py",
+      "--config",
+      "configs/m1.1/vidoseek.toml",
+      "--check-sdk"
+    ],
+    "started_utc": "2026-09-25T18:21:15.367651+00:00",
+    "finished_utc": "2026-09-25T18:21:16.256493+00:00",
+    "exit_code": 0,
+    "log": "modal-sdk-final.log"
+  },
+  {
+    "name": "dry-run-final",
+    "command": [
+      "C:\\Users\\lanph\\OneDrive\\Desktop\\Artificial_Intelligent_Project\\.venv\\Scripts\\python.exe",
+      "scripts/run_m11_modal.py",
+      "--config",
+      "configs/m1.1/vidoseek.toml",
+      "--run-id",
+      "verification-only",
+      "--set",
+      "modal.gpu=L4",
+      "--set",
+      "modal.volume_name=verification-artifacts",
+      "--set",
+      "modal.mount_path=/verify",
+      "--set",
+      "modal.workspace=checks",
+      "--set",
+      "output.local_dir=results/m1.1/verification-download",
+      "--dry-run"
+    ],
+    "started_utc": "2026-09-25T18:21:16.256493+00:00",
+    "finished_utc": "2026-09-25T18:21:16.688168+00:00",
+    "exit_code": 0,
+    "log": "dry-run-final.log"
+  },
+  {
+    "name": "dependencies-final",
+    "command": [
+      "uv",
+      "pip",
+      "check",
+      "--python",
+      "C:\\Users\\lanph\\OneDrive\\Desktop\\Artificial_Intelligent_Project\\.venv\\Scripts\\python.exe"
+    ],
+    "started_utc": "2026-09-25T18:21:16.688168+00:00",
+    "finished_utc": "2026-09-25T18:21:16.764168+00:00",
+    "exit_code": 0,
+    "log": "dependencies-final.log"
+  },
+  {
+    "name": "diff-final",
+    "command": [
+      "git",
+      "diff",
+      "--check"
+    ],
+    "started_utc": "2026-09-25T18:21:16.764168+00:00",
+    "finished_utc": "2026-09-25T18:21:16.834929+00:00",
+    "exit_code": 0,
+    "log": "diff-final.log"
+  }
+]

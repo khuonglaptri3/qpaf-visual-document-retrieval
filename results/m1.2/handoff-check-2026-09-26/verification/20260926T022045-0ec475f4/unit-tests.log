@@ -1,0 +1,28 @@
+test_invalid_fields_are_rejected_before_model_construction (test_m12_config.MethodConfigTests.test_invalid_fields_are_rejected_before_model_construction) ... ok
+test_shared_preset_loads (test_m12_config.MethodConfigTests.test_shared_preset_loads) ... ok
+test_active_nonfinite_scores_and_invalid_identifiers_fail (test_m12_core.FeatureTests.test_active_nonfinite_scores_and_invalid_identifiers_fail) ... ok
+test_bad_shape_dtype_empty_query_pool_and_cap_fail (test_m12_core.FeatureTests.test_bad_shape_dtype_empty_query_pool_and_cap_fail) ... ok
+test_constant_channels_singleton_and_empty_query_are_defined (test_m12_core.FeatureTests.test_constant_channels_singleton_and_empty_query_are_defined) ... ok
+test_feature_construction_disconnects_retriever_autograd (test_m12_core.FeatureTests.test_feature_construction_disconnects_retriever_autograd) ... ok
+test_padding_and_permutation_preserve_page_features (test_m12_core.FeatureTests.test_padding_and_permutation_preserve_page_features) ... ok
+test_query_length_is_capped_unicode_word_count (test_m12_core.FeatureTests.test_query_length_is_capped_unicode_word_count) ... ok
+test_thirteen_features_match_hand_computation (test_m12_core.FeatureTests.test_thirteen_features_match_hand_computation) ... ok
+test_backward_updates_only_gate_even_with_attached_input_tensors (test_m12_core.GateTests.test_backward_updates_only_gate_even_with_attached_input_tensors) ... ok
+test_bad_gate_settings_are_rejected (test_m12_core.GateTests.test_bad_gate_settings_are_rejected) ... ok
+test_fusion_matches_known_weighted_scores (test_m12_core.GateTests.test_fusion_matches_known_weighted_scores) ... ok
+test_fusion_rejects_non_simplex_weights (test_m12_core.GateTests.test_fusion_rejects_non_simplex_weights) ... ok
+test_gate_loss_autograd_matches_finite_differences (test_m12_core.GateTests.test_gate_loss_autograd_matches_finite_differences) ... ok
+test_granularity_matches_softmax_and_uniform_fusion_by_hand (test_m12_core.GateTests.test_granularity_matches_softmax_and_uniform_fusion_by_hand) ... ok
+test_mask_and_permutation_do_not_change_real_predictions (test_m12_core.GateTests.test_mask_and_permutation_do_not_change_real_predictions) ... ok
+test_matched_variants_share_initial_parameters_and_budget (test_m12_core.GateTests.test_matched_variants_share_initial_parameters_and_budget) ... ok
+test_small_learning_run_reduces_loss_for_both_variants (test_m12_core.GateTests.test_small_learning_run_reduces_loss_for_both_variants) ... ok
+test_inactive_scores_have_zero_gradient (test_m12_core.LossTests.test_inactive_scores_have_zero_gradient) ... ok
+test_large_score_difference_is_numerically_stable (test_m12_core.LossTests.test_large_score_difference_is_numerically_stable) ... ok
+test_no_pairs_graded_labels_and_nonfinite_active_values_fail (test_m12_core.LossTests.test_no_pairs_graded_labels_and_nonfinite_active_values_fail) ... ok
+test_pairwise_loss_and_derivative_match_hand_calculation (test_m12_core.LossTests.test_pairwise_loss_and_derivative_match_hand_calculation) ... ok
+test_query_mean_does_not_overweight_queries_with_more_pairs (test_m12_core.LossTests.test_query_mean_does_not_overweight_queries_with_more_pairs) ... ok
+
+----------------------------------------------------------------------
+Ran 23 tests in 10.317s
+
+OK

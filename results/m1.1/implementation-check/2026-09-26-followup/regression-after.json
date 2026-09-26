@@ -1,0 +1,15 @@
+{
+  "command": [
+    "C:\\Users\\lanph\\OneDrive\\Desktop\\Artificial_Intelligent_Project\\.venv\\Scripts\\python.exe",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests",
+    "-p",
+    "test_m11_pipeline.py",
+    "-v"
+  ],
+  "exit_code": 0,
+  "utc": "2026-09-25T18:15:43.262133+00:00"
+}

@@ -1,0 +1,129 @@
+{
+  "schema_version": 1,
+  "dataset": {
+    "adapter": "vidoseek",
+    "repo_id": "Qiuchen-Wang/ViDoSeek",
+    "revision": "e91a92ba5f38690696c7e66be5c5474b54c6e791",
+    "annotation_file": "vidoseek.json",
+    "annotation_key": "examples",
+    "corpus_file": "vidoseek_pdf_document.zip"
+  },
+  "selection": {
+    "count": 0,
+    "seed": 2026
+  },
+  "execution": {
+    "seed": 2026
+  },
+  "text": {
+    "mode": "native_or_ocr",
+    "dpi": 150,
+    "min_native_chars": 40,
+    "ocr_language": "eng",
+    "ocr_timeout": 120
+  },
+  "bm25": {
+    "k1": 1.5,
+    "b": 0.75
+  },
+  "dense": {
+    "model_id": "BAAI/bge-m3",
+    "revision": "5617a9f61b028005a4858fdac845db406aefb181",
+    "batch_size": 4,
+    "max_seq_length": 8192,
+    "query_prefix": "",
+    "page_prefix": "",
+    "device": "cuda"
+  },
+  "visual": {
+    "model_id": "vidore/colqwen2-v1.0",
+    "revision": "2b6ac8fb37f46a49e4841e599583d00ae8a20117",
+    "base_model_id": "vidore/colqwen2-base",
+    "base_revision": "9fe8a713422a7cb4ef79ca77a09b381ee2243101",
+    "batch_size": 1,
+    "query_batch_size": 8,
+    "score_batch_size": 32,
+    "embedding_shard_size": 64,
+    "device": "cuda",
+    "dtype": "bfloat16",
+    "attention": "sdpa",
+    "max_pixels": 602112,
+    "query_prefix": "Query: "
+  },
+  "retrieval": {
+    "candidate_k": 100,
+    "normalization": "minmax"
+  },
+  "oracle": {
+    "metric_k": 10,
+    "bootstrap_samples": 20,
+    "seed": 2026,
+    "tie_tolerance": 1e-12
+  },
+  "weights": {
+    "W7": {
+      "values": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ],
+        [
+          0.3333333333333333,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        [
+          0.5,
+          0.5,
+          0
+        ],
+        [
+          0.5,
+          0,
+          0.5
+        ],
+        [
+          0,
+          0.5,
+          0.5
+        ]
+      ]
+    },
+    "W66": {
+      "simplex_divisions": 10
+    }
+  },
+  "modal": {
+    "app_name": "qpaf-m11-oracle",
+    "volume_name": "qpaf-m11-artifacts",
+    "mount_path": "/research",
+    "workspace": "m11",
+    "gpu": "A10G",
+    "cpu": 4,
+    "memory_mb": 32768,
+    "timeout": 86400,
+    "python_version": "3.11",
+    "requirements_file": "requirements/m11-modal.lock",
+    "apt_packages": [
+      "tesseract-ocr",
+      "tesseract-ocr-eng",
+      "libglib2.0-0",
+      "libgl1"
+    ],
+    "secret_names": []
+  },
+  "output": {
+    "local_dir": "results/m1.1"
+  }
+}

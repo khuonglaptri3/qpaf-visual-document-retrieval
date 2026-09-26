@@ -1,0 +1,25 @@
+test_bm25_b_one_keeps_empty_pages_finite (test_m11_pipeline.PipelineTests.test_bm25_b_one_keeps_empty_pages_finite) ... ok
+test_bm25_positive_idf_and_empty_pages (test_m11_pipeline.PipelineTests.test_bm25_positive_idf_and_empty_pages) ... ok
+test_cached_fixture_produces_verifiable_evidence_and_reuses_stages (test_m11_pipeline.PipelineTests.test_cached_fixture_produces_verifiable_evidence_and_reuses_stages) ... 2026-09-26 01:15:40,788 INFO stage started: prepare
+2026-09-26 01:15:40,793 INFO stage completed
+2026-09-26 01:15:41,021 INFO stage started: bm25
+2026-09-26 01:15:41,029 INFO stage completed
+2026-09-26 01:15:41,244 INFO stage started: dense
+2026-09-26 01:15:41,250 INFO stage completed
+2026-09-26 01:15:41,432 INFO stage started: visual
+2026-09-26 01:15:41,436 INFO stage completed
+2026-09-26 01:15:41,747 INFO stage started: oracle
+2026-09-26 01:15:41,764 INFO evaluated 1 queries; independent QA remains pending
+2026-09-26 01:15:41,764 INFO stage completed
+ok
+test_launcher_dry_run_uses_runtime_config_without_credentials (test_m11_pipeline.PipelineTests.test_launcher_dry_run_uses_runtime_config_without_credentials) ... ok
+test_local_evaluator_rejects_generation_config_mismatch (test_m11_pipeline.PipelineTests.test_local_evaluator_rejects_generation_config_mismatch) ... 2026-09-26 01:15:43,085 INFO stage started: dense
+2026-09-26 01:15:43,085 INFO stage completed
+ok
+test_nonfinite_cache_rejected_on_write (test_m11_pipeline.PipelineTests.test_nonfinite_cache_rejected_on_write) ... ok
+test_reordered_cache_is_rejected (test_m11_pipeline.PipelineTests.test_reordered_cache_is_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 2.761s
+
+OK

@@ -1,0 +1,72 @@
+[
+  {
+    "path": "src/qpaf/m12/__init__.py",
+    "size_bytes": 82,
+    "sha256": "da36c939381d3e097a35208abdf7b5ab43b912a1c1e137638f67ab759758b2c0"
+  },
+  {
+    "path": "src/qpaf/m12/config.py",
+    "size_bytes": 2168,
+    "sha256": "4b50ec1b8f1f48cc47c6028235ea0e18e931349360ac65d48693ea8099fd3f6e"
+  },
+  {
+    "path": "src/qpaf/m12/features.py",
+    "size_bytes": 4257,
+    "sha256": "86eb5d540d2330c0fec263d587581d2f159b77461df85c57f6ecaa64fafa40b6"
+  },
+  {
+    "path": "src/qpaf/m12/losses.py",
+    "size_bytes": 1586,
+    "sha256": "18debc316b02146c38c36a6b1021f0db5e3ba9be55ffdb4c8be153cd11ce5395"
+  },
+  {
+    "path": "src/qpaf/m12/model.py",
+    "size_bytes": 4173,
+    "sha256": "05c0370343a14b70b1db37e3d2bf6fd852c4ea67f7a967af52fa0ff498adcc3e"
+  },
+  {
+    "path": "tests/test_m12_config.py",
+    "size_bytes": 1485,
+    "sha256": "c0efddbbaba71d668c0879c7546f4190618caefc298323d6fafba3ca9bf2aa6e"
+  },
+  {
+    "path": "tests/test_m12_core.py",
+    "size_bytes": 14103,
+    "sha256": "11e88d00cf89945fea68a4a9ed4b8aa9a379a277e7f96923198c7b94ff93abc2"
+  },
+  {
+    "path": "tests/test_m12_verification.py",
+    "size_bytes": 3299,
+    "sha256": "568ad9077b41e1c8ec20f5139b73d44ff9267e854e07de60baa822a950e6e9da"
+  },
+  {
+    "path": "scripts/verify_m12.py",
+    "size_bytes": 9871,
+    "sha256": "a2fec7486934636bf2a809b56cdad81dd4178ffce731575d465a47f17102effa"
+  },
+  {
+    "path": "configs/m1.2/core.toml",
+    "size_bytes": 387,
+    "sha256": "d8ab2405dc9656eba42e35b1cf53f31b95b46bd9d1db75387a59ff28180b436d"
+  },
+  {
+    "path": "requirements/m12-cpu.txt",
+    "size_bytes": 143,
+    "sha256": "a5124e622eb46751a98265b914627789be8e4d61f2df95167f879d8cb9557461"
+  },
+  {
+    "path": "docs/m1.2-method-core.md",
+    "size_bytes": 8299,
+    "sha256": "22fa1dad3006f4542a63c7445583d9de7fdfcf7788e461bd86588856b16c744f"
+  },
+  {
+    "path": "pyproject.toml",
+    "size_bytes": 719,
+    "sha256": "ebb8a8d06ff6195c4049f09675e55085aa4e9595cfaf035ab7361e0fbbba980f"
+  },
+  {
+    "path": ".github/workflows/ci.yml",
+    "size_bytes": 1835,
+    "sha256": "2d267a391c7a009ea9958e1c8cc8800aec4e2c2e8fa65bfa912324b12a2a081c"
+  }
+]

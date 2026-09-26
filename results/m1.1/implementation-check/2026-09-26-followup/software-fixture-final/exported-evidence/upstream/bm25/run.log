@@ -1,0 +1,3 @@
+2026-09-26 01:21:12,858 INFO stage started: bm25
+2026-09-26 01:21:12,863 INFO saved bm25 scores: (2, 3)
+2026-09-26 01:21:12,864 INFO stage completed
