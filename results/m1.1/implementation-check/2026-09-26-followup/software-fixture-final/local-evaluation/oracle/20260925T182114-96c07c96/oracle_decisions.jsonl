@@ -1,0 +1,4 @@
+{"query_id": "q1", "weight_set": "W7", "candidate_page_ids": ["a", "b", "c"], "qarf_profile": 0, "qpaf_profiles": [0, 0, 0]}
+{"query_id": "q1", "weight_set": "W66", "candidate_page_ids": ["a", "b", "c"], "qarf_profile": 0, "qpaf_profiles": [65, 0, 0]}
+{"query_id": "q2", "weight_set": "W7", "candidate_page_ids": ["a", "b", "c"], "qarf_profile": 0, "qpaf_profiles": [0, 0, 0]}
+{"query_id": "q2", "weight_set": "W66", "candidate_page_ids": ["a", "b", "c"], "qarf_profile": 38, "qpaf_profiles": [65, 65, 0]}

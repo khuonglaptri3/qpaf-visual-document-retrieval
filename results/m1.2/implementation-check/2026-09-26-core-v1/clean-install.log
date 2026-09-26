@@ -1,0 +1,6 @@
+Resolved 1 package in 3ms
+   Building qpaf-visual-document-retrieval @ file:///C:/Users/lanph/AppData/Local/Temp/qpaf-m12-clean-3d9ab5c0
+      Built qpaf-visual-document-retrieval @ file:///C:/Users/lanph/AppData/Local/Temp/qpaf-m12-clean-3d9ab5c0
+Prepared 1 package in 4.81s
+Installed 1 package in 215ms
+ + qpaf-visual-document-retrieval==0.1.0.dev0 (from file:///C:/Users/lanph/AppData/Local/Temp/qpaf-m12-clean-3d9ab5c0)

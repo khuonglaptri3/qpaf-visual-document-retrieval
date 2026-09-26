@@ -1,0 +1,76 @@
+test_audit_infrastructure_is_not_research_method_code (test_audit.AuditTests.test_audit_infrastructure_is_not_research_method_code) ... ok
+test_credentials_and_generated_evidence_are_excluded (test_audit.AuditTests.test_credentials_and_generated_evidence_are_excluded) ... ok
+test_empty_or_malformed_manifest_is_rejected (test_audit.AuditTests.test_empty_or_malformed_manifest_is_rejected) ... ok
+test_empty_research_folders_are_gaps_not_a_pass (test_audit.AuditTests.test_empty_research_folders_are_gaps_not_a_pass) ... ok
+test_existing_output_is_preserved (test_audit.AuditTests.test_existing_output_is_preserved) ... ok
+test_junction_is_excluded_without_path_is_junction (test_audit.AuditTests.test_junction_is_excluded_without_path_is_junction) ... ok
+test_known_bytes_and_unicode_path_are_hashed (test_audit.AuditTests.test_known_bytes_and_unicode_path_are_hashed) ... ok
+test_manifest_path_traversal_is_rejected (test_audit.AuditTests.test_manifest_path_traversal_is_rejected) ... ok
+test_nonexistent_root_is_rejected_without_creation (test_audit.AuditTests.test_nonexistent_root_is_rejected_without_creation) ... ok
+test_output_cannot_escape_root (test_audit.AuditTests.test_output_cannot_escape_root) ... ok
+test_path_and_descriptor_change_times_are_compared_separately (test_audit.AuditTests.test_path_and_descriptor_change_times_are_compared_separately) ... ok
+test_real_assets_are_classified_without_claiming_provenance (test_audit.AuditTests.test_real_assets_are_classified_without_claiming_provenance) ... ok
+test_replaced_file_with_same_size_and_mtime_has_no_valid_hash (test_audit.AuditTests.test_replaced_file_with_same_size_and_mtime_has_no_valid_hash) ... ok
+test_symlink_is_not_followed (test_audit.AuditTests.test_symlink_is_not_followed) ... skipped 'Host does not permit unprivileged symlinks'
+test_verification_detects_modified_and_deleted_content (test_audit.AuditTests.test_verification_detects_modified_and_deleted_content) ... ok
+test_atomic_write_preserves_original_after_persistent_windows_error (test_m11_artifacts.ArtifactTests.test_atomic_write_preserves_original_after_persistent_windows_error) ... ok
+test_atomic_write_recovers_from_temporary_windows_file_lock (test_m11_artifacts.ArtifactTests.test_atomic_write_recovers_from_temporary_windows_file_lock) ... ok
+test_changed_config_cannot_reuse_completed_stage (test_m11_artifacts.ArtifactTests.test_changed_config_cannot_reuse_completed_stage) ... 2026-09-26 01:21:07,306 INFO stage started: prepare
+2026-09-26 01:21:07,306 INFO stage completed
+ok
+test_changing_local_download_path_does_not_invalidate_cloud_cache (test_m11_artifacts.ArtifactTests.test_changing_local_download_path_does_not_invalidate_cloud_cache) ... 2026-09-26 01:21:07,522 INFO stage started: prepare
+2026-09-26 01:21:07,523 INFO stage completed
+ok
+test_failure_keeps_log_but_cannot_be_used_as_complete (test_m11_artifacts.ArtifactTests.test_failure_keeps_log_but_cannot_be_used_as_complete) ... 2026-09-26 01:21:07,754 INFO stage started: visual
+2026-09-26 01:21:07,756 ERROR stage failed
+Traceback (most recent call last):
+  File "C:\Users\lanph\OneDrive\Desktop\Artificial_Intelligent_Project\tests\test_m11_artifacts.py", line 135, in test_failure_keeps_log_but_cannot_be_used_as_complete
+    raise RuntimeError('expected')
+RuntimeError: expected
+2026-09-26 01:21:07,882 INFO stage started: visual
+2026-09-26 01:21:07,882 INFO stage completed
+ok
+test_success_receipt_and_corruption_detection (test_m11_artifacts.ArtifactTests.test_success_receipt_and_corruption_detection) ... 2026-09-26 01:21:08,073 INFO stage started: prepare
+2026-09-26 01:21:08,074 INFO stage completed
+ok
+test_missing_zero_page_and_duplicate_queries_fail (test_m11_artifacts.DatasetTests.test_missing_zero_page_and_duplicate_queries_fail) ... ok
+test_original_wrapper_and_one_based_page (test_m11_artifacts.DatasetTests.test_original_wrapper_and_one_based_page) ... ok
+test_real_pdf_rendering_preserves_empty_pages_and_one_based_labels (test_m11_artifacts.DatasetTests.test_real_pdf_rendering_preserves_empty_pages_and_one_based_labels) ... ok
+test_selection_is_id_only_and_order_independent (test_m11_artifacts.DatasetTests.test_selection_is_id_only_and_order_independent) ... ok
+test_zip_traversal_does_not_write_outside_destination (test_m11_artifacts.DatasetTests.test_zip_traversal_does_not_write_outside_destination) ... ok
+test_preset_and_cli_overrides (test_m11_core.ConfigTests.test_preset_and_cli_overrides) ... ok
+test_unknown_override_and_invalid_resource_fail (test_m11_core.ConfigTests.test_unknown_override_and_invalid_resource_fail) ... ok
+test_bootstrap_is_paired_and_deterministic (test_m11_core.MetricTests.test_bootstrap_is_paired_and_deterministic) ... ok
+test_duplicate_ranking_and_graded_labels_are_rejected (test_m11_core.MetricTests.test_duplicate_ranking_and_graded_labels_are_rejected) ... ok
+test_idcg_includes_relevant_pages_outside_pool (test_m11_core.MetricTests.test_idcg_includes_relevant_pages_outside_pool) ... ok
+test_binary_oracle_matches_exhaustive_weight_assignment (test_m11_core.OracleTests.test_binary_oracle_matches_exhaustive_weight_assignment) ... ok
+test_candidate_pool_does_not_read_labels (test_m11_core.OracleTests.test_candidate_pool_does_not_read_labels) ... ok
+test_constant_scores_use_id_ties (test_m11_core.OracleTests.test_constant_scores_use_id_ties) ... ok
+test_global_chooses_one_profile_for_the_entire_study (test_m11_core.OracleTests.test_global_chooses_one_profile_for_the_entire_study) ... ok
+test_nonfinite_or_wrong_id_cache_fails (test_m11_core.OracleTests.test_nonfinite_or_wrong_id_cache_fails) ... ok
+test_vertex_containing_sets_have_same_exact_qpaf (test_m11_core.OracleTests.test_vertex_containing_sets_have_same_exact_qpaf) ... ok
+test_bm25_b_one_keeps_empty_pages_finite (test_m11_pipeline.PipelineTests.test_bm25_b_one_keeps_empty_pages_finite) ... ok
+test_bm25_positive_idf_and_empty_pages (test_m11_pipeline.PipelineTests.test_bm25_positive_idf_and_empty_pages) ... ok
+test_cached_fixture_produces_verifiable_evidence_and_reuses_stages (test_m11_pipeline.PipelineTests.test_cached_fixture_produces_verifiable_evidence_and_reuses_stages) ... 2026-09-26 01:21:09,238 INFO stage started: prepare
+2026-09-26 01:21:09,242 INFO stage completed
+2026-09-26 01:21:09,488 INFO stage started: bm25
+2026-09-26 01:21:09,494 INFO stage completed
+2026-09-26 01:21:09,702 INFO stage started: dense
+2026-09-26 01:21:09,706 INFO stage completed
+2026-09-26 01:21:09,909 INFO stage started: visual
+2026-09-26 01:21:09,915 INFO stage completed
+2026-09-26 01:21:10,198 INFO stage started: oracle
+2026-09-26 01:21:10,203 INFO evaluated 1 queries; independent QA remains pending
+2026-09-26 01:21:10,203 INFO stage completed
+ok
+test_launcher_dry_run_uses_runtime_config_without_credentials (test_m11_pipeline.PipelineTests.test_launcher_dry_run_uses_runtime_config_without_credentials) ... ok
+test_local_evaluator_rejects_generation_config_mismatch (test_m11_pipeline.PipelineTests.test_local_evaluator_rejects_generation_config_mismatch) ... 2026-09-26 01:21:11,545 INFO stage started: dense
+2026-09-26 01:21:11,545 INFO stage completed
+ok
+test_nonfinite_cache_rejected_on_write (test_m11_pipeline.PipelineTests.test_nonfinite_cache_rejected_on_write) ... ok
+test_reordered_cache_is_rejected (test_m11_pipeline.PipelineTests.test_reordered_cache_is_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 44 tests in 11.356s
+
+OK (skipped=1)

@@ -1,0 +1,18 @@
+{
+  "channel": "dense",
+  "query_ids": [
+    "q1",
+    "q2"
+  ],
+  "page_ids": [
+    "a",
+    "b",
+    "c"
+  ],
+  "shape": [
+    2,
+    3
+  ],
+  "dtype": "float64",
+  "sha256": "2696304be93419744ffe6dd04eff9930f2066ab7b73a4d79c7d06613d04d1446"
+}

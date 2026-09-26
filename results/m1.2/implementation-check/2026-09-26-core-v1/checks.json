@@ -1,0 +1,75 @@
+[
+  {
+    "name": "full-tests",
+    "command": [
+      "C:\\Users\\lanph\\OneDrive\\Desktop\\Artificial_Intelligent_Project\\.venv\\Scripts\\python.exe",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-v"
+    ],
+    "exit_code": 0,
+    "started_utc": "2026-09-25T18:53:37.968436+00:00",
+    "finished_utc": "2026-09-25T18:54:04.050264+00:00",
+    "log": "full-tests.log"
+  },
+  {
+    "name": "local-verification",
+    "command": [
+      "C:\\Users\\lanph\\OneDrive\\Desktop\\Artificial_Intelligent_Project\\.venv\\Scripts\\python.exe",
+      "scripts/verify_m12.py",
+      "--config",
+      "configs/m1.2/core.toml",
+      "--output",
+      "results/m1.2/local-core-2026-09-26-001"
+    ],
+    "exit_code": 0,
+    "started_utc": "2026-09-25T18:54:04.050264+00:00",
+    "finished_utc": "2026-09-25T18:54:11.043800+00:00",
+    "log": "local-verification.log"
+  },
+  {
+    "name": "compile",
+    "command": [
+      "C:\\Users\\lanph\\OneDrive\\Desktop\\Artificial_Intelligent_Project\\.venv\\Scripts\\python.exe",
+      "-m",
+      "compileall",
+      "-q",
+      "src",
+      "scripts",
+      "tests"
+    ],
+    "exit_code": 0,
+    "started_utc": "2026-09-25T18:54:11.043800+00:00",
+    "finished_utc": "2026-09-25T18:54:11.272802+00:00",
+    "log": "compile.log"
+  },
+  {
+    "name": "dependencies",
+    "command": [
+      "uv",
+      "pip",
+      "check",
+      "--python",
+      "C:\\Users\\lanph\\OneDrive\\Desktop\\Artificial_Intelligent_Project\\.venv\\Scripts\\python.exe"
+    ],
+    "exit_code": 0,
+    "started_utc": "2026-09-25T18:54:11.272802+00:00",
+    "finished_utc": "2026-09-25T18:54:11.343802+00:00",
+    "log": "dependencies.log"
+  },
+  {
+    "name": "diff",
+    "command": [
+      "git",
+      "diff",
+      "--check"
+    ],
+    "exit_code": 0,
+    "started_utc": "2026-09-25T18:54:11.343802+00:00",
+    "finished_utc": "2026-09-25T18:54:11.444155+00:00",
+    "log": "diff.log"
+  }
+]

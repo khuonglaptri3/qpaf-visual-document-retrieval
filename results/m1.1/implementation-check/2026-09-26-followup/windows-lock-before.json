@@ -1,0 +1,18 @@
+{
+  "command": [
+    "C:\\Users\\lanph\\OneDrive\\Desktop\\Artificial_Intelligent_Project\\.venv\\Scripts\\python.exe",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests",
+    "-p",
+    "test_m11_artifacts.py",
+    "-k",
+    "atomic_write",
+    "-v"
+  ],
+  "exit_code": 1,
+  "utc": "2026-09-25T18:20:13.689127+00:00",
+  "expected_failure": true
+}

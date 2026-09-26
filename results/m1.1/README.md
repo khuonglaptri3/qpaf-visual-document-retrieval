@@ -1,6 +1,21 @@
 # M1.1 — Oracle reference and reproduction
 
-**Owner: Thanh. Status: REPORT AVAILABLE / RAW EVIDENCE PENDING.**
+**Owner: Thanh. Status: ACCEPTED FOR ORACLE FEASIBILITY / REPRODUCTION UNVERIFIED.**
+
+Xem [đối chiếu M1.1/M1.2 ngày 26/09/2026](../../docs/m1.1-m1.2-status.md)
+cho kết quả kiểm tra phần mềm và phần nghiệm thu còn chờ.
+
+Người phụ trách đã chấp nhận báo cáo Word này làm đầu ra đủ cho phạm vi M1.1
+khảo sát tính khả thi và cho phép tiếp tục M1.2. Quyết định chấp nhận không xác
+nhận đã nhận được raw evidence, tái lập số liệu hay review độc lập. Các bước
+đối chiếu bên dưới được giữ cho công việc đánh giá tiếp theo.
+
+Đã bổ sung [pipeline chạy mới trên Modal](../../docs/m1.1-modal-oracle.md), gồm
+ViDoSeek adapter, BM25/dense/visual score cache, Oracle, config và provenance.
+Đây là implementation mới; chưa thay thế artifact của báo cáo cũ. Chưa có run
+nghiên cứu mới trên Modal được xác minh trong checkout này. Xem
+[báo cáo kiểm phần mềm](implementation-check/README.md) để phân biệt log kiểm
+phần mềm với kết quả corpus thật.
 
 Đã nhận [báo cáo Word gốc](reference/oracle-progress-report.docx), tên file
 nguồn `BÁO CÁO TIẾN ĐỘ ORACLE STUDY.docx`. Bản trong repo được copy nguyên
