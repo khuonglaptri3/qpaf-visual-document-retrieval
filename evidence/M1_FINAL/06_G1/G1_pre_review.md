@@ -8,7 +8,7 @@
 >
 > **Source branch:** `sync/tanphat`
 >
-> **Base commit:** `3df0016`
+> **Integration base:** `0bc865e` (`origin/develop`)
 >
 > **Scope:** `INTERNAL_SOURCE_VERIFICATION_NOT_INDEPENDENT_QA`
 >
@@ -33,7 +33,7 @@ Khương, Thanh, or the whole-team G1.
 | Independent audit | No evidence audit, issue log or traceability matrix | `BLOCKED_MISSING` |
 | Final sign-offs | Technical Sign-off is `NOT SIGNED`; QA Sign-off is missing | `NOT_DUE_BEFORE_FIRST_REVIEW` |
 | G1 preparation | Checklist/evidence/readiness documents refreshed by this sync | `READY_FOR_TEAM_REVIEW_AFTER_UPSTREAM_GATES` |
-| Git/package provenance | Dedicated sync branch exists; working tree intentionally contains uncommitted sync files and the user's untracked prompt | `NOT_A_FINAL_REVIEW_SNAPSHOT` |
+| Git/package provenance | Sync package is committed as `c82dd5a` and reconciled with `origin/develop`; the user's prompt remains untracked and excluded, while no G1-selected immutable package exists | `COMMITTED_NOT_G1_SELECTED_SNAPSHOT` |
 
 ## Pre-review blocker candidates
 
@@ -42,7 +42,7 @@ These are internal candidates, not entries in an official G1 blocker log.
 | ID | Finding | Owner | Closure evidence |
 | --- | --- | --- | --- |
 | SYNC-PR-B01 | M1.4 lacks reviewable research-asset inventories | Khương | New immutable audit revision with actual assets and reproducible hashes |
-| SYNC-PR-B02 | Imported M1.5 is not adopted and conflicts with the pending M1.2 loss contract | Tấn Phát + Thanh | Successor/amendment, NEW-relative manifest and independent review |
+| SYNC-PR-B02 | Imported M1.5 is not adopted and conflicts with the integrated M1.2 loss contract | Tấn Phát + Thanh | Successor/amendment, NEW-relative manifest and independent review |
 | SYNC-PR-B03 | Exact ViMDoc split/data/cache/coverage evidence is missing | Khương + Tấn Phát | ID manifests/hashes, overlap and readiness reports |
 | SYNC-PR-B04 | M1.6 has not run on the real corpus | Khương | Populated manifests/report with collision/leakage conclusion and review |
 | SYNC-PR-B05 | M1.7 Final, traceability and evidence audit are missing | Thanh | Final registry package bound to adopted M1.5 plus audit artifacts |

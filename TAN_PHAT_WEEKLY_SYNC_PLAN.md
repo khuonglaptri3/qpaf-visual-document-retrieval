@@ -5,7 +5,8 @@
 - Week: ISO Week 39 (active timeline window 23–27/09/2026)
 - Milestone: M1 — final-day evidence, gate, report, and closure sequence
 - Branch: `sync/tanphat`
-- Base: `develop` at `3df0016`
+- Initial base: `develop` at `3df0016`
+- Refreshed integration base: `origin/develop` at `0bc865e`
 - Scope rule: synchronize only Tấn Phát's current-week work or a documented strict dependency; do not commit or push.
 
 ## Success Criteria
@@ -49,7 +50,13 @@
 
 ### M1.5
 
-`evidence/M1_FINAL/02_protocol/README.md` is a waiting placeholder. The pending NEW remote branch `origin/feature/m1-1-m1-2-handoff` contains a locally verified M1.2 method core, not an adopted M1.5 real-data protocol. Its pairwise-logistic page-level fixture contract conflicts with the OLD M1.5 masked-listwise ViMDoc contract and must remain an explicit reconciliation item.
+At the initial audit, `evidence/M1_FINAL/02_protocol/README.md` was a waiting
+placeholder. The M1.1/M1.2 handoff is now integrated in `origin/develop` via
+merge `0bc865e` (feature commit `7a758e3`). Its M1.2 pairwise-logistic
+page-level fixture contract is locally verified software evidence, not an
+adopted M1.5 real-data protocol, and still conflicts with the OLD M1.5
+masked-listwise ViMDoc contract. That conflict remains an explicit
+reconciliation item.
 
 ### M1.9
 
@@ -126,7 +133,7 @@
 - OLD M1.7 Draft files: Thanh-owned external dependency; copying them would take ownership of another member's task.
 - OLD G1 Pre-review candidates as an official blocker log: no G1 review occurred.
 - `G1_final_decision.md` and `M1_closure_record.md`: no source artifact or valid gate evidence exists.
-- Pending remote M1.1/M1.2 feature contents: separate unmerged work; inspect only to identify the M1.5 semantic conflict.
+- M1.1/M1.2 implementation already integrated in `develop`: leave unchanged by this sync; inspect only to identify the M1.5 semantic conflict.
 - User-owned `SYNC_TAN_PHAT_PROMPT.md`: preserve untracked and untouched.
 
 ## Dependency Notes
@@ -134,7 +141,7 @@
 - Imported protocol Markdown remains linked to OLD-relative M1.7 paths. The reconciliation record must state that those dependencies are unresolved in NEW; broken dependency links must not be interpreted as adopted registry evidence.
 - OLD manifest hashes identify OLD paths and mixed line endings. Exact-byte import is required to retain the historical package digest.
 - Active adoption must use a successor protocol version or approved amendment; it must not rewrite the historical files.
-- The pending NEW M1.2 core uses pairwise logistic loss; OLD M1.5 uses masked listwise loss. This blocks active adoption but not historical preservation.
+- The integrated NEW M1.2 core uses pairwise logistic loss; OLD M1.5 uses masked listwise loss. This blocks active adoption but not historical preservation.
 - No package dependency, database change, API change, or runtime execution is required for this sync.
 
 ## Execution Order
@@ -158,7 +165,9 @@
 
 ## Final Status
 
-Completed on branch `sync/tanphat` as an uncommitted, unpushed working-tree synchronization.
+Completed on branch `sync/tanphat`, committed as `c82dd5a`, and reconciled
+against `origin/develop` at `0bc865e`. The user-owned
+`SYNC_TAN_PHAT_PROMPT.md` remains untracked and excluded.
 
 ### Task Outcomes
 
@@ -191,12 +200,22 @@ Completed on branch `sync/tanphat` as an uncommitted, unpushed working-tree sync
 - Current Markdown: 10 relative links checked, zero missing. Four preserved OLD-relative M1.7 links remain unresolved by design and are disclosed in the reconciliation record.
 - Acceptance boundaries: all three unsupported acceptance artifacts are absent; all four required historical/blocked/not-run/not-reached status markers are present.
 - Safety: zero credential-like assignments and zero files at or above 1 MB in the synchronized set.
-- Repository checks: `python -m unittest discover -s tests -v` passed 14 tests with one host-symlink skip; `python -m compileall -q src scripts tests` passed; `git diff --check` passed for the tracked diff; current authored Markdown has zero trailing-whitespace lines.
+- Repository checks on the reconciled tree: `python -m unittest discover -s
+  tests -v` ran 69 tests successfully (67 passed, two environment-dependent
+  skips); `python -m compileall -q src scripts tests` passed; `git diff
+  --check` passed for authored changes; current authored Markdown has zero
+  trailing-whitespace lines. A fresh temporary-directory run of
+  `scripts/verify_m12.py` also passed its 23 method-core unit tests and both
+  deterministic QARF/QPAF learning fixtures without adding repository output.
 - Immutable-import warning: the nine historical Markdown policies retain 586 CRLF lines and 17 literal trailing-space/hard-break lines, with one overlap, because editing them would invalidate the manifest. The targeted `.gitattributes` rules prevent Git normalization. Under the current Git settings, a staged-style whitespace check reports 602 manifest-bound warnings; these are disclosed provenance exceptions, not authored-sync whitespace.
 - Gate-order checks: First Review criteria exclude final sign-offs, Final G1 retains both sign-offs, and the readiness matrix has no review self-dependency.
-- Independent final review: zero Critical, Important, or Minor findings after the sequencing/status corrections.
+- Internal final review: no unresolved sequencing/status finding after the
+  `develop` reconciliation; this does not replace Thanh's independent QA.
 - Tooling limitation: the optional `python -m build` frontend is not installed (`No module named build`); `pyproject.toml` has no lint/type-check configuration. No package or dependency file changed.
-- Git scope: no staged files, commits, pushes, source-code changes, dependency changes, schema changes, or runtime execution were introduced.
+- Git scope: synchronization-authored changes remain limited to the 22 paths in
+  `c82dd5a` plus targeted status reconciliation in those same governance files;
+  upstream M1.1/M1.2 source, dependency, and evidence files are carried in
+  unchanged from `origin/develop`. No result-bearing runtime was executed.
 
 ### Remaining Issues and Next Gate
 

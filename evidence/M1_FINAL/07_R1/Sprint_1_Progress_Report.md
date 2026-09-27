@@ -10,7 +10,7 @@
 >
 > **Source branch:** `sync/tanphat`
 >
-> **Base commit:** `3df0016`
+> **Integration base:** `0bc865e` (`origin/develop`)
 >
 > **Independent review:** `PENDING`
 >
@@ -22,11 +22,13 @@
 >
 > **Result-bearing execution:** `CLOSED`
 
-This draft reflects the NEW repository after the bounded Tấn Phát synchronization.
-The working tree contains uncommitted sync files and the user's pre-existing
-untracked `SYNC_TAN_PHAT_PROMPT.md`; it is not a final review snapshot or freeze
-commit. The report does not authorize OCR, extraction, oracle, optimizer,
-training, Modal/GPU, or sealed external evaluation.
+This draft reflects the NEW repository after the bounded Tấn Phát
+synchronization was committed as `c82dd5a` and reconciled with
+`origin/develop`. The user's pre-existing untracked
+`SYNC_TAN_PHAT_PROMPT.md` remains excluded. This branch is not a G1-selected
+immutable review snapshot or protocol freeze commit. The report does not
+authorize OCR, extraction, oracle, optimizer, training, Modal/GPU, or sealed
+external evaluation.
 
 ## 1. Sprint objective
 
@@ -101,7 +103,7 @@ only when the team starts G1 review.
 | ID | Blocker candidate | Owner | Closure evidence |
 | --- | --- | --- | --- |
 | SYNC-PR-B01 | M1.4 lacks reviewable research-asset inventories | Khương | New immutable audit revision with actual assets and reproducible hashes |
-| SYNC-PR-B02 | Imported M1.5 is not adopted; loss contract conflicts with pending M1.2 | Tấn Phát + Thanh | Successor/amendment, NEW-relative manifest and independent review |
+| SYNC-PR-B02 | Imported M1.5 is not adopted; loss contract conflicts with integrated M1.2 | Tấn Phát + Thanh | Successor/amendment, NEW-relative manifest and independent review |
 | SYNC-PR-B03 | Exact split/data/cache/coverage evidence missing | Khương + Tấn Phát | ID/hash/overlap/readiness artifacts |
 | SYNC-PR-B04 | M1.6 not run on real corpus | Khương | Populated audit and reviewed conclusion |
 | SYNC-PR-B05 | M1.7 Final/traceability/audit missing | Thanh | Final registry and independent audit package |
@@ -115,8 +117,8 @@ recheck, for Final G1.
 
 - The available ViDoSeek Oracle report is bounded upper-bound evidence and still
   lacks complete raw/per-query provenance in this integration target.
-- The pending M1.2 feature branch reports local synthetic method-core verification.
-  It is not integrated into the current base and is not learned retrieval evidence.
+- The M1.2 handoff integrated in `develop` reports local synthetic method-core
+  verification. It is not learned retrieval evidence.
 - The imported OLD M1.5 policy is historical governance evidence, not proof that
   its ViMDoc data, candidates, loss, training or evaluation ran.
 - No learned QPAF checkpoint, matched learned QARF comparison, confidence interval,

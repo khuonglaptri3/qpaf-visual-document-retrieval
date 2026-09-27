@@ -1,0 +1,24 @@
+test_bad_config_fails_without_creating_output (test_m12_verification.VerificationTests.test_bad_config_fails_without_creating_output) ... FAIL
+test_cli_exports_verified_evidence_and_preserves_existing_output (test_m12_verification.VerificationTests.test_cli_exports_verified_evidence_and_preserves_existing_output) ... FAIL
+
+======================================================================
+FAIL: test_bad_config_fails_without_creating_output (test_m12_verification.VerificationTests.test_bad_config_fails_without_creating_output)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\OneDrive\Desktop\Artificial_Intelligent_Project\tests\test_m12_verification.py", line 55, in test_bad_config_fails_without_creating_output
+    self.assertIn('temperature', result.stderr)
+AssertionError: 'temperature' not found in "C:\\Users\\lanph\\AppData\\Roaming\\uv\\python\\cpython-3.11-windows-x86_64-none\\python.exe: can't open file 'C:\\\\Users\\\\lanph\\\\OneDrive\\\\Desktop\\\\Artificial_Intelligent_Project\\\\scripts\\\\verify_m12.py': [Errno 2] No such file or directory\n"
+
+======================================================================
+FAIL: test_cli_exports_verified_evidence_and_preserves_existing_output (test_m12_verification.VerificationTests.test_cli_exports_verified_evidence_and_preserves_existing_output)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\OneDrive\Desktop\Artificial_Intelligent_Project\tests\test_m12_verification.py", line 22, in test_cli_exports_verified_evidence_and_preserves_existing_output
+    self.assertEqual(result.returncode, 0, result.stdout+result.stderr)
+AssertionError: 2 != 0 : C:\Users\lanph\AppData\Roaming\uv\python\cpython-3.11-windows-x86_64-none\python.exe: can't open file 'C:\\Users\\lanph\\OneDrive\\Desktop\\Artificial_Intelligent_Project\\scripts\\verify_m12.py': [Errno 2] No such file or directory
+
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.229s
+
+FAILED (failures=2)

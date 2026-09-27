@@ -60,7 +60,7 @@ complete M1.4 package.
 - [x] The historical canonical package digest recomputes exactly.
 - [x] The imported manifest records dirty/uncommitted source provenance,
       independent sign-off pending, and `execution_authorized=false`.
-- [ ] Tấn Phát has resolved the OLD masked-listwise versus pending NEW
+- [ ] Tấn Phát has resolved the OLD masked-listwise versus integrated NEW
       pairwise-logistic method contract in a successor version/amendment.
 - [ ] A NEW-relative manifest binds the adopted implementation/config and paths.
 - [ ] Thanh has independently reviewed the adopted byte-identical package.

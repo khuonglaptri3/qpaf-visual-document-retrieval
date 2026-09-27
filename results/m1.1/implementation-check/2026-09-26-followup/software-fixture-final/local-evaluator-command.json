@@ -1,0 +1,21 @@
+{
+  "command": [
+    "C:\\Users\\lanph\\OneDrive\\Desktop\\Artificial_Intelligent_Project\\.venv\\Scripts\\python.exe",
+    "C:\\Users\\lanph\\OneDrive\\Desktop\\Artificial_Intelligent_Project\\scripts\\evaluate_m11.py",
+    "--config",
+    "C:\\Users\\lanph\\OneDrive\\Desktop\\Artificial_Intelligent_Project\\configs\\m1.1\\vidoseek.toml",
+    "--prepared",
+    "C:\\Users\\lanph\\OneDrive\\Desktop\\Artificial_Intelligent_Project\\results\\m1.1\\implementation-check\\2026-09-26-followup\\software-fixture-final\\runs\\software-fixture\\prepare\\20260925T182112-4f3baafb",
+    "--output",
+    "C:\\Users\\lanph\\OneDrive\\Desktop\\Artificial_Intelligent_Project\\results\\m1.1\\implementation-check\\2026-09-26-followup\\software-fixture-final\\local-evaluation",
+    "--set",
+    "oracle.bootstrap_samples=20",
+    "--bm25",
+    "C:\\Users\\lanph\\OneDrive\\Desktop\\Artificial_Intelligent_Project\\results\\m1.1\\implementation-check\\2026-09-26-followup\\software-fixture-final\\runs\\software-fixture\\bm25\\20260925T182112-2a0fbcbc",
+    "--dense",
+    "C:\\Users\\lanph\\OneDrive\\Desktop\\Artificial_Intelligent_Project\\results\\m1.1\\implementation-check\\2026-09-26-followup\\software-fixture-final\\runs\\software-fixture\\dense\\20260925T182112-71a9effd",
+    "--visual",
+    "C:\\Users\\lanph\\OneDrive\\Desktop\\Artificial_Intelligent_Project\\results\\m1.1\\implementation-check\\2026-09-26-followup\\software-fixture-final\\runs\\software-fixture\\visual\\20260925T182113-0c334cad"
+  ],
+  "exit_code": 0
+}

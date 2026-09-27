@@ -4,7 +4,7 @@
 
 - Import date: 27/09/2026
 - NEW branch: `sync/tanphat`
-- NEW base commit: `3df0016`
+- NEW integration base: `0bc865e` (`origin/develop`)
 - Source repository: `C:\Users\HP\OneDrive\tlcn`
 - Source package: `M1_FINAL/02_protocol/`
 - Imported destination: `evidence/M1_FINAL/02_protocol/`
@@ -47,12 +47,13 @@ with similar names in the NEW checkout.
 ### Method contract conflict
 
 The OLD M1.5 package specifies a masked listwise loss for the planned ViMDoc
-learned study. The pending NEW branch `origin/feature/m1-1-m1-2-handoff`
-documents a `pairwise_logistic` loss for the M1.2 page-level synthetic method
-core. Those artifacts have different scopes, but they cannot both serve as the
-same active learned-training contract without an explicit decision.
+learned study. The M1.2 handoff integrated in `origin/develop` at merge
+`0bc865e` (feature commit `7a758e3`) documents a `pairwise_logistic` loss for
+the page-level synthetic method core. Those artifacts have different scopes,
+but they cannot both serve as the same active learned-training contract without
+an explicit decision.
 
-The ViDoSeek M1.1 settings in that pending branch—ColQwen2-v1.0, top-100 and a
+The integrated ViDoSeek M1.1 settings—ColQwen2-v1.0, top-100 and a
 software-verification seed—also must not be substituted for the OLD ViMDoc
 M1.5 settings—ColQwen2.5, top-200 per channel and three training seeds. M1.1,
 M1.2 and M1.5 evidence remain separately labeled.

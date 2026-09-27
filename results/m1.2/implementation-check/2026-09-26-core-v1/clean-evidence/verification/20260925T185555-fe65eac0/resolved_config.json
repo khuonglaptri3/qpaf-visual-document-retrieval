@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "features": {
+    "schema": "qpaf13_v1",
+    "query_length_cap": 64
+  },
+  "gate": {
+    "kind": "linear",
+    "hidden_dim": 16,
+    "temperature": 1.0
+  },
+  "loss": {
+    "name": "pairwise_logistic",
+    "reduction": "query_mean"
+  },
+  "verification": {
+    "seed": 2026,
+    "steps": 40,
+    "learning_rate": 0.2
+  }
+}
