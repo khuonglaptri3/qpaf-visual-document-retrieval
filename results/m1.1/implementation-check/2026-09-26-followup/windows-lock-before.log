@@ -1,0 +1,28 @@
+test_atomic_write_preserves_original_after_persistent_windows_error (test_m11_artifacts.ArtifactTests.test_atomic_write_preserves_original_after_persistent_windows_error) ... ok
+test_atomic_write_recovers_from_temporary_windows_file_lock (test_m11_artifacts.ArtifactTests.test_atomic_write_recovers_from_temporary_windows_file_lock) ... ERROR
+
+======================================================================
+ERROR: test_atomic_write_recovers_from_temporary_windows_file_lock (test_m11_artifacts.ArtifactTests.test_atomic_write_recovers_from_temporary_windows_file_lock)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\OneDrive\Desktop\Artificial_Intelligent_Project\tests\test_m11_artifacts.py", line 104, in test_atomic_write_recovers_from_temporary_windows_file_lock
+    write_json(path, {'status': 'completed'})
+  File "C:\Users\lanph\OneDrive\Desktop\Artificial_Intelligent_Project\src\qpaf\m11\artifacts.py", line 36, in write_json
+    os.replace(temp, path)
+  File "C:\Users\lanph\AppData\Roaming\uv\python\cpython-3.11-windows-x86_64-none\Lib\unittest\mock.py", line 1124, in __call__
+    return self._mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lanph\AppData\Roaming\uv\python\cpython-3.11-windows-x86_64-none\Lib\unittest\mock.py", line 1128, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lanph\AppData\Roaming\uv\python\cpython-3.11-windows-x86_64-none\Lib\unittest\mock.py", line 1189, in _execute_mock_call
+    result = effect(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lanph\OneDrive\Desktop\Artificial_Intelligent_Project\tests\test_m11_artifacts.py", line 100, in transient_lock
+    raise error
+PermissionError: simulated temporary Windows file lock
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.041s
+
+FAILED (errors=1)

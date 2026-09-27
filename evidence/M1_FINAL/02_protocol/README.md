@@ -15,7 +15,7 @@ dirty worktree, chưa có freeze commit và chưa có independent reviewer sign-
 Việc import bảo toàn provenance; nó **không tự động biến protocol cũ thành
 protocol được NEW repository phê duyệt**. Xem
 [`sync_reconciliation.md`](sync_reconciliation.md) để biết path mapping, khác
-biệt với method core đang chờ tích hợp, dependency còn thiếu và điều kiện tạo
+biệt với method core đã tích hợp trong `develop`, dependency còn thiếu và điều kiện tạo
 một successor protocol có hiệu lực trong repo này.
 
 Các file policy được bảo toàn nguyên byte nên một số liên kết sang M1.7 trỏ đến

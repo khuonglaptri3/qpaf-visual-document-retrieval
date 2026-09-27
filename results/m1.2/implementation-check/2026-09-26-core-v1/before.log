@@ -1,0 +1,37 @@
+test_m12_config (unittest.loader._FailedTest.test_m12_config) ... ERROR
+test_m12_core (unittest.loader._FailedTest.test_m12_core) ... ERROR
+
+======================================================================
+ERROR: test_m12_config (unittest.loader._FailedTest.test_m12_config)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_m12_config
+Traceback (most recent call last):
+  File "C:\Users\lanph\AppData\Roaming\uv\python\cpython-3.11-windows-x86_64-none\Lib\unittest\loader.py", line 419, in _find_test_path
+    module = self._get_module_from_name(name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lanph\AppData\Roaming\uv\python\cpython-3.11-windows-x86_64-none\Lib\unittest\loader.py", line 362, in _get_module_from_name
+    __import__(name)
+  File "C:\Users\lanph\OneDrive\Desktop\Artificial_Intelligent_Project\tests\test_m12_config.py", line 7, in <module>
+    from qpaf.m12.config import load_config, validate
+ModuleNotFoundError: No module named 'qpaf.m12'
+
+
+======================================================================
+ERROR: test_m12_core (unittest.loader._FailedTest.test_m12_core)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_m12_core
+Traceback (most recent call last):
+  File "C:\Users\lanph\AppData\Roaming\uv\python\cpython-3.11-windows-x86_64-none\Lib\unittest\loader.py", line 419, in _find_test_path
+    module = self._get_module_from_name(name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lanph\AppData\Roaming\uv\python\cpython-3.11-windows-x86_64-none\Lib\unittest\loader.py", line 362, in _get_module_from_name
+    __import__(name)
+  File "C:\Users\lanph\OneDrive\Desktop\Artificial_Intelligent_Project\tests\test_m12_core.py", line 12, in <module>
+    from qpaf.m12.features import FeatureBatch, FEATURE_NAMES, build_features
+ModuleNotFoundError: No module named 'qpaf.m12'
+
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.001s
+
+FAILED (errors=2)

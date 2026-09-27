@@ -1,0 +1,17 @@
+[
+  {
+    "location": "workspace",
+    "attempts": 100,
+    "errors": [
+      {
+        "iteration": 76,
+        "error": "[WinError 5] Access is denied: 'results\\\\m1.1\\\\implementation-check\\\\2026-09-26-followup\\\\filesystem-probe\\\\status.json.a5f2dafb43894b2884cfb0fef3f1a244.tmp' -> 'results\\\\m1.1\\\\implementation-check\\\\2026-09-26-followup\\\\filesystem-probe\\\\status.json'"
+      }
+    ]
+  },
+  {
+    "location": "temp",
+    "attempts": 100,
+    "errors": []
+  }
+]

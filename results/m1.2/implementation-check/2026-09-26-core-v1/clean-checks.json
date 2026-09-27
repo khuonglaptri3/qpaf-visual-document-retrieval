@@ -1,0 +1,101 @@
+[
+  {
+    "name": "clean-venv",
+    "cwd": "C:\\Users\\lanph\\AppData\\Local\\Temp\\qpaf-m12-clean-3d9ab5c0",
+    "command": [
+      "uv",
+      "venv",
+      "--python",
+      "C:\\Users\\lanph\\OneDrive\\Desktop\\Artificial_Intelligent_Project\\.venv\\Scripts\\python.exe",
+      "C:\\Users\\lanph\\AppData\\Local\\Temp\\qpaf-m12-clean-3d9ab5c0\\.venv"
+    ],
+    "exit_code": 0,
+    "started_utc": "2026-09-25T18:55:04.037838+00:00",
+    "finished_utc": "2026-09-25T18:55:04.509837+00:00",
+    "log": "clean-venv.log"
+  },
+  {
+    "name": "clean-dependencies",
+    "cwd": "C:\\Users\\lanph\\AppData\\Local\\Temp\\qpaf-m12-clean-3d9ab5c0",
+    "command": [
+      "uv",
+      "pip",
+      "install",
+      "--python",
+      "C:\\Users\\lanph\\AppData\\Local\\Temp\\qpaf-m12-clean-3d9ab5c0\\.venv\\Scripts\\python.exe",
+      "-r",
+      "requirements/m12-cpu.txt"
+    ],
+    "exit_code": 0,
+    "started_utc": "2026-09-25T18:55:04.509837+00:00",
+    "finished_utc": "2026-09-25T18:55:10.890121+00:00",
+    "log": "clean-dependencies.log"
+  },
+  {
+    "name": "clean-install",
+    "cwd": "C:\\Users\\lanph\\AppData\\Local\\Temp\\qpaf-m12-clean-3d9ab5c0",
+    "command": [
+      "uv",
+      "pip",
+      "install",
+      "--python",
+      "C:\\Users\\lanph\\AppData\\Local\\Temp\\qpaf-m12-clean-3d9ab5c0\\.venv\\Scripts\\python.exe",
+      "--no-deps",
+      "."
+    ],
+    "exit_code": 0,
+    "started_utc": "2026-09-25T18:55:10.890121+00:00",
+    "finished_utc": "2026-09-25T18:55:16.378620+00:00",
+    "log": "clean-install.log"
+  },
+  {
+    "name": "clean-tests",
+    "cwd": "C:\\Users\\lanph\\AppData\\Local\\Temp\\qpaf-m12-clean-3d9ab5c0",
+    "command": [
+      "C:\\Users\\lanph\\AppData\\Local\\Temp\\qpaf-m12-clean-3d9ab5c0\\.venv\\Scripts\\python.exe",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-p",
+      "test_m12*.py",
+      "-v"
+    ],
+    "exit_code": 0,
+    "started_utc": "2026-09-25T18:55:16.378620+00:00",
+    "finished_utc": "2026-09-25T18:55:52.638972+00:00",
+    "log": "clean-tests.log"
+  },
+  {
+    "name": "clean-verification",
+    "cwd": "C:\\Users\\lanph\\AppData\\Local\\Temp\\qpaf-m12-clean-3d9ab5c0",
+    "command": [
+      "C:\\Users\\lanph\\AppData\\Local\\Temp\\qpaf-m12-clean-3d9ab5c0\\.venv\\Scripts\\python.exe",
+      "scripts/verify_m12.py",
+      "--config",
+      "configs/m1.2/core.toml",
+      "--output",
+      "results/m1.2/clean-verification"
+    ],
+    "exit_code": 0,
+    "started_utc": "2026-09-25T18:55:52.638972+00:00",
+    "finished_utc": "2026-09-25T18:56:02.917438+00:00",
+    "log": "clean-verification.log"
+  },
+  {
+    "name": "clean-dependency-check",
+    "cwd": "C:\\Users\\lanph\\AppData\\Local\\Temp\\qpaf-m12-clean-3d9ab5c0",
+    "command": [
+      "uv",
+      "pip",
+      "check",
+      "--python",
+      "C:\\Users\\lanph\\AppData\\Local\\Temp\\qpaf-m12-clean-3d9ab5c0\\.venv\\Scripts\\python.exe"
+    ],
+    "exit_code": 0,
+    "started_utc": "2026-09-25T18:56:02.917438+00:00",
+    "finished_utc": "2026-09-25T18:56:02.992438+00:00",
+    "log": "clean-dependency-check.log"
+  }
+]
