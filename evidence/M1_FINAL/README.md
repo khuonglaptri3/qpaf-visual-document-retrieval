@@ -12,12 +12,12 @@ trạng thái nghiệm thu. File có sẵn không đồng nghĩa task đã hoàn
 | Thư mục | Owner | Trạng thái/đầu vào |
 | --- | --- | --- |
 | `01_repository_audit/` | Khương | Snapshot M1.4; xem `audit_metadata.json` và `gap_log.md` |
-| `02_protocol/` | Tấn Phát | Chờ frozen protocol thật |
+| `02_protocol/` | Tấn Phát | OLD M1.5 freeze imported byte-identically; active NEW adoption/reconciliation and independent review pending; execution closed |
 | `03_collision_audit/` | Khương | BLOCKED; CSV chỉ có schema, chưa có corpus |
 | `04_experiment_registry/` | Thanh | Chờ registry và independent QA |
 | `05_ocr_artifacts/` | Khương | DRAFT; chưa calibration/chốt threshold; NOT SIGNED |
-| `06_G1/` | Tấn Phát | Chờ đủ evidence và review của nhóm |
-| `07_R1/` | Tấn Phát | Chờ G1 final và báo cáo thật |
+| `06_G1/` | Tấn Phát | Checklist/matrices refreshed; Pre-G1 is `BLOCKED_FOR_G1_FIRST_REVIEW`; no official blocker log or decision |
+| `07_R1/` | Tấn Phát | Current Sprint 1 draft exists; Final R1 and M1 closure remain `NOT_REACHED` |
 
 Snapshots mới lưu dưới `evidence/revisions/` với ID mới. Bộ được lựa chọn để
 nghiệm thu phải được ghi rõ ở quyết định G1; bảo toàn các snapshot trước đó.

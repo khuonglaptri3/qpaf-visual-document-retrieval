@@ -3,3 +3,8 @@
 *.docx binary
 # Preserve the supplied planning document byte-for-byte for provenance.
 /TIMELINE_fixed.md -text
+
+# Preserve the hash-addressed historical M1.5 freeze bytes, including mixed EOLs.
+/evidence/M1_FINAL/02_protocol/*_policy.md -text -eol
+/evidence/M1_FINAL/02_protocol/frozen_protocol.md -text -eol
+/evidence/M1_FINAL/02_protocol/protocol_amendments.md -text -eol
