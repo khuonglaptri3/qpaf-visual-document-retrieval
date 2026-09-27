@@ -1,0 +1,3 @@
+# Python 3.11, local method-core verification; no pretrained model dependencies.
+--index-url https://download.pytorch.org/whl/cpu
+torch==2.7.1

@@ -17,9 +17,11 @@ git push -u origin feature/m1-repository-audit
 
 Tên nhánh khác: `feature/m1-collision-audit`, `feature/m1-ocr-artifacts`,
 `feature/m1-protocol-freeze`, `feature/m1-experiment-registry`.
-Đợt bàn giao M1.1/M1.2 dùng `feature/m1-1-oracle-review` cho Thanh và
-`feature/m1-2-method-core` cho Phát. Mỗi người tạo nhánh riêng từ
-`develop`; xem [README](README.md) để biết đầu vào, việc làm và output.
+Code, kiểm thử và tài liệu M1.1/M1.2 hiện được bàn giao chung trên
+`feature/m1-1-m1-2-handoff`, với đích tích hợp `develop`. Khi nhánh này chưa
+được merge, tạo nhánh nối tiếp từ nó để có đủ implementation; sau khi merge,
+tạo từ `develop`. Thanh có thể dùng `feature/m1-1-oracle-review`, Phát dùng
+`feature/m1-2-method-core`. Xem [README](README.md) để biết đầu vào và output.
 Mở PR vào `develop`; ghi task, file bàn giao, lệnh kiểm tra và blocker.
 Một thành viên khác review khi nhóm đã có quyền truy cập.
 Merge theo `--no-ff` để giữ ranh giới feature; không force-push nhánh dùng chung.
@@ -53,7 +55,8 @@ review, merge vào `main`, gắn patch tag, merge về `develop` và nhánh rele
 
 ## Chính sách GitHub
 
-Repo mới được tạo private để nhóm chuẩn bị dữ liệu và phạm vi chia sẻ.
+Repo hiện là **public** (kiểm tra trên GitHub ngày 26/09/2026). Các ghi chú
+private trong hồ sơ bootstrap mô tả thời điểm khởi tạo.
 Các quy tắc review ở trên là quy trình làm việc; không tự coi là branch
 protection đã được GitHub cưỡng chế. Cần thêm tài khoản của Phát/Thanh và chọn
 các kiểm tra bắt buộc trước khi cấu hình enforcement cho cả nhóm.

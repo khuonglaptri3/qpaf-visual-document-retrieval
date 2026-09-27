@@ -12,7 +12,12 @@
 
 **Trạng thái tài liệu:** Đề xuất nghiên cứu; chưa triển khai đầy đủ và chưa có kết quả learned fusion được kiểm chứng trong repo. Các đóng góp và mức cải thiện được trình bày dưới dạng giả thuyết cần kiểm chứng.
 
-**Cập nhật bằng chứng Oracle:** repo đã nhận [báo cáo Oracle trên ViDoSeek](../results/m1.1/README.md). Đây là số liệu được cung cấp, còn chờ đối chiếu artifact từng query; không thay thế kết quả learned QPAF.
+**Cập nhật triển khai ngày 26/09/2026:** M1.1 được chấp nhận ở phạm vi khả thi theo
+[báo cáo Oracle trên ViDoSeek](../../results/m1.1/README.md); artifact từng query
+và tái lập còn chờ. [Lõi M1.2](../m1.2-method-core.md) đã triển khai 13 features,
+gate QARF/QPAF, fusion và loss, có kiểm chứng gradient trên fixture tổng hợp.
+Chưa có kết quả learned QPAF trên corpus thật hoặc nghiệm thu độc lập của nhóm;
+các giả thuyết nghiên cứu bên dưới vẫn cần kiểm chứng thực nghiệm.
 
 ---
 

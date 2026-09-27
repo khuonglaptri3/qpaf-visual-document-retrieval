@@ -11,6 +11,13 @@ requires-python = ">=3.11"
 authors = [{name = "Group 01"}]
 dependencies = []
 
+[project.optional-dependencies]
+oracle = ["numpy>=1.26,<3"]
+modal = ["modal==1.5.5", "numpy>=1.26,<3"]
+method = ["torch==2.7.1"]
+verification = ["numpy>=1.26,<3", "pypdfium2==4.30.0", "Pillow==11.3.0",
+                "pytesseract==0.3.13", "huggingface-hub==0.34.4"]
+
 [project.scripts]
 qpaf-audit = "qpaf.audit:main"
 

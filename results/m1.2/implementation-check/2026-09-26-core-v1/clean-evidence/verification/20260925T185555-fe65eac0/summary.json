@@ -1,0 +1,42 @@
+{
+  "kind": "synthetic_software_verification",
+  "software_verification": "passed",
+  "independent_review": "pending",
+  "real_data_experiment": "not_run",
+  "feature_schema": "qpaf13_v1",
+  "feature_count": 13,
+  "unit_tests": {
+    "run": 23,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "methods": {
+    "QARF": {
+      "granularity": "query",
+      "parameter_count": 42,
+      "loss_initial": 0.5705374380642615,
+      "loss_final": 0.5190076058179951,
+      "gradient_l1_initial": 0.7438673078770269,
+      "retriever_frozen": true,
+      "valid_queries": 2,
+      "skipped_queries": 0,
+      "pairs": 3
+    },
+    "QPAF": {
+      "granularity": "page",
+      "parameter_count": 42,
+      "loss_initial": 0.5747279679628075,
+      "loss_final": 0.5193282440618711,
+      "gradient_l1_initial": 0.7853925496908511,
+      "retriever_frozen": true,
+      "valid_queries": 2,
+      "skipped_queries": 0,
+      "pairs": 3
+    }
+  },
+  "torch": "2.7.1+cpu",
+  "dtype": "float64",
+  "device": "cpu",
+  "seed": 2026
+}

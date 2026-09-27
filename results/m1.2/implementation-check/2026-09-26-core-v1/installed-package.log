@@ -1,0 +1,4 @@
+C:\Users\lanph\AppData\Local\Temp\qpaf-m12-clean-3d9ab5c0\.venv\Lib\site-packages\qpaf\m12\model.py
+Installed package import: PASS
+C:\Users\lanph\AppData\Local\Temp\qpaf-m12-clean-3d9ab5c0\.venv\Lib\site-packages\torch\_subclasses\functional_tensor.py:276: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at C:\actions-runner\_work\pytorch\pytorch\pytorch\torch\csrc\utils\tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))

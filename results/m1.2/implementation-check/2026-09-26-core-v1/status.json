@@ -1,0 +1,24 @@
+{
+  "implementation": "complete",
+  "software_verification": "passed",
+  "full_suite": {
+    "run": 69,
+    "passed": 68,
+    "skipped": 1
+  },
+  "m12_tests": {
+    "run": 25,
+    "passed": 25,
+    "skipped": 0
+  },
+  "fresh_environment_m12_tests": {
+    "run": 25,
+    "passed": 25,
+    "skipped": 0
+  },
+  "fresh_environment_matching_output_files": 4,
+  "independent_review": "pending",
+  "real_data_experiment": "not_run",
+  "remote_ci_execution": "not_run",
+  "finished_utc": "2026-09-25T19:00:06.295654+00:00"
+}
