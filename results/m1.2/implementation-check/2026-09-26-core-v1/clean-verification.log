@@ -1,0 +1,8 @@
+C:\Users\lanph\AppData\Local\Temp\qpaf-m12-clean-3d9ab5c0\.venv\Lib\site-packages\torch\_subclasses\functional_tensor.py:276: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at C:\actions-runner\_work\pytorch\pytorch\pytorch\torch\csrc\utils\tensor_numpy.cpp:81.)
+  cpu = _conversion_method_template(device=torch.device("cpu"))
+2026-09-26 01:55:55,669 INFO stage started: verification
+2026-09-26 01:56:01,239 INFO method-core unit tests passed: 23
+2026-09-26 01:56:01,506 INFO QARF fixture loss 0.570537 -> 0.519008; gate gradient L1 0.743867; retriever frozen=True
+2026-09-26 01:56:01,740 INFO QPAF fixture loss 0.574728 -> 0.519328; gate gradient L1 0.785393; retriever frozen=True
+2026-09-26 01:56:01,754 INFO stage completed
+Verification evidence: results\m1.2\clean-verification\verification\20260925T185555-fe65eac0

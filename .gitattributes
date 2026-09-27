@@ -3,3 +3,7 @@
 *.docx binary
 # Preserve the supplied planning document byte-for-byte for provenance.
 /TIMELINE_fixed.md -text
+/docs/GUILDLINE_OVERVIEWS_PROPOSAL/TIMELINE_fixed.md -text
+# Verification receipts hash exact bytes, including line endings.
+/results/m1.1/implementation-check/** -text -whitespace
+/results/m1.2/** -text -whitespace

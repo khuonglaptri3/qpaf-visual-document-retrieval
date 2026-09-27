@@ -1,0 +1,63 @@
+{
+  "config_sha256": "6fc4644e96411a52cd9a185d0d83c0bd3d19542cf14dda716260c3ba7c9b5d9f",
+  "cache_config_sha256": "1751348dcf540b2b4b0aaacb0824a7415789a88a4ffff00440c0e21825746fa0",
+  "inputs": {
+    "prepare": "33b44f918befc779402a93868bd0b72f14352b04ce11436e6b9591755516570a",
+    "bm25": "3d459dc602f52ef21615931f2de4cbcffbde6cc6deecca026611b2162234205e",
+    "dense": "e3e9db8675588608a7c1362d7f1a7a8b594dd82402b1fc58d1230584265021ff",
+    "visual": "1952dffdd636ca28faabb7bcaa86a4a17b8b6eb4de13859bbaecafa7da5755b8"
+  },
+  "source_digest": "084d33bf0f3db0e2b20c9f9251f8799822979b537228367940a6217cbecb7332",
+  "outputs": [
+    {
+      "path": "oracle_decisions.jsonl",
+      "size_bytes": 510,
+      "sha256": "84638bb4c922854b750a1d42136deed16a3e3a019318e7fba2b5f6ab893f8c13"
+    },
+    {
+      "path": "per_query_metrics.csv",
+      "size_bytes": 226,
+      "sha256": "623bbb1d0c3fd6972ee44c8a13e782151c4cb7bee56f666e82d3331a37eaa328"
+    },
+    {
+      "path": "provenance.json",
+      "size_bytes": 6083,
+      "sha256": "ba57aebb3339b8dfea0eca15066664d0b3e1d79a8de3d5ba445befc7164758d8"
+    },
+    {
+      "path": "query_ids.csv",
+      "size_bytes": 58,
+      "sha256": "20838c7d07bf8502085c8d7a1b75a836ac5609a4a8a5bbae3b9d8c86f41a98fc"
+    },
+    {
+      "path": "resolved_config.json",
+      "size_bytes": 2676,
+      "sha256": "5c76fd80b6a0a5ec7925930a3e662a480a8059076644cf749ad5b91f653b9f21"
+    },
+    {
+      "path": "review.md",
+      "size_bytes": 1000,
+      "sha256": "121f41606bbe246bf8605b0854177c4cbe7610ed32a49b5ab4d4099c5e4b8ed1"
+    },
+    {
+      "path": "run.log",
+      "size_bytes": 180,
+      "sha256": "8fd6181a77310fe4433f3611c42e531f5311cbc2fae830b18d9d47809978e6db"
+    },
+    {
+      "path": "status.json",
+      "size_bytes": 158,
+      "sha256": "0270dd6d4224248840fe062c6405a976936f82531def18c0da5388a3048d3ad6"
+    },
+    {
+      "path": "summary.json",
+      "size_bytes": 6608,
+      "sha256": "07a9357d3d9be5edb7649547dd392cc1ca6db42249d80fc0ad8a78b6865c7547"
+    },
+    {
+      "path": "hashes.csv",
+      "size_bytes": 796,
+      "sha256": "558d0f1c180858e143e8cda93862927eef37c5c84a53333f364043b08e791b13"
+    }
+  ]
+}

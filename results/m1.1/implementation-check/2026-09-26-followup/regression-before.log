@@ -1,0 +1,251 @@
+test_cached_fixture_produces_verifiable_evidence_and_reuses_stages (test_m11_pipeline.PipelineTests.test_cached_fixture_produces_verifiable_evidence_and_reuses_stages) ... 2026-09-26 01:15:05,258 INFO stage started: prepare
+2026-09-26 01:15:05,261 INFO stage completed
+2026-09-26 01:15:05,464 INFO stage started: bm25
+2026-09-26 01:15:05,467 INFO stage completed
+2026-09-26 01:15:05,701 INFO stage started: dense
+2026-09-26 01:15:05,707 INFO stage completed
+2026-09-26 01:15:05,929 INFO stage started: visual
+2026-09-26 01:15:05,937 INFO stage completed
+2026-09-26 01:15:06,245 INFO stage started: oracle
+2026-09-26 01:15:06,280 INFO evaluated 1 queries; independent QA remains pending
+2026-09-26 01:15:06,280 INFO stage completed
+
+  test_cached_fixture_produces_verifiable_evidence_and_reuses_stages (test_m11_pipeline.PipelineTests.test_cached_fixture_produces_verifiable_evidence_and_reuses_stages) (missing_metadata='prepare/dataset.json') ... FAIL
+  test_cached_fixture_produces_verifiable_evidence_and_reuses_stages (test_m11_pipeline.PipelineTests.test_cached_fixture_produces_verifiable_evidence_and_reuses_stages) (missing_metadata='prepare/hashes.csv') ... FAIL
+  test_cached_fixture_produces_verifiable_evidence_and_reuses_stages (test_m11_pipeline.PipelineTests.test_cached_fixture_produces_verifiable_evidence_and_reuses_stages) (missing_metadata='prepare/provenance.json') ... FAIL
+  test_cached_fixture_produces_verifiable_evidence_and_reuses_stages (test_m11_pipeline.PipelineTests.test_cached_fixture_produces_verifiable_evidence_and_reuses_stages) (missing_metadata='prepare/qrels.json') ... FAIL
+  test_cached_fixture_produces_verifiable_evidence_and_reuses_stages (test_m11_pipeline.PipelineTests.test_cached_fixture_produces_verifiable_evidence_and_reuses_stages) (missing_metadata='prepare/queries.json') ... FAIL
+  test_cached_fixture_produces_verifiable_evidence_and_reuses_stages (test_m11_pipeline.PipelineTests.test_cached_fixture_produces_verifiable_evidence_and_reuses_stages) (missing_metadata='prepare/resolved_config.json') ... FAIL
+  test_cached_fixture_produces_verifiable_evidence_and_reuses_stages (test_m11_pipeline.PipelineTests.test_cached_fixture_produces_verifiable_evidence_and_reuses_stages) (missing_metadata='prepare/run.log') ... FAIL
+  test_cached_fixture_produces_verifiable_evidence_and_reuses_stages (test_m11_pipeline.PipelineTests.test_cached_fixture_produces_verifiable_evidence_and_reuses_stages) (missing_metadata='prepare/status.json') ... FAIL
+  test_cached_fixture_produces_verifiable_evidence_and_reuses_stages (test_m11_pipeline.PipelineTests.test_cached_fixture_produces_verifiable_evidence_and_reuses_stages) (missing_metadata='bm25/hashes.csv') ... FAIL
+  test_cached_fixture_produces_verifiable_evidence_and_reuses_stages (test_m11_pipeline.PipelineTests.test_cached_fixture_produces_verifiable_evidence_and_reuses_stages) (missing_metadata='bm25/provenance.json') ... FAIL
+  test_cached_fixture_produces_verifiable_evidence_and_reuses_stages (test_m11_pipeline.PipelineTests.test_cached_fixture_produces_verifiable_evidence_and_reuses_stages) (missing_metadata='bm25/resolved_config.json') ... FAIL
+  test_cached_fixture_produces_verifiable_evidence_and_reuses_stages (test_m11_pipeline.PipelineTests.test_cached_fixture_produces_verifiable_evidence_and_reuses_stages) (missing_metadata='bm25/run.log') ... FAIL
+  test_cached_fixture_produces_verifiable_evidence_and_reuses_stages (test_m11_pipeline.PipelineTests.test_cached_fixture_produces_verifiable_evidence_and_reuses_stages) (missing_metadata='bm25/scores.json') ... FAIL
+  test_cached_fixture_produces_verifiable_evidence_and_reuses_stages (test_m11_pipeline.PipelineTests.test_cached_fixture_produces_verifiable_evidence_and_reuses_stages) (missing_metadata='bm25/status.json') ... FAIL
+  test_cached_fixture_produces_verifiable_evidence_and_reuses_stages (test_m11_pipeline.PipelineTests.test_cached_fixture_produces_verifiable_evidence_and_reuses_stages) (missing_metadata='dense/hashes.csv') ... FAIL
+  test_cached_fixture_produces_verifiable_evidence_and_reuses_stages (test_m11_pipeline.PipelineTests.test_cached_fixture_produces_verifiable_evidence_and_reuses_stages) (missing_metadata='dense/provenance.json') ... FAIL
+  test_cached_fixture_produces_verifiable_evidence_and_reuses_stages (test_m11_pipeline.PipelineTests.test_cached_fixture_produces_verifiable_evidence_and_reuses_stages) (missing_metadata='dense/resolved_config.json') ... FAIL
+  test_cached_fixture_produces_verifiable_evidence_and_reuses_stages (test_m11_pipeline.PipelineTests.test_cached_fixture_produces_verifiable_evidence_and_reuses_stages) (missing_metadata='dense/run.log') ... FAIL
+  test_cached_fixture_produces_verifiable_evidence_and_reuses_stages (test_m11_pipeline.PipelineTests.test_cached_fixture_produces_verifiable_evidence_and_reuses_stages) (missing_metadata='dense/scores.json') ... FAIL
+  test_cached_fixture_produces_verifiable_evidence_and_reuses_stages (test_m11_pipeline.PipelineTests.test_cached_fixture_produces_verifiable_evidence_and_reuses_stages) (missing_metadata='dense/status.json') ... FAIL
+  test_cached_fixture_produces_verifiable_evidence_and_reuses_stages (test_m11_pipeline.PipelineTests.test_cached_fixture_produces_verifiable_evidence_and_reuses_stages) (missing_metadata='visual/hashes.csv') ... FAIL
+  test_cached_fixture_produces_verifiable_evidence_and_reuses_stages (test_m11_pipeline.PipelineTests.test_cached_fixture_produces_verifiable_evidence_and_reuses_stages) (missing_metadata='visual/provenance.json') ... FAIL
+  test_cached_fixture_produces_verifiable_evidence_and_reuses_stages (test_m11_pipeline.PipelineTests.test_cached_fixture_produces_verifiable_evidence_and_reuses_stages) (missing_metadata='visual/resolved_config.json') ... FAIL
+  test_cached_fixture_produces_verifiable_evidence_and_reuses_stages (test_m11_pipeline.PipelineTests.test_cached_fixture_produces_verifiable_evidence_and_reuses_stages) (missing_metadata='visual/run.log') ... FAIL
+  test_cached_fixture_produces_verifiable_evidence_and_reuses_stages (test_m11_pipeline.PipelineTests.test_cached_fixture_produces_verifiable_evidence_and_reuses_stages) (missing_metadata='visual/scores.json') ... FAIL
+  test_cached_fixture_produces_verifiable_evidence_and_reuses_stages (test_m11_pipeline.PipelineTests.test_cached_fixture_produces_verifiable_evidence_and_reuses_stages) (missing_metadata='visual/status.json') ... FAIL
+
+======================================================================
+FAIL: test_cached_fixture_produces_verifiable_evidence_and_reuses_stages (test_m11_pipeline.PipelineTests.test_cached_fixture_produces_verifiable_evidence_and_reuses_stages) (missing_metadata='prepare/dataset.json')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\OneDrive\Desktop\Artificial_Intelligent_Project\tests\test_m11_pipeline.py", line 102, in test_cached_fixture_produces_verifiable_evidence_and_reuses_stages
+    with self.assertRaises(ValueError):
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_cached_fixture_produces_verifiable_evidence_and_reuses_stages (test_m11_pipeline.PipelineTests.test_cached_fixture_produces_verifiable_evidence_and_reuses_stages) (missing_metadata='prepare/hashes.csv')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\OneDrive\Desktop\Artificial_Intelligent_Project\tests\test_m11_pipeline.py", line 102, in test_cached_fixture_produces_verifiable_evidence_and_reuses_stages
+    with self.assertRaises(ValueError):
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_cached_fixture_produces_verifiable_evidence_and_reuses_stages (test_m11_pipeline.PipelineTests.test_cached_fixture_produces_verifiable_evidence_and_reuses_stages) (missing_metadata='prepare/provenance.json')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\OneDrive\Desktop\Artificial_Intelligent_Project\tests\test_m11_pipeline.py", line 102, in test_cached_fixture_produces_verifiable_evidence_and_reuses_stages
+    with self.assertRaises(ValueError):
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_cached_fixture_produces_verifiable_evidence_and_reuses_stages (test_m11_pipeline.PipelineTests.test_cached_fixture_produces_verifiable_evidence_and_reuses_stages) (missing_metadata='prepare/qrels.json')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\OneDrive\Desktop\Artificial_Intelligent_Project\tests\test_m11_pipeline.py", line 102, in test_cached_fixture_produces_verifiable_evidence_and_reuses_stages
+    with self.assertRaises(ValueError):
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_cached_fixture_produces_verifiable_evidence_and_reuses_stages (test_m11_pipeline.PipelineTests.test_cached_fixture_produces_verifiable_evidence_and_reuses_stages) (missing_metadata='prepare/queries.json')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\OneDrive\Desktop\Artificial_Intelligent_Project\tests\test_m11_pipeline.py", line 102, in test_cached_fixture_produces_verifiable_evidence_and_reuses_stages
+    with self.assertRaises(ValueError):
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_cached_fixture_produces_verifiable_evidence_and_reuses_stages (test_m11_pipeline.PipelineTests.test_cached_fixture_produces_verifiable_evidence_and_reuses_stages) (missing_metadata='prepare/resolved_config.json')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\OneDrive\Desktop\Artificial_Intelligent_Project\tests\test_m11_pipeline.py", line 102, in test_cached_fixture_produces_verifiable_evidence_and_reuses_stages
+    with self.assertRaises(ValueError):
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_cached_fixture_produces_verifiable_evidence_and_reuses_stages (test_m11_pipeline.PipelineTests.test_cached_fixture_produces_verifiable_evidence_and_reuses_stages) (missing_metadata='prepare/run.log')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\OneDrive\Desktop\Artificial_Intelligent_Project\tests\test_m11_pipeline.py", line 102, in test_cached_fixture_produces_verifiable_evidence_and_reuses_stages
+    with self.assertRaises(ValueError):
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_cached_fixture_produces_verifiable_evidence_and_reuses_stages (test_m11_pipeline.PipelineTests.test_cached_fixture_produces_verifiable_evidence_and_reuses_stages) (missing_metadata='prepare/status.json')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\OneDrive\Desktop\Artificial_Intelligent_Project\tests\test_m11_pipeline.py", line 102, in test_cached_fixture_produces_verifiable_evidence_and_reuses_stages
+    with self.assertRaises(ValueError):
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_cached_fixture_produces_verifiable_evidence_and_reuses_stages (test_m11_pipeline.PipelineTests.test_cached_fixture_produces_verifiable_evidence_and_reuses_stages) (missing_metadata='bm25/hashes.csv')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\OneDrive\Desktop\Artificial_Intelligent_Project\tests\test_m11_pipeline.py", line 102, in test_cached_fixture_produces_verifiable_evidence_and_reuses_stages
+    with self.assertRaises(ValueError):
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_cached_fixture_produces_verifiable_evidence_and_reuses_stages (test_m11_pipeline.PipelineTests.test_cached_fixture_produces_verifiable_evidence_and_reuses_stages) (missing_metadata='bm25/provenance.json')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\OneDrive\Desktop\Artificial_Intelligent_Project\tests\test_m11_pipeline.py", line 102, in test_cached_fixture_produces_verifiable_evidence_and_reuses_stages
+    with self.assertRaises(ValueError):
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_cached_fixture_produces_verifiable_evidence_and_reuses_stages (test_m11_pipeline.PipelineTests.test_cached_fixture_produces_verifiable_evidence_and_reuses_stages) (missing_metadata='bm25/resolved_config.json')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\OneDrive\Desktop\Artificial_Intelligent_Project\tests\test_m11_pipeline.py", line 102, in test_cached_fixture_produces_verifiable_evidence_and_reuses_stages
+    with self.assertRaises(ValueError):
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_cached_fixture_produces_verifiable_evidence_and_reuses_stages (test_m11_pipeline.PipelineTests.test_cached_fixture_produces_verifiable_evidence_and_reuses_stages) (missing_metadata='bm25/run.log')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\OneDrive\Desktop\Artificial_Intelligent_Project\tests\test_m11_pipeline.py", line 102, in test_cached_fixture_produces_verifiable_evidence_and_reuses_stages
+    with self.assertRaises(ValueError):
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_cached_fixture_produces_verifiable_evidence_and_reuses_stages (test_m11_pipeline.PipelineTests.test_cached_fixture_produces_verifiable_evidence_and_reuses_stages) (missing_metadata='bm25/scores.json')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\OneDrive\Desktop\Artificial_Intelligent_Project\tests\test_m11_pipeline.py", line 102, in test_cached_fixture_produces_verifiable_evidence_and_reuses_stages
+    with self.assertRaises(ValueError):
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_cached_fixture_produces_verifiable_evidence_and_reuses_stages (test_m11_pipeline.PipelineTests.test_cached_fixture_produces_verifiable_evidence_and_reuses_stages) (missing_metadata='bm25/status.json')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\OneDrive\Desktop\Artificial_Intelligent_Project\tests\test_m11_pipeline.py", line 102, in test_cached_fixture_produces_verifiable_evidence_and_reuses_stages
+    with self.assertRaises(ValueError):
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_cached_fixture_produces_verifiable_evidence_and_reuses_stages (test_m11_pipeline.PipelineTests.test_cached_fixture_produces_verifiable_evidence_and_reuses_stages) (missing_metadata='dense/hashes.csv')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\OneDrive\Desktop\Artificial_Intelligent_Project\tests\test_m11_pipeline.py", line 102, in test_cached_fixture_produces_verifiable_evidence_and_reuses_stages
+    with self.assertRaises(ValueError):
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_cached_fixture_produces_verifiable_evidence_and_reuses_stages (test_m11_pipeline.PipelineTests.test_cached_fixture_produces_verifiable_evidence_and_reuses_stages) (missing_metadata='dense/provenance.json')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\OneDrive\Desktop\Artificial_Intelligent_Project\tests\test_m11_pipeline.py", line 102, in test_cached_fixture_produces_verifiable_evidence_and_reuses_stages
+    with self.assertRaises(ValueError):
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_cached_fixture_produces_verifiable_evidence_and_reuses_stages (test_m11_pipeline.PipelineTests.test_cached_fixture_produces_verifiable_evidence_and_reuses_stages) (missing_metadata='dense/resolved_config.json')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\OneDrive\Desktop\Artificial_Intelligent_Project\tests\test_m11_pipeline.py", line 102, in test_cached_fixture_produces_verifiable_evidence_and_reuses_stages
+    with self.assertRaises(ValueError):
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_cached_fixture_produces_verifiable_evidence_and_reuses_stages (test_m11_pipeline.PipelineTests.test_cached_fixture_produces_verifiable_evidence_and_reuses_stages) (missing_metadata='dense/run.log')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\OneDrive\Desktop\Artificial_Intelligent_Project\tests\test_m11_pipeline.py", line 102, in test_cached_fixture_produces_verifiable_evidence_and_reuses_stages
+    with self.assertRaises(ValueError):
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_cached_fixture_produces_verifiable_evidence_and_reuses_stages (test_m11_pipeline.PipelineTests.test_cached_fixture_produces_verifiable_evidence_and_reuses_stages) (missing_metadata='dense/scores.json')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\OneDrive\Desktop\Artificial_Intelligent_Project\tests\test_m11_pipeline.py", line 102, in test_cached_fixture_produces_verifiable_evidence_and_reuses_stages
+    with self.assertRaises(ValueError):
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_cached_fixture_produces_verifiable_evidence_and_reuses_stages (test_m11_pipeline.PipelineTests.test_cached_fixture_produces_verifiable_evidence_and_reuses_stages) (missing_metadata='dense/status.json')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\OneDrive\Desktop\Artificial_Intelligent_Project\tests\test_m11_pipeline.py", line 102, in test_cached_fixture_produces_verifiable_evidence_and_reuses_stages
+    with self.assertRaises(ValueError):
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_cached_fixture_produces_verifiable_evidence_and_reuses_stages (test_m11_pipeline.PipelineTests.test_cached_fixture_produces_verifiable_evidence_and_reuses_stages) (missing_metadata='visual/hashes.csv')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\OneDrive\Desktop\Artificial_Intelligent_Project\tests\test_m11_pipeline.py", line 102, in test_cached_fixture_produces_verifiable_evidence_and_reuses_stages
+    with self.assertRaises(ValueError):
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_cached_fixture_produces_verifiable_evidence_and_reuses_stages (test_m11_pipeline.PipelineTests.test_cached_fixture_produces_verifiable_evidence_and_reuses_stages) (missing_metadata='visual/provenance.json')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\OneDrive\Desktop\Artificial_Intelligent_Project\tests\test_m11_pipeline.py", line 102, in test_cached_fixture_produces_verifiable_evidence_and_reuses_stages
+    with self.assertRaises(ValueError):
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_cached_fixture_produces_verifiable_evidence_and_reuses_stages (test_m11_pipeline.PipelineTests.test_cached_fixture_produces_verifiable_evidence_and_reuses_stages) (missing_metadata='visual/resolved_config.json')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\OneDrive\Desktop\Artificial_Intelligent_Project\tests\test_m11_pipeline.py", line 102, in test_cached_fixture_produces_verifiable_evidence_and_reuses_stages
+    with self.assertRaises(ValueError):
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_cached_fixture_produces_verifiable_evidence_and_reuses_stages (test_m11_pipeline.PipelineTests.test_cached_fixture_produces_verifiable_evidence_and_reuses_stages) (missing_metadata='visual/run.log')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\OneDrive\Desktop\Artificial_Intelligent_Project\tests\test_m11_pipeline.py", line 102, in test_cached_fixture_produces_verifiable_evidence_and_reuses_stages
+    with self.assertRaises(ValueError):
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_cached_fixture_produces_verifiable_evidence_and_reuses_stages (test_m11_pipeline.PipelineTests.test_cached_fixture_produces_verifiable_evidence_and_reuses_stages) (missing_metadata='visual/scores.json')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\OneDrive\Desktop\Artificial_Intelligent_Project\tests\test_m11_pipeline.py", line 102, in test_cached_fixture_produces_verifiable_evidence_and_reuses_stages
+    with self.assertRaises(ValueError):
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_cached_fixture_produces_verifiable_evidence_and_reuses_stages (test_m11_pipeline.PipelineTests.test_cached_fixture_produces_verifiable_evidence_and_reuses_stages) (missing_metadata='visual/status.json')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\OneDrive\Desktop\Artificial_Intelligent_Project\tests\test_m11_pipeline.py", line 102, in test_cached_fixture_produces_verifiable_evidence_and_reuses_stages
+    with self.assertRaises(ValueError):
+AssertionError: ValueError not raised
+
+----------------------------------------------------------------------
+Ran 1 test in 2.361s
+
+FAILED (failures=26)

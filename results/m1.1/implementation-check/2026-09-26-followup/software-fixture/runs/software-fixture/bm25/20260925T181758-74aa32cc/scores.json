@@ -1,0 +1,18 @@
+{
+  "channel": "bm25",
+  "query_ids": [
+    "q1",
+    "q2"
+  ],
+  "page_ids": [
+    "a",
+    "b",
+    "c"
+  ],
+  "shape": [
+    2,
+    3
+  ],
+  "dtype": "float64",
+  "sha256": "60d6510f50d161cbc19d1699815ebf988bbc542298b10e558ec45031deb988a2"
+}

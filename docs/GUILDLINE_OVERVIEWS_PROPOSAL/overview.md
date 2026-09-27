@@ -1,10 +1,12 @@
 # Tổng quan phối hợp M1
 
-**Cập nhật bàn giao ngày 25/09/2026:** nhóm bắt đầu bàn giao lại từ M1.1/M1.2.
-M1.1 đã có [báo cáo Oracle](../results/m1.1/README.md), còn thiếu artifact gốc
-để đối chiếu. M1.2 chưa có method core trong repo; M1.3 chưa có gói audit
-để kiểm chứng. Xem [README](../README.md) và
-[trạng thái bàn giao](m1-restart-handoff.md) cho phạm vi hiện tại.
+**Cập nhật bàn giao ngày 26/09/2026:** M1.1 đã được chấp nhận theo
+[báo cáo khả thi Oracle](../../results/m1.1/README.md); artifact gốc và tái lập
+trên corpus thật còn chờ. M1.2 đã có method core, đặc tả 13 features và bằng
+chứng kiểm chứng cục bộ; thành viên khác cần chạy lại để nghiệm thu.
+M1.3 chưa có gói audit corpus để kiểm chứng. Xem [README](../../README.md),
+[trạng thái bàn giao](../m1-restart-handoff.md) và
+[bảng đối chiếu M1.1/M1.2](../m1.1-m1.2-status.md).
 
 Các bảng ngày dưới đây giữ lịch tham chiếu M1.4–M1.10 của
 `TIMELINE_fixed.md`; không chứng minh các công việc trước đó đã Done.
@@ -106,7 +108,7 @@ Bạn có thể **làm ngay** phần tập hợp asset, kiểm kê, hash, kiểm
 
 Với đợt bàn giao lại từ M1.1/M1.2, thứ tự phối hợp hiện tại là:
 
-- **Trước hết**: Thanh xác định artifact của báo cáo Oracle; Phát bắt đầu method core và đặc tả còn thiếu. Khương ghi người cung cấp, vị trí và gap của từng đầu vào.
+- **Trước hết**: Thanh xác định artifact của báo cáo Oracle; Phát bàn giao method core và đặc tả đã có để thành viên khác chạy lại. Khương đưa code/config/evidence hiện có vào inventory và ghi gap của từng đầu vào.
 - **Khi nhận được đầu vào tương ứng**: kiểm gói M1.3 trong phạm vi cho phép, bổ sung M1.4, chạy M1.6 và chuẩn bị M1.8 theo phạm vi nhóm chốt. Bàn giao từng phần đã có cho review.
 - **Khi đủ evidence**: chốt revision, technical review và QA, rồi chuyển Phát xem xét gate/report.
 

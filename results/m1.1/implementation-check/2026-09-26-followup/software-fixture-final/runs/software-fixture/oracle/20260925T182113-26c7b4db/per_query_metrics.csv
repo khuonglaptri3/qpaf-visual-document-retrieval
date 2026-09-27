@@ -1,0 +1,5 @@
+query_id,weight_set,global_ndcg10,qarf_ndcg10,qpaf_ndcg10,delta_qpaf_qarf,candidate_count,candidate_recall
+q1,W7,1.0,1.0,1.0,0.0,3,1.0
+q1,W66,1.0,1.0,1.0,0.0,3,1.0
+q2,W7,1.0,1.0,1.0,0.0,3,1.0
+q2,W66,1.0,1.0,1.0,0.0,3,1.0

@@ -1,5 +1,10 @@
 # Repository bootstrap decisions and verification
 
+For current implementation status, see the
+[26 September M1.1/M1.2 check](m1.1-m1.2-status.md). The sections below record
+earlier bootstrap/handoff decisions; statements about missing method code
+describe those earlier revisions, not the current checkout.
+
 This record describes software preparation, not research acceptance.
 
 - The user approved the repository name/structure, instructed the M1 restart,

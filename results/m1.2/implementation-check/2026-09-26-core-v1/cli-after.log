@@ -1,0 +1,7 @@
+test_bad_config_fails_without_creating_output (test_m12_verification.VerificationTests.test_bad_config_fails_without_creating_output) ... ok
+test_cli_exports_verified_evidence_and_preserves_existing_output (test_m12_verification.VerificationTests.test_cli_exports_verified_evidence_and_preserves_existing_output) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 12.422s
+
+OK
