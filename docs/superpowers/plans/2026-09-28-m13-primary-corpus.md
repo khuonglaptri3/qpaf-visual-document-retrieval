@@ -35,11 +35,11 @@
 - Create: `src/qpaf/m13/__init__.py`
 - Create: `src/qpaf/m13/boundary.py`
 
-- [ ] **Step 1:** Viết failing unit tests trong `tests/test_m13_boundary.py` kiểm tra `ExecutionBoundary`: mặc định bị khóa (`is_authorized() == False`), bắn `PermissionError` khi gọi `assert_execution_authorized()`, và hỗ trợ ghi nhận trạng thái kiểm toán.
-- [ ] **Step 2:** Chạy test để đảm bảo fail: `python3 -m unittest tests/test_m13_boundary.py`.
-- [ ] **Step 3:** Triển khai `src/qpaf/m13/boundary.py` và export trong `src/qpaf/m13/__init__.py`.
-- [ ] **Step 4:** Chạy lại test để đảm bảo pass 100%: `python3 -m unittest tests/test_m13_boundary.py`.
-- [ ] **Step 5:** Commit thay đổi: `git commit -m "feat(m1.3): add execution boundary guard and tests"`.
+- [x] **Step 1:** Viết failing unit tests trong `tests/test_m13_boundary.py` kiểm tra `ExecutionBoundary`: mặc định bị khóa (`is_authorized() == False`), bắn `PermissionError` khi gọi `assert_execution_authorized()`, và hỗ trợ ghi nhận trạng thái kiểm toán.
+- [x] **Step 2:** Chạy test để đảm bảo fail: `python3 -m unittest tests/test_m13_boundary.py`.
+- [x] **Step 3:** Triển khai `src/qpaf/m13/boundary.py` và export trong `src/qpaf/m13/__init__.py`.
+- [x] **Step 4:** Chạy lại test để đảm bảo pass 100%: `python3 -m unittest tests/test_m13_boundary.py`.
+- [x] **Step 5:** Commit thay đổi: `git commit -m "feat(m1.3): add execution boundary guard and tests"`.
 
 ---
 
@@ -49,14 +49,14 @@
 - Create: `tests/test_m13_vidoseek.py`
 - Create: `src/qpaf/m13/vidoseek.py`
 
-- [ ] **Step 1:** Viết failing unit tests trong `tests/test_m13_vidoseek.py` kiểm tra:
+- [x] **Step 1:** Viết failing unit tests trong `tests/test_m13_vidoseek.py` kiểm tra:
   - Phân tích cú pháp hợp lệ của `vidoseek.json` (`examples` chứa `uid`, `query`, `meta_info`).
   - Ánh xạ `document_id` và định dạng `page_id` chuẩn `{doc}_page_{num:04d}`.
   - Xử lý lỗi: trùng query ID, query rỗng, trang tham chiếu vượt biên (`out-of-bounds page`).
-- [ ] **Step 2:** Chạy test để đảm bảo fail: `python3 -m unittest tests/test_m13_vidoseek.py`.
-- [ ] **Step 3:** Triển khai `src/qpaf/m13/vidoseek.py`.
-- [ ] **Step 4:** Chạy lại test để đảm bảo pass 100%: `python3 -m unittest tests/test_m13_vidoseek.py`.
-- [ ] **Step 5:** Commit thay đổi: `git commit -m "feat(m1.3): add ViDoSeek annotation parser and qrels validator"`.
+- [x] **Step 2:** Chạy test để đảm bảo fail: `python3 -m unittest tests/test_m13_vidoseek.py`.
+- [x] **Step 3:** Triển khai `src/qpaf/m13/vidoseek.py`.
+- [x] **Step 4:** Chạy lại test để đảm bảo pass 100%: `python3 -m unittest tests/test_m13_vidoseek.py`.
+- [x] **Step 5:** Commit thay đổi: `git commit -m "feat(m1.3): add ViDoSeek annotation parser and qrels validator"`.
 
 ---
 
@@ -66,15 +66,15 @@
 - Create: `tests/test_m13_splits.py`
 - Create: `src/qpaf/m13/splits.py`
 
-- [ ] **Step 1:** Viết failing unit tests trong `tests/test_m13_splits.py` kiểm tra:
+- [x] **Step 1:** Viết failing unit tests trong `tests/test_m13_splits.py` kiểm tra:
   - Thuật toán băm SHA256 cho phân chia Train / Val / Test.
   - Tính tất định (cùng seed/query_ids luôn ra cùng kết quả).
   - Kiểm tra tính rời rạc tuyệt đối (zero overlap giữa các tập).
   - Serialization ra định dạng text mỗi dòng một ID có kèm hash SHA256.
-- [ ] **Step 2:** Chạy test để đảm bảo fail: `python3 -m unittest tests/test_m13_splits.py`.
-- [ ] **Step 3:** Triển khai `src/qpaf/m13/splits.py`.
-- [ ] **Step 4:** Chạy lại test để đảm bảo pass 100%: `python3 -m unittest tests/test_m13_splits.py`.
-- [ ] **Step 5:** Commit thay đổi: `git commit -m "feat(m1.3): add deterministic split derivation and verification"`.
+- [x] **Step 2:** Chạy test để đảm bảo fail: `python3 -m unittest tests/test_m13_splits.py`.
+- [x] **Step 3:** Triển khai `src/qpaf/m13/splits.py`.
+- [x] **Step 4:** Chạy lại test để đảm bảo pass 100%: `python3 -m unittest tests/test_m13_splits.py`.
+- [x] **Step 5:** Commit thay đổi: `git commit -m "feat(m1.3): add deterministic split derivation and verification"`.
 
 ---
 
@@ -84,14 +84,14 @@
 - Create: `tests/test_m13_corpus.py`
 - Create: `src/qpaf/m13/corpus.py`
 
-- [ ] **Step 1:** Viết failing unit tests trong `tests/test_m13_corpus.py` kiểm tra:
+- [x] **Step 1:** Viết failing unit tests trong `tests/test_m13_corpus.py` kiểm tra:
   - Kiểm tra và đếm tài liệu trong file ZIP mà không cần giải nén đĩa đầy đủ.
   - Quét thư mục PDF thật trên máy.
   - Tạo bộ fixture giả lập nhỏ (synthetic dataset) phục vụ kiểm thử cô lập.
-- [ ] **Step 2:** Chạy test để đảm bảo fail: `python3 -m unittest tests/test_m13_corpus.py`.
-- [ ] **Step 3:** Triển khai `src/qpaf/m13/corpus.py`.
-- [ ] **Step 4:** Chạy lại test để đảm bảo pass 100%: `python3 -m unittest tests/test_m13_corpus.py`.
-- [ ] **Step 5:** Commit thay đổi: `git commit -m "feat(m1.3): add CPU corpus inspector and fixture generator"`.
+- [x] **Step 2:** Chạy test để đảm bảo fail: `python3 -m unittest tests/test_m13_corpus.py`.
+- [x] **Step 3:** Triển khai `src/qpaf/m13/corpus.py`.
+- [x] **Step 4:** Chạy lại test để đảm bảo pass 100%: `python3 -m unittest tests/test_m13_corpus.py`.
+- [x] **Step 5:** Commit thay đổi: `git commit -m "feat(m1.3): add CPU corpus inspector and fixture generator"`.
 
 ---
 
@@ -101,13 +101,13 @@
 - Create: `tests/test_m13_cli.py`
 - Create: `scripts/audit_primary_corpus.py`
 
-- [ ] **Step 1:** Viết failing unit tests trong `tests/test_m13_cli.py` kiểm tra gọi CLI:
+- [x] **Step 1:** Viết failing unit tests trong `tests/test_m13_cli.py` kiểm tra gọi CLI:
   - Chạy với `--dry-run` hoặc `--generate-splits`.
   - Xuất báo cáo JSON kiểm toán với đầy đủ thông tin metadata, counts, và cờ boundary.
-- [ ] **Step 2:** Chạy test để đảm bảo fail: `python3 -m unittest tests/test_m13_cli.py`.
-- [ ] **Step 3:** Triển khai `scripts/audit_primary_corpus.py`.
-- [ ] **Step 4:** Chạy lại test để đảm bảo pass 100%: `python3 -m unittest tests/test_m13_cli.py`.
-- [ ] **Step 5:** Commit thay đổi: `git commit -m "feat(m1.3): add CLI primary corpus audit tool"`.
+- [x] **Step 2:** Chạy test để đảm bảo fail: `python3 -m unittest tests/test_m13_cli.py`.
+- [x] **Step 3:** Triển khai `scripts/audit_primary_corpus.py`.
+- [x] **Step 4:** Chạy lại test để đảm bảo pass 100%: `python3 -m unittest tests/test_m13_cli.py`.
+- [x] **Step 5:** Commit thay đổi: `git commit -m "feat(m1.3): add CLI primary corpus audit tool"`.
 
 ---
 
@@ -117,6 +117,6 @@
 - Create: `docs/m1.3-primary-corpus.md`
 - Modify: `docs/m1.1-m1.2-status.md` (hoặc bổ sung phần M1.3)
 
-- [ ] **Step 1:** Viết tài liệu `docs/m1.3-primary-corpus.md` trình bày chi tiết mục đích, cách cấu hình, cách chạy CLI, các tiêu chí nghiệm thu và ranh giới nghiên cứu (tương tự như `docs/m1.1-modal-oracle.md` và `docs/m1.2-method-core.md`).
-- [ ] **Step 2:** Chạy toàn bộ test suite của dự án (`python3 -m unittest discover -s tests -v`) để đảm bảo không có bất kỳ regression nào.
-- [ ] **Step 3:** Commit tài liệu: `git commit -m "docs(m1.3): add M1.3 primary corpus audit documentation"`.
+- [x] **Step 1:** Viết tài liệu `docs/m1.3-primary-corpus.md` trình bày chi tiết mục đích, cách cấu hình, cách chạy CLI, các tiêu chí nghiệm thu và ranh giới nghiên cứu (tương tự như `docs/m1.1-modal-oracle.md` và `docs/m1.2-method-core.md`).
+- [x] **Step 2:** Chạy toàn bộ test suite của dự án (`python3 -m unittest discover -s tests -v`) để đảm bảo không có bất kỳ regression nào.
+- [x] **Step 3:** Commit tài liệu: `git commit -m "docs(m1.3): add M1.3 primary corpus audit documentation"`.
