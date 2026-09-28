@@ -99,7 +99,7 @@ def collect_files(root, output):
             lower = name.lower()
             if (is_link(path) or lower in {".env", ".ds_store", "thumbs.db"}
                     or (lower.startswith(".env.") and lower != ".env.example")
-                    or path.suffix.lower() in {".pem", ".key", ".p12", ".pyc", ".pyo"}):
+                    or path.suffix.lower() in {".pem", ".key", ".p12", ".pyc", ".pyo", ".tmp"}):
                 excluded.append(relative.as_posix())
                 continue
             category = category_for(relative)

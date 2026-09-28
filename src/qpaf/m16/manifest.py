@@ -39,16 +39,22 @@ def build_page_manifest(
     split_assignment: Optional[Dict[str, str]] = None,
     default_split: str = "unassigned",
     default_extraction_method: str = "direct_bytes",
-    default_review_status: str = "verified",
+    default_review_status: str = "pending_review",
 ) -> List[PageRecord]:
     """Construct a list of validated PageRecords from raw page data."""
     split_assignment = split_assignment or {}
     manifest: List[PageRecord] = []
+    seen_ids = set()
 
     for raw in raw_pages:
         doc_id = str(raw["document_id"]).strip()
         page_num = int(raw["page_number"])
         page_id = raw.get("page_id") or format_canonical_page_id(doc_id, page_num)
+        if not doc_id or page_num < 1 or page_id != format_canonical_page_id(doc_id, page_num):
+            raise ValueError(f"Invalid canonical page identity: {page_id}")
+        if page_id.casefold() in seen_ids:
+            raise ValueError(f"Duplicate page ID: {page_id}")
+        seen_ids.add(page_id.casefold())
         source_path = str(raw.get("source_path", ""))
         file_sha256 = str(raw.get("file_sha256", ""))
 
@@ -133,7 +139,7 @@ def normalize_alias_to_canonical(alias_candidate: str) -> Optional[Tuple[str, st
 def resolve_aliases(
     raw_aliases: Iterable[Tuple[str, str]],
     canonical_page_ids: Set[str],
-    default_review_status: str = "reviewed",
+    default_review_status: str = "pending_review",
 ) -> Tuple[Dict[str, str], List[AliasRecord]]:
     """Resolve alias references against known canonical page IDs.
 
@@ -165,5 +171,8 @@ def resolve_aliases(
                         review_status=default_review_status,
                     )
                 )
+                continue
+        records.append(AliasRecord(alias_id_clean, "", source_ref,
+                                   "unknown_alias_or_target", "unresolved"))
 
     return mapping, records

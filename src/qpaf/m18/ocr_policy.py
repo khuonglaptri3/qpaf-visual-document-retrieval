@@ -1,5 +1,6 @@
 """OCR quality metrics and extraction routing policy for M1.8."""
 from dataclasses import dataclass
+import math
 from typing import Optional
 
 
@@ -32,16 +33,15 @@ def evaluate_page_text(
     char_count = len(text)
     conf_val = confidence if confidence is not None else 100.0
 
+    failed_route = 'EXTRACTION_FAILED' if confidence is not None else 'OCR_FALLBACK_TRIGGERED'
+    if confidence is not None and (not math.isfinite(confidence) or not 0 <= confidence <= 100 or confidence < min_confidence):
+        return ExtractionDecision('EXTRACTION_FAILED',
+                                  QualityMetrics(char_count, 0.0 if not text else sum(c.isprintable() for c in text) / char_count, conf_val),
+                                  'low_or_invalid_ocr_confidence')
     if char_count == 0:
         metrics = QualityMetrics(char_count=0, printable_ratio=0.0, estimated_confidence=conf_val)
-        if confidence is not None and confidence < min_confidence:
-            return ExtractionDecision(
-                route="EXTRACTION_FAILED",
-                metrics=metrics,
-                reason="empty_text_and_low_ocr_confidence",
-            )
         return ExtractionDecision(
-            route="EXTRACTION_FAILED",
+            route=failed_route,
             metrics=metrics,
             reason="empty_page_text",
         )
@@ -60,20 +60,20 @@ def evaluate_page_text(
 
     if printable_ratio < min_printable_ratio:
         return ExtractionDecision(
-            route="OCR_FALLBACK_TRIGGERED",
+            route=failed_route,
             metrics=metrics,
             reason="corrupted_encoding_low_printable_ratio",
         )
 
     if char_count < min_chars:
         return ExtractionDecision(
-            route="OCR_FALLBACK_TRIGGERED",
+            route=failed_route,
             metrics=metrics,
             reason="insufficient_character_count",
         )
 
     return ExtractionDecision(
-        route="NATIVE_TEXT_QUALIFIED",
+        route="NATIVE_TEXT_QUALIFIED" if confidence is None else "OCR_TEXT_QUALIFIED",
         metrics=metrics,
-        reason="native_quality_meets_provisional_threshold",
+        reason="native_quality_meets_provisional_threshold" if confidence is None else "ocr_quality_meets_provisional_threshold",
     )

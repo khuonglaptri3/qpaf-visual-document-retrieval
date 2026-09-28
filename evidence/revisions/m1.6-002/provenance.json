@@ -1,0 +1,36 @@
+{
+  "command": [
+    "scripts/audit_collisions.py",
+    "--annotations",
+    "data/raw/vidoseek-e91a92b/vidoseek.json",
+    "--corpus-dir",
+    "data/raw/vidoseek-e91a92b/pdfs/pdf",
+    "--splits-dir",
+    "evidence/revisions/m1.3-001/splits",
+    "--output-dir",
+    "evidence/revisions/m1.6-002"
+  ],
+  "python": "3.11.16 (main, Aug 25 2026, 13:59:19) [MSC v.1944 64 bit (AMD64)]",
+  "platform": "Windows-10-10.0.26200-SP0",
+  "git_commit": "765803fee5465006658de35a4272414b27a5bb53",
+  "source_sha256": {
+    "scripts/audit_collisions.py": "b8e4a686b0852df735d6e4fef8846191850e020ff3b4cca10b3f8b409ee9b1ae",
+    "src/qpaf/m16/__init__.py": "c4e5942acc652d47f9d09d9d4ed7cfccebf820c64e698e690a5f3e6e041f7e5e",
+    "src/qpaf/m16/detector.py": "7863926375ce7eb8041141fcfdcf8be3ca35140fd6658e6d5db853f068aef724",
+    "src/qpaf/m16/manifest.py": "1b20c75318186094cb47754824a4a21a89fa9c100a0c9263fcd8f0c28b368d5a",
+    "src/qpaf/m16/real_corpus.py": "bcd3c5f9b1c1ba173ff78b1f9bd9eba1b842136ca157774f8cf95516e2cb534a",
+    "src/qpaf/m16/report.py": "850dab8d76fe5f11c8be454dd108ef1e17c4412a3b44bea66367da4321814e19",
+    "src/qpaf/m13/__init__.py": "4f6ff852d89a749c6911610bb300f9b8a510743373f557218c1f2380ebd92684",
+    "src/qpaf/m13/boundary.py": "6c0897346254fe8d751a7f68cc7dee1e21e2dba1c920ba535b90307796a1cee8",
+    "src/qpaf/m13/corpus.py": "5a4e60a8be5d64a67244b841312ca3d5fcfe152c71fd59bea8d1b58de37efb66",
+    "src/qpaf/m13/splits.py": "341eed1f421646f4e2c5d1c52e12733f9849d074986b6d46db19ff2b459a65f1",
+    "src/qpaf/m13/vidoseek.py": "9724e0e26e376e8559ff91eb064175dbb427a3142e39779c1c134e8aeec52b44"
+  },
+  "inputs": {
+    "data\\raw\\vidoseek-e91a92b\\vidoseek.json": "ca4949bfc16231d129cd7565f20e07683854ab5aa8d05f05a86a12a9b71a7fab",
+    "evidence\\revisions\\m1.3-001\\splits\\split_manifest.json": "560737151fc9de58067376c6a02a512ec2a50e57118e28386b5e5f50a0ee5c8a",
+    "evidence\\revisions\\m1.3-001\\splits\\test_ids.txt": "d34210f901759a4f174da0c6c2e9b810616dcb33a71a0bd128a25d5d8d12e6f6",
+    "evidence\\revisions\\m1.3-001\\splits\\train_ids.txt": "61dfe867c27b91a0a96594440b0f0e5ecf51501da0fcecdac94badaf16962191",
+    "evidence\\revisions\\m1.3-001\\splits\\val_ids.txt": "46f8af5853942f6697cc3a995347a1832206212e93ff8aa87acb1775b3a060b4"
+  }
+}

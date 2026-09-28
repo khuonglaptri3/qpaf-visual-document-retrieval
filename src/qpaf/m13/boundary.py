@@ -45,6 +45,16 @@ def assert_execution_authorized() -> None:
     _DEFAULT_BOUNDARY.assert_authorized()
 
 
+def assert_stage_authorized(stage: str, source: Dict[str, Any], *, allow_fixture: bool = False) -> None:
+    """Only local cached synthetic Oracle verification can bypass the research gate.
+
+    No config switch grants research authorization. Remote workers never allow fixtures.
+    """
+    if allow_fixture and stage == 'oracle' and source.get('kind') == 'synthetic_software_test':
+        return
+    assert_execution_authorized()
+
+
 def get_boundary_status() -> Dict[str, Any]:
     """Get boundary status metadata dictionary."""
     return _DEFAULT_BOUNDARY.status()

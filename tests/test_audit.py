@@ -95,6 +95,13 @@ class AuditTests(unittest.TestCase):
         self.generate()
         self.assertEqual([row["path"] for row in self.rows("hash_manifest.csv")], ["README.md"])
 
+    def test_temporary_files_are_excluded_from_reproducible_snapshot(self):
+        self.write('results/fixture/status.json.abc.tmp')
+        self.write('results/fixture/status.json', b'{}')
+        self.generate()
+        self.assertEqual([row['path'] for row in self.rows('hash_manifest.csv')],
+                         ['results/fixture/status.json'])
+
     def test_existing_output_is_preserved(self):
         self.write("README.md")
         self.generate()

@@ -1,0 +1,35 @@
+{
+  "files": {
+    "test_ids.txt": {
+      "count": 172,
+      "sha256": "d34210f901759a4f174da0c6c2e9b810616dcb33a71a0bd128a25d5d8d12e6f6",
+      "size_bytes": 7396
+    },
+    "train_ids.txt": {
+      "count": 799,
+      "sha256": "61dfe867c27b91a0a96594440b0f0e5ecf51501da0fcecdac94badaf16962191",
+      "size_bytes": 34357
+    },
+    "val_ids.txt": {
+      "count": 171,
+      "sha256": "46f8af5853942f6697cc3a995347a1832206212e93ff8aa87acb1775b3a060b4",
+      "size_bytes": 7353
+    }
+  },
+  "policy": {
+    "encoding": "utf-8",
+    "namespace": "vidoseek_v1",
+    "newline": "LF",
+    "ranking": "sha256(namespace:seed:query_id),query_id",
+    "ratios": [
+      0.7,
+      0.15,
+      0.15
+    ],
+    "rounding": "python_round_train_val_test_remainder",
+    "seed": 2026
+  },
+  "query_count": 1142,
+  "query_ids_sha256": "6702a5f81420a2f93c7fed28d8631a05f9252a8022cf6c95982862455d7253d7",
+  "schema_version": 1
+}

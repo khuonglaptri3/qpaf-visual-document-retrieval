@@ -7,6 +7,8 @@ from .artifacts import StageRun, completed_stage, digest, read_json, verify_mani
 from .dataset import prepare
 from .oracle import evaluate
 from .retrieval import bm25_scores, dense_scores, visual_scores, load_score_cache, save_score_cache
+from qpaf.m13.boundary import assert_stage_authorized
+from qpaf.m18.namespace import ensure_run_metadata
 
 STAGES = ('prepare', 'bm25', 'dense', 'visual', 'oracle')
 
@@ -83,7 +85,10 @@ def write_reports(output, queries, pages, qrels, scores, config, dataset, logger
 def execute_stage(stage, config, workspace, run_id, source):
     if stage not in STAGES:
         raise ValueError(f'Unknown pipeline stage: {stage}')
+    assert_stage_authorized(stage, source, allow_fixture=True)
     root = run_directory(workspace, run_id)
+    if source.get('kind') != 'synthetic_software_test':
+        ensure_run_metadata(root, run_id, config, source)
     memo = {}
     existing = resolve_stage(root, stage, config, source, memo)
     if existing is not None:
@@ -95,6 +100,8 @@ def execute_stage(stage, config, workspace, run_id, source):
         prepared = resolve_stage(root, 'prepare', config, source, memo)
         inputs['prepare'] = digest(prepared/'receipt.json')
     if stage == 'oracle':
+        if source.get('kind') == 'synthetic_software_test' and read_json(prepared/'dataset.json').get('kind') != 'synthetic_software_test':
+            raise PermissionError('Fixture verification requires a synthetic dataset receipt')
         for channel in ('bm25', 'dense', 'visual'):
             caches[channel] = resolve_stage(root, channel, config, source, memo)
             inputs[channel] = digest(caches[channel]/'receipt.json')

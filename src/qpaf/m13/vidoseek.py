@@ -41,10 +41,12 @@ def parse_vidoseek_annotations(
     else:
         raise TypeError("Expected file path or dictionary for vidoseek annotations")
 
-    if "examples" not in raw or not isinstance(raw["examples"], list):
+    if not isinstance(raw, dict) or "examples" not in raw or not isinstance(raw["examples"], list):
         raise ValueError("Annotations JSON must contain an 'examples' list")
 
     examples = raw["examples"]
+    if not examples:
+        raise ValueError("Annotations examples must not be empty")
     queries: List[Dict[str, str]] = []
     qrels: Dict[str, Dict[str, int]] = {}
     documents: Set[str] = set()
@@ -73,6 +75,8 @@ def parse_vidoseek_annotations(
         if not isinstance(file_name, str) or not file_name.strip():
             raise ValueError(f"Missing file_name in meta_info for query ID {uid}")
         documents.add(file_name)
+        if doc_page_counts is not None and file_name not in doc_page_counts:
+            raise ValueError(f"Unknown document {file_name} for query ID {uid}")
 
         ref_pages = meta.get("reference_page")
         if not isinstance(ref_pages, list) or not ref_pages:
@@ -80,7 +84,7 @@ def parse_vidoseek_annotations(
 
         query_qrels: Dict[str, int] = {}
         for p in ref_pages:
-            if not isinstance(p, int) or p < 1:
+            if type(p) is not int or p < 1:
                 raise ValueError(f"Invalid one-based page number '{p}' for query ID {uid}")
 
             if doc_page_counts is not None and file_name in doc_page_counts:

@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "revision": "m1.5-002",
+  "created_date": "2026-09-28",
+  "status": "DRAFT_RECONCILIATION_NOT_ADOPTED",
+  "baseline_git_head": "765803fee5465006658de35a4272414b27a5bb53",
+  "source_identity": "source_hashes.csv records inspected working-tree bytes; baseline is not a successor freeze commit",
+  "manifest_path_semantics": "artifacts paths are relative to this revision; source_hashes.csv paths are relative to repository root",
+  "hash_algorithm": "sha256",
+  "byte_policy": "hash raw bytes; no newline normalization",
+  "historical_protocol": "QPAF-M1.5-v1",
+  "recorded_approved_amendments": [
+    "QPAF-M1.5-A001",
+    "QPAF-M1.5-A002"
+  ],
+  "proposed_effective_protocol": null,
+  "new_amendment_id": null,
+  "owner_adoption": "PENDING_NOT_CLAIMED",
+  "independent_review": "PENDING_NOT_CLAIMED",
+  "g1_decision": "NOT_ISSUED",
+  "execution_authorization": "NOT_GRANTED_BY_THIS_PACKAGE",
+  "artifacts": [
+    {
+      "path": "governance_events.jsonl",
+      "size_bytes": 1459,
+      "sha256": "bde19c0dea942c34040f4194faddfe5c98ad14e0f1dab01b65ffba0b55ed428f"
+    },
+    {
+      "path": "README.md",
+      "size_bytes": 1696,
+      "sha256": "6e14f8ba6cb49a84d5bd5a427eb358754934a82124af9ff3d5adf399fbac563c"
+    },
+    {
+      "path": "scoped_contract.md",
+      "size_bytes": 11649,
+      "sha256": "5629fa8b2cd60afe29d8cd34d2c538177dac919a31dbb453e0064451652ae4c1"
+    },
+    {
+      "path": "source_hashes.csv",
+      "size_bytes": 1927,
+      "sha256": "36c30745c60ceb04acc4270c6e307ae82d478138cc001e7f9b9170d8d679f534"
+    }
+  ]
+}
