@@ -1,33 +1,40 @@
-# M1.7 Draft Evidence Audit
+# M1.7 Draft Evidence Audit — Post-merge reconciliation
 
 **Reviewer:** Thanh — Experiment Governance / Independent QA
-**Reviewed:** 27/09/2026
-**Audit scope:** `DRAFT_SOURCE_INSPECTION_NOT_FINAL_QA`
-**Package status:** `DRAFT_NOT_FROZEN`
+**Initial review:** 27/09/2026
+**Reconciled:** 28/09/2026 against `765803fee5465006658de35a4272414b27a5bb53`
+**Audit scope:** `POST_MERGE_SOURCE_AND_HASH_INSPECTION_NOT_FINAL_QA`
+**Package status:** `DRAFT_RECONCILED_FINAL_BLOCKED`
 **Execution authorization:** `CLOSED`
 
 ## Kết luận
 
-M1.7 Draft đã có schema, controlled vocabulary, naming, append-only policy,
-current-state registry, traceability matrix và issue log. Các claim boundary
-được giữ đúng: M1.1 là Oracle upper bound; M1.2 là synthetic software evidence;
-không có learned scientific result hoặc authorization event.
+M1.7 Draft đã được reconcile sau khi các nhánh M1.4, M1.5, M1.6 và M1.8 merge.
+Năm event và năm trace mới được append; chín row/trace ngày 27/09 vẫn giữ nguyên.
+Các claim boundary tiếp tục tách Oracle, software verification, engineering audit
+và governance; không có learned scientific result hoặc authorization event.
 
-M1.7 **chưa thể Final/Freeze**. Active NEW protocol chưa được adopt; M1.4 thiếu
-actual assets; M1.6 chưa chạy; M1.8 chưa calibration; exact split/cache hashes và
-selected immutable G1 package chưa tồn tại. Kết quả audit tổng thể là
-`DRAFT_COMPLETE_FINAL_BLOCKED`, không phải PASS của M1.7/G1.
+M1.7 **chưa thể Final/Freeze**. M1.5 đã có hai amendment được Research Lead
+approve nhưng thiếu independent sign-off, exact amended package identity và exact
+split manifests/hashes. M1.4 revision `m1.4-003` tự ghi `PARTIAL` và zero data
+assets. M1.6 có populated output nhưng ba payload hash không khớp manifest, năm
+source PDF không có trong workspace và full-corpus scope chưa tái lập được. M1.8
+hash-valid nhưng threshold vẫn `PROVISIONAL` chờ M2.3/G1 scope decision. Kết quả
+audit hiện tại là `DRAFT_RECONCILED_FINAL_BLOCKED`, không phải PASS của M1.7/G1.
 
 ## Phạm vi đã kiểm
 
 1. Đối chiếu status vocabulary, experiment/evidence class và required fields với
    `../02_protocol/run_policy.md`.
 2. Đối chiếu dataset/split/metric/seed fields với các policy M1.5 được import.
-3. Kiểm current repository evidence cho M1.1, M1.2 và M1.4–M1.10.
+3. Kiểm current repository evidence cho M1.1, M1.2 và M1.4–M1.10, gồm các
+   revision `m1.4-003`, `m1.6-001` và `m1.8-001` vừa merge.
 4. Kiểm chuỗi `Experiment → Method → Config → Commit → Data/Hash → Output → Review`
    trong `traceability_matrix.csv`.
 5. Ghi mọi missing/unknown/adoption gap vào `issue_log.csv` với owner và closure
    criterion; không suy đoán giá trị lịch sử.
+6. Tính lại SHA-256 của M1.6/M1.8 payload, kiểm source locator M1.6 và đối chiếu
+   amendment M1.5 với source/config tích hợp.
 
 Đây là source review do Thanh thực hiện trên evidence của các owner khác và trên
 Draft registry do Thanh tạo. Nó chưa phải Final independent QA sign-off của một
@@ -39,13 +46,13 @@ selected byte-identical package.
 | --- | --- | --- | --- |
 | M1.1 | Report/config/code có; raw historical run provenance thiếu | Bounded Oracle evidence, reproduction unverified | `BLOCKED`, `oracle_upper_bound` |
 | M1.2 | Core/config/tests/verification output có | Software verification có, independent rerun thiếu | `BLOCKED`, `integration_test`/`engineering_evidence` |
-| M1.4 | Audit files/hash/gap log có | `PARTIAL`; actual research assets thiếu | `BLOCKED`, `data_audit` |
-| M1.5 | Historical protocol bytes/hash valid | Active adoption và loss-contract resolution thiếu | `BLOCKED`, `governance` |
-| M1.6 | Schema/report tồn tại | Header-only; real corpus audit `NOT_RUN` | `BLOCKED`, `data_audit` |
-| M1.7 | Bảy Draft deliverables hiện có | Chưa bind adopted protocol/snapshot; chưa Final | `PLANNED`, `governance` |
-| M1.8 | OCR/namespace Draft có | Chưa sample/calibration/numerical threshold | `BLOCKED`, `calibration` |
-| M1.9 | Checklist/matrices/pre-review có | Preparation only; official G1 `NOT_RUN` | `BLOCKED`, `governance` |
-| M1.10 | Current progress report có | Draft; Final G1/M1 closure chưa đạt | `BLOCKED`, `governance` |
+| M1.4 | `m1.4-003` có 307-file inventory | Metadata vẫn `PARTIAL`, data count 0, provenance review required | `BLOCKED`, `data_audit` |
+| M1.5 | A001/A002 `APPROVED`; A001 khớp pairwise source/config | Thiếu exact amended package/split hashes và independent sign-off | `BLOCKED`, `governance` |
+| M1.6 | `m1.6-001` có 5 docs/20 pages, report claim `PASS_AUDIT` | 3 payload hash mismatch, 5 source PDF absent, full-corpus scope unverified | `BLOCKED`, `data_audit` |
+| M1.7 | 14 registry events, 14 trace rows và 16 issues | Post-merge findings đã ghi; chưa chọn/hash Final package | `BLOCKED`, `governance` |
+| M1.8 | `m1.8-001` có 4/4 payload hash hợp lệ | Threshold provisional; M2.3/G1 scope decision pending | `BLOCKED`, `calibration` |
+| M1.9 | Checklist/matrices/pre-review có | Tài liệu chưa refresh sau merges; official G1 `NOT_RUN` | `BLOCKED`, `governance` |
+| M1.10 | Current progress report có | Draft còn mô tả pre-merge state; Final G1/M1 closure chưa đạt | `BLOCKED`, `governance` |
 
 ## Trace samples
 
@@ -64,9 +71,15 @@ vẫn thiếu; xem `M17-ISS-007`. Không có learned QPAF-vs-QARF result.
 
 ### M1.4–M1.8 gate chain
 
-M1.4/M1.5/M1.6/M1.8 có đường dẫn current-state nhưng lần lượt partial,
-historical-not-adopted, not-run và uncalibrated. Do đó M1.7 chỉ có thể ghi Draft
-truthfully; xem `M17-ISS-001`–`M17-ISS-005` và `M17-ISS-009`.
+- M1.4: byte-trace được `m1.4-003`, nhưng metadata tự giới hạn là `PARTIAL`.
+- M1.5: A001 semantic reconciliation được source inspection hỗ trợ; A002 và
+  package identity chưa đủ để independent sign-off.
+- M1.6: engine tests pass, nhưng evidence package không byte-identical với hash
+  manifest và source locator không resolve.
+- M1.8: package hash hợp lệ; numerical calibration chưa thực hiện.
+
+Do đó M1.7 chỉ có thể ghi reconciliation Draft; xem `M17-ISS-011`–`M17-ISS-016`
+cùng các finding lịch sử còn mở.
 
 ## Registry/protocol consistency
 
@@ -76,25 +89,35 @@ truthfully; xem `M17-ISS-001`–`M17-ISS-005` và `M17-ISS-009`.
   `NOT_RECORDED` và issue; known future dependency dùng `PENDING`.
 - Exact split dùng `split_id`/`split_sha256`; future result-bearing authorization
   phải bind một immutable authorization manifest/hash chứa toàn bộ run contract.
-- Không có `AUTHORIZED`/`STARTED`; imported protocol vẫn ghi
+- Không có `AUTHORIZED`/`STARTED`; protocol vẫn ghi
   `execution_authorized=false`.
-- Active protocol reference giữ `PENDING`; Draft không giả mạo old M1.7 hashes
-  hoặc coi historical import là NEW adoption.
+- Amendment ledger được tham chiếu nhưng chưa được coi là Final binding cho đến
+  khi exact package/split hashes và independent review được ghi nhận.
+- Mọi current-state update dùng event/trace mới trỏ `supersedes_event_id`; các
+  row ngày 27/09 không bị sửa hoặc xóa.
 
 ## Open issues và bước tiếp theo
 
-`issue_log.csv` là source of truth cho 10 finding mở/blocking. Thứ tự đóng hợp lệ:
+`issue_log.csv` hiện có 16 finding. Sáu finding `M17-ISS-011`–`M17-ISS-016`
+ghi riêng trạng thái sau merge. Thứ tự đóng hợp lệ:
 
-1. Phát + Thanh giải quyết/adopt active M1.5 successor hoặc amendment.
-2. Khương cung cấp selected M1.4 revision, exact data/split/cache evidence, real
-   M1.6 audit và calibrated M1.8 package.
-3. Thanh append Final registry binding, refresh hashes/traceability và re-audit.
-4. Cả nhóm chọn/hash package rồi tiến hành G1 First Review.
-5. Chỉ sau fix/recheck và Technical Sign-off mới tạo Final QA sign-off.
+Các finding lịch sử `M17-ISS-001` và `M17-ISS-003` đã có evidence mới thay đổi
+tình trạng ban đầu, nhưng chưa được coi là closed: phần còn thiếu được tách rõ
+thành `M17-ISS-011`, `M17-ISS-013` và `M17-ISS-014` để không rewrite lịch sử.
+
+1. Phát phát hành immutable amended-protocol identity và exact A002 split hashes;
+   Thanh recheck trước khi ghi independent decision.
+2. Khương phát hành M1.4 revision đủ data/provenance và M1.6 revision mới có
+   source locator cùng payload hashes hợp lệ.
+3. Phát + Khương chốt bằng governance record việc M1.8 provisional có đủ cho G1
+   hay phải calibration trước gate.
+4. Thanh append closure/review events, refresh traceability và re-audit.
+5. Phát refresh G1/R1 trên một selected immutable commit và tổ chức First Review.
+6. Chỉ sau fix/recheck và Technical Sign-off mới tạo Final QA sign-off.
 
 ## Draft decision
 
-**`M1.7_DRAFT_COMPLETE__M1.7_FINAL_BLOCKED`**
+**`M1.7_DRAFT_RECONCILED__M1.7_FINAL_BLOCKED`**
 
 Quyết định này xác nhận chất lượng cấu trúc Draft, không đóng M1.7, không mở
 execution và không thay thế G1.
