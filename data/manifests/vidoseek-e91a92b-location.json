@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "dataset": "Qiuchen-Wang/ViDoSeek",
+  "revision": "e91a92ba5f38690696c7e66be5c5474b54c6e791",
+  "license_declared_by_dataset_card": "apache-2.0",
+  "timestamp_utc": "2026-09-28T16:42:28.742008+00:00",
+  "command": [
+    "scripts/download_primary_corpus.py",
+    "--manifest",
+    "data/manifests/vidoseek-e91a92b-location.json"
+  ],
+  "python": "3.11.16 (main, Aug 25 2026, 13:59:19) [MSC v.1944 64 bit (AMD64)]",
+  "scope": "download_and_inventory_only; no OCR, model download or research inference",
+  "files": [
+    {
+      "filename": "README.md",
+      "path": "C:/Users/lanph/OneDrive/Desktop/Artificial_Intelligent_Project/data/raw/vidoseek-e91a92b/README.md",
+      "size_bytes": 3100,
+      "sha256": "273f59f85f61c9c242eb9a08075563b2a969c183cb1a3bd0abf3866f2c24fd5b",
+      "remote_git_blob": "e26345e85a61b5a7bca6414e17e4c60a34525daf",
+      "remote_lfs_sha256": null,
+      "source_url": "https://huggingface.co/datasets/Qiuchen-Wang/ViDoSeek/resolve/e91a92ba5f38690696c7e66be5c5474b54c6e791/README.md"
+    },
+    {
+      "filename": "vidoseek.json",
+      "path": "C:/Users/lanph/OneDrive/Desktop/Artificial_Intelligent_Project/data/raw/vidoseek-e91a92b/vidoseek.json",
+      "size_bytes": 597200,
+      "sha256": "ca4949bfc16231d129cd7565f20e07683854ab5aa8d05f05a86a12a9b71a7fab",
+      "remote_git_blob": "cced5d64b8146ab5050ff843a96eea8934e4d8c9",
+      "remote_lfs_sha256": null,
+      "source_url": "https://huggingface.co/datasets/Qiuchen-Wang/ViDoSeek/resolve/e91a92ba5f38690696c7e66be5c5474b54c6e791/vidoseek.json"
+    },
+    {
+      "filename": "vidoseek_pdf_document.zip",
+      "path": "C:/Users/lanph/OneDrive/Desktop/Artificial_Intelligent_Project/data/raw/vidoseek-e91a92b/vidoseek_pdf_document.zip",
+      "size_bytes": 758769613,
+      "sha256": "3b999a798ceab38703118e4cc7d9b852f86538d5bb7caad64eb545251ee00454",
+      "remote_git_blob": "75fe3e5a7e70d172f4930338b3a6a26b99cb13d5",
+      "remote_lfs_sha256": "3b999a798ceab38703118e4cc7d9b852f86538d5bb7caad64eb545251ee00454",
+      "source_url": "https://huggingface.co/datasets/Qiuchen-Wang/ViDoSeek/resolve/e91a92ba5f38690696c7e66be5c5474b54c6e791/vidoseek_pdf_document.zip"
+    }
+  ],
+  "independent_review": "PENDING"
+}

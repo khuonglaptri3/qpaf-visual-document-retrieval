@@ -20,7 +20,7 @@ class DuplicateRecord:
 
 def detect_content_duplicates(
     manifest: Iterable[PageRecord],
-    default_review_status: str = "reviewed",
+    default_review_status: str = "pending_review",
 ) -> List[DuplicateRecord]:
     """Cluster pages with identical content_sha256 and detect pairwise collisions."""
     content_groups: Dict[str, List[PageRecord]] = defaultdict(list)
@@ -114,9 +114,11 @@ def verify_qrel_consistency(
     valid_queries = 0
     orphan_queries: List[str] = []
     referenced_canonical_pages: Set[str] = set()
+    missing_targets = []
 
     for qid, rel_map in sorted(qrels.items()):
         query_has_valid_target = False
+        query_has_missing_target = False
         for raw_page_id, score in rel_map.items():
             if score <= 0:
                 continue
@@ -124,8 +126,11 @@ def verify_qrel_consistency(
             if canonical_id in canonical_page_ids:
                 query_has_valid_target = True
                 referenced_canonical_pages.add(canonical_id)
+            else:
+                query_has_missing_target = True
+                missing_targets.append({"query_id": qid, "page_id": raw_page_id})
 
-        if query_has_valid_target:
+        if query_has_valid_target and not query_has_missing_target:
             valid_queries += 1
         else:
             orphan_queries.append(qid)
@@ -140,4 +145,6 @@ def verify_qrel_consistency(
         "referenced_page_count": len(referenced_canonical_pages),
         "unreferenced_pages": unreferenced_pages,
         "orphan_page_count": len(unreferenced_pages),
+        "missing_targets": missing_targets,
+        "missing_target_count": len(missing_targets),
     }

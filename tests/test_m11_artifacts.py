@@ -58,7 +58,7 @@ class DatasetTests(unittest.TestCase):
         from qpaf.m11.dataset import prepare
         from qpaf.m11.artifacts import read_json, write_json
         root_repo = Path(__file__).resolve().parents[1]
-        cfg = load_config(root_repo/'configs/m1.1/vidoseek.toml', ['text.mode=native'])
+        cfg = load_config(root_repo/'configs/m1.1/vidoseek.toml', ['text.mode=native', 'text.max_failure_fraction=1'])
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             document = pdfium.PdfDocument.new()
@@ -76,10 +76,10 @@ class DatasetTests(unittest.TestCase):
                 return str(root/('annotations.json' if filename == cfg['dataset']['annotation_file'] else 'corpus.zip'))
             with patch('huggingface_hub.hf_hub_download', side_effect=download):
                 prepare(cfg, output, logging.getLogger('pdf-test'), root/'cache')
-            self.assertEqual(read_json(output/'qrels.json'), {'q': {'doc_2': 1}})
+            self.assertEqual(read_json(output/'qrels.json'), {'q': {'doc_page_0002': 1}})
             self.assertEqual(read_json(output/'dataset.json')['text_extraction_counts']['empty'], 2)
-            self.assertEqual([x['page_id'] for x in read_json(output/'pages.json')], ['doc_1', 'doc_2'])
-            self.assertTrue((output/'images/doc_1.png').is_file())
+            self.assertEqual([x['page_id'] for x in read_json(output/'pages.json')], ['doc_page_0001', 'doc_page_0002'])
+            self.assertTrue((output/'images/doc_page_0001.png').is_file())
 
 
 class ArtifactTests(unittest.TestCase):

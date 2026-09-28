@@ -1,5 +1,10 @@
 """Tests for deterministic split derivation and verification in M1.3."""
 import unittest
+import tempfile
+import json
+import hashlib
+from pathlib import Path
+from qpaf.m13 import splits as split_module
 
 from qpaf.m13.splits import (
     create_deterministic_splits,
@@ -9,6 +14,47 @@ from qpaf.m13.splits import (
 
 
 class TestM13Splits(unittest.TestCase):
+    def test_duplicate_ids_are_rejected_within_one_split_and_input(self):
+        valid, _ = verify_split_disjointness({"train": ["a", "a"], "val": [], "test": []}, 1)
+        self.assertFalse(valid)
+        with self.assertRaises(ValueError):
+            create_deterministic_splits(["a", "a"])
+
+    def test_bundle_roundtrip_is_create_once_and_verification_is_read_only(self):
+        self.assertTrue(hasattr(split_module, "write_split_bundle"))
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp)
+            written = split_module.write_split_bundle(path, self.query_ids)
+            before = {p.name: (p.read_bytes(), p.stat().st_mtime_ns) for p in path.iterdir()}
+            self.assertEqual(split_module.read_split_bundle(path, self.query_ids), written)
+            self.assertEqual(before, {p.name: (p.read_bytes(), p.stat().st_mtime_ns) for p in path.iterdir()})
+            with self.assertRaises(FileExistsError):
+                split_module.write_split_bundle(path, self.query_ids)
+            target = path / "train_ids.txt"
+            target.write_bytes(target.read_bytes().replace(b"\n", b"\r\n"))
+            with self.assertRaises(ValueError):
+                split_module.read_split_bundle(path, self.query_ids)
+
+    def test_bundle_rejects_policy_changes_and_ids_even_with_updated_hash(self):
+        self.assertTrue(hasattr(split_module, "write_split_bundle"))
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp)
+            split_module.write_split_bundle(path, self.query_ids)
+            manifest_path = path / "split_manifest.json"
+            original = manifest_path.read_bytes()
+            manifest = json.loads(original)
+            manifest["policy"]["seed"] = 99
+            manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+            with self.assertRaises(ValueError):
+                split_module.read_split_bundle(path, self.query_ids)
+            manifest = json.loads(original)
+            target = path / "train_ids.txt"
+            content = target.read_bytes().replace(b"q_", b"x_", 1)
+            target.write_bytes(content)
+            manifest["files"]["train_ids.txt"]["sha256"] = hashlib.sha256(content).hexdigest()
+            manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+            with self.assertRaises(ValueError):
+                split_module.read_split_bundle(path, self.query_ids)
     def setUp(self):
         # 100 mock query IDs
         self.query_ids = [f"q_{i:04d}" for i in range(100)]

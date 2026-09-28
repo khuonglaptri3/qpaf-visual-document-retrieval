@@ -1,170 +1,118 @@
 #!/usr/bin/env python3
-"""CLI tool for M1.3 Primary Corpus Audit and Closed Boundary Verification."""
+"""Read PDFs and qrels for the M1.3 CPU audit; preserve existing evidence."""
 import argparse
 from datetime import datetime, timezone
+import hashlib
+import importlib.metadata
 import json
 from pathlib import Path
+import platform
+import subprocess
 import sys
-from typing import Any, Dict
+import tomllib
+import zipfile
 
-# Ensure src is in python path
 repo_root = Path(__file__).resolve().parent.parent
-src_dir = repo_root / "src"
-if str(src_dir) not in sys.path:
-    sys.path.insert(0, str(src_dir))
+sys.path.insert(0, str(repo_root / "src"))
 
 from qpaf.m13.boundary import get_boundary_status
-from qpaf.m13.corpus import inspect_pdf_archive
-from qpaf.m13.splits import (
-    create_deterministic_splits,
-    serialize_split_manifest,
-    verify_split_disjointness,
-)
+from qpaf.m13.corpus import inspect_pdf_archive, inspect_pdf_directory
+from qpaf.m13.splits import create_deterministic_splits, read_split_bundle, write_split_bundle, serialize_split_manifest
 from qpaf.m13.vidoseek import parse_vidoseek_annotations
 
 
-def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(
-        description="M1.3 Primary Corpus (ViDoSeek) CPU Audit Tool."
-    )
-    parser.add_argument(
-        "--config",
-        type=Path,
-        help="Path to TOML config file (e.g. configs/m1.1/vidoseek.toml).",
-    )
-    parser.add_argument(
-        "--annotations",
-        type=Path,
-        help="Path to vidoseek.json annotations file.",
-    )
-    parser.add_argument(
-        "--corpus-zip",
-        type=Path,
-        help="Path to vidoseek_pdf_document.zip archive.",
-    )
-    parser.add_argument(
-        "--output",
-        type=Path,
-        help="Path to write JSON audit report.",
-    )
-    parser.add_argument(
-        "--splits-dir",
-        type=Path,
-        help="Directory to save or verify split manifest files.",
-    )
-    parser.add_argument(
-        "--generate-splits",
-        action="store_true",
-        help="Generate deterministic splits and save manifests.",
-    )
-    parser.add_argument(
-        "--verify-splits",
-        action="store_true",
-        help="Verify existing split manifests in splits-dir.",
-    )
-    parser.add_argument(
-        "--check-boundary",
-        action="store_true",
-        help="Verify that execution boundary is CLOSED.",
-    )
-    parser.add_argument(
-        "--dry-run",
-        action="store_true",
-        help="Perform audit without writing output files.",
-    )
+def parse_args():
+    parser = argparse.ArgumentParser(description="M1.3 Primary Corpus (ViDoSeek) CPU Audit Tool.")
+    parser.add_argument("--config", type=Path)
+    parser.add_argument("--annotations", type=Path)
+    corpus = parser.add_mutually_exclusive_group()
+    corpus.add_argument("--corpus-zip", type=Path)
+    corpus.add_argument("--corpus-dir", type=Path)
+    parser.add_argument("--output", type=Path, help="Create a new report; never overwrite an existing report.")
+    parser.add_argument("--splits-dir", type=Path)
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument("--generate-splits", action="store_true")
+    mode.add_argument("--verify-splits", action="store_true", help="Read and verify existing splits without changing them.")
+    parser.add_argument("--check-boundary", action="store_true")
+    parser.add_argument("--dry-run", action="store_true", help="Audit without writing files.")
     return parser.parse_args()
 
 
-def main() -> int:
-    args = parse_args()
+def _provenance(args):
+    sources = [Path(__file__), *sorted((repo_root / "src/qpaf/m13").glob("*.py"))]
+    hashes = {p.relative_to(repo_root).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest() for p in sources}
+    try:
+        commit = subprocess.run(["git", "rev-parse", "HEAD"], cwd=repo_root,
+                                capture_output=True, text=True, check=True).stdout.strip()
+        dirty = bool(subprocess.run(["git", "status", "--porcelain"], cwd=repo_root,
+                                    capture_output=True, text=True, check=True).stdout.strip())
+    except (OSError, subprocess.CalledProcessError):
+        commit, dirty = None, None
+    return {"command": [sys.executable, *sys.argv], "cwd": str(Path.cwd()),
+            "source_commit": commit, "source_tree_dirty": dirty, "source_hashes": hashes,
+            "environment": {"python": sys.version, "platform": platform.platform(),
+                            "pypdfium2": importlib.metadata.version("pypdfium2")},
+            "config": None if not args.config else {"path": str(args.config),
+                "sha256": hashlib.sha256(args.config.read_bytes()).hexdigest()}}
 
-    # Load from config if provided
-    annotations_path = args.annotations
-    corpus_zip_path = args.corpus_zip
 
-    if args.config and args.config.exists():
-        try:
-            import tomllib
-        except ImportError:
-            import tomli as tomllib  # type: ignore
+def audit(args):
+    annotations_path, archive_path, directory_path = args.annotations, args.corpus_zip, args.corpus_dir
+    if args.config:
+        cfg = tomllib.loads(args.config.read_text(encoding="utf-8"))
+        dataset = cfg.get("dataset", {})
+        if annotations_path is None and dataset.get("annotation_file"):
+            annotations_path = Path(dataset["annotation_file"])
+        if archive_path is None and directory_path is None and dataset.get("corpus_file"):
+            archive_path = Path(dataset["corpus_file"])
+    if annotations_path is None or (archive_path is None and directory_path is None):
+        raise ValueError("Both annotations and a PDF corpus are required for a CPU audit")
+    if not annotations_path.is_file():
+        raise FileNotFoundError(f"Annotations not found: {annotations_path}")
+    if (args.generate_splits or args.verify_splits) and args.splits_dir is None:
+        raise ValueError("--splits-dir is required for split generation or verification")
+    corpus = inspect_pdf_archive(archive_path) if archive_path is not None else inspect_pdf_directory(directory_path)
+    parsed = parse_vidoseek_annotations(annotations_path, corpus["doc_page_counts"])
+    query_ids = [query["query_id"] for query in parsed.queries]
+    splits = {}
+    if args.verify_splits:
+        splits = read_split_bundle(args.splits_dir, query_ids)
+    elif args.generate_splits:
+        splits = create_deterministic_splits(query_ids)
 
-        with open(args.config, "rb") as f:
-            cfg = tomllib.load(f)
-
-        dataset_cfg = cfg.get("dataset", {})
-        if not annotations_path and "annotation_file" in dataset_cfg:
-            annotations_path = Path(dataset_cfg["annotation_file"])
-        if not corpus_zip_path and "corpus_file" in dataset_cfg:
-            corpus_zip_path = Path(dataset_cfg["corpus_file"])
-
-    boundary_status = get_boundary_status()
-
-    report: Dict[str, Any] = {
-        "status": "VERIFIED_CPU_AUDIT",
-        "dataset": "Qiuchen-Wang/ViDoSeek",
-        "timestamp_utc": datetime.now(timezone.utc).isoformat(),
-        "boundary": boundary_status,
-        "corpus": {},
-        "annotations": {},
-        "splits": {},
+    # Preflight all existing output paths before creating any artifacts.
+    if args.output and not args.dry_run and (args.output.exists() or args.output.is_symlink()):
+        raise FileExistsError(f"Report already exists; select a new output path: {args.output}")
+    report = {
+        "status": "VERIFIED_CPU_AUDIT", "dataset": "Qiuchen-Wang/ViDoSeek",
+        "timestamp_utc": datetime.now(timezone.utc).isoformat(), "boundary": get_boundary_status(),
+        "corpus": corpus,
+        "annotations": {"path": str(annotations_path), "sha256": hashlib.sha256(annotations_path.read_bytes()).hexdigest(),
+                        "size_bytes": annotations_path.stat().st_size, "total_queries": len(parsed.queries),
+                        "total_documents": len(parsed.document_names), "qrels_count": len(parsed.qrels)},
+        "queries": parsed.queries, "qrels": parsed.qrels,
+        "splits": {name: {"count": len(ids), "sha256": serialize_split_manifest(ids)[1], "ids": ids}
+                   for name, ids in splits.items()},
+        "split_mode": "verified" if args.verify_splits else "generated" if args.generate_splits else "not_requested",
+        "provenance": _provenance(args),
     }
-
-    # 1. Corpus ZIP Inspection
-    if corpus_zip_path and corpus_zip_path.exists():
-        archive_info = inspect_pdf_archive(corpus_zip_path)
-        report["corpus"] = archive_info
-        print(f"[OK] Inspected archive: {corpus_zip_path.name} ({archive_info['pdf_count']} PDFs)")
-    elif corpus_zip_path:
-        report["corpus"] = {"status": "MISSING_LOCAL_FILE", "path": str(corpus_zip_path)}
-        print(f"[NOTE] Corpus archive not found locally at: {corpus_zip_path}")
-
-    # 2. Annotations Parsing
-    query_ids = []
-    if annotations_path and annotations_path.exists():
-        parsed = parse_vidoseek_annotations(annotations_path)
-        query_ids = [q["query_id"] for q in parsed.queries]
-        report["annotations"] = {
-            "total_queries": len(parsed.queries),
-            "total_documents": len(parsed.document_names),
-            "qrels_count": len(parsed.qrels),
-        }
-        print(f"[OK] Parsed annotations: {len(parsed.queries)} queries, {len(parsed.document_names)} documents")
-    elif annotations_path:
-        report["annotations"] = {"status": "MISSING_LOCAL_FILE", "path": str(annotations_path)}
-        print(f"[NOTE] Annotations file not found locally at: {annotations_path}")
-
-    # 3. Splits Generation / Verification
-    if (args.generate_splits or args.verify_splits) and query_ids:
-        splits = create_deterministic_splits(query_ids, seed=2026)
-        valid, msg = verify_split_disjointness(splits, total_expected=len(query_ids))
-        if not valid:
-            print(f"[ERROR] Split verification failed: {msg}", file=sys.stderr)
-            return 1
-
-        split_summary = {}
-        for split_name, ids in splits.items():
-            text, digest = serialize_split_manifest(ids)
-            split_summary[split_name] = {
-                "count": len(ids),
-                "sha256": digest,
-            }
-            if args.splits_dir and not args.dry_run:
-                args.splits_dir.mkdir(parents=True, exist_ok=True)
-                manifest_file = args.splits_dir / f"{split_name}_ids.txt"
-                manifest_file.write_text(text, encoding="utf-8")
-
-        report["splits"] = split_summary
-        print(f"[OK] Derived deterministic splits: Train={len(splits['train'])}, Val={len(splits['val'])}, Test={len(splits['test'])}")
-
-    # 4. Output Writing
+    if args.generate_splits and not args.dry_run:
+        write_split_bundle(args.splits_dir, query_ids)
     if args.output and not args.dry_run:
         args.output.parent.mkdir(parents=True, exist_ok=True)
-        with open(args.output, "w", encoding="utf-8") as f:
-            json.dump(report, f, indent=2)
-        print(f"[OK] Audit report written to: {args.output}")
-
-    print(f"\n[DONE] M1.3 CPU Audit completed successfully. Boundary state: {boundary_status['boundary_state']}.")
+        with args.output.open("xb") as stream:
+            stream.write((json.dumps(report, indent=2, ensure_ascii=False) + "\n").encode("utf-8"))
+    print(f"[OK] VERIFIED_CPU_AUDIT: {corpus['pdf_count']} PDFs, {corpus['total_pages']} pages, {len(query_ids)} queries")
     return 0
+
+
+def main():
+    args = parse_args()
+    try:
+        return audit(args)
+    except (OSError, ValueError, TypeError, zipfile.BadZipFile, RuntimeError) as exc:
+        print(f"[ERROR] FAILED_CPU_AUDIT: {exc}", file=sys.stderr)
+        return 1
 
 
 if __name__ == "__main__":

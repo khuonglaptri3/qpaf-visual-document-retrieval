@@ -3,6 +3,8 @@ from pathlib import Path
 
 
 def _execute_remote(stage, config, run_id, source):
+    from qpaf.m13.boundary import assert_stage_authorized
+    assert_stage_authorized(stage, source)
     import modal
     from .pipeline import execute_stage
     volume = modal.Volume.from_name(config['modal']['volume_name'])

@@ -5,7 +5,6 @@ import io
 import json
 from pathlib import Path
 import sys
-import uuid
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT/'src'))
@@ -14,6 +13,8 @@ from qpaf.m11.config import load_config
 from qpaf.m11.dataset import extract_zip
 from qpaf.m11.evidence import verify_evidence
 from qpaf.m11.pipeline import STAGES, run_directory
+from qpaf.m13.boundary import assert_execution_authorized
+from qpaf.m18.namespace import create_run_namespace, ensure_run_metadata, format_canonical_run_id, validate_run_contract
 
 
 def main(argv=None):
@@ -28,13 +29,16 @@ def main(argv=None):
     config = load_config(args.config, args.set)
     if args.stage != 'all' and not args.run_id:
         parser.error('--run-id is required when selecting a stage or fetching evidence')
-    run_id = args.run_id or (datetime.now(timezone.utc).strftime('m11-%Y%m%dT%H%M%S')+'-'+uuid.uuid4().hex[:8])
+    run_id = args.run_id or format_canonical_run_id(config['execution']['experiment_id'], datetime.now(timezone.utc))
     run_directory(Path('.'), run_id) # validate before cloud work
     source = source_provenance(ROOT, config['modal']['requirements_file'])
     stages = list(STAGES) if args.stage == 'all' else [args.stage]
     if args.dry_run:
         print(json.dumps({'run_id': run_id, 'stages': stages, 'config': config, 'source': source}, indent=2))
         return 0
+    if not args.check_sdk and args.stage != 'fetch':
+        assert_execution_authorized()
+        validate_run_contract(run_id, config)
     from qpaf.m11.modal_app import build_app
     app, cpu, gpu, collect = build_app(config, ROOT)
     if args.check_sdk:
@@ -47,6 +51,11 @@ def main(argv=None):
     destination = local_root/run_id
     if ('oracle' in stages or 'fetch' in stages) and destination.exists():
         raise FileExistsError(f'Local evidence already exists: {destination}; change output.local_dir to fetch elsewhere')
+    if args.stage != 'fetch':
+        namespace = local_root/'artifacts'/config['execution']['experiment_id']/run_id
+        if not namespace.exists():
+            namespace = create_run_namespace(local_root, config['execution']['experiment_id'], run_id)
+        ensure_run_metadata(namespace, run_id, config, source)
     import modal
     print(f'Run: {run_id}; volume: {config["modal"]["volume_name"]}', flush=True)
     with modal.enable_output(), app.run():
@@ -72,6 +81,6 @@ if __name__ == '__main__':
         sys.stderr.reconfigure(encoding='utf-8')
     try:
         raise SystemExit(main())
-    except (ValueError, FileExistsError) as exc:
+    except (ValueError, FileExistsError, PermissionError) as exc:
         print(f'Error: {exc}', file=sys.stderr)
         raise SystemExit(2)
