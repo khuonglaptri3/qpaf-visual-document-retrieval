@@ -5,6 +5,12 @@ from .boundary import (
     assert_execution_authorized,
     get_boundary_status,
 )
+from .splits import (
+    create_deterministic_splits,
+    hash_query_for_split,
+    serialize_split_manifest,
+    verify_split_disjointness,
+)
 from .vidoseek import (
     ViDoSeekParsedDataset,
     format_page_id,
@@ -21,5 +27,10 @@ __all__ = [
     "format_page_id",
     "page_to_document_id",
     "parse_vidoseek_annotations",
+    "create_deterministic_splits",
+    "hash_query_for_split",
+    "serialize_split_manifest",
+    "verify_split_disjointness",
 ]
+
 
