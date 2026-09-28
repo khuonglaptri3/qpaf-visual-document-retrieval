@@ -307,6 +307,34 @@ class TestM16CollisionAudit(unittest.TestCase):
         self.assertIn("PASS_AUDIT", md_text)
         self.assertIn("Zero cross-split leakage confirmed", md_text)
 
+    def test_cli_execution_with_fixture(self):
+        """Verify standalone execution of scripts/audit_collisions.py."""
+        import subprocess
+
+        cli_script = ROOT / "scripts" / "audit_collisions.py"
+        out_dir = self.work_dir / "audit_output"
+
+        cmd = [
+            sys.executable,
+            str(cli_script),
+            "--fixture",
+            "--output-dir",
+            str(out_dir),
+        ]
+        result = subprocess.run(cmd, capture_output=True, text=True)
+        self.assertEqual(result.returncode, 0, f"CLI stderr: {result.stderr}")
+
+        self.assertTrue((out_dir / "page_manifest.csv").is_file())
+        self.assertTrue((out_dir / "alias_manifest.csv").is_file())
+        self.assertTrue((out_dir / "duplicate_report.csv").is_file())
+        self.assertTrue((out_dir / "collision_report.md").is_file())
+        self.assertTrue((out_dir / "collision_summary.json").is_file())
+
+        with open(out_dir / "collision_summary.json", "r", encoding="utf-8") as f:
+            summary = json.load(f)
+        self.assertEqual(summary["status"], "PASS_AUDIT")
+        self.assertEqual(summary["split_leakage_count"], 0)
+
 
 if __name__ == "__main__":
     unittest.main()
