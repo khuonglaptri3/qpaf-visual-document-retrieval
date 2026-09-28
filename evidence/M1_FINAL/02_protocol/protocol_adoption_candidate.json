@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "candidate_id": "QPAF-M1.5-v2-candidate",
+  "status": "PREPARED_BLOCKED_NOT_ADOPTED",
+  "source_snapshot_commit": "2e74b97e1836213f07510a4075c3b53389bd04c5",
+  "historical_freeze": {
+    "manifest_path": "evidence/M1_FINAL/02_protocol/protocol_freeze_manifest.json",
+    "manifest_sha256": "fbd2f4cf6003bfa271985ebf283a046950ad5fc4d7e2657e21ad6fe4a2c96f8b",
+    "package_digest_sha256": "692e98b790939f25f95e2c04ab9f3c661561b18cae5548870d49491d4fdf6c16"
+  },
+  "post_import_amendments": {
+    "path": "evidence/M1_FINAL/02_protocol/amendments_after_import.md",
+    "sha256": "6a7a0f6328e467c698771115affa58cac32b95ea889da1a91691661e4049dc49",
+    "ids": ["QPAF-M1.5-A001", "QPAF-M1.5-A002"],
+    "research_lead_approval_recorded": true,
+    "independent_reviewer_signoff": "PENDING"
+  },
+  "reference_bindings": [
+    {
+      "amendment": "QPAF-M1.5-A001",
+      "role": "pairwise_loss_software_reference_not_learned_training",
+      "path": "src/qpaf/m12/losses.py",
+      "sha256": "18debc316b02146c38c36a6b1021f0db5e3ba9be55ffdb4c8be153cd11ce5395"
+    },
+    {
+      "amendment": "QPAF-M1.5-A001",
+      "role": "method_core_verification_config_not_learned_training",
+      "path": "configs/m1.2/core.toml",
+      "sha256": "d8ab2405dc9656eba42e35b1cf53f31b95b46bd9d1db75387a59ff28180b436d"
+    },
+    {
+      "amendment": "QPAF-M1.5-A002",
+      "role": "label_free_split_implementation_reference",
+      "path": "src/qpaf/m13/splits.py",
+      "sha256": "025e1ef1f9d005d56cae56e2807524671ad7818cc4f64fc8742ccf8f95865b2c"
+    },
+    {
+      "amendment": "QPAF-M1.5-A002",
+      "role": "pinned_dataset_reference_not_materialized_data",
+      "path": "configs/m1.1/vidoseek.toml",
+      "sha256": "09ab9e5850897c6cdfc7235712d9e9a950023690de55c618a913d7d62a0763eb"
+    }
+  ],
+  "dataset_reference": {
+    "repo_id": "Qiuchen-Wang/ViDoSeek",
+    "revision": "e91a92ba5f38690696c7e66be5c5474b54c6e791",
+    "planned_query_split_ratios": {"train": 0.70, "val": 0.15, "test": 0.15},
+    "split_manifest_paths_and_sha256": null,
+    "source_data_and_qrels_sha256": null,
+    "overlap_and_coverage_review": null
+  },
+  "unresolved_contract": {
+    "learned_training_config_and_model_revisions": null,
+    "candidate_depth_and_seed_decision": null,
+    "m1_6_reviewed_full_corpus_revision": null,
+    "m1_8_provisional_vs_calibrated_g1_scope_decision": null,
+    "selected_immutable_review_commit": null,
+    "independent_m1_7_protocol_binding": null
+  },
+  "execution_authorized": false
+}
