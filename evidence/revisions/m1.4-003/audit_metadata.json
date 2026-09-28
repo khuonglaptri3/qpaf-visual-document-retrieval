@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "task": "M1.4",
+  "owner": "Trần Đình Khương",
+  "planned_date": "2026-09-23",
+  "generated_at_utc": "2026-09-28T08:49:29.892787+00:00",
+  "status": "PARTIAL",
+  "file_count": 307,
+  "counts": {
+    "source": 20,
+    "data": 0,
+    "config": 2,
+    "run": 225,
+    "documentation": 31,
+    "infrastructure": 29
+  },
+  "git": {
+    "commit": "0924c2702692146cad1b52f196df0c789bd5ce36",
+    "branch": "feature/m1-3-primary-corpus",
+    "worktree_status": ""
+  },
+  "excluded_entries": [
+    ".git/",
+    "evidence/",
+    "src/qpaf/__pycache__/",
+    "src/qpaf/m11/__pycache__/",
+    "src/qpaf/m12/__pycache__/",
+    "src/qpaf/m13/__pycache__/",
+    "tests/__pycache__/"
+  ],
+  "read_errors": [],
+  "gaps": [
+    {
+      "id": "DATA_MISSING",
+      "detail": "No data assets observed in the audited scope. Request the real location or record that none exist."
+    },
+    {
+      "id": "PROVENANCE_REVIEW_REQUIRED",
+      "detail": "Khương and independent QA must review source/data/config/run/output links. Inventory generation is not M1.4 acceptance."
+    }
+  ],
+  "scope": "Local filesystem inventory; generated evidence, links and configured exclusions are omitted. No external assets were inspected."
+}
