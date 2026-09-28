@@ -1,0 +1,7 @@
+alias_id,canonical_page_id,source_reference,reason,review_status
+doc_001_1,doc_001_page_0001,vidoseek.json:example_0002,underscore_index,reviewed
+doc_001_p1,doc_001_page_0001,vidoseek.json:example_0001,short_p_notation,reviewed
+doc_002_page_1,doc_002_page_0001,vidoseek.json:example_0003,zero_padded_page_index,reviewed
+doc_003_p2,doc_003_page_0002,vidoseek.json:example_0004,short_p_notation,reviewed
+doc_004_page_3,doc_004_page_0003,vidoseek.json:example_0005,zero_padded_page_index,reviewed
+doc_005_p1,doc_005_page_0001,vidoseek.json:example_0006,short_p_notation,reviewed
