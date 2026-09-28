@@ -21,7 +21,8 @@ cũ để làm lịch sử trông hoàn chỉnh hơn.
 6. `SUPERSESSION_RECORDED`: row cũ giữ nguyên; row mới trỏ
    `supersedes_event_id` và giải thích phạm vi bị thay thế.
 
-Draft hiện tại chỉ dùng `REGISTERED`/`STATUS_RECORDED`; không có authorization.
+Draft hiện tại dùng `REGISTERED`, `STATUS_RECORDED` và
+`VERIFICATION_RECORDED`; không có authorization hoặc attempt event.
 
 ## Correction policy
 
