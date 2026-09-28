@@ -1,0 +1,5 @@
+generated_at_utc: 2026-09-28T08:49:29.892787+00:00
+planned_date: 2026-09-23
+commit: 0924c2702692146cad1b52f196df0c789bd5ce36
+branch: feature/m1-3-primary-corpus
+worktree_status: (clean/empty)
