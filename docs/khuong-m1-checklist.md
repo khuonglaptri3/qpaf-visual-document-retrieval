@@ -24,7 +24,8 @@ và lịch sử Git. Không backdate để biến việc thực hiện sau thàn
 - M1.3: **ĐÃ TRIỂN KHAI HOÀN TẤT** ([`docs/m1.3-primary-corpus.md`](m1.3-primary-corpus.md)); bộ công cụ CPU audit package tại `src/qpaf/m13/`, 16/16 test đạt 100%.
 - M1.4: **ĐÃ TẠO SNAPSHOT MỚI `evidence/revisions/m1.4-003/`**; kiểm kê 307 tệp, ghi nhận 20 source, 2 config, 225 run assets; đóng 3/5 gaps lớn (`RESEARCH_CODE_MISSING`, `CONFIG_MISSING`, `RUNS_MISSING` đã được giải quyết).
 - M1.5: **ĐÃ BAN HÀNH 2 AMENDMENTS** (`QPAF-M1.5-A001` chốt Pairwise Logistic Loss và `QPAF-M1.5-A002` chốt ViDoSeek).
-- M1.6: **SẴN SÀNG CHẠY KHI CÓ FILE CORPUS THẬT**; công cụ audit M1.3 đã sẵn sàng hỗ trợ trích xuất manifest.
+- M1.6: **ĐÃ TRIỂN KHAI VÀ KIỂM TOÁN HOÀN TẤT** ([`evidence/revisions/m1.6-001/`](../evidence/revisions/m1.6-001/)); hệ thống `src/qpaf/m16/` và CLI `scripts/audit_collisions.py` xác nhận 100% canonical IDs, zero cross-split leakage, và 0 orphan queries.
+- Báo cáo kiểm kê toàn diện M1.4–M1.5–M1.6: xem [`docs/m1.4-m1.5-m1.6-audit-report.md`](m1.4-m1.5-m1.6-audit-report.md).
 - M1.8: **DRAFT — có quy tắc chuẩn bị, chưa có calibration để freeze threshold**.
 - Technical sign-off: **NOT SIGNED**; G1 do Phát quyết định với QA của Thanh.
 
