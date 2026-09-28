@@ -5,6 +5,11 @@ from .boundary import (
     assert_execution_authorized,
     get_boundary_status,
 )
+from .corpus import (
+    generate_synthetic_vidoseek_fixture,
+    inspect_pdf_archive,
+    scan_pdf_directory,
+)
 from .splits import (
     create_deterministic_splits,
     hash_query_for_split,
@@ -31,6 +36,10 @@ __all__ = [
     "hash_query_for_split",
     "serialize_split_manifest",
     "verify_split_disjointness",
+    "inspect_pdf_archive",
+    "scan_pdf_directory",
+    "generate_synthetic_vidoseek_fixture",
 ]
+
 
 
