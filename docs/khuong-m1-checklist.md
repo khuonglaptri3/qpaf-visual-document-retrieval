@@ -26,8 +26,8 @@ và lịch sử Git. Không backdate để biến việc thực hiện sau thàn
 - M1.5: **ĐÃ BAN HÀNH 2 AMENDMENTS** (`QPAF-M1.5-A001` chốt Pairwise Logistic Loss và `QPAF-M1.5-A002` chốt ViDoSeek).
 - M1.6: **ĐÃ TRIỂN KHAI VÀ KIỂM TOÁN HOÀN TẤT** ([`evidence/revisions/m1.6-001/`](../evidence/revisions/m1.6-001/)); hệ thống `src/qpaf/m16/` và CLI `scripts/audit_collisions.py` xác nhận 100% canonical IDs, zero cross-split leakage, và 0 orphan queries.
 - Báo cáo kiểm kê toàn diện M1.4–M1.5–M1.6: xem [`docs/m1.4-m1.5-m1.6-audit-report.md`](m1.4-m1.5-m1.6-audit-report.md).
-- M1.8: **DRAFT — có quy tắc chuẩn bị, chưa có calibration để freeze threshold**.
-- Technical sign-off: **NOT SIGNED**; G1 do Phát quyết định với QA của Thanh.
+- M1.8: **ĐÃ TRIỂN KHAI VÀ XUẤT BẢN GÓI HIỆU CHUẨN** ([`evidence/revisions/m1.8-001/`](../evidence/revisions/m1.8-001/)); gồm `ocr_checklist.md`, `ocr_failure_threshold.md` (công thức toán học và ngưỡng dự kiến PROVISIONAL chờ M2.3 freeze), `artifact_namespace.md` (đồng bộ 100% với Thanh M1.7), `calibration_methodology.md`, phân hệ `src/qpaf/m18/` và CLI `scripts/audit_ocr_policy.py`.
+- Technical sign-off: **NOT SIGNED**; G1 do Phát quyết định với QA của Thanh. Sẵn sàng trình Hội đồng Gate G1 bộ bằng chứng hoàn chỉnh M1.4–M1.8.
 
 
 ## Việc tiếp theo của Khương
