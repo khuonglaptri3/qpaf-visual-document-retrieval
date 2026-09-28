@@ -1,0 +1,16 @@
+{
+  "status": "PASS_AUDIT",
+  "timestamp_utc": "2026-09-28T09:05:26.816683+00:00",
+  "total_documents": 5,
+  "total_pages": 20,
+  "unique_content_hashes": 19,
+  "duplicate_pairs_count": 1,
+  "duplicate_groups_count": 1,
+  "split_leakage_count": 0,
+  "total_queries": 6,
+  "valid_queries": 6,
+  "orphan_query_count": 0,
+  "orphan_page_count": 15,
+  "dataset_name": "Qiuchen-Wang/ViDoSeek",
+  "dataset_revision": "e91a92ba5f38690696c7e66be5c5474b54c6e791"
+}
