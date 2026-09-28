@@ -18,14 +18,16 @@ và lịch sử Git. Không backdate để biến việc thực hiện sau thàn
 | 26/09 | Sửa technical blocker từ G1 | Issue có owner, evidence mới, kiểm lại hash/collision |
 | 27/09 | Technical Freeze và sign-off | Review dữ liệu/code/hash/OCR hoàn tất; Thanh QA độc lập |
 
-## Trạng thái khởi đầu
+## Trạng thái cập nhật ngày 28/09/2026
 
-- Repo và quy trình Gitflow: đã thiết lập trong đợt khởi tạo.
-- M1.4: công cụ kiểm kê và snapshot ban đầu; **PARTIAL**, chưa đóng các gap
-  về research code, corpus, experiment configs và historical runs.
-- M1.6: **BLOCKED — chưa có corpus/split/qrels để chạy kiểm tra**.
+- Repo và quy trình Gitflow: hoạt động ổn định trên `develop` và feature branches.
+- M1.3: **ĐÃ TRIỂN KHAI HOÀN TẤT** ([`docs/m1.3-primary-corpus.md`](m1.3-primary-corpus.md)); bộ công cụ CPU audit package tại `src/qpaf/m13/`, 16/16 test đạt 100%.
+- M1.4: **ĐÃ TẠO SNAPSHOT MỚI `evidence/revisions/m1.4-003/`**; kiểm kê 307 tệp, ghi nhận 20 source, 2 config, 225 run assets; đóng 3/5 gaps lớn (`RESEARCH_CODE_MISSING`, `CONFIG_MISSING`, `RUNS_MISSING` đã được giải quyết).
+- M1.5: **ĐÃ BAN HÀNH 2 AMENDMENTS** (`QPAF-M1.5-A001` chốt Pairwise Logistic Loss và `QPAF-M1.5-A002` chốt ViDoSeek).
+- M1.6: **SẴN SÀNG CHẠY KHI CÓ FILE CORPUS THẬT**; công cụ audit M1.3 đã sẵn sàng hỗ trợ trích xuất manifest.
 - M1.8: **DRAFT — có quy tắc chuẩn bị, chưa có calibration để freeze threshold**.
 - Technical sign-off: **NOT SIGNED**; G1 do Phát quyết định với QA của Thanh.
+
 
 ## Việc tiếp theo của Khương
 
