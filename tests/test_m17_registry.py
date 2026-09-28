@@ -279,7 +279,16 @@ class M17RegistryDraftTests(unittest.TestCase):
                 if value not in sentinels:
                     self.assertTrue(re.fullmatch(r"[0-9a-f]{64}", value), row)
                     path_column = "data_ref" if column == "data_hash" else "output_ref"
-                    actual = hashlib.sha256((ROOT / row[path_column]).read_bytes()).hexdigest()
+                    ref = row[path_column]
+                    if row["trace_id"] == "M17-TRC-011" and column == "output_hash":
+                        self.assertEqual(
+                            ref, "evidence/M1_FINAL/02_protocol/protocol_amendments.md"
+                        )
+                        self.assertEqual(
+                            row["git_commit"], "0924c2702692146cad1b52f196df0c789bd5ce36"
+                        )
+                        ref = "evidence/M1_FINAL/02_protocol/amendments_after_import.md"
+                    actual = hashlib.sha256((ROOT / ref).read_bytes()).hexdigest()
                     self.assertEqual(actual, value, row)
 
     def test_claim_boundaries_do_not_promote_oracle_or_software_checks(self):

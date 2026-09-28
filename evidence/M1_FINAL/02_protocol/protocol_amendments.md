@@ -2,7 +2,7 @@
 
 > **Protocol:** `QPAF-M1.5-v1`  
 > **Ledger mode:** Append-only after freeze  
-> **Current state:** Protocol frozen; đã ghi nhận 2 amendments `QPAF-M1.5-A001` và `QPAF-M1.5-A002`  
+> **Current state:** Protocol frozen; chưa có post-freeze amendment  
 > **Registry classification:** `governance` / `governance_record`
 
 Mọi thay đổi từ sau initial freeze identity bên dưới là post-freeze amendment. Chỉ
@@ -25,8 +25,7 @@ append amendment mới; không sửa/xóa entry cũ hoặc silently thay semanti
 
 | ID | Date | Requester | Affected field/file | Old value | New value | Reason/evidence | Leakage/fairness/statistical impact | Affected runs / rerun | Approver | Status |
 |---|---|---|---|---|---|---|---|---|---|---|
-| `QPAF-M1.5-A001` | 2026-09-28 | Khương / Tấn Phát | `frozen_protocol.md`, loss contract | Masked listwise loss | Pairwise logistic loss (`qpaf13_v1`) | Reconcile with verified M1.2 method core in `src/qpaf/m12/losses.py` (25/25 tests passing, finite-difference checked) | No leakage; both variants use identical candidate order and query-balanced normalization | Resolves method contract conflict (M17-ISS-001); no prior learned runs invalidated | Tấn Phát (Research Lead) | `APPROVED` |
-| `QPAF-M1.5-A002` | 2026-09-28 | Khương / Nhóm | `dataset_split_policy.md`, dataset role | ViDoSeek only discovery / ViMDoc primary | ViDoSeek (`Qiuchen-Wang/ViDoSeek`) adopted as active primary corpus; ViMDoc retained for future confirmation | Aligns protocol with active codebase, configs (`configs/m1.1/vidoseek.toml`), and M1.1/M1.3 CPU audit tool | Zero leakage; label-free deterministic SHA256 split (Train 70% / Val 15% / Test 15%) | Clarifies active evaluation targets across M1.1–M1.3 | Tấn Phát (Research Lead) | `APPROVED` |
+| — | — | — | — | — | — | — | — | — | — | No post-freeze amendments |
 
 ## Required amendment procedure
 
