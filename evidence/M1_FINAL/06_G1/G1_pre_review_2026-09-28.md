@@ -33,7 +33,7 @@ Khương, Thanh, or the whole-team G1.
 | Independent audit | Thanh has a Draft source/hash audit and issue log, but no Final review of an adopted selected package | `BLOCKED_DRAFT_INDEPENDENT_AUDIT` |
 | Final sign-offs | Technical Sign-off is `NOT SIGNED`; QA Sign-off is missing | `NOT_DUE_BEFORE_FIRST_REVIEW` |
 | G1 preparation | Checklist/evidence/readiness documents refreshed by this sync | `READY_FOR_TEAM_REVIEW_AFTER_UPSTREAM_GATES` |
-| Git/package provenance | Source base `2e74b97` is known; current preparation is not a committed or selected byte-identical G1 review package | `SOURCE_BASE_IDENTIFIED_PACKAGE_NOT_SELECTED` |
+| Git/package provenance | Source base `2e74b97` is known; at this 28/09 drafting snapshot, preparation was uncommitted and no byte-identical G1 review package was selected | `SOURCE_BASE_IDENTIFIED_PACKAGE_NOT_SELECTED` |
 
 ## Pre-review blocker candidates
 
