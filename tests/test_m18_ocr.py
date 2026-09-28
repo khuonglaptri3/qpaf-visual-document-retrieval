@@ -86,6 +86,33 @@ class TestM18OCRPolicy(unittest.TestCase):
         with self.assertRaises(FileExistsError):
             create_run_namespace(self.work_dir, exp_id, run_id)
 
+    def test_cli_execution_and_generation(self):
+        """Verify standalone execution of scripts/audit_ocr_policy.py."""
+        import subprocess
+
+        cli_script = ROOT / "scripts" / "audit_ocr_policy.py"
+        out_dir = self.work_dir / "m1.8_out"
+
+        cmd = [
+            sys.executable,
+            str(cli_script),
+            "--probe",
+            "--output-dir",
+            str(out_dir),
+        ]
+        result = subprocess.run(cmd, capture_output=True, text=True)
+        self.assertEqual(result.returncode, 0, f"CLI stderr: {result.stderr}")
+
+        self.assertTrue((out_dir / "ocr_checklist.md").is_file())
+        self.assertTrue((out_dir / "ocr_failure_threshold.md").is_file())
+        self.assertTrue((out_dir / "artifact_namespace.md").is_file())
+        self.assertTrue((out_dir / "calibration_methodology.md").is_file())
+        self.assertTrue((out_dir / "hash_manifest.csv").is_file())
+
+        threshold_content = (out_dir / "ocr_failure_threshold.md").read_text(encoding="utf-8")
+        self.assertIn("PROVISIONAL", threshold_content)
+        self.assertIn("M2.3", threshold_content)
+
 
 if __name__ == "__main__":
     unittest.main()
