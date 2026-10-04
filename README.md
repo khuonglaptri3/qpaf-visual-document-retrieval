@@ -1,15 +1,15 @@
 # Oracle Study for QPAF and Budget-Aware HEAVEN
 
-## Milestone v? guideline ??y ??
+## Tài liệu và milestone
 
-Ngu?n k? ho?ch c?a nh?m n?m trong [`docs/GUILDLINE_OVERVIEWS_PROPOSAL`](docs/GUILDLINE_OVERVIEWS_PROPOSAL/overview.md):
+Bắt đầu tại [mục lục tài liệu](docs/README.md). Các tài liệu được phân nhóm theo tổng quan, kế hoạch, phương pháp, dữ liệu, thí nghiệm và bàn giao.
 
-- [Milestone ho?n ch?nh](docs/GUILDLINE_OVERVIEWS_PROPOSAL/POAI_Milestone_Group01_Hoan_Chinh.xlsx), sheet `Milestones`.
-- [T?ng quan ph?i h?p](docs/GUILDLINE_OVERVIEWS_PROPOSAL/overview.md) v? [timeline tham chi?u](docs/GUILDLINE_OVERVIEWS_PROPOSAL/TIMELINE_fixed.md).
-- [?? xu?t nghi?n c?u](docs/GUILDLINE_OVERVIEWS_PROPOSAL/DE_XUAT_NGHIEN_CUU_QPAF.md).
-- [Checklist c?a Kh??ng](docs/khuong-m1-checklist.md), [b?o c?o audit M1.4?M1.6](docs/m1.4-m1.5-m1.6-audit-report.md) v? [g?i b?ng ch?ng M1](evidence/M1_FINAL/README.md).
+- [Milestone hoàn chỉnh](docs/GUILDLINE_OVERVIEWS_PROPOSAL/POAI_Milestone_Group01_Hoan_Chinh.xlsx), sheet `Milestones`.
+- [Tổng quan phối hợp](docs/GUILDLINE_OVERVIEWS_PROPOSAL/overview.md) và [timeline tham chiếu](docs/GUILDLINE_OVERVIEWS_PROPOSAL/TIMELINE_fixed.md).
+- [Đề xuất nghiên cứu](docs/GUILDLINE_OVERVIEWS_PROPOSAL/DE_XUAT_NGHIEN_CUU_QPAF.md).
+- [Checklist của Khương](docs/khuong-m1-checklist.md), [báo cáo audit M1.4–M1.6](docs/06_handover/m1.4-m1.5-m1.6-audit-report.md) và [gói bằng chứng M1](evidence/M1_FINAL/README.md).
 
-Nh?nh `feature/m1-8-ocr-artifact` t? repo `khuonglaptri3/qpaf-visual-document-retrieval` ???c h?p nh?t v?o `develop` c?ng l?ch s? v? b?ng ch?ng b?n giao. C?c tr?ng th?i trong t?i li?u b?n giao l? snapshot c?a repo ngu?n; ??i chi?u artifact v? review tr??c khi c?p nh?t tr?ng th?i milestone. `PROJECT_TRACKING.md` v? `Tasks.md` gi? h? s? oracle-study hi?n c?.
+Các trạng thái trong tài liệu bàn giao là snapshot theo thời điểm của repo nguồn. Đối chiếu artifact, amendment và review trước khi cập nhật trạng thái milestone.
 
 Package này triển khai phần **oracle analysis** của hai hướng nghiên cứu:
 
@@ -201,9 +201,9 @@ xác từ môi trường HEAVEN/GPU nằm tại `docs/heaven_export_contract.md`
 
 ---
 
-# H? s? b?n giao t? repository nghi?n c?u c?a nh?m
+# Hồ sơ bàn giao từ repository nghiên cứu của nhóm
 
-Ph?n d??i gi? n?i dung README c?a repo ngu?n t?i commit `83a20c2`; c?c tr?ng th?i l? l?ch s? b?n giao t?i repo ??.
+Phần dưới giữ nội dung README của repo nguồn tại commit `83a20c2`; các trạng thái là lịch sử bàn giao tại repo đó.
 
 # QPAF — Query-Page Adaptive Fusion for Visual Document Retrieval
 
@@ -238,7 +238,7 @@ config và bằng chứng vào inventory.
 [TIMELINE_fixed.md](docs/GUILDLINE_OVERVIEWS_PROPOSAL/TIMELINE_fixed.md) là lịch tham chiếu cũ cho M1.4–M1.10.
 Lịch đó chưa phân công lại việc thực hiện M1.1/M1.2. Không dùng ngày kế
 hoạch để thay cho ngày chạy thực tế. Tài liệu Word
-[Nghiên Cứu Kỹ Thuật QPAF](docs/GUILDLINE_OVERVIEWS_PROPOSAL/Nghiên%20Cứu%20Kỹ%20Thuật%20QPAF.docx) được giữ
+[Nghiên Cứu Kỹ Thuật QPAF](docs/GUILDLINE_OVERVIEWS_PROPOSAL/Nghi%C3%AAn%20C%E1%BB%A9u%20K%E1%BB%B9%20Thu%E1%BA%ADt%20QPAF.docx) được giữ
 để truy nguồn; khi khác phạm vi dataset hoặc diễn giải kết quả, đối chiếu
 với hai tài liệu định hướng và protocol được nhóm chốt.
 
