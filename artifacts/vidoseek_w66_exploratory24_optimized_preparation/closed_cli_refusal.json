@@ -1,0 +1,15 @@
+{
+  "status": "PASS_CLOSED_REFUSAL",
+  "classification": "preparation_guard_evidence_not_w66_result",
+  "command": "C:\\Python313\\python.exe scripts\\run_vidoseek_exploratory24_w66_optimized.py run --actor codex",
+  "exit_code": 1,
+  "error_type": "PermissionError",
+  "error": "Separate optimized exploratory-24 W66 execution approval pending; no attempt consumed",
+  "approval_checked_before_validation_input_or_output_write": true,
+  "output_path": "runs/vidoseek_w66_exploratory24_optimized_v1",
+  "output_exists_after_refusal": false,
+  "attempt_exists_after_refusal": false,
+  "w66_oracle_executed": false,
+  "scientific_result_produced": false,
+  "authorized_invocations": 0
+}

@@ -1,0 +1,32 @@
+{
+  "artifact_hashes_checked": 1171,
+  "checkpoint_envelopes_checked": 1142,
+  "classification": "independent_fixed_profile_audit_review",
+  "config_canonical_sha256": "9b51e3fd162c8c8f6807128b80f705026c6b8e345116e8db03679f53602d6e63",
+  "formal_phase_decision": false,
+  "global_ceiling_queries": 864,
+  "global_mean_ndcg10": 0.8751382164365616,
+  "global_profile": [
+    0.0,
+    0.0,
+    1.0
+  ],
+  "global_profile_index": 2,
+  "headroom_threshold": 0.03,
+  "max_query_headroom": 1.0,
+  "mean_fixed_profile_gain": 0.033129425188685,
+  "mean_qpaf_gain_upper_bound": 0.09173235837475333,
+  "profile_metric_values_recomputed": 32012,
+  "qarf_ceiling_queries": 926,
+  "qarf_mean_ndcg10": 0.9082676416252466,
+  "qpaf_measured": false,
+  "queries_with_headroom_ge_003": 216,
+  "queries_with_positive_headroom": 216,
+  "raw_queries_recomputed": 1142,
+  "raw_query_page_pairs_recomputed": 6149670,
+  "remaining_authorized_invocations": 0,
+  "review_advice": "HEADROOM_POSSIBLE_REVIEW_COMPUTE",
+  "run_manifest_sha256": "7f58280aed8e9376e53adf4cfa8e527a0189ee6ad196df59d22706539ad8008e",
+  "status": "PASS",
+  "training_authorized": false
+}

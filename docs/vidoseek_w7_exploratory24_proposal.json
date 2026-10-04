@@ -1,0 +1,218 @@
+{
+  "proposal_id": "vidoseek_p1_02r_w7_exploratory24_v1",
+  "status": "FROZEN_SELECTION_EXECUTION_CLOSED",
+  "execution_authorized": false,
+  "classification": "proposed_exploratory24_subset_not_full_w7_or_phase_gate",
+  "selection": {
+    "rule": "Remove the 12 indices in docs/vidoseek_w7_exploratory12_proposal.json from candidate-audit order; Python 3.13 random.Random(20260820).sample(range(1130),24); sort sampled remainder positions; map to original audit indices",
+    "seed": 20260820,
+    "population_queries": 1142,
+    "excluded_original_queries": 12,
+    "remainder_queries": 1130,
+    "sampled_remainder_positions": [
+      92,
+      141,
+      147,
+      396,
+      510,
+      637,
+      673,
+      682,
+      792,
+      797,
+      826,
+      836,
+      848,
+      880,
+      881,
+      883,
+      940,
+      982,
+      1023,
+      1056,
+      1070,
+      1072,
+      1081,
+      1117
+    ],
+    "queries": [
+      {
+        "audit_index": 92,
+        "dataset": "Qiuchen-Wang/ViDoSeek",
+        "query_id": "0073d1c9d37a124a69560a42acf492e6fae6fb55_0"
+      },
+      {
+        "audit_index": 141,
+        "dataset": "Qiuchen-Wang/ViDoSeek",
+        "query_id": "009856a0cdcc230d983c3a3e460a0c1b83cb09d4_3"
+      },
+      {
+        "audit_index": 148,
+        "dataset": "Qiuchen-Wang/ViDoSeek",
+        "query_id": "009e328fc7136f2a006b114ff3154d3eafd04ecb_3"
+      },
+      {
+        "audit_index": 398,
+        "dataset": "Qiuchen-Wang/ViDoSeek",
+        "query_id": "01dc52ed80b475c6ac81bc9def3e03dad93e33de_2"
+      },
+      {
+        "audit_index": 513,
+        "dataset": "Qiuchen-Wang/ViDoSeek",
+        "query_id": "02e22d6e970bef1b48efd32bf2a524c6bd3263c7_2"
+      },
+      {
+        "audit_index": 640,
+        "dataset": "Qiuchen-Wang/ViDoSeek",
+        "query_id": "034a1a1dd2c6d0d58c3c9c95754f33fd786527a1_3"
+      },
+      {
+        "audit_index": 676,
+        "dataset": "Qiuchen-Wang/ViDoSeek",
+        "query_id": "035f7ae44821cbb6191454cffc3a81cbc5cfc9d5_4"
+      },
+      {
+        "audit_index": 686,
+        "dataset": "Qiuchen-Wang/ViDoSeek",
+        "query_id": "036d37910cd4b143a98986f1facbe9d84f7e6ca3_0"
+      },
+      {
+        "audit_index": 798,
+        "dataset": "Qiuchen-Wang/ViDoSeek",
+        "query_id": "04450a0f59f81025574451222aa26322ae7ede42_2"
+      },
+      {
+        "audit_index": 803,
+        "dataset": "Qiuchen-Wang/ViDoSeek",
+        "query_id": "0454efb78bc1e03ae39f9552cb4c165495b11e4b_3"
+      },
+      {
+        "audit_index": 832,
+        "dataset": "Qiuchen-Wang/ViDoSeek",
+        "query_id": "046c8aeae3495fae63c6b029a72b048b5b91ed0a_0"
+      },
+      {
+        "audit_index": 842,
+        "dataset": "Qiuchen-Wang/ViDoSeek",
+        "query_id": "04787b8b2a5d62fdd928d716356ca6c3e7554251_2"
+      },
+      {
+        "audit_index": 855,
+        "dataset": "Qiuchen-Wang/ViDoSeek",
+        "query_id": "0487dcb861f03c1c838213788c0ab0b7e2cb0715_1"
+      },
+      {
+        "audit_index": 889,
+        "dataset": "Qiuchen-Wang/ViDoSeek",
+        "query_id": "04ad1ed44c5d12daf9bc5cc290e7eade424ee761_0"
+      },
+      {
+        "audit_index": 890,
+        "dataset": "Qiuchen-Wang/ViDoSeek",
+        "query_id": "04ad1ed44c5d12daf9bc5cc290e7eade424ee761_1"
+      },
+      {
+        "audit_index": 892,
+        "dataset": "Qiuchen-Wang/ViDoSeek",
+        "query_id": "04ad1ed44c5d12daf9bc5cc290e7eade424ee761_3"
+      },
+      {
+        "audit_index": 950,
+        "dataset": "Qiuchen-Wang/ViDoSeek",
+        "query_id": "04fbac4cb4c0de17f371d1ef6de15d535c9c875f_1"
+      },
+      {
+        "audit_index": 992,
+        "dataset": "Qiuchen-Wang/ViDoSeek",
+        "query_id": "051d7a1acd648d364a5ccaf6a7b5d1ed16f1adeb_0"
+      },
+      {
+        "audit_index": 1034,
+        "dataset": "Qiuchen-Wang/ViDoSeek",
+        "query_id": "054adbf8327de7348cba0375cbaea22cb7f80813_0"
+      },
+      {
+        "audit_index": 1067,
+        "dataset": "Qiuchen-Wang/ViDoSeek",
+        "query_id": "058f6bca5179d3ca48d85a2c29dfd2c727518ac1_3"
+      },
+      {
+        "audit_index": 1082,
+        "dataset": "Qiuchen-Wang/ViDoSeek",
+        "query_id": "05a312877bb2a2360f336e7a99bb52ec6f313339_2"
+      },
+      {
+        "audit_index": 1084,
+        "dataset": "Qiuchen-Wang/ViDoSeek",
+        "query_id": "05a3b8bbe4978f54c15901725d146b952aa36fc5_0"
+      },
+      {
+        "audit_index": 1093,
+        "dataset": "Qiuchen-Wang/ViDoSeek",
+        "query_id": "05b3364e2aa2aa8b644a335529979724b658414b_1"
+      },
+      {
+        "audit_index": 1129,
+        "dataset": "Qiuchen-Wang/ViDoSeek",
+        "query_id": "05e2dbaf2d299e33a0e7bf92a434214c84381bf1_5"
+      }
+    ],
+    "canonical_query_list_sha256": "95715b6a8c0c2d684b3a34e9130eca25ea641aafb62678f7daa764f0ab585f5b",
+    "candidate_audit_sha256": "938aab50bbf981c7b5d4609a6345be18f9a9c7797714a2c42bea099f8ad39151",
+    "original12_proposal_sha256": "ccc0c9469c0ee42e540ece1b5aefc8acf82c3117b8db77affb748799495c08f6",
+    "relevance_scores_or_fixed_audit_metrics_used_for_selection": false
+  },
+  "trigger": {
+    "fixed_profile_review_path": "artifacts/vidoseek_fixed_profile_audit_review/result_integrity_review.json",
+    "fixed_profile_review_sha256": "9358ba32f0dd5015685efb34f007abb6bd59ec1ec66668bc6d39b08955eac176",
+    "review_status": "PASS",
+    "review_advice": "HEADROOM_POSSIBLE_REVIEW_COMPUTE",
+    "mean_qpaf_gain_upper_bound": 0.09173235837475333,
+    "headroom_threshold": 0.03,
+    "interpretation": "The bound warrants review of page-level feasibility; it is not measured QPAF gain"
+  },
+  "input": {
+    "retrieval_scores_path": "artifacts/vidoseek_p1_02r_import/retrieval_scores.parquet",
+    "retrieval_scores_byte_sha256": "32b39da19e9507a0a5060157630cb40bf5c6bcf6464d88e4bb6136888473173b",
+    "pages_per_query": 5385,
+    "candidate_pairs": 129240,
+    "normalization": "reuse_frozen_per_query_minmax_no_changes"
+  },
+  "oracle": {
+    "grid": "w7",
+    "global_scope": "one_profile_selected_across_only_the_24_frozen_queries",
+    "global_is_full_1142_query_global": false,
+    "qarf": "existing_frozen_query_local_search",
+    "qpaf": "existing_frozen_coordinate_ascent_max_two_sweeps_not_exhaustive_assignment_search",
+    "bootstrap_resamples": 10000,
+    "bootstrap_seed": 20260820,
+    "primary_metric": "ndcg_at_10",
+    "relevance_use": "oracle_selection_and_evaluation_only"
+  },
+  "proposed_limits": {
+    "device": "cpu",
+    "workers": 1,
+    "threads_per_library": 1,
+    "total_wall_timeout_seconds": 43200,
+    "automatic_retries": 0,
+    "invocations": 1,
+    "timeout_result": "incomplete_no_subset_reselection_or_partial_mean_claim",
+    "checkpoint_policy": "hash_bound_query checkpoints; any recovery or restart requires separate approval"
+  },
+  "decision_policy": {
+    "can_pass_or_fail_full_phase1": false,
+    "can_authorize_training": false,
+    "report_original12_and_new24_separately": true,
+    "pool_incompatible_global_selections": false,
+    "next_after_completion": "independent result review and lecturer decision on full-discovery confirmation"
+  },
+  "implementation_status": "selection_frozen; guarded_runner_and_fixture_tests_prepared; execution_closed",
+  "unchanged_boundaries": {
+    "p1_02": "BLOCKED",
+    "full_w7_authorized": false,
+    "p1_03_authorized": false,
+    "learned_qpaf_authorized": false,
+    "modal_gpu_authorized": false,
+    "vidore_external_labels_used": false
+  }
+}

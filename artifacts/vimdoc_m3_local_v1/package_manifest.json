@@ -1,0 +1,184 @@
+{
+  "schema_version": 1,
+  "package_id": "vimdoc_m3_local_v1",
+  "created_at_utc": "2026-09-11T05:12:53.7762589Z",
+  "source_head": "d3b0f16aea6acbc3d110f8ca73c5511de3460b29",
+  "dirty_worktree": true,
+  "tracked_worktree_clean_at_source_commit": true,
+  "excluded_untracked_paths": [
+    "Vietnamese_Visual_RAG_Milestone_Plan.xlsx",
+    "prompting.md",
+    "refs_from_scibot.txt"
+  ],
+  "repair": {
+    "classification": "LOCAL_MODAL_MATERIALIZATION_MOUNT_REPAIR_ONLY",
+    "consumed_remote_invocation_recorded": true,
+    "modal_invoked_during_this_repair": false,
+    "archive_opened": false,
+    "ocr_executed": false,
+    "training_executed": false
+  },
+  "scope": "local preparation snapshot, not execution approval",
+  "files": [
+    {
+      "path": "configs/vimdoc_m3_local_v1.json",
+      "sha256": "0a68c19688519822e4ac58afa51e08ca43ad6350d849f642bac23115bc64be9d",
+      "bytes": 6791
+    },
+    {
+      "path": "configs/vimdoc_ocr_page_identity_v1.json",
+      "sha256": "804f555703e02d44e1d182bdda1a9c5a3f0ad8f12cb64276c4f10a17fbd513ac",
+      "bytes": 5797
+    },
+    {
+      "path": "configs/vimdoc_archive_content_audit_v1.json",
+      "sha256": "d68aa576a088081002d1e938e19a2c443ad8cd570c35c618173d54be26609253",
+      "bytes": 7453
+    },
+    {
+      "path": "scripts/prepare_vimdoc_m3.py",
+      "sha256": "e314db1946ce309ea2ee1a511e29dd3a15adb80c020a4015e233d89318ee3cb4",
+      "bytes": 10881
+    },
+    {
+      "path": "scripts/prepare_vimdoc_archive_content_audit.py",
+      "sha256": "cf7cb56348e734209d754f5375408552d8a430e99432276b8e18ba3ba609195d",
+      "bytes": 2338
+    },
+    {
+      "path": "scripts/run_vimdoc_archive_content_audit.py",
+      "sha256": "7dfe3daa01f61d66476df03a9e85248468c44e95d1bdf6b6e05ec8aed34b3c00",
+      "bytes": 14615
+    },
+    {
+      "path": "scripts/validate_vimdoc_ocr_page_identity.py",
+      "sha256": "96ec7e72871b403cc712e439462b669e2f1b067161b4d42e6747ca49784b5367",
+      "bytes": 12750
+    },
+    {
+      "path": "vimdoc_archive_audit_modal.py",
+      "sha256": "3e18aeee78c4cc119f7c394d0d1dabda477254d9aa7fd7d175f3fb5fab1dbe53",
+      "bytes": 2437
+    },
+    {
+      "path": "tests/test_vimdoc_m3_preparation.py",
+      "sha256": "2d984e4fe90ea155bd863f218cd14c5c85c4cf32c0b0106582dd4d480f6632b4",
+      "bytes": 7591
+    },
+    {
+      "path": "tests/test_vimdoc_archive_content_audit.py",
+      "sha256": "8343f79f41759c95106679b22ae58f4ea66b1502720eff0e70390c6c978b22e9",
+      "bytes": 11853
+    },
+    {
+      "path": "tests/test_vimdoc_ocr_page_identity.py",
+      "sha256": "39ea65ea697eab2cdb03867f3ef4c52ec1a930061b67986088590518c4a0c6fa",
+      "bytes": 8586
+    },
+    {
+      "path": "docs/VIMDOC_M3_LOCAL_PACKAGE.md",
+      "sha256": "82f6da18848589f621d8d1d8fd3f232cc08dc3c87df6c27b02eac3ae45aff9b9",
+      "bytes": 11653
+    },
+    {
+      "path": "docs/VIMDOC_ARCHIVE_CONTENT_AUDIT_EXECUTION_REVIEW.md",
+      "sha256": "0a1ed860b7124001072638874d1dea93d9de5b53dfc4163ff698e6ae9bc45230",
+      "bytes": 8525
+    },
+    {
+      "path": "docs/VIMDOC_OCR_PAGE_IDENTITY_SPEC.md",
+      "sha256": "8cdd05587de071df22a3193e989bc530c05ae8c5c8fa0c4e6033bf190f12742d",
+      "bytes": 5346
+    },
+    {
+      "path": "configs/datasets.yaml",
+      "sha256": "72c220465803d26fbe6bfec19bafa8daa391685c4c6afe3d1751c3a65faf7e86",
+      "bytes": 7808
+    },
+    {
+      "path": "configs/environment.yaml",
+      "sha256": "ce219b3b679fed85d6e5343c8cb155b5c4626b137482664771806e18adcd78ac",
+      "bytes": 1776
+    },
+    {
+      "path": "configs/preregistered.yaml",
+      "sha256": "46a255ffdf2cf703c816fa906b5d88cb91dfdf7e81cc09042ee78df9a108d73f",
+      "bytes": 1082
+    },
+    {
+      "path": "requirements-lock.txt",
+      "sha256": "17e6673bc89d0e10470c27250c34961058308823399c6b003519576cdd46c1be",
+      "bytes": 255515
+    },
+    {
+      "path": "requirements-learned-local.txt",
+      "sha256": "a6e0c06ef446d91f8682e8de743f98274244ccf1c04bc310812c1bb1582b78cf",
+      "bytes": 67
+    },
+    {
+      "path": "artifacts/dataset_materialization_vimdoc.json",
+      "sha256": "20ececf7be4e2e726a0e657de32e80dfc5b380130d907626269cec54a11f1d9d",
+      "bytes": 40891
+    },
+    {
+      "path": "artifacts/vimdoc_archive_content_audit_v1_preparation/package_manifest.json",
+      "sha256": "98a2ea10156a5b1b95877b39cc02f44fdda215042ceb051937053240bb03d452",
+      "bytes": 3140
+    },
+    {
+      "path": "artifacts/score_input_probe_vimdoc.json",
+      "sha256": "1edc442b476cb640fc56d86e127e9353c1e1cd084efe13a42b6ba9dfb0d6addd",
+      "bytes": 3769
+    },
+    {
+      "path": "scripts/materialize_datasets.py",
+      "sha256": "ac11247628969bc2dcc460908056e219f15be2fec2c04fff9fa763d70be88212",
+      "bytes": 12038
+    },
+    {
+      "path": "scripts/extract_vidore_baseline.py",
+      "sha256": "25fbbb0fdc732920619b912573200a140438998498185e9cc34824474e98047a",
+      "bytes": 32236
+    },
+    {
+      "path": "src/oracle_study/learned/__init__.py",
+      "sha256": "777dda8967cf6009e2ee1b751ba9340b1bee211edb981d4a3091fcde6640eb56",
+      "bytes": 486
+    },
+    {
+      "path": "src/oracle_study/learned/features.py",
+      "sha256": "862c336fb031d6061aa0cdc848c29502e670fa943119afdde67ddf595a765a4a",
+      "bytes": 4049
+    },
+    {
+      "path": "src/oracle_study/learned/models.py",
+      "sha256": "22b7f28ba8f0d1d5f81b4d4794fb9fe457de4103e6cae13d8c06886093ccbbcc",
+      "bytes": 3119
+    },
+    {
+      "path": "src/oracle_study/learned/losses.py",
+      "sha256": "5f7cb9e8b2f67407089ff5482725c8e8a96802576c16fa5bbc2d57259dcdc216",
+      "bytes": 6410
+    },
+    {
+      "path": "tests/test_features.py",
+      "sha256": "a73cf049a0a85f65ee632dd5449b2f5d59299c93df3cf99dcee22ba83d20cfa2",
+      "bytes": 4195
+    },
+    {
+      "path": "tests/test_models.py",
+      "sha256": "f7b07fcd86deec5655f6d9c7fbf1990bdd6901123f267cd477e202417c41a0e4",
+      "bytes": 2399
+    },
+    {
+      "path": "tests/test_losses.py",
+      "sha256": "c649f525f037d97145644cc17d12ed42df584accaccfe1a31500c852a1207eec",
+      "bytes": 3230
+    },
+    {
+      "path": "tests/test_gradients.py",
+      "sha256": "6cd66efeff1c365b19790c3d1355995a0ef25b9b30014c03f8e4a873b744cde6",
+      "bytes": 2596
+    }
+  ]
+}

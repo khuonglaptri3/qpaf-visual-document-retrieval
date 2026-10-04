@@ -303,9 +303,9 @@ Chúng gần tương ứng như sau:
 |---|---|---|
 | Pha A — dữ liệu và baseline | Phase 0 + P1-01 | Đóng băng môi trường, dữ liệu, score và metric contract |
 | Pha B — complementarity và oracle | Phần chính của Phase 1 | Dùng W7/W66 để đo Global → QARF → QPAF headroom |
-| Pha C — granularity | P1-03 và P2-05 | Quyết định query/cluster/page-level có đáng dùng không |
-| Pha D — learned fusion | Phase 2 | Implement và train learned QARF/QPAF; CARF nếu đủ điều kiện |
-| Pha E — xác nhận và báo cáo | Phase 3 | Nhiều seed, ablation, external validation, reproducibility package |
+| Pha C — granularity | P1-03 và CARF trong P3-02 | Dùng W7/W66 trước, rồi kiểm tra query/cluster/page-level trong ablation |
+| Pha D — learned fusion | Phase 2 | Implement và train learned QARF/QPAF với matched protocol |
+| Pha E — xác nhận và báo cáo | Phase 3 | Nhiều seed, CARF/ablation, external validation, reproducibility package |
 
 Khi quyết định “được phép làm gì tiếp theo”, hãy dùng `Tasks.md` làm task graph thực thi hiện tại.
 
@@ -392,6 +392,8 @@ Task này chỉ được chạy sau P1-02 `PASS` theo DAG hiện tại. Nó so s
 - `revise`;
 - `stop`.
 
+Một W66 **exploratory-24 subset** riêng đã hoàn tất và được independently verified: Global `0.8296782270669829`, QARF `0.8538451195715936`, QPAF `0.8859108127976215`; QPAF–QARF là `0.03206569322602797`, CI95 `[0.002888476746941956, 0.07116543024082586]`. Nó đạt các numeric continuation signal trên subset nhưng QPAF thấp hơn W7 `0.0179448565863913`; toàn bộ chênh lệch đến từ một trường hợp tied QARF profile làm đổi initialization theo thứ tự grid. Vì vậy, kết luận đúng là heuristic nhạy với tie/order, không phải W66 intrinsically kém hơn W7.
+
 Phase 1 gate hiện yêu cầu trước ngày 2026-09-05:
 
 - W7 và W66 dùng cùng data hash;
@@ -422,9 +424,9 @@ Train QARF trước dưới cùng data/features/loss/budget. Đây là baseline 
 
 Train QPAF trên confirmation data. Với ViMDoc, QPAF tạo page score nhưng loss/metric được tính ở document level.
 
-#### P2-05 — CARF diagnostic
+#### P2-05 — đã chuyển sang P3-02
 
-Cluster candidate bằng feature không nhãn, đóng băng cluster rồi mới join qrels. CARF chỉ cần chạy khi Phase 1 cho thấy granularity trung gian này có ý nghĩa.
+CARF không còn là Phase 2 gate. Contract vẫn được giữ nguyên trong P3-02: cluster candidate bằng feature không nhãn, đóng băng cluster trước khi join qrels, chạy $K=3$ cùng sensitivity $K=2,4$, rồi báo QARF–CARF–QPAF như **oracle granularity ablation**, không phải deployable learned result.
 
 #### Phase 2 gate
 
@@ -444,7 +446,7 @@ Chạy các learned method với ba seed, báo mean/std và 10.000-resample quer
 
 #### P3-02 — Ablation
 
-Thay từng yếu tố một: bỏ từng channel, giảm feature, đổi gate, đổi normalization, W7/W66 và candidate-depth sensitivity. Mỗi run chỉ được đổi một factor để còn diễn giải được nguyên nhân.
+Thay từng yếu tố một: bỏ từng channel, giảm feature, đổi gate, đổi normalization, W7/W66 và candidate-depth sensitivity. P3-02 cũng chứa CARF diagnostic với label-free cluster assignment được đóng băng trước qrels và $K=2/3/4$ sensitivity. Mỗi learned run chỉ được đổi một factor để còn diễn giải được nguyên nhân; CARF phải được tách nhãn oracle khỏi QARF/QPAF learned results.
 
 #### P3-03 — Sealed ViDoRe V3 external validation
 
@@ -683,6 +685,8 @@ Không nhất thiết. Một kết luận có giá trị có thể là query-lev
 | P1-02R L4 calibration | Workload mẫu chạy được và có cost projection | Full run chắc chắn thành công |
 | P1-02R full function | Receipt local báo `complete` | Bundle local tự động hợp lệ |
 | P1-02R integrity review | Bundle local khớp hash/schema/row/key/normalization/rank/coverage/provenance; execution guard đã đóng | P1-02 thành `PASS`, P1-03 được mở, hoặc oracle/QPAF gain tồn tại |
+| Exploratory-24 W7 | QPAF 0,903856; QPAF–QARF 0,050011, CI95 [0,008344; 0,101921] trên 24 query | Formal Phase 1 `PASS` hoặc learned/deployable performance |
+| Exploratory-24 W66 | QPAF 0,885911; QPAF–QARF 0,032066, CI95 [0,002888; 0,071165] trên cùng 24 query; có tie/order sensitivity | W66 intrinsically tốt/xấu hơn W7 hoặc formal P1-03 decision |
 | P1-03 | `BLOCKED` theo dependency hiện tại | Phase 1 gate đã được đánh giá |
 | Phase 2 | Chưa dependency-unblock | Learned QPAF đã implement/train |
 | Phase 3 | Chưa bắt đầu | Có kết quả multi-seed/external reportable |
@@ -702,6 +706,7 @@ Theo thứ tự cho từng mục đích:
 - Remote manifest đã import: [`artifacts/vidoseek_p1_02r_import/extraction_manifest.json`](../artifacts/vidoseek_p1_02r_import/extraction_manifest.json).
 - Success marker đã import: [`artifacts/vidoseek_p1_02r_import/_EXTRACTION_SUCCESS.json`](../artifacts/vidoseek_p1_02r_import/_EXTRACTION_SUCCESS.json).
 - Integrity review: [`artifacts/vidoseek_p1_02r_integrity_review.json`](../artifacts/vidoseek_p1_02r_integrity_review.json).
+- W66 exploratory-24 result: [`docs/QPAF_W66_EXPLORATORY24_RESULTS.md`](QPAF_W66_EXPLORATORY24_RESULTS.md) và [`closeout_receipt.json`](../artifacts/vidoseek_w66_exploratory24_optimized_review/closeout_receipt.json).
 - Source thực thi: [`modal_app.py`](../modal_app.py) và [`scripts/extract_vidoseek_p1_02r.py`](../scripts/extract_vidoseek_p1_02r.py).
 
 Khi các nguồn khác nhau về status, không chọn câu nghe tích cực nhất. Hãy phân biệt thời điểm và tầng bằng chứng: committed task plan, remote receipt, imported artifact, integrity review, rồi mới đến human-approved decision.

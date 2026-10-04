@@ -1,0 +1,14 @@
+{
+  "status": "PASS_CLOSED_BEFORE_VALIDATION_INPUT_OR_WRITES",
+  "verified_at": "2026-09-09T08:03:38Z",
+  "classification": "synthetic_w66_calibration_closed_cli_not_result",
+  "command": "C:\\Python313\\python.exe scripts\\calibrate_vidoseek_w66_resources.py run --actor codex",
+  "exit_code": 1,
+  "error_type": "PermissionError",
+  "error": "Separate synthetic W66 calibration approval pending; no attempt consumed",
+  "output_directory_exists": false,
+  "attempt_consumed": false,
+  "actual_relevance_loaded": false,
+  "w66_oracle_executed": false,
+  "scientific_result_produced": false
+}

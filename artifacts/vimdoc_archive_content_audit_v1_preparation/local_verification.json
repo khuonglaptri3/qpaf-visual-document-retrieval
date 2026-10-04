@@ -1,0 +1,135 @@
+{
+  "schema_version": 1,
+  "package_id": "vimdoc_archive_content_audit_v1_preparation",
+  "verified_at_utc": "2026-09-11T05:15:53.4422163Z",
+  "source_head": "d3b0f16aea6acbc3d110f8ca73c5511de3460b29",
+  "dirty_worktree": true,
+  "tracked_worktree_clean_at_source_commit": true,
+  "excluded_untracked_paths": [
+    "Vietnamese_Visual_RAG_Milestone_Plan.xlsx",
+    "prompting.md",
+    "refs_from_scibot.txt"
+  ],
+  "status": "PASS_LOCAL_PACKAGE_ONLY_EXECUTION_CLOSED",
+  "hashes": {
+    "configs/vimdoc_archive_content_audit_v1.json": "d68aa576a088081002d1e938e19a2c443ad8cd570c35c618173d54be26609253",
+    "scripts/run_vimdoc_archive_content_audit.py": "7dfe3daa01f61d66476df03a9e85248468c44e95d1bdf6b6e05ec8aed34b3c00",
+    "tests/test_vimdoc_archive_content_audit.py": "8343f79f41759c95106679b22ae58f4ea66b1502720eff0e70390c6c978b22e9",
+    "docs/VIMDOC_ARCHIVE_CONTENT_AUDIT_EXECUTION_REVIEW.md": "0a1ed860b7124001072638874d1dea93d9de5b53dfc4163ff698e6ae9bc45230",
+    "artifacts/vimdoc_archive_content_audit_v1_preparation/package_manifest.json": "98a2ea10156a5b1b95877b39cc02f44fdda215042ceb051937053240bb03d452",
+    "artifacts/vimdoc_m3_local_v1/package_manifest.json": "7c88384a179db14290f84b449628f0052132dfb58588b4f95436a20323386c16"
+  },
+  "checks": [
+    {
+      "name": "audit_package_preflight",
+      "command": "C:/Python313/python.exe scripts/prepare_vimdoc_archive_content_audit.py",
+      "exit_code": 0,
+      "summary": "10 files and 5 pinned execution sources verified; Modal not called; archive not opened; execution remains unauthorized."
+    },
+    {
+      "name": "materialization_receipt_mount_regression",
+      "pre_fix_summary": "1 failed as expected because MATERIALIZATION_PATH and its /root/artifacts mount were absent.",
+      "post_fix_summary": "3 passed, covering the receipt mount, POSIX roots and CPU-only wrapper guards."
+    },
+    {
+      "name": "focused_archive_identity_and_m3_tests",
+      "command": "$env:PYTHONPATH='src'; C:/Python313/python.exe -m pytest tests/test_vimdoc_archive_content_audit.py tests/test_vimdoc_ocr_page_identity.py tests/test_vimdoc_m3_preparation.py tests/test_features.py tests/test_models.py tests/test_losses.py tests/test_gradients.py -q",
+      "exit_code": 0,
+      "summary": "77 passed in 6.74s; includes Windows-to-POSIX paths and the materialization-receipt mount regression"
+    },
+    {
+      "name": "broader_non_training_regression",
+      "command": "$env:PYTHONPATH='src'; C:/Python313/python.exe -m pytest -q -k \"not test_live_preflight_is_approved_read_only_and_does_not_create_attempt\"",
+      "exit_code": 0,
+      "summary": "449 passed, 1 deselected in 37.42s",
+      "excluded_test": "tests/test_vidoseek_exploratory24_w66_optimized.py::test_live_preflight_is_approved_read_only_and_does_not_create_attempt",
+      "exclusion_reason": "Historical hash-pinned test asserts a now-completed W66 attempt/output does not exist and execution remains authorized; it was preserved."
+    },
+    {
+      "name": "m3_package_preflight",
+      "command": "C:/Python313/python.exe scripts/prepare_vimdoc_m3.py",
+      "exit_code": 0,
+      "summary": "32 files verified; local package integrity PASS; execution readiness BLOCKED."
+    },
+    {
+      "name": "focused_lint",
+      "exit_code": 0,
+      "summary": "Ruff passed on the learned core and all new ViMDoc preparation, audit, validator, wrapper, and test files."
+    },
+    {
+      "name": "syntax_and_whitespace",
+      "exit_code": 0,
+      "summary": "Audit preparation, runner, identity validator, and CPU-only Modal wrapper compile; git diff --check reports no whitespace errors."
+    }
+  ],
+  "proposed_future_resources": {
+    "cpu_physical_cores": 1,
+    "memory_mb": 4096,
+    "timeout_seconds": 21600,
+    "retries": 0,
+    "gpu": null,
+    "maximum_reserved_compute_usd_at_reviewed_rates": 0.474768,
+    "pricing_checked_at_utc": "2026-09-11T05:12:53.7762589Z",
+    "pricing_source": "https://modal.com/pricing",
+    "pricing_must_be_rechecked_if_rates_or_scope_change": true
+  },
+  "authorization": {
+    "execution_authorized": false,
+    "approved_actor": null,
+    "required_source_commit": null,
+    "approved_invocations": 0,
+    "approved_timeout_seconds": 0,
+    "approved_retries": 0
+  },
+  "dormant_approval_package": {
+    "status": "AWAITING_EXPLICIT_USER_APPROVAL_DO_NOT_EXECUTE",
+    "request_path": "artifacts/vimdoc_archive_content_audit_v1_preparation/authorization_request.json",
+    "request_sha256": "20015d115f41725ad50dcf779fd1fb81980f0546d732f5b8e13d727f23452252",
+    "candidate_path": "artifacts/vimdoc_archive_content_audit_v1_preparation/proposed_approved_config.json",
+    "candidate_sha256": "938331b948af2f9630154ca865f1e8eeea0b5df6fc7d7cf245dbfdabe9e48fa4",
+    "live_config_remains_closed": true
+  },
+  "consumed_submissions": [
+    {
+      "activation_commit": "20b65c0b7e2d0733f94fc50025342563f751aaac",
+      "config_sha256": "baeb51bd5429a32443c64d4620928c75b06e65f722c33f24ec3c1a8f924d4013",
+      "outcome": "LOCAL_WRAPPER_IMPORT_REFUSAL_BEFORE_MODAL_FUNCTION_INVOCATION",
+      "retry_performed": false,
+      "authorization_reusable": false
+    },
+    {
+      "activation_commit": "6a0db676a8b5b43d14081463f835ec6b0fcb8abc",
+      "config_sha256": "f3eadaa97ff0df20f5e2ad288aed5cea920502321cd42b18cf2d687192950014",
+      "modal_app_page_id": "ap-50h0xf7emXuFfMZ75fHvAu",
+      "outcome": "REMOTE_FUNCTION_SOURCE_VALIDATION_REFUSAL_BEFORE_ARCHIVE_OR_OUTPUT",
+      "function_call_id_created": true,
+      "run_audit_entered": true,
+      "audit_attempt_marker_created": false,
+      "retry_performed": false,
+      "authorization_reusable": false
+    }
+  ],
+  "actual_data_status": {
+    "live_archive_opened": false,
+    "live_archive_content_audited": false,
+    "archive_extracted": false,
+    "ocr_executed": false,
+    "score_extraction_executed": false,
+    "training_executed": false,
+    "scientific_metrics_computed": false,
+    "modal_function_invocation_started": true,
+    "latest_invocation_failed_before_archive_or_output": true,
+    "modal_invoked_during_this_repair": false
+  },
+  "actions_not_performed": [
+    "Modal Function invocation during this repair",
+    "GPU execution",
+    "live ViMDoc archive access",
+    "archive extraction",
+    "OCR execution",
+    "retriever score extraction",
+    "optimizer step",
+    "training"
+  ],
+  "next_boundary": "Fresh explicit user approval of the exact materialization-mount-repaired dormant candidate is required. Both earlier commands are non-reusable. The live config remains closed; no invocation may occur before a one-path activation commit and repeated hash/guard checks."
+}

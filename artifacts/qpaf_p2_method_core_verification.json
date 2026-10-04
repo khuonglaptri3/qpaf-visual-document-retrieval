@@ -1,0 +1,89 @@
+{
+  "status": "PASS_LOCAL_METHOD_CORE_ONLY",
+  "verified_at": "2026-09-10T06:55:12.3226883Z",
+  "authorization": "artifacts/qpaf_posthoc_continuation_decision_v1.json",
+  "implementation": {
+    "package": "oracle_study.learned",
+    "p2_01": "PASS",
+    "p2_02": "PASS",
+    "normalized_rank_convention": "best_is_1_worst_is_0_ascending_page_id_breaks_score_ties",
+    "feature_dimension": 13,
+    "channels": 3,
+    "parameters_per_gate": 42,
+    "optimizer_steps": 0,
+    "trained_checkpoints": 0
+  },
+  "verification": {
+    "focused_tests": {
+      "status": "PASS",
+      "passed": 14,
+      "command": "C:\\Python313\\python.exe -m pytest tests\\test_features.py tests\\test_models.py tests\\test_losses.py tests\\test_gradients.py -q"
+    },
+    "repository_suite_without_stale_completed_run_preflight_assertion": {
+      "status": "PASS",
+      "passed": 386,
+      "deselected": 1,
+      "command": "C:\\Python313\\python.exe -m pytest -q -k \"not test_live_preflight_is_approved_read_only_and_does_not_create_attempt\""
+    },
+    "repository_suite_unfiltered": {
+      "status": "NOT_ALL_GREEN",
+      "passed": 386,
+      "failed": 1,
+      "failure": "tests/test_vidoseek_exploratory24_w66_optimized.py::test_live_preflight_is_approved_read_only_and_does_not_create_attempt expects attempt_exists=false, but the independently verified historical run now correctly has an immutable attempt directory",
+      "reason_not_modified": "The historical optimized-W66 configuration hash-pins this test file; rewriting it would invalidate completed-run provenance."
+    },
+    "ruff": {
+      "status": "PASS",
+      "scope": [
+        "src/oracle_study/learned",
+        "tests/test_features.py",
+        "tests/test_models.py",
+        "tests/test_losses.py",
+        "tests/test_gradients.py"
+      ]
+    },
+    "checks": [
+      "100_run_feature_determinism",
+      "page_id_tie_break_and_permutation_stability",
+      "padded_feature_and_loss_isolation",
+      "label_free_feature_signature",
+      "zero_initialization_equal_weights",
+      "qarf_query_pool_and_broadcast",
+      "convex_fusion",
+      "checkpoint_round_trip",
+      "hand_computed_listwise_cross_entropy",
+      "stable_first_page_gradient_on_equal_document_score",
+      "float64_gradcheck",
+      "equation_11_matches_autograd",
+      "finite_parameter_gradients"
+    ]
+  },
+  "environment": {
+    "python": "3.13.7",
+    "torch": "2.11.0+cpu",
+    "cuda_available": false,
+    "local_training_permitted": false
+  },
+  "sha256": {
+    "requirements_learned_local": "a6e0c06ef446d91f8682e8de743f98274244ccf1c04bc310812c1bb1582b78cf",
+    "learned_init": "777dda8967cf6009e2ee1b751ba9340b1bee211edb981d4a3091fcde6640eb56",
+    "features": "862c336fb031d6061aa0cdc848c29502e670fa943119afdde67ddf595a765a4a",
+    "models": "22b7f28ba8f0d1d5f81b4d4794fb9fe457de4103e6cae13d8c06886093ccbbcc",
+    "losses": "5f7cb9e8b2f67407089ff5482725c8e8a96802576c16fa5bbc2d57259dcdc216",
+    "test_features": "a73cf049a0a85f65ee632dd5449b2f5d59299c93df3cf99dcee22ba83d20cfa2",
+    "test_models": "f7b07fcd86deec5655f6d9c7fbf1990bdd6901123f267cd477e202417c41a0e4",
+    "test_losses": "c649f525f037d97145644cc17d12ed42df584accaccfe1a31500c852a1207eec",
+    "test_gradients": "6cd66efeff1c365b19790c3d1355995a0ef25b9b30014c03f8e4a873b744cde6",
+    "continuation_decision": "28c6935708698831ecda262edbcd18bc1c322ab5e83271e12cea60da2cdb2570"
+  },
+  "confirmation_readiness": {
+    "learned_qpaf_improvement_confirmed": false,
+    "vimdoc_dataset_materialized_on_modal": true,
+    "vimdoc_confirmation_sample_queries": 2000,
+    "vimdoc_three_channel_score_extraction_started": false,
+    "verified_vimdoc_training_score_bundle_available": false,
+    "training_authorized": false,
+    "modal_gpu_authorized": false,
+    "next_gate": "Prepare and review a frozen ViMDoc score-cache plus matched learned QARF/QPAF execution package; execute only after separate resource and execution approval."
+  }
+}

@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "package_id": "vimdoc_m3_local_v1",
+  "verified_at_utc": "2026-09-11T05:15:53.4422163Z",
+  "source_head": "d3b0f16aea6acbc3d110f8ca73c5511de3460b29",
+  "dirty_worktree": true,
+  "tracked_worktree_clean_at_source_commit": true,
+  "excluded_untracked_paths": [
+    "Vietnamese_Visual_RAG_Milestone_Plan.xlsx",
+    "prompting.md",
+    "refs_from_scibot.txt"
+  ],
+  "scope": "LOCAL_OCR_PAGE_IDENTITY_AND_ARCHIVE_AUDIT_PREPARATION_ONLY",
+  "hashes": {
+    "configs/vimdoc_m3_local_v1.json": "0a68c19688519822e4ac58afa51e08ca43ad6350d849f642bac23115bc64be9d",
+    "configs/vimdoc_ocr_page_identity_v1.json": "804f555703e02d44e1d182bdda1a9c5a3f0ad8f12cb64276c4f10a17fbd513ac",
+    "configs/vimdoc_archive_content_audit_v1.json": "d68aa576a088081002d1e938e19a2c443ad8cd570c35c618173d54be26609253",
+    "artifacts/vimdoc_m3_local_v1/package_manifest.json": "7c88384a179db14290f84b449628f0052132dfb58588b4f95436a20323386c16",
+    "artifacts/vimdoc_archive_content_audit_v1_preparation/package_manifest.json": "98a2ea10156a5b1b95877b39cc02f44fdda215042ceb051937053240bb03d452",
+    "scripts/validate_vimdoc_ocr_page_identity.py": "96ec7e72871b403cc712e439462b669e2f1b067161b4d42e6747ca49784b5367",
+    "scripts/run_vimdoc_archive_content_audit.py": "7dfe3daa01f61d66476df03a9e85248468c44e95d1bdf6b6e05ec8aed34b3c00",
+    "vimdoc_archive_audit_modal.py": "3e18aeee78c4cc119f7c394d0d1dabda477254d9aa7fd7d175f3fb5fab1dbe53",
+    "docs/VIMDOC_ARCHIVE_CONTENT_AUDIT_EXECUTION_REVIEW.md": "0a1ed860b7124001072638874d1dea93d9de5b53dfc4163ff698e6ae9bc45230",
+    "docs/VIMDOC_OCR_PAGE_IDENTITY_SPEC.md": "8cdd05587de071df22a3193e989bc530c05ae8c5c8fa0c4e6033bf190f12742d",
+    "tests/test_vimdoc_ocr_page_identity.py": "39ea65ea697eab2cdb03867f3ef4c52ec1a930061b67986088590518c4a0c6fa",
+    "tests/test_vimdoc_archive_content_audit.py": "8343f79f41759c95106679b22ae58f4ea66b1502720eff0e70390c6c978b22e9"
+  },
+  "official_source_verification": {
+    "url": "https://raw.githubusercontent.com/juyeonnn/HEAVEN/3eea5ca61f492d3fa18594d455ee10024932f851/indexing/encode/ocr.py",
+    "bytes": 2864,
+    "sha256": "eabe9cffc6d82f2634ec07d8b579c26dfd96acab4565fba5a5c9c618cac7922b",
+    "checked_read_only": true
+  },
+  "decision": {
+    "ocr": "HEAVEN-aligned Tesseract plain text; eng; OEM 3; PSM 3; explicit pinned versions; errors fail and cannot become empty text",
+    "page_identity": "Safe tar path plus uncompressed-content SHA-256; identical-content aliases collapse deterministically; different-content collisions block",
+    "status": "FROZEN_LOCAL_SPECIFICATION_NOT_EXECUTED"
+  },
+  "checks": [
+    {
+      "name": "ocr_page_identity_contract_tests",
+      "command": "$env:PYTHONPATH='src'; C:/Python313/python.exe -m pytest tests/test_vimdoc_ocr_page_identity.py -q",
+      "exit_code": 0,
+      "summary": "16 passed in 0.73s"
+    },
+    {
+      "name": "focused_m3_non_training_tests",
+      "command": "$env:PYTHONPATH='src'; C:/Python313/python.exe -m pytest tests/test_vimdoc_archive_content_audit.py tests/test_vimdoc_ocr_page_identity.py tests/test_vimdoc_m3_preparation.py tests/test_features.py tests/test_models.py tests/test_losses.py tests/test_gradients.py -q",
+      "exit_code": 0,
+      "summary": "77 passed in 6.74s; includes archive-audit preparation, persisted JSONL tamper checks, Windows-to-POSIX paths and the materialization-receipt mount regression"
+    },
+    {
+      "name": "broader_non_training_regression",
+      "command": "$env:PYTHONPATH='src'; C:/Python313/python.exe -m pytest -q -k \"not test_live_preflight_is_approved_read_only_and_does_not_create_attempt\"",
+      "exit_code": 0,
+      "summary": "449 passed, 1 deselected in 37.42s",
+      "excluded_test": "tests/test_vidoseek_exploratory24_w66_optimized.py::test_live_preflight_is_approved_read_only_and_does_not_create_attempt",
+      "exclusion_reason": "Historical hash-pinned test asserts a now-completed W66 attempt/output does not exist and execution remains authorized; it was preserved."
+    },
+    {
+      "name": "m3_read_only_preflight",
+      "command": "C:/Python313/python.exe scripts/prepare_vimdoc_m3.py",
+      "exit_code": 0,
+      "summary": "32 files verified; local package integrity PASS; execution readiness BLOCKED"
+    },
+    {
+      "name": "focused_lint",
+      "command": "C:/Python313/python.exe -m ruff check src/oracle_study/learned tests/test_features.py tests/test_models.py tests/test_losses.py tests/test_gradients.py scripts/prepare_vimdoc_m3.py scripts/prepare_vimdoc_archive_content_audit.py scripts/run_vimdoc_archive_content_audit.py scripts/validate_vimdoc_ocr_page_identity.py tests/test_vimdoc_m3_preparation.py tests/test_vimdoc_ocr_page_identity.py tests/test_vimdoc_archive_content_audit.py vimdoc_archive_audit_modal.py",
+      "exit_code": 0,
+      "summary": "All checks passed."
+    },
+    {
+      "name": "syntax_and_whitespace",
+      "command": "C:/Python313/python.exe -m py_compile scripts/prepare_vimdoc_archive_content_audit.py scripts/run_vimdoc_archive_content_audit.py scripts/validate_vimdoc_ocr_page_identity.py vimdoc_archive_audit_modal.py; git diff --check",
+      "exit_code": 0,
+      "summary": "Python compile passed; no whitespace errors (Git emitted line-ending conversion warnings only for pre-existing attribute policy)."
+    }
+  ],
+  "actual_data_status": {
+    "live_archive_opened": false,
+    "live_archive_content_audited": false,
+    "duplicate_content_classified": false,
+    "ocr_executed": false,
+    "ocr_text_verified": false,
+    "remote_state_verified": false,
+    "modal_function_invocation_started": true,
+    "latest_invocation_failed_before_archive_or_output": true,
+    "modal_invoked_during_this_repair": false
+  },
+  "actions_not_performed": [
+    "Modal Function invocation during this repair",
+    "GPU execution",
+    "live ViMDoc archive access",
+    "OCR execution",
+    "retriever score extraction",
+    "optimizer step",
+    "training"
+  ],
+  "m3_execution_readiness": "BLOCKED",
+  "ready_for_execution": false,
+  "next_required_evidence": "Obtain fresh exact approval for the materialization-mount-repaired hash-frozen CPU-only archive audit; both earlier commands are non-reusable. Only after a zero-collision audit should OCR resource calibration be prepared."
+}

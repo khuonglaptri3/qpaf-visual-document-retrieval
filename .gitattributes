@@ -17,3 +17,17 @@ artifacts/vidoseek_p1_02r_import/candidate_audit.parquet -text -diff
 artifacts/vidoseek_p1_02r_integrity_review.json -text -diff
 artifacts/vidoseek_p1_02r_oracle_w7_v1_probe/_ATTEMPTED.json -text -diff
 artifacts/vidoseek_p1_02r_oracle_w7_v1_probe/run_manifest.json -text -diff
+artifacts/qpaf_p2_method_core_verification.json -text -diff
+artifacts/qpaf_posthoc_continuation_decision_v1.json -text -diff
+artifacts/vidoseek_w66_exploratory24_optimized_review/** -text -diff
+artifacts/vimdoc_archive_content_audit_v1_preparation/** -text -diff
+artifacts/vimdoc_m3_local_v1/** -text -diff
+configs/vimdoc_archive_content_audit_v1.json -text
+configs/vimdoc_m3_local_v1.json -text
+configs/vimdoc_ocr_page_identity_v1.json -text
+requirements-learned-local.txt -text
+scripts/prepare_vimdoc_archive_content_audit.py -text
+scripts/prepare_vimdoc_m3.py -text
+scripts/run_vimdoc_archive_content_audit.py -text
+scripts/validate_vimdoc_ocr_page_identity.py -text
+vimdoc_archive_audit_modal.py -text

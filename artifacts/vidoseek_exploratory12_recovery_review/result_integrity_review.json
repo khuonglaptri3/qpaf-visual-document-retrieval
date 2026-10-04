@@ -1,0 +1,117 @@
+{
+  "checks": {
+    "all_global_profile_metrics_recomputed": true,
+    "all_query_timings_present": true,
+    "all_rankings_reconstructed_from_saved_weights": true,
+    "all_reported_metrics_recomputed": true,
+    "approved_config_and_source_snapshot": true,
+    "artifact_byte_hashes": true,
+    "attempt_consumption_and_resource_limits": true,
+    "checkpoint_hashes_and_global_chain": true,
+    "complete_manifest_and_exact_artifact_inventory": true,
+    "exact_frozen_query_selection_and_candidate_counts": true,
+    "no_full_phase_gate_or_training_claim": true,
+    "parent_evidence_and_inherited_checkpoints_unchanged": true,
+    "recovery_timings_distinguish_reused_and_new_work": true,
+    "separate_recovery_approval_and_config_identity": true,
+    "shared_global_selected_over_all_12_queries": true,
+    "summary_bootstrap_and_win_tie_loss_recomputed": true
+  },
+  "classification": "exploratory_subset_oracle_not_full_w7_or_phase_gate",
+  "elapsed_scope": "this_recovery_invocation_only",
+  "elapsed_seconds": 6023.9181465,
+  "inherited_queries": 4,
+  "new_queries": 8,
+  "parent_run_identity_sha256": "1b4e382fc32114aff97e1123c6a390a29037ab2a071d42aa419011c2897193a9",
+  "query_comparison_sha256": "fb816916fed67e23d4a520d23e95af2ec04db56ffa75b256dec29ccd2a4c4552",
+  "review_script_sha256": "ca63e62f249bf7d588d5ea875a3b4ef0552b9671e0cc36ca1c44592368c394c0",
+  "run_manifest_sha256": "5aee955408d680a918bdd5c4df5f7ae3301a87281b970968ee3da5e5f207b98d",
+  "status": "PASS",
+  "summary": {
+    "classification": "exploratory_subset_oracle_not_full_w7_or_phase_gate",
+    "confidence_interval_interpretation": "exploratory_query_bootstrap_not_population_proof",
+    "global_scope": "selected_exploratory_queries_only",
+    "grids": {
+      "w7": {
+        "delta_ci95": [
+          0.0,
+          0.125
+        ],
+        "fraction_gain_ge_001": 0.08333333333333333,
+        "fraction_gain_ge_003": 0.08333333333333333,
+        "fraction_gain_ge_005": 0.08333333333333333,
+        "global_profile": [
+          0.0,
+          0.0,
+          1.0
+        ],
+        "mean_changed_candidates": 0.16666666666666666,
+        "mean_delta_ndcg10": 0.041666666666666664,
+        "mean_global_ndcg10": 0.9525563798394495,
+        "mean_qarf_ndcg10": 0.9583333333333334,
+        "mean_qpaf_ndcg10": 1.0,
+        "profile_counts": [
+          37693,
+          16157,
+          10770,
+          0,
+          0,
+          0,
+          0
+        ],
+        "qarf_vs_global": {
+          "delta_ci95": [
+            0.0,
+            0.017330860481651736
+          ],
+          "fraction_gain_ge_001": 0.08333333333333333,
+          "fraction_gain_ge_003": 0.08333333333333333,
+          "fraction_gain_ge_005": 0.08333333333333333,
+          "mean_delta_ndcg10": 0.005776953493883912,
+          "top_5pct_gain_share": 1.0
+        },
+        "qpaf_vs_global": {
+          "delta_ci95": [
+            0.0,
+            0.14233086048165172
+          ],
+          "fraction_gain_ge_001": 0.08333333333333333,
+          "fraction_gain_ge_003": 0.08333333333333333,
+          "fraction_gain_ge_005": 0.08333333333333333,
+          "mean_delta_ndcg10": 0.04744362016055057,
+          "top_5pct_gain_share": 1.0
+        },
+        "qpaf_vs_qarf": {
+          "delta_ci95": [
+            0.0,
+            0.125
+          ],
+          "fraction_gain_ge_001": 0.08333333333333333,
+          "fraction_gain_ge_003": 0.08333333333333333,
+          "fraction_gain_ge_005": 0.08333333333333333,
+          "mean_delta_ndcg10": 0.041666666666666664,
+          "top_5pct_gain_share": 1.0
+        },
+        "queries": 12,
+        "top_5pct_gain_share": 1.0
+      }
+    },
+    "phase1_decision": "NOT_APPLICABLE_EXPLORATORY_SUBSET",
+    "training_authorized": false,
+    "win_tie_loss": {
+      "delta_qarf_vs_global": {
+        "loss": 0,
+        "tie": 11,
+        "win": 1
+      },
+      "delta_qpaf_vs_qarf": {
+        "loss": 0,
+        "tie": 11,
+        "win": 1
+      }
+    }
+  },
+  "verified_artifacts": 78,
+  "verified_at": "2026-09-07T11:42:56.449851+00:00",
+  "verified_queries": 12
+}

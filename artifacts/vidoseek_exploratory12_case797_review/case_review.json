@@ -1,0 +1,101 @@
+{
+  "status": "PASS_SAVED_RANKING_RECONSTRUCTION",
+  "classification": "post_hoc_case_study_not_new_oracle_run",
+  "oracle_search_executed": false,
+  "seed": 20260820,
+  "verified_queries": 12,
+  "metrics_checked": 144,
+  "global_ceiling_queries": 11,
+  "case": {
+    "audit_index": 797,
+    "query_id": "04450a0f59f81025574451222aa26322ae7ede42_1",
+    "global_relevant_rank": 4,
+    "global_ndcg10": 0.43067655807339306,
+    "qarf_relevant_rank": 3,
+    "qarf_ndcg10": 0.5,
+    "qpaf_relevant_rank": 1,
+    "qpaf_ndcg10": 1.0,
+    "relevant_page_id": "04450a0f59f81025574451222aa26322ae7ede42_6",
+    "global_profile": [
+      0.0,
+      0.0,
+      1.0
+    ],
+    "qarf_profile": [
+      1.0,
+      0.0,
+      0.0
+    ],
+    "changed_pages": {
+      "04450a0f59f81025574451222aa26322ae7ede42_1": [
+        0.0,
+        1.0,
+        0.0
+      ],
+      "04450a0f59f81025574451222aa26322ae7ede42_6": [
+        0.0,
+        1.0,
+        0.0
+      ]
+    },
+    "source": "source_type=2d_layout|query_type=single_hop",
+    "accepted_updates": 2
+  },
+  "relevant_and_changed_pages": [
+    {
+      "dataset": "Qiuchen-Wang/ViDoSeek",
+      "query_id": "04450a0f59f81025574451222aa26322ae7ede42_1",
+      "page_id": "04450a0f59f81025574451222aa26322ae7ede42_1",
+      "source": "source_type=2d_layout|query_type=single_hop",
+      "relevance": 0.0,
+      "bm25_score": 1.0,
+      "dense_score": 0.9266803301030113,
+      "stage1_score": 0.8441516274790984,
+      "visual_score": 1.0,
+      "branch_ranks": "{\"bm25\":1,\"dense\":5,\"stage1\":4,\"visual\":1}",
+      "bm25_rank": 1,
+      "dense_rank": 5,
+      "visual_rank": 1,
+      "global_rank": 1,
+      "global_fused_score": 1.0,
+      "qarf_rank": 1,
+      "qarf_fused_score": 1.0,
+      "qpaf_rank": 3,
+      "qpaf_fused_score": 0.9266803301030113,
+      "qpaf_weights_bm25_dense_visual": "[0.0, 1.0, 0.0]",
+      "weight_changed": true
+    },
+    {
+      "dataset": "Qiuchen-Wang/ViDoSeek",
+      "query_id": "04450a0f59f81025574451222aa26322ae7ede42_1",
+      "page_id": "04450a0f59f81025574451222aa26322ae7ede42_6",
+      "source": "source_type=2d_layout|query_type=single_hop",
+      "relevance": 1.0,
+      "bm25_score": 0.6256201009738278,
+      "dense_score": 0.9817918976031969,
+      "stage1_score": 1.0,
+      "visual_score": 0.9800995024875622,
+      "branch_ranks": "{\"bm25\":3,\"dense\":3,\"stage1\":1,\"visual\":4}",
+      "bm25_rank": 3,
+      "dense_rank": 3,
+      "visual_rank": 4,
+      "global_rank": 4,
+      "global_fused_score": 0.9800995024875622,
+      "qarf_rank": 3,
+      "qarf_fused_score": 0.6256201009738278,
+      "qpaf_rank": 1,
+      "qpaf_fused_score": 0.9817918976031969,
+      "qpaf_weights_bm25_dense_visual": "[0.0, 1.0, 0.0]",
+      "weight_changed": true
+    }
+  ],
+  "input_sha256": {
+    "run_manifest": "5aee955408d680a918bdd5c4df5f7ae3301a87281b970968ee3da5e5f207b98d",
+    "retrieval_scores": "32b39da19e9507a0a5060157630cb40bf5c6bcf6464d88e4bb6136888473173b",
+    "script": "6f8d014afad5534cc49491a9047bbdf43b5279cc4d04dd244ea3c6e66292dd9f"
+  },
+  "output_sha256": {
+    "all_query_relevant_ranks.csv": "c73302fcdfa2f9e623b74a6d1d5f6b02abc4825b80ecd39e51d856576bada0df",
+    "query_page_rankings.csv": "bcc706b3c7d925cfe6b8c2f1ac890bdbaa3d2069f4f87585b930155ff0f6f1d9"
+  }
+}

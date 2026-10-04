@@ -1,0 +1,13 @@
+{
+  "command": [
+    "C:\\Python313\\python.exe",
+    "-m",
+    "pytest",
+    "-q"
+  ],
+  "exit_code": 0,
+  "elapsed_seconds": 100.55115569999907,
+  "final_line": "213 passed in 88.46s (0:01:28)",
+  "runner_sha256": "2eebbb6db9853eacedcfe143d5cac6910e116e6c469ed64d9cf0cbaab52b1e6f",
+  "tests_sha256": "43cfd69845c07be51f83a33e1662a0e9279cd01075df2ce1b5825f888dd81fb3"
+}

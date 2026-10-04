@@ -1,0 +1,67 @@
+{
+  "status": "PASS_PREPARED_EXECUTION_CLOSED",
+  "verified_at": "2026-09-08T03:40:56.5876820+00:00",
+  "base_git_commit": "99823b96c9afd52e11e7ddb001f5b74bf0a1e314",
+  "selection": {
+    "population_queries": 1142,
+    "excluded_original_queries": 12,
+    "remainder_queries": 1130,
+    "selected_queries": 24,
+    "pages_per_query": 5385,
+    "candidate_pairs": 129240,
+    "query_list_sha256": "95715b6a8c0c2d684b3a34e9130eca25ea641aafb62678f7daa764f0ab585f5b",
+    "disjoint_from_original12": true,
+    "relevance_or_scores_used_for_selection": false
+  },
+  "checks": {
+    "closed_config_json_valid": true,
+    "closed_config_snapshot_content_matches": true,
+    "source_inventory_pins": 25,
+    "source_hashes_match": true,
+    "environment_matches": true,
+    "read_only_preflight": "PASS",
+    "preflight_loaded_relevance": false,
+    "preflight_executed_page_oracle": false,
+    "closed_cli_refused_before_writes": true,
+    "output_directory_exists": false,
+    "attempt_consumed": false,
+    "focused_tests": "19 passed in 1.95s",
+    "full_test_suite": "232 passed in 19.62s",
+    "ruff_check": "PASS",
+    "ruff_format_check": "PASS",
+    "git_diff_check": "PASS"
+  },
+  "sha256": {
+    "live_closed_config_bytes": "401da348fc875ace578d3d0d1e09c49f0e5d446d3cb198543bd50c1b1bff3fd3",
+    "reviewed_closed_config_snapshot": "401da348fc875ace578d3d0d1e09c49f0e5d446d3cb198543bd50c1b1bff3fd3",
+    "proposal": "1f3d76ce5976a8568fac1119e7de5791af0550ddea8331641613ff7a91a086b2",
+    "runner": "7165db755bc9f53fec96489464113ae36274f666ea1d1180b33ab1953bca04e7",
+    "tests": "8d39d94d3066eef6c396014fd261d844dd6a06bc97ddcc9534f8d9698c94ada5",
+    "execution_review": "af434aee662c13675e788104e54754975caf5f0f34aa56803f5f315e06457a75",
+    "preflight": "34ab1fad11a17f7c36b57ec73e4a6adf543c5bdfee4c6e38559b34243bd1604f",
+    "closed_cli_refusal": "7c5eb830d9130cc1ab8c2a51bc58f622d75768ea4abeb21d02c6c36043de70b4",
+    "fixed_profile_trigger_review": "9358ba32f0dd5015685efb34f007abb6bd59ec1ec66668bc6d39b08955eac176",
+    "original12_proposal": "ccc0c9469c0ee42e540ece1b5aefc8acf82c3117b8db77affb748799495c08f6",
+    "retrieval_scores": "32b39da19e9507a0a5060157630cb40bf5c6bcf6464d88e4bb6136888473173b"
+  },
+  "proposed_execution": {
+    "actor": "codex",
+    "device": "cpu",
+    "workers": 1,
+    "threads_per_library": 1,
+    "total_wall_timeout_seconds": 43200,
+    "invocations": 1,
+    "automatic_retries": 0,
+    "execution_authorized": false
+  },
+  "boundaries": {
+    "full_w7_authorized": false,
+    "w66_authorized": false,
+    "training_authorized": false,
+    "modal_gpu_authorized": false,
+    "vidore_access_authorized": false,
+    "p1_03_authorized": false,
+    "formal_phase_decision": false,
+    "frozen_p1_02_status": "BLOCKED"
+  }
+}

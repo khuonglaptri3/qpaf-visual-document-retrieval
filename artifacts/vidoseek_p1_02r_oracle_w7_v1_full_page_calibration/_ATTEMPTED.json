@@ -1,0 +1,26 @@
+{
+  "approval_commit": "b252080d4ea32ea7b5b11450b54a7cb58f214990",
+  "authorization": {
+    "attempt_number": 1,
+    "authorized_invocations": 1,
+    "remaining_authorized_invocations_after_start": 0
+  },
+  "boundaries": {
+    "actual_relevance_loaded": false,
+    "authorization_attempt_consumed": true,
+    "automatic_retry_allowed": false,
+    "frozen_p1_02_status": "BLOCKED",
+    "full_w7_oracle_executed": false,
+    "learned_qpaf_executed": false,
+    "modal_or_gpu_used": false,
+    "oracle_results_persisted": false,
+    "p1_03_authorized": false,
+    "scientific_oracle_analysis_executed": false
+  },
+  "classification": "engineering_full_page_calibration_attempt_not_result",
+  "protocol_id": "vidoseek_p1_02r_oracle_w7_v1",
+  "protocol_sha256": "8d37e6c4dbe46146e9f2d5d3da439a2c72f4e06f3d9c8ce33511484fceccbe34",
+  "schema_version": 1,
+  "started_at": "2026-09-06T14:50:45.145910+00:00",
+  "status": "STARTED"
+}

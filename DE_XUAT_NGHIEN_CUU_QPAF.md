@@ -77,7 +77,7 @@ BM25, dense-text và visual retrieval có tìm đúng các trang liên quan trê
 
 ### RQ4 — Có thể học trọng số thích ứng mà không dùng qrels khi suy luận không?
 
-**H4:** Bộ dự đoán QARF/CARF/QPAF học từ train split có thể cải thiện so với fixed fusion trên validation và test dưới protocol cố định. Hiệu quả phải được báo cáo cùng độ bất định, chi phí suy luận và số seed; oracle headroom không được dùng thay cho kết quả này.
+**H4:** Bộ dự đoán QARF/QPAF học từ train split có thể cải thiện so với fixed fusion trên validation và test dưới protocol cố định. Hiệu quả phải được báo cáo cùng độ bất định, chi phí suy luận và số seed; oracle headroom, bao gồm CARF diagnostic, không được dùng thay cho kết quả này.
 
 ## 5. Phương pháp đề xuất
 
@@ -164,7 +164,7 @@ Nhóm đặc trưng ban đầu được giới hạn ở các tín hiệu sẵn 
 - đặc trưng độ dài và loại truy vấn;
 - biểu diễn truy vấn và, nếu ngân sách cho phép, biểu diễn trang đã được cache.
 
-Không đưa qrels, oracle profile, thống kê từ test split hoặc đặc trưng được suy ra từ nhãn vào đầu vào mô hình. Hàm mất mát xếp hạng và chiến lược negative sampling sẽ được chọn trên train/validation, ghi rõ trước khi đánh giá test, và được giữ giống nhau khi so sánh QARF, CARF và QPAF.
+Không đưa qrels, oracle profile, thống kê từ test split hoặc đặc trưng được suy ra từ nhãn vào đầu vào mô hình. Hàm mất mát xếp hạng và chiến lược negative sampling sẽ được chọn trên train/validation, ghi rõ trước khi đánh giá test, và được giữ giống nhau khi so sánh learned QARF và learned QPAF.
 
 ## 6. Thiết kế thực nghiệm
 
@@ -189,7 +189,7 @@ Dataset revision, split và quy tắc nhóm các biến thể dịch phải đư
 - fixed weighted fusion, trọng số chọn trên validation;
 - Global fusion oracle, chỉ báo cáo như upper bound;
 - QARF: một bộ trọng số học được cho mỗi câu hỏi;
-- CARF: biến thể chẩn đoán theo cụm ứng viên;
+- CARF oracle: biến thể chẩn đoán theo cụm ứng viên, báo cáo tách khỏi deployable learned methods;
 - QPAF: một bộ trọng số học được cho mỗi cặp câu hỏi–trang;
 - DAT, nếu có thể tái lập dưới cùng candidate pool và protocol;
 - mFAR chỉ được dùng như baseline trực tiếp nếu việc chuyển đổi từ field–scorer sang ba kênh retrieval được định nghĩa và triển khai công bằng; nếu không, mFAR được giữ ở vai trò nền tảng kiến trúc.
@@ -208,7 +208,7 @@ Mọi so sánh learned fusion phải báo cáo nhiều seed hoặc nêu rõ sing
 - bỏ lần lượt BM25, dense hoặc visual channel;
 - chỉ dùng score/rank so với thêm query/page features;
 - linear gating so với shallow MLP;
-- QARF so với CARF và QPAF dưới cùng ngân sách tham số;
+- learned QARF so với learned QPAF dưới cùng ngân sách tham số; QARF–CARF–QPAF được so sánh riêng như oracle granularity ablation;
 - $W_7$ so với $W_{66}$ trong oracle study;
 - độ nhạy theo candidate depth $K_c$;
 - min–max so với phép chuẩn hóa thay thế;
@@ -220,8 +220,8 @@ Mọi so sánh learned fusion phải báo cáo nhiều seed hoặc nêu rõ sing
 |---|---|---|
 | 1. Baseline | Score table hợp lệ; metric khớp kiểm tra tay; candidate recall; lỗi bổ trợ giữa ba kênh | Dừng adaptive fusion nếu một kênh thống trị và union không tăng headroom |
 | 2. Oracle $W_7$ | Global, QARF và QPAF trên cùng protocol; gain, coverage và bootstrap CI | Dừng nếu không có headroom; chọn QARF nếu page-level gain không đáng kể |
-| 3. CARF | QARF–CARF–QPAF oracle, qrels không tham gia clustering | Chọn mức đơn giản nhất giữ phần lớn headroom |
-| 4. Learned fusion | Nhiều seed; validation/test tách biệt; latency và ablation | Chỉ tuyên bố cải thiện khi learned model, không phải oracle, vượt baseline dưới protocol giống nhau |
+| 3. Learned fusion | Learned QARF và QPAF; nhiều seed; validation/test tách biệt; latency | Chỉ tuyên bố cải thiện khi learned model, không phải oracle, vượt baseline dưới protocol giống nhau |
+| 4. CARF và ablation | QARF–CARF–QPAF oracle, qrels không tham gia clustering; các learned ablation đổi một factor mỗi run | Dùng CARF để giải thích granularity, không trình bày như deployable learned method |
 | 5. External/Vietnamese | Dataset và qrels được đóng băng; không tuning trên test | Giới hạn kết luận theo ngôn ngữ và miền thực sự đã đánh giá |
 
 ## 8. Đóng góp dự kiến
@@ -263,15 +263,15 @@ Nếu các giả thuyết được thực nghiệm hỗ trợ, đề tài dự k
 
 1. **Pha A — Chuẩn bị dữ liệu và baseline:** cố định dataset revision, split, metric; chạy ba retriever và kiểm tra score cache.
 2. **Pha B — Complementarity và oracle:** chạy individual, RRF, fixed fusion, sau đó Global/QARF/QPAF oracle với $W_7$; chỉ mở rộng $W_{66}$ nếu cần.
-3. **Pha C — Kiểm tra granularity:** phân tích coverage; chạy CARF khi page-level headroom rõ; chọn granularity bằng cổng dừng.
-4. **Pha D — Learned fusion:** triển khai QARF trước làm baseline học được, sau đó CARF/QPAF theo kết quả Pha C.
-5. **Pha E — Xác nhận và viết báo cáo:** multi-seed, external validation, Vietnamese evaluation nếu protocol hợp lệ, ablation và error analysis.
+3. **Pha C — Kiểm tra granularity ban đầu:** phân tích coverage và W7/W66 QARF–QPAF headroom để quyết định có đáng chuẩn bị learned fusion hay không.
+4. **Pha D — Learned fusion:** triển khai QARF trước làm baseline học được, sau đó QPAF dưới cùng protocol và ngân sách.
+5. **Pha E — Xác nhận và viết báo cáo:** multi-seed, CARF oracle granularity ablation, các ablation khác, external validation, Vietnamese evaluation nếu protocol hợp lệ, và error analysis.
 
 Mốc thời gian cụ thể phụ thuộc vào tài nguyên GPU, khả năng tải mô hình/dataset và thời hạn nộp; các thông tin này cần được chốt trước khi chuyển kế hoạch pha thành lịch tuần.
 
 ## 12. Kết luận
 
-QPAF là một mở rộng có phạm vi rõ từ adaptive fusion theo câu hỏi sang adaptive fusion theo cặp câu hỏi–trang cho Visual RAG. Điểm mạnh của đề xuất không nằm ở giả định rằng mô hình chi tiết hơn chắc chắn tốt hơn, mà ở thiết kế thực nghiệm có thể bác bỏ giả thuyết đó sớm. Bằng cách đo complementarity, oracle headroom và learned performance theo thứ tự, đề tài có thể chọn Global, QARF, CARF hoặc QPAF dựa trên bằng chứng thay vì mặc định chọn phương án phức tạp nhất.
+QPAF là một mở rộng có phạm vi rõ từ adaptive fusion theo câu hỏi sang adaptive fusion theo cặp câu hỏi–trang cho Visual RAG. Điểm mạnh của đề xuất không nằm ở giả định rằng mô hình chi tiết hơn chắc chắn tốt hơn, mà ở thiết kế thực nghiệm có thể bác bỏ giả thuyết đó sớm. Bằng cách đo complementarity, oracle headroom và learned performance theo thứ tự, đề tài có thể chọn Global, QARF hoặc QPAF dựa trên bằng chứng; CARF được dùng trong ablation để giải thích liệu granularity theo cụm đã giữ được phần lớn page-level headroom hay chưa.
 
 ## Tài liệu tham khảo
 

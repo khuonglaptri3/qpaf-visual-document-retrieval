@@ -1,0 +1,23 @@
+{
+  "recovery_id": "vidoseek_exploratory12_recovery_v1",
+  "parent_output_path": "runs/vidoseek_w7_exploratory12_v1",
+  "output_path": "runs/vidoseek_exploratory12_recovery_v1",
+  "review_path": "artifacts/vidoseek_exploratory12_interruption_review_20260907/checkpoint_integrity_review.json",
+  "runner_sha256": "6adb19f82ebb1037bcabc5bfd1174e95fe6c4728320febe0097cda5b88f49c09",
+  "review_sha256": "e69f464ed2f9d2a53c2707a30d68338c6e589c98c78cebb20780ae486149fc5f",
+  "inherited_queries": 4,
+  "new_queries": 8,
+  "workers": 1,
+  "threads_per_library": 1,
+  "invocations": 1,
+  "automatic_retries": 0,
+  "total_wall_timeout_seconds": 21600,
+  "authorization": {
+    "recovery_adopted": true,
+    "execution_authorized": true,
+    "approved_by": "user",
+    "execution_actor": "codex",
+    "approval_text": "OK now continue",
+    "approved_at": "2026-09-07T10:01:22.671961+00:00"
+  }
+}
