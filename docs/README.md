@@ -5,9 +5,10 @@ Thư mục này được phân nhóm theo mục đích đọc. Dùng mục lục
 ## Bắt đầu ở đây
 
 1. [Milestone hoàn chỉnh](GUILDLINE_OVERVIEWS_PROPOSAL/POAI_Milestone_Group01_Hoan_Chinh.xlsx), sheet `Milestones`: nhiệm vụ, người phụ trách, deliverable và gate.
+   Hồ sơ mới: [đóng M1](../evidence/M1_FINAL/07_R1/M1_closure_record.md), [G1 conditional pass](../evidence/M1_FINAL/06_G1/G1_final_decision.md) và [M2.1 split freeze](../evidence/M2_FINAL/01_data_splits/README.md).
 2. [Tổng quan dự án](01_overview/HUONG_DAN_HIEU_DU_AN_QPAF.md): thuật ngữ và ý nghĩa các giai đoạn.
 3. [Checklist bàn giao của Khương](06_handover/khuong-m1-checklist.md) và [báo cáo audit M1.4–M1.6](06_handover/m1.4-m1.5-m1.6-audit-report.md): tiến độ theo bằng chứng.
-4. [Hồ sơ G1](../evidence/M1_FINAL/06_G1/README.md), [registry/QA](../evidence/M1_FINAL/04_experiment_registry/README.md) và [báo cáo R1](../evidence/M1_FINAL/07_R1/Sprint_1_Progress_Report.md): trạng thái nghiệm thu.
+4. [Bảng nghiệm thu và runbook M1](06_handover/M1_ACCEPTANCE_SUMMARY_AND_RUNBOOK.md), [hồ sơ G1](../evidence/M1_FINAL/06_G1/README.md) và [registry/QA](../evidence/M1_FINAL/04_experiment_registry/README.md): trạng thái nghiệm thu theo revision.
 
 ## Các nhóm tài liệu
 
@@ -38,4 +39,5 @@ Workbook và timeline là nguồn kế hoạch. [Tasks.md](../Tasks.md), [PROJEC
 - Script/config hiện tại dùng đường dẫn trong folder mới. Catalog ghi vị trí và hash hiện tại; manifest, receipt và source snapshot lịch sử giữ nguyên theo revision của chúng.
 - Mỗi tài liệu có một vị trí đọc chính trong catalog. Các trang chuyển tiếp ở vị trí cũ đã được xóa; liên kết trong tài liệu hiện tại trỏ trực tiếp tới vị trí mới.
 - Bộ workbook/Word/timeline gốc và các spec/plan đã lưu giữ nguyên vị trí.
-- [catalog.json](catalog.json) ghi vị trí cũ/mới, nhóm và SHA-256 của 63 tài liệu nguồn tại lần sắp xếp ngày 04/10/2026; đây là inventory tổ chức tài liệu, không phải nghiệm thu nghiên cứu.
+- [catalog.json](catalog.json) ghi vị trí cũ/mới, nhóm và SHA-256 của tài liệu đã sắp xếp và nhập từ các branch; đây là inventory tổ chức tài liệu, không phải nghiệm thu nghiên cứu.
+- Liên kết trong hồ sơ ký duyệt và revision lịch sử áp dụng cho checkout nguồn. Tra vị trí hiện tại qua `original_path` → `current_path` trong catalog nếu tài liệu đã chuyển folder.

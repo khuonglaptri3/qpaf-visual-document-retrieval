@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "task": "M1.4",
+  "owner": "Trần Đình Khương",
+  "planned_date": "2026-09-23",
+  "generated_at_utc": "2026-09-28T16:57:13.533710+00:00",
+  "status": "PARTIAL",
+  "file_count": 631,
+  "counts": {
+    "source": 28,
+    "data": 295,
+    "config": 2,
+    "run": 227,
+    "documentation": 43,
+    "infrastructure": 36
+  },
+  "git": {
+    "commit": "765803fee5465006658de35a4272414b27a5bb53",
+    "branch": "develop",
+    "worktree_status": "M configs/m1.1/vidoseek.toml\n M scripts/audit_collisions.py\n M scripts/audit_primary_corpus.py\n M scripts/run_m11_modal.py\n M src/qpaf/audit.py\n M src/qpaf/m11/config.py\n M src/qpaf/m11/dataset.py\n M src/qpaf/m11/modal_app.py\n M src/qpaf/m11/pipeline.py\n M src/qpaf/m13/boundary.py\n M src/qpaf/m13/corpus.py\n M src/qpaf/m13/splits.py\n M src/qpaf/m13/vidoseek.py\n M src/qpaf/m16/detector.py\n M src/qpaf/m16/manifest.py\n M src/qpaf/m16/report.py\n M src/qpaf/m18/namespace.py\n M src/qpaf/m18/ocr_policy.py\n M tests/test_audit.py\n M tests/test_m11_artifacts.py\n M tests/test_m13_cli.py\n M tests/test_m13_corpus.py\n M tests/test_m13_splits.py\n M tests/test_m13_vidoseek.py\n M tests/test_m16_collision.py\n?? data/manifests/vidoseek-e91a92b-location.json\n?? docs/khuong-m1-checklist.correction-2026-09-28.md\n?? docs/m1-readiness-remediation-2026-09-28.md\n?? docs/m1-restart-handoff.correction-2026-09-28.md\n?? docs/m1.1-m1.8-readiness-audit-2026-09-28.md\n?? docs/m1.4-m1.5-m1.6-audit-report.correction-2026-09-28.md\n?? docs/superpowers/plans/2026-09-28-readiness-remediation.md\n?? evidence/M1_FINAL/06_G1/CORRECTION-2026-09-28.md\n?? evidence/M1_FINAL/07_R1/Sprint_1_Progress_Report.correction-2026-09-28.md\n?? evidence/revisions/m1.3-001/audit_report.json\n?? evidence/revisions/m1.3-001/splits/split_manifest.json\n?? evidence/revisions/m1.3-001/splits/test_ids.txt\n?? evidence/revisions/m1.3-001/splits/train_ids.txt\n?? evidence/revisions/m1.3-001/splits/val_ids.txt\n?? evidence/revisions/m1.5-002/README.md\n?? evidence/revisions/m1.5-002/governance_events.jsonl\n?? evidence/revisions/m1.5-002/package_manifest.json\n?? evidence/revisions/m1.5-002/scoped_contract.md\n?? evidence/revisions/m1.5-002/source_hashes.csv\n?? evidence/revisions/m1.6-002/alias_manifest.csv\n?? evidence/revisions/m1.6-002/collision_report.md\n?? evidence/revisions/m1.6-002/collision_summary.json\n?? evidence/revisions/m1.6-002/duplicate_report.csv\n?? evidence/revisions/m1.6-002/hash_manifest.json\n?? evidence/revisions/m1.6-002/input_inventory.json\n?? evidence/revisions/m1.6-002/overlap_report.json\n?? evidence/revisions/m1.6-002/page_manifest.csv\n?? evidence/revisions/m1.6-002/provenance.json\n?? evidence/revisions/m1.6-002/qrel_validation.json\n?? scripts/download_primary_corpus.py\n?? src/qpaf/m16/real_corpus.py\n?? tests/test_m16_real_audit.py\n?? tests/test_m18_runtime.py"
+  },
+  "excluded_entries": [
+    ".agents/",
+    ".git/",
+    ".superpowers/",
+    ".venv/",
+    ".worktrees/",
+    "data/raw/vidoseek-e91a92b/.cache/",
+    "evidence/",
+    "results/m1.1/implementation-check/2026-09-26-followup/filesystem-probe/status.json.a5f2dafb43894b2884cfb0fef3f1a244.tmp",
+    "results/m1.1/implementation-check/2026-09-26-followup/software-fixture/runs/software-fixture/bm25/20260925T181758-74aa32cc/status.json.69be7a97980745758e64a6319cf257ed.tmp",
+    "scripts/__pycache__/",
+    "src/qpaf/__pycache__/",
+    "src/qpaf/m11/__pycache__/",
+    "src/qpaf/m12/__pycache__/",
+    "src/qpaf/m13/__pycache__/",
+    "src/qpaf/m16/__pycache__/",
+    "src/qpaf/m18/__pycache__/",
+    "tests/__pycache__/"
+  ],
+  "read_errors": [],
+  "gaps": [
+    {
+      "id": "PROVENANCE_REVIEW_REQUIRED",
+      "detail": "Khương and independent QA must review source/data/config/run/output links. Inventory generation is not M1.4 acceptance."
+    }
+  ],
+  "scope": "Local filesystem inventory; generated evidence, links and configured exclusions are omitted. No external assets were inspected."
+}

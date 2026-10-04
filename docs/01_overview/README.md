@@ -7,3 +7,4 @@ Các nhận xét về tiến độ trong tài liệu là snapshot theo thời đ
 - [Hướng dẫn hiểu dự án QPAF và các giai đoạn thực nghiệm](HUONG_DAN_HIEU_DU_AN_QPAF.md)
 - [Comprehensive Review and Technical Summary: Query-Page-Adaptive Fusion (QPAF)](PROJECT_REVIEW_AND_KNOWLEDGE_GUIDE.md)
 - [Tóm tắt định hướng đề tài QPAF](Tom_tat_dinh_huong_QPAF.md)
+- [Bản tổng quan nhập từ repo Khương](QPAF_PROJECT_SYNTHESIS_SOURCE.md): snapshot tài liệu nguồn; đối chiếu ghi chú feature/loss với đặc tả method hiện tại.

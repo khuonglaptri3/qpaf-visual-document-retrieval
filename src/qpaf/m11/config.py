@@ -41,7 +41,7 @@ def validate(config):
                     'visual.max_pixels', 'retrieval.candidate_k', 'oracle.metric_k',
                     'oracle.bootstrap_samples', 'modal.cpu', 'modal.memory_mb',
                     'modal.timeout']
-        for key in positive + ['selection.count', 'text.min_native_chars']:
+        for key in positive + ['selection.count', 'text.min_native_chars', 'text.min_ocr_chars']:
             section, name = key.split('.')
             value = config[section][name]
             minimum = 1 if key in positive else 0
@@ -60,6 +60,16 @@ def validate(config):
             raise ValueError('Only the vidoseek adapter is implemented')
         if config['text']['mode'] not in {'native', 'ocr', 'native_or_ocr'}:
             raise ValueError('Unsupported text extraction mode')
+        from qpaf.m18.namespace import validate_experiment_id
+        validate_experiment_id(config['execution']['experiment_id'])
+        for name, maximum in [('min_printable_ratio', 1), ('min_ocr_confidence', 100), ('max_failure_fraction', 1)]:
+            value = config['text'][name]
+            if type(value) not in (float, int) or not math.isfinite(value) or not 0 <= value <= maximum:
+                raise ValueError(f'text.{name} must be finite and between 0 and {maximum}')
+        if config['text']['parser'] != 'pypdfium2' or config['text']['ocr_engine'] != 'tesseract':
+            raise ValueError('Only pypdfium2 and tesseract extraction are supported')
+        if config['text']['quality_status'] != 'PROVISIONAL':
+            raise ValueError('OCR thresholds have not been calibrated; quality_status must be PROVISIONAL')
         if config['retrieval']['normalization'] != 'minmax':
             raise ValueError('Only minmax normalization is implemented')
         if config['visual']['dtype'] not in {'float32', 'float16', 'bfloat16'}:

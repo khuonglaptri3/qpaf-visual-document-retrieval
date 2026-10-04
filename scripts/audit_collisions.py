@@ -109,7 +109,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--splits-dir",
         type=Path,
-        help="Directory containing split manifest JSON files.",
+        help="Directory containing verified M1.3 *_ids.txt and split_manifest.json.",
     )
     parser.add_argument(
         "--corpus-dir",
@@ -119,7 +119,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--output-dir",
         type=Path,
-        default=REPO_ROOT / "evidence" / "revisions" / "m1.6-001",
+        required=True,
         help="Output directory to store audit manifests and report.",
     )
     parser.add_argument(
@@ -138,34 +138,29 @@ def parse_args() -> argparse.Namespace:
 def main() -> int:
     args = parse_args()
     output_dir = args.output_dir
-    output_dir.mkdir(parents=True, exist_ok=True)
+    if output_dir.exists():
+        raise FileExistsError(f"Output already exists: {output_dir}")
 
     print("================================================================================")
     print("QPAF Milestone 1.6 — Primary-Corpus Collision Audit")
     print("================================================================================")
 
-    if args.fixture or not args.annotations or not args.annotations.is_file():
-        print("[INFO] Using representative synthetic multi-document corpus fixture...")
+    inventory, overlap = {}, {}
+    if args.fixture:
+        if args.annotations or args.corpus_dir or args.splits_dir:
+            raise ValueError('--fixture cannot be mixed with real inputs')
+        print('[INFO] Explicit synthetic fixture; this is not a real corpus audit.')
         raw_pages, split_map, raw_aliases, qrels = generate_synthetic_collision_corpus()
+        for row in raw_pages:
+            row['review_status'] = 'synthetic_not_reviewed'
     else:
-        print(f"[INFO] Reading annotations from {args.annotations}...")
-        # If real annotation provided, parse using m13 parser
-        with open(args.annotations, "r", encoding="utf-8") as f:
-            data = json.load(f)
-        # Load split map if splits-dir exists
-        split_map: Dict[str, str] = {}
-        if args.splits_dir and args.splits_dir.is_dir():
-            for s_name in ("train", "val", "test"):
-                sp_file = args.splits_dir / f"{s_name}_manifest.json"
-                if sp_file.is_file():
-                    with open(sp_file, "r", encoding="utf-8") as sf:
-                        sp_data = json.load(sf)
-                        for qid in sp_data.get("queries", []):
-                            split_map[qid] = s_name
-
-        raw_pages = []
-        raw_aliases = []
-        qrels = {}
+        if not all((args.annotations, args.corpus_dir, args.splits_dir)):
+            raise ValueError('Real audit requires --annotations, --corpus-dir and --splits-dir; fixture requires --fixture')
+        from qpaf.m16.real_corpus import load_real_corpus
+        raw_pages, split_map, raw_aliases, qrels, inventory, overlap = load_real_corpus(
+            args.corpus_dir, args.annotations, args.splits_dir)
+    if not raw_pages or not qrels:
+        raise ValueError('Cannot audit empty pages or qrels')
 
     # Step 1: Build Page Manifest
     page_records = build_page_manifest(raw_pages, split_assignment=split_map)
@@ -190,7 +185,13 @@ def main() -> int:
     print(f"[5/5] Verified qrels: {qrel_results['valid_queries']}/{qrel_results['total_queries']} valid queries, {qrel_results['orphan_query_count']} orphan queries.")
 
     # Determine status
-    if leakage_count > 0:
+    unresolved_aliases = sum(r.review_status == 'unresolved' for r in alias_records)
+    overlap_count = len(overlap.get('overlapping_content', []))
+    if unresolved_aliases:
+        audit_status = 'FAIL_UNRESOLVED_ALIASES'
+    elif overlap_count or overlap.get('cross_split_exact_query_groups'):
+        audit_status = 'REVIEW_REQUIRED_OVERLAP'
+    elif leakage_count > 0:
         audit_status = "FAIL_LEAKAGE_DETECTED"
     elif qrel_results["orphan_query_count"] > 0:
         audit_status = "FAIL_ORPHAN_QUERIES"
@@ -199,6 +200,14 @@ def main() -> int:
 
     summary: Dict[str, Any] = {
         "status": audit_status,
+        "evidence_kind": "synthetic_fixture" if args.fixture else "real_corpus_cpu_audit",
+        "independent_review": "PENDING",
+        "unresolved_alias_count": unresolved_aliases,
+        "document_overlap_count": len(overlap.get('overlapping_documents', {})),
+        "content_overlap_count": overlap_count,
+        "missing_target_count": qrel_results['missing_target_count'],
+        "content_hash_method": "synthetic" if args.fixture else "pdfium_rgb_72dpi_v1",
+
         "timestamp_utc": datetime.now(timezone.utc).isoformat(),
         "total_documents": len({p.document_id for p in page_records}),
         "total_pages": len(page_records),
@@ -214,6 +223,7 @@ def main() -> int:
         "dataset_revision": "e91a92ba5f38690696c7e66be5c5474b54c6e791",
     }
 
+    output_dir.mkdir(parents=True, exist_ok=False)
     # Export CSVs & Markdown Report
     page_csv = output_dir / "page_manifest.csv"
     alias_csv = output_dir / "alias_manifest.csv"
@@ -241,11 +251,35 @@ def main() -> int:
     print(f"[STATUS] Final Audit Status: {audit_status}")
     print("================================================================================")
 
-    if args.fail_on_leakage and leakage_count > 0:
+    import platform
+    import subprocess
+    from qpaf.m11.artifacts import digest
+    def save(name, value):
+        (output_dir/name).write_bytes((json.dumps(value, indent=2, ensure_ascii=False)+'\n').encode('utf-8'))
+    save('input_inventory.json', inventory)
+    save('overlap_report.json', overlap)
+    save('qrel_validation.json', qrel_results)
+    source_paths = [Path(__file__), *sorted((SRC_DIR/'qpaf'/'m16').glob('*.py')),
+                    *sorted((SRC_DIR/'qpaf'/'m13').glob('*.py'))]
+    save('provenance.json', {
+        'command': sys.argv, 'python': sys.version, 'platform': platform.platform(),
+        'git_commit': subprocess.check_output(['git','rev-parse','HEAD'], cwd=REPO_ROOT, text=True).strip(),
+        'source_sha256': {p.relative_to(REPO_ROOT).as_posix():digest(p) for p in source_paths},
+        'inputs': {} if args.fixture else {
+            str(args.annotations):digest(args.annotations),
+            **{str(p):digest(p) for p in sorted(args.splits_dir.iterdir()) if p.is_file()}},
+    })
+    save('hash_manifest.json', {p.name:{'sha256':digest(p), 'size_bytes':p.stat().st_size}
+                               for p in sorted(output_dir.iterdir()) if p.is_file()})
+    if args.fail_on_leakage and (leakage_count > 0 or overlap_count > 0):
         return 2
 
     return 0 if audit_status == "PASS_AUDIT" else 1
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    try:
+        sys.exit(main())
+    except (ValueError, OSError, KeyError) as exc:
+        print(f'[ERROR] {exc}', file=sys.stderr)
+        sys.exit(1)

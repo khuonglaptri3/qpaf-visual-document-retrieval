@@ -45,7 +45,7 @@ def export_manifest_csv(records: Iterable[PageRecord], output_path: Union[str, P
     path = Path(output_path)
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", encoding="utf-8", newline="") as f:
-        writer = csv.writer(f)
+        writer = csv.writer(f, lineterminator="\n")
         writer.writerow(PAGE_MANIFEST_HEADERS)
         for r in sorted(records, key=lambda x: (x.document_id, x.page_number, x.page_id)):
             writer.writerow([
@@ -67,7 +67,7 @@ def export_alias_csv(records: Iterable[AliasRecord], output_path: Union[str, Pat
     path = Path(output_path)
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", encoding="utf-8", newline="") as f:
-        writer = csv.writer(f)
+        writer = csv.writer(f, lineterminator="\n")
         writer.writerow(ALIAS_MANIFEST_HEADERS)
         for r in sorted(records, key=lambda x: (x.canonical_page_id, x.alias_id)):
             writer.writerow([
@@ -85,7 +85,7 @@ def export_duplicate_csv(records: Iterable[DuplicateRecord], output_path: Union[
     path = Path(output_path)
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", encoding="utf-8", newline="") as f:
-        writer = csv.writer(f)
+        writer = csv.writer(f, lineterminator="\n")
         writer.writerow(DUPLICATE_REPORT_HEADERS)
         for r in sorted(records, key=lambda x: (x.group_id, x.left_page_id, x.right_page_id)):
             writer.writerow([
@@ -104,7 +104,7 @@ def export_duplicate_csv(records: Iterable[DuplicateRecord], output_path: Union[
 def generate_collision_markdown_report(summary: Dict[str, Any]) -> str:
     """Format comprehensive Markdown audit report for M1.6."""
     ts = summary.get("timestamp_utc") or datetime.now(timezone.utc).isoformat()
-    status = summary.get("status", "PASS_AUDIT")
+    status = summary.get("status", "NOT_AUDITED")
     total_docs = summary.get("total_documents", 0)
     total_pages = summary.get("total_pages", 0)
     unique_hashes = summary.get("unique_content_hashes", 0)
@@ -116,11 +116,15 @@ def generate_collision_markdown_report(summary: Dict[str, Any]) -> str:
     dataset_name = summary.get("dataset_name", "Qiuchen-Wang/ViDoSeek")
     dataset_revision = summary.get("dataset_revision", "e91a92ba5f38690696c7e66be5c5474b54c6e791")
 
-    leakage_msg = "Zero cross-split leakage confirmed" if leakage_count == 0 else f"CRITICAL: {leakage_count} cross-split leakage instances detected!"
+    overlap_count = summary.get('content_overlap_count', 0)
+    leakage_msg = ("Zero cross-split leakage confirmed within measured scope" if leakage_count == 0 and not overlap_count
+                   else f"Review required: {leakage_count} pairwise collisions, {overlap_count} shared content groups")
 
     return f"""# M1.6 — Primary-Corpus Collision Audit
 
 **Audit Status:** `{status}`
+**Evidence kind:** `{summary.get('evidence_kind', 'unspecified')}`
+**Independent review:** PENDING. This report does not grant G1 acceptance.
 **Owner:** Khương (Data & Technical Owner)
 **Evaluator/Auditor:** QPAF Collision Audit Engine v1.0
 **Timestamp (UTC):** `{ts}`
@@ -166,12 +170,15 @@ def generate_collision_markdown_report(summary: Dict[str, Any]) -> str:
   - Found: `{leakage_count}` instances.
   - Result: `{leakage_msg}`.
 - **Qrel & Ground-Truth Consistency:**
-  - All query target references map to valid canonical page IDs in `page_manifest.csv`.
+  - Missing positive targets: `{summary.get('missing_target_count', 0)}`; details in `qrel_validation.json`.
   - Dangling query count: `{orphan_queries}`.
 
 ---
 
 ## 4. Acceptance & Gate G1 Readiness
 
-The generated manifests (`page_manifest.csv`, `alias_manifest.csv`, `duplicate_report.csv`) satisfy Gate G1 criteria `G1-COL-01`, `G1-COL-02`, and `G1-COL-03`.
+The manifests support review of `G1-COL-01`, `G1-COL-02`, and `G1-COL-03`; they do not sign off those criteria.
+Query partitions and document/content overlap are measured separately in `overlap_report.json`.
+Shared documents: `{summary.get('document_overlap_count', 0)}`. Shared content groups: `{overlap_count}`.
+Page fingerprints use `{summary.get('content_hash_method', 'unspecified')}`; perceptual/semantic duplicates are not measured.
 """

@@ -101,6 +101,15 @@ class TestM13ViDoSeek(unittest.TestCase):
             parse_vidoseek_annotations(bad_raw, doc_page_counts={"doc.pdf": 10})
         self.assertIn("page", str(ctx.exception).lower())
 
+    def test_unknown_documents_empty_corpus_and_boolean_pages_rejected(self):
+        with self.assertRaises(ValueError):
+            parse_vidoseek_annotations(self.sample_raw, {})
+        with self.assertRaises(ValueError):
+            parse_vidoseek_annotations({"examples": []})
+        self.sample_raw["examples"][0]["meta_info"]["reference_page"] = [True]
+        with self.assertRaises(ValueError):
+            parse_vidoseek_annotations(self.sample_raw, self.doc_page_counts)
+
 
 if __name__ == "__main__":
     unittest.main()

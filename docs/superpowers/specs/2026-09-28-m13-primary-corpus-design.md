@@ -10,7 +10,7 @@
 
 ## 1. Mục tiêu và Bối cảnh (Context & Scope)
 
-Theo kế hoạch tổng thể ([`POAI_Milestone_Group01_Hoan_Chinh.xlsx`](file:///home/intern-tdkhuong/Desktop/qpaf-visual-document-retrieval/docs/GUILDLINE_OVERVIEWS_PROPOSAL/POAI_Milestone_Group01_Hoan_Chinh.xlsx)), cấu hình thực tế tại [`configs/m1.1/vidoseek.toml`](file:///home/intern-tdkhuong/Desktop/qpaf-visual-document-retrieval/configs/m1.1/vidoseek.toml) và [`docs/06_handover/m1-restart-handoff.md`](file:///home/intern-tdkhuong/Desktop/qpaf-visual-document-retrieval/docs/m1-restart-handoff.md):
+Theo kế hoạch tổng thể ([`POAI_Milestone_Group01_Hoan_Chinh.xlsx`](../../GUILDLINE_OVERVIEWS_PROPOSAL/POAI_Milestone_Group01_Hoan_Chinh.xlsx)), cấu hình thực tế tại [`configs/m1.1/vidoseek.toml`](../../../configs/m1.1/vidoseek.toml) và [`docs/06_handover/m1-restart-handoff.md`](../../06_handover/m1-restart-handoff.md):
 * **Tập dữ liệu chính xác:** **`Qiuchen-Wang/ViDoSeek`** tại `https://huggingface.co/datasets/Qiuchen-Wang/ViDoSeek`.
 * **M1.3 giải quyết triệt để:** Bất đồng bộ giữa protocol cũ của Tấn Phát (vốn chép nhầm ViMDoc từ máy cá nhân cũ) với repo mới (đang chuẩn hóa hoàn toàn theo **ViDoSeek**).
 * **Đầu ra của M1.3:**
@@ -103,6 +103,6 @@ docs/
 1. **Khả năng tái lập 100% trên CPU:**
    * Chạy toàn bộ test `python -m unittest discover -s tests -p "test_m13_*.py"` pass 100% không cần GPU và không phụ thuộc vào kết nối mạng ngoài.
 2. **Khớp nối với M1.1:**
-   * Đọc và tương thích hoàn toàn với schema của [`configs/m1.1/vidoseek.toml`](file:///home/intern-tdkhuong/Desktop/qpaf-visual-document-retrieval/configs/m1.1/vidoseek.toml) và [`src/qpaf/m11/dataset.py`](file:///home/intern-tdkhuong/Desktop/qpaf-visual-document-retrieval/src/qpaf/m11/dataset.py).
+   * Đọc và tương thích hoàn toàn với schema của [`configs/m1.1/vidoseek.toml`](../../../configs/m1.1/vidoseek.toml) và [`src/qpaf/m11/dataset.py`](../../../src/qpaf/m11/dataset.py).
 3. **Tài liệu đầy đủ:**
-   * Viết tài liệu [`docs/04_data_protocol/m1.3-primary-corpus.md`](file:///home/intern-tdkhuong/Desktop/qpaf-visual-document-retrieval/docs/m1.3-primary-corpus.md) ghi nhận hướng dẫn kiểm toán ViDoSeek, các lệnh chạy, và bảng đối chiếu nghiệm thu.
+   * Viết tài liệu [`docs/04_data_protocol/m1.3-primary-corpus.md`](../../04_data_protocol/m1.3-primary-corpus.md) ghi nhận hướng dẫn kiểm toán ViDoSeek, các lệnh chạy, và bảng đối chiếu nghiệm thu.

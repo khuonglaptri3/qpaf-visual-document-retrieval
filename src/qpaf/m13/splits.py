@@ -1,5 +1,8 @@
 """Deterministic label-free split generation and verification."""
 import hashlib
+import json
+import math
+from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
 
@@ -23,6 +26,12 @@ def create_deterministic_splits(
     """
     if abs((train_ratio + val_ratio + test_ratio) - 1.0) > 1e-6:
         raise ValueError("Train, val, and test ratios must sum to 1.0")
+    if any(not math.isfinite(r) or not 0 <= r <= 1 for r in (train_ratio, val_ratio, test_ratio)):
+        raise ValueError("Split ratios must be finite and between zero and one")
+    if any(not isinstance(q, str) or not q.strip() or q != q.strip() or "\n" in q or "\r" in q for q in query_ids):
+        raise ValueError("Query IDs must be nonempty single-line strings without outer whitespace")
+    if len(set(query_ids)) != len(query_ids):
+        raise ValueError("Duplicate query IDs")
 
     total = len(query_ids)
     if total == 0:
@@ -58,6 +67,11 @@ def verify_split_disjointness(
 ) -> Tuple[bool, str]:
     """Verify pairwise disjointness and completeness of splits."""
     keys = list(splits.keys())
+    if set(keys) != {"train", "val", "test"}:
+        return False, "Expected train, val, and test splits"
+    for key, ids in splits.items():
+        if len(set(ids)) != len(ids):
+            return False, f"Duplicate query IDs within {key}"
     for i in range(len(keys)):
         for j in range(i + 1, len(keys)):
             set_i = set(splits[keys[i]])
@@ -81,3 +95,57 @@ def serialize_split_manifest(ids: List[str]) -> Tuple[str, str]:
     text = "".join(f"{item}\n" for item in ids)
     digest = hashlib.sha256(text.encode("utf-8")).hexdigest()
     return text, digest
+
+
+def _bundle_content(query_ids: List[str], seed: int):
+    if not query_ids:
+        raise ValueError("Cannot create or verify splits for empty query IDs")
+    splits = create_deterministic_splits(query_ids, seed=seed)
+    content = {f"{name}_ids.txt": serialize_split_manifest(ids)[0].encode("utf-8")
+               for name, ids in splits.items()}
+    manifest = {
+        "schema_version": 1,
+        "policy": {"seed": seed, "namespace": "vidoseek_v1", "ratios": [0.7, 0.15, 0.15],
+                   "ranking": "sha256(namespace:seed:query_id),query_id",
+                   "rounding": "python_round_train_val_test_remainder", "encoding": "utf-8", "newline": "LF"},
+        "query_count": len(query_ids),
+        "query_ids_sha256": serialize_split_manifest(sorted(query_ids))[1],
+        "files": {name: {"sha256": hashlib.sha256(data).hexdigest(), "size_bytes": len(data),
+                         "count": len(splits[name.removesuffix("_ids.txt")])}
+                  for name, data in content.items()},
+    }
+    return splits, content, manifest
+
+
+def write_split_bundle(directory, query_ids: List[str], seed: int = 2026) -> Dict[str, List[str]]:
+    """Create immutable UTF-8/LF ID files and a policy/hash manifest."""
+    splits, content, manifest = _bundle_content(query_ids, seed)
+    content["split_manifest.json"] = (json.dumps(manifest, indent=2, sort_keys=True) + "\n").encode("utf-8")
+    path = Path(directory)
+    for name in content:
+        if (path / name).exists() or (path / name).is_symlink():
+            raise FileExistsError(f"Split artifact already exists: {path / name}")
+    path.mkdir(parents=True, exist_ok=True)
+    for name, data in content.items():
+        with (path / name).open("xb") as stream:
+            stream.write(data)
+    return splits
+
+
+def read_split_bundle(directory, query_ids: List[str], seed: int = 2026) -> Dict[str, List[str]]:
+    """Read-only verification of persisted bytes, IDs, coverage and deterministic policy."""
+    expected, content, expected_manifest = _bundle_content(query_ids, seed)
+    path = Path(directory)
+    manifest = json.loads((path / "split_manifest.json").read_bytes())
+    if manifest != expected_manifest:
+        raise ValueError("Split manifest policy, coverage or hashes do not match expected query IDs")
+    splits = {}
+    for name, expected_bytes in content.items():
+        data = (path / name).read_bytes()
+        if data != expected_bytes:
+            raise ValueError(f"Split bytes, IDs or hash mismatch: {name}")
+        splits[name.removesuffix("_ids.txt")] = data.decode("utf-8").splitlines()
+    valid, message = verify_split_disjointness(splits, len(query_ids))
+    if not valid or splits != expected:
+        raise ValueError(message)
+    return splits

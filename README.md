@@ -1,4 +1,15 @@
-# Oracle Study for QPAF and Budget-Aware HEAVEN
+# QPAF — Query-Page Adaptive Fusion
+
+Repository này gom công cụ oracle trong `src/oracle_study` và các module nghiên cứu M1–M2.1 trong `src/qpaf`.
+
+## Trạng thái sau khi tích hợp các branch
+
+- Hồ sơ M1 đã có [biên bản đóng milestone](evidence/M1_FINAL/07_R1/M1_closure_record.md) và [quyết định G1 `CONDITIONAL_PASS`](evidence/M1_FINAL/06_G1/G1_final_decision.md), ban hành ngày 29/09/2026.
+- M2.1 chọn [revision `m2.1-002`](evidence/revisions/m2.1-002/README.md), với train/validation/test **799/171/172 query** và kiểm chứng được ghi ngày 04/10/2026. Raw corpus cần được tái tạo riêng trên máy chạy.
+- Các hồ sơ trên được nhập từ `khuong/develop`; việc merge không chạy lại corpus audit, huấn luyện hoặc suy luận.
+- Đọc [bảng nghiệm thu và runbook M1](docs/06_handover/M1_ACCEPTANCE_SUMMARY_AND_RUNBOOK.md), [bản rà soát readiness](docs/06_handover/m1.1-m1.8-readiness-audit-2026-09-28.md) và [bản tổng quan từ repo nguồn](docs/01_overview/QPAF_PROJECT_SYNTHESIS_SOURCE.md).
+
+Các đoạn oracle và run lịch sử bên dưới giữ phạm vi, kết quả và ranh giới của từng study. Đặc tả M1.2 hiện tại nằm ở [method core](docs/03_method/m1.2-method-core.md); phần tổng quan từ repo nguồn có ghi chú khi mô tả khác code.
 
 ## Tài liệu và milestone
 

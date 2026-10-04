@@ -2,9 +2,9 @@
   "schema_version": 1,
   "organized_at": "2026-10-04",
   "scope": "documentation_inventory_not_research_acceptance",
-  "source_documents": 63,
-  "moved_documents": 48,
-  "path_bound_documents": 41,
+  "source_documents": 71,
+  "moved_documents": 55,
+  "path_bound_documents": 49,
   "groups": [
     {
       "id": "01_overview",
@@ -598,7 +598,7 @@
       "path_bound_evidence": true,
       "legacy_alias": false,
       "source_sha256": "3e4b4cfa2342cef78c0f0fc14607cabf6687c1ee3cc29ecd2fc55a3ec4a7defd",
-      "sha256": "4b06d6caa6449174ed918793be6528bc73d4284fcb4cd95c2a926cdce77f66cf",
+      "sha256": "5864cdd5b7eedb9c7a83952783df190ad6e5d227f1ffd75f876137146fed263c",
       "navigation_links_updated": true
     },
     {
@@ -651,7 +651,7 @@
       "path_bound_evidence": true,
       "legacy_alias": false,
       "source_sha256": "13e6c2a272fc4a61b9b6a406a09b7f5cb1db94ed1aa1165cc920a2e3f2f40e47",
-      "sha256": "be4fe7ee3dedd94665e22781ee4f77fe32c9441dd6e7477f567e4f1c8a47ce59",
+      "sha256": "1e4981b1d93ba13f4c108e2f26709ba35c9a709f9a7d7424a218019f5e37b316",
       "navigation_links_updated": true
     },
     {
@@ -808,6 +808,118 @@
       "previous_path": "docs/VIMDOC_OCR_PAGE_IDENTITY_SPEC.md",
       "original_path_removed": true,
       "relocated_at": "2026-10-04"
+    },
+    {
+      "title": "BẢNG NGHIỆM THU CHỐT LẠI M1.1 – M1.10 & TOÀN BỘ CẨM NANG LỆNH TERMINAL (RUNBOOK)",
+      "category": "06_handover",
+      "original_path": "docs/M1_ACCEPTANCE_SUMMARY_AND_RUNBOOK.md",
+      "current_path": "docs/06_handover/M1_ACCEPTANCE_SUMMARY_AND_RUNBOOK.md",
+      "path_bound_evidence": true,
+      "legacy_alias": false,
+      "source_sha256": "12da4ec695bf0096fe133cb70e054df389dae77f7d8203d152662cad536bf89a",
+      "sha256": "b0329ce350f514ccf9ac0cadcba7895a7c4655b618b594d56af27b6e6ddaaf66",
+      "imported_from": "khuong/develop",
+      "imported_commit": "f03947b64f8faceb3d8d4bc65b398cd8e0806f37",
+      "original_path_removed": true,
+      "navigation_links_updated": true
+    },
+    {
+      "title": "Readiness correction notice - 2026-09-28",
+      "category": "06_handover",
+      "original_path": "docs/khuong-m1-checklist.correction-2026-09-28.md",
+      "current_path": "docs/06_handover/khuong-m1-checklist.correction-2026-09-28.md",
+      "path_bound_evidence": true,
+      "legacy_alias": false,
+      "source_sha256": "e7c16b225bcd8f95b562474298d0b070b4c3f0e6d893179688d322a779931e56",
+      "sha256": "e7c16b225bcd8f95b562474298d0b070b4c3f0e6d893179688d322a779931e56",
+      "imported_from": "khuong/develop",
+      "imported_commit": "f03947b64f8faceb3d8d4bc65b398cd8e0806f37",
+      "original_path_removed": true,
+      "navigation_links_updated": false
+    },
+    {
+      "title": "M1 readiness correction and remediation record — 2026-09-28",
+      "category": "06_handover",
+      "original_path": "docs/m1-readiness-remediation-2026-09-28.md",
+      "current_path": "docs/06_handover/m1-readiness-remediation-2026-09-28.md",
+      "path_bound_evidence": true,
+      "legacy_alias": false,
+      "source_sha256": "5a1438f96be2679dc3ab7d5a0713f1a0d627bdf4267369c70ee8066e1e0ca711",
+      "sha256": "8c40ea3ca6719b160e5af4e424cabe3f85863e38f12eff06148032ffd814d941",
+      "imported_from": "khuong/develop",
+      "imported_commit": "f03947b64f8faceb3d8d4bc65b398cd8e0806f37",
+      "original_path_removed": true,
+      "navigation_links_updated": true
+    },
+    {
+      "title": "Readiness correction notice - 2026-09-28",
+      "category": "06_handover",
+      "original_path": "docs/m1-restart-handoff.correction-2026-09-28.md",
+      "current_path": "docs/06_handover/m1-restart-handoff.correction-2026-09-28.md",
+      "path_bound_evidence": true,
+      "legacy_alias": false,
+      "source_sha256": "855c1e3cbdba34fd4d20ca8adc83cf57c63939708174936b78a6823d999b50e6",
+      "sha256": "855c1e3cbdba34fd4d20ca8adc83cf57c63939708174936b78a6823d999b50e6",
+      "imported_from": "khuong/develop",
+      "imported_commit": "f03947b64f8faceb3d8d4bc65b398cd8e0806f37",
+      "original_path_removed": true,
+      "navigation_links_updated": false
+    },
+    {
+      "title": "Rà soát M1.1–M1.8 và danh sách công việc còn lại",
+      "category": "06_handover",
+      "original_path": "docs/m1.1-m1.8-readiness-audit-2026-09-28.md",
+      "current_path": "docs/06_handover/m1.1-m1.8-readiness-audit-2026-09-28.md",
+      "path_bound_evidence": true,
+      "legacy_alias": false,
+      "source_sha256": "cfa03c565f53a767808cc3edebbe446835f8e42972b0ae6c8288c948d7a08fea",
+      "sha256": "0219c641785326041a3d6b4c44e679dedb0bcea92d267fd043fc7d46fb59d154",
+      "imported_from": "khuong/develop",
+      "imported_commit": "f03947b64f8faceb3d8d4bc65b398cd8e0806f37",
+      "original_path_removed": true,
+      "navigation_links_updated": true
+    },
+    {
+      "title": "Readiness correction notice - 2026-09-28",
+      "category": "06_handover",
+      "original_path": "docs/m1.4-m1.5-m1.6-audit-report.correction-2026-09-28.md",
+      "current_path": "docs/06_handover/m1.4-m1.5-m1.6-audit-report.correction-2026-09-28.md",
+      "path_bound_evidence": true,
+      "legacy_alias": false,
+      "source_sha256": "203ed47457fd94e4e7b9c6fe0f9eda0aa684d6c114bfe1ce31f062259443b866",
+      "sha256": "203ed47457fd94e4e7b9c6fe0f9eda0aa684d6c114bfe1ce31f062259443b866",
+      "imported_from": "khuong/develop",
+      "imported_commit": "f03947b64f8faceb3d8d4bc65b398cd8e0806f37",
+      "original_path_removed": true,
+      "navigation_links_updated": false
+    },
+    {
+      "title": "QPAF — Query-Page Adaptive Fusion for Visual Document Retrieval",
+      "category": "01_overview",
+      "original_path": "README.md",
+      "current_path": "docs/01_overview/QPAF_PROJECT_SYNTHESIS_SOURCE.md",
+      "path_bound_evidence": true,
+      "legacy_alias": false,
+      "source_sha256": "6b9bd1b4e8d2538e9be3aa2ec36417cd3fd36db4cfaf9bac70c3a37ff42b41fe",
+      "sha256": "3d39fd38fab009b24fb141b48d6647b67164e0ca0e8b30332fd66b3a7c0ce233",
+      "imported_from": "khuong/develop",
+      "imported_commit": "f03947b64f8faceb3d8d4bc65b398cd8e0806f37",
+      "original_path_removed": false,
+      "navigation_links_updated": true
+    },
+    {
+      "title": "M1.1–M1.8 readiness remediation plan — 2026-09-28",
+      "category": "06_handover",
+      "original_path": "docs/superpowers/plans/2026-09-28-readiness-remediation.md",
+      "current_path": "docs/superpowers/plans/2026-09-28-readiness-remediation.md",
+      "path_bound_evidence": true,
+      "legacy_alias": false,
+      "source_sha256": "37a3c5315539e10b50ebaf04bcb5728dbe700af7836309982f31d37f761f96d1",
+      "sha256": "37a3c5315539e10b50ebaf04bcb5728dbe700af7836309982f31d37f761f96d1",
+      "imported_from": "khuong/develop",
+      "imported_commit": "f03947b64f8faceb3d8d4bc65b398cd8e0806f37",
+      "original_path_removed": false,
+      "navigation_links_updated": false
     }
   ],
   "preexisting_missing_local_links": [
@@ -943,5 +1055,13 @@
       "docs/04_data_protocol/manifests/vimdoc_archive_content_audit_v1_preparation.json",
       "docs/04_data_protocol/manifests/vimdoc_m3_local_v1.json"
     ]
+  },
+  "branch_integration": {
+    "date": "2026-10-04",
+    "source": "khuong/develop",
+    "source_commit": "f03947b64f8faceb3d8d4bc65b398cd8e0806f37",
+    "commits_integrated": 24,
+    "remote_branches_covered": 17,
+    "historical_revision_links_resolve_against_source_commit": true
   }
 }

@@ -69,7 +69,7 @@ class TestM16CollisionAudit(unittest.TestCase):
         self.assertEqual(p1.page_number, 1)
         self.assertEqual(p1.split, "train")
         self.assertEqual(p1.extraction_method, "direct_bytes")
-        self.assertEqual(p1.review_status, "verified")
+        self.assertEqual(p1.review_status, "pending_review")
 
         expected_hash = hashlib.sha256(b"Page 1 unique text content").hexdigest()
         self.assertEqual(p1.content_sha256, expected_hash)
@@ -93,7 +93,7 @@ class TestM16CollisionAudit(unittest.TestCase):
         self.assertGreaterEqual(len(records), 2)
         r0 = records[0]
         self.assertEqual(r0.canonical_page_id, "doc_001_page_0001")
-        self.assertEqual(r0.review_status, "reviewed")
+        self.assertEqual(r0.review_status, "pending_review")
 
     def test_detect_content_duplicates(self):
         """Verify grouping of identical content hashes."""

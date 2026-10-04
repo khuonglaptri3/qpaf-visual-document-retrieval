@@ -8,7 +8,7 @@
 
 **Tech Stack:** Python 3.11, standard library (`hashlib`, `json`, `pathlib`, `zipfile`, `unittest`), không đòi hỏi thư viện GPU hay tài nguyên nặng.
 
-**Spec:** [`docs/superpowers/specs/2026-09-28-m13-primary-corpus-design.md`](file:///home/intern-tdkhuong/Desktop/qpaf-visual-document-retrieval/docs/superpowers/specs/2026-09-28-m13-primary-corpus-design.md)
+**Spec:** [`docs/superpowers/specs/2026-09-28-m13-primary-corpus-design.md`](../specs/2026-09-28-m13-primary-corpus-design.md)
 
 ## Global Constraints
 

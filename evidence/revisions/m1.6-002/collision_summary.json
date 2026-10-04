@@ -1,0 +1,23 @@
+{
+  "status": "REVIEW_REQUIRED_OVERLAP",
+  "evidence_kind": "real_corpus_cpu_audit",
+  "independent_review": "PENDING",
+  "unresolved_alias_count": 0,
+  "document_overlap_count": 205,
+  "content_overlap_count": 3813,
+  "missing_target_count": 0,
+  "content_hash_method": "pdfium_rgb_72dpi_v1",
+  "timestamp_utc": "2026-09-28T16:54:12.833970+00:00",
+  "total_documents": 292,
+  "total_pages": 5385,
+  "unique_content_hashes": 5380,
+  "duplicate_pairs_count": 5,
+  "duplicate_groups_count": 5,
+  "split_leakage_count": 0,
+  "total_queries": 1142,
+  "valid_queries": 1142,
+  "orphan_query_count": 0,
+  "orphan_page_count": 4495,
+  "dataset_name": "Qiuchen-Wang/ViDoSeek",
+  "dataset_revision": "e91a92ba5f38690696c7e66be5c5474b54c6e791"
+}

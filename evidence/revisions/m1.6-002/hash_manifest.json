@@ -1,0 +1,38 @@
+{
+  "alias_manifest.csv": {
+    "sha256": "e9255ba44e3199f6a0c6b1fc1a89d27731302e8bda25a054beac355aef65ffba",
+    "size_bytes": 964145
+  },
+  "collision_report.md": {
+    "sha256": "76f7be08333742806f21477a760cc9e32ab223bb7f161ada5079b9f52c581d9e",
+    "size_bytes": 3015
+  },
+  "collision_summary.json": {
+    "sha256": "5fb05ad3247cbbdef4ce6dd4b17a49c33ecec0ac16e85ccc460b68c175c9e124",
+    "size_bytes": 757
+  },
+  "duplicate_report.csv": {
+    "sha256": "8c41b6458e1eaf061b184486ed23b4a48c4e2ed9f2659ef3ef8532038cd961a7",
+    "size_bytes": 1320
+  },
+  "input_inventory.json": {
+    "sha256": "920aa3dd546e901382e8dd878d86c1b2b3255fb061130160ef63eaaa65183600",
+    "size_bytes": 167084
+  },
+  "overlap_report.json": {
+    "sha256": "8437844fc28c2c5aa6bc443e94f7080a10b3a56f1e264668f6142824da487d83",
+    "size_bytes": 1019630
+  },
+  "page_manifest.csv": {
+    "sha256": "431fa92d2959daadd9fc394bcbec5c90d1caf393be2a607150eeea33530652a9",
+    "size_bytes": 2203851
+  },
+  "provenance.json": {
+    "sha256": "cf201c6c15c31c5be1611ffe1427b14f58e664adf38989ea51a6816613e2653b",
+    "size_bytes": 2264
+  },
+  "qrel_validation.json": {
+    "sha256": "03211c4f1540a48c69bafde29122f7eefd1090e18c68548d0b2ec77d5ac7bb8c",
+    "size_bytes": 260959
+  }
+}

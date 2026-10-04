@@ -4,6 +4,9 @@ Corpus, qrels, OCR, định danh trang và hợp đồng xuất score. Phân bi�
 
 [Manifest kiểm tra gói hiện tại](manifests/README.md) dùng các đường dẫn sau khi chuyển folder; hồ sơ gốc giữ trong `artifacts`.
 
+- [M2.1: vai trò và split dữ liệu đã đóng băng](../../evidence/M2_FINAL/01_data_splits/README.md)
+- [Revision M2.1 được chọn: `m2.1-002`](../../evidence/revisions/m2.1-002/README.md)
+
 Các nhận xét về tiến độ trong tài liệu là snapshot theo thời điểm và phạm vi ghi trong từng file.
 
 - [ViMDoc archive content audit v1 — local preparation review](VIMDOC_ARCHIVE_CONTENT_AUDIT_EXECUTION_REVIEW.md)
