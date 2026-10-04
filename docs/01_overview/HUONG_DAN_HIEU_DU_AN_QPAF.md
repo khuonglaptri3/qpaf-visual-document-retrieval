@@ -706,7 +706,7 @@ Theo thứ tự cho từng mục đích:
 - Remote manifest đã import: [`artifacts/vidoseek_p1_02r_import/extraction_manifest.json`](../../artifacts/vidoseek_p1_02r_import/extraction_manifest.json).
 - Success marker đã import: [`artifacts/vidoseek_p1_02r_import/_EXTRACTION_SUCCESS.json`](../../artifacts/vidoseek_p1_02r_import/_EXTRACTION_SUCCESS.json).
 - Integrity review: [`artifacts/vidoseek_p1_02r_integrity_review.json`](../../artifacts/vidoseek_p1_02r_integrity_review.json).
-- W66 exploratory-24 result: [`docs/QPAF_W66_EXPLORATORY24_RESULTS.md`](../05_oracle_experiments/w66/QPAF_W66_EXPLORATORY24_RESULTS.md) và [`closeout_receipt.json`](../../artifacts/vidoseek_w66_exploratory24_optimized_review/closeout_receipt.json).
+- W66 exploratory-24 result: [`docs/05_oracle_experiments/w66/QPAF_W66_EXPLORATORY24_RESULTS.md`](../05_oracle_experiments/w66/QPAF_W66_EXPLORATORY24_RESULTS.md) và [`closeout_receipt.json`](../../artifacts/vidoseek_w66_exploratory24_optimized_review/closeout_receipt.json).
 - Source thực thi: [`modal_app.py`](../../modal_app.py) và [`scripts/extract_vidoseek_p1_02r.py`](../../scripts/extract_vidoseek_p1_02r.py).
 
 Khi các nguồn khác nhau về status, không chọn câu nghe tích cực nhất. Hãy phân biệt thời điểm và tầng bằng chứng: committed task plan, remote receipt, imported artifact, integrity review, rồi mới đến human-approved decision.

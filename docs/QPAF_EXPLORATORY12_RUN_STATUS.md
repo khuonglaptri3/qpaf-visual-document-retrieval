@@ -1,6 +1,6 @@
 # Exploratory-12 live run
 
-Recovery closeout (2026-09-07): the separately approved recovery completed at 11:42:29 UTC and all twelve results passed independent verification; chart visual QA passed. See [current recovery status](QPAF_EXPLORATORY12_RECOVERY_RUN_STATUS.md) and [completed comparison](QPAF_EXPLORATORY12_RESULTS.md). The original attempt described below remains immutable and incomplete; the following interruption notes are historical.
+Recovery closeout (2026-09-07): the separately approved recovery completed at 11:42:29 UTC and all twelve results passed independent verification; chart visual QA passed. See [current recovery status](QPAF_EXPLORATORY12_RECOVERY_RUN_STATUS.md) and [completed comparison](05_oracle_experiments/exploratory12/QPAF_EXPLORATORY12_RESULTS.md). The original attempt described below remains immutable and incomplete; the following interruption notes are historical.
 
 Current status (2026-09-07, checked at 09:34 UTC / 16:34 Vietnam time): **INTERRUPTED / INCOMPLETE; 4 of 12 query checkpoints verified; no completed comparison.**
 
@@ -15,7 +15,7 @@ Read-only follow-up completed:
 
 Still unfinished: query positions 5–12 (audit indices `792, 797, 848, 880, 881, 940, 1023, 1081`), final per-query/summary/timing/preflight exports, the complete manifest, full metric/bootstrap verification, and the promised comparison report/chart. No full-sample mean or research conclusion is available.
 
-The one-run authorization is consumed. The `execution_authorized: true` value in the original config is a historical approval snapshot; the immutable attempt marker and existing output directory close execution operationally. No retry or resume is authorized. A separate recovery launcher, closed config, and fixture tests are now prepared; see [the execution review](QPAF_EXPLORATORY12_RECOVERY_EXECUTION_REVIEW.md). The [continuation handoff](QPAF_EXPLORATORY12_INTERRUPTION_HANDOFF.md) preserves the original audit and boundaries.
+The one-run authorization is consumed. The `execution_authorized: true` value in the original config is a historical approval snapshot; the immutable attempt marker and existing output directory close execution operationally. No retry or resume is authorized. A separate recovery launcher, closed config, and fixture tests are now prepared; see [the execution review](05_oracle_experiments/exploratory12/QPAF_EXPLORATORY12_RECOVERY_EXECUTION_REVIEW.md). The [continuation handoff](05_oracle_experiments/exploratory12/QPAF_EXPLORATORY12_INTERRUPTION_HANDOFF.md) preserves the original audit and boundaries.
 
 ## Historical launch record
 

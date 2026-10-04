@@ -104,9 +104,11 @@
       "original_path": "docs/HUONG_DAN_HIEU_DU_AN_QPAF.md",
       "current_path": "docs/01_overview/HUONG_DAN_HIEU_DU_AN_QPAF.md",
       "path_bound_evidence": false,
-      "legacy_alias": true,
+      "legacy_alias": false,
       "source_sha256": "33e864900cf7f7ace909da5d9f91785491d24bdc48913805b9ab6af9037fa17d",
-      "sha256": "58bc8d08b2a0d8b19e7bf9dce1a1bc47b73584e9a242727b64c0061475534b74"
+      "sha256": "9e98d3d38856dccb3acb5eef3c1d1b9055290df0fba083b6a52924507cbe0321",
+      "original_path_removed": true,
+      "navigation_links_updated": true
     },
     {
       "title": "Repository bootstrap decisions and verification",
@@ -126,7 +128,8 @@
       "path_bound_evidence": true,
       "legacy_alias": false,
       "source_sha256": "a5f1c6c001bcb7370d4949b62eab330f336e81afed43d0170a52b9e319f32988",
-      "sha256": "a5f1c6c001bcb7370d4949b62eab330f336e81afed43d0170a52b9e319f32988"
+      "sha256": "34a111f4c2aa72ef55ab116f5bc1214f5c2508b33e00d53670bf1fcac57425dc",
+      "navigation_links_updated": true
     },
     {
       "title": "Bàn giao M1.1/M1.2 — cập nhật ngày 26/09/2026",
@@ -184,9 +187,10 @@
       "original_path": "docs/m1.4-m1.5-m1.6-audit-report.md",
       "current_path": "docs/06_handover/m1.4-m1.5-m1.6-audit-report.md",
       "path_bound_evidence": false,
-      "legacy_alias": true,
+      "legacy_alias": false,
       "source_sha256": "6cb002c03262a74fd7fe7bb43ae0965124f72922baec72e27eeb770299f580f7",
-      "sha256": "6cb002c03262a74fd7fe7bb43ae0965124f72922baec72e27eeb770299f580f7"
+      "sha256": "6cb002c03262a74fd7fe7bb43ae0965124f72922baec72e27eeb770299f580f7",
+      "original_path_removed": true
     },
     {
       "title": "Kế hoạch Oracle Study cho QPAF và Budget-Aware Adaptive HEAVEN",
@@ -204,9 +208,10 @@
       "original_path": "docs/PROJECT_REVIEW_AND_KNOWLEDGE_GUIDE.md",
       "current_path": "docs/01_overview/PROJECT_REVIEW_AND_KNOWLEDGE_GUIDE.md",
       "path_bound_evidence": false,
-      "legacy_alias": true,
+      "legacy_alias": false,
       "source_sha256": "090f1a650cb48f2e105a6d8b6e9d7b16531ab4def013f59baf3cc04e4a2cf537",
-      "sha256": "fa8baf32a9017da40b24024a6479cf4155646d1c9e812f2f4869ca57f5be3418"
+      "sha256": "fa8baf32a9017da40b24024a6479cf4155646d1c9e812f2f4869ca57f5be3418",
+      "original_path_removed": true
     },
     {
       "title": "QPAF: prepared CPU calibration handoff",
@@ -214,9 +219,10 @@
       "original_path": "docs/QPAF_CALIBRATION_HANDOFF.md",
       "current_path": "docs/05_oracle_experiments/calibration/QPAF_CALIBRATION_HANDOFF.md",
       "path_bound_evidence": false,
-      "legacy_alias": true,
+      "legacy_alias": false,
       "source_sha256": "87527eda9846a423c0b6706903321fef58c32648afc6d05544d3e7c483228e71",
-      "sha256": "157fbbc5da5b01bf5983845a682da18812f61fe7f2d8c0dd9be3ca6cc53b14db"
+      "sha256": "157fbbc5da5b01bf5983845a682da18812f61fe7f2d8c0dd9be3ca6cc53b14db",
+      "original_path_removed": true
     },
     {
       "title": "QPAF calibration review and proposed next experiment",
@@ -224,9 +230,10 @@
       "original_path": "docs/QPAF_CALIBRATION_REVIEW_AND_NEXT_STEP.md",
       "current_path": "docs/05_oracle_experiments/calibration/QPAF_CALIBRATION_REVIEW_AND_NEXT_STEP.md",
       "path_bound_evidence": false,
-      "legacy_alias": true,
+      "legacy_alias": false,
       "source_sha256": "3246351c4827d49981c6fc526ae94ea7969d9bcea1c7b0c992042362589620a8",
-      "sha256": "da073a3bb7c41a0eb33da58a19f45b39f5d5a6b166c8fcedf6284f8efac6369b"
+      "sha256": "da073a3bb7c41a0eb33da58a19f45b39f5d5a6b166c8fcedf6284f8efac6369b",
+      "original_path_removed": true
     },
     {
       "title": "First QPAF oracle comparison: prepared execution review",
@@ -234,9 +241,10 @@
       "original_path": "docs/QPAF_EXPLORATORY12_EXECUTION_REVIEW.md",
       "current_path": "docs/05_oracle_experiments/exploratory12/QPAF_EXPLORATORY12_EXECUTION_REVIEW.md",
       "path_bound_evidence": false,
-      "legacy_alias": true,
+      "legacy_alias": false,
       "source_sha256": "9c0907b64b99efde8a1dff0374301d80d9ccb460cfaf99a2e41bcd61bb25720f",
-      "sha256": "f22ab807d665c7a7aa23a51c81dc6abbf0c6d6b46c24f2ebac984fe42ed38b58"
+      "sha256": "f22ab807d665c7a7aa23a51c81dc6abbf0c6d6b46c24f2ebac984fe42ed38b58",
+      "original_path_removed": true
     },
     {
       "title": "Exploratory-12 interruption handoff",
@@ -244,9 +252,10 @@
       "original_path": "docs/QPAF_EXPLORATORY12_INTERRUPTION_HANDOFF.md",
       "current_path": "docs/05_oracle_experiments/exploratory12/QPAF_EXPLORATORY12_INTERRUPTION_HANDOFF.md",
       "path_bound_evidence": false,
-      "legacy_alias": true,
+      "legacy_alias": false,
       "source_sha256": "7c1fe024e293b259d53df13c4ac981ece8635e5d8d78dee3b00941e61a85686d",
-      "sha256": "f24536407839d9ade54a8de1455c4a7fad74445ebcc76b18848bfa08109f7524"
+      "sha256": "f24536407839d9ade54a8de1455c4a7fad74445ebcc76b18848bfa08109f7524",
+      "original_path_removed": true
     },
     {
       "title": "Exploratory-12 recovery execution review",
@@ -254,9 +263,10 @@
       "original_path": "docs/QPAF_EXPLORATORY12_RECOVERY_EXECUTION_REVIEW.md",
       "current_path": "docs/05_oracle_experiments/exploratory12/QPAF_EXPLORATORY12_RECOVERY_EXECUTION_REVIEW.md",
       "path_bound_evidence": false,
-      "legacy_alias": true,
+      "legacy_alias": false,
       "source_sha256": "056463716c43ad3610d020b0fcea5100630729b586ca2c413ae7be68c435763e",
-      "sha256": "25da2828fcf5bdc9b8e47a014788ee873bcee6de492d22c81a3dc69ccf374b60"
+      "sha256": "25da2828fcf5bdc9b8e47a014788ee873bcee6de492d22c81a3dc69ccf374b60",
+      "original_path_removed": true
     },
     {
       "title": "Exploratory-12 recovery run",
@@ -266,7 +276,8 @@
       "path_bound_evidence": true,
       "legacy_alias": false,
       "source_sha256": "c8d8efab734b616461e5202cbefd82ade747c19b1838748ded119321be796573",
-      "sha256": "c8d8efab734b616461e5202cbefd82ade747c19b1838748ded119321be796573"
+      "sha256": "138ef27ae45fe8f5976bfb1875f85b3e3c41888ea96e83dba03bc8b4e6021649",
+      "navigation_links_updated": true
     },
     {
       "title": "ViDoSeek exploratory-12: verified Global / QARF / QPAF comparison",
@@ -274,9 +285,10 @@
       "original_path": "docs/QPAF_EXPLORATORY12_RESULTS.md",
       "current_path": "docs/05_oracle_experiments/exploratory12/QPAF_EXPLORATORY12_RESULTS.md",
       "path_bound_evidence": false,
-      "legacy_alias": true,
+      "legacy_alias": false,
       "source_sha256": "126e355fc90f6f3a81118672d73f626b56fd3a86c9b343536b3d8b859449d812",
-      "sha256": "89bbd9fb13f30360625535b6e508699d8bfb2f91911e61a8099921ca8ee24ce1"
+      "sha256": "89bbd9fb13f30360625535b6e508699d8bfb2f91911e61a8099921ca8ee24ce1",
+      "original_path_removed": true
     },
     {
       "title": "Exploratory-12 live run",
@@ -286,7 +298,8 @@
       "path_bound_evidence": true,
       "legacy_alias": false,
       "source_sha256": "c38cca9ed7db334a46be7917d2c5a0385c246c4d0e8094fd518fe9c1b802f33e",
-      "sha256": "c38cca9ed7db334a46be7917d2c5a0385c246c4d0e8094fd518fe9c1b802f33e"
+      "sha256": "29b86d4d3efea70ac643611ef95cc27bf5c5711134de9119d5aa8b9141e5611e",
+      "navigation_links_updated": true
     },
     {
       "title": "Exploratory-24 page-level QPAF feasibility: execution review",
@@ -294,9 +307,10 @@
       "original_path": "docs/QPAF_EXPLORATORY24_EXECUTION_REVIEW.md",
       "current_path": "docs/05_oracle_experiments/exploratory24/QPAF_EXPLORATORY24_EXECUTION_REVIEW.md",
       "path_bound_evidence": false,
-      "legacy_alias": true,
+      "legacy_alias": false,
       "source_sha256": "28eba13d0522e2a8bb90d9fe05f20fc9437a6c0659b9faa048650004a1e396ef",
-      "sha256": "6cc1e55ff1b48024c54a5f5437de10bef18af5a26e1603c6919f6c8d01d4840e"
+      "sha256": "6cc1e55ff1b48024c54a5f5437de10bef18af5a26e1603c6919f6c8d01d4840e",
+      "original_path_removed": true
     },
     {
       "title": "ViDoSeek exploratory-24: verified Global / QARF / QPAF comparison",
@@ -304,9 +318,10 @@
       "original_path": "docs/QPAF_EXPLORATORY24_RESULTS.md",
       "current_path": "docs/05_oracle_experiments/exploratory24/QPAF_EXPLORATORY24_RESULTS.md",
       "path_bound_evidence": false,
-      "legacy_alias": true,
+      "legacy_alias": false,
       "source_sha256": "f6d86cfba35a28e211632d0b209a66bef8d36f2cafdd505cb9a556212b20e4f3",
-      "sha256": "bc720e9550837cde926479baf71dfc3890caa56ab88ef81ff241b2642378e915"
+      "sha256": "bc720e9550837cde926479baf71dfc3890caa56ab88ef81ff241b2642378e915",
+      "original_path_removed": true
     },
     {
       "title": "Fixed-profile discovery audit: execution review",
@@ -316,7 +331,8 @@
       "path_bound_evidence": true,
       "legacy_alias": false,
       "source_sha256": "25f02addd8fca6b6dc741056d07edfcf7e4de4ceccac7b7cb1176f59fa030999",
-      "sha256": "25f02addd8fca6b6dc741056d07edfcf7e4de4ceccac7b7cb1176f59fa030999"
+      "sha256": "66cde2ca5dd6d79dbdf400608fa679302b5c00d8520d196858b8612083bd855c",
+      "navigation_links_updated": true
     },
     {
       "title": "ViDoSeek fixed-profile discovery audit: verified result",
@@ -324,9 +340,10 @@
       "original_path": "docs/QPAF_FIXED_PROFILE_AUDIT_RESULTS.md",
       "current_path": "docs/05_oracle_experiments/fixed_profile/QPAF_FIXED_PROFILE_AUDIT_RESULTS.md",
       "path_bound_evidence": false,
-      "legacy_alias": true,
+      "legacy_alias": false,
       "source_sha256": "a36517a02ccc08bb49581ef5d2c4830800886d820cb728ef985406dcbee2c776",
-      "sha256": "df1a42cb1638181b034acef59a12da3782cc3a0687aefb8e8d821061a669b925"
+      "sha256": "df1a42cb1638181b034acef59a12da3782cc3a0687aefb8e8d821061a669b925",
+      "original_path_removed": true
     },
     {
       "title": "Next evaluation after exploratory-12",
@@ -336,7 +353,8 @@
       "path_bound_evidence": true,
       "legacy_alias": false,
       "source_sha256": "9fd411020e91efd7c7338042bd2adb32f3bcc2663117a799d82224e1554b25d7",
-      "sha256": "9fd411020e91efd7c7338042bd2adb32f3bcc2663117a799d82224e1554b25d7"
+      "sha256": "b016e8e9e0d470194898c63c6b920fb63003494f228ba6baa07a09b0b9983eb1",
+      "navigation_links_updated": true
     },
     {
       "title": "QPAF P2 local method-core verification",
@@ -344,9 +362,10 @@
       "original_path": "docs/QPAF_P2_METHOD_CORE_VERIFICATION.md",
       "current_path": "docs/03_method/QPAF_P2_METHOD_CORE_VERIFICATION.md",
       "path_bound_evidence": false,
-      "legacy_alias": true,
+      "legacy_alias": false,
       "source_sha256": "d4447735440378bb7b861bda7252d4dff363f7f2053310916c8e0272642a000b",
-      "sha256": "6f2d30afce8e0d781a54008dca170922c6c7c2ec96019f5d9f228007effe76f1"
+      "sha256": "6f2d30afce8e0d781a54008dca170922c6c7c2ec96019f5d9f228007effe76f1",
+      "original_path_removed": true
     },
     {
       "title": "QPAF post-hoc continuation decision",
@@ -354,9 +373,10 @@
       "original_path": "docs/QPAF_POSTHOC_CONTINUATION_DECISION.md",
       "current_path": "docs/03_method/QPAF_POSTHOC_CONTINUATION_DECISION.md",
       "path_bound_evidence": false,
-      "legacy_alias": true,
+      "legacy_alias": false,
       "source_sha256": "1e880f5838f7b942aa76d1eb1451fc5770058ce481c0dc86e3aa8c7582de3439",
-      "sha256": "fa81067d813725c2bce2addc9574217975a5bd7f1bdf9f2b8fca8a413b3aad54"
+      "sha256": "fa81067d813725c2bce2addc9574217975a5bd7f1bdf9f2b8fca8a413b3aad54",
+      "original_path_removed": true
     },
     {
       "title": "Query 797: what the saved QPAF weights corrected",
@@ -366,7 +386,8 @@
       "path_bound_evidence": true,
       "legacy_alias": false,
       "source_sha256": "e48e9acd05b8d46ce24e44bd21378af5824db314d2456b750ac0f34d0d2ff093",
-      "sha256": "e48e9acd05b8d46ce24e44bd21378af5824db314d2456b750ac0f34d0d2ff093"
+      "sha256": "33bf78e09ce80bff7fa9bde614f64f99e2601f00cf32e5d959f53bb0f9bec5dc",
+      "navigation_links_updated": true
     },
     {
       "title": "QPAF Team Research Execution Plan",
@@ -374,9 +395,10 @@
       "original_path": "docs/QPAF_TEAM_RESEARCH_EXECUTION_PLAN.md",
       "current_path": "docs/02_project_plan/QPAF_TEAM_RESEARCH_EXECUTION_PLAN.md",
       "path_bound_evidence": false,
-      "legacy_alias": true,
+      "legacy_alias": false,
       "source_sha256": "94bca723e1c46e2ec20f4e36bcf74e4d985a8131c2bf456bb6b18122229e2718",
-      "sha256": "fe72daf37361f97438259b4d2dd1b8aac70de0e8cac58a936ed58fcd3ae000ac"
+      "sha256": "fe72daf37361f97438259b4d2dd1b8aac70de0e8cac58a936ed58fcd3ae000ac",
+      "original_path_removed": true
     },
     {
       "title": "Exploratory-24 W66 sensitivity: preparation and execution review",
@@ -404,9 +426,10 @@
       "original_path": "docs/QPAF_W66_EXPLORATORY24_RESULTS.md",
       "current_path": "docs/05_oracle_experiments/w66/QPAF_W66_EXPLORATORY24_RESULTS.md",
       "path_bound_evidence": false,
-      "legacy_alias": true,
+      "legacy_alias": false,
       "source_sha256": "1b8f3b7c6807e36de4a4db43d6c6c0674f020b5d9105e71a1962d00c2cb3974e",
-      "sha256": "2ed0ea1c4dec764fe5dd8c09283612679fb896286234639dabe6d6b0a57288db"
+      "sha256": "2ed0ea1c4dec764fe5dd8c09283612679fb896286234639dabe6d6b0a57288db",
+      "original_path_removed": true
     },
     {
       "title": "QPAF_W66_RESOURCE_BUDGET_REVIEW.json",
@@ -444,9 +467,10 @@
       "original_path": "docs/QPAF_W66_RESOURCE_CALIBRATION_INTERRUPTION_REVIEW.md",
       "current_path": "docs/05_oracle_experiments/w66/QPAF_W66_RESOURCE_CALIBRATION_INTERRUPTION_REVIEW.md",
       "path_bound_evidence": false,
-      "legacy_alias": true,
+      "legacy_alias": false,
       "source_sha256": "0cef12f272c27ebadc3bd57e007f5eda30c98afc3ed4509c43cc0b6a00f7e71b",
-      "sha256": "0cef12f272c27ebadc3bd57e007f5eda30c98afc3ed4509c43cc0b6a00f7e71b"
+      "sha256": "0cef12f272c27ebadc3bd57e007f5eda30c98afc3ed4509c43cc0b6a00f7e71b",
+      "original_path_removed": true
     },
     {
       "title": "W66 synthetic resource calibration recovery: preparation and execution review",
@@ -464,9 +488,10 @@
       "original_path": "docs/QPAF_W66_RESOURCE_CALIBRATION_RECOVERY_RESULT_REVIEW.md",
       "current_path": "docs/05_oracle_experiments/w66/QPAF_W66_RESOURCE_CALIBRATION_RECOVERY_RESULT_REVIEW.md",
       "path_bound_evidence": false,
-      "legacy_alias": true,
+      "legacy_alias": false,
       "source_sha256": "631a6ad682ab2ce63bfb9ad01c9f70e5ba28e3a864eb0a0db1151e00e855ba11",
-      "sha256": "631a6ad682ab2ce63bfb9ad01c9f70e5ba28e3a864eb0a0db1151e00e855ba11"
+      "sha256": "631a6ad682ab2ce63bfb9ad01c9f70e5ba28e3a864eb0a0db1151e00e855ba11",
+      "original_path_removed": true
     },
     {
       "title": "M1 Repository Implementation Plan",
@@ -506,7 +531,8 @@
       "path_bound_evidence": false,
       "legacy_alias": false,
       "source_sha256": "a36b14142ac3ed2bd6f0ec19a5b8211eaa0ccd3917a1033273ec5183d50a287f",
-      "sha256": "a36b14142ac3ed2bd6f0ec19a5b8211eaa0ccd3917a1033273ec5183d50a287f"
+      "sha256": "24de4e4e94db80afc3174dc992096dfa8e9d8ca5822056bfbaa0321c813de2c1",
+      "navigation_links_updated": true
     },
     {
       "title": "M1.8 OCR Policy, Failure Thresholds & Artifact Namespace Implementation Plan",
@@ -516,7 +542,8 @@
       "path_bound_evidence": false,
       "legacy_alias": false,
       "source_sha256": "0ba4e9fd69f199d06eb21faebd7e19e4d226dfd1b5c7928ffd9a2220884e838e",
-      "sha256": "0ba4e9fd69f199d06eb21faebd7e19e4d226dfd1b5c7928ffd9a2220884e838e"
+      "sha256": "612e52bfa62273a1607688215e508cb47898477e2638d934e881d4ce7651d02d",
+      "navigation_links_updated": true
     },
     {
       "title": "M1 repository and audit design",
@@ -786,5 +813,7 @@
       "docs/QPAF_W66_RESOURCE_BUDGET_REVIEW.md",
       "runs/vidoseek_w7_exploratory24_v1/timings.json"
     ]
-  ]
+  ],
+  "legacy_redirects_removed": 18,
+  "navigation_revision": "2026-10-04-direct-links"
 }

@@ -46,7 +46,7 @@ The QPAF-minus-QARF mean is therefore `0.5/12 = 0.041667`; wins/ties/losses are 
 
 ## Evidence and reproduction
 
-- [Original complete comparison](QPAF_EXPLORATORY12_RESULTS.md), retained byte-for-byte.
+- [Original complete comparison](05_oracle_experiments/exploratory12/QPAF_EXPLORATORY12_RESULTS.md), retained byte-for-byte.
 - [Case review and input/output hashes](../artifacts/vidoseek_exploratory12_case797_review/case_review.json).
 - [All 5,385 page scores, channel ranks, fused ranks and weights](../artifacts/vidoseek_exploratory12_case797_review/query_page_rankings.csv).
 - [Relevant-page ranks for all twelve queries](../artifacts/vidoseek_exploratory12_case797_review/all_query_relevant_ranks.csv).

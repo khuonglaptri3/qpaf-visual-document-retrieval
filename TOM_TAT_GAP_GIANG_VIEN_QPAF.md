@@ -125,5 +125,5 @@ Vì vậy, kết luận trung thực là: **QPAF có tín hiệu oracle thăm d�
 
 - `PROJECT_OVERVIEW.md`: tổng quan chính thức về bài toán, kiến trúc và dữ liệu.
 - `PROJECT_TRACKING.md`: bảng trạng thái ngắn theo từng giai đoạn.
-- `docs/HUONG_DAN_HIEU_DU_AN_QPAF.md`: bản giải thích tiếng Việt chi tiết hơn.
+- `docs/01_overview/HUONG_DAN_HIEU_DU_AN_QPAF.md`: bản giải thích tiếng Việt chi tiết hơn.
 - `Tasks.md`: nguồn chính xác nhất về dependency, trạng thái PASS/BLOCKED và điều kiện dừng; chỉ cần tra khi giảng viên hỏi sâu.

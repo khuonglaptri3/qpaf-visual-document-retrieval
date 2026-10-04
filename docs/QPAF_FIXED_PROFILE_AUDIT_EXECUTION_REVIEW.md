@@ -1,6 +1,6 @@
 # Fixed-profile discovery audit: execution review
 
-**EXECUTION COMPLETE AND INDEPENDENTLY VERIFIED.** The user approved the reviewed scope on 2026-09-08. The single Codex CPU invocation completed in 561.485 seconds, and the independent review recomputed all seven profile metrics over all 6,149,670 pairs. See [the verified result](QPAF_FIXED_PROFILE_AUDIT_RESULTS.md). The preparation-only text below is retained as the pre-execution contract.
+**EXECUTION COMPLETE AND INDEPENDENTLY VERIFIED.** The user approved the reviewed scope on 2026-09-08. The single Codex CPU invocation completed in 561.485 seconds, and the independent review recomputed all seven profile metrics over all 6,149,670 pairs. See [the verified result](05_oracle_experiments/fixed_profile/QPAF_FIXED_PROFILE_AUDIT_RESULTS.md). The preparation-only text below is retained as the pre-execution contract.
 
 ## Purpose and scope
 

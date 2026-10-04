@@ -34,7 +34,7 @@ Workbook và timeline là nguồn kế hoạch. [Tasks.md](../Tasks.md), [PROJEC
 ## Quy tắc tổ chức và truy nguồn
 
 - Tài liệu mới đặt vào nhóm phù hợp; cập nhật mục lục nhóm và [catalog.json](catalog.json).
-- Các tài liệu được script/config/manifest tham chiếu giữ nguyên đường dẫn và byte. Mục lục nhóm liên kết tới các file đó.
-- File hướng dẫn ở vị trí cũ có nội dung “Tài liệu đã chuyển” là liên kết tương thích cho hồ sơ và tài liệu lịch sử.
+- Các tài liệu được script/config/manifest tham chiếu giữ đường dẫn cố định. Khi sửa liên kết điều hướng, catalog ghi hash hiện tại; manifest và receipt lịch sử giữ nguyên theo revision của chúng.
+- Mỗi tài liệu có một vị trí đọc chính trong catalog. Các trang chuyển tiếp ở vị trí cũ đã được xóa; liên kết trong tài liệu hiện tại trỏ trực tiếp tới vị trí mới.
 - Bộ workbook/Word/timeline gốc và các spec/plan đã lưu giữ nguyên vị trí.
 - [catalog.json](catalog.json) ghi vị trí cũ/mới, nhóm và SHA-256 của 63 tài liệu nguồn tại lần sắp xếp ngày 04/10/2026; đây là inventory tổ chức tài liệu, không phải nghiệm thu nghiên cứu.
