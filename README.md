@@ -229,7 +229,7 @@ $env:PYTHONUTF8 = '1'
   --output-dir evidence/revisions/m2.1-new-revision
 ```
 
-The selected project revision is [`evidence/revisions/m2.1-001/`](evidence/revisions/m2.1-001/).
+The selected project revision is [`evidence/revisions/m2.1-002/`](evidence/revisions/m2.1-002/).
 The CLI refuses to overwrite an existing revision; use a new revision directory for a
 fresh run. Raw corpus payloads remain local under `data/raw/` and are not committed.
 

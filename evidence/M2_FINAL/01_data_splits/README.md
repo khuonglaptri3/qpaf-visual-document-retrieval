@@ -2,7 +2,7 @@
 
 **Owner:** Thanh
 
-**Selected revision:** [`m2.1-001`](../../revisions/m2.1-001/)
+**Selected revision:** [`m2.1-002`](../../revisions/m2.1-002/)
 
 **State:** `VERIFIED_ACTIVE_PRIMARY_SPLITS`
 
@@ -35,4 +35,6 @@ $env:PYTHONUTF8 = '1'
 ```
 
 The selected revision is create-once. Use a new revision directory for any later
-rerun; do not overwrite `m2.1-001`.
+rerun; do not overwrite `m2.1-002`. Revision `m2.1-001` remains preserved as the
+pre-review snapshot; `m2.1-002` adds fail-closed dataset identity and exact payload
+inventory validation.
