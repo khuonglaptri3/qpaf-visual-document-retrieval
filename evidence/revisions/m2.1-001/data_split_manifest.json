@@ -1,0 +1,83 @@
+{
+  "data_files": {
+    "README.md": {
+      "path": "data/raw/vidoseek-e91a92b/README.md",
+      "sha256": "273f59f85f61c9c242eb9a08075563b2a969c183cb1a3bd0abf3866f2c24fd5b",
+      "size_bytes": 3100
+    },
+    "vidoseek.json": {
+      "path": "data/raw/vidoseek-e91a92b/vidoseek.json",
+      "sha256": "ca4949bfc16231d129cd7565f20e07683854ab5aa8d05f05a86a12a9b71a7fab",
+      "size_bytes": 597200
+    },
+    "vidoseek_pdf_document.zip": {
+      "path": "data/raw/vidoseek-e91a92b/vidoseek_pdf_document.zip",
+      "sha256": "3b999a798ceab38703118e4cc7d9b852f86538d5bb7caad64eb545251ee00454",
+      "size_bytes": 758769613
+    }
+  },
+  "dataset": {
+    "name": "Qiuchen-Wang/ViDoSeek",
+    "revision": "e91a92ba5f38690696c7e66be5c5474b54c6e791",
+    "source_manifest": "data/manifests/vidoseek-e91a92b-location.json",
+    "source_manifest_sha256": "eeb74f436ebf579359d54d05589c8b47c9017d8df35f0ebb1bff423f286e65cd"
+  },
+  "query_ids_sha256": "6702a5f81420a2f93c7fed28d8631a05f9252a8022cf6c95982862455d7253d7",
+  "roles": {
+    "confirmation": {
+      "dataset": "ViMDoc",
+      "id_manifest": null,
+      "status": "NOT_ACTIVATED_FUTURE_SCOPE"
+    },
+    "external": {
+      "dataset": null,
+      "id_manifest": null,
+      "status": "NOT_ADOPTED"
+    },
+    "test": {
+      "count": 172,
+      "dataset": "Qiuchen-Wang/ViDoSeek",
+      "id_manifest": "evidence/revisions/m1.3-001/splits/test_ids.txt",
+      "purpose": "frozen_primary_evaluation",
+      "sha256": "d34210f901759a4f174da0c6c2e9b810616dcb33a71a0bd128a25d5d8d12e6f6",
+      "size_bytes": 7396
+    },
+    "train": {
+      "count": 799,
+      "dataset": "Qiuchen-Wang/ViDoSeek",
+      "id_manifest": "evidence/revisions/m1.3-001/splits/train_ids.txt",
+      "purpose": "learned_model_fitting",
+      "sha256": "61dfe867c27b91a0a96594440b0f0e5ecf51501da0fcecdac94badaf16962191",
+      "size_bytes": 34357
+    },
+    "validation": {
+      "count": 171,
+      "dataset": "Qiuchen-Wang/ViDoSeek",
+      "id_manifest": "evidence/revisions/m1.3-001/splits/val_ids.txt",
+      "purpose": "model_selection_and_calibration",
+      "sha256": "46f8af5853942f6697cc3a995347a1832206212e93ff8aa87acb1775b3a060b4",
+      "size_bytes": 7353
+    }
+  },
+  "schema_version": 1,
+  "split_bundle": {
+    "manifest_path": "evidence/revisions/m1.3-001/splits/split_manifest.json",
+    "manifest_sha256": "560737151fc9de58067376c6a02a512ec2a50e57118e28386b5e5f50a0ee5c8a",
+    "source_task": "M1.3"
+  },
+  "split_policy": {
+    "encoding": "utf-8",
+    "namespace": "vidoseek_v1",
+    "newline": "LF",
+    "ranking": "sha256(namespace:seed:query_id),query_id",
+    "ratios": [
+      0.7,
+      0.15,
+      0.15
+    ],
+    "rounding": "python_round_train_val_test_remainder",
+    "seed": 2026
+  },
+  "status": "VERIFIED_ACTIVE_PRIMARY_SPLITS",
+  "task_id": "M2.1"
+}
