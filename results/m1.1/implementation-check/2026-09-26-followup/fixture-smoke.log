@@ -1,0 +1,18 @@
+2026-09-26 01:17:58,610 INFO stage started: prepare
+2026-09-26 01:17:58,614 INFO stage completed
+2026-09-26 01:17:58,923 INFO stage started: bm25
+2026-09-26 01:17:58,953 INFO saved bm25 scores: (2, 3)
+2026-09-26 01:17:58,953 INFO stage completed
+Traceback (most recent call last):
+  File "C:\Users\lanph\OneDrive\Desktop\Artificial_Intelligent_Project\results\m1.1\implementation-check\2026-09-26-followup\fixture_smoke.py", line 79, in <module>
+    main()
+  File "C:\Users\lanph\OneDrive\Desktop\Artificial_Intelligent_Project\results\m1.1\implementation-check\2026-09-26-followup\fixture_smoke.py", line 43, in main
+    bm25 = execute_stage('bm25', config, workspace, 'software-fixture', source)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lanph\OneDrive\Desktop\Artificial_Intelligent_Project\src\qpaf\m11\pipeline.py", line 101, in execute_stage
+    with StageRun(root, stage, config, inputs, source) as run:
+  File "C:\Users\lanph\OneDrive\Desktop\Artificial_Intelligent_Project\src\qpaf\m11\artifacts.py", line 166, in __exit__
+    write_json(self.path/'status.json', {'status': 'completed' if success else 'failed',
+  File "C:\Users\lanph\OneDrive\Desktop\Artificial_Intelligent_Project\src\qpaf\m11\artifacts.py", line 36, in write_json
+    os.replace(temp, path)
+PermissionError: [WinError 5] Access is denied: 'C:\\Users\\lanph\\OneDrive\\Desktop\\Artificial_Intelligent_Project\\results\\m1.1\\implementation-check\\2026-09-26-followup\\software-fixture\\runs\\software-fixture\\bm25\\20260925T181758-74aa32cc\\status.json.69be7a97980745758e64a6319cf257ed.tmp' -> 'C:\\Users\\lanph\\OneDrive\\Desktop\\Artificial_Intelligent_Project\\results\\m1.1\\implementation-check\\2026-09-26-followup\\software-fixture\\runs\\software-fixture\\bm25\\20260925T181758-74aa32cc\\status.json'

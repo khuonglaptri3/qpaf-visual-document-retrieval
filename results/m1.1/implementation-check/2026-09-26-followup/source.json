@@ -1,0 +1,170 @@
+{
+  "digest": "084d33bf0f3db0e2b20c9f9251f8799822979b537228367940a6217cbecb7332",
+  "files": [
+    {
+      "path": "pyproject.toml",
+      "sha256": "cfb8a17ffd6c9c36969eff5b807a9ef8e8064db54c53adee42a63085b7e5b901"
+    },
+    {
+      "path": "requirements/m11-local.txt",
+      "sha256": "f2794370b269ce6ba4b5e118b4f7f0d8622d49ed2ed79841ea30776d4358f2b2"
+    },
+    {
+      "path": "requirements/m11-modal.lock",
+      "sha256": "44ccced6480cf8a238db61ba048bc612024c7d3eb7acbc9d3303ebc911b68a07"
+    },
+    {
+      "path": "requirements/m11-modal.txt",
+      "sha256": "00a5005b623d5d94484d11b5ff335acde45d353833c1c3aa4f8e6c05ee189ce1"
+    },
+    {
+      "path": "scripts/audit_repository.py",
+      "sha256": "3d5be4fa6db221900c7ac085cbe0099ab10563de653120103db90564ef8a2aaa"
+    },
+    {
+      "path": "scripts/evaluate_m11.py",
+      "sha256": "6513fafbc95347f3b64100bdc2d2a51bbb7639501f2625767f6a395fe884b882"
+    },
+    {
+      "path": "scripts/run_m11_modal.py",
+      "sha256": "127d19d316b02de1924873abcf85c7d460ebc9ddc98b4483f0c1171db7fab22a"
+    },
+    {
+      "path": "src/qpaf/__init__.py",
+      "sha256": "3c676f0b96ef73c4f9eb29a27d8bcc3464303483653f2ae28c7f4e739fe9d542"
+    },
+    {
+      "path": "src/qpaf/audit.py",
+      "sha256": "16a6b7c83215aa667ca26ce2045323255fcf09aa67dc1925e0b86bea7c0818a5"
+    },
+    {
+      "path": "src/qpaf/m11/__init__.py",
+      "sha256": "f2c256e8608884fb0e4ffca4ccfd800bbbc8fea816963fb084b0e3255d49ba2b"
+    },
+    {
+      "path": "src/qpaf/m11/artifacts.py",
+      "sha256": "a71ac1d3a0ea26e9c7de60d4de4f821d910c72039499adba6ad87c9bc43ec691"
+    },
+    {
+      "path": "src/qpaf/m11/config.py",
+      "sha256": "1bfd9185704370be4e3559de0bfba601bddf858b53eb05d0d90681e92eebeafd"
+    },
+    {
+      "path": "src/qpaf/m11/dataset.py",
+      "sha256": "7cb64887743ead14c5b1d75c63ff57db5b35dc280b06cc6d149b0d3e2fa15a1f"
+    },
+    {
+      "path": "src/qpaf/m11/evidence.py",
+      "sha256": "58eef596cd4bb27da2f7044ec5bf5703f59e3e6c010c4f84afff7a39498b1f85"
+    },
+    {
+      "path": "src/qpaf/m11/metrics.py",
+      "sha256": "c2d15bd922cc60b3f84a72a8828fe8a248467d892d88e9af98e4cfe3b71a3a9c"
+    },
+    {
+      "path": "src/qpaf/m11/modal_app.py",
+      "sha256": "f583a5b636028e87393903cc949e0289f2d3fe6b41533b1a7c75de9f5e50ed05"
+    },
+    {
+      "path": "src/qpaf/m11/oracle.py",
+      "sha256": "56e05e5a4d01dae5ab68ae5e11ffbaf4f9c76bee22b5cf78fabf004f493dbdf1"
+    },
+    {
+      "path": "src/qpaf/m11/pipeline.py",
+      "sha256": "38398aa6916f0129791d356ef0c5bcbcf772373998e36fa61c561e58e88a294e"
+    },
+    {
+      "path": "src/qpaf/m11/retrieval.py",
+      "sha256": "93ff00e50256bdc44759cfde88012a49282017096d240de2eaab58ef695db2e1"
+    },
+    {
+      "path": "selected_image_requirements",
+      "sha256": "44ccced6480cf8a238db61ba048bc612024c7d3eb7acbc9d3303ebc911b68a07"
+    }
+  ],
+  "git_commit": "3df00169fb181866b1fbc240d812f06bb0804e8c",
+  "git_status": "M .github/workflows/ci.yml\n M README.md\n M configs/README.md\n M pyproject.toml\n M results/m1.1/README.md\n?? configs/m1.1/\n?? docs/m1.1-modal-oracle.md\n?? docs/superpowers/plans/2026-09-26-m11-modal-oracle.md\n?? docs/superpowers/specs/2026-09-26-m11-modal-oracle-design.md\n?? requirements/\n?? results/m1.1/implementation-check/\n?? scripts/evaluate_m11.py\n?? scripts/run_m11_modal.py\n?? src/qpaf/m11/\n?? tests/test_m11_artifacts.py\n?? tests/test_m11_core.py\n?? tests/test_m11_pipeline.py",
+  "command": [
+    "C:\\Users\\lanph\\OneDrive\\Desktop\\Artificial_Intelligent_Project\\.venv\\Scripts\\python.exe",
+    "-"
+  ],
+  "environment": {
+    "python": "3.11.16 (main, Aug 25 2026, 13:59:19) [MSC v.1944 64 bit (AMD64)]",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "packages": {
+      "aiohappyeyeballs": "2.7.1",
+      "aiohttp": "3.14.3",
+      "aiosignal": "1.4.0",
+      "anyio": "4.15.1",
+      "attrs": "26.1.0",
+      "cbor2": "6.1.4",
+      "certifi": "2026.7.22",
+      "charset-normalizer": "3.5.1",
+      "click": "8.5.0",
+      "colorama": "0.4.6",
+      "filelock": "4.0.3",
+      "frozenlist": "1.8.0",
+      "fsspec": "2026.9.0",
+      "grpclib": "0.4.9",
+      "h2": "4.4.1",
+      "hpack": "4.2.0",
+      "huggingface-hub": "0.34.4",
+      "hyperframe": "6.1.0",
+      "idna": "3.20",
+      "markdown-it-py": "4.2.0",
+      "mdurl": "0.1.2",
+      "modal": "1.5.5",
+      "multidict": "6.9.1",
+      "numpy": "2.4.6",
+      "packaging": "26.3",
+      "pillow": "11.3.0",
+      "propcache": "0.5.4",
+      "protobuf": "6.33.6",
+      "Pygments": "2.21.0",
+      "pypdfium2": "4.30.0",
+      "pytesseract": "0.3.13",
+      "PyYAML": "6.0.3",
+      "requests": "2.34.2",
+      "rich": "15.0.0",
+      "synchronicity": "0.12.5",
+      "toml": "0.10.2",
+      "tqdm": "4.70.1",
+      "types-certifi": "2021.10.8.3",
+      "types-toml": "0.10.8.20260518",
+      "typing_extensions": "4.16.0",
+      "urllib3": "2.8.0",
+      "watchfiles": "1.3.0",
+      "yarl": "1.25.1"
+    }
+  },
+  "verification_inputs": [
+    {
+      "path": ".github/workflows/ci.yml",
+      "sha256": "e6e5a1577521fdfca48f248711ae4cffd3e6ee046135cfc9c350425e5f8032a8"
+    },
+    {
+      "path": "configs/m1.1/vidoseek.toml",
+      "sha256": "09ab9e5850897c6cdfc7235712d9e9a950023690de55c618a913d7d62a0763eb"
+    },
+    {
+      "path": "results/m1.1/implementation-check/2026-09-26-followup/fixture_smoke.py",
+      "sha256": "999bc10b61496d84c980dc4123bfdb6b7a94a07142d54322c0f30f3a90e63118"
+    },
+    {
+      "path": "tests/test_audit.py",
+      "sha256": "1fe43835422704340d2f188f9023af0313e3ea2ec7660ff414086f28be0be65b"
+    },
+    {
+      "path": "tests/test_m11_artifacts.py",
+      "sha256": "f737f1c01c4e0063b66e6b8afd64db719fee11ed74e4396bf8206c42ac44e6ca"
+    },
+    {
+      "path": "tests/test_m11_core.py",
+      "sha256": "5e71b275d3e2e42d2d3056cc3429cff4beae7942390fce5836ade98c689b13ff"
+    },
+    {
+      "path": "tests/test_m11_pipeline.py",
+      "sha256": "91be95f1d8ddb8efe7cbeb6280e87ce3f21a3b4e34abfec572817bac026af8ed"
+    }
+  ]
+}

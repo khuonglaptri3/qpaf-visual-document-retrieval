@@ -1,0 +1,2 @@
+git diff --check: exit 0
+New method source/config/test/dependency/CI files: no trailing whitespace or merge markers

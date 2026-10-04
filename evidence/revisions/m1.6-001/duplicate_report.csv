@@ -1,0 +1,2 @@
+group_id,collision_type,left_page_id,right_page_id,content_sha256,split_leakage,resolution,review_status
+DUP-0001,EXACT_CONTENT_DUPLICATE,doc_001_page_0004,doc_002_page_0004,dfcf7835dd0c918f8751be10238fc5c1d946bd1d5e23acbb1cf8ae08cee65623,false,intra_split_duplicate,reviewed

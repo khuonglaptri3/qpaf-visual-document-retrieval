@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "task": "M1.4",
+  "owner": "Trần Đình Khương",
+  "planned_date": "2026-09-23",
+  "generated_at_utc": "2026-09-25T11:57:04.661813+00:00",
+  "status": "PARTIAL",
+  "file_count": 21,
+  "counts": {
+    "source": 0,
+    "data": 0,
+    "config": 0,
+    "run": 0,
+    "documentation": 13,
+    "infrastructure": 8
+  },
+  "git": {
+    "commit": "319978329ca86ffd6e4d242ab9b528f2357a44b1",
+    "branch": "feature/m1-repository-audit",
+    "worktree_status": ""
+  },
+  "excluded_entries": [
+    ".git/",
+    ".superpowers/",
+    "evidence/",
+    "src/qpaf/__pycache__/",
+    "tests/__pycache__/"
+  ],
+  "read_errors": [],
+  "gaps": [
+    {
+      "id": "RESEARCH_CODE_MISSING",
+      "detail": "No source assets observed in the audited scope. Request the real location or record that none exist."
+    },
+    {
+      "id": "DATA_MISSING",
+      "detail": "No data assets observed in the audited scope. Request the real location or record that none exist."
+    },
+    {
+      "id": "CONFIG_MISSING",
+      "detail": "No config assets observed in the audited scope. Request the real location or record that none exist."
+    },
+    {
+      "id": "RUNS_MISSING",
+      "detail": "No run assets observed in the audited scope. Request the real location or record that none exist."
+    },
+    {
+      "id": "PROVENANCE_REVIEW_REQUIRED",
+      "detail": "Khương and independent QA must review source/data/config/run/output links. Inventory generation is not M1.4 acceptance."
+    }
+  ],
+  "scope": "Local filesystem inventory; generated evidence, links and configured exclusions are omitted. No external assets were inspected."
+}

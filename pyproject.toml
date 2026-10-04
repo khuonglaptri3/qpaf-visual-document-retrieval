@@ -7,7 +7,7 @@ name = "visual-rag-oracle-study"
 version = "0.1.0"
 description = "Offline oracle studies for QPAF and Budget-Aware HEAVEN"
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 dependencies = [
   "matplotlib>=3.8",
   "numpy>=1.26",
@@ -16,8 +16,16 @@ dependencies = [
   "PyYAML>=6",
 ]
 
+[project.optional-dependencies]
+oracle = ["numpy>=1.26,<3"]
+modal = ["modal==1.5.5", "numpy>=1.26,<3"]
+method = ["torch==2.7.1"]
+verification = ["numpy>=1.26,<3", "pypdfium2==4.30.0", "Pillow==11.3.0",
+                "pytesseract==0.3.13", "huggingface-hub==0.34.4"]
+
 [project.scripts]
 oracle-study = "oracle_study.cli:main"
+qpaf-audit = "qpaf.audit:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
