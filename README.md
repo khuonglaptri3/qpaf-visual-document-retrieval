@@ -217,6 +217,24 @@ $env:PYTHONUTF8 = '1'
 
 ---
 
+### M2.1 Data-Split Role Freeze
+
+After reproducing ViDoSeek and verifying the accepted M1.3 splits, create a new
+immutable M2.1 evidence revision. The command verifies the pinned raw payload hashes,
+split hashes, counts, complete union, and zero query overlap without rewriting M1.3:
+
+```powershell
+$env:PYTHONUTF8 = '1'
+.venv/Scripts/python.exe scripts/freeze_m21_data_splits.py `
+  --output-dir evidence/revisions/m2.1-new-revision
+```
+
+The selected project revision is [`evidence/revisions/m2.1-002/`](evidence/revisions/m2.1-002/).
+The CLI refuses to overwrite an existing revision; use a new revision directory for a
+fresh run. Raw corpus payloads remain local under `data/raw/` and are not committed.
+
+---
+
 ### Visual Collision, Alias & Leakage Audit (M1.6)
 
 Rasterize all 5,385 real PDF pages at 72 DPI, compute SHA-256 pixel hashes, detect duplicates/aliases, and verify split isolation and qrels integrity:
