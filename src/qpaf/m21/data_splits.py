@@ -10,9 +10,24 @@ from typing import Any, Dict, Tuple
 from qpaf.m13.splits import read_split_bundle
 from qpaf.m13.vidoseek import parse_vidoseek_annotations
 
+EXPECTED_DATASET = "Qiuchen-Wang/ViDoSeek"
+EXPECTED_REVISION = "e91a92ba5f38690696c7e66be5c5474b54c6e791"
+REQUIRED_PAYLOADS = {"README.md", "vidoseek.json", "vidoseek_pdf_document.zip"}
+
 
 def _relative_path(path: Path, repo_root: Path) -> str:
     return path.resolve().relative_to(repo_root.resolve()).as_posix()
+
+
+def _validate_source_manifest(source: Dict[str, Any]) -> None:
+    if source.get("dataset") != EXPECTED_DATASET or source.get("revision") != EXPECTED_REVISION:
+        raise ValueError("Pinned dataset identity mismatch")
+    records = source.get("files")
+    if not isinstance(records, list) or not all(isinstance(record, dict) for record in records):
+        raise ValueError("Pinned payload inventory mismatch")
+    names = [record.get("filename") for record in records]
+    if len(names) != len(REQUIRED_PAYLOADS) or set(names) != REQUIRED_PAYLOADS:
+        raise ValueError("Pinned payload inventory mismatch")
 
 
 def _verify_reproduced_payloads(
@@ -43,6 +58,7 @@ def build_data_split_freeze(
 ) -> Tuple[Dict[str, Any], Dict[str, Any]]:
     """Build the M2.1 role manifest and its verification report read-only."""
     source = json.loads(source_manifest_path.read_text(encoding="utf-8"))
+    _validate_source_manifest(source)
     data_files = _verify_reproduced_payloads(source, raw_dir, repo_root)
     parsed = parse_vidoseek_annotations(raw_dir / "vidoseek.json")
     query_ids = [query["query_id"] for query in parsed.queries]

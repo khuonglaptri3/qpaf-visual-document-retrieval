@@ -43,7 +43,7 @@ class M21Fixture:
         manifest = {
             "schema_version": 1,
             "dataset": "Qiuchen-Wang/ViDoSeek",
-            "revision": "fixture-revision",
+            "revision": "e91a92ba5f38690696c7e66be5c5474b54c6e791",
             "files": [
                 {
                     "filename": name,
@@ -59,6 +59,47 @@ class M21Fixture:
 
 
 class TestM21DataSplits(unittest.TestCase):
+    def test_freeze_rejects_wrong_dataset_identity(self):
+        module = importlib.import_module("qpaf.m21.data_splits")
+        cases = {
+            "dataset": "unexpected/dataset",
+            "revision": "wrong-revision",
+        }
+        for field, value in cases.items():
+            with self.subTest(field=field), tempfile.TemporaryDirectory() as tmp:
+                fixture = M21Fixture(Path(tmp))
+                source = json.loads(fixture.source_manifest.read_text(encoding="utf-8"))
+                source[field] = value
+                fixture.source_manifest.write_text(json.dumps(source), encoding="utf-8")
+
+                with self.assertRaisesRegex(ValueError, "dataset identity mismatch"):
+                    module.build_data_split_freeze(
+                        repo_root=fixture.root,
+                        source_manifest_path=fixture.source_manifest,
+                        raw_dir=fixture.raw_dir,
+                        splits_dir=fixture.splits_dir,
+                    )
+
+    def test_freeze_requires_exact_payload_inventory(self):
+        module = importlib.import_module("qpaf.m21.data_splits")
+        for mutation in ("missing", "duplicate"):
+            with self.subTest(mutation=mutation), tempfile.TemporaryDirectory() as tmp:
+                fixture = M21Fixture(Path(tmp))
+                source = json.loads(fixture.source_manifest.read_text(encoding="utf-8"))
+                if mutation == "missing":
+                    source["files"] = source["files"][:-1]
+                else:
+                    source["files"].append(dict(source["files"][0]))
+                fixture.source_manifest.write_text(json.dumps(source), encoding="utf-8")
+
+                with self.assertRaisesRegex(ValueError, "payload inventory mismatch"):
+                    module.build_data_split_freeze(
+                        repo_root=fixture.root,
+                        source_manifest_path=fixture.source_manifest,
+                        raw_dir=fixture.raw_dir,
+                        splits_dir=fixture.splits_dir,
+                    )
+
     def test_freeze_records_active_split_roles(self):
         try:
             module = importlib.import_module("qpaf.m21.data_splits")
