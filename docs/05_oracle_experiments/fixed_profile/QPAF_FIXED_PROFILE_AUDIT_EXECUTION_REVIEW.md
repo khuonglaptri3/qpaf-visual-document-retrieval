@@ -1,10 +1,10 @@
 # Fixed-profile discovery audit: execution review
 
-**EXECUTION COMPLETE AND INDEPENDENTLY VERIFIED.** The user approved the reviewed scope on 2026-09-08. The single Codex CPU invocation completed in 561.485 seconds, and the independent review recomputed all seven profile metrics over all 6,149,670 pairs. See [the verified result](05_oracle_experiments/fixed_profile/QPAF_FIXED_PROFILE_AUDIT_RESULTS.md). The preparation-only text below is retained as the pre-execution contract.
+**EXECUTION COMPLETE AND INDEPENDENTLY VERIFIED.** The user approved the reviewed scope on 2026-09-08. The single Codex CPU invocation completed in 561.485 seconds, and the independent review recomputed all seven profile metrics over all 6,149,670 pairs. See [the verified result](QPAF_FIXED_PROFILE_AUDIT_RESULTS.md). The preparation-only text below is retained as the pre-execution contract.
 
 ## Purpose and scope
 
-The completed exploratory-12 study had eleven Global ceiling cases and one improving query. This audit would measure the remaining theoretical headroom across all frozen discovery queries before committing to further page-specific search. See [the case study](QPAF_QUERY797_CASE_STUDY.md) and [the evaluation proposal](QPAF_NEXT_EVALUATION_PROPOSAL.md).
+The completed exploratory-12 study had eleven Global ceiling cases and one improving query. This audit would measure the remaining theoretical headroom across all frozen discovery queries before committing to further page-specific search. See [the case study](../exploratory12/QPAF_QUERY797_CASE_STUDY.md) and [the evaluation proposal](../../02_project_plan/QPAF_NEXT_EVALUATION_PROPOSAL.md).
 
 | Item | Prepared contract |
 | --- | --- |
@@ -27,10 +27,10 @@ The deterministic audit retains seed 20260820 as study metadata. It performs nei
 
 Final verification: **213 tests passed in 88.46 seconds**, including 31 focused audit tests. Ruff lint/format checks passed. The source-pinned read-only preflight passed for all 1,142 queries / 6,149,670 rows with `actual_relevance_loaded=false`, `execution_authorized=false`, and `attempt_exists=false`. All 43 original-run and 78 recovery-run artifact hashes still match, as do the original report and chart. The live CLI's closed-approval refusal was also checked without creating an attempt.
 
-- [Runner](../scripts/audit_vidoseek_fixed_profiles.py): reuses the unchanged metric/profile/tie-break primitives; it never calls a QPAF or full-oracle runner.
-- [Focused tests](../tests/test_vidoseek_fixed_profile_audit.py): synthetic equivalence to frozen Global/QARF selection, independent single-positive metric values, graded relevance, ties, row permutation, split row groups, corruption/coverage refusal, closed approval, actor/thread guards, consumed attempts, timeouts and preserved inputs.
-- [Preparation verification receipt](../artifacts/vidoseek_fixed_profile_audit_preparation/verification_receipt.json): final test results, lint/format checks, exact source/config/test hashes and evidence-preservation checks.
-- [Read-only preflight](../artifacts/vidoseek_fixed_profile_audit_preparation/preflight.json): input hash/metadata/provenance verification and ID-only query-order validation. It reads no relevance values, calculates no retrieval metrics and consumes no attempt.
+- [Runner](../../../scripts/audit_vidoseek_fixed_profiles.py): reuses the unchanged metric/profile/tie-break primitives; it never calls a QPAF or full-oracle runner.
+- [Focused tests](../../../tests/test_vidoseek_fixed_profile_audit.py): synthetic equivalence to frozen Global/QARF selection, independent single-positive metric values, graded relevance, ties, row permutation, split row groups, corruption/coverage refusal, closed approval, actor/thread guards, consumed attempts, timeouts and preserved inputs.
+- [Preparation verification receipt](../../../artifacts/vidoseek_fixed_profile_audit_preparation/verification_receipt.json): final test results, lint/format checks, exact source/config/test hashes and evidence-preservation checks.
+- [Read-only preflight](../../../artifacts/vidoseek_fixed_profile_audit_preparation/preflight.json): input hash/metadata/provenance verification and ID-only query-order validation. It reads no relevance values, calculates no retrieval metrics and consumes no attempt.
 
 No existing scientific source, score file, checkpoint, old approval config or old result report is edited. The new script is under `scripts/` so the frozen `src/oracle_study/` inventory stays intact. No dependency was added. The current working tree contains local, uncommitted changes; HEAD alone does not reproduce this prepared state. The runtime will snapshot every pinned source file and the tracked diff.
 
@@ -100,4 +100,4 @@ The user does not need to edit the config or run these commands manually. After 
 
 “Approve the prepared fixed-profile discovery audit: all 1,142 ViDoSeek queries and 5,385 pages/query, seven fixed W7 profiles, one Codex local CPU invocation with one worker/thread, a 1,800-second cap, no automatic retries, followed by independent result verification and reporting. Do not run QPAF coordinate search, W66, training, Modal/GPU, or change frozen P1-02/P1-03 and formal phase gates.”
 
-This was the historical proposed approval text. The actual approval is recorded in `runs/fixed_profile_audit_preparation_20260908/execution_approval.json`; the one invocation is complete and consumed. The requirement for any later execution amendment remains in [Tasks.md](../Tasks.md), P1-02R-O1 STOP/KILL CONDITION: “Every later execution step requires a separate explicit human-approved amendment.”
+This was the historical proposed approval text. The actual approval is recorded in `runs/fixed_profile_audit_preparation_20260908/execution_approval.json`; the one invocation is complete and consumed. The requirement for any later execution amendment remains in [Tasks.md](../../../Tasks.md), P1-02R-O1 STOP/KILL CONDITION: “Every later execution step requires a separate explicit human-approved amendment.”

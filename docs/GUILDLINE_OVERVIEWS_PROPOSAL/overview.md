@@ -5,8 +5,8 @@
 trên corpus thật còn chờ. M1.2 đã có method core, đặc tả 13 features và bằng
 chứng kiểm chứng cục bộ; thành viên khác cần chạy lại để nghiệm thu.
 M1.3 chưa có gói audit corpus để kiểm chứng. Xem [README](../../README.md),
-[trạng thái bàn giao](../m1-restart-handoff.md) và
-[bảng đối chiếu M1.1/M1.2](../m1.1-m1.2-status.md).
+[trạng thái bàn giao](../06_handover/m1-restart-handoff.md) và
+[bảng đối chiếu M1.1/M1.2](../06_handover/m1.1-m1.2-status.md).
 
 Các bảng ngày dưới đây giữ lịch tham chiếu M1.4–M1.10 của
 `TIMELINE_fixed.md`; không chứng minh các công việc trước đó đã Done.

@@ -1,6 +1,6 @@
 # First QPAF oracle comparison: prepared execution review
 
-Execution update (2026-09-07): the user approved this prepared scope and Codex launched the one permitted CPU attempt. See [the run status and logs](../../QPAF_EXPLORATORY12_RUN_STATUS.md). The review below is the pre-execution snapshot; its pending/closed statements describe that historical stage.
+Execution update (2026-09-07): the user approved this prepared scope and Codex launched the one permitted CPU attempt. See [the run status and logs](QPAF_EXPLORATORY12_RUN_STATUS.md). The review below is the pre-execution snapshot; its pending/closed statements describe that historical stage.
 
 Prepared 2026-09-07. **Implementation and read-only verification complete; protocol adoption and live execution pending. No retrieval improvement result exists yet.**
 
@@ -13,7 +13,7 @@ The existing 12-query proposal is now supported by a separate, closed runner. Pr
 - [Separate runner](../../../src/oracle_study/vidoseek_exploratory12.py): uses the existing two-pass W7 checkpoint engine and unchanged QARF/QPAF search primitives.
 - [Closed execution configuration](../../../configs/vidoseek_w7_exploratory12_v1.json): pins all oracle-package Python source files, both parent protocols, the original proposal, Git base, Python/package versions, query count, resource limits, and output path. Both approval flags are false; actor, approver, text, and date are unset.
 - [Pilot tests](../../../tests/test_vidoseek_exploratory12.py): exact comparison against the monolithic oracle on a synthetic subset, complete-query requirements, source/protocol drift, draft/actor refusal, no retry, and incomplete-output handling.
-- [Original proposal](../../vidoseek_w7_exploratory12_proposal.json): preserved unchanged as the historical design snapshot. Its old `not_implemented` field describes the proposal's creation, not current implementation readiness.
+- [Original proposal](vidoseek_w7_exploratory12_proposal.json): preserved unchanged as the historical design snapshot. Its old `not_implemented` field describes the proposal's creation, not current implementation readiness.
 - [Full test output](../../../runs/exploratory12_preparation_20260907/pytest.txt): `169 passed in 22.82s` before final formatting. [Final focused tests](../../../runs/exploratory12_preparation_20260907/final_focused_tests.txt): `46 passed in 8.70s` after formatting and source-pin refresh. Ruff lint/format checks also pass. [Final read-only preflight](../../../runs/exploratory12_preparation_20260907/final_preflight.json): PASS.
 
 Read-only preflight reverified the pinned 6,149,670-row score bundle, 1,142-query candidate audit, 5,385 pages per query, coverage 1.0, existing engineering evidence, and the frozen sample IDs. It read query-ID columns for selection verification and did not load relevance values or execute the oracle. Semantic integrity continues to inherit the previously verified, hash-pinned integrity review. The calibration marker/manifest byte hashes and their cross-link also match the saved review.

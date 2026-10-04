@@ -1,6 +1,6 @@
 # Exploratory-12 recovery execution review
 
-Execution update (2026-09-07): the user approved the exact prepared scope with "OK now continue". Codex launched the one permitted recovery invocation at 10:02 UTC. See [the current run status](../../QPAF_EXPLORATORY12_RECOVERY_RUN_STATUS.md). The preparation/closed statements below are the historical pre-approval review, whose hash is retained in the approval record.
+Execution update (2026-09-07): the user approved the exact prepared scope with "OK now continue". Codex launched the one permitted recovery invocation at 10:02 UTC. See [the current run status](QPAF_EXPLORATORY12_RECOVERY_RUN_STATUS.md). The preparation/closed statements below are the historical pre-approval review, whose hash is retained in the approval record.
 
 Prepared 2026-09-07. **Recovery implementation and focused tests complete; live execution disabled.** No recovery output directory or attempt exists. The original experiment remains incomplete at four of twelve query results.
 

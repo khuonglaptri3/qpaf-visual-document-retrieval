@@ -46,12 +46,12 @@ The QPAF-minus-QARF mean is therefore `0.5/12 = 0.041667`; wins/ties/losses are 
 
 ## Evidence and reproduction
 
-- [Original complete comparison](05_oracle_experiments/exploratory12/QPAF_EXPLORATORY12_RESULTS.md), retained byte-for-byte.
-- [Case review and input/output hashes](../artifacts/vidoseek_exploratory12_case797_review/case_review.json).
-- [All 5,385 page scores, channel ranks, fused ranks and weights](../artifacts/vidoseek_exploratory12_case797_review/query_page_rankings.csv).
-- [Relevant-page ranks for all twelve queries](../artifacts/vidoseek_exploratory12_case797_review/all_query_relevant_ranks.csv).
-- [Saved checkpoint](../runs/vidoseek_exploratory12_recovery_v1/checkpoints/queries/000005.json).
-- [Reconstruction script](../scripts/inspect_exploratory12_saved_rankings.py).
+- [Original complete comparison](QPAF_EXPLORATORY12_RESULTS.md), retained byte-for-byte.
+- [Case review and input/output hashes](../../../artifacts/vidoseek_exploratory12_case797_review/case_review.json).
+- [All 5,385 page scores, channel ranks, fused ranks and weights](../../../artifacts/vidoseek_exploratory12_case797_review/query_page_rankings.csv).
+- [Relevant-page ranks for all twelve queries](../../../artifacts/vidoseek_exploratory12_case797_review/all_query_relevant_ranks.csv).
+- [Saved checkpoint](../../../runs/vidoseek_exploratory12_recovery_v1/checkpoints/queries/000005.json).
+- [Reconstruction script](../../../scripts/inspect_exploratory12_saved_rankings.py).
 
 The script verifies all 78 recovery artifact hashes and the full input score-file hash, then checks 144 saved metrics (12 queries x 3 methods x 4 metrics) using stable score-descending/page-ID-ascending ranking and the independent one-positive closed form. It fails if any query has a different relevance-count contract. It imports no oracle runner and writes only a new diagnostic directory.
 
@@ -67,4 +67,4 @@ C:\Python313\python.exe scripts\inspect_exploratory12_saved_rankings.py --run ru
 
 Expected: `PASS_SAVED_RANKING_RECONSTRUCTION`, `metrics_checked=144`, `global_ceiling_queries=11`, relevant ranks 4/3/1. The current checkout includes uncommitted implementation and local data; a clean checkout of HEAD alone is insufficient. Preserve the linked inputs and script with their hashes when packaging reproduction.
 
-Next: [review-only evaluation proposal](QPAF_NEXT_EVALUATION_PROPOSAL.md).
+Next: [review-only evaluation proposal](../../02_project_plan/QPAF_NEXT_EVALUATION_PROPOSAL.md).

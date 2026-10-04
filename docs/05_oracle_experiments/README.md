@@ -4,6 +4,7 @@
 
 | Study | Phạm vi |
 |---|---|
+| [Oracle trên Modal: M1.1](modal_oracle/README.md) | Hướng dẫn triển khai và kiểm chứng oracle. |
 | [Calibration CPU ban đầu](calibration/README.md) | Đo thử thời gian và tài nguyên trước oracle. |
 | [Exploratory-12: W7 và recovery](exploratory12/README.md) | Oracle W7 trên 12 query và xử lý gián đoạn. |
 | [Exploratory-24: tính khả thi W7](exploratory24/README.md) | Oracle W7 trên 24 query cố định. |
@@ -13,8 +14,6 @@
 ## Danh mục đầy đủ
 
 Các nhận xét về tiến độ trong tài liệu là snapshot theo thời điểm và phạm vi ghi trong từng file.
-
-Tài liệu có dấu **Đường dẫn cố định** được code hoặc hồ sơ kiểm chứng tham chiếu. Đọc qua liên kết dưới đây; cập nhật chúng cần xem xét cả hash và provenance.
 
 - [QPAF: prepared CPU calibration handoff](calibration/QPAF_CALIBRATION_HANDOFF.md)
 - [QPAF calibration review and proposed next experiment](calibration/QPAF_CALIBRATION_REVIEW_AND_NEXT_STEP.md)
@@ -28,20 +27,20 @@ Tài liệu có dấu **Đường dẫn cố định** được code hoặc hồ
 - [ViDoSeek exploratory-24 W66: verified Global / QARF / QPAF sensitivity](w66/QPAF_W66_EXPLORATORY24_RESULTS.md)
 - [W66 synthetic resource calibration interruption review](w66/QPAF_W66_RESOURCE_CALIBRATION_INTERRUPTION_REVIEW.md)
 - [W66 resource-calibration recovery result review](w66/QPAF_W66_RESOURCE_CALIBRATION_RECOVERY_RESULT_REVIEW.md)
-- [Exploratory-12 recovery run](../QPAF_EXPLORATORY12_RECOVERY_RUN_STATUS.md) **Đường dẫn cố định**
-- [Exploratory-12 live run](../QPAF_EXPLORATORY12_RUN_STATUS.md) **Đường dẫn cố định**
-- [Fixed-profile discovery audit: execution review](../QPAF_FIXED_PROFILE_AUDIT_EXECUTION_REVIEW.md) **Đường dẫn cố định**
-- [Query 797: what the saved QPAF weights corrected](../QPAF_QUERY797_CASE_STUDY.md) **Đường dẫn cố định**
-- [Exploratory-24 W66 sensitivity: preparation and execution review](../QPAF_W66_EXPLORATORY24_EXECUTION_REVIEW.md) **Đường dẫn cố định**
-- [Optimized exploratory-24 W66: resource and execution review](../QPAF_W66_EXPLORATORY24_OPTIMIZED_EXECUTION_REVIEW.md) **Đường dẫn cố định**
-- [QPAF_W66_RESOURCE_BUDGET_REVIEW.json](../QPAF_W66_RESOURCE_BUDGET_REVIEW.json) **Đường dẫn cố định**
-- [W66 resource-budget review](../QPAF_W66_RESOURCE_BUDGET_REVIEW.md) **Đường dẫn cố định**
-- [W66 synthetic resource calibration: preparation and execution review](../QPAF_W66_RESOURCE_CALIBRATION_EXECUTION_REVIEW.md) **Đường dẫn cố định**
-- [W66 synthetic resource calibration recovery: preparation and execution review](../QPAF_W66_RESOURCE_CALIBRATION_RECOVERY_EXECUTION_REVIEW.md) **Đường dẫn cố định**
-- [M1.1 — chạy Oracle có thể tái lập trên Modal](../m1.1-modal-oracle.md) **Đường dẫn cố định**
-- [vidoseek_w66_exploratory24_optimized_proposal.json](../vidoseek_w66_exploratory24_optimized_proposal.json) **Đường dẫn cố định**
-- [vidoseek_w66_exploratory24_proposal.json](../vidoseek_w66_exploratory24_proposal.json) **Đường dẫn cố định**
-- [vidoseek_w66_resource_calibration_proposal.json](../vidoseek_w66_resource_calibration_proposal.json) **Đường dẫn cố định**
-- [vidoseek_w66_resource_calibration_recovery_proposal.json](../vidoseek_w66_resource_calibration_recovery_proposal.json) **Đường dẫn cố định**
-- [vidoseek_w7_exploratory12_proposal.json](../vidoseek_w7_exploratory12_proposal.json) **Đường dẫn cố định**
-- [vidoseek_w7_exploratory24_proposal.json](../vidoseek_w7_exploratory24_proposal.json) **Đường dẫn cố định**
+- [Exploratory-12 recovery run](exploratory12/QPAF_EXPLORATORY12_RECOVERY_RUN_STATUS.md)
+- [Exploratory-12 live run](exploratory12/QPAF_EXPLORATORY12_RUN_STATUS.md)
+- [Fixed-profile discovery audit: execution review](fixed_profile/QPAF_FIXED_PROFILE_AUDIT_EXECUTION_REVIEW.md)
+- [Query 797: what the saved QPAF weights corrected](exploratory12/QPAF_QUERY797_CASE_STUDY.md)
+- [Exploratory-24 W66 sensitivity: preparation and execution review](w66/QPAF_W66_EXPLORATORY24_EXECUTION_REVIEW.md)
+- [Optimized exploratory-24 W66: resource and execution review](w66/QPAF_W66_EXPLORATORY24_OPTIMIZED_EXECUTION_REVIEW.md)
+- [QPAF_W66_RESOURCE_BUDGET_REVIEW.json](w66/QPAF_W66_RESOURCE_BUDGET_REVIEW.json)
+- [W66 resource-budget review](w66/QPAF_W66_RESOURCE_BUDGET_REVIEW.md)
+- [W66 synthetic resource calibration: preparation and execution review](w66/QPAF_W66_RESOURCE_CALIBRATION_EXECUTION_REVIEW.md)
+- [W66 synthetic resource calibration recovery: preparation and execution review](w66/QPAF_W66_RESOURCE_CALIBRATION_RECOVERY_EXECUTION_REVIEW.md)
+- [M1.1 — chạy Oracle có thể tái lập trên Modal](modal_oracle/m1.1-modal-oracle.md)
+- [vidoseek_w66_exploratory24_optimized_proposal.json](w66/vidoseek_w66_exploratory24_optimized_proposal.json)
+- [vidoseek_w66_exploratory24_proposal.json](w66/vidoseek_w66_exploratory24_proposal.json)
+- [vidoseek_w66_resource_calibration_proposal.json](w66/vidoseek_w66_resource_calibration_proposal.json)
+- [vidoseek_w66_resource_calibration_recovery_proposal.json](w66/vidoseek_w66_resource_calibration_recovery_proposal.json)
+- [vidoseek_w7_exploratory12_proposal.json](exploratory12/vidoseek_w7_exploratory12_proposal.json)
+- [vidoseek_w7_exploratory24_proposal.json](exploratory24/vidoseek_w7_exploratory24_proposal.json)

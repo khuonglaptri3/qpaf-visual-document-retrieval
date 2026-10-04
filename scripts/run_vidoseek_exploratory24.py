@@ -23,8 +23,8 @@ from oracle_study import vidoseek_exploratory12 as pilot
 
 PROTOCOL_ID = "vidoseek_p1_02r_w7_exploratory24_v1"
 CLASSIFICATION = "exploratory24_subset_oracle_not_full_w7_or_phase_gate"
-PROPOSAL_PATH = "docs/vidoseek_w7_exploratory24_proposal.json"
-ORIGINAL_PROPOSAL_PATH = "docs/vidoseek_w7_exploratory12_proposal.json"
+PROPOSAL_PATH = "docs/05_oracle_experiments/exploratory24/vidoseek_w7_exploratory24_proposal.json"
+ORIGINAL_PROPOSAL_PATH = "docs/05_oracle_experiments/exploratory12/vidoseek_w7_exploratory12_proposal.json"
 FIXED_AUDIT_REVIEW_PATH = (
     "artifacts/vidoseek_fixed_profile_audit_review/result_integrity_review.json"
 )

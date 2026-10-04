@@ -43,7 +43,7 @@ payloads are deliverables for the assigned teammates.
 
 - The earlier environment/Git notes above describe bootstrap execution.
 - The supplied workbook and timeline remain unchanged. Current handoff
-  status is explicit in README and `docs/m1-restart-handoff.md`, because
+  status is explicit in README and `docs/06_handover/m1-restart-handoff.md`, because
   the historical Done cells are not a verification of this checkout.
 - A later supplied Oracle progress report contains reported ViDoSeek
   results. Its original bytes are stored in `results/m1.1/reference/`,

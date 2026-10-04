@@ -1,6 +1,6 @@
 # Bàn giao M1.1/M1.2 — cập nhật ngày 26/09/2026
 
-Đọc cùng [README](../README.md), nơi có các bước thực hiện và tiêu chí
+Đọc cùng [README](../../README.md), nơi có các bước thực hiện và tiêu chí
 hoàn tất riêng cho Thanh và Phát. Tài liệu này ghi trạng thái bàn giao
 hiện tại, không thay thế việc nhóm review hoặc quyết định G1.
 
@@ -34,7 +34,7 @@ Xem [bảng đối chiếu tiêu chí và kiểm thử](m1.1-m1.2-status.md).
 | Corpus/query/qrels/cache của run Oracle | Chưa có trong repo | Thanh xác định nguồn/revision/người giữ; Khương tiếp nhận manifest và vị trí |
 | Code/config/log/output từng query của Oracle | Chưa có | Thanh nhận bản gốc hoặc tạo run mới có provenance |
 | Method core QARF/QPAF và test | `src/qpaf/m12/`, 25 test M1.2 đạt; bằng chứng tại `results/m1.2/` | Phát bàn giao; thành viên khác chạy lại từ checkout sạch |
-| Định nghĩa 13 features và loss | Schema `qpaf13_v1`, pairwise logistic loss trong `docs/m1.2-method-core.md` | Review lựa chọn v1 và chốt protocol cho dữ liệu thật |
+| Định nghĩa 13 features và loss | Schema `qpaf13_v1`, pairwise logistic loss trong `docs/03_method/m1.2-method-core.md` | Review lựa chọn v1 và chốt protocol cho dữ liệu thật |
 | Gói audit primary corpus M1.3 | Chưa nhận được | Khương cùng Phát xác định corpus/phạm vi và nguồn hoặc phần cần tạo |
 | Frozen protocol / registry | Chưa có | Phát làm M1.5; Thanh làm M1.7, nhận inventory dần từ Khương |
 
@@ -58,7 +58,7 @@ Mỗi phần chờ đúng đầu vào mà phần đó cần.
 ## Quy ước đầu ra
 
 - Output Oracle mới: `results/m1.1/<run-id>/`.
-- Đặc tả method core: `docs/m1.2-method-core.md`; code/test/config nằm ở
+- Đặc tả method core: `docs/03_method/m1.2-method-core.md`; code/test/config nằm ở
   `src/qpaf/`, `tests/`, `configs/`.
 - Bằng chứng method core: `results/m1.2/<run-id>/verification/<attempt-id>/`.
 - Dữ liệu lớn/cache: storage dùng chung hoặc các thư mục payload được

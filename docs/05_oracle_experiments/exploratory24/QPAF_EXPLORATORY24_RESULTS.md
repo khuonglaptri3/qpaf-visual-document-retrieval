@@ -68,7 +68,7 @@ The next defensible action is a separate resource and protocol review for W66 se
 
 - [Tracked closeout receipt](../../../artifacts/vidoseek_exploratory24_review/closeout_receipt.json), which records the complete local run-manifest SHA-256 `0fcfbceee0e581240f241447abae1cb85cbb4f11cfee4f4d5343c2f81e06d9ee`. The full run directory remains local and Git-ignored.
 - [Independent integrity review](../../../artifacts/vidoseek_exploratory24_review/result_integrity_review.json): 82 manifest artifacts, 50 checkpoint envelopes, 25 source snapshots, 960 raw ranking metrics, and 415 aggregate metric/delta comparisons passed.
-- [Frozen sample and protocol](../../vidoseek_w7_exploratory24_proposal.json), query-list SHA-256 `95715b6a8c0c2d684b3a34e9130eca25ea641aafb62678f7daa764f0ab585f5b`.
+- [Frozen sample and protocol](vidoseek_w7_exploratory24_proposal.json), query-list SHA-256 `95715b6a8c0c2d684b3a34e9130eca25ea641aafb62678f7daa764f0ab585f5b`.
 - One local CPU worker/thread, one invocation, zero retries, Python 3.13.7; completed in 8,700.394 seconds under the 43,200-second cap. The result chart passed visual inspection.
 
 `phase1_decision=NOT_APPLICABLE_EXPLORATORY_SUBSET`. Frozen P1-02 remains `BLOCKED`. Full W7/W66, P1-03, training, and Modal/GPU remain closed.

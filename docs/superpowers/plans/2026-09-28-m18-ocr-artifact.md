@@ -92,9 +92,9 @@
 ### Task 4: Regression Testing & Documentation Update
 
 **Files:**
-- Modify: `docs/khuong-m1-checklist.md`
+- Modify: `docs/06_handover/khuong-m1-checklist.md`
 - Modify: `docs/06_handover/m1.4-m1.5-m1.6-audit-report.md` (or append M1.8 overview)
 
-- [ ] **Step 1: Update `docs/khuong-m1-checklist.md` reflecting M1.8 completion**
+- [ ] **Step 1: Update `docs/06_handover/khuong-m1-checklist.md` reflecting M1.8 completion**
 - [ ] **Step 2: Run full regression test suite (`python3 -m unittest discover -s tests -v`)**
 - [ ] **Step 3: Commit all documentation updates to Git**

@@ -31,9 +31,9 @@ The W7 run took 8,700.394 seconds. W66 has 66 profiles versus 7 in W7, and each 
 
 ## Guarded implementation
 
-- [Runner](../scripts/run_vidoseek_exploratory24_w66.py) validates Git provenance, source and evidence hashes, package versions, the frozen query list, the W66 grid, and the parent W7 continuation evidence.
-- [Closed config](../configs/vidoseek_w66_exploratory24_v1.json) pins the prepared checkout and keeps resource and execution authorization false.
-- [Focused tests](../tests/test_vidoseek_exploratory24_w66.py) cover exact synthetic W66 equivalence, immutable checkpoint reuse, tamper refusal, closed authorization, failure evidence, and no retry.
+- [Runner](../../../scripts/run_vidoseek_exploratory24_w66.py) validates Git provenance, source and evidence hashes, package versions, the frozen query list, the W66 grid, and the parent W7 continuation evidence.
+- [Closed config](../../../configs/vidoseek_w66_exploratory24_v1.json) pins the prepared checkout and keeps resource and execution authorization false.
+- [Focused tests](../../../tests/test_vidoseek_exploratory24_w66.py) cover exact synthetic W66 equivalence, immutable checkpoint reuse, tamper refusal, closed authorization, failure evidence, and no retry.
 - Read-only preflight validates IDs and metadata without loading relevance or running the W66 oracle.
 - The run command checks authorization before validation, input access, or any output write.
 

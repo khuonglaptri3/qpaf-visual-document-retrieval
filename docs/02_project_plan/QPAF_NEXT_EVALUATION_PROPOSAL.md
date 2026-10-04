@@ -1,8 +1,8 @@
 # Next evaluation after exploratory-12
 
-**HISTORICAL DECISION PLAN; STEPS A AND B ARE COMPLETE.** Prepared 2026-09-07 from the completed exploratory-12 comparison and [query 797 case study](QPAF_QUERY797_CASE_STUDY.md). The separately approved fixed-profile audit and exploratory-24 W7 study have since completed; no W66 or training execution is authorized.
+**HISTORICAL DECISION PLAN; STEPS A AND B ARE COMPLETE.** Prepared 2026-09-07 from the completed exploratory-12 comparison and [query 797 case study](../05_oracle_experiments/exploratory12/QPAF_QUERY797_CASE_STUDY.md). The separately approved fixed-profile audit and exploratory-24 W7 study have since completed; no W66 or training execution is authorized.
 
-Completion follow-up (2026-09-08): the separately approved step A audit completed and passed independent verification. The mean theoretical QPAF-over-QARF headroom is 0.091732, above the 0.03 review threshold; 216 of 1,142 queries retain positive headroom. Step B then completed on the frozen additional 24-query sample: measured QPAF-minus-QARF is 0.050011 with CI95 [0.008344, 0.101921] and top-5% gain share 0.666315. See [the fixed-profile result](05_oracle_experiments/fixed_profile/QPAF_FIXED_PROFILE_AUDIT_RESULTS.md) and [the exploratory-24 result](05_oracle_experiments/exploratory24/QPAF_EXPLORATORY24_RESULTS.md).
+Completion follow-up (2026-09-08): the separately approved step A audit completed and passed independent verification. The mean theoretical QPAF-over-QARF headroom is 0.091732, above the 0.03 review threshold; 216 of 1,142 queries retain positive headroom. Step B then completed on the frozen additional 24-query sample: measured QPAF-minus-QARF is 0.050011 with CI95 [0.008344, 0.101921] and top-5% gain share 0.666315. See [the fixed-profile result](../05_oracle_experiments/fixed_profile/QPAF_FIXED_PROFILE_AUDIT_RESULTS.md) and [the exploratory-24 result](../05_oracle_experiments/exploratory24/QPAF_EXPLORATORY24_RESULTS.md).
 
 ## Recommended next decision
 
@@ -33,7 +33,7 @@ For query `q`, the maximum possible improvement over QARF is at most `1 - nDCG@1
 
 ## Proposed step B: prepared after the audit warranted further exploration
 
-The bounded feasibility option completed as **24 additional queries**, sampled uniformly without replacement from the frozen 1,130-query remainder using `random.Random(20260820)`. The exact selection algorithm, IDs and query-list hash were frozen in `docs/vidoseek_w7_exploratory24_proposal.json` before any new page-level oracle outcome. The completed run and independent review are reported in `docs/05_oracle_experiments/exploratory24/QPAF_EXPLORATORY24_RESULTS.md`.
+The bounded feasibility option completed as **24 additional queries**, sampled uniformly without replacement from the frozen 1,130-query remainder using `random.Random(20260820)`. The exact selection algorithm, IDs and query-list hash were frozen in `docs/05_oracle_experiments/exploratory24/vidoseek_w7_exploratory24_proposal.json` before any new page-level oracle outcome. The completed run and independent review are reported in `docs/05_oracle_experiments/exploratory24/QPAF_EXPLORATORY24_RESULTS.md`.
 
 Preserve all pages, W7 profiles, normalization, metric definitions, tie-breaks and two-sweep search. Select Global over these same 24 queries and label that scope explicitly. Report the original 12 and new 24 separately; do not pool incompatible Global selections. Use the existing 10,000-resample query bootstrap, report every query, ceiling fractions, wins/ties/losses, and gain concentration. This remains exploratory and cannot pass Phase 1.
 

@@ -42,8 +42,8 @@ CLASSIFICATION = (
     "not_phase_gate"
 )
 CONFIG_PATH = "configs/vidoseek_w66_exploratory24_optimized_v1.json"
-PROPOSAL_PATH = "docs/vidoseek_w66_exploratory24_optimized_proposal.json"
-EXECUTION_REVIEW_PATH = "docs/QPAF_W66_EXPLORATORY24_OPTIMIZED_EXECUTION_REVIEW.md"
+PROPOSAL_PATH = "docs/05_oracle_experiments/w66/vidoseek_w66_exploratory24_optimized_proposal.json"
+EXECUTION_REVIEW_PATH = "docs/05_oracle_experiments/w66/QPAF_W66_EXPLORATORY24_OPTIMIZED_EXECUTION_REVIEW.md"
 CALIBRATION_REVIEW_PATH = (
     "artifacts/vidoseek_w66_resource_calibration_recovery_review/review.json"
 )

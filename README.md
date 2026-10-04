@@ -7,7 +7,7 @@ Bắt đầu tại [mục lục tài liệu](docs/README.md). Các tài liệu �
 - [Milestone hoàn chỉnh](docs/GUILDLINE_OVERVIEWS_PROPOSAL/POAI_Milestone_Group01_Hoan_Chinh.xlsx), sheet `Milestones`.
 - [Tổng quan phối hợp](docs/GUILDLINE_OVERVIEWS_PROPOSAL/overview.md) và [timeline tham chiếu](docs/GUILDLINE_OVERVIEWS_PROPOSAL/TIMELINE_fixed.md).
 - [Đề xuất nghiên cứu](docs/GUILDLINE_OVERVIEWS_PROPOSAL/DE_XUAT_NGHIEN_CUU_QPAF.md).
-- [Checklist của Khương](docs/khuong-m1-checklist.md), [báo cáo audit M1.4–M1.6](docs/06_handover/m1.4-m1.5-m1.6-audit-report.md) và [gói bằng chứng M1](evidence/M1_FINAL/README.md).
+- [Checklist của Khương](docs/06_handover/khuong-m1-checklist.md), [báo cáo audit M1.4–M1.6](docs/06_handover/m1.4-m1.5-m1.6-audit-report.md) và [gói bằng chứng M1](evidence/M1_FINAL/README.md).
 
 Các trạng thái trong tài liệu bàn giao là snapshot theo thời điểm của repo nguồn. Đối chiếu artifact, amendment và review trước khi cập nhật trạng thái milestone.
 
@@ -117,7 +117,7 @@ vào candidate union.
 
 Lưu ý kỹ thuật: `Stage2Retrieval.filter_and_combine()` của upstream mask score tensor tại
 chỗ. Vì vậy raw ColQwen2.5 score cho QPAF phải được snapshot trước lời gọi này; chi tiết
-hook nằm trong `docs/heaven_export_contract.md`.
+hook nằm trong `docs/04_data_protocol/heaven_export_contract.md`.
 
 Với benchmark thật, nên export thêm `official_query_metrics.parquet` trực tiếp từ
 ranking trên **toàn bộ corpus**, theo schema `query_metrics.parquet`. Raw score table
@@ -196,7 +196,7 @@ Các test kiểm tra metric tính tay, deterministic tie-break, candidate constr
 dùng relevance, QPAF oracle không thấp hơn QARF, Budget endpoints và sampling cố định.
 
 Ngưỡng đăng ký trước nằm tại `configs/preregistered.yaml`. Quy trình export score chính
-xác từ môi trường HEAVEN/GPU nằm tại `docs/heaven_export_contract.md`.
+xác từ môi trường HEAVEN/GPU nằm tại `docs/04_data_protocol/heaven_export_contract.md`.
 
 
 ---
@@ -217,16 +217,16 @@ mềm cục bộ. Chưa có bằng chứng tái lập Oracle trên corpus thật
 viên khác chạy lại M1.2 để nghiệm thu độc lập. **Chưa đóng toàn bộ M1/G1.**
 
 Đợt code và tài liệu này được bàn giao trên nhánh **`feature/m1-1-m1-2-handoff`**,
-đích tích hợp là `develop`. Xem [bảng đối chiếu tiêu chí và kết quả kiểm tra](docs/m1.1-m1.2-status.md).
+đích tích hợp là `develop`. Xem [bảng đối chiếu tiêu chí và kết quả kiểm tra](docs/06_handover/m1.1-m1.2-status.md).
 Thanh phụ trách Oracle; Phát phụ trách method core; Khương tiếp nhận code,
 config và bằng chứng vào inventory.
 
 ## Đọc trước khi bắt đầu
 
-1. [Trạng thái và đầu vào bàn giao M1](docs/m1-restart-handoff.md): phần đã
+1. [Trạng thái và đầu vào bàn giao M1](docs/06_handover/m1-restart-handoff.md): phần đã
    có, phần còn thiếu, người phụ trách và các quyết định cần chốt.
 2. [Đề xuất nghiên cứu](docs/GUILDLINE_OVERVIEWS_PROPOSAL/DE_XUAT_NGHIEN_CUU_QPAF.md) và
-   [tóm tắt định hướng](docs/Tom_tat_dinh_huong_QPAF.md): phương pháp,
+   [tóm tắt định hướng](docs/01_overview/Tom_tat_dinh_huong_QPAF.md): phương pháp,
    giả thuyết và phạm vi dataset.
 3. [Báo cáo Oracle đã nhận](results/m1.1/README.md): số liệu được cung cấp,
    file Word gốc và giới hạn kiểm chứng hiện tại.
@@ -256,13 +256,13 @@ cáo cũ làm nguồn tham chiếu. M1.2 đã có đặc tả và kiểm chứng
 hợp; bước tiếp theo là thành viên khác chạy lại và review phần lõi đã bàn giao.
 
 **Pipeline M1.1 mới:** đã có code và config chạy ViDoSeek trên Modal; xem
-[hướng dẫn chạy và lấy bằng chứng](docs/m1.1-modal-oracle.md). Đây là bản dựng
+[hướng dẫn chạy và lấy bằng chứng](docs/05_oracle_experiments/modal_oracle/m1.1-modal-oracle.md). Đây là bản dựng
 mới sau thử nghiệm khả thi, chưa phải artifact gốc hoặc run GPU đã được xác minh.
 Theo quyết định của người phụ trách, M1.1 được chấp nhận ở phạm vi báo cáo tính
 khả thi Oracle. Tái lập trên dữ liệu thật và kiểm chứng độc lập là công việc
 đánh giá tiếp theo, không được suy ra từ việc chấp nhận báo cáo.
 
-**Lõi M1.2 mới:** xem [đặc tả và lệnh kiểm chứng](docs/m1.2-method-core.md) cùng
+**Lõi M1.2 mới:** xem [đặc tả và lệnh kiểm chứng](docs/03_method/m1.2-method-core.md) cùng
 [bằng chứng phần mềm](results/m1.2/README.md). QARF/QPAF dùng chung feature và
 ngân sách tham số; khác mức điều kiện hóa query/page. Chưa có kết quả learned
 fusion trên corpus thật.
@@ -400,7 +400,7 @@ git switch -c feature/m1-1-oracle-review
 
 Đã có implementation mới trong `src/qpaf/m12/`, cấu hình chung
 `configs/m1.2/core.toml`, test `tests/test_m12*.py` và lệnh `scripts/verify_m12.py`.
-[Đặc tả v1](docs/m1.2-method-core.md) ghi rõ các quyết định mới về feature,
+[Đặc tả v1](docs/03_method/m1.2-method-core.md) ghi rõ các quyết định mới về feature,
 pooling và loss; [báo cáo kiểm chứng](results/m1.2/README.md) giữ log thực tế.
 
 **Mục tiêu:** có phần lõi feature → gate → trọng số → fusion score → loss
@@ -409,7 +409,7 @@ trainer/evaluator đầy đủ là công việc riêng ở M2.4.
 
 ### Bước 1 — Review đặc tả đã có
 
-Đọc `docs/m1.2-method-core.md` và đối chiếu:
+Đọc `docs/03_method/m1.2-method-core.md` và đối chiếu:
 
 - Đầu vào/đầu ra, shape, kiểu dữ liệu và cách nhóm query/page.
 - **Danh sách 13 features theo yêu cầu milestone**: tên, thứ tự, công thức,
@@ -452,7 +452,7 @@ là unit test, không dùng chúng làm kết quả nghiên cứu trên corpus t
 
 | Thành phần | Nơi lưu / yêu cầu |
 | --- | --- |
-| Đặc tả method core | `docs/m1.2-method-core.md` |
+| Đặc tả method core | `docs/03_method/m1.2-method-core.md` |
 | Code QARF/QPAF | `src/qpaf/`, có interface và hướng dẫn gọi rõ ràng |
 | Test và fixture | `tests/`; chạy được từ fresh checkout |
 | Config và dependency | `configs/`, khai báo phiên bản thư viện và lệnh cài cần thiết |
@@ -497,7 +497,7 @@ git switch -c feature/m1-2-method-core
   đồng bộ naming với Thanh và protocol với Phát. Phạm vi đo calibration
   cần chốt vì milestone có task M2.3 riêng; full OCR thuộc M2.6.
 
-Xem [checklist Khương](docs/khuong-m1-checklist.md) và
+Xem [checklist Khương](docs/06_handover/khuong-m1-checklist.md) và
 [tổng quan phối hợp](docs/GUILDLINE_OVERVIEWS_PROPOSAL/overview.md).
 
 ## Cấu trúc và kiểm chứng snapshot

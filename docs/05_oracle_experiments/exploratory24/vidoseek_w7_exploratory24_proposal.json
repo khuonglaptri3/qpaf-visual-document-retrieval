@@ -4,7 +4,7 @@
   "execution_authorized": false,
   "classification": "proposed_exploratory24_subset_not_full_w7_or_phase_gate",
   "selection": {
-    "rule": "Remove the 12 indices in docs/vidoseek_w7_exploratory12_proposal.json from candidate-audit order; Python 3.13 random.Random(20260820).sample(range(1130),24); sort sampled remainder positions; map to original audit indices",
+    "rule": "Remove the 12 indices in docs/05_oracle_experiments/exploratory12/vidoseek_w7_exploratory12_proposal.json from candidate-audit order; Python 3.13 random.Random(20260820).sample(range(1130),24); sort sampled remainder positions; map to original audit indices",
     "seed": 20260820,
     "population_queries": 1142,
     "excluded_original_queries": 12,

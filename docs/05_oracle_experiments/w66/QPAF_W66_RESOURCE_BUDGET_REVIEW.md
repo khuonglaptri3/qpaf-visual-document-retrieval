@@ -8,7 +8,7 @@ This review adds only this document and its [machine-readable evidence](QPAF_W66
 
 ## Evidence and measured W7 runtime
 
-The [parent W7 manifest](../runs/vidoseek_w7_exploratory24_v1/run_manifest.json) is COMPLETE; its SHA-256 is `0fcfbceee0e581240f241447abae1cb85cbb4f11cfee4f4d5343c2f81e06d9ee`. All 82 artifact hashes were rechecked, including the [timings](../runs/vidoseek_w7_exploratory24_v1/timings.json), per-query records and source snapshots. All 27 W66 source pins also match. The existing score file was hashed again: 248,445,561 bytes, SHA-256 `32b39da19e9507a0a5060157630cb40bf5c6bcf6464d88e4bb6136888473173b`.
+The [parent W7 manifest](../../../runs/vidoseek_w7_exploratory24_v1/run_manifest.json) is COMPLETE; its SHA-256 is `0fcfbceee0e581240f241447abae1cb85cbb4f11cfee4f4d5343c2f81e06d9ee`. All 82 artifact hashes were rechecked, including the [timings](../../../runs/vidoseek_w7_exploratory24_v1/timings.json), per-query records and source snapshots. All 27 W66 source pins also match. The existing score file was hashed again: 248,445,561 bytes, SHA-256 `32b39da19e9507a0a5060157630cb40bf5c6bcf6464d88e4bb6136888473173b`.
 
 | Recorded component | Seconds | Interpretation |
 | --- | ---: | --- |
@@ -18,13 +18,13 @@ The [parent W7 manifest](../runs/vidoseek_w7_exploratory24_v1/run_manifest.json)
 | Total minus the two timer sums | 8.729 | Unattributed remainder, not a separately measured bootstrap or I/O time |
 | Query timer minimum / median / maximum | 244.316 / 296.743 / 691.207 | About 4.1 to 11.5 minutes per query |
 
-The timer in [the shared W7 subset evaluator](../src/oracle_study/vidoseek_exploratory12.py) starts after frame filtering and validation and surrounds the yielded checkpoint operation. It therefore cannot separate QARF, QPAF, hashing and checkpoint writing. Input loading, frame preparation, summaries and process/finalization costs contribute to the remainder. There is no measured W7 peak process memory in these run artifacts, and the manifest does not identify the historical CPU model or thermal state.
+The timer in [the shared W7 subset evaluator](../../../src/oracle_study/vidoseek_exploratory12.py) starts after frame filtering and validation and surrounds the yielded checkpoint operation. It therefore cannot separate QARF, QPAF, hashing and checkpoint writing. Input loading, frame preparation, summaries and process/finalization costs contribute to the remainder. There is no measured W7 peak process memory in these run artifacts, and the manifest does not identify the historical CPU model or thermal state.
 
 From the unchanged search loop and the recorded accepted-update counts, 19 queries required one sweep and five required two: 29 query-sweeps total. The slowest query was audit index **1129**, with **zero accepted updates** and 691.207 seconds. Thus a slow query cannot be identified solely by whether its oracle improved the ranking. The JSON companion records all 24 timers and update counts.
 
 ## Workload and conditional scenarios
 
-In [the candidate oracle](../src/oracle_study/qpaf.py), each alternative profile calls `_single_item_ndcg`. That helper re-sorts the current ranking, allocates position/order arrays and constructs a Python list of approximately 5,384 score/ID pairs. If the position changes, it also recomputes gain/discount information and sorts the relevance array. The small three-channel dot product is not the dominant structural cost.
+In [the candidate oracle](../../../src/oracle_study/qpaf.py), each alternative profile calls `_single_item_ndcg`. That helper re-sorts the current ranking, allocates position/order arrays and constructs a Python list of approximately 5,384 score/ID pairs. If the position changes, it also recomputes gain/discount information and sorts the relevance array. The small three-channel dot product is not the dominant structural cost.
 
 For Q queries, N pages, P profiles and S sweeps, an approximate upper-order cost is `O(Q * S * (P-1) * N^2 * log(N))`; Python allocation and string comparisons affect constants. S is one or two, not a constant learned from W7. The implementation does not skip the candidate loop merely because nDCG is already at its ceiling.
 
@@ -36,7 +36,7 @@ For Q queries, N pages, P profiles and S sweeps, an approximate upper-order cost
 | QARF profile evaluations over 24 queries | 168 | 1,584 |
 | Candidate alternative evaluations | 936,990, inferred for the observed 29 sweeps | 8,400,600 to 16,801,200 for one to two sweeps on every query |
 
-The [W66 query-result function](../scripts/run_vidoseek_exploratory24_w66.py) recomputes the query-local profile search in its second pass; it does not reuse the first pass's profile metrics for that calculation. Its larger menu can alter initialization, accepted updates and second-sweep frequency. Finer-grid coordinate ascent does not guarantee a better QPAF local optimum, so runtime review must not assume improved retrieval outcomes.
+The [W66 query-result function](../../../scripts/run_vidoseek_exploratory24_w66.py) recomputes the query-local profile search in its second pass; it does not reuse the first pass's profile metrics for that calculation. Its larger menu can alter initialization, accepted updates and second-sweep frequency. Finer-grid coordinate ascent does not guarantee a better QPAF local optimum, so runtime review must not assume improved retrieval outcomes.
 
 For transparency, the following are conditional arithmetic scenarios, **not confidence intervals, measured W66 runtimes or safe limits**:
 
@@ -53,11 +53,11 @@ The first three apply `65/6` to search work, `66/7` to Global time and keep the 
 
 The read-only host snapshot at `2026-09-09T03:34:03.5591980+00:00` shows an Intel i7-10510U, four cores/eight logical processors, 15.81 GiB visible RAM, 3.80 GiB free physical memory and 22.61 GiB free space on C:. These are current conditions, not historical W7 measurements or reserved capacity. One search worker cannot claim an eightfold speedup from the logical processor count; this path spends substantial time in serial Python work.
 
-The worker [loads all 129,240 selected rows](../scripts/run_vidoseek_exploratory24_w66.py) into one pandas DataFrame before its two passes. It is query-sharded for checkpointing, but is not a streaming one-query input loader. Its call does not project columns: strings, branch ranks and stage1 scores are loaded alongside the three score channels and relevance.
+The worker [loads all 129,240 selected rows](../../../scripts/run_vidoseek_exploratory24_w66.py) into one pandas DataFrame before its two passes. It is query-sharded for checkpointing, but is not a streaming one-query input loader. Its call does not project columns: strings, branch ranks and stage1 scores are loaded alongside the three score channels and relevance.
 
 The three float64 channels alone occupy 2.958 MiB for the subset and 0.123 MiB for one query. These are lower bounds only. Arrow decoding/buffering, pandas string columns, frame copies, hash serialization, Python tuple lists and the parent/worker interpreters add memory. The Parquet file has 143 row groups; the first contains 43,080 rows and 3,467,417 uncompressed bytes. A filtered query read may decode more rows than it returns. This review read metadata only and did not measure the full loader's peak memory.
 
-The profile grid itself is only 66 x 3 x 8 = 1,584 numeric bytes. The shared [bootstrap implementation](../src/oracle_study/bootstrap.py) batches resampling in groups of 256 and retains 10,000 float estimates; it does not retain a full 10,000 x 24 sample matrix. Bootstrap is therefore unlikely to dominate memory, but its elapsed time must be recorded separately in calibration.
+The profile grid itself is only 66 x 3 x 8 = 1,584 numeric bytes. The shared [bootstrap implementation](../../../src/oracle_study/bootstrap.py) batches resampling in groups of 256 and retains 10,000 float estimates; it does not retain a full 10,000 x 24 sample matrix. Bootstrap is therefore unlikely to dominate memory, but its elapsed time must be recorded separately in calibration.
 
 **Thread-control gap:** in a fresh installed PyArrow 24.0.0 process, with OMP, MKL, OpenBLAS and NumExpr thread variables all set to 1, `cpu_count()` reports 1 while `io_thread_count()` reports 8. The W66 source has no explicit Arrow CPU/I/O pool setters. The installed `read_table` signature defaults to `use_threads=True` and `pre_buffer=True`; [Apache Arrow's documentation](https://arrow.apache.org/docs/python/generated/pyarrow.parquet.read_table.html) confirms threaded reads and background I/O buffering. Actual simultaneous thread usage during this workload remains unmeasured. A one-thread resource claim needs explicit pool limits and verification in the spawned worker.
 
@@ -69,7 +69,7 @@ The W66 design writes a run plan, 24 Global checkpoints, a shared Global selecti
 
 A query checkpoint is written only after the entire candidate search returns. There is no intra-query or per-sweep recovery point; interruption can lose hours of work on the current query under the scenarios above. The normal command rejects an existing output directory even if usable checkpoints exist. Recovery is a separate workflow requiring reviewed authorization, not a supported automatic restart.
 
-The [atomic writer](../src/oracle_study/vidoseek_p1_02r_sharded.py) flushes and fsyncs a temporary file, then creates a hard link to its final path. This avoids replacing a completed checkpoint. It still requires working filesystem/link support and must be tested in the intended output location. A crash can leave temporary files; inventory checks can refuse them, so cleanup must not be automatic or erase evidence.
+The [atomic writer](../../../src/oracle_study/vidoseek_p1_02r_sharded.py) flushes and fsyncs a temporary file, then creates a hard link to its final path. This avoids replacing a completed checkpoint. It still requires working filesystem/link support and must be tested in the intended output location. A crash can leave temporary files; inventory checks can refuse them, so cleanup must not be automatic or erase evidence.
 
 The parent waits for the worker with a timeout, then terminates it and, if needed, kills it after a five-second wait. This protects a surviving parent, but provides no independent watchdog if the parent or controlling session dies. Validation before spawning and final hashing use elapsed-time checks rather than continuous deadline supervision; termination also has grace time. There is no process-memory limit, memory sampler, per-query timeout or within-query heartbeat in the current runner. Timings are written to the final JSON only after completion; stdout progress is emitted after each query.
 

@@ -10,7 +10,7 @@ A full 1,142-query page-level run remains too expensive and is not authorized. T
 
 ## Frozen selection
 
-The selection algorithm was declared in `docs/QPAF_NEXT_EVALUATION_PROPOSAL.md` before the fixed-profile result was known:
+The selection algorithm was declared in `docs/02_project_plan/QPAF_NEXT_EVALUATION_PROPOSAL.md` before the fixed-profile result was known:
 
 1. Start with the frozen 1,142-query candidate-audit order.
 2. Remove the 12 exact audit indices used by the completed exploratory-12 study, leaving 1,130 queries in original order.
@@ -19,7 +19,7 @@ The selection algorithm was declared in `docs/QPAF_NEXT_EVALUATION_PROPOSAL.md` 
 
 The frozen audit indices are `[92, 141, 148, 398, 513, 640, 676, 686, 798, 803, 832, 842, 855, 889, 890, 892, 950, 992, 1034, 1067, 1082, 1084, 1093, 1129]`. The canonical query-list SHA-256 is `95715b6a8c0c2d684b3a34e9130eca25ea641aafb62678f7daa764f0ab585f5b`.
 
-[The frozen proposal](../../vidoseek_w7_exploratory24_proposal.json) publishes all 24 IDs. Query selection used no relevance values, retrieval scores, fixed-audit per-query metrics, or page-level QPAF outcomes. The sample is disjoint from the original 12 exact queries. It is representative by the declared uniform rule; it is not a failure-focused sample.
+[The frozen proposal](vidoseek_w7_exploratory24_proposal.json) publishes all 24 IDs. Query selection used no relevance values, retrieval scores, fixed-audit per-query metrics, or page-level QPAF outcomes. The sample is disjoint from the original 12 exact queries. It is representative by the declared uniform rule; it is not a failure-focused sample.
 
 ## Exact proposed contract
 

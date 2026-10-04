@@ -13,7 +13,7 @@ from scripts.run_vimdoc_archive_content_audit import (  # noqa: E402
     package_preflight,
 )
 
-MANIFEST_RELATIVE_PATH = "artifacts/vimdoc_archive_content_audit_v1_preparation/package_manifest.json"
+MANIFEST_RELATIVE_PATH = "docs/04_data_protocol/manifests/vimdoc_archive_content_audit_v1_preparation.json"
 
 
 def verify_manifest(root: Path) -> int:

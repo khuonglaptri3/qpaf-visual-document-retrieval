@@ -4,7 +4,7 @@
 
 **Goal:** Xây dựng gói công cụ kiểm toán dữ liệu ViDoSeek (`CPU-only audit package`), sinh/kiểm tra phân chia split tất định không nhãn, và cơ chế bảo vệ ranh giới an toàn (`Closed Boundary Guard`) phục vụ Milestone M1.3.
 
-**Architecture:** Tạo phân hệ `src/qpaf/m13/` gồm 4 module độc lập: `boundary.py` (khóa thực thi), `vidoseek.py` (phân tích annotations và qrels), `splits.py` (chia tập train/val/test tất định bằng SHA256), `corpus.py` (kiểm kê tệp và fixture giả lập), cùng công cụ dòng lệnh `scripts/audit_primary_corpus.py` và tài liệu chuẩn `docs/m1.3-primary-corpus.md`.
+**Architecture:** Tạo phân hệ `src/qpaf/m13/` gồm 4 module độc lập: `boundary.py` (khóa thực thi), `vidoseek.py` (phân tích annotations và qrels), `splits.py` (chia tập train/val/test tất định bằng SHA256), `corpus.py` (kiểm kê tệp và fixture giả lập), cùng công cụ dòng lệnh `scripts/audit_primary_corpus.py` và tài liệu chuẩn `docs/04_data_protocol/m1.3-primary-corpus.md`.
 
 **Tech Stack:** Python 3.11, standard library (`hashlib`, `json`, `pathlib`, `zipfile`, `unittest`), không đòi hỏi thư viện GPU hay tài nguyên nặng.
 
@@ -114,9 +114,9 @@
 ### Task 6: Tài liệu Hướng dẫn & Báo cáo Nghiệm thu M1.3
 
 **Files:**
-- Create: `docs/m1.3-primary-corpus.md`
-- Modify: `docs/m1.1-m1.2-status.md` (hoặc bổ sung phần M1.3)
+- Create: `docs/04_data_protocol/m1.3-primary-corpus.md`
+- Modify: `docs/06_handover/m1.1-m1.2-status.md` (hoặc bổ sung phần M1.3)
 
-- [x] **Step 1:** Viết tài liệu `docs/m1.3-primary-corpus.md` trình bày chi tiết mục đích, cách cấu hình, cách chạy CLI, các tiêu chí nghiệm thu và ranh giới nghiên cứu (tương tự như `docs/m1.1-modal-oracle.md` và `docs/m1.2-method-core.md`).
+- [x] **Step 1:** Viết tài liệu `docs/04_data_protocol/m1.3-primary-corpus.md` trình bày chi tiết mục đích, cách cấu hình, cách chạy CLI, các tiêu chí nghiệm thu và ranh giới nghiên cứu (tương tự như `docs/05_oracle_experiments/modal_oracle/m1.1-modal-oracle.md` và `docs/03_method/m1.2-method-core.md`).
 - [x] **Step 2:** Chạy toàn bộ test suite của dự án (`python3 -m unittest discover -s tests -v`) để đảm bảo không có bất kỳ regression nào.
 - [x] **Step 3:** Commit tài liệu: `git commit -m "docs(m1.3): add M1.3 primary corpus audit documentation"`.

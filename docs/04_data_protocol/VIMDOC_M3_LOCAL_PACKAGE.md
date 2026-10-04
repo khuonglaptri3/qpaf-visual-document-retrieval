@@ -20,7 +20,7 @@ Receipt local của lần materialization cũ ghi nhận ViMDoc revision `25657f
 
 Ba vấn đề dữ liệu không được giải quyết bằng suy đoán:
 
-1. OCR/page-identity semantics đã được đóng băng trong `configs/vimdoc_ocr_page_identity_v1.json` và giải thích tại `docs/VIMDOC_OCR_PAGE_IDENTITY_SPEC.md`. Dùng HEAVEN-aligned Tesseract plain text chung cho BM25/BGE-M3, không gọi là Markdown; engine/options/version/schema/hash/failure policy đã rõ. Chưa build runtime hoặc tạo text payload.
+1. OCR/page-identity semantics đã được đóng băng trong `configs/vimdoc_ocr_page_identity_v1.json` và giải thích tại `docs/04_data_protocol/VIMDOC_OCR_PAGE_IDENTITY_SPEC.md`. Dùng HEAVEN-aligned Tesseract plain text chung cho BM25/BGE-M3, không gọi là Markdown; engine/options/version/schema/hash/failure policy đã rõ. Chưa build runtime hoặc tạo text payload.
 2. Có 6.267 asset dư so với số page stem duy nhất. Policy đã chốt: cùng `page_id` và cùng content hash thì collapse thành aliases với canonical UTF-8-smallest path; khác content thì `BLOCK`, không ưu tiên extension/rename/drop. Live archive chưa được content-hash audit nên chưa biết collision thuộc loại nào.
 3. Sample 2.000 query chưa có train/validation split riêng. Package đề xuất 1.600/400, sắp xếp SHA-256 của `vimdoc_m3_local_v1:dev_split:20260820:<query_id>` rồi query ID. Exact IDs tái tạo được bằng lệnh ở dưới. Split này **chưa được áp dụng để train**, không đọc nhãn, không đổi theo seed hoặc method.
 
@@ -67,4 +67,4 @@ C:\Python313\python.exe -m pytest tests/test_vimdoc_m3_preparation.py tests/test
 
 Preflight exit0 nghĩa là **local package integrity PASS**, luôn kèm `ready_for_execution=false` và `m3_execution_readiness=BLOCKED`. Source/config drift làm exit2. Không có cờ `--train`, `--extract`, `--modal`, `--gpu` hay `--approve`. Test fixtures chỉ dùng synthetic data/temp directories; script preflight không ghi file. Đổi file nằm trong manifest cần version/review snapshot mới, không refresh checksum để che drift.
 
-Bước OCR/page-identity specification và local preparation của content-audit package đã hoàn tất; xem `docs/VIMDOC_ARCHIVE_CONTENT_AUDIT_EXECUTION_REVIEW.md`. Content-hash audit archive thật vẫn chưa chạy và cần approval riêng. Sau audit PASS mới chuẩn bị OCR runtime/resource contract. Song song trong phạm vi local có thể review split/baseline và hoàn thiện adapter/runner contract tests. Hoàn tất bản chuẩn bị hiện tại không phải lý do kết luận QPAF đã cải thiện.
+Bước OCR/page-identity specification và local preparation của content-audit package đã hoàn tất; xem `docs/04_data_protocol/VIMDOC_ARCHIVE_CONTENT_AUDIT_EXECUTION_REVIEW.md`. Content-hash audit archive thật vẫn chưa chạy và cần approval riêng. Sau audit PASS mới chuẩn bị OCR runtime/resource contract. Song song trong phạm vi local có thể review split/baseline và hoàn thiện adapter/runner contract tests. Hoàn tất bản chuẩn bị hiện tại không phải lý do kết luận QPAF đã cải thiện.

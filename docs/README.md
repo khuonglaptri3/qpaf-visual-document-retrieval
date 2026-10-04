@@ -6,7 +6,7 @@ Thư mục này được phân nhóm theo mục đích đọc. Dùng mục lục
 
 1. [Milestone hoàn chỉnh](GUILDLINE_OVERVIEWS_PROPOSAL/POAI_Milestone_Group01_Hoan_Chinh.xlsx), sheet `Milestones`: nhiệm vụ, người phụ trách, deliverable và gate.
 2. [Tổng quan dự án](01_overview/HUONG_DAN_HIEU_DU_AN_QPAF.md): thuật ngữ và ý nghĩa các giai đoạn.
-3. [Checklist bàn giao của Khương](khuong-m1-checklist.md) và [báo cáo audit M1.4–M1.6](06_handover/m1.4-m1.5-m1.6-audit-report.md): tiến độ theo bằng chứng.
+3. [Checklist bàn giao của Khương](06_handover/khuong-m1-checklist.md) và [báo cáo audit M1.4–M1.6](06_handover/m1.4-m1.5-m1.6-audit-report.md): tiến độ theo bằng chứng.
 4. [Hồ sơ G1](../evidence/M1_FINAL/06_G1/README.md), [registry/QA](../evidence/M1_FINAL/04_experiment_registry/README.md) và [báo cáo R1](../evidence/M1_FINAL/07_R1/Sprint_1_Progress_Report.md): trạng thái nghiệm thu.
 
 ## Các nhóm tài liệu
@@ -34,7 +34,8 @@ Workbook và timeline là nguồn kế hoạch. [Tasks.md](../Tasks.md), [PROJEC
 ## Quy tắc tổ chức và truy nguồn
 
 - Tài liệu mới đặt vào nhóm phù hợp; cập nhật mục lục nhóm và [catalog.json](catalog.json).
-- Các tài liệu được script/config/manifest tham chiếu giữ đường dẫn cố định. Khi sửa liên kết điều hướng, catalog ghi hash hiện tại; manifest và receipt lịch sử giữ nguyên theo revision của chúng.
+- Gốc `docs` chỉ giữ `README.md` và `catalog.json`; tài liệu và proposal nằm trong folder theo chủ đề.
+- Script/config hiện tại dùng đường dẫn trong folder mới. Catalog ghi vị trí và hash hiện tại; manifest, receipt và source snapshot lịch sử giữ nguyên theo revision của chúng.
 - Mỗi tài liệu có một vị trí đọc chính trong catalog. Các trang chuyển tiếp ở vị trí cũ đã được xóa; liên kết trong tài liệu hiện tại trỏ trực tiếp tới vị trí mới.
 - Bộ workbook/Word/timeline gốc và các spec/plan đã lưu giữ nguyên vị trí.
 - [catalog.json](catalog.json) ghi vị trí cũ/mới, nhóm và SHA-256 của 63 tài liệu nguồn tại lần sắp xếp ngày 04/10/2026; đây là inventory tổ chức tài liệu, không phải nghiệm thu nghiên cứu.

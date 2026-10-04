@@ -94,9 +94,9 @@ QPAF hạ điểm distractor đứng đầu từ `1.000000` xuống `0.926680`, 
 ## 7. Nguồn số liệu trong project
 
 - [Định nghĩa chính xác của W7 và W66](src/oracle_study/profiles.py)
-- [Full fixed-profile W7 audit](docs/QPAF_FIXED_PROFILE_AUDIT_RESULTS.md)
-- [Exploratory-24 W7 results](docs/QPAF_EXPLORATORY24_RESULTS.md) và [independent integrity review](artifacts/vidoseek_exploratory24_review/result_integrity_review.json)
-- [Exploratory-24 W66 results](docs/QPAF_W66_EXPLORATORY24_RESULTS.md) và [independent integrity review](artifacts/vidoseek_w66_exploratory24_optimized_review/result_integrity_review.json)
-- [Exploratory-12 results](docs/QPAF_EXPLORATORY12_RESULTS.md)
-- [Query 797 case study](docs/QPAF_QUERY797_CASE_STUDY.md) và [case reconstruction review](artifacts/vidoseek_exploratory12_case797_review/case_review.json)
+- [Full fixed-profile W7 audit](../docs/05_oracle_experiments/fixed_profile/QPAF_FIXED_PROFILE_AUDIT_RESULTS.md)
+- [Exploratory-24 W7 results](../docs/05_oracle_experiments/exploratory24/QPAF_EXPLORATORY24_RESULTS.md) và [independent integrity review](artifacts/vidoseek_exploratory24_review/result_integrity_review.json)
+- [Exploratory-24 W66 results](../docs/05_oracle_experiments/w66/QPAF_W66_EXPLORATORY24_RESULTS.md) và [independent integrity review](artifacts/vidoseek_w66_exploratory24_optimized_review/result_integrity_review.json)
+- [Exploratory-12 results](../docs/05_oracle_experiments/exploratory12/QPAF_EXPLORATORY12_RESULTS.md)
+- [Query 797 case study](../docs/05_oracle_experiments/exploratory12/QPAF_QUERY797_CASE_STUDY.md) và [case reconstruction review](artifacts/vidoseek_exploratory12_case797_review/case_review.json)
 - [Current project context and claim boundaries](PROJECT_CONTEXT.md), [formal task DAG](Tasks.md), [scientific contract](Context.md)

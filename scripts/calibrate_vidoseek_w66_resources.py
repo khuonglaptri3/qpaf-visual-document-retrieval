@@ -38,11 +38,11 @@ else:
 PROTOCOL_ID = "vidoseek_w66_resource_calibration_v1"
 CLASSIFICATION = "synthetic_w66_engineering_calibration_not_retrieval_result"
 CONFIG_PATH = "configs/vidoseek_w66_resource_calibration_v1.json"
-PROPOSAL_PATH = "docs/vidoseek_w66_resource_calibration_proposal.json"
-RESOURCE_REVIEW_JSON = "docs/QPAF_W66_RESOURCE_BUDGET_REVIEW.json"
-RESOURCE_REVIEW_MD = "docs/QPAF_W66_RESOURCE_BUDGET_REVIEW.md"
-EXECUTION_REVIEW_PATH = "docs/QPAF_W66_RESOURCE_CALIBRATION_EXECUTION_REVIEW.md"
-PARENT_W7_PROPOSAL_PATH = "docs/vidoseek_w7_exploratory24_proposal.json"
+PROPOSAL_PATH = "docs/05_oracle_experiments/w66/vidoseek_w66_resource_calibration_proposal.json"
+RESOURCE_REVIEW_JSON = "docs/05_oracle_experiments/w66/QPAF_W66_RESOURCE_BUDGET_REVIEW.json"
+RESOURCE_REVIEW_MD = "docs/05_oracle_experiments/w66/QPAF_W66_RESOURCE_BUDGET_REVIEW.md"
+EXECUTION_REVIEW_PATH = "docs/05_oracle_experiments/w66/QPAF_W66_RESOURCE_CALIBRATION_EXECUTION_REVIEW.md"
+PARENT_W7_PROPOSAL_PATH = "docs/05_oracle_experiments/exploratory24/vidoseek_w7_exploratory24_proposal.json"
 PARENT_W7_REVIEW_PATH = (
     "artifacts/vidoseek_exploratory24_review/result_integrity_review.json"
 )

@@ -48,7 +48,7 @@ Consumes: an existing directory via `--root`. Produces: create-once inventory CS
 
 ## Task 3: Handover preparation and real snapshot
 
-Files: directory READMEs, `docs/khuong-m1-checklist.md`, `evidence/M1_FINAL/`, updated README and a PR template.
+Files: directory READMEs, `docs/06_handover/khuong-m1-checklist.md`, `evidence/M1_FINAL/`, updated README and a PR template.
 Consumes: the verified CLI and timeline. Produces: actual M1.4 evidence, M1.6 input templates, M1.8 draft policies and explicit dependencies.
 
 - [x] Add dated task tracking, ownership notes and corpus/alias/duplicate CSV schemas.

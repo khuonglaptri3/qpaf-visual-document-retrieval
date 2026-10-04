@@ -3,7 +3,7 @@
   "organized_at": "2026-10-04",
   "scope": "documentation_inventory_not_research_acceptance",
   "source_documents": 63,
-  "moved_documents": 18,
+  "moved_documents": 48,
   "path_bound_documents": 41,
   "groups": [
     {
@@ -46,7 +46,8 @@
       "path_bound_evidence": true,
       "legacy_alias": false,
       "source_sha256": "b3fb003c7158b1b7ca239c64b3e62a842cab12d0c5239d7ab8b1df5cfb4d177c",
-      "sha256": "b3fb003c7158b1b7ca239c64b3e62a842cab12d0c5239d7ab8b1df5cfb4d177c"
+      "sha256": "7e5c90b4f749bcf29cff52322bb66f4723e078af74293d7b486fc6063f203b44",
+      "navigation_links_updated": true
     },
     {
       "title": "Nghiên Cứu Kỹ Thuật QPAF.docx",
@@ -66,7 +67,8 @@
       "path_bound_evidence": true,
       "legacy_alias": false,
       "source_sha256": "9a62aca72eb47a37528ff0993af92472270d0a6c9fa8d1c07a155e497da7f4c3",
-      "sha256": "9a62aca72eb47a37528ff0993af92472270d0a6c9fa8d1c07a155e497da7f4c3"
+      "sha256": "f8224e7c712c2bce77e5f58aed8bc3c5d13ff98ed8f382f722238fa831eb4d71",
+      "navigation_links_updated": true
     },
     {
       "title": "POAI_Milestone_Group01_Hoan_Chinh.xlsx",
@@ -92,11 +94,14 @@
       "title": "HEAVEN cloud export contract",
       "category": "04_data_protocol",
       "original_path": "docs/heaven_export_contract.md",
-      "current_path": "docs/heaven_export_contract.md",
+      "current_path": "docs/04_data_protocol/heaven_export_contract.md",
       "path_bound_evidence": true,
       "legacy_alias": false,
       "source_sha256": "0fbaedb292c527e882760861327a523ceb7f84547639da063ba5c34167fa91a5",
-      "sha256": "0fbaedb292c527e882760861327a523ceb7f84547639da063ba5c34167fa91a5"
+      "sha256": "0fbaedb292c527e882760861327a523ceb7f84547639da063ba5c34167fa91a5",
+      "previous_path": "docs/heaven_export_contract.md",
+      "original_path_removed": true,
+      "relocated_at": "2026-10-04"
     },
     {
       "title": "Hướng dẫn hiểu dự án QPAF và các giai đoạn thực nghiệm",
@@ -114,72 +119,99 @@
       "title": "Repository bootstrap decisions and verification",
       "category": "06_handover",
       "original_path": "docs/implementation-notes.md",
-      "current_path": "docs/implementation-notes.md",
+      "current_path": "docs/06_handover/implementation-notes.md",
       "path_bound_evidence": true,
       "legacy_alias": false,
       "source_sha256": "11917385bf86c1931b4bb702ef4a8fb98a0b3ddc87c964a9c89a915dc1171474",
-      "sha256": "11917385bf86c1931b4bb702ef4a8fb98a0b3ddc87c964a9c89a915dc1171474"
+      "sha256": "fd8df39e236dacebe3109d96f5013b9771a48dc7d4400ba800dd94ea7f6b6a0d",
+      "previous_path": "docs/implementation-notes.md",
+      "original_path_removed": true,
+      "relocated_at": "2026-10-04",
+      "navigation_links_updated": true
     },
     {
       "title": "Khương — làm lại M1 theo lịch 23–27/09/2026",
       "category": "06_handover",
       "original_path": "docs/khuong-m1-checklist.md",
-      "current_path": "docs/khuong-m1-checklist.md",
+      "current_path": "docs/06_handover/khuong-m1-checklist.md",
       "path_bound_evidence": true,
       "legacy_alias": false,
       "source_sha256": "a5f1c6c001bcb7370d4949b62eab330f336e81afed43d0170a52b9e319f32988",
-      "sha256": "34a111f4c2aa72ef55ab116f5bc1214f5c2508b33e00d53670bf1fcac57425dc",
-      "navigation_links_updated": true
+      "sha256": "821196ed84870dcfc8adeac2f5704f4422c2acdcef6a16d57c97ea9daa909e75",
+      "navigation_links_updated": true,
+      "previous_path": "docs/khuong-m1-checklist.md",
+      "original_path_removed": true,
+      "relocated_at": "2026-10-04"
     },
     {
       "title": "Bàn giao M1.1/M1.2 — cập nhật ngày 26/09/2026",
       "category": "06_handover",
       "original_path": "docs/m1-restart-handoff.md",
-      "current_path": "docs/m1-restart-handoff.md",
+      "current_path": "docs/06_handover/m1-restart-handoff.md",
       "path_bound_evidence": true,
       "legacy_alias": false,
       "source_sha256": "e8d8de7b7424ccfcd3381f73117e11f4bfc9678eec913deb0a36772844aea90f",
-      "sha256": "e8d8de7b7424ccfcd3381f73117e11f4bfc9678eec913deb0a36772844aea90f"
+      "sha256": "abea5319a0b99bffc1befe8bca156921a150730b8ae45b749d98b006f28b9a11",
+      "previous_path": "docs/m1-restart-handoff.md",
+      "original_path_removed": true,
+      "relocated_at": "2026-10-04",
+      "navigation_links_updated": true
     },
     {
       "title": "Kiểm tra hoàn thành M1.1 và M1.2 — 26/09/2026",
       "category": "06_handover",
       "original_path": "docs/m1.1-m1.2-status.md",
-      "current_path": "docs/m1.1-m1.2-status.md",
+      "current_path": "docs/06_handover/m1.1-m1.2-status.md",
       "path_bound_evidence": true,
       "legacy_alias": false,
       "source_sha256": "ae3e40a06eae62e5b6c8d3b38073e5171023618eb3cb6c10f5750156bda855fb",
-      "sha256": "ae3e40a06eae62e5b6c8d3b38073e5171023618eb3cb6c10f5750156bda855fb"
+      "sha256": "6fef221010dc97653bddb4e73e64c08a531de557c9b3b19faf2691fb950c53ee",
+      "previous_path": "docs/m1.1-m1.2-status.md",
+      "original_path_removed": true,
+      "relocated_at": "2026-10-04",
+      "navigation_links_updated": true
     },
     {
       "title": "M1.1 — chạy Oracle có thể tái lập trên Modal",
       "category": "05_oracle_experiments",
       "original_path": "docs/m1.1-modal-oracle.md",
-      "current_path": "docs/m1.1-modal-oracle.md",
+      "current_path": "docs/05_oracle_experiments/modal_oracle/m1.1-modal-oracle.md",
       "path_bound_evidence": true,
       "legacy_alias": false,
       "source_sha256": "92ccb2cd4378464ef1ac8307a60d3acee8a9d8dd7fdc2b4199cf3aae07f5dc91",
-      "sha256": "92ccb2cd4378464ef1ac8307a60d3acee8a9d8dd7fdc2b4199cf3aae07f5dc91"
+      "sha256": "0c6cbd664f01f841fbed0f3643b1b56478168ae7c274d23cfdd4325a1da7579f",
+      "previous_path": "docs/m1.1-modal-oracle.md",
+      "original_path_removed": true,
+      "relocated_at": "2026-10-04",
+      "navigation_links_updated": true
     },
     {
       "title": "M1.2 — lõi learned QARF/QPAF",
       "category": "03_method",
       "original_path": "docs/m1.2-method-core.md",
-      "current_path": "docs/m1.2-method-core.md",
+      "current_path": "docs/03_method/m1.2-method-core.md",
       "path_bound_evidence": true,
       "legacy_alias": false,
       "source_sha256": "1ea15699098308a592845faba23ffe83b8208a3385158ba51abdfaf909c8c941",
-      "sha256": "1ea15699098308a592845faba23ffe83b8208a3385158ba51abdfaf909c8c941"
+      "sha256": "fd6499483081f3b0b982edb8f00e05df4b2e3644888dbe6ee480f2a97cd670b6",
+      "previous_path": "docs/m1.2-method-core.md",
+      "original_path_removed": true,
+      "relocated_at": "2026-10-04",
+      "navigation_links_updated": true
     },
     {
       "title": "M1.3 — kiểm kê và đóng băng ranh giới primary corpus (ViDoSeek)",
       "category": "04_data_protocol",
       "original_path": "docs/m1.3-primary-corpus.md",
-      "current_path": "docs/m1.3-primary-corpus.md",
+      "current_path": "docs/04_data_protocol/m1.3-primary-corpus.md",
       "path_bound_evidence": true,
       "legacy_alias": false,
       "source_sha256": "72e9080e00c99dd57013afe45cb6d8848eca7f07c761437ade2ca765b1886712",
-      "sha256": "72e9080e00c99dd57013afe45cb6d8848eca7f07c761437ade2ca765b1886712"
+      "sha256": "afca1c119bb881a5e38733eea16cb0caa8d1cfda07b908952c4e21a0f4a69641",
+      "previous_path": "docs/m1.3-primary-corpus.md",
+      "original_path_removed": true,
+      "relocated_at": "2026-10-04",
+      "navigation_links_updated": true
     },
     {
       "title": "BÁO CÁO TOÀN DIỆN KIỂM KÊ VÀ KIỂM TOÁN DỮ LIỆU: M1.4, M1.5, M1.6",
@@ -196,11 +228,14 @@
       "title": "Kế hoạch Oracle Study cho QPAF và Budget-Aware Adaptive HEAVEN",
       "category": "02_project_plan",
       "original_path": "docs/oracle_study_plan_vi.md",
-      "current_path": "docs/oracle_study_plan_vi.md",
+      "current_path": "docs/02_project_plan/oracle_study_plan_vi.md",
       "path_bound_evidence": true,
       "legacy_alias": false,
       "source_sha256": "07f84511fa082b8063db663f88c7cd83ced60bda6d468be2a531d1dfcdedb5b2",
-      "sha256": "07f84511fa082b8063db663f88c7cd83ced60bda6d468be2a531d1dfcdedb5b2"
+      "sha256": "07f84511fa082b8063db663f88c7cd83ced60bda6d468be2a531d1dfcdedb5b2",
+      "previous_path": "docs/oracle_study_plan_vi.md",
+      "original_path_removed": true,
+      "relocated_at": "2026-10-04"
     },
     {
       "title": "Comprehensive Review and Technical Summary: Query-Page-Adaptive Fusion (QPAF)",
@@ -232,8 +267,9 @@
       "path_bound_evidence": false,
       "legacy_alias": false,
       "source_sha256": "3246351c4827d49981c6fc526ae94ea7969d9bcea1c7b0c992042362589620a8",
-      "sha256": "da073a3bb7c41a0eb33da58a19f45b39f5d5a6b166c8fcedf6284f8efac6369b",
-      "original_path_removed": true
+      "sha256": "d1b2623a5101400cb3b14274f3b8b89528fe7d2a582e643be8b7a15d16be1c1c",
+      "original_path_removed": true,
+      "navigation_links_updated": true
     },
     {
       "title": "First QPAF oracle comparison: prepared execution review",
@@ -243,8 +279,9 @@
       "path_bound_evidence": false,
       "legacy_alias": false,
       "source_sha256": "9c0907b64b99efde8a1dff0374301d80d9ccb460cfaf99a2e41bcd61bb25720f",
-      "sha256": "f22ab807d665c7a7aa23a51c81dc6abbf0c6d6b46c24f2ebac984fe42ed38b58",
-      "original_path_removed": true
+      "sha256": "01f7ae06ff8247feae4b390e4ead4b6c73a1bd1ae483b968190d526f036ea03f",
+      "original_path_removed": true,
+      "navigation_links_updated": true
     },
     {
       "title": "Exploratory-12 interruption handoff",
@@ -265,19 +302,23 @@
       "path_bound_evidence": false,
       "legacy_alias": false,
       "source_sha256": "056463716c43ad3610d020b0fcea5100630729b586ca2c413ae7be68c435763e",
-      "sha256": "25da2828fcf5bdc9b8e47a014788ee873bcee6de492d22c81a3dc69ccf374b60",
-      "original_path_removed": true
+      "sha256": "30521e33e7c8ca01e0c01a6723c1d7a99ac4c3ebc2fdd9a746805ad3c26763ac",
+      "original_path_removed": true,
+      "navigation_links_updated": true
     },
     {
       "title": "Exploratory-12 recovery run",
       "category": "05_oracle_experiments",
       "original_path": "docs/QPAF_EXPLORATORY12_RECOVERY_RUN_STATUS.md",
-      "current_path": "docs/QPAF_EXPLORATORY12_RECOVERY_RUN_STATUS.md",
+      "current_path": "docs/05_oracle_experiments/exploratory12/QPAF_EXPLORATORY12_RECOVERY_RUN_STATUS.md",
       "path_bound_evidence": true,
       "legacy_alias": false,
       "source_sha256": "c8d8efab734b616461e5202cbefd82ade747c19b1838748ded119321be796573",
-      "sha256": "138ef27ae45fe8f5976bfb1875f85b3e3c41888ea96e83dba03bc8b4e6021649",
-      "navigation_links_updated": true
+      "sha256": "c37e3fdd595cd79ce38a47cbff969b882c45beb18f2b2b2acc85d69cd27b0dfc",
+      "navigation_links_updated": true,
+      "previous_path": "docs/QPAF_EXPLORATORY12_RECOVERY_RUN_STATUS.md",
+      "original_path_removed": true,
+      "relocated_at": "2026-10-04"
     },
     {
       "title": "ViDoSeek exploratory-12: verified Global / QARF / QPAF comparison",
@@ -294,12 +335,15 @@
       "title": "Exploratory-12 live run",
       "category": "05_oracle_experiments",
       "original_path": "docs/QPAF_EXPLORATORY12_RUN_STATUS.md",
-      "current_path": "docs/QPAF_EXPLORATORY12_RUN_STATUS.md",
+      "current_path": "docs/05_oracle_experiments/exploratory12/QPAF_EXPLORATORY12_RUN_STATUS.md",
       "path_bound_evidence": true,
       "legacy_alias": false,
       "source_sha256": "c38cca9ed7db334a46be7917d2c5a0385c246c4d0e8094fd518fe9c1b802f33e",
-      "sha256": "29b86d4d3efea70ac643611ef95cc27bf5c5711134de9119d5aa8b9141e5611e",
-      "navigation_links_updated": true
+      "sha256": "5cd8c6e0964c3ceae59ec1aea62c7903215ac82842fe6d0140ec4b9a18497e67",
+      "navigation_links_updated": true,
+      "previous_path": "docs/QPAF_EXPLORATORY12_RUN_STATUS.md",
+      "original_path_removed": true,
+      "relocated_at": "2026-10-04"
     },
     {
       "title": "Exploratory-24 page-level QPAF feasibility: execution review",
@@ -309,8 +353,9 @@
       "path_bound_evidence": false,
       "legacy_alias": false,
       "source_sha256": "28eba13d0522e2a8bb90d9fe05f20fc9437a6c0659b9faa048650004a1e396ef",
-      "sha256": "6cc1e55ff1b48024c54a5f5437de10bef18af5a26e1603c6919f6c8d01d4840e",
-      "original_path_removed": true
+      "sha256": "8d7c103c9887980449645cd9af0ae44f79aef6d6b46d39b011cb5ec52ee93d4a",
+      "original_path_removed": true,
+      "navigation_links_updated": true
     },
     {
       "title": "ViDoSeek exploratory-24: verified Global / QARF / QPAF comparison",
@@ -320,19 +365,23 @@
       "path_bound_evidence": false,
       "legacy_alias": false,
       "source_sha256": "f6d86cfba35a28e211632d0b209a66bef8d36f2cafdd505cb9a556212b20e4f3",
-      "sha256": "bc720e9550837cde926479baf71dfc3890caa56ab88ef81ff241b2642378e915",
-      "original_path_removed": true
+      "sha256": "2f6a16ef91b267b46f793ff005e87a1c313cf5e65b9f018aafb4dafa4e46b6e0",
+      "original_path_removed": true,
+      "navigation_links_updated": true
     },
     {
       "title": "Fixed-profile discovery audit: execution review",
       "category": "05_oracle_experiments",
       "original_path": "docs/QPAF_FIXED_PROFILE_AUDIT_EXECUTION_REVIEW.md",
-      "current_path": "docs/QPAF_FIXED_PROFILE_AUDIT_EXECUTION_REVIEW.md",
+      "current_path": "docs/05_oracle_experiments/fixed_profile/QPAF_FIXED_PROFILE_AUDIT_EXECUTION_REVIEW.md",
       "path_bound_evidence": true,
       "legacy_alias": false,
       "source_sha256": "25f02addd8fca6b6dc741056d07edfcf7e4de4ceccac7b7cb1176f59fa030999",
-      "sha256": "66cde2ca5dd6d79dbdf400608fa679302b5c00d8520d196858b8612083bd855c",
-      "navigation_links_updated": true
+      "sha256": "a5a1c13f42b4a815ff892a70a3d8251d5759545bb3fa2ccfcab574032a33d396",
+      "navigation_links_updated": true,
+      "previous_path": "docs/QPAF_FIXED_PROFILE_AUDIT_EXECUTION_REVIEW.md",
+      "original_path_removed": true,
+      "relocated_at": "2026-10-04"
     },
     {
       "title": "ViDoSeek fixed-profile discovery audit: verified result",
@@ -349,12 +398,15 @@
       "title": "Next evaluation after exploratory-12",
       "category": "02_project_plan",
       "original_path": "docs/QPAF_NEXT_EVALUATION_PROPOSAL.md",
-      "current_path": "docs/QPAF_NEXT_EVALUATION_PROPOSAL.md",
+      "current_path": "docs/02_project_plan/QPAF_NEXT_EVALUATION_PROPOSAL.md",
       "path_bound_evidence": true,
       "legacy_alias": false,
       "source_sha256": "9fd411020e91efd7c7338042bd2adb32f3bcc2663117a799d82224e1554b25d7",
-      "sha256": "b016e8e9e0d470194898c63c6b920fb63003494f228ba6baa07a09b0b9983eb1",
-      "navigation_links_updated": true
+      "sha256": "3235debb15a873d0c475898928613db2fad706d6f6bc62b71128f65c09ee09f4",
+      "navigation_links_updated": true,
+      "previous_path": "docs/QPAF_NEXT_EVALUATION_PROPOSAL.md",
+      "original_path_removed": true,
+      "relocated_at": "2026-10-04"
     },
     {
       "title": "QPAF P2 local method-core verification",
@@ -382,12 +434,15 @@
       "title": "Query 797: what the saved QPAF weights corrected",
       "category": "05_oracle_experiments",
       "original_path": "docs/QPAF_QUERY797_CASE_STUDY.md",
-      "current_path": "docs/QPAF_QUERY797_CASE_STUDY.md",
+      "current_path": "docs/05_oracle_experiments/exploratory12/QPAF_QUERY797_CASE_STUDY.md",
       "path_bound_evidence": true,
       "legacy_alias": false,
       "source_sha256": "e48e9acd05b8d46ce24e44bd21378af5824db314d2456b750ac0f34d0d2ff093",
-      "sha256": "33bf78e09ce80bff7fa9bde614f64f99e2601f00cf32e5d959f53bb0f9bec5dc",
-      "navigation_links_updated": true
+      "sha256": "b6c96cd90187d8ad484c8a5ebd54ea53737fbb918da459294120ea313fa87024",
+      "navigation_links_updated": true,
+      "previous_path": "docs/QPAF_QUERY797_CASE_STUDY.md",
+      "original_path_removed": true,
+      "relocated_at": "2026-10-04"
     },
     {
       "title": "QPAF Team Research Execution Plan",
@@ -397,28 +452,36 @@
       "path_bound_evidence": false,
       "legacy_alias": false,
       "source_sha256": "94bca723e1c46e2ec20f4e36bcf74e4d985a8131c2bf456bb6b18122229e2718",
-      "sha256": "fe72daf37361f97438259b4d2dd1b8aac70de0e8cac58a936ed58fcd3ae000ac",
-      "original_path_removed": true
+      "sha256": "07ce94c345ee3e7666b17c41721b5247f2089dfc41ca54be2dc917f980f6290b",
+      "original_path_removed": true,
+      "navigation_links_updated": true
     },
     {
       "title": "Exploratory-24 W66 sensitivity: preparation and execution review",
       "category": "05_oracle_experiments",
       "original_path": "docs/QPAF_W66_EXPLORATORY24_EXECUTION_REVIEW.md",
-      "current_path": "docs/QPAF_W66_EXPLORATORY24_EXECUTION_REVIEW.md",
+      "current_path": "docs/05_oracle_experiments/w66/QPAF_W66_EXPLORATORY24_EXECUTION_REVIEW.md",
       "path_bound_evidence": true,
       "legacy_alias": false,
       "source_sha256": "1b5f0f97b69e046cdcf6ff7b572894b9755905be709bc4743a397668163a1b90",
-      "sha256": "1b5f0f97b69e046cdcf6ff7b572894b9755905be709bc4743a397668163a1b90"
+      "sha256": "8f1cfde5ca9617c269b21877986a6d73811b03ae4548e21f46c3211bef4f8932",
+      "previous_path": "docs/QPAF_W66_EXPLORATORY24_EXECUTION_REVIEW.md",
+      "original_path_removed": true,
+      "relocated_at": "2026-10-04",
+      "navigation_links_updated": true
     },
     {
       "title": "Optimized exploratory-24 W66: resource and execution review",
       "category": "05_oracle_experiments",
       "original_path": "docs/QPAF_W66_EXPLORATORY24_OPTIMIZED_EXECUTION_REVIEW.md",
-      "current_path": "docs/QPAF_W66_EXPLORATORY24_OPTIMIZED_EXECUTION_REVIEW.md",
+      "current_path": "docs/05_oracle_experiments/w66/QPAF_W66_EXPLORATORY24_OPTIMIZED_EXECUTION_REVIEW.md",
       "path_bound_evidence": true,
       "legacy_alias": false,
       "source_sha256": "543dcd23276068ddf82399e8708ba36e7939c8717a58cf8b14d13f63e7cf649c",
-      "sha256": "543dcd23276068ddf82399e8708ba36e7939c8717a58cf8b14d13f63e7cf649c"
+      "sha256": "543dcd23276068ddf82399e8708ba36e7939c8717a58cf8b14d13f63e7cf649c",
+      "previous_path": "docs/QPAF_W66_EXPLORATORY24_OPTIMIZED_EXECUTION_REVIEW.md",
+      "original_path_removed": true,
+      "relocated_at": "2026-10-04"
     },
     {
       "title": "ViDoSeek exploratory-24 W66: verified Global / QARF / QPAF sensitivity",
@@ -435,31 +498,41 @@
       "title": "QPAF_W66_RESOURCE_BUDGET_REVIEW.json",
       "category": "05_oracle_experiments",
       "original_path": "docs/QPAF_W66_RESOURCE_BUDGET_REVIEW.json",
-      "current_path": "docs/QPAF_W66_RESOURCE_BUDGET_REVIEW.json",
+      "current_path": "docs/05_oracle_experiments/w66/QPAF_W66_RESOURCE_BUDGET_REVIEW.json",
       "path_bound_evidence": true,
       "legacy_alias": false,
       "source_sha256": "dfda8e5ef9d8129d3d3526218691b6ab68df5337034946e5a33afc29f5bbe05d",
-      "sha256": "dfda8e5ef9d8129d3d3526218691b6ab68df5337034946e5a33afc29f5bbe05d"
+      "sha256": "dfda8e5ef9d8129d3d3526218691b6ab68df5337034946e5a33afc29f5bbe05d",
+      "previous_path": "docs/QPAF_W66_RESOURCE_BUDGET_REVIEW.json",
+      "original_path_removed": true,
+      "relocated_at": "2026-10-04"
     },
     {
       "title": "W66 resource-budget review",
       "category": "05_oracle_experiments",
       "original_path": "docs/QPAF_W66_RESOURCE_BUDGET_REVIEW.md",
-      "current_path": "docs/QPAF_W66_RESOURCE_BUDGET_REVIEW.md",
+      "current_path": "docs/05_oracle_experiments/w66/QPAF_W66_RESOURCE_BUDGET_REVIEW.md",
       "path_bound_evidence": true,
       "legacy_alias": false,
       "source_sha256": "df6c1608610f8c0607dd2e80a60019a01fe980c29207011c770f345b1921383f",
-      "sha256": "df6c1608610f8c0607dd2e80a60019a01fe980c29207011c770f345b1921383f"
+      "sha256": "e36ca803fbdd4322abc83174b8f3a75bafb15c5421ee6b8049a0c82469b34138",
+      "previous_path": "docs/QPAF_W66_RESOURCE_BUDGET_REVIEW.md",
+      "original_path_removed": true,
+      "relocated_at": "2026-10-04",
+      "navigation_links_updated": true
     },
     {
       "title": "W66 synthetic resource calibration: preparation and execution review",
       "category": "05_oracle_experiments",
       "original_path": "docs/QPAF_W66_RESOURCE_CALIBRATION_EXECUTION_REVIEW.md",
-      "current_path": "docs/QPAF_W66_RESOURCE_CALIBRATION_EXECUTION_REVIEW.md",
+      "current_path": "docs/05_oracle_experiments/w66/QPAF_W66_RESOURCE_CALIBRATION_EXECUTION_REVIEW.md",
       "path_bound_evidence": true,
       "legacy_alias": false,
       "source_sha256": "3ea21cf21d5d210355e95f2dedb686a649e0dba1eded73d1d92a39dac77537c1",
-      "sha256": "3ea21cf21d5d210355e95f2dedb686a649e0dba1eded73d1d92a39dac77537c1"
+      "sha256": "3ea21cf21d5d210355e95f2dedb686a649e0dba1eded73d1d92a39dac77537c1",
+      "previous_path": "docs/QPAF_W66_RESOURCE_CALIBRATION_EXECUTION_REVIEW.md",
+      "original_path_removed": true,
+      "relocated_at": "2026-10-04"
     },
     {
       "title": "W66 synthetic resource calibration interruption review",
@@ -476,11 +549,14 @@
       "title": "W66 synthetic resource calibration recovery: preparation and execution review",
       "category": "05_oracle_experiments",
       "original_path": "docs/QPAF_W66_RESOURCE_CALIBRATION_RECOVERY_EXECUTION_REVIEW.md",
-      "current_path": "docs/QPAF_W66_RESOURCE_CALIBRATION_RECOVERY_EXECUTION_REVIEW.md",
+      "current_path": "docs/05_oracle_experiments/w66/QPAF_W66_RESOURCE_CALIBRATION_RECOVERY_EXECUTION_REVIEW.md",
       "path_bound_evidence": true,
       "legacy_alias": false,
       "source_sha256": "0cb6b01c418d184d026f77d2e9b121d260d5c76ab21502c64b58f73316ab73bc",
-      "sha256": "0cb6b01c418d184d026f77d2e9b121d260d5c76ab21502c64b58f73316ab73bc"
+      "sha256": "0cb6b01c418d184d026f77d2e9b121d260d5c76ab21502c64b58f73316ab73bc",
+      "previous_path": "docs/QPAF_W66_RESOURCE_CALIBRATION_RECOVERY_EXECUTION_REVIEW.md",
+      "original_path_removed": true,
+      "relocated_at": "2026-10-04"
     },
     {
       "title": "W66 resource-calibration recovery result review",
@@ -501,7 +577,8 @@
       "path_bound_evidence": true,
       "legacy_alias": false,
       "source_sha256": "194a2db6ea3bbc5b2d064e40815d03b1748c4b462bbde13161955e85f0534f85",
-      "sha256": "194a2db6ea3bbc5b2d064e40815d03b1748c4b462bbde13161955e85f0534f85"
+      "sha256": "f07155f79ece9ca1b07b96f3a8c4830a6f481efd54e38033bebc2faba6a9927d",
+      "navigation_links_updated": true
     },
     {
       "title": "M1.1 Modal Oracle implementation plan",
@@ -521,7 +598,8 @@
       "path_bound_evidence": true,
       "legacy_alias": false,
       "source_sha256": "3e4b4cfa2342cef78c0f0fc14607cabf6687c1ee3cc29ecd2fc55a3ec4a7defd",
-      "sha256": "3e4b4cfa2342cef78c0f0fc14607cabf6687c1ee3cc29ecd2fc55a3ec4a7defd"
+      "sha256": "4b06d6caa6449174ed918793be6528bc73d4284fcb4cd95c2a926cdce77f66cf",
+      "navigation_links_updated": true
     },
     {
       "title": "M1.6 Collision Audit & M1.4-M1.6 Comprehensive Audit Report Plan",
@@ -531,7 +609,7 @@
       "path_bound_evidence": false,
       "legacy_alias": false,
       "source_sha256": "a36b14142ac3ed2bd6f0ec19a5b8211eaa0ccd3917a1033273ec5183d50a287f",
-      "sha256": "24de4e4e94db80afc3174dc992096dfa8e9d8ca5822056bfbaa0321c813de2c1",
+      "sha256": "803b99a4008b417eb8b9fa2d938af7d0c292ad99ec994638120ed99acfd49341",
       "navigation_links_updated": true
     },
     {
@@ -542,7 +620,7 @@
       "path_bound_evidence": false,
       "legacy_alias": false,
       "source_sha256": "0ba4e9fd69f199d06eb21faebd7e19e4d226dfd1b5c7928ffd9a2220884e838e",
-      "sha256": "612e52bfa62273a1607688215e508cb47898477e2638d934e881d4ce7651d02d",
+      "sha256": "3dd49dd9190df83a78baa61800b71fef06aecbd96cda0b8ebbc75f827bfc3e5d",
       "navigation_links_updated": true
     },
     {
@@ -573,7 +651,8 @@
       "path_bound_evidence": true,
       "legacy_alias": false,
       "source_sha256": "13e6c2a272fc4a61b9b6a406a09b7f5cb1db94ed1aa1165cc920a2e3f2f40e47",
-      "sha256": "13e6c2a272fc4a61b9b6a406a09b7f5cb1db94ed1aa1165cc920a2e3f2f40e47"
+      "sha256": "be4fe7ee3dedd94665e22781ee4f77fe32c9441dd6e7477f567e4f1c8a47ce59",
+      "navigation_links_updated": true
     },
     {
       "title": "M1.4, M1.5 & M1.6 Repository Audit, Protocol Amendments & Collision Audit — Design Spec",
@@ -593,107 +672,142 @@
       "path_bound_evidence": false,
       "legacy_alias": false,
       "source_sha256": "177ec1bd7adc65cc466802e79c6f9cac31b36868d2d571e9cb95a4fdbacd44d9",
-      "sha256": "177ec1bd7adc65cc466802e79c6f9cac31b36868d2d571e9cb95a4fdbacd44d9"
+      "sha256": "52d44ec4bf1a6101c83a2c0450988682f3ed051134e323a308e722e575d6fa1f",
+      "navigation_links_updated": true
     },
     {
       "title": "Tóm tắt định hướng đề tài QPAF",
       "category": "01_overview",
       "original_path": "docs/Tom_tat_dinh_huong_QPAF.md",
-      "current_path": "docs/Tom_tat_dinh_huong_QPAF.md",
+      "current_path": "docs/01_overview/Tom_tat_dinh_huong_QPAF.md",
       "path_bound_evidence": true,
       "legacy_alias": false,
       "source_sha256": "a98a6f7e0454657dd8a93dbcfd0caee44e9491f1dc99c3d0c63fda17e67e3484",
-      "sha256": "a98a6f7e0454657dd8a93dbcfd0caee44e9491f1dc99c3d0c63fda17e67e3484"
+      "sha256": "a98a6f7e0454657dd8a93dbcfd0caee44e9491f1dc99c3d0c63fda17e67e3484",
+      "previous_path": "docs/Tom_tat_dinh_huong_QPAF.md",
+      "original_path_removed": true,
+      "relocated_at": "2026-10-04"
     },
     {
       "title": "vidoseek_w66_exploratory24_optimized_proposal.json",
       "category": "05_oracle_experiments",
       "original_path": "docs/vidoseek_w66_exploratory24_optimized_proposal.json",
-      "current_path": "docs/vidoseek_w66_exploratory24_optimized_proposal.json",
+      "current_path": "docs/05_oracle_experiments/w66/vidoseek_w66_exploratory24_optimized_proposal.json",
       "path_bound_evidence": true,
       "legacy_alias": false,
       "source_sha256": "043736c86473a89b31a1a54d804155b0cf3fa24a75d5df782c612cd529d9e726",
-      "sha256": "043736c86473a89b31a1a54d804155b0cf3fa24a75d5df782c612cd529d9e726"
+      "sha256": "c00148305f0cc2b317cb527bf552df0ff512d14c95e65ac00681d1448ff425db",
+      "previous_path": "docs/vidoseek_w66_exploratory24_optimized_proposal.json",
+      "original_path_removed": true,
+      "relocated_at": "2026-10-04",
+      "navigation_links_updated": true
     },
     {
       "title": "vidoseek_w66_exploratory24_proposal.json",
       "category": "05_oracle_experiments",
       "original_path": "docs/vidoseek_w66_exploratory24_proposal.json",
-      "current_path": "docs/vidoseek_w66_exploratory24_proposal.json",
+      "current_path": "docs/05_oracle_experiments/w66/vidoseek_w66_exploratory24_proposal.json",
       "path_bound_evidence": true,
       "legacy_alias": false,
       "source_sha256": "697ca8b31412f80533293db88880e5eb54921f69c3c231e631a1a2cd93c4efa2",
-      "sha256": "697ca8b31412f80533293db88880e5eb54921f69c3c231e631a1a2cd93c4efa2"
+      "sha256": "7c77969fcbd53a567128b8636a1a06431bad9813db8e7c436786af5da7c6ba42",
+      "previous_path": "docs/vidoseek_w66_exploratory24_proposal.json",
+      "original_path_removed": true,
+      "relocated_at": "2026-10-04",
+      "navigation_links_updated": true
     },
     {
       "title": "vidoseek_w66_resource_calibration_proposal.json",
       "category": "05_oracle_experiments",
       "original_path": "docs/vidoseek_w66_resource_calibration_proposal.json",
-      "current_path": "docs/vidoseek_w66_resource_calibration_proposal.json",
+      "current_path": "docs/05_oracle_experiments/w66/vidoseek_w66_resource_calibration_proposal.json",
       "path_bound_evidence": true,
       "legacy_alias": false,
       "source_sha256": "f5a247f10b80047653e36b47eb1f8fb17ca506185a682994f8da0a38ab3f94ee",
-      "sha256": "f5a247f10b80047653e36b47eb1f8fb17ca506185a682994f8da0a38ab3f94ee"
+      "sha256": "f5a247f10b80047653e36b47eb1f8fb17ca506185a682994f8da0a38ab3f94ee",
+      "previous_path": "docs/vidoseek_w66_resource_calibration_proposal.json",
+      "original_path_removed": true,
+      "relocated_at": "2026-10-04"
     },
     {
       "title": "vidoseek_w66_resource_calibration_recovery_proposal.json",
       "category": "05_oracle_experiments",
       "original_path": "docs/vidoseek_w66_resource_calibration_recovery_proposal.json",
-      "current_path": "docs/vidoseek_w66_resource_calibration_recovery_proposal.json",
+      "current_path": "docs/05_oracle_experiments/w66/vidoseek_w66_resource_calibration_recovery_proposal.json",
       "path_bound_evidence": true,
       "legacy_alias": false,
       "source_sha256": "6dccec3e7c0331f031ac2f8e661ff7fe7bf0abc9940c29fb0405a4a52f063c9a",
-      "sha256": "6dccec3e7c0331f031ac2f8e661ff7fe7bf0abc9940c29fb0405a4a52f063c9a"
+      "sha256": "6dccec3e7c0331f031ac2f8e661ff7fe7bf0abc9940c29fb0405a4a52f063c9a",
+      "previous_path": "docs/vidoseek_w66_resource_calibration_recovery_proposal.json",
+      "original_path_removed": true,
+      "relocated_at": "2026-10-04"
     },
     {
       "title": "vidoseek_w7_exploratory12_proposal.json",
       "category": "05_oracle_experiments",
       "original_path": "docs/vidoseek_w7_exploratory12_proposal.json",
-      "current_path": "docs/vidoseek_w7_exploratory12_proposal.json",
+      "current_path": "docs/05_oracle_experiments/exploratory12/vidoseek_w7_exploratory12_proposal.json",
       "path_bound_evidence": true,
       "legacy_alias": false,
       "source_sha256": "ccc0c9469c0ee42e540ece1b5aefc8acf82c3117b8db77affb748799495c08f6",
-      "sha256": "ccc0c9469c0ee42e540ece1b5aefc8acf82c3117b8db77affb748799495c08f6"
+      "sha256": "ccc0c9469c0ee42e540ece1b5aefc8acf82c3117b8db77affb748799495c08f6",
+      "previous_path": "docs/vidoseek_w7_exploratory12_proposal.json",
+      "original_path_removed": true,
+      "relocated_at": "2026-10-04"
     },
     {
       "title": "vidoseek_w7_exploratory24_proposal.json",
       "category": "05_oracle_experiments",
       "original_path": "docs/vidoseek_w7_exploratory24_proposal.json",
-      "current_path": "docs/vidoseek_w7_exploratory24_proposal.json",
+      "current_path": "docs/05_oracle_experiments/exploratory24/vidoseek_w7_exploratory24_proposal.json",
       "path_bound_evidence": true,
       "legacy_alias": false,
       "source_sha256": "1f3d76ce5976a8568fac1119e7de5791af0550ddea8331641613ff7a91a086b2",
-      "sha256": "1f3d76ce5976a8568fac1119e7de5791af0550ddea8331641613ff7a91a086b2"
+      "sha256": "60525c0d9e7e1ae110fffb28a4f6c8608118c21753aa2b3e03a5b0a4647f6592",
+      "previous_path": "docs/vidoseek_w7_exploratory24_proposal.json",
+      "original_path_removed": true,
+      "relocated_at": "2026-10-04",
+      "navigation_links_updated": true
     },
     {
       "title": "ViMDoc archive content audit v1 — local preparation review",
       "category": "04_data_protocol",
       "original_path": "docs/VIMDOC_ARCHIVE_CONTENT_AUDIT_EXECUTION_REVIEW.md",
-      "current_path": "docs/VIMDOC_ARCHIVE_CONTENT_AUDIT_EXECUTION_REVIEW.md",
+      "current_path": "docs/04_data_protocol/VIMDOC_ARCHIVE_CONTENT_AUDIT_EXECUTION_REVIEW.md",
       "path_bound_evidence": true,
       "legacy_alias": false,
       "source_sha256": "0a1ed860b7124001072638874d1dea93d9de5b53dfc4163ff698e6ae9bc45230",
-      "sha256": "0a1ed860b7124001072638874d1dea93d9de5b53dfc4163ff698e6ae9bc45230"
+      "sha256": "0a1ed860b7124001072638874d1dea93d9de5b53dfc4163ff698e6ae9bc45230",
+      "previous_path": "docs/VIMDOC_ARCHIVE_CONTENT_AUDIT_EXECUTION_REVIEW.md",
+      "original_path_removed": true,
+      "relocated_at": "2026-10-04"
     },
     {
       "title": "ViMDoc M3 — package chuẩn bị local v1",
       "category": "04_data_protocol",
       "original_path": "docs/VIMDOC_M3_LOCAL_PACKAGE.md",
-      "current_path": "docs/VIMDOC_M3_LOCAL_PACKAGE.md",
+      "current_path": "docs/04_data_protocol/VIMDOC_M3_LOCAL_PACKAGE.md",
       "path_bound_evidence": true,
       "legacy_alias": false,
       "source_sha256": "82f6da18848589f621d8d1d8fd3f232cc08dc3c87df6c27b02eac3ae45aff9b9",
-      "sha256": "82f6da18848589f621d8d1d8fd3f232cc08dc3c87df6c27b02eac3ae45aff9b9"
+      "sha256": "5cdee2a8665934b6e4e60cb2249c1aba14d359a118c293a4bed9116d8d437fbc",
+      "previous_path": "docs/VIMDOC_M3_LOCAL_PACKAGE.md",
+      "original_path_removed": true,
+      "relocated_at": "2026-10-04",
+      "navigation_links_updated": true
     },
     {
       "title": "ViMDoc OCR và page identity — specification v1",
       "category": "04_data_protocol",
       "original_path": "docs/VIMDOC_OCR_PAGE_IDENTITY_SPEC.md",
-      "current_path": "docs/VIMDOC_OCR_PAGE_IDENTITY_SPEC.md",
+      "current_path": "docs/04_data_protocol/VIMDOC_OCR_PAGE_IDENTITY_SPEC.md",
       "path_bound_evidence": true,
       "legacy_alias": false,
       "source_sha256": "8cdd05587de071df22a3193e989bc530c05ae8c5c8fa0c4e6033bf190f12742d",
-      "sha256": "8cdd05587de071df22a3193e989bc530c05ae8c5c8fa0c4e6033bf190f12742d"
+      "sha256": "8cdd05587de071df22a3193e989bc530c05ae8c5c8fa0c4e6033bf190f12742d",
+      "previous_path": "docs/VIMDOC_OCR_PAGE_IDENTITY_SPEC.md",
+      "original_path_removed": true,
+      "relocated_at": "2026-10-04"
     }
   ],
   "preexisting_missing_local_links": [
@@ -746,74 +860,88 @@
       "runs/vidoseek_w7_exploratory24_v1/run_manifest.json"
     ],
     [
-      "docs/QPAF_EXPLORATORY12_RECOVERY_RUN_STATUS.md",
+      "docs/05_oracle_experiments/exploratory12/QPAF_EXPLORATORY12_RECOVERY_RUN_STATUS.md",
       "runs/exploratory12_recovery_preparation_20260907/execution_approval.json"
     ],
     [
-      "docs/QPAF_EXPLORATORY12_RECOVERY_RUN_STATUS.md",
+      "docs/05_oracle_experiments/exploratory12/QPAF_EXPLORATORY12_RECOVERY_RUN_STATUS.md",
       "runs/exploratory12_recovery_preparation_20260907/finalizer_launch_receipt.json"
     ],
     [
-      "docs/QPAF_EXPLORATORY12_RECOVERY_RUN_STATUS.md",
+      "docs/05_oracle_experiments/exploratory12/QPAF_EXPLORATORY12_RECOVERY_RUN_STATUS.md",
       "runs/exploratory12_recovery_preparation_20260907/launch_receipt.json"
     ],
     [
-      "docs/QPAF_EXPLORATORY12_RECOVERY_RUN_STATUS.md",
+      "docs/05_oracle_experiments/exploratory12/QPAF_EXPLORATORY12_RECOVERY_RUN_STATUS.md",
       "runs/exploratory12_recovery_preparation_20260907/live_stderr.log"
     ],
     [
-      "docs/QPAF_EXPLORATORY12_RECOVERY_RUN_STATUS.md",
+      "docs/05_oracle_experiments/exploratory12/QPAF_EXPLORATORY12_RECOVERY_RUN_STATUS.md",
       "runs/exploratory12_recovery_preparation_20260907/live_stdout.log"
     ],
     [
-      "docs/QPAF_EXPLORATORY12_RECOVERY_RUN_STATUS.md",
+      "docs/05_oracle_experiments/exploratory12/QPAF_EXPLORATORY12_RECOVERY_RUN_STATUS.md",
       "runs/exploratory12_recovery_preparation_20260907/monitor_progress.jsonl"
     ],
     [
-      "docs/QPAF_EXPLORATORY12_RECOVERY_RUN_STATUS.md",
+      "docs/05_oracle_experiments/exploratory12/QPAF_EXPLORATORY12_RECOVERY_RUN_STATUS.md",
       "runs/vidoseek_exploratory12_recovery_v1/_ATTEMPTED.json"
     ],
     [
-      "docs/QPAF_EXPLORATORY12_RECOVERY_RUN_STATUS.md",
+      "docs/05_oracle_experiments/exploratory12/QPAF_EXPLORATORY12_RECOVERY_RUN_STATUS.md",
       "runs/vidoseek_exploratory12_recovery_v1/resolved_config.json"
     ],
     [
-      "docs/QPAF_EXPLORATORY12_RUN_STATUS.md",
+      "docs/05_oracle_experiments/exploratory12/QPAF_EXPLORATORY12_RUN_STATUS.md",
       "runs/exploratory12_preparation_20260907/execution_approval.json"
     ],
     [
-      "docs/QPAF_EXPLORATORY12_RUN_STATUS.md",
+      "docs/05_oracle_experiments/exploratory12/QPAF_EXPLORATORY12_RUN_STATUS.md",
       "runs/exploratory12_preparation_20260907/launch_receipt.json"
     ],
     [
-      "docs/QPAF_EXPLORATORY12_RUN_STATUS.md",
+      "docs/05_oracle_experiments/exploratory12/QPAF_EXPLORATORY12_RUN_STATUS.md",
       "runs/exploratory12_preparation_20260907/live_stderr.log"
     ],
     [
-      "docs/QPAF_EXPLORATORY12_RUN_STATUS.md",
+      "docs/05_oracle_experiments/exploratory12/QPAF_EXPLORATORY12_RUN_STATUS.md",
       "runs/exploratory12_preparation_20260907/live_stdout.log"
     ],
     [
-      "docs/QPAF_EXPLORATORY12_RUN_STATUS.md",
+      "docs/05_oracle_experiments/exploratory12/QPAF_EXPLORATORY12_RUN_STATUS.md",
       "runs/vidoseek_w7_exploratory12_v1/_ATTEMPTED.json"
     ],
     [
-      "docs/QPAF_EXPLORATORY12_RUN_STATUS.md",
+      "docs/05_oracle_experiments/exploratory12/QPAF_EXPLORATORY12_RUN_STATUS.md",
       "runs/vidoseek_w7_exploratory12_v1/resolved_config.json"
     ],
     [
-      "docs/QPAF_QUERY797_CASE_STUDY.md",
+      "docs/05_oracle_experiments/exploratory12/QPAF_QUERY797_CASE_STUDY.md",
       "runs/vidoseek_exploratory12_recovery_v1/checkpoints/queries/000005.json"
     ],
     [
-      "docs/QPAF_W66_RESOURCE_BUDGET_REVIEW.md",
+      "docs/05_oracle_experiments/w66/QPAF_W66_RESOURCE_BUDGET_REVIEW.md",
       "runs/vidoseek_w7_exploratory24_v1/run_manifest.json"
     ],
     [
-      "docs/QPAF_W66_RESOURCE_BUDGET_REVIEW.md",
+      "docs/05_oracle_experiments/w66/QPAF_W66_RESOURCE_BUDGET_REVIEW.md",
       "runs/vidoseek_w7_exploratory24_v1/timings.json"
     ]
   ],
   "legacy_redirects_removed": 18,
-  "navigation_revision": "2026-10-04-direct-links"
+  "navigation_revision": "2026-10-04-all-documents-in-topic-folders",
+  "root_files": [
+    "README.md",
+    "catalog.json"
+  ],
+  "documentation_migration": {
+    "parent_commit": "f333e62d65a94682c6049edc4ad9ab4cc980444e",
+    "additional_documents_moved": 30,
+    "exact_duplicates_found": 0,
+    "historical_evidence_preserved": true,
+    "current_preparation_manifests": [
+      "docs/04_data_protocol/manifests/vimdoc_archive_content_audit_v1_preparation.json",
+      "docs/04_data_protocol/manifests/vimdoc_m3_local_v1.json"
+    ]
+  }
 }

@@ -39,9 +39,9 @@ else:
 PROTOCOL_ID = "vidoseek_w66_resource_calibration_recovery_v1"
 CLASSIFICATION = "synthetic_w66_engineering_recovery_not_retrieval_result"
 CONFIG_PATH = "configs/vidoseek_w66_resource_calibration_recovery_v1.json"
-PROPOSAL_PATH = "docs/vidoseek_w66_resource_calibration_recovery_proposal.json"
+PROPOSAL_PATH = "docs/05_oracle_experiments/w66/vidoseek_w66_resource_calibration_recovery_proposal.json"
 EXECUTION_REVIEW_PATH = (
-    "docs/QPAF_W66_RESOURCE_CALIBRATION_RECOVERY_EXECUTION_REVIEW.md"
+    "docs/05_oracle_experiments/w66/QPAF_W66_RESOURCE_CALIBRATION_RECOVERY_EXECUTION_REVIEW.md"
 )
 INTERRUPTION_REVIEW_PATH = (
     "artifacts/vidoseek_w66_resource_calibration_interruption_review/review.json"

@@ -38,7 +38,7 @@ Recommendation: do not start the full 1,142-query job merely to obtain the first
 
 ## Proposed bounded discovery pilot — draft only
 
-The complete machine-readable design and exact query IDs are in [the 12-query proposal](../../vidoseek_w7_exploratory12_proposal.json). **It is not approved, implemented, or runnable.** It requires a protocol decision because it changes the discovery query set and the scope used to select Global.
+The complete machine-readable design and exact query IDs are in [the 12-query proposal](../exploratory12/vidoseek_w7_exploratory12_proposal.json). **It is not approved, implemented, or runnable.** It requires a protocol decision because it changes the discovery query set and the scope used to select Global.
 
 | Design choice | Proposed value |
 | --- | --- |

@@ -14,7 +14,7 @@ from pathlib import Path
 
 
 CONFIG = "configs/vimdoc_m3_local_v1.json"
-MANIFEST = "artifacts/vimdoc_m3_local_v1/package_manifest.json"
+MANIFEST = "docs/04_data_protocol/manifests/vimdoc_m3_local_v1.json"
 INVENTORY = (
     CONFIG,
     "configs/vimdoc_ocr_page_identity_v1.json",
@@ -27,16 +27,16 @@ INVENTORY = (
     "tests/test_vimdoc_m3_preparation.py",
     "tests/test_vimdoc_archive_content_audit.py",
     "tests/test_vimdoc_ocr_page_identity.py",
-    "docs/VIMDOC_M3_LOCAL_PACKAGE.md",
-    "docs/VIMDOC_ARCHIVE_CONTENT_AUDIT_EXECUTION_REVIEW.md",
-    "docs/VIMDOC_OCR_PAGE_IDENTITY_SPEC.md",
+    "docs/04_data_protocol/VIMDOC_M3_LOCAL_PACKAGE.md",
+    "docs/04_data_protocol/VIMDOC_ARCHIVE_CONTENT_AUDIT_EXECUTION_REVIEW.md",
+    "docs/04_data_protocol/VIMDOC_OCR_PAGE_IDENTITY_SPEC.md",
     "configs/datasets.yaml",
     "configs/environment.yaml",
     "configs/preregistered.yaml",
     "requirements-lock.txt",
     "requirements-learned-local.txt",
     "artifacts/dataset_materialization_vimdoc.json",
-    "artifacts/vimdoc_archive_content_audit_v1_preparation/package_manifest.json",
+    "docs/04_data_protocol/manifests/vimdoc_archive_content_audit_v1_preparation.json",
     "artifacts/score_input_probe_vimdoc.json",
     "scripts/materialize_datasets.py",
     "scripts/extract_vidore_baseline.py",

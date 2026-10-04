@@ -1,7 +1,7 @@
 {
   "protocol_id": "vidoseek_p1_02r_w7_exploratory12_v1",
   "classification": "exploratory_subset_oracle_not_full_w7_or_phase_gate",
-  "proposal_path": "docs/vidoseek_w7_exploratory12_proposal.json",
+  "proposal_path": "docs/05_oracle_experiments/exploratory12/vidoseek_w7_exploratory12_proposal.json",
   "base_protocol_path": "configs/vidoseek_p1_02r_oracle_w7_v1.yaml",
   "output_path": "runs/vidoseek_w7_exploratory12_v1",
   "total_wall_timeout_seconds": 21600,
@@ -17,7 +17,7 @@
   "source_sha256": {
     "configs/vidoseek_p1_02r.yaml": "b26d4f76206ed9fe74b4b508392a3228e799138f2c372863dc983744ebbcab87",
     "configs/vidoseek_p1_02r_oracle_w7_v1.yaml": "8d37e6c4dbe46146e9f2d5d3da439a2c72f4e06f3d9c8ce33511484fceccbe34",
-    "docs/vidoseek_w7_exploratory12_proposal.json": "ccc0c9469c0ee42e540ece1b5aefc8acf82c3117b8db77affb748799495c08f6",
+    "docs/05_oracle_experiments/exploratory12/vidoseek_w7_exploratory12_proposal.json": "ccc0c9469c0ee42e540ece1b5aefc8acf82c3117b8db77affb748799495c08f6",
     "src/oracle_study/__init__.py": "a9dc3cd08f28e8be03f2c7847993697d2334e2318d56fea269ebaf1ddbb0d7b0",
     "src/oracle_study/bootstrap.py": "3e9f588dcde3930406700e417f25b322f2755fe2b02c1fe9fb075c63767da3bd",
     "src/oracle_study/budget.py": "f9d08dcfbd484cee2e76719e7f2051fa9541dca6ca507e5c9b3672e5119b8b81",
@@ -34,7 +34,7 @@
     "src/oracle_study/qpaf.py": "00ce93a76cf80d43b9df394550b1e6799de8285772b12811b19c768f7ea44d53",
     "src/oracle_study/report.py": "78904de8655a9dfc8df4894355e9bd22e5da72e67ff659d728df73c023ba425f",
     "src/oracle_study/sampling.py": "9c24dae0c1c9e769b97ba05e977fa95fcb262293712b3ca2b10a82ff6629d1e8",
-    "src/oracle_study/vidoseek_exploratory12.py": "21ed853bbbda0ad66cc391935c3eeb93e7800c1dcf73768812aa7eabfd7d7d6f",
+    "src/oracle_study/vidoseek_exploratory12.py": "af4085b1290a105de6eee8f8036059ba371fabf2d2c540857c93d8e9ff9981b0",
     "src/oracle_study/vidoseek_p1_02r_oracle.py": "ed21096e68a77c2b0dcbe597ad9848396e93a4058ef275783f976d930bc362dd",
     "src/oracle_study/vidoseek_p1_02r_sharded.py": "a6cbe4eb155b502da507630c486bcc8a06849aaacb77a3fc54c7e96ef67eab17"
   },

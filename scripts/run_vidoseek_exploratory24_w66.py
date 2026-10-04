@@ -32,8 +32,8 @@ from oracle_study.qpaf import (
 
 PROTOCOL_ID = "vidoseek_p1_02r_w66_exploratory24_v1"
 CLASSIFICATION = "w66_sensitivity_on_frozen_exploratory24_subset_not_phase_gate"
-PROPOSAL_PATH = "docs/vidoseek_w66_exploratory24_proposal.json"
-PARENT_W7_PROPOSAL_PATH = "docs/vidoseek_w7_exploratory24_proposal.json"
+PROPOSAL_PATH = "docs/05_oracle_experiments/w66/vidoseek_w66_exploratory24_proposal.json"
+PARENT_W7_PROPOSAL_PATH = "docs/05_oracle_experiments/exploratory24/vidoseek_w7_exploratory24_proposal.json"
 PARENT_W7_CONFIG_PATH = "configs/vidoseek_w7_exploratory24_v1.json"
 PARENT_W7_SCRIPT_PATH = "scripts/run_vidoseek_exploratory24.py"
 PARENT_W7_REVIEW_PATH = (
@@ -48,7 +48,7 @@ PROFILE_COUNT = 66
 PROFILES_SHA256 = "c04139858954fd0a7f7baa5dad548f3675a41b8682e9798039508e4077da5973"
 QUERY_LIST_SHA256 = "95715b6a8c0c2d684b3a34e9130eca25ea641aafb62678f7daa764f0ab585f5b"
 PARENT_W7_PROPOSAL_SHA256 = (
-    "1f3d76ce5976a8568fac1119e7de5791af0550ddea8331641613ff7a91a086b2"
+    "60525c0d9e7e1ae110fffb28a4f6c8608118c21753aa2b3e03a5b0a4647f6592"
 )
 PARENT_W7_REVIEW_SHA256 = (
     "716a184eedcbe73c34dc166bcaa60d594546625dcb288049fd71807f63b61319"

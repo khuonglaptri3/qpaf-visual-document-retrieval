@@ -4,8 +4,8 @@
   "execution_authorized": false,
   "classification": "proposed_w66_sensitivity_on_frozen_exploratory24_subset_not_phase_gate",
   "parent_w7_evidence": {
-    "proposal_path": "docs/vidoseek_w7_exploratory24_proposal.json",
-    "proposal_sha256": "1f3d76ce5976a8568fac1119e7de5791af0550ddea8331641613ff7a91a086b2",
+    "proposal_path": "docs/05_oracle_experiments/exploratory24/vidoseek_w7_exploratory24_proposal.json",
+    "proposal_sha256": "60525c0d9e7e1ae110fffb28a4f6c8608118c21753aa2b3e03a5b0a4647f6592",
     "result_review_path": "artifacts/vidoseek_exploratory24_review/result_integrity_review.json",
     "result_review_sha256": "716a184eedcbe73c34dc166bcaa60d594546625dcb288049fd71807f63b61319",
     "run_manifest_sha256": "0fcfbceee0e581240f241447abae1cb85cbb4f11cfee4f4d5343c2f81e06d9ee",
@@ -19,7 +19,7 @@
   },
   "selection": {
     "rule": "Reuse the exact 24 ordered queries already frozen before the W7 exploratory run; do not resample or filter after observing W7 outcomes",
-    "parent_selection_path": "docs/vidoseek_w7_exploratory24_proposal.json",
+    "parent_selection_path": "docs/05_oracle_experiments/exploratory24/vidoseek_w7_exploratory24_proposal.json",
     "queries": 24,
     "pages_per_query": 5385,
     "candidate_pairs": 129240,

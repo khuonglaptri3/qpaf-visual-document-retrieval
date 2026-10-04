@@ -9,7 +9,7 @@
 
 ## 1. Mục tiêu và Bối cảnh (Context & Scope)
 
-Theo tiến độ `TIMELINE_fixed.md` và các hướng dẫn tại `docs/m1-restart-handoff.md`:
+Theo tiến độ `TIMELINE_fixed.md` và các hướng dẫn tại `docs/06_handover/m1-restart-handoff.md`:
 * **Ranh giới công việc:**
   - **M1.8** là giai đoạn chuẩn bị khung chính sách kiểm tra chất lượng trích xuất (OCR Checklist), định nghĩa toán học các biến đo lường và thiết lập ngưỡng dự kiến (Failure Thresholds), cùng với việc chuẩn hóa không gian tên lưu trữ hiện vật (Artifact Namespace).
   - **M2.3** sẽ thực hiện chạy thực nghiệm đo đạc mẫu (Sample Calibration Run) trên tập PDF thật của ViDoSeek để chính thức đóng băng (Freeze) các giá trị số học.

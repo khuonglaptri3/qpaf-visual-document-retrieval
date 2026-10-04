@@ -1,7 +1,7 @@
 # Khương — làm lại M1 theo lịch 23–27/09/2026
 
 **Bàn giao hiện tại bắt đầu từ M1.1/M1.2:** xem
-[trạng thái đầu vào](m1-restart-handoff.md) và [README](../README.md).
+[trạng thái đầu vào](m1-restart-handoff.md) và [README](../../README.md).
 M1.1 đã có báo cáo Oracle nhưng thiếu artifact gốc; M1.3 chưa có gói audit
 để kiểm chứng. Bảng dưới là lịch tham chiếu cho phần Khương từ M1.4.
 
@@ -21,12 +21,12 @@ và lịch sử Git. Không backdate để biến việc thực hiện sau thàn
 ## Trạng thái cập nhật ngày 28/09/2026
 
 - Repo và quy trình Gitflow: hoạt động ổn định trên `develop` và feature branches.
-- M1.3: **ĐÃ TRIỂN KHAI HOÀN TẤT** ([`docs/m1.3-primary-corpus.md`](m1.3-primary-corpus.md)); bộ công cụ CPU audit package tại `src/qpaf/m13/`, 16/16 test đạt 100%.
+- M1.3: **ĐÃ TRIỂN KHAI HOÀN TẤT** ([`docs/04_data_protocol/m1.3-primary-corpus.md`](../04_data_protocol/m1.3-primary-corpus.md)); bộ công cụ CPU audit package tại `src/qpaf/m13/`, 16/16 test đạt 100%.
 - M1.4: **ĐÃ TẠO SNAPSHOT MỚI `evidence/revisions/m1.4-003/`**; kiểm kê 307 tệp, ghi nhận 20 source, 2 config, 225 run assets; đóng 3/5 gaps lớn (`RESEARCH_CODE_MISSING`, `CONFIG_MISSING`, `RUNS_MISSING` đã được giải quyết).
 - M1.5: **ĐÃ BAN HÀNH 2 AMENDMENTS** (`QPAF-M1.5-A001` chốt Pairwise Logistic Loss và `QPAF-M1.5-A002` chốt ViDoSeek).
-- M1.6: **ĐÃ TRIỂN KHAI VÀ KIỂM TOÁN HOÀN TẤT** ([`evidence/revisions/m1.6-001/`](../evidence/revisions/m1.6-001/)); hệ thống `src/qpaf/m16/` và CLI `scripts/audit_collisions.py` xác nhận 100% canonical IDs, zero cross-split leakage, và 0 orphan queries.
-- Báo cáo kiểm kê toàn diện M1.4–M1.5–M1.6: xem [`docs/06_handover/m1.4-m1.5-m1.6-audit-report.md`](06_handover/m1.4-m1.5-m1.6-audit-report.md).
-- M1.8: **ĐÃ TRIỂN KHAI VÀ XUẤT BẢN GÓI HIỆU CHUẨN** ([`evidence/revisions/m1.8-001/`](../evidence/revisions/m1.8-001/)); gồm `ocr_checklist.md`, `ocr_failure_threshold.md` (công thức toán học và ngưỡng dự kiến PROVISIONAL chờ M2.3 freeze), `artifact_namespace.md` (đồng bộ 100% với Thanh M1.7), `calibration_methodology.md`, phân hệ `src/qpaf/m18/` và CLI `scripts/audit_ocr_policy.py`.
+- M1.6: **ĐÃ TRIỂN KHAI VÀ KIỂM TOÁN HOÀN TẤT** ([`evidence/revisions/m1.6-001/`](../../evidence/revisions/m1.6-001)); hệ thống `src/qpaf/m16/` và CLI `scripts/audit_collisions.py` xác nhận 100% canonical IDs, zero cross-split leakage, và 0 orphan queries.
+- Báo cáo kiểm kê toàn diện M1.4–M1.5–M1.6: xem [`docs/06_handover/m1.4-m1.5-m1.6-audit-report.md`](m1.4-m1.5-m1.6-audit-report.md).
+- M1.8: **ĐÃ TRIỂN KHAI VÀ XUẤT BẢN GÓI HIỆU CHUẨN** ([`evidence/revisions/m1.8-001/`](../../evidence/revisions/m1.8-001)); gồm `ocr_checklist.md`, `ocr_failure_threshold.md` (công thức toán học và ngưỡng dự kiến PROVISIONAL chờ M2.3 freeze), `artifact_namespace.md` (đồng bộ 100% với Thanh M1.7), `calibration_methodology.md`, phân hệ `src/qpaf/m18/` và CLI `scripts/audit_ocr_policy.py`.
 - Technical sign-off: **NOT SIGNED**; G1 do Phát quyết định với QA của Thanh. Sẵn sàng trình Hội đồng Gate G1 bộ bằng chứng hoàn chỉnh M1.4–M1.8.
 
 

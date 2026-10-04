@@ -26,7 +26,7 @@ from . import vidoseek_p1_02r_sharded as sharded
 
 PROTOCOL_ID = "vidoseek_p1_02r_w7_exploratory12_v1"
 CLASSIFICATION = "exploratory_subset_oracle_not_full_w7_or_phase_gate"
-PROPOSAL_PATH = "docs/vidoseek_w7_exploratory12_proposal.json"
+PROPOSAL_PATH = "docs/05_oracle_experiments/exploratory12/vidoseek_w7_exploratory12_proposal.json"
 BASE_PROTOCOL_PATH = "configs/vidoseek_p1_02r_oracle_w7_v1.yaml"
 CONFIG_PATH = "configs/vidoseek_w7_exploratory12_v1.json"
 OUTPUT_PATH = "runs/vidoseek_w7_exploratory12_v1"
