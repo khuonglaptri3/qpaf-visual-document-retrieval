@@ -1,0 +1,16 @@
+{
+  "phases": [
+    {
+      "phase": "prepare",
+      "seconds": 2.6828815089999996,
+      "peak_rss_mb": 3379.3515625,
+      "peak_cuda_allocated_mb": 0.0,
+      "peak_cuda_reserved_mb": 0.0
+    }
+  ],
+  "elapsed_seconds": 5.200102842,
+  "peak_rss_mb": 3379.3515625,
+  "peak_cuda_reserved_mb": 0.0,
+  "artifact_bytes": 23106,
+  "rss_poll_interval_seconds": 0.02
+}

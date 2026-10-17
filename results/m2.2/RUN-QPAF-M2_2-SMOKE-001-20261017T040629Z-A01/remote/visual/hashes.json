@@ -1,0 +1,37 @@
+[
+  {
+    "path": "environment.json",
+    "size_bytes": 2302,
+    "sha256": "d460d07cc949bd0e9da2aeda577d08b39c31448b8248a80517f0df6ee3978f02"
+  },
+  {
+    "path": "inputs.json",
+    "size_bytes": 1267,
+    "sha256": "3223867a0091b43bcdc2023c89621eed3667cdcefe27ce3237af932c22c18ffb"
+  },
+  {
+    "path": "model_files.json",
+    "size_bytes": 6101,
+    "sha256": "ee0692cdc057767bc5ac9c22c0cbb5b586b126b378e2bca9993955d19124f1eb"
+  },
+  {
+    "path": "resources.json",
+    "size_bytes": 765,
+    "sha256": "ca398bf02759afa2d676a004e3ce4a1dc2d04cf65d3f856e69728022daa67d61"
+  },
+  {
+    "path": "run.log",
+    "size_bytes": 1899,
+    "sha256": "3ae1ce087d4cd90fc348aa446fedc18393c382f06994c827142f621d691355af"
+  },
+  {
+    "path": "status.json",
+    "size_bytes": 78,
+    "sha256": "ea8042a7ce9567895f6d317447ee4f0712b196c5dabe606994f3fbc69dd4bf1e"
+  },
+  {
+    "path": "summary.json",
+    "size_bytes": 3067,
+    "sha256": "b1dd8b2498e00df96082c7b5cba3a9282ec0f27a40e69b90436290588efa7eaf"
+  }
+]

@@ -1,0 +1,25 @@
+Started visual
+Calibration stage failed
+Traceback (most recent call last):
+  File "/root/qpaf/m22/worker.py", line 250, in execute
+    result = resolve_text(config, root, output) if stage == 'prepare' else run_channel(stage, config, root, output, telemetry, logger)
+                                                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/qpaf/m22/worker.py", line 189, in run_channel
+    scores = visual_scores(query_texts, pages, root/'inputs', config[channel], output, logger, cache,
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/qpaf/m11/retrieval.py", line 116, in visual_scores
+    processor = Processor.from_pretrained(config.get('processor_id', config['model_id']),
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/colpali_engine/models/qwen2_5/colqwen2_5/processing_colqwen2_5.py", line 43, in from_pretrained
+    instance = super().from_pretrained(
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/transformers/processing_utils.py", line 1307, in from_pretrained
+    processor_dict, kwargs = cls.get_processor_dict(pretrained_model_name_or_path, **kwargs)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/transformers/processing_utils.py", line 992, in get_processor_dict
+    chat_templates = {
+                     ^
+  File "/usr/local/lib/python3.11/site-packages/transformers/processing_utils.py", line 993, in <dictcomp>
+    template_name: open(template_file, "r", encoding="utf-8").read()
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: expected str, bytes or os.PathLike object, not NoneType

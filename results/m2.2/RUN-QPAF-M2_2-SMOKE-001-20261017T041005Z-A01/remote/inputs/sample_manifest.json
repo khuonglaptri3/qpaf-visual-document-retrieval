@@ -1,0 +1,69 @@
+{
+  "task_id": "M2.2",
+  "experiment_class": "calibration",
+  "sample_policy": {
+    "split": "validation",
+    "query_count": 4,
+    "page_count": 16,
+    "selection": "sha256(seed:id),id",
+    "m21_revision": "evidence/revisions/m2.1-002",
+    "page_manifest": "evidence/revisions/m1.6-002/page_manifest.csv",
+    "gate": "evidence/M1_FINAL/06_G1/G1_final_decision.md"
+  },
+  "seed": 2026,
+  "selection_uses_qrels": false,
+  "query_ids": [
+    "00b713b0c29bb3c2332acc9720ee82084e6d2223_0",
+    "014fd451d352ca6afa4520bc065d9223a77220fd_0",
+    "015834912780c3a83a8c27aa66c52252994a8b16_0",
+    "02c05ed2ea23546d0df9449c70dcaa41103a240c_1"
+  ],
+  "page_ids": [
+    "00222bf4bff30ff446c45fee544767a33532ee56_page_0011",
+    "0037474fa0400321fa39f174b2e463c6e1a2c263_page_0008",
+    "004fa5b659d542cc041ca010cd7d7ee62c6cad65_page_0020",
+    "007b9c939a070ebea56e27391ecb1cf9550909df_page_0006",
+    "007ee14d7991c3debc7ebc7558a8a5e38dfb1109_page_0017",
+    "01008ed4462f4cd8ca21bb3f0ba2c9f42adf31e0_page_0008",
+    "010a416cae90d4bb404900188fa5b3b588cf4ee6_page_0007",
+    "011a2465874f6d9a254213a736098a0a2bb02008_page_0011",
+    "017b6f58539aba1651e897c39a8104381e627794_page_0024",
+    "01867e3e7f633451b5d59291fb4ff2bce1d23d4f_page_0005",
+    "01adef9a43d47eb468db708906f53c182e01c156_page_0001",
+    "02d59c632786097daf539c0e1c249dece29d678c_page_0009",
+    "034a1a1dd2c6d0d58c3c9c95754f33fd786527a1_page_0005",
+    "03e90a945dafd353e9d86b46ca2774a29149048d_page_0008",
+    "0417d7d6ead6fe08b9b85792559b45ded94db6b8_page_0007",
+    "048ce9cbabf9b58c9764e8be143b7196b5478ac1_page_0007"
+  ],
+  "test_query_overlap": 0,
+  "m21_manifest_sha256": "ea5a19f93dce07cce375d6fb6afed630606e00916c5daa10938562aee9cddfad",
+  "m21_verification": {
+    "status": "VERIFIED",
+    "query_count": 1142,
+    "checks": {
+      "source_payload_hashes": "PASS",
+      "split_disjointness": "PASS",
+      "split_union_matches_annotations": "PASS"
+    },
+    "integrity": {
+      "pairwise_overlap": {
+        "train_validation": 0,
+        "train_test": 0,
+        "validation_test": 0
+      },
+      "union_count": 1142,
+      "annotation_query_count": 1142
+    }
+  },
+  "gate_sha256": "8a65555f0a7f38cada9fabb385e048afee01014395782fe842f38814c24ff66a",
+  "page_manifest_sha256": "431fa92d2959daadd9fc394bcbec5c90d1caf393be2a607150eeea33530652a9",
+  "dataset": {
+    "name": "Qiuchen-Wang/ViDoSeek",
+    "revision": "e91a92ba5f38690696c7e66be5c5474b54c6e791",
+    "source_manifest": "data/manifests/vidoseek-e91a92b-location.json",
+    "source_manifest_sha256": "eeb74f436ebf579359d54d05589c8b47c9017d8df35f0ebb1bff423f286e65cd"
+  },
+  "source_archive_sha256": "3b999a798ceab38703118e4cc7d9b852f86538d5bb7caad64eb545251ee00454",
+  "config_sha256": "e55ce86b3fcc9c6133351e96360d2d9aa3a3f3f42238faeccf79aa6c44c78489"
+}

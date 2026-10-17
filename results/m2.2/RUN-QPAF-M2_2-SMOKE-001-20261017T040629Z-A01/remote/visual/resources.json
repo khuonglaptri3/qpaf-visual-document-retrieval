@@ -1,0 +1,30 @@
+{
+  "phases": [
+    {
+      "phase": "download_models",
+      "seconds": 39.654686911,
+      "peak_rss_mb": 7683.5,
+      "peak_cuda_allocated_mb": 8.125,
+      "peak_cuda_reserved_mb": 20.0
+    },
+    {
+      "phase": "load_model",
+      "seconds": 2.916406445000007,
+      "peak_rss_mb": 10705.78125,
+      "peak_cuda_allocated_mb": 7629.35546875,
+      "peak_cuda_reserved_mb": 7656.0
+    },
+    {
+      "phase": "total_channel",
+      "seconds": 43.798051183,
+      "peak_rss_mb": 10705.78125,
+      "peak_cuda_allocated_mb": 7629.35546875,
+      "peak_cuda_reserved_mb": 7656.0
+    }
+  ],
+  "elapsed_seconds": 43.924030736999995,
+  "peak_rss_mb": 10705.78125,
+  "peak_cuda_reserved_mb": 7656.0,
+  "artifact_bytes": 11648,
+  "rss_poll_interval_seconds": 0.02
+}

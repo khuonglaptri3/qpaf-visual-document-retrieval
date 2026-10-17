@@ -42,3 +42,6 @@ cache/
 *.npz
 *.parquet
 
+# M2.2 rendered sample payloads; portable manifests and reports remain tracked.
+results/m2.2/**/images/
+

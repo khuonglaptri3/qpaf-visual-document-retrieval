@@ -1,0 +1,245 @@
+{
+  "digest": "c1972b19841811ebace87cd875a4d26d68b78ee95456ab31d8ae0151539c81f3",
+  "files": [
+    {
+      "path": "pyproject.toml",
+      "sha256": "ebb8a8d06ff6195c4049f09675e55085aa4e9595cfaf035ab7361e0fbbba980f"
+    },
+    {
+      "path": "requirements/m11-local.txt",
+      "sha256": "f2794370b269ce6ba4b5e118b4f7f0d8622d49ed2ed79841ea30776d4358f2b2"
+    },
+    {
+      "path": "requirements/m11-modal.lock",
+      "sha256": "44ccced6480cf8a238db61ba048bc612024c7d3eb7acbc9d3303ebc911b68a07"
+    },
+    {
+      "path": "requirements/m11-modal.txt",
+      "sha256": "00a5005b623d5d94484d11b5ff335acde45d353833c1c3aa4f8e6c05ee189ce1"
+    },
+    {
+      "path": "requirements/m12-cpu.txt",
+      "sha256": "a5124e622eb46751a98265b914627789be8e4d61f2df95167f879d8cb9557461"
+    },
+    {
+      "path": "requirements/m22-modal.lock",
+      "sha256": "f3d9ba43acbc94e7a82697ac1942d029b153e250321805cc04e70de9cc6083b6"
+    },
+    {
+      "path": "requirements/m22-modal.txt",
+      "sha256": "b4326edd9ab2a34d2571f20a4a866111990527686f8dcd09681a7bc95816ecf9"
+    },
+    {
+      "path": "scripts/audit_collisions.py",
+      "sha256": "b8e4a686b0852df735d6e4fef8846191850e020ff3b4cca10b3f8b409ee9b1ae"
+    },
+    {
+      "path": "scripts/audit_ocr_policy.py",
+      "sha256": "7b72c4571392fd8e3a3c833ebc028045384ee47ccf6fab72abb118595e22c454"
+    },
+    {
+      "path": "scripts/audit_primary_corpus.py",
+      "sha256": "9d9f2941eec0440dd7cf0882f44fd8327ff61ed5de25a4eb78cb8f7e40d7648f"
+    },
+    {
+      "path": "scripts/audit_repository.py",
+      "sha256": "3d5be4fa6db221900c7ac085cbe0099ab10563de653120103db90564ef8a2aaa"
+    },
+    {
+      "path": "scripts/download_primary_corpus.py",
+      "sha256": "1f830bf2c7e63a8eee41a17fef4882f6311776da710d1d2404deededf6e62018"
+    },
+    {
+      "path": "scripts/evaluate_m11.py",
+      "sha256": "6513fafbc95347f3b64100bdc2d2a51bbb7639501f2625767f6a395fe884b882"
+    },
+    {
+      "path": "scripts/freeze_m21_data_splits.py",
+      "sha256": "9a627296b40f46e4725e9621f3b9c3edbd2058d216f520b7d6db95906ad3aa28"
+    },
+    {
+      "path": "scripts/run_m11_modal.py",
+      "sha256": "c0fe3b215ca59b6edcfb82b018980fbd089fc157656f6d907b5dd6136ffb5957"
+    },
+    {
+      "path": "scripts/run_m22_smoke.py",
+      "sha256": "d5d29a7eda1345a511ecc318aaf148286597b06641f60f832fde798b2eac2e1c"
+    },
+    {
+      "path": "scripts/verify_m12.py",
+      "sha256": "a2fec7486934636bf2a809b56cdad81dd4178ffce731575d465a47f17102effa"
+    },
+    {
+      "path": "scripts/verify_m22_smoke.py",
+      "sha256": "eb0235df4ba53e9f6e19888bee8a9d0436e4b50b0615e9c7a02276d8797378fc"
+    },
+    {
+      "path": "src/qpaf/__init__.py",
+      "sha256": "3c676f0b96ef73c4f9eb29a27d8bcc3464303483653f2ae28c7f4e739fe9d542"
+    },
+    {
+      "path": "src/qpaf/audit.py",
+      "sha256": "0d4190e6642eed477d50cbbadd0046eeb333ca5305a6f5919ec3d610df5d29b5"
+    },
+    {
+      "path": "src/qpaf/m11/__init__.py",
+      "sha256": "f2c256e8608884fb0e4ffca4ccfd800bbbc8fea816963fb084b0e3255d49ba2b"
+    },
+    {
+      "path": "src/qpaf/m11/artifacts.py",
+      "sha256": "a71ac1d3a0ea26e9c7de60d4de4f821d910c72039499adba6ad87c9bc43ec691"
+    },
+    {
+      "path": "src/qpaf/m11/config.py",
+      "sha256": "7b2f8d25c3fdfe7b8d6f149e2aee6c1cdc41e31e5a0c04abfaed652486fc0df5"
+    },
+    {
+      "path": "src/qpaf/m11/dataset.py",
+      "sha256": "f44c87e14932bf0586fc70d15b51e9ee286949e73900617be640390ccbdcd67a"
+    },
+    {
+      "path": "src/qpaf/m11/evidence.py",
+      "sha256": "58eef596cd4bb27da2f7044ec5bf5703f59e3e6c010c4f84afff7a39498b1f85"
+    },
+    {
+      "path": "src/qpaf/m11/metrics.py",
+      "sha256": "c2d15bd922cc60b3f84a72a8828fe8a248467d892d88e9af98e4cfe3b71a3a9c"
+    },
+    {
+      "path": "src/qpaf/m11/modal_app.py",
+      "sha256": "44ba5c2f2a22c1b1bde60b0bf16793061c27cc2d5764340f4008a4d856eb4cdb"
+    },
+    {
+      "path": "src/qpaf/m11/oracle.py",
+      "sha256": "56e05e5a4d01dae5ab68ae5e11ffbaf4f9c76bee22b5cf78fabf004f493dbdf1"
+    },
+    {
+      "path": "src/qpaf/m11/pipeline.py",
+      "sha256": "edf171f9a413a5ba546f71882cc163d8281bfa9d47b8b9cd8aaad637b0a4764f"
+    },
+    {
+      "path": "src/qpaf/m11/retrieval.py",
+      "sha256": "4fc5f83b1d8fcdee02af37bfc637f35e93ddf2c207b2c4afd3c52e1ec402eb49"
+    },
+    {
+      "path": "src/qpaf/m12/__init__.py",
+      "sha256": "da36c939381d3e097a35208abdf7b5ab43b912a1c1e137638f67ab759758b2c0"
+    },
+    {
+      "path": "src/qpaf/m12/config.py",
+      "sha256": "4b50ec1b8f1f48cc47c6028235ea0e18e931349360ac65d48693ea8099fd3f6e"
+    },
+    {
+      "path": "src/qpaf/m12/features.py",
+      "sha256": "86eb5d540d2330c0fec263d587581d2f159b77461df85c57f6ecaa64fafa40b6"
+    },
+    {
+      "path": "src/qpaf/m12/losses.py",
+      "sha256": "18debc316b02146c38c36a6b1021f0db5e3ba9be55ffdb4c8be153cd11ce5395"
+    },
+    {
+      "path": "src/qpaf/m12/model.py",
+      "sha256": "05c0370343a14b70b1db37e3d2bf6fd852c4ea67f7a967af52fa0ff498adcc3e"
+    },
+    {
+      "path": "src/qpaf/m13/__init__.py",
+      "sha256": "4f6ff852d89a749c6911610bb300f9b8a510743373f557218c1f2380ebd92684"
+    },
+    {
+      "path": "src/qpaf/m13/boundary.py",
+      "sha256": "6c0897346254fe8d751a7f68cc7dee1e21e2dba1c920ba535b90307796a1cee8"
+    },
+    {
+      "path": "src/qpaf/m13/corpus.py",
+      "sha256": "5a4e60a8be5d64a67244b841312ca3d5fcfe152c71fd59bea8d1b58de37efb66"
+    },
+    {
+      "path": "src/qpaf/m13/splits.py",
+      "sha256": "341eed1f421646f4e2c5d1c52e12733f9849d074986b6d46db19ff2b459a65f1"
+    },
+    {
+      "path": "src/qpaf/m13/vidoseek.py",
+      "sha256": "9724e0e26e376e8559ff91eb064175dbb427a3142e39779c1c134e8aeec52b44"
+    },
+    {
+      "path": "src/qpaf/m16/__init__.py",
+      "sha256": "c4e5942acc652d47f9d09d9d4ed7cfccebf820c64e698e690a5f3e6e041f7e5e"
+    },
+    {
+      "path": "src/qpaf/m16/detector.py",
+      "sha256": "7863926375ce7eb8041141fcfdcf8be3ca35140fd6658e6d5db853f068aef724"
+    },
+    {
+      "path": "src/qpaf/m16/manifest.py",
+      "sha256": "1b20c75318186094cb47754824a4a21a89fa9c100a0c9263fcd8f0c28b368d5a"
+    },
+    {
+      "path": "src/qpaf/m16/real_corpus.py",
+      "sha256": "bcd3c5f9b1c1ba173ff78b1f9bd9eba1b842136ca157774f8cf95516e2cb534a"
+    },
+    {
+      "path": "src/qpaf/m16/report.py",
+      "sha256": "850dab8d76fe5f11c8be454dd108ef1e17c4412a3b44bea66367da4321814e19"
+    },
+    {
+      "path": "src/qpaf/m18/__init__.py",
+      "sha256": "942bcaa139785d70821d172969afe8ed3094d33fef7384342f499436f0edfaaf"
+    },
+    {
+      "path": "src/qpaf/m18/namespace.py",
+      "sha256": "6e05cafb8db4808e073742ced9ba3fc6f0ecbdbfec9db9f55adfcc65a55ad12a"
+    },
+    {
+      "path": "src/qpaf/m18/ocr_policy.py",
+      "sha256": "69ae47b8c4f95a213b10f851899874e98953ef85705f36a3f625578acbd20bc0"
+    },
+    {
+      "path": "src/qpaf/m21/__init__.py",
+      "sha256": "1b8fbaddb787bfc0d0eb6aa189f173c929a4de1549f43241826cf1f4375ccd06"
+    },
+    {
+      "path": "src/qpaf/m21/data_splits.py",
+      "sha256": "77b4b99e4dad151e9109910b71469a55138605ada751aff1055175f67af9e603"
+    },
+    {
+      "path": "src/qpaf/m22/__init__.py",
+      "sha256": "595214ddc38f2285af31ebee2ce633be0576a4f0b803764e3787cca5322422cc"
+    },
+    {
+      "path": "src/qpaf/m22/checks.py",
+      "sha256": "c22d7da130b8e9d18b5521ea7eda0d018cbd90a9d963589b5411239edbaf9028"
+    },
+    {
+      "path": "src/qpaf/m22/config.py",
+      "sha256": "94798c0e1c9ae3db8913f1c30f3ed546ac49082861d5394035ec5c6951f2b7c0"
+    },
+    {
+      "path": "src/qpaf/m22/evidence.py",
+      "sha256": "5aaf8ba27aaee7b2ba1e2e4933766435462736843a07f99e8229c2e89434b8a3"
+    },
+    {
+      "path": "src/qpaf/m22/sample.py",
+      "sha256": "3e034cffdb7daf0210b1b4141f9b3899c4e748709b39de42f8224f4df7dc2618"
+    },
+    {
+      "path": "src/qpaf/m22/telemetry.py",
+      "sha256": "fa2919e0d76db416392ed2844f37cdd6c3cdbdbfeae34d608521849e6dd1af1a"
+    },
+    {
+      "path": "src/qpaf/m22/worker.py",
+      "sha256": "dc9974c16185aff4c215d7b7acb4386af4d2b0ad944ed73c9d6b6cbaf3cc3feb"
+    },
+    {
+      "path": "selected_image_requirements",
+      "sha256": "f3d9ba43acbc94e7a82697ac1942d029b153e250321805cc04e70de9cc6083b6"
+    }
+  ],
+  "git_commit": "51087eee5e00ad53572cae2b7b2da141ce4dd082",
+  "git_status": "M .gitignore\n M README.md\n M src/qpaf/m11/retrieval.py\n?? configs/m2.2/\n?? docs/superpowers/README.md\n?? docs/superpowers/plans/2026-10-17-m22-retriever-smoke.md\n?? docs/superpowers/progress/\n?? docs/superpowers/reports/\n?? docs/superpowers/specs/2026-10-17-m22-retriever-smoke-design.md\n?? requirements/m22-modal.lock\n?? requirements/m22-modal.txt\n?? results/m2.2/\n?? scripts/run_m22_smoke.py\n?? scripts/verify_m22_smoke.py\n?? src/qpaf/m22/\n?? tests/test_m22_smoke.py",
+  "command": [
+    "C:\\Users\\lanph\\OneDrive\\Desktop\\Artificial_Intelligent_Project\\.venv\\Scripts\\python.exe",
+    "scripts/run_m22_smoke.py",
+    "--retry-of",
+    "RUN-QPAF-M2_2-SMOKE-001-20261017T041005Z-A01"
+  ]
+}

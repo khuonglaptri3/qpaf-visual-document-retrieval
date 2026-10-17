@@ -8,6 +8,11 @@
 /results/m1.1/implementation-check/** -text -whitespace
 /results/m1.2/** -text -whitespace
 
+# M2.2 receipts bind exact artifact bytes, including Windows line endings.
+/results/m2.2/RUN-*/** -text -eol -whitespace
+/results/m2.2/verification/** -text -eol -whitespace
+/evidence/revisions/m2.2-001/** -text -eol -whitespace
+
 # Preserve the hash-addressed historical M1.5 freeze bytes, including mixed EOLs.
 /evidence/M1_FINAL/02_protocol/*_policy.md -text -eol
 /evidence/M1_FINAL/02_protocol/frozen_protocol.md -text -eol

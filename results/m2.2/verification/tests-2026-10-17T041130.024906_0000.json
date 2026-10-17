@@ -1,0 +1,409 @@
+{
+  "completed_utc": "2026-10-17T04:11:30.024906+00:00",
+  "returncode": 0,
+  "stdout": "2026-10-17 04:11:17,059 INFO stage started: prepare\n2026-10-17 04:11:17,060 INFO stage completed\n2026-10-17 04:11:17,127 INFO stage started: prepare\n2026-10-17 04:11:17,127 INFO stage completed\n2026-10-17 04:11:17,195 INFO stage started: visual\n2026-10-17 04:11:17,195 ERROR stage failed\nTraceback (most recent call last):\n  File \"/tmp/tmp4znfo9c8/tests/test_m11_artifacts.py\", line 135, in test_failure_keeps_log_but_cannot_be_used_as_complete\n    raise RuntimeError('expected')\nRuntimeError: expected\n2026-10-17 04:11:17,260 INFO stage started: visual\n2026-10-17 04:11:17,260 INFO stage completed\n2026-10-17 04:11:17,329 INFO stage started: prepare\n2026-10-17 04:11:17,329 INFO stage completed\n2026-10-17 04:11:17,722 INFO stage started: prepare\n2026-10-17 04:11:17,722 INFO stage completed\n2026-10-17 04:11:17,800 INFO stage started: bm25\n2026-10-17 04:11:17,801 INFO stage completed\n2026-10-17 04:11:17,898 INFO stage started: dense\n2026-10-17 04:11:17,899 INFO stage completed\n2026-10-17 04:11:18,037 INFO stage started: visual\n2026-10-17 04:11:18,038 INFO stage completed\n2026-10-17 04:11:18,119 INFO stage started: oracle\n2026-10-17 04:11:18,123 INFO evaluated 1 queries; independent QA remains pending\n2026-10-17 04:11:18,123 INFO stage completed\n2026-10-17 04:11:18,813 INFO stage started: dense\n2026-10-17 04:11:18,813 INFO stage completed\n",
+  "stderr": "test_audit_infrastructure_is_not_research_method_code (test_audit.AuditTests.test_audit_infrastructure_is_not_research_method_code) ... ok\ntest_credentials_and_generated_evidence_are_excluded (test_audit.AuditTests.test_credentials_and_generated_evidence_are_excluded) ... ok\ntest_empty_or_malformed_manifest_is_rejected (test_audit.AuditTests.test_empty_or_malformed_manifest_is_rejected) ... ok\ntest_empty_research_folders_are_gaps_not_a_pass (test_audit.AuditTests.test_empty_research_folders_are_gaps_not_a_pass) ... ok\ntest_existing_output_is_preserved (test_audit.AuditTests.test_existing_output_is_preserved) ... ok\ntest_junction_is_excluded_without_path_is_junction (test_audit.AuditTests.test_junction_is_excluded_without_path_is_junction) ... skipped 'Windows junction compatibility'\ntest_known_bytes_and_unicode_path_are_hashed (test_audit.AuditTests.test_known_bytes_and_unicode_path_are_hashed) ... ok\ntest_manifest_path_traversal_is_rejected (test_audit.AuditTests.test_manifest_path_traversal_is_rejected) ... ok\ntest_nonexistent_root_is_rejected_without_creation (test_audit.AuditTests.test_nonexistent_root_is_rejected_without_creation) ... ok\ntest_output_cannot_escape_root (test_audit.AuditTests.test_output_cannot_escape_root) ... ok\ntest_path_and_descriptor_change_times_are_compared_separately (test_audit.AuditTests.test_path_and_descriptor_change_times_are_compared_separately) ... ok\ntest_real_assets_are_classified_without_claiming_provenance (test_audit.AuditTests.test_real_assets_are_classified_without_claiming_provenance) ... ok\ntest_replaced_file_with_same_size_and_mtime_has_no_valid_hash (test_audit.AuditTests.test_replaced_file_with_same_size_and_mtime_has_no_valid_hash) ... ok\ntest_symlink_is_not_followed (test_audit.AuditTests.test_symlink_is_not_followed) ... ok\ntest_temporary_files_are_excluded_from_reproducible_snapshot (test_audit.AuditTests.test_temporary_files_are_excluded_from_reproducible_snapshot) ... ok\ntest_verification_detects_modified_and_deleted_content (test_audit.AuditTests.test_verification_detects_modified_and_deleted_content) ... ok\ntest_atomic_write_preserves_original_after_persistent_windows_error (test_m11_artifacts.ArtifactTests.test_atomic_write_preserves_original_after_persistent_windows_error) ... ok\ntest_atomic_write_recovers_from_temporary_windows_file_lock (test_m11_artifacts.ArtifactTests.test_atomic_write_recovers_from_temporary_windows_file_lock) ... ok\ntest_changed_config_cannot_reuse_completed_stage (test_m11_artifacts.ArtifactTests.test_changed_config_cannot_reuse_completed_stage) ... ok\ntest_changing_local_download_path_does_not_invalidate_cloud_cache (test_m11_artifacts.ArtifactTests.test_changing_local_download_path_does_not_invalidate_cloud_cache) ... ok\ntest_failure_keeps_log_but_cannot_be_used_as_complete (test_m11_artifacts.ArtifactTests.test_failure_keeps_log_but_cannot_be_used_as_complete) ... ok\ntest_success_receipt_and_corruption_detection (test_m11_artifacts.ArtifactTests.test_success_receipt_and_corruption_detection) ... ok\ntest_missing_zero_page_and_duplicate_queries_fail (test_m11_artifacts.DatasetTests.test_missing_zero_page_and_duplicate_queries_fail) ... ok\ntest_original_wrapper_and_one_based_page (test_m11_artifacts.DatasetTests.test_original_wrapper_and_one_based_page) ... ok\ntest_real_pdf_rendering_preserves_empty_pages_and_one_based_labels (test_m11_artifacts.DatasetTests.test_real_pdf_rendering_preserves_empty_pages_and_one_based_labels) ... ok\ntest_selection_is_id_only_and_order_independent (test_m11_artifacts.DatasetTests.test_selection_is_id_only_and_order_independent) ... ok\ntest_zip_traversal_does_not_write_outside_destination (test_m11_artifacts.DatasetTests.test_zip_traversal_does_not_write_outside_destination) ... ok\ntest_preset_and_cli_overrides (test_m11_core.ConfigTests.test_preset_and_cli_overrides) ... ok\ntest_unknown_override_and_invalid_resource_fail (test_m11_core.ConfigTests.test_unknown_override_and_invalid_resource_fail) ... ok\ntest_bootstrap_is_paired_and_deterministic (test_m11_core.MetricTests.test_bootstrap_is_paired_and_deterministic) ... ok\ntest_duplicate_ranking_and_graded_labels_are_rejected (test_m11_core.MetricTests.test_duplicate_ranking_and_graded_labels_are_rejected) ... ok\ntest_idcg_includes_relevant_pages_outside_pool (test_m11_core.MetricTests.test_idcg_includes_relevant_pages_outside_pool) ... ok\ntest_binary_oracle_matches_exhaustive_weight_assignment (test_m11_core.OracleTests.test_binary_oracle_matches_exhaustive_weight_assignment) ... ok\ntest_candidate_pool_does_not_read_labels (test_m11_core.OracleTests.test_candidate_pool_does_not_read_labels) ... ok\ntest_constant_scores_use_id_ties (test_m11_core.OracleTests.test_constant_scores_use_id_ties) ... ok\ntest_global_chooses_one_profile_for_the_entire_study (test_m11_core.OracleTests.test_global_chooses_one_profile_for_the_entire_study) ... ok\ntest_nonfinite_or_wrong_id_cache_fails (test_m11_core.OracleTests.test_nonfinite_or_wrong_id_cache_fails) ... ok\ntest_vertex_containing_sets_have_same_exact_qpaf (test_m11_core.OracleTests.test_vertex_containing_sets_have_same_exact_qpaf) ... ok\ntest_bm25_b_one_keeps_empty_pages_finite (test_m11_pipeline.PipelineTests.test_bm25_b_one_keeps_empty_pages_finite) ... ok\ntest_bm25_positive_idf_and_empty_pages (test_m11_pipeline.PipelineTests.test_bm25_positive_idf_and_empty_pages) ... ok\ntest_cached_fixture_produces_verifiable_evidence_and_reuses_stages (test_m11_pipeline.PipelineTests.test_cached_fixture_produces_verifiable_evidence_and_reuses_stages) ... ok\ntest_launcher_dry_run_uses_runtime_config_without_credentials (test_m11_pipeline.PipelineTests.test_launcher_dry_run_uses_runtime_config_without_credentials) ... ok\ntest_local_evaluator_rejects_generation_config_mismatch (test_m11_pipeline.PipelineTests.test_local_evaluator_rejects_generation_config_mismatch) ... ok\ntest_nonfinite_cache_rejected_on_write (test_m11_pipeline.PipelineTests.test_nonfinite_cache_rejected_on_write) ... ok\ntest_reordered_cache_is_rejected (test_m11_pipeline.PipelineTests.test_reordered_cache_is_rejected) ... ok\ntest_invalid_fields_are_rejected_before_model_construction (test_m12_config.MethodConfigTests.test_invalid_fields_are_rejected_before_model_construction) ... ok\ntest_shared_preset_loads (test_m12_config.MethodConfigTests.test_shared_preset_loads) ... ok\ntest_active_nonfinite_scores_and_invalid_identifiers_fail (test_m12_core.FeatureTests.test_active_nonfinite_scores_and_invalid_identifiers_fail) ... ok\ntest_bad_shape_dtype_empty_query_pool_and_cap_fail (test_m12_core.FeatureTests.test_bad_shape_dtype_empty_query_pool_and_cap_fail) ... ok\ntest_constant_channels_singleton_and_empty_query_are_defined (test_m12_core.FeatureTests.test_constant_channels_singleton_and_empty_query_are_defined) ... ok\ntest_feature_construction_disconnects_retriever_autograd (test_m12_core.FeatureTests.test_feature_construction_disconnects_retriever_autograd) ... ok\ntest_padding_and_permutation_preserve_page_features (test_m12_core.FeatureTests.test_padding_and_permutation_preserve_page_features) ... ok\ntest_query_length_is_capped_unicode_word_count (test_m12_core.FeatureTests.test_query_length_is_capped_unicode_word_count) ... ok\ntest_thirteen_features_match_hand_computation (test_m12_core.FeatureTests.test_thirteen_features_match_hand_computation) ... ok\ntest_backward_updates_only_gate_even_with_attached_input_tensors (test_m12_core.GateTests.test_backward_updates_only_gate_even_with_attached_input_tensors) ... ok\ntest_bad_gate_settings_are_rejected (test_m12_core.GateTests.test_bad_gate_settings_are_rejected) ... ok\ntest_fusion_matches_known_weighted_scores (test_m12_core.GateTests.test_fusion_matches_known_weighted_scores) ... ok\ntest_fusion_rejects_non_simplex_weights (test_m12_core.GateTests.test_fusion_rejects_non_simplex_weights) ... ok\ntest_gate_loss_autograd_matches_finite_differences (test_m12_core.GateTests.test_gate_loss_autograd_matches_finite_differences) ... ok\ntest_granularity_matches_softmax_and_uniform_fusion_by_hand (test_m12_core.GateTests.test_granularity_matches_softmax_and_uniform_fusion_by_hand) ... ok\ntest_mask_and_permutation_do_not_change_real_predictions (test_m12_core.GateTests.test_mask_and_permutation_do_not_change_real_predictions) ... ok\ntest_matched_variants_share_initial_parameters_and_budget (test_m12_core.GateTests.test_matched_variants_share_initial_parameters_and_budget) ... ok\ntest_small_learning_run_reduces_loss_for_both_variants (test_m12_core.GateTests.test_small_learning_run_reduces_loss_for_both_variants) ... ok\ntest_inactive_scores_have_zero_gradient (test_m12_core.LossTests.test_inactive_scores_have_zero_gradient) ... ok\ntest_large_score_difference_is_numerically_stable (test_m12_core.LossTests.test_large_score_difference_is_numerically_stable) ... ok\ntest_no_pairs_graded_labels_and_nonfinite_active_values_fail (test_m12_core.LossTests.test_no_pairs_graded_labels_and_nonfinite_active_values_fail) ... ok\ntest_pairwise_loss_and_derivative_match_hand_calculation (test_m12_core.LossTests.test_pairwise_loss_and_derivative_match_hand_calculation) ... ok\ntest_query_mean_does_not_overweight_queries_with_more_pairs (test_m12_core.LossTests.test_query_mean_does_not_overweight_queries_with_more_pairs) ... ok\ntest_bad_config_fails_without_creating_output (test_m12_verification.VerificationTests.test_bad_config_fails_without_creating_output) ... ok\ntest_cli_exports_verified_evidence_and_preserves_existing_output (test_m12_verification.VerificationTests.test_cli_exports_verified_evidence_and_preserves_existing_output) ... ok\ntest_assert_execution_authorized_raises_permission_error (test_m13_boundary.TestM13Boundary.test_assert_execution_authorized_raises_permission_error) ... ok\ntest_boundary_status_metadata (test_m13_boundary.TestM13Boundary.test_boundary_status_metadata) ... ok\ntest_default_boundary_is_closed (test_m13_boundary.TestM13Boundary.test_default_boundary_is_closed) ... ok\ntest_cli_execution_with_synthetic_fixture (test_m13_cli.TestM13CLI.test_cli_execution_with_synthetic_fixture) ... ok\ntest_cli_rejects_empty_annotations_and_corrupt_pdfs_without_creating_report (test_m13_cli.TestM13CLI.test_cli_rejects_empty_annotations_and_corrupt_pdfs_without_creating_report) ... ok\ntest_cli_rejects_unknown_documents_and_actual_page_overflow (test_m13_cli.TestM13CLI.test_cli_rejects_unknown_documents_and_actual_page_overflow) ... ok\ntest_missing_inputs_cannot_report_verified (test_m13_cli.TestM13CLI.test_missing_inputs_cannot_report_verified) ... ok\ntest_verify_detects_tampering_and_does_not_rewrite_any_evidence (test_m13_cli.TestM13CLI.test_verify_detects_tampering_and_does_not_rewrite_any_evidence) ... ok\ntest_directory_inspection_reads_pages_and_source_bytes (test_m13_corpus.TestM13Corpus.test_directory_inspection_reads_pages_and_source_bytes) ... ok\ntest_generate_synthetic_vidoseek_fixture (test_m13_corpus.TestM13Corpus.test_generate_synthetic_vidoseek_fixture) ... ok\ntest_inspect_pdf_archive (test_m13_corpus.TestM13Corpus.test_inspect_pdf_archive) ... ok\ntest_rejects_empty_corrupt_unsafe_and_ambiguous_archives (test_m13_corpus.TestM13Corpus.test_rejects_empty_corrupt_unsafe_and_ambiguous_archives) ... ok\ntest_rejects_zip_symlink (test_m13_corpus.TestM13Corpus.test_rejects_zip_symlink) ... ok\ntest_scan_pdf_directory (test_m13_corpus.TestM13Corpus.test_scan_pdf_directory) ... ok\ntest_bundle_rejects_policy_changes_and_ids_even_with_updated_hash (test_m13_splits.TestM13Splits.test_bundle_rejects_policy_changes_and_ids_even_with_updated_hash) ... ok\ntest_bundle_roundtrip_is_create_once_and_verification_is_read_only (test_m13_splits.TestM13Splits.test_bundle_roundtrip_is_create_once_and_verification_is_read_only) ... ok\ntest_detects_overlap (test_m13_splits.TestM13Splits.test_detects_overlap) ... ok\ntest_duplicate_ids_are_rejected_within_one_split_and_input (test_m13_splits.TestM13Splits.test_duplicate_ids_are_rejected_within_one_split_and_input) ... ok\ntest_manifest_serialization_and_hash (test_m13_splits.TestM13Splits.test_manifest_serialization_and_hash) ... ok\ntest_split_counts_and_reproducibility (test_m13_splits.TestM13Splits.test_split_counts_and_reproducibility) ... ok\ntest_zero_leakage_and_invariants (test_m13_splits.TestM13Splits.test_zero_leakage_and_invariants) ... ok\ntest_duplicate_query_id_rejected (test_m13_vidoseek.TestM13ViDoSeek.test_duplicate_query_id_rejected) ... ok\ntest_empty_query_rejected (test_m13_vidoseek.TestM13ViDoSeek.test_empty_query_rejected) ... ok\ntest_out_of_bounds_page_rejected (test_m13_vidoseek.TestM13ViDoSeek.test_out_of_bounds_page_rejected) ... ok\ntest_page_id_formatting_and_parsing (test_m13_vidoseek.TestM13ViDoSeek.test_page_id_formatting_and_parsing) ... ok\ntest_parse_valid_annotations (test_m13_vidoseek.TestM13ViDoSeek.test_parse_valid_annotations) ... ok\ntest_unknown_documents_empty_corpus_and_boolean_pages_rejected (test_m13_vidoseek.TestM13ViDoSeek.test_unknown_documents_empty_corpus_and_boolean_pages_rejected) ... ok\ntest_alias_resolution_and_normalization (test_m16_collision.TestM16CollisionAudit.test_alias_resolution_and_normalization)\nVerify normalization of arbitrary alias strings to canonical page IDs. ... ok\ntest_cli_execution_with_fixture (test_m16_collision.TestM16CollisionAudit.test_cli_execution_with_fixture)\nVerify standalone execution of scripts/audit_collisions.py. ... ok\ntest_detect_content_duplicates (test_m16_collision.TestM16CollisionAudit.test_detect_content_duplicates)\nVerify grouping of identical content hashes. ... ok\ntest_detect_split_leakage (test_m16_collision.TestM16CollisionAudit.test_detect_split_leakage)\nVerify flag when identical content spans across train/val/test splits. ... ok\ntest_export_manifests_and_duplicate_csvs (test_m16_collision.TestM16CollisionAudit.test_export_manifests_and_duplicate_csvs)\nVerify that exported CSVs strictly conform to the expected schema. ... ok\ntest_page_record_and_manifest_construction (test_m16_collision.TestM16CollisionAudit.test_page_record_and_manifest_construction)\nVerify building canonical page records from raw inputs. ... ok\ntest_verify_qrel_consistency_and_orphans (test_m16_collision.TestM16CollisionAudit.test_verify_qrel_consistency_and_orphans)\nVerify query-document relevance mappings against canonical pages. ... ok\ntest_duplicate_page_ids_rejected (test_m16_real_audit.RealAuditTests.test_duplicate_page_ids_rejected) ... ok\ntest_empty_corpus_is_not_pass (test_m16_real_audit.RealAuditTests.test_empty_corpus_is_not_pass) ... ok\ntest_every_positive_qrel_must_resolve (test_m16_real_audit.RealAuditTests.test_every_positive_qrel_must_resolve) ... ok\ntest_fixture_output_is_create_once (test_m16_real_audit.RealAuditTests.test_fixture_output_is_create_once) ... ok\ntest_missing_input_never_falls_back_to_fixture (test_m16_real_audit.RealAuditTests.test_missing_input_never_falls_back_to_fixture) ... ok\ntest_real_pdf_cli_uses_m13_splits_and_measures_shared_documents (test_m16_real_audit.RealAuditTests.test_real_pdf_cli_uses_m13_splits_and_measures_shared_documents) ... ok\ntest_unknown_alias_has_unresolved_record (test_m16_real_audit.RealAuditTests.test_unknown_alias_has_unresolved_record) ... ok\ntest_claim_boundaries_do_not_promote_oracle_or_software_checks (test_m17_registry.M17RegistryDraftTests.test_claim_boundaries_do_not_promote_oracle_or_software_checks) ... ok\ntest_every_registry_issue_reference_resolves_to_an_open_issue (test_m17_registry.M17RegistryDraftTests.test_every_registry_issue_reference_resolves_to_an_open_issue) ... ok\ntest_m16_evidence_integrity_failures_are_explicitly_blocked (test_m17_registry.M17RegistryDraftTests.test_m16_evidence_integrity_failures_are_explicitly_blocked) ... ok\ntest_m18_manifest_binds_all_four_payloads_by_size_and_hash (test_m17_registry.M17RegistryDraftTests.test_m18_manifest_binds_all_four_payloads_by_size_and_hash) ... ok\ntest_post_merge_reconciliation_is_append_only_and_remains_fail_closed (test_m17_registry.M17RegistryDraftTests.test_post_merge_reconciliation_is_append_only_and_remains_fail_closed) ... ok\ntest_registry_schema_and_controlled_vocabularies_are_valid (test_m17_registry.M17RegistryDraftTests.test_registry_schema_and_controlled_vocabularies_are_valid) ... ok\ntest_required_draft_artifacts_exist_without_final_signoff (test_m17_registry.M17RegistryDraftTests.test_required_draft_artifacts_exist_without_final_signoff) ... ok\ntest_traceability_covers_every_registered_experiment_and_real_paths_exist (test_m17_registry.M17RegistryDraftTests.test_traceability_covers_every_registered_experiment_and_real_paths_exist) ... ok\ntest_cli_execution_and_generation (test_m18_ocr.TestM18OCRPolicy.test_cli_execution_and_generation)\nVerify standalone execution of scripts/audit_ocr_policy.py. ... ok\ntest_corrupted_mojibake_triggers_ocr_fallback (test_m18_ocr.TestM18OCRPolicy.test_corrupted_mojibake_triggers_ocr_fallback)\nText with high ratio of unprintable control characters triggers OCR fallback. ... ok\ntest_create_run_namespace_create_once (test_m18_ocr.TestM18OCRPolicy.test_create_run_namespace_create_once)\nCreating an existing namespace must fail-closed with FileExistsError. ... ok\ntest_empty_text_and_low_confidence_fails (test_m18_ocr.TestM18OCRPolicy.test_empty_text_and_low_confidence_fails)\nZero text and OCR failure leads to EXTRACTION_FAILED. ... ok\ntest_format_and_parse_canonical_run_id (test_m18_ocr.TestM18OCRPolicy.test_format_and_parse_canonical_run_id)\nVerify format and parsing of Thanh's M1.7 canonical Run ID. ... ok\ntest_native_text_qualification (test_m18_ocr.TestM18OCRPolicy.test_native_text_qualification)\nClean academic text with > 50 chars passes native text check. ... ok\ntest_short_text_triggers_ocr_fallback (test_m18_ocr.TestM18OCRPolicy.test_short_text_triggers_ocr_fallback)\nShort text (< 50 chars) triggers OCR fallback. ... ok\ntest_confident_ocr_has_distinct_qualified_route (test_m18_runtime.PolicyRuntimeTests.test_confident_ocr_has_distinct_qualified_route) ... ok\ntest_empty_native_routes_to_ocr_but_empty_ocr_fails (test_m18_runtime.PolicyRuntimeTests.test_empty_native_routes_to_ocr_but_empty_ocr_fails) ... ok\ntest_launcher_guard_precedes_app_construction (test_m18_runtime.PolicyRuntimeTests.test_launcher_guard_precedes_app_construction) ... ok\ntest_long_ocr_text_does_not_override_low_or_invalid_confidence (test_m18_runtime.PolicyRuntimeTests.test_long_ocr_text_does_not_override_low_or_invalid_confidence) ... ok\ntest_namespace_rejects_mismatch_and_traversal_before_writing (test_m18_runtime.PolicyRuntimeTests.test_namespace_rejects_mismatch_and_traversal_before_writing) ... ok\ntest_real_stages_block_before_preparation_or_output_creation (test_m18_runtime.PolicyRuntimeTests.test_real_stages_block_before_preparation_or_output_creation) ... ok\ntest_remote_worker_blocks_before_volume_access_even_with_fixture_marker (test_m18_runtime.PolicyRuntimeTests.test_remote_worker_blocks_before_volume_access_even_with_fixture_marker) ... ok\ntest_retry_run_requires_matching_prior_attempt (test_m18_runtime.PolicyRuntimeTests.test_retry_run_requires_matching_prior_attempt) ... ok\ntest_run_ids_validate_dates_attempts_and_timezone (test_m18_runtime.PolicyRuntimeTests.test_run_ids_validate_dates_attempts_and_timezone) ... ok\ntest_run_metadata_is_immutable_but_allows_stage_resume (test_m18_runtime.PolicyRuntimeTests.test_run_metadata_is_immutable_but_allows_stage_resume) ... ok\ntest_corrupt_pdf_leaves_failure_evidence_and_cannot_pass (test_m18_runtime.PrepareOCRRuntimeTests.test_corrupt_pdf_leaves_failure_evidence_and_cannot_pass) ... cannot open doc.pdf: Failed to load document (PDFium: Data format error).\nok\ntest_engine_version_mismatch_is_logged_and_stops_extraction (test_m18_runtime.PrepareOCRRuntimeTests.test_engine_version_mismatch_is_logged_and_stops_extraction) ... ok\ntest_failures_persist_pages_and_images_before_fraction_stops_run (test_m18_runtime.PrepareOCRRuntimeTests.test_failures_persist_pages_and_images_before_fraction_stops_run) ... ok\ntest_scan_fallback_uses_word_confidence_and_canonical_page_ids (test_m18_runtime.PrepareOCRRuntimeTests.test_scan_fallback_uses_word_confidence_and_canonical_page_ids) ... ok\ntest_cli_exports_create_once_verified_evidence (test_m21_data_splits.TestM21DataSplits.test_cli_exports_create_once_verified_evidence) ... ok\ntest_freeze_binds_source_and_split_manifests (test_m21_data_splits.TestM21DataSplits.test_freeze_binds_source_and_split_manifests) ... ok\ntest_freeze_records_active_split_roles (test_m21_data_splits.TestM21DataSplits.test_freeze_records_active_split_roles) ... ok\ntest_freeze_rejects_tampered_reproduced_payload (test_m21_data_splits.TestM21DataSplits.test_freeze_rejects_tampered_reproduced_payload) ... ok\ntest_freeze_rejects_wrong_dataset_identity (test_m21_data_splits.TestM21DataSplits.test_freeze_rejects_wrong_dataset_identity) ... ok\ntest_freeze_reports_split_hashes_and_zero_overlap (test_m21_data_splits.TestM21DataSplits.test_freeze_reports_split_hashes_and_zero_overlap) ... ok\ntest_freeze_requires_exact_payload_inventory (test_m21_data_splits.TestM21DataSplits.test_freeze_requires_exact_payload_inventory) ... ok\ntest_deterministic_selection_is_independent_of_input_order_and_labels (test_m22_smoke.BoundaryTests.test_deterministic_selection_is_independent_of_input_order_and_labels) ... ok\ntest_payload_cap_applies_to_uncompressed_bytes (test_m22_smoke.BoundaryTests.test_payload_cap_applies_to_uncompressed_bytes) ... ok\ntest_rejects_test_split_and_unbounded_or_mutable_settings (test_m22_smoke.BoundaryTests.test_rejects_test_split_and_unbounded_or_mutable_settings) ... ok\ntest_selection_rejects_duplicate_and_unknown_ids (test_m22_smoke.BoundaryTests.test_selection_rejects_duplicate_and_unknown_ids) ... ok\ntest_low_confidence_and_engine_timeout_remain_failures (test_m22_smoke.ExtractionTests.test_low_confidence_and_engine_timeout_remain_failures) ... ok\ntest_no_words_keeps_page_and_records_m23_review (test_m22_smoke.ExtractionTests.test_no_words_keeps_page_and_records_m23_review) ... ok\ntest_cpu_and_gpu_functions_have_distinct_registered_names (test_m22_smoke.FailureTests.test_cpu_and_gpu_functions_have_distinct_registered_names) ... ok\ntest_error_classification_preserves_reason (test_m22_smoke.FailureTests.test_error_classification_preserves_reason) ... ok\ntest_oom_and_timeout_leave_durable_failed_stage_evidence (test_m22_smoke.FailureTests.test_oom_and_timeout_leave_durable_failed_stage_evidence) ... ok\ntest_config_drift_rejected_before_inference (test_m22_smoke.InputIntegrityTests.test_config_drift_rejected_before_inference) ... ok\ntest_reordered_ids_rejected_even_with_new_file_hashes (test_m22_smoke.InputIntegrityTests.test_reordered_ids_rejected_even_with_new_file_hashes) ... ok\ntest_valid_inputs_then_modified_image_rejected (test_m22_smoke.InputIntegrityTests.test_valid_inputs_then_modified_image_rejected) ... ok\ntest_maxsim_reference_and_padding_alignment (test_m22_smoke.MultiVectorTests.test_maxsim_reference_and_padding_alignment) ... ok\ntest_bm25_matches_hand_computed_repeated_term_and_scalar_reference (test_m22_smoke.ScoreTests.test_bm25_matches_hand_computed_repeated_term_and_scalar_reference) ... ok\ntest_bm25_zero_length_corpus (test_m22_smoke.ScoreTests.test_bm25_zero_length_corpus) ... ok\ntest_cache_rejects_id_order_channel_nonfinite_and_tampering (test_m22_smoke.ScoreTests.test_cache_rejects_id_order_channel_nonfinite_and_tampering) ... ok\ntest_ties_use_page_id_and_compare_rejects_bad_shapes (test_m22_smoke.ScoreTests.test_ties_use_page_id_and_compare_rejects_bad_shapes) ... ok\n\n----------------------------------------------------------------------\nRan 164 tests in 15.362s\n\nOK (skipped=1)\n",
+  "environment": {
+    "python": "3.11.12 (main, May 21 2025, 23:34:13) [GCC 12.2.0]",
+    "platform": "Linux-4.19.0-gvisor-x86_64-with-glibc2.36",
+    "packages": {
+      "sympy": "1.14.0",
+      "PyYAML": "6.0.3",
+      "regex": "2026.9.10",
+      "sentence-transformers": "3.4.1",
+      "wheel": "0.45.1",
+      "nvidia-cufft-cu12": "11.3.0.4",
+      "triton": "3.3.1",
+      "nvidia-nccl-cu12": "2.26.2",
+      "numpy": "2.2.6",
+      "nvidia-cuda-runtime-cu12": "12.6.77",
+      "nvidia-cublas-cu12": "12.6.4.1",
+      "nvidia-cudnn-cu12": "9.5.1.17",
+      "urllib3": "2.8.0",
+      "torchvision": "0.22.1",
+      "cloudpickle": "3.1.2",
+      "nvidia-cusparse-cu12": "12.5.4.2",
+      "packaging": "26.3",
+      "scikit-learn": "1.9.1",
+      "nvidia-nvjitlink-cu12": "12.6.85",
+      "charset-normalizer": "3.5.1",
+      "pip": "25.2",
+      "huggingface-hub": "0.34.4",
+      "filelock": "4.0.3",
+      "pytesseract": "0.3.13",
+      "typing_extensions": "4.13.2",
+      "mpmath": "1.3.0",
+      "nvidia-cuda-nvrtc-cu12": "12.6.77",
+      "setuptools": "84.0.0",
+      "threadpoolctl": "3.7.0",
+      "tokenizers": "0.21.4",
+      "tqdm": "4.70.1",
+      "nvidia-curand-cu12": "10.3.7.77",
+      "Jinja2": "3.1.6",
+      "nvidia-cuda-cupti-cu12": "12.6.80",
+      "nvidia-cusparselt-cu12": "0.6.3",
+      "colpali_engine": "0.3.12",
+      "pillow": "11.3.0",
+      "requests": "2.34.2",
+      "nvidia-nvtx-cu12": "12.6.77",
+      "safetensors": "0.8.0",
+      "uv": "0.8.17",
+      "idna": "3.10",
+      "hf-xet": "1.6.0",
+      "nvidia-cufile-cu12": "1.11.1.6",
+      "scipy": "1.17.1",
+      "networkx": "3.6.1",
+      "transformers": "4.53.3",
+      "fsspec": "2026.9.0",
+      "nvidia-cusolver-cu12": "11.7.1.2",
+      "joblib": "1.6.0",
+      "psutil": "7.2.2",
+      "certifi": "2025.4.26",
+      "accelerate": "1.8.1",
+      "peft": "0.16.0",
+      "narwhals": "2.26.0",
+      "MarkupSafe": "3.0.3",
+      "torch": "2.7.1",
+      "pypdfium2": "4.30.0",
+      "protobuf": "6.31.1",
+      "cbor2": "5.7.0",
+      "h2": "4.2.0",
+      "aiohttp": "3.12.7",
+      "propcache": "0.3.1",
+      "hpack": "4.1.0",
+      "frozenlist": "1.6.0",
+      "grpclib": "0.4.8",
+      "aiosignal": "1.3.2",
+      "yarl": "1.20.0",
+      "aiohappyeyeballs": "2.6.1",
+      "hyperframe": "6.1.0",
+      "multidict": "6.4.4",
+      "attrs": "25.3.0"
+    },
+    "cuda_available": false
+  },
+  "checkout_note": "Source snapshot extracted into a synthetic Git repository for CLI tests.",
+  "uploaded_snapshot_sha256": "cfc28221420f6609d283e5aeb2c69b26e96c861384fa36193cc46a579712abdc",
+  "source": {
+    "digest": "1eff7bd8b908d9230d3e7cfa19dcbeb5654b5bae1f7bf1e627ba798b4fb5a516",
+    "files": [
+      {
+        "path": "pyproject.toml",
+        "sha256": "ebb8a8d06ff6195c4049f09675e55085aa4e9595cfaf035ab7361e0fbbba980f"
+      },
+      {
+        "path": "requirements/m11-local.txt",
+        "sha256": "f2794370b269ce6ba4b5e118b4f7f0d8622d49ed2ed79841ea30776d4358f2b2"
+      },
+      {
+        "path": "requirements/m11-modal.lock",
+        "sha256": "44ccced6480cf8a238db61ba048bc612024c7d3eb7acbc9d3303ebc911b68a07"
+      },
+      {
+        "path": "requirements/m11-modal.txt",
+        "sha256": "00a5005b623d5d94484d11b5ff335acde45d353833c1c3aa4f8e6c05ee189ce1"
+      },
+      {
+        "path": "requirements/m12-cpu.txt",
+        "sha256": "a5124e622eb46751a98265b914627789be8e4d61f2df95167f879d8cb9557461"
+      },
+      {
+        "path": "requirements/m22-modal.lock",
+        "sha256": "f3d9ba43acbc94e7a82697ac1942d029b153e250321805cc04e70de9cc6083b6"
+      },
+      {
+        "path": "requirements/m22-modal.txt",
+        "sha256": "b4326edd9ab2a34d2571f20a4a866111990527686f8dcd09681a7bc95816ecf9"
+      },
+      {
+        "path": "scripts/audit_collisions.py",
+        "sha256": "b8e4a686b0852df735d6e4fef8846191850e020ff3b4cca10b3f8b409ee9b1ae"
+      },
+      {
+        "path": "scripts/audit_ocr_policy.py",
+        "sha256": "7b72c4571392fd8e3a3c833ebc028045384ee47ccf6fab72abb118595e22c454"
+      },
+      {
+        "path": "scripts/audit_primary_corpus.py",
+        "sha256": "9d9f2941eec0440dd7cf0882f44fd8327ff61ed5de25a4eb78cb8f7e40d7648f"
+      },
+      {
+        "path": "scripts/audit_repository.py",
+        "sha256": "3d5be4fa6db221900c7ac085cbe0099ab10563de653120103db90564ef8a2aaa"
+      },
+      {
+        "path": "scripts/download_primary_corpus.py",
+        "sha256": "1f830bf2c7e63a8eee41a17fef4882f6311776da710d1d2404deededf6e62018"
+      },
+      {
+        "path": "scripts/evaluate_m11.py",
+        "sha256": "6513fafbc95347f3b64100bdc2d2a51bbb7639501f2625767f6a395fe884b882"
+      },
+      {
+        "path": "scripts/freeze_m21_data_splits.py",
+        "sha256": "9a627296b40f46e4725e9621f3b9c3edbd2058d216f520b7d6db95906ad3aa28"
+      },
+      {
+        "path": "scripts/run_m11_modal.py",
+        "sha256": "c0fe3b215ca59b6edcfb82b018980fbd089fc157656f6d907b5dd6136ffb5957"
+      },
+      {
+        "path": "scripts/run_m22_smoke.py",
+        "sha256": "d5d29a7eda1345a511ecc318aaf148286597b06641f60f832fde798b2eac2e1c"
+      },
+      {
+        "path": "scripts/verify_m12.py",
+        "sha256": "a2fec7486934636bf2a809b56cdad81dd4178ffce731575d465a47f17102effa"
+      },
+      {
+        "path": "scripts/verify_m22_smoke.py",
+        "sha256": "eb0235df4ba53e9f6e19888bee8a9d0436e4b50b0615e9c7a02276d8797378fc"
+      },
+      {
+        "path": "src/qpaf/__init__.py",
+        "sha256": "3c676f0b96ef73c4f9eb29a27d8bcc3464303483653f2ae28c7f4e739fe9d542"
+      },
+      {
+        "path": "src/qpaf/audit.py",
+        "sha256": "0d4190e6642eed477d50cbbadd0046eeb333ca5305a6f5919ec3d610df5d29b5"
+      },
+      {
+        "path": "src/qpaf/m11/__init__.py",
+        "sha256": "f2c256e8608884fb0e4ffca4ccfd800bbbc8fea816963fb084b0e3255d49ba2b"
+      },
+      {
+        "path": "src/qpaf/m11/artifacts.py",
+        "sha256": "a71ac1d3a0ea26e9c7de60d4de4f821d910c72039499adba6ad87c9bc43ec691"
+      },
+      {
+        "path": "src/qpaf/m11/config.py",
+        "sha256": "7b2f8d25c3fdfe7b8d6f149e2aee6c1cdc41e31e5a0c04abfaed652486fc0df5"
+      },
+      {
+        "path": "src/qpaf/m11/dataset.py",
+        "sha256": "f44c87e14932bf0586fc70d15b51e9ee286949e73900617be640390ccbdcd67a"
+      },
+      {
+        "path": "src/qpaf/m11/evidence.py",
+        "sha256": "58eef596cd4bb27da2f7044ec5bf5703f59e3e6c010c4f84afff7a39498b1f85"
+      },
+      {
+        "path": "src/qpaf/m11/metrics.py",
+        "sha256": "c2d15bd922cc60b3f84a72a8828fe8a248467d892d88e9af98e4cfe3b71a3a9c"
+      },
+      {
+        "path": "src/qpaf/m11/modal_app.py",
+        "sha256": "44ba5c2f2a22c1b1bde60b0bf16793061c27cc2d5764340f4008a4d856eb4cdb"
+      },
+      {
+        "path": "src/qpaf/m11/oracle.py",
+        "sha256": "56e05e5a4d01dae5ab68ae5e11ffbaf4f9c76bee22b5cf78fabf004f493dbdf1"
+      },
+      {
+        "path": "src/qpaf/m11/pipeline.py",
+        "sha256": "edf171f9a413a5ba546f71882cc163d8281bfa9d47b8b9cd8aaad637b0a4764f"
+      },
+      {
+        "path": "src/qpaf/m11/retrieval.py",
+        "sha256": "4fc5f83b1d8fcdee02af37bfc637f35e93ddf2c207b2c4afd3c52e1ec402eb49"
+      },
+      {
+        "path": "src/qpaf/m12/__init__.py",
+        "sha256": "da36c939381d3e097a35208abdf7b5ab43b912a1c1e137638f67ab759758b2c0"
+      },
+      {
+        "path": "src/qpaf/m12/config.py",
+        "sha256": "4b50ec1b8f1f48cc47c6028235ea0e18e931349360ac65d48693ea8099fd3f6e"
+      },
+      {
+        "path": "src/qpaf/m12/features.py",
+        "sha256": "86eb5d540d2330c0fec263d587581d2f159b77461df85c57f6ecaa64fafa40b6"
+      },
+      {
+        "path": "src/qpaf/m12/losses.py",
+        "sha256": "18debc316b02146c38c36a6b1021f0db5e3ba9be55ffdb4c8be153cd11ce5395"
+      },
+      {
+        "path": "src/qpaf/m12/model.py",
+        "sha256": "05c0370343a14b70b1db37e3d2bf6fd852c4ea67f7a967af52fa0ff498adcc3e"
+      },
+      {
+        "path": "src/qpaf/m13/__init__.py",
+        "sha256": "4f6ff852d89a749c6911610bb300f9b8a510743373f557218c1f2380ebd92684"
+      },
+      {
+        "path": "src/qpaf/m13/boundary.py",
+        "sha256": "6c0897346254fe8d751a7f68cc7dee1e21e2dba1c920ba535b90307796a1cee8"
+      },
+      {
+        "path": "src/qpaf/m13/corpus.py",
+        "sha256": "5a4e60a8be5d64a67244b841312ca3d5fcfe152c71fd59bea8d1b58de37efb66"
+      },
+      {
+        "path": "src/qpaf/m13/splits.py",
+        "sha256": "341eed1f421646f4e2c5d1c52e12733f9849d074986b6d46db19ff2b459a65f1"
+      },
+      {
+        "path": "src/qpaf/m13/vidoseek.py",
+        "sha256": "9724e0e26e376e8559ff91eb064175dbb427a3142e39779c1c134e8aeec52b44"
+      },
+      {
+        "path": "src/qpaf/m16/__init__.py",
+        "sha256": "c4e5942acc652d47f9d09d9d4ed7cfccebf820c64e698e690a5f3e6e041f7e5e"
+      },
+      {
+        "path": "src/qpaf/m16/detector.py",
+        "sha256": "7863926375ce7eb8041141fcfdcf8be3ca35140fd6658e6d5db853f068aef724"
+      },
+      {
+        "path": "src/qpaf/m16/manifest.py",
+        "sha256": "1b20c75318186094cb47754824a4a21a89fa9c100a0c9263fcd8f0c28b368d5a"
+      },
+      {
+        "path": "src/qpaf/m16/real_corpus.py",
+        "sha256": "bcd3c5f9b1c1ba173ff78b1f9bd9eba1b842136ca157774f8cf95516e2cb534a"
+      },
+      {
+        "path": "src/qpaf/m16/report.py",
+        "sha256": "850dab8d76fe5f11c8be454dd108ef1e17c4412a3b44bea66367da4321814e19"
+      },
+      {
+        "path": "src/qpaf/m18/__init__.py",
+        "sha256": "942bcaa139785d70821d172969afe8ed3094d33fef7384342f499436f0edfaaf"
+      },
+      {
+        "path": "src/qpaf/m18/namespace.py",
+        "sha256": "6e05cafb8db4808e073742ced9ba3fc6f0ecbdbfec9db9f55adfcc65a55ad12a"
+      },
+      {
+        "path": "src/qpaf/m18/ocr_policy.py",
+        "sha256": "69ae47b8c4f95a213b10f851899874e98953ef85705f36a3f625578acbd20bc0"
+      },
+      {
+        "path": "src/qpaf/m21/__init__.py",
+        "sha256": "1b8fbaddb787bfc0d0eb6aa189f173c929a4de1549f43241826cf1f4375ccd06"
+      },
+      {
+        "path": "src/qpaf/m21/data_splits.py",
+        "sha256": "77b4b99e4dad151e9109910b71469a55138605ada751aff1055175f67af9e603"
+      },
+      {
+        "path": "src/qpaf/m22/__init__.py",
+        "sha256": "595214ddc38f2285af31ebee2ce633be0576a4f0b803764e3787cca5322422cc"
+      },
+      {
+        "path": "src/qpaf/m22/checks.py",
+        "sha256": "c22d7da130b8e9d18b5521ea7eda0d018cbd90a9d963589b5411239edbaf9028"
+      },
+      {
+        "path": "src/qpaf/m22/config.py",
+        "sha256": "fd349a916371f07b5d3baf40e821e4fab396e2f976e95d0e19d4420b2e5de744"
+      },
+      {
+        "path": "src/qpaf/m22/evidence.py",
+        "sha256": "5aaf8ba27aaee7b2ba1e2e4933766435462736843a07f99e8229c2e89434b8a3"
+      },
+      {
+        "path": "src/qpaf/m22/sample.py",
+        "sha256": "3e034cffdb7daf0210b1b4141f9b3899c4e748709b39de42f8224f4df7dc2618"
+      },
+      {
+        "path": "src/qpaf/m22/telemetry.py",
+        "sha256": "fa2919e0d76db416392ed2844f37cdd6c3cdbdbfeae34d608521849e6dd1af1a"
+      },
+      {
+        "path": "src/qpaf/m22/worker.py",
+        "sha256": "dc9974c16185aff4c215d7b7acb4386af4d2b0ad944ed73c9d6b6cbaf3cc3feb"
+      },
+      {
+        "path": "selected_image_requirements",
+        "sha256": "f3d9ba43acbc94e7a82697ac1942d029b153e250321805cc04e70de9cc6083b6"
+      }
+    ],
+    "git_commit": "51087eee5e00ad53572cae2b7b2da141ce4dd082",
+    "git_status": "M .gitignore\n M README.md\n M src/qpaf/m11/retrieval.py\n?? configs/m2.2/\n?? docs/superpowers/README.md\n?? docs/superpowers/plans/2026-10-17-m22-retriever-smoke.md\n?? docs/superpowers/progress/\n?? docs/superpowers/reports/\n?? docs/superpowers/specs/2026-10-17-m22-retriever-smoke-design.md\n?? requirements/m22-modal.lock\n?? requirements/m22-modal.txt\n?? results/m2.2/\n?? scripts/run_m22_smoke.py\n?? scripts/verify_m22_smoke.py\n?? src/qpaf/m22/\n?? tests/test_m22_smoke.py",
+    "command": [
+      "C:\\Users\\lanph\\OneDrive\\Desktop\\Artificial_Intelligent_Project\\.venv\\Scripts\\python.exe",
+      "scripts/verify_m22_smoke.py"
+    ]
+  },
+  "test_files": [
+    {
+      "path": "tests/test_audit.py",
+      "sha256": "c45aa4c0e7cf179000de9fcd599ce08b220ca1aa2792707c8a7ad0b2aee8bf0b"
+    },
+    {
+      "path": "tests/test_m11_artifacts.py",
+      "sha256": "1850f26e7a4d9554b2dd40995392d43a6a459b8e16ee2e780bcdb43b2ab5dd50"
+    },
+    {
+      "path": "tests/test_m11_core.py",
+      "sha256": "5e71b275d3e2e42d2d3056cc3429cff4beae7942390fce5836ade98c689b13ff"
+    },
+    {
+      "path": "tests/test_m11_pipeline.py",
+      "sha256": "91be95f1d8ddb8efe7cbeb6280e87ce3f21a3b4e34abfec572817bac026af8ed"
+    },
+    {
+      "path": "tests/test_m12_config.py",
+      "sha256": "c0efddbbaba71d668c0879c7546f4190618caefc298323d6fafba3ca9bf2aa6e"
+    },
+    {
+      "path": "tests/test_m12_core.py",
+      "sha256": "11e88d00cf89945fea68a4a9ed4b8aa9a379a277e7f96923198c7b94ff93abc2"
+    },
+    {
+      "path": "tests/test_m12_verification.py",
+      "sha256": "568ad9077b41e1c8ec20f5139b73d44ff9267e854e07de60baa822a950e6e9da"
+    },
+    {
+      "path": "tests/test_m13_boundary.py",
+      "sha256": "1c1ad7c6630162baf38ef14c8b2617c2b99561361c30e4f7a05621e71e091f67"
+    },
+    {
+      "path": "tests/test_m13_cli.py",
+      "sha256": "9cb6089825d9d6976a308280cfdc35a8cfcc4662ca96edff3fc2cbcdafcaa1de"
+    },
+    {
+      "path": "tests/test_m13_corpus.py",
+      "sha256": "e0ed59e394a58e58b245a18def294eb585177a1f5b17fd2fc2a1cc2e293ea0b9"
+    },
+    {
+      "path": "tests/test_m13_splits.py",
+      "sha256": "5aa918f49a6c79e519eb2959a93d2634880bdf46f99f34001231c56b6a947216"
+    },
+    {
+      "path": "tests/test_m13_vidoseek.py",
+      "sha256": "7f46188cc82a5f7e14a53ec201a25e1e56867c57665bd792640919975e445385"
+    },
+    {
+      "path": "tests/test_m16_collision.py",
+      "sha256": "11a25844f7b0d5b3cce3522575eab7be0e17e23e9bde5df8b96934bda0cdf8d8"
+    },
+    {
+      "path": "tests/test_m16_real_audit.py",
+      "sha256": "f37385352ddc4fd9816ff17b620dc7b1732f24efde161b5be7bff3f370e9bc33"
+    },
+    {
+      "path": "tests/test_m17_registry.py",
+      "sha256": "72234ed0721a76f2dd4685b396c6ef0b445de8635d07890bbc89c4f6657c0542"
+    },
+    {
+      "path": "tests/test_m18_ocr.py",
+      "sha256": "a7017f79fe009d8e3545427dd5e19ff3810f4613f24169c792b11a81e7ed6137"
+    },
+    {
+      "path": "tests/test_m18_runtime.py",
+      "sha256": "e8b0c00365112ec64f691239e98400f7092a8f693c744a7b05eb2ade8a2e0314"
+    },
+    {
+      "path": "tests/test_m21_data_splits.py",
+      "sha256": "544996cad42c1f36695820b690921a95853b8a45f25beaa87894376e36def0d9"
+    },
+    {
+      "path": "tests/test_m22_smoke.py",
+      "sha256": "f4552f462c61988c1588894cdb650eeeb2b431034f3daaf822fc03e2104d76a4"
+    }
+  ],
+  "source_unchanged_during_tests": true
+}

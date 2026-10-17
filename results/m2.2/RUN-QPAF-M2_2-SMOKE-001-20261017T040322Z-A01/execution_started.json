@@ -1,0 +1,7 @@
+{
+  "started_utc": "2026-10-17T04:03:31.864295+00:00",
+  "command": [
+    "C:\\Users\\lanph\\OneDrive\\Desktop\\Artificial_Intelligent_Project\\.venv\\Scripts\\python.exe",
+    "scripts/run_m22_smoke.py"
+  ]
+}

@@ -1,0 +1,82 @@
+[
+  {
+    "path": "checks.json",
+    "size_bytes": 974,
+    "sha256": "ec1f3e7a8101285c750bf04aa669416fc4ff91ecf83240720539cb6960e55630"
+  },
+  {
+    "path": "embeddings/pages-00000000.pt",
+    "size_bytes": 2019597,
+    "sha256": "65d49e148d21b3318fa544b7a1ab8e09b603f8429c3c2a1942895ae0592bf599"
+  },
+  {
+    "path": "embeddings/queries.pt",
+    "size_bytes": 103517,
+    "sha256": "494d82aa1f1362c3387455c42b6dc6e5d1b33b48f815ea4658b0f61127df1823"
+  },
+  {
+    "path": "environment.json",
+    "size_bytes": 2302,
+    "sha256": "dc1b152fed2169804806995f0a8d46fc169f9fa10053e3f70ee2bec36fc3c79a"
+  },
+  {
+    "path": "inputs.json",
+    "size_bytes": 1267,
+    "sha256": "3223867a0091b43bcdc2023c89621eed3667cdcefe27ce3237af932c22c18ffb"
+  },
+  {
+    "path": "model_files.json",
+    "size_bytes": 6101,
+    "sha256": "ee0692cdc057767bc5ac9c22c0cbb5b586b126b378e2bca9993955d19124f1eb"
+  },
+  {
+    "path": "rankings.json",
+    "size_bytes": 4132,
+    "sha256": "b2f02983f7098eb40490eed4d6949048b1cf069474d0666455cf1d80f1b3887d"
+  },
+  {
+    "path": "reference/embeddings/pages-00000000.pt",
+    "size_bytes": 2006797,
+    "sha256": "5ec2a1955eb9b3c3689943f84c0759fe9a5dff4fad231c76b405fa9dfb442f2b"
+  },
+  {
+    "path": "reference/embeddings/queries.pt",
+    "size_bytes": 98397,
+    "sha256": "60a887981b1aae7ce4049ce6eb3fa1324eaebc309334f100ec577a527522bab7"
+  },
+  {
+    "path": "reference/scores.npy",
+    "size_bytes": 384,
+    "sha256": "e05c2b706787d5973f89a6d8d2fbf81ec026e5af452547cdbcbdd4c32bee3d40"
+  },
+  {
+    "path": "resources.json",
+    "size_bytes": 2426,
+    "sha256": "05e4ec2108158ffa7fb24ceb546160e0aee1c866cb01df1ebc2c0201ea988e9f"
+  },
+  {
+    "path": "run.log",
+    "size_bytes": 157,
+    "sha256": "aeacd3df5de38a6963d9992b7d02a2ad4fa50efb26863635b2cb343d91aa084d"
+  },
+  {
+    "path": "scores.json",
+    "size_bytes": 1329,
+    "sha256": "0ea398346e8dc8252682f06efc5dad7c45a6015d2b4755343f4e7e13666f2186"
+  },
+  {
+    "path": "scores.npy",
+    "size_bytes": 384,
+    "sha256": "213c6b034714eba9bdf5efa5a3a3427cd1c5919480be8b1fcb1259e1a658045f"
+  },
+  {
+    "path": "status.json",
+    "size_bytes": 78,
+    "sha256": "51ea8be8bd07d6b47d624c3d2737eea75595688915c1ea792b4bef45263a2825"
+  },
+  {
+    "path": "summary.json",
+    "size_bytes": 4976,
+    "sha256": "922f3fd1eff464471d3cbe3a9d9dd6cfed00654ab029577fa12a7369767ea7de"
+  }
+]

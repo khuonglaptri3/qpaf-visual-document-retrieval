@@ -1,0 +1,57 @@
+[
+  {
+    "path": "checks.json",
+    "size_bytes": 404,
+    "sha256": "84dd3bfcb843b465ae078a4c681de10e07f09a8d678ac876546e854827f29b31"
+  },
+  {
+    "path": "environment.json",
+    "size_bytes": 2210,
+    "sha256": "d2cd28a7f2c0bf583fe204690c59f95d9b4266ac2dbc5cf7ea8ba0f881ffa8b4"
+  },
+  {
+    "path": "index.json",
+    "size_bytes": 9643,
+    "sha256": "be24e2b62a22181b654e3174b2a6f89307ef363eb9292a33080803b719ee7bbb"
+  },
+  {
+    "path": "inputs.json",
+    "size_bytes": 1267,
+    "sha256": "3223867a0091b43bcdc2023c89621eed3667cdcefe27ce3237af932c22c18ffb"
+  },
+  {
+    "path": "rankings.json",
+    "size_bytes": 4132,
+    "sha256": "5c03b76f63184147466b76ba48c7b01fb11c64fc0f0ffb17ff2124d9bde36a2e"
+  },
+  {
+    "path": "resources.json",
+    "size_bytes": 564,
+    "sha256": "cd3051dcf6f65beaf3ddec433605569df5061b240bd39384dc92928cf15950f0"
+  },
+  {
+    "path": "run.log",
+    "size_bytes": 13,
+    "sha256": "116006112c7f502cd96a73ad96eebde031f0a93eb40649bd54640710ccf73841"
+  },
+  {
+    "path": "scores.json",
+    "size_bytes": 1327,
+    "sha256": "cf52ff36ca7182f9b4cd9ba7ee812f8415af14a9fdbd5bd563e5f0b9453b2276"
+  },
+  {
+    "path": "scores.npy",
+    "size_bytes": 640,
+    "sha256": "cb7966bab3eec7fcee31c4545a46292255cb664c23e697d6e3bb5b6ba1c3533c"
+  },
+  {
+    "path": "status.json",
+    "size_bytes": 78,
+    "sha256": "27518be2eb400d5e7ac6a2900af34dece202749123fc63de5c303294f02d9fc2"
+  },
+  {
+    "path": "summary.json",
+    "size_bytes": 1519,
+    "sha256": "fba4d674c7e89a82cab745a9af7dfa8d2d3b2e7edf5999865f6065e4d203bbcf"
+  }
+]

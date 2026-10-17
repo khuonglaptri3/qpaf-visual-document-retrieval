@@ -1,0 +1,44 @@
+{
+  "status": "FAIL",
+  "failure_kind": "ERROR",
+  "error": "TypeError: expected str, bytes or os.PathLike object, not NoneType",
+  "traceback": "Traceback (most recent call last):\n  File \"/root/qpaf/m22/worker.py\", line 250, in execute\n    result = resolve_text(config, root, output) if stage == 'prepare' else run_channel(stage, config, root, output, telemetry, logger)\n                                                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/qpaf/m22/worker.py\", line 189, in run_channel\n    scores = visual_scores(query_texts, pages, root/'inputs', config[channel], output, logger, cache,\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/qpaf/m11/retrieval.py\", line 116, in visual_scores\n    processor = Processor.from_pretrained(config.get('processor_id', config['model_id']),\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/site-packages/colpali_engine/models/qwen2_5/colqwen2_5/processing_colqwen2_5.py\", line 43, in from_pretrained\n    instance = super().from_pretrained(\n               ^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/site-packages/transformers/processing_utils.py\", line 1307, in from_pretrained\n    processor_dict, kwargs = cls.get_processor_dict(pretrained_model_name_or_path, **kwargs)\n                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/local/lib/python3.11/site-packages/transformers/processing_utils.py\", line 992, in get_processor_dict\n    chat_templates = {\n                     ^\n  File \"/usr/local/lib/python3.11/site-packages/transformers/processing_utils.py\", line 993, in <dictcomp>\n    template_name: open(template_file, \"r\", encoding=\"utf-8\").read()\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nTypeError: expected str, bytes or os.PathLike object, not NoneType\n",
+  "stage": "visual",
+  "completed_utc": "2026-10-17T04:09:19.928794+00:00",
+  "resources": {
+    "phases": [
+      {
+        "phase": "download_models",
+        "seconds": 39.654686911,
+        "peak_rss_mb": 7683.5,
+        "peak_cuda_allocated_mb": 8.125,
+        "peak_cuda_reserved_mb": 20.0
+      },
+      {
+        "phase": "load_model",
+        "seconds": 2.916406445000007,
+        "peak_rss_mb": 10705.78125,
+        "peak_cuda_allocated_mb": 7629.35546875,
+        "peak_cuda_reserved_mb": 7656.0
+      },
+      {
+        "phase": "total_channel",
+        "seconds": 43.798051183,
+        "peak_rss_mb": 10705.78125,
+        "peak_cuda_allocated_mb": 7629.35546875,
+        "peak_cuda_reserved_mb": 7656.0
+      }
+    ],
+    "elapsed_seconds": 43.924030736999995,
+    "peak_rss_mb": 10705.78125,
+    "peak_cuda_reserved_mb": 7656.0,
+    "artifact_bytes": 11648,
+    "rss_poll_interval_seconds": 0.02
+  },
+  "resource_checks": {
+    "ram": true,
+    "vram": true,
+    "time": true,
+    "artifact": true
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "task_id": "M2.2",
+  "run_id": "RUN-QPAF-M2_2-SMOKE-001-20261017T040322Z-A01",
+  "status": "FAIL",
+  "completed_utc": "2026-10-17T04:05:53.673941+00:00",
+  "stages": {
+    "prepare": {
+      "status": "FAIL",
+      "failure_kind": "ERROR",
+      "error": "ValueError: Sample extraction failed; see prepare/failures.json",
+      "traceback": "Traceback (most recent call last):\n  File \"/root/qpaf/m22/worker.py\", line 242, in execute\n    result = resolve_text(config, root, output) if stage == 'prepare' else run_channel(stage, config, root, output, telemetry, logger)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/qpaf/m22/worker.py\", line 116, in resolve_text\n    raise ValueError('Sample extraction failed; see prepare/failures.json')\nValueError: Sample extraction failed; see prepare/failures.json\n",
+      "stage": "prepare",
+      "completed_utc": "2026-10-17T04:05:42.722791+00:00",
+      "resources": {
+        "phases": [
+          {
+            "phase": "prepare",
+            "seconds": 2.6828815089999996,
+            "peak_rss_mb": 3379.3515625,
+            "peak_cuda_allocated_mb": 0.0,
+            "peak_cuda_reserved_mb": 0.0
+          }
+        ],
+        "elapsed_seconds": 5.200102842,
+        "peak_rss_mb": 3379.3515625,
+        "peak_cuda_reserved_mb": 0.0,
+        "artifact_bytes": 23106,
+        "rss_poll_interval_seconds": 0.02
+      },
+      "resource_checks": {
+        "ram": true,
+        "vram": true,
+        "time": true,
+        "artifact": true
+      }
+    },
+    "bm25": {
+      "status": "NOT_RUN",
+      "reason": "Text preparation did not pass"
+    },
+    "dense": {
+      "status": "NOT_RUN",
+      "reason": "Text preparation did not pass"
+    },
+    "visual": {
+      "status": "NOT_RUN",
+      "reason": "Text preparation did not pass"
+    }
+  },
+  "cloud_error": null,
+  "modal_volume": "qpaf-m22-smoke-artifacts",
+  "modal_path": "runs/RUN-QPAF-M2_2-SMOKE-001-20261017T040322Z-A01",
+  "sample_manifest_sha256": "9bdbaf5738ce121f5f5c84fc284e1447106c6d4c274d85c37609e140cd838ff8"
+}

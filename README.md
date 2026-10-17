@@ -1,7 +1,8 @@
 # QPAF — Query-Page Adaptive Fusion for Visual Document Retrieval
 
 [![Python 3.11](https://img.shields.io/badge/python-3.11-blue.svg)](https://www.python.org/downloads/release/python-3110/)
-[![Tests](https://img.shields.io/badge/tests-140%20passed%2C%201%20skipped-success.svg)](#full-automated-test-suite-execution)
+[![Tests](https://img.shields.io/badge/tests-163%20passed%2C%201%20skipped-success.svg)](#full-automated-test-suite-execution)
+[![M2.2](https://img.shields.io/badge/M2.2-Smoke%20PASS-success.svg)](docs/superpowers/reports/2026-10-17-m22-retriever-smoke.md)
 [![Gate G1](https://img.shields.io/badge/Gate%20G1-CONDITIONAL__PASS-green.svg)](docs/M1.10_GATE_CLOSURE_REPORT.md)
 [![Milestone](https://img.shields.io/badge/Milestone-M1.1--M1.10%20CLOSED-brightgreen.svg)](docs/M1_ACCEPTANCE_SUMMARY_AND_RUNBOOK.md)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
@@ -27,12 +28,14 @@ Official research repository developed by **Group 01** for multimodal Visual Doc
   - [Automated Dataset Reproduction (Hugging Face LFS)](#automated-dataset-reproduction-hugging-face-lfs)
   - [Corpus Auditing & Deterministic Split Generation (M1.3)](#corpus-auditing--deterministic-split-generation-m13)
   - [Read-Only Split Verification (M1.3)](#read-only-split-verification-m13)
+  - [M2.1 Data-Split Role Freeze](#m21-data-split-role-freeze)
+  - [M2.2 Results and Handover](#m22-three-retriever-smoke-calibration)
   - [Visual Collision, Alias & Leakage Audit (M1.6)](#visual-collision-alias--leakage-audit-m16)
   - [Repository Integrity & Byte-Level Manifest Verification (M1.4)](#repository-integrity--byte-level-manifest-verification-m14)
   - [Gating Network Optimization & Gradient Verification (M1.2)](#gating-network-optimization--gradient-verification-m12)
   - [OCR Fallback Policy & Run ID Auditing (M1.8)](#ocr-fallback-policy--run-id-auditing-m18)
   - [Modal Multimodal Pipeline & Software Fixture (M1.1)](#modal-multimodal-pipeline--software-fixture-m11)
-  - [Full Automated Test Suite Execution (140 Tests)](#full-automated-test-suite-execution-140-tests)
+  - [Full Automated Test Suite Execution](#full-automated-test-suite-execution)
   - [Granular Unit Tests by Milestone](#granular-unit-tests-by-milestone)
   - [Gitflow Workflow & Contribution](#gitflow-workflow--contribution)
 - [5. Repository Directory Layout](#5-repository-directory-layout)
@@ -233,6 +236,74 @@ The selected project revision is [`evidence/revisions/m2.1-002/`](evidence/revis
 The CLI refuses to overwrite an existing revision; use a new revision directory for a
 fresh run. Raw corpus payloads remain local under `data/raw/` and are not committed.
 
+### M2.2 Three-Retriever Smoke Calibration
+
+**Technical result: PASS on a real bounded ViDoSeek sample.** BM25, BGE-M3 and
+**ColQwen2.5** passed on the same **4 validation queries × 16 pages**, selected
+deterministically from verified M2.1 inputs without using qrels for page selection.
+Each channel produced an aligned `[4, 16]` score matrix. ID/shape/finite checks,
+batch/reference parity, independent score references and cache/ranking reload passed.
+
+**Selected run:** `RUN-QPAF-M2_2-SMOKE-001-20261017T041244Z-A01`
+
+**Selected evidence revision:** `m2.2-001`
+
+| Retriever | Selected inference preset | Peak reserved VRAM | Result |
+|---|---|---:|---|
+| BM25 | Unicode word/lowercase, k1=1.5, b=0.75; CPU | 0 MiB | PASS |
+| BGE-M3 | Pinned model/tokenizer; float32; batch 2 | 2,268 MiB | PASS |
+| ColQwen2.5 | Pinned base/adapter/processor/tokenizer; float32; batch 2; up to 256 visual tokens | 14,978 MiB | PASS |
+
+ColQwen2.5 bfloat16 failed token-embedding batch parity in an earlier run; its
+failed evidence is preserved. Selecting float32 kept the original tolerances.
+One image page returned no OCR words and remains explicitly recorded as
+`NO_TEXT_DETECTED / M23_REVIEW_PENDING` in the shared sample.
+
+#### M2.2 Result Files
+
+| What to read | File or directory |
+|---|---|
+| Complete outcome, parity, resources, cost and limitations | [M2.2 report](docs/superpowers/reports/2026-10-17-m22-retriever-smoke.md) |
+| Selected handover and links for the next contributor | [M2_FINAL / retriever calibration](evidence/M2_FINAL/02_retriever_calibration/README.md) |
+| Immutable handover revision and artifact hashes | [m2.2-001](evidence/revisions/m2.2-001/README.md) |
+| Selected real-run report | [Run report](results/m2.2/RUN-QPAF-M2_2-SMOKE-001-20261017T041244Z-A01/report.md) |
+| Selected query/page IDs and verified data identity | [Sample manifest](results/m2.2/RUN-QPAF-M2_2-SMOKE-001-20261017T041244Z-A01/inputs/sample_manifest.json) |
+| Per-channel checks, resources and environment | [BM25 evidence](evidence/revisions/m2.2-001/bm25/), [dense evidence](evidence/revisions/m2.2-001/dense/), [visual evidence](evidence/revisions/m2.2-001/visual/) |
+| Full regression receipt: 164 tests, 163 passed, 1 platform skip | [Test receipt](results/m2.2/verification/tests-2026-10-17T041449.342184_0000.json) |
+| Exact model revisions, preprocessing, seed and resource caps | [Smoke configuration](configs/m2.2/retriever_smoke.toml) |
+| Specification, completed plan and execution journal | [Documentation index](docs/superpowers/README.md) |
+| Commands, artifact layout and payload policy | [M2.2 runbook](results/m2.2/README.md) |
+
+Git contains the small reports, IDs, metadata, logs, source snapshots and hashes.
+Score arrays (`.npy`), embeddings (`.pt`) and rendered page images remain local and
+in Modal Volume `qpaf-m22-smoke-artifacts`, under `runs/<run-id>`. Full read-only
+run verification requires those payloads to be present locally; cloning Git alone
+provides the reports and manifests.
+
+To verify the existing local run without launching cloud compute:
+
+```powershell
+.venv/Scripts/python.exe -X utf8 scripts/run_m22_smoke.py `
+  --verify results/m2.2/RUN-QPAF-M2_2-SMOKE-001-20261017T041244Z-A01
+```
+
+Optional new smoke run on Modal (**uses paid compute or available credits**):
+
+```powershell
+.venv/Scripts/python.exe -X utf8 scripts/run_m22_smoke.py
+```
+
+The billing audit recorded **$0.2436 gross usage across all M2.2 attempts and test
+apps**, including **$0.0683 for the selected PASS run**. These are historical
+observations before credits/allowances. See the report for billing scope and
+[the separate full-corpus cost estimate](docs/superpowers/plans/2026-10-17-m22-full-corpus-cost-estimate.md).
+Resource/time caps in the config are not a dollar spend limit.
+
+M2.2 supplies the verified retrieval interfaces and bounded preset for subsequent
+work. OCR quality calibration belongs to M2.3 and full-corpus cache generation to
+M2.8. This sample PASS does not certify full-corpus retrieval quality or constitute
+an independent QA sign-off or learned-training authorization.
+
 ---
 
 ### Visual Collision, Alias & Leakage Audit (M1.6)
@@ -308,9 +379,10 @@ $env:PYTHONUTF8 = '1'
 
 ---
 
-### Full Automated Test Suite Execution (140 Tests)
+### Full Automated Test Suite Execution
 
-Run all 140 unit and integration tests across M1.1 through M1.8:
+Run the unit and integration tests, including M2.1 and M2.2, in an environment
+with working PyTorch:
 
 ```powershell
 $env:PYTHONUTF8 = '1'
@@ -323,7 +395,9 @@ $env:PYTHONUTF8 = '1'
 .venv/Scripts/python.exe -m unittest discover -s tests
 ```
 
-*Expected Result: `Ran 140 tests ... OK (skipped=1)` (1 Windows symlink privilege test skipped).*
+*Latest pinned Modal Linux result: `Ran 164 tests ... OK (skipped=1)` — 163 passed,
+1 platform-specific skip. See the [recorded receipt](results/m2.2/verification/tests-2026-10-17T041449.342184_0000.json).
+Platform-dependent skips can differ on Windows.*
 
 ---
 

@@ -1,0 +1,9 @@
+{
+  "status": "VERIFIED",
+  "run_id": "RUN-QPAF-M2_2-SMOKE-001-20261017T041244Z-A01",
+  "queries": 4,
+  "pages": 16,
+  "run_hash_manifest_sha256": "feb5b87b8a6252f7a6cc9d5c9525d96d10f51a24e20f7e75319ad714596c59aa",
+  "run_location": "results/m2.2/RUN-QPAF-M2_2-SMOKE-001-20261017T041244Z-A01",
+  "large_payload_policy": "Scores/embeddings remain in local results and the named Modal Volume; hashes bind them."
+}

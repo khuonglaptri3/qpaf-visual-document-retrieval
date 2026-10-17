@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "experiment_id": "QPAF-M2_2-SMOKE-001",
+  "seed": 2026,
+  "sample": {
+    "split": "validation",
+    "query_count": 4,
+    "page_count": 16,
+    "selection": "sha256(seed:id),id",
+    "m21_revision": "evidence/revisions/m2.1-002",
+    "page_manifest": "evidence/revisions/m1.6-002/page_manifest.csv",
+    "gate": "evidence/M1_FINAL/06_G1/G1_final_decision.md"
+  },
+  "text": {
+    "parser": "pypdfium2",
+    "parser_version": "4.30.0",
+    "dpi": 150,
+    "mode": "native_or_ocr",
+    "min_native_chars": 40,
+    "min_printable_ratio": 0.85,
+    "ocr_engine": "tesseract",
+    "ocr_engine_version": "5.3.0",
+    "ocr_language": "eng",
+    "ocr_timeout": 120,
+    "min_ocr_chars": 50,
+    "min_ocr_confidence": 60.0,
+    "quality_status": "PROVISIONAL_M23_PENDING"
+  },
+  "bm25": {
+    "k1": 1.5,
+    "b": 0.75,
+    "tokenizer": "unicode_word_lowercase"
+  },
+  "dense": {
+    "model_id": "BAAI/bge-m3",
+    "revision": "5617a9f61b028005a4858fdac845db406aefb181",
+    "tokenizer_id": "BAAI/bge-m3",
+    "tokenizer_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+    "batch_size": 2,
+    "max_seq_length": 8192,
+    "query_prefix": "",
+    "page_prefix": "",
+    "device": "cuda",
+    "dtype": "float32",
+    "normalize_embeddings": true
+  },
+  "visual": {
+    "family": "colqwen2_5",
+    "model_id": "vidore/colqwen2.5-v0.2",
+    "revision": "dcbe8d9cede518bce830488364ba0e40c873645b",
+    "base_model_id": "vidore/colqwen2.5-base",
+    "base_revision": "92908120384b7a2110c5beda3ab29cbdb2c08e49",
+    "processor_id": "vidore/colqwen2.5-v0.2",
+    "processor_revision": "dcbe8d9cede518bce830488364ba0e40c873645b",
+    "processor_local_snapshot": true,
+    "processor_use_fast": false,
+    "tokenizer_id": "vidore/colqwen2.5-v0.2",
+    "tokenizer_revision": "dcbe8d9cede518bce830488364ba0e40c873645b",
+    "batch_size": 2,
+    "query_batch_size": 2,
+    "score_batch_size": 4,
+    "embedding_shard_size": 16,
+    "device": "cuda",
+    "dtype": "bfloat16",
+    "attention": "sdpa",
+    "max_pixels": 200704,
+    "min_pixels": 3136,
+    "query_prefix": "Query: ",
+    "query_suffix_tokens": 10,
+    "max_query_tokens": 256,
+    "mask_non_image_embeddings": false
+  },
+  "parity": {
+    "bm25_atol": 1e-12,
+    "dense_atol": 1e-05,
+    "dense_rtol": 1e-05,
+    "visual_atol": 0.25,
+    "visual_rtol": 0.005,
+    "visual_embedding_atol": 0.02,
+    "visual_embedding_rtol": 0.05
+  },
+  "caps": {
+    "max_queries": 16,
+    "max_pages": 64,
+    "timeout_seconds": 1800,
+    "ram_mb": 32768,
+    "vram_mb": 22528,
+    "input_mb": 64,
+    "artifact_mb": 512,
+    "retries": 0
+  },
+  "modal": {
+    "app_name": "qpaf-m22-smoke",
+    "volume_name": "qpaf-m22-smoke-artifacts",
+    "mount_path": "/m22",
+    "gpu": "A10G",
+    "cpu": 4,
+    "python_version": "3.11",
+    "requirements_file": "requirements/m22-modal.lock"
+  },
+  "output": {
+    "local_dir": "results/m2.2"
+  }
+}

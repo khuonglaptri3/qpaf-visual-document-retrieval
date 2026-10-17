@@ -1,0 +1,22 @@
+{
+  "total_pages": 16,
+  "native_pages": 13,
+  "ocr_pages": 3,
+  "failures": 1,
+  "engine": "5.3.0",
+  "policy": {
+    "parser": "pypdfium2",
+    "parser_version": "4.30.0",
+    "dpi": 150,
+    "mode": "native_or_ocr",
+    "min_native_chars": 40,
+    "min_printable_ratio": 0.85,
+    "ocr_engine": "tesseract",
+    "ocr_engine_version": "5.3.0",
+    "ocr_language": "eng",
+    "ocr_timeout": 120,
+    "min_ocr_chars": 50,
+    "min_ocr_confidence": 60.0,
+    "quality_status": "PROVISIONAL_M23_PENDING"
+  }
+}

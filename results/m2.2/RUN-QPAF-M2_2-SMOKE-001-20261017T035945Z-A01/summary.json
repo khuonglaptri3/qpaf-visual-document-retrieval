@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "task_id": "M2.2",
+  "run_id": "RUN-QPAF-M2_2-SMOKE-001-20261017T035945Z-A01",
+  "status": "FAIL",
+  "completed_utc": "2026-10-17T04:02:45.127749+00:00",
+  "stages": {
+    "prepare": {
+      "status": "FAIL",
+      "failure_kind": "ERROR",
+      "error": "ExecutionError: Function has not been hydrated with the metadata it needs to run on Modal.",
+      "traceback": "Traceback (most recent call last):\n  File \"C:\\Users\\lanph\\OneDrive\\Desktop\\Artificial_Intelligent_Project\\scripts\\run_m22_smoke.py\", line 108, in main\n    results[stage] = (gpu if stage in ('dense', 'visual') else cpu).remote(stage, config, run_id)\n                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\lanph\\OneDrive\\Desktop\\Artificial_Intelligent_Project\\.venv\\Lib\\site-packages\\modal\\_object.py\", line 45, in wrapped\n    await self.hydrate()\n  File \"C:\\Users\\lanph\\OneDrive\\Desktop\\Artificial_Intelligent_Project\\.venv\\Lib\\site-packages\\modal\\_object.py\", line 382, in hydrate\n    self._validate_is_hydrated()\n  File \"C:\\Users\\lanph\\OneDrive\\Desktop\\Artificial_Intelligent_Project\\.venv\\Lib\\site-packages\\modal\\_object.py\", line 203, in _validate_is_hydrated\n    raise ExecutionError(\nmodal.exception.ExecutionError: Function has not been hydrated with the metadata it needs to run on Modal.\n"
+    },
+    "bm25": {
+      "status": "NOT_RUN",
+      "reason": "Text preparation did not pass"
+    },
+    "dense": {
+      "status": "NOT_RUN",
+      "reason": "Text preparation did not pass"
+    },
+    "visual": {
+      "status": "NOT_RUN",
+      "reason": "Text preparation did not pass"
+    }
+  },
+  "cloud_error": null,
+  "modal_volume": "qpaf-m22-smoke-artifacts",
+  "modal_path": "runs/RUN-QPAF-M2_2-SMOKE-001-20261017T035945Z-A01",
+  "sample_manifest_sha256": "9bdbaf5738ce121f5f5c84fc284e1447106c6d4c274d85c37609e140cd838ff8"
+}

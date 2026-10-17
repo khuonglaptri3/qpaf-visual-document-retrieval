@@ -1,0 +1,9 @@
+{
+  "started_utc": "2026-10-17T04:00:06.016431+00:00",
+  "command": [
+    "C:\\Users\\lanph\\OneDrive\\Desktop\\Artificial_Intelligent_Project\\.venv\\Scripts\\python.exe",
+    "scripts/run_m22_smoke.py",
+    "--execute-prepared",
+    "results/m2.2/RUN-QPAF-M2_2-SMOKE-001-20261017T035945Z-A01"
+  ]
+}

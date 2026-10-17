@@ -1,0 +1,58 @@
+{
+  "phases": [
+    {
+      "phase": "download_models",
+      "seconds": 2.992582076999999,
+      "peak_rss_mb": 3620.265625,
+      "peak_cuda_allocated_mb": 0.0,
+      "peak_cuda_reserved_mb": 0.0
+    },
+    {
+      "phase": "load_model",
+      "seconds": 3.776355251000002,
+      "peak_rss_mb": 7350.515625,
+      "peak_cuda_allocated_mb": 2165.9384765625,
+      "peak_cuda_reserved_mb": 2186.0
+    },
+    {
+      "phase": "encode_queries",
+      "seconds": 0.3610672190000024,
+      "peak_rss_mb": 5510.42578125,
+      "peak_cuda_allocated_mb": 2178.755859375,
+      "peak_cuda_reserved_mb": 2190.0
+    },
+    {
+      "phase": "encode_pages",
+      "seconds": 0.2007468920000015,
+      "peak_rss_mb": 5510.42578125,
+      "peak_cuda_allocated_mb": 2226.9560546875,
+      "peak_cuda_reserved_mb": 2266.0
+    },
+    {
+      "phase": "score",
+      "seconds": 7.80350000013641e-05,
+      "peak_rss_mb": 5510.41015625,
+      "peak_cuda_allocated_mb": 2174.0634765625,
+      "peak_cuda_reserved_mb": 2266.0
+    },
+    {
+      "phase": "reference_encode",
+      "seconds": 0.28446670199999957,
+      "peak_rss_mb": 5512.42578125,
+      "peak_cuda_allocated_mb": 2198.822265625,
+      "peak_cuda_reserved_mb": 2268.0
+    },
+    {
+      "phase": "total_channel",
+      "seconds": 12.888361933999999,
+      "peak_rss_mb": 7350.515625,
+      "peak_cuda_allocated_mb": 2198.822265625,
+      "peak_cuda_reserved_mb": 2268.0
+    }
+  ],
+  "elapsed_seconds": 15.123564664,
+  "peak_rss_mb": 7350.515625,
+  "peak_cuda_reserved_mb": 2268.0,
+  "artifact_bytes": 178713,
+  "rss_poll_interval_seconds": 0.02
+}
