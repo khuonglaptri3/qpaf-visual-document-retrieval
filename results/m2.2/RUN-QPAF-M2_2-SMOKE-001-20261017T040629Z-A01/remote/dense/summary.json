@@ -1,0 +1,170 @@
+{
+  "status": "PASS",
+  "channel": "dense",
+  "checks": {
+    "batch_reference": {
+      "passed": true,
+      "max_abs_error": 1.7881393432617188e-07,
+      "max_relative_error": 4.728123892732486e-07,
+      "atol": 1e-05,
+      "rtol": 1e-05,
+      "shape": [
+        4,
+        16
+      ]
+    },
+    "query_embedding_batch_reference": {
+      "passed": true,
+      "max_abs_error": 1.1734664440155029e-07,
+      "max_relative_error": 0.05815748316160926,
+      "atol": 1e-05,
+      "rtol": 1e-05,
+      "shape": [
+        4,
+        1024
+      ]
+    },
+    "query_unit_norm": {
+      "passed": true,
+      "max_abs_error": 5.960464477539063e-08,
+      "max_relative_error": 5.960464477539063e-08,
+      "atol": 1e-05,
+      "rtol": 0,
+      "shape": [
+        4
+      ]
+    },
+    "page_embedding_batch_reference": {
+      "passed": true,
+      "max_abs_error": 2.9616057872772217e-07,
+      "max_relative_error": 0.010466650880970343,
+      "atol": 1e-05,
+      "rtol": 1e-05,
+      "shape": [
+        16,
+        1024
+      ]
+    },
+    "page_unit_norm": {
+      "passed": true,
+      "max_abs_error": 5.960464477539063e-08,
+      "max_relative_error": 5.960464477539063e-08,
+      "atol": 1e-05,
+      "rtol": 0,
+      "shape": [
+        16
+      ]
+    },
+    "embedding_score_reload": {
+      "passed": true,
+      "max_abs_error": 0.0,
+      "max_relative_error": 0.0,
+      "atol": 0,
+      "rtol": 0,
+      "shape": [
+        4,
+        16
+      ]
+    },
+    "cache_reload": {
+      "passed": true,
+      "max_abs_error": 0.0,
+      "max_relative_error": 0.0,
+      "atol": 0,
+      "rtol": 0,
+      "shape": [
+        4,
+        16
+      ]
+    },
+    "ranking_reload": {
+      "passed": true
+    }
+  },
+  "shape": [
+    4,
+    16
+  ],
+  "score_min": 0.20215803384780884,
+  "score_max": 0.5181261301040649,
+  "frozen_weights": true,
+  "settings": {
+    "model_id": "BAAI/bge-m3",
+    "revision": "5617a9f61b028005a4858fdac845db406aefb181",
+    "tokenizer_id": "BAAI/bge-m3",
+    "tokenizer_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+    "batch_size": 2,
+    "max_seq_length": 8192,
+    "query_prefix": "",
+    "page_prefix": "",
+    "device": "cuda",
+    "dtype": "float32",
+    "normalize_embeddings": true
+  },
+  "stage": "dense",
+  "completed_utc": "2026-10-17T04:08:11.337651+00:00",
+  "resources": {
+    "phases": [
+      {
+        "phase": "download_models",
+        "seconds": 1.5377478480000004,
+        "peak_rss_mb": 3716.87890625,
+        "peak_cuda_allocated_mb": 0.0,
+        "peak_cuda_reserved_mb": 0.0
+      },
+      {
+        "phase": "load_model",
+        "seconds": 12.274805676,
+        "peak_rss_mb": 8265.78125,
+        "peak_cuda_allocated_mb": 2165.9384765625,
+        "peak_cuda_reserved_mb": 2186.0
+      },
+      {
+        "phase": "encode_queries",
+        "seconds": 0.4488126809999997,
+        "peak_rss_mb": 6604.3359375,
+        "peak_cuda_allocated_mb": 2178.755859375,
+        "peak_cuda_reserved_mb": 2190.0
+      },
+      {
+        "phase": "encode_pages",
+        "seconds": 0.2087130039999998,
+        "peak_rss_mb": 6706.546875,
+        "peak_cuda_allocated_mb": 2226.9560546875,
+        "peak_cuda_reserved_mb": 2266.0
+      },
+      {
+        "phase": "score",
+        "seconds": 8.221100000227466e-05,
+        "peak_rss_mb": 6710.546875,
+        "peak_cuda_allocated_mb": 2174.0634765625,
+        "peak_cuda_reserved_mb": 2266.0
+      },
+      {
+        "phase": "reference_encode",
+        "seconds": 0.31020496100000017,
+        "peak_rss_mb": 6851.0625,
+        "peak_cuda_allocated_mb": 2198.822265625,
+        "peak_cuda_reserved_mb": 2268.0
+      },
+      {
+        "phase": "total_channel",
+        "seconds": 24.005964765999998,
+        "peak_rss_mb": 8265.78125,
+        "peak_cuda_allocated_mb": 2198.822265625,
+        "peak_cuda_reserved_mb": 2268.0
+      }
+    ],
+    "elapsed_seconds": 26.336981440000002,
+    "peak_rss_mb": 8265.78125,
+    "peak_cuda_reserved_mb": 2268.0,
+    "artifact_bytes": 178380,
+    "rss_poll_interval_seconds": 0.02
+  },
+  "resource_checks": {
+    "ram": true,
+    "vram": true,
+    "time": true,
+    "artifact": true
+  }
+}

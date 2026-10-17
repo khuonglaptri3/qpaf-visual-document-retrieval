@@ -1,0 +1,1938 @@
+[
+  {
+    "page_id": "0004b995666f8846b92ffc3d741a930bba0638e3_page_0001",
+    "dpi": 150,
+    "word_count": 46,
+    "mean_word_confidence": 87.34053202173912,
+    "character_weighted_confidence": 90.00068807751934,
+    "low_confidence_word_fraction": 0.13043478260869565
+  },
+  {
+    "page_id": "0004b995666f8846b92ffc3d741a930bba0638e3_page_0001",
+    "dpi": 300,
+    "word_count": 55,
+    "mean_word_confidence": 90.63191163636364,
+    "character_weighted_confidence": 90.8754310355987,
+    "low_confidence_word_fraction": 0.05454545454545454
+  },
+  {
+    "page_id": "0004b995666f8846b92ffc3d741a930bba0638e3_page_0002",
+    "dpi": 150,
+    "word_count": 14,
+    "mean_word_confidence": 91.19131807142855,
+    "character_weighted_confidence": 93.37379979729731,
+    "low_confidence_word_fraction": 0.07142857142857142
+  },
+  {
+    "page_id": "0004b995666f8846b92ffc3d741a930bba0638e3_page_0002",
+    "dpi": 300,
+    "word_count": 14,
+    "mean_word_confidence": 76.12041985714286,
+    "character_weighted_confidence": 80.28007113333334,
+    "low_confidence_word_fraction": 0.21428571428571427
+  },
+  {
+    "page_id": "0004b995666f8846b92ffc3d741a930bba0638e3_page_0009",
+    "dpi": 150,
+    "word_count": 51,
+    "mean_word_confidence": 94.12099709803918,
+    "character_weighted_confidence": 95.34730355555556,
+    "low_confidence_word_fraction": 0.0
+  },
+  {
+    "page_id": "0004b995666f8846b92ffc3d741a930bba0638e3_page_0009",
+    "dpi": 300,
+    "word_count": 59,
+    "mean_word_confidence": 87.33895640677969,
+    "character_weighted_confidence": 91.9725881333333,
+    "low_confidence_word_fraction": 0.13559322033898305
+  },
+  {
+    "page_id": "0004b995666f8846b92ffc3d741a930bba0638e3_page_0017",
+    "dpi": 150,
+    "word_count": 13,
+    "mean_word_confidence": 92.78249130769231,
+    "character_weighted_confidence": 91.12365652777778,
+    "low_confidence_word_fraction": 0.0
+  },
+  {
+    "page_id": "0004b995666f8846b92ffc3d741a930bba0638e3_page_0017",
+    "dpi": 300,
+    "word_count": 23,
+    "mean_word_confidence": 93.28466091304347,
+    "character_weighted_confidence": 93.57659349579832,
+    "low_confidence_word_fraction": 0.0
+  },
+  {
+    "page_id": "00171a1b5e1078fd6fa76e72d361d1c647d77eb5_page_0001",
+    "dpi": 150,
+    "word_count": 22,
+    "mean_word_confidence": 92.84535599999998,
+    "character_weighted_confidence": 92.22513153205128,
+    "low_confidence_word_fraction": 0.045454545454545456
+  },
+  {
+    "page_id": "00171a1b5e1078fd6fa76e72d361d1c647d77eb5_page_0001",
+    "dpi": 300,
+    "word_count": 22,
+    "mean_word_confidence": 92.79455018181818,
+    "character_weighted_confidence": 94.06920945859872,
+    "low_confidence_word_fraction": 0.045454545454545456
+  },
+  {
+    "page_id": "00171a1b5e1078fd6fa76e72d361d1c647d77eb5_page_0002",
+    "dpi": 150,
+    "word_count": 101,
+    "mean_word_confidence": 62.88009264356437,
+    "character_weighted_confidence": 70.37156131489364,
+    "low_confidence_word_fraction": 0.43564356435643564
+  },
+  {
+    "page_id": "00171a1b5e1078fd6fa76e72d361d1c647d77eb5_page_0002",
+    "dpi": 300,
+    "word_count": 171,
+    "mean_word_confidence": 59.50208522222224,
+    "character_weighted_confidence": 66.54414391281374,
+    "low_confidence_word_fraction": 0.4619883040935672
+  },
+  {
+    "page_id": "00171a1b5e1078fd6fa76e72d361d1c647d77eb5_page_0017",
+    "dpi": 150,
+    "word_count": 87,
+    "mean_word_confidence": 91.54132665517241,
+    "character_weighted_confidence": 93.21868423734729,
+    "low_confidence_word_fraction": 0.04597701149425287
+  },
+  {
+    "page_id": "00171a1b5e1078fd6fa76e72d361d1c647d77eb5_page_0017",
+    "dpi": 300,
+    "word_count": 89,
+    "mean_word_confidence": 89.6684612808989,
+    "character_weighted_confidence": 93.20893438356167,
+    "low_confidence_word_fraction": 0.06741573033707865
+  },
+  {
+    "page_id": "00171a1b5e1078fd6fa76e72d361d1c647d77eb5_page_0018",
+    "dpi": 150,
+    "word_count": 6,
+    "mean_word_confidence": 96.40833400000001,
+    "character_weighted_confidence": 96.49511203225806,
+    "low_confidence_word_fraction": 0.0
+  },
+  {
+    "page_id": "00171a1b5e1078fd6fa76e72d361d1c647d77eb5_page_0018",
+    "dpi": 300,
+    "word_count": 6,
+    "mean_word_confidence": 96.20492666666667,
+    "character_weighted_confidence": 96.26172022580646,
+    "low_confidence_word_fraction": 0.0
+  },
+  {
+    "page_id": "0065038b9255be3283bedc7bbe75ef5c2660d3a8_page_0001",
+    "dpi": 150,
+    "word_count": 20,
+    "mean_word_confidence": 85.64970670000001,
+    "character_weighted_confidence": 88.36650056666666,
+    "low_confidence_word_fraction": 0.1
+  },
+  {
+    "page_id": "0065038b9255be3283bedc7bbe75ef5c2660d3a8_page_0001",
+    "dpi": 300,
+    "word_count": 20,
+    "mean_word_confidence": 86.370371,
+    "character_weighted_confidence": 88.63109616666668,
+    "low_confidence_word_fraction": 0.15
+  },
+  {
+    "page_id": "0065038b9255be3283bedc7bbe75ef5c2660d3a8_page_0002",
+    "dpi": 150,
+    "word_count": 67,
+    "mean_word_confidence": 96.2864663283582,
+    "character_weighted_confidence": 96.26068873244141,
+    "low_confidence_word_fraction": 0.0
+  },
+  {
+    "page_id": "0065038b9255be3283bedc7bbe75ef5c2660d3a8_page_0002",
+    "dpi": 300,
+    "word_count": 67,
+    "mean_word_confidence": 96.20380377611941,
+    "character_weighted_confidence": 96.2275404548495,
+    "low_confidence_word_fraction": 0.0
+  },
+  {
+    "page_id": "0065038b9255be3283bedc7bbe75ef5c2660d3a8_page_0010",
+    "dpi": 150,
+    "word_count": 7,
+    "mean_word_confidence": 63.931887428571436,
+    "character_weighted_confidence": 68.02210018181819,
+    "low_confidence_word_fraction": 0.42857142857142855
+  },
+  {
+    "page_id": "0065038b9255be3283bedc7bbe75ef5c2660d3a8_page_0010",
+    "dpi": 300,
+    "word_count": 78,
+    "mean_word_confidence": 51.194815153846164,
+    "character_weighted_confidence": 56.37400478470254,
+    "low_confidence_word_fraction": 0.6025641025641025
+  },
+  {
+    "page_id": "0065038b9255be3283bedc7bbe75ef5c2660d3a8_page_0013",
+    "dpi": 150,
+    "word_count": 28,
+    "mean_word_confidence": 94.07028900000003,
+    "character_weighted_confidence": 95.4717395049505,
+    "low_confidence_word_fraction": 0.0
+  },
+  {
+    "page_id": "0065038b9255be3283bedc7bbe75ef5c2660d3a8_page_0013",
+    "dpi": 300,
+    "word_count": 28,
+    "mean_word_confidence": 94.23881421428572,
+    "character_weighted_confidence": 95.48767585148515,
+    "low_confidence_word_fraction": 0.0
+  },
+  {
+    "page_id": "0073d1c9d37a124a69560a42acf492e6fae6fb55_page_0001",
+    "dpi": 150,
+    "word_count": 30,
+    "mean_word_confidence": 85.5748072,
+    "character_weighted_confidence": 93.20866397126439,
+    "low_confidence_word_fraction": 0.13333333333333333
+  },
+  {
+    "page_id": "0073d1c9d37a124a69560a42acf492e6fae6fb55_page_0001",
+    "dpi": 300,
+    "word_count": 30,
+    "mean_word_confidence": 85.99132273333333,
+    "character_weighted_confidence": 93.63827170114942,
+    "low_confidence_word_fraction": 0.13333333333333333
+  },
+  {
+    "page_id": "0073d1c9d37a124a69560a42acf492e6fae6fb55_page_0007",
+    "dpi": 150,
+    "word_count": 21,
+    "mean_word_confidence": 96.43390814285715,
+    "character_weighted_confidence": 96.38607696402877,
+    "low_confidence_word_fraction": 0.0
+  },
+  {
+    "page_id": "0073d1c9d37a124a69560a42acf492e6fae6fb55_page_0007",
+    "dpi": 300,
+    "word_count": 21,
+    "mean_word_confidence": 96.33241004761904,
+    "character_weighted_confidence": 96.25960673381296,
+    "low_confidence_word_fraction": 0.0
+  },
+  {
+    "page_id": "0073d1c9d37a124a69560a42acf492e6fae6fb55_page_0018",
+    "dpi": 150,
+    "word_count": 47,
+    "mean_word_confidence": 78.77766757446808,
+    "character_weighted_confidence": 82.70367141886791,
+    "low_confidence_word_fraction": 0.2127659574468085
+  },
+  {
+    "page_id": "0073d1c9d37a124a69560a42acf492e6fae6fb55_page_0018",
+    "dpi": 300,
+    "word_count": 47,
+    "mean_word_confidence": 79.98325044680851,
+    "character_weighted_confidence": 82.00246532592594,
+    "low_confidence_word_fraction": 0.14893617021276595
+  },
+  {
+    "page_id": "0073d1c9d37a124a69560a42acf492e6fae6fb55_page_0021",
+    "dpi": 150,
+    "word_count": 8,
+    "mean_word_confidence": 68.73967975000001,
+    "character_weighted_confidence": 63.92187546296296,
+    "low_confidence_word_fraction": 0.25
+  },
+  {
+    "page_id": "0073d1c9d37a124a69560a42acf492e6fae6fb55_page_0021",
+    "dpi": 300,
+    "word_count": 5,
+    "mean_word_confidence": 92.839334,
+    "character_weighted_confidence": 91.69323296969698,
+    "low_confidence_word_fraction": 0.0
+  },
+  {
+    "page_id": "008363273c77bfd99cc0bbe473189616006e7c72_page_0001",
+    "dpi": 150,
+    "word_count": 23,
+    "mean_word_confidence": 93.792114,
+    "character_weighted_confidence": 94.42224317763156,
+    "low_confidence_word_fraction": 0.0
+  },
+  {
+    "page_id": "008363273c77bfd99cc0bbe473189616006e7c72_page_0001",
+    "dpi": 300,
+    "word_count": 23,
+    "mean_word_confidence": 92.33130278260869,
+    "character_weighted_confidence": 93.26970230263159,
+    "low_confidence_word_fraction": 0.0
+  },
+  {
+    "page_id": "008363273c77bfd99cc0bbe473189616006e7c72_page_0010",
+    "dpi": 150,
+    "word_count": 107,
+    "mean_word_confidence": 89.90179712149532,
+    "character_weighted_confidence": 93.86710812222226,
+    "low_confidence_word_fraction": 0.07476635514018691
+  },
+  {
+    "page_id": "008363273c77bfd99cc0bbe473189616006e7c72_page_0010",
+    "dpi": 300,
+    "word_count": 104,
+    "mean_word_confidence": 90.09764875961542,
+    "character_weighted_confidence": 93.97942431835207,
+    "low_confidence_word_fraction": 0.07692307692307693
+  },
+  {
+    "page_id": "008363273c77bfd99cc0bbe473189616006e7c72_page_0014",
+    "dpi": 150,
+    "word_count": 11,
+    "mean_word_confidence": 71.68648327272727,
+    "character_weighted_confidence": 86.72341357894736,
+    "low_confidence_word_fraction": 0.2727272727272727
+  },
+  {
+    "page_id": "008363273c77bfd99cc0bbe473189616006e7c72_page_0014",
+    "dpi": 300,
+    "word_count": 7,
+    "mean_word_confidence": 95.5089242857143,
+    "character_weighted_confidence": 95.22840506,
+    "low_confidence_word_fraction": 0.0
+  },
+  {
+    "page_id": "008363273c77bfd99cc0bbe473189616006e7c72_page_0023",
+    "dpi": 150,
+    "word_count": 4,
+    "mean_word_confidence": 74.3651715,
+    "character_weighted_confidence": 89.33406138461538,
+    "low_confidence_word_fraction": 0.25
+  },
+  {
+    "page_id": "008363273c77bfd99cc0bbe473189616006e7c72_page_0023",
+    "dpi": 300,
+    "word_count": 3,
+    "mean_word_confidence": 78.55942666666665,
+    "character_weighted_confidence": 85.37951369999999,
+    "low_confidence_word_fraction": 0.3333333333333333
+  },
+  {
+    "page_id": "009856a0cdcc230d983c3a3e460a0c1b83cb09d4_page_0001",
+    "dpi": 150,
+    "word_count": 33,
+    "mean_word_confidence": 91.28889806060604,
+    "character_weighted_confidence": 93.04374198492465,
+    "low_confidence_word_fraction": 0.06060606060606061
+  },
+  {
+    "page_id": "009856a0cdcc230d983c3a3e460a0c1b83cb09d4_page_0001",
+    "dpi": 300,
+    "word_count": 34,
+    "mean_word_confidence": 84.13790261764703,
+    "character_weighted_confidence": 87.07455056372551,
+    "low_confidence_word_fraction": 0.11764705882352941
+  },
+  {
+    "page_id": "009856a0cdcc230d983c3a3e460a0c1b83cb09d4_page_0017",
+    "dpi": 150,
+    "word_count": 69,
+    "mean_word_confidence": 91.7391145217391,
+    "character_weighted_confidence": 91.29154753598009,
+    "low_confidence_word_fraction": 0.014492753623188406
+  },
+  {
+    "page_id": "009856a0cdcc230d983c3a3e460a0c1b83cb09d4_page_0017",
+    "dpi": 300,
+    "word_count": 78,
+    "mean_word_confidence": 85.28450971794872,
+    "character_weighted_confidence": 86.66747619203747,
+    "low_confidence_word_fraction": 0.11538461538461539
+  },
+  {
+    "page_id": "009856a0cdcc230d983c3a3e460a0c1b83cb09d4_page_0024",
+    "dpi": 150,
+    "word_count": 71,
+    "mean_word_confidence": 71.10281308450702,
+    "character_weighted_confidence": 81.36654180585106,
+    "low_confidence_word_fraction": 0.29577464788732394
+  },
+  {
+    "page_id": "009856a0cdcc230d983c3a3e460a0c1b83cb09d4_page_0024",
+    "dpi": 300,
+    "word_count": 76,
+    "mean_word_confidence": 67.93805039473685,
+    "character_weighted_confidence": 78.32576976130652,
+    "low_confidence_word_fraction": 0.3684210526315789
+  },
+  {
+    "page_id": "009856a0cdcc230d983c3a3e460a0c1b83cb09d4_page_0025",
+    "dpi": 150,
+    "word_count": 32,
+    "mean_word_confidence": 57.87208959375,
+    "character_weighted_confidence": 53.35140870909091,
+    "low_confidence_word_fraction": 0.5625
+  },
+  {
+    "page_id": "009856a0cdcc230d983c3a3e460a0c1b83cb09d4_page_0025",
+    "dpi": 300,
+    "word_count": 19,
+    "mean_word_confidence": 53.08352457894737,
+    "character_weighted_confidence": 56.629157951219504,
+    "low_confidence_word_fraction": 0.5789473684210527
+  },
+  {
+    "page_id": "00c9161083ca956372a7548e69650556a8c7f358_page_0001",
+    "dpi": 150,
+    "word_count": 59,
+    "mean_word_confidence": 94.99656196610172,
+    "character_weighted_confidence": 94.96794577233429,
+    "low_confidence_word_fraction": 0.0
+  },
+  {
+    "page_id": "00c9161083ca956372a7548e69650556a8c7f358_page_0001",
+    "dpi": 300,
+    "word_count": 59,
+    "mean_word_confidence": 94.94799081355929,
+    "character_weighted_confidence": 94.85077280979831,
+    "low_confidence_word_fraction": 0.0
+  },
+  {
+    "page_id": "00c9161083ca956372a7548e69650556a8c7f358_page_0011",
+    "dpi": 150,
+    "word_count": 55,
+    "mean_word_confidence": 64.34105032727271,
+    "character_weighted_confidence": 77.60614717105261,
+    "low_confidence_word_fraction": 0.38181818181818183
+  },
+  {
+    "page_id": "00c9161083ca956372a7548e69650556a8c7f358_page_0011",
+    "dpi": 300,
+    "word_count": 87,
+    "mean_word_confidence": 60.97975597701152,
+    "character_weighted_confidence": 75.93284520879122,
+    "low_confidence_word_fraction": 0.41379310344827586
+  },
+  {
+    "page_id": "00c9161083ca956372a7548e69650556a8c7f358_page_0018",
+    "dpi": 150,
+    "word_count": 80,
+    "mean_word_confidence": 76.1256522875,
+    "character_weighted_confidence": 76.78769056796119,
+    "low_confidence_word_fraction": 0.225
+  },
+  {
+    "page_id": "00c9161083ca956372a7548e69650556a8c7f358_page_0018",
+    "dpi": 300,
+    "word_count": 80,
+    "mean_word_confidence": 81.53241769999997,
+    "character_weighted_confidence": 82.23133331463413,
+    "low_confidence_word_fraction": 0.1625
+  },
+  {
+    "page_id": "00c9161083ca956372a7548e69650556a8c7f358_page_0022",
+    "dpi": 150,
+    "word_count": 8,
+    "mean_word_confidence": 95.30599987500001,
+    "character_weighted_confidence": 94.2803465138889,
+    "low_confidence_word_fraction": 0.0
+  },
+  {
+    "page_id": "00c9161083ca956372a7548e69650556a8c7f358_page_0022",
+    "dpi": 300,
+    "word_count": 8,
+    "mean_word_confidence": 94.88599575,
+    "character_weighted_confidence": 94.03682972222221,
+    "low_confidence_word_fraction": 0.0
+  },
+  {
+    "page_id": "00d8d22ded241c20c75d49578359057cd25739d1_page_0001",
+    "dpi": 150,
+    "word_count": 15,
+    "mean_word_confidence": 93.37763926666666,
+    "character_weighted_confidence": 92.84946443564354,
+    "low_confidence_word_fraction": 0.06666666666666667
+  },
+  {
+    "page_id": "00d8d22ded241c20c75d49578359057cd25739d1_page_0001",
+    "dpi": 300,
+    "word_count": 40,
+    "mean_word_confidence": 75.252137475,
+    "character_weighted_confidence": 81.22038427601808,
+    "low_confidence_word_fraction": 0.25
+  },
+  {
+    "page_id": "00d8d22ded241c20c75d49578359057cd25739d1_page_0002",
+    "dpi": 150,
+    "word_count": 37,
+    "mean_word_confidence": 67.69353027027027,
+    "character_weighted_confidence": 68.65335849333333,
+    "low_confidence_word_fraction": 0.32432432432432434
+  },
+  {
+    "page_id": "00d8d22ded241c20c75d49578359057cd25739d1_page_0002",
+    "dpi": 300,
+    "word_count": 44,
+    "mean_word_confidence": 72.17203261363638,
+    "character_weighted_confidence": 78.67481835269709,
+    "low_confidence_word_fraction": 0.36363636363636365
+  },
+  {
+    "page_id": "00d8d22ded241c20c75d49578359057cd25739d1_page_0009",
+    "dpi": 150,
+    "word_count": 974,
+    "mean_word_confidence": 92.64215651950724,
+    "character_weighted_confidence": 92.09062196115198,
+    "low_confidence_word_fraction": 0.03285420944558522
+  },
+  {
+    "page_id": "00d8d22ded241c20c75d49578359057cd25739d1_page_0009",
+    "dpi": 300,
+    "word_count": 973,
+    "mean_word_confidence": 94.56413595580678,
+    "character_weighted_confidence": 94.5447817375791,
+    "low_confidence_word_fraction": 0.014388489208633094
+  },
+  {
+    "page_id": "00d8d22ded241c20c75d49578359057cd25739d1_page_0023",
+    "dpi": 150,
+    "word_count": 0,
+    "mean_word_confidence": null,
+    "character_weighted_confidence": null,
+    "low_confidence_word_fraction": null
+  },
+  {
+    "page_id": "00d8d22ded241c20c75d49578359057cd25739d1_page_0023",
+    "dpi": 300,
+    "word_count": 0,
+    "mean_word_confidence": null,
+    "character_weighted_confidence": null,
+    "low_confidence_word_fraction": null
+  },
+  {
+    "page_id": "01056efdbb585d355a073b6aba9a906611fc1cc4_page_0001",
+    "dpi": 150,
+    "word_count": 17,
+    "mean_word_confidence": 66.97567776470588,
+    "character_weighted_confidence": 75.2878129090909,
+    "low_confidence_word_fraction": 0.4117647058823529
+  },
+  {
+    "page_id": "01056efdbb585d355a073b6aba9a906611fc1cc4_page_0001",
+    "dpi": 300,
+    "word_count": 14,
+    "mean_word_confidence": 74.64159657142855,
+    "character_weighted_confidence": 82.58771027083333,
+    "low_confidence_word_fraction": 0.2857142857142857
+  },
+  {
+    "page_id": "01056efdbb585d355a073b6aba9a906611fc1cc4_page_0003",
+    "dpi": 150,
+    "word_count": 125,
+    "mean_word_confidence": 91.36916575999994,
+    "character_weighted_confidence": 92.74621249088145,
+    "low_confidence_word_fraction": 0.056
+  },
+  {
+    "page_id": "01056efdbb585d355a073b6aba9a906611fc1cc4_page_0003",
+    "dpi": 300,
+    "word_count": 200,
+    "mean_word_confidence": 89.38409527499999,
+    "character_weighted_confidence": 91.99670635441765,
+    "low_confidence_word_fraction": 0.08
+  },
+  {
+    "page_id": "01056efdbb585d355a073b6aba9a906611fc1cc4_page_0006",
+    "dpi": 150,
+    "word_count": 157,
+    "mean_word_confidence": 86.27724377707005,
+    "character_weighted_confidence": 89.74092082863578,
+    "low_confidence_word_fraction": 0.12101910828025478
+  },
+  {
+    "page_id": "01056efdbb585d355a073b6aba9a906611fc1cc4_page_0006",
+    "dpi": 300,
+    "word_count": 189,
+    "mean_word_confidence": 84.17865047619044,
+    "character_weighted_confidence": 91.12679402055505,
+    "low_confidence_word_fraction": 0.15873015873015872
+  },
+  {
+    "page_id": "01056efdbb585d355a073b6aba9a906611fc1cc4_page_0007",
+    "dpi": 150,
+    "word_count": 201,
+    "mean_word_confidence": 86.53208059701495,
+    "character_weighted_confidence": 90.95492503898456,
+    "low_confidence_word_fraction": 0.11442786069651742
+  },
+  {
+    "page_id": "01056efdbb585d355a073b6aba9a906611fc1cc4_page_0007",
+    "dpi": 300,
+    "word_count": 191,
+    "mean_word_confidence": 87.7075261727749,
+    "character_weighted_confidence": 90.54532806182532,
+    "low_confidence_word_fraction": 0.09947643979057591
+  },
+  {
+    "page_id": "011e012b28d60278c243b200eaf19952a725370c_page_0001",
+    "dpi": 150,
+    "word_count": 16,
+    "mean_word_confidence": 81.447268875,
+    "character_weighted_confidence": 79.92597404819277,
+    "low_confidence_word_fraction": 0.1875
+  },
+  {
+    "page_id": "011e012b28d60278c243b200eaf19952a725370c_page_0001",
+    "dpi": 300,
+    "word_count": 17,
+    "mean_word_confidence": 86.04585647058826,
+    "character_weighted_confidence": 84.26446088421054,
+    "low_confidence_word_fraction": 0.11764705882352941
+  },
+  {
+    "page_id": "011e012b28d60278c243b200eaf19952a725370c_page_0003",
+    "dpi": 150,
+    "word_count": 55,
+    "mean_word_confidence": 88.23482921818182,
+    "character_weighted_confidence": 91.50384334062502,
+    "low_confidence_word_fraction": 0.10909090909090909
+  },
+  {
+    "page_id": "011e012b28d60278c243b200eaf19952a725370c_page_0003",
+    "dpi": 300,
+    "word_count": 55,
+    "mean_word_confidence": 82.97106976363638,
+    "character_weighted_confidence": 89.15738411214954,
+    "low_confidence_word_fraction": 0.12727272727272726
+  },
+  {
+    "page_id": "011e012b28d60278c243b200eaf19952a725370c_page_0005",
+    "dpi": 150,
+    "word_count": 52,
+    "mean_word_confidence": 91.44232401923078,
+    "character_weighted_confidence": 93.01785527152316,
+    "low_confidence_word_fraction": 0.057692307692307696
+  },
+  {
+    "page_id": "011e012b28d60278c243b200eaf19952a725370c_page_0005",
+    "dpi": 300,
+    "word_count": 50,
+    "mean_word_confidence": 89.79220026000002,
+    "character_weighted_confidence": 91.8335582989324,
+    "low_confidence_word_fraction": 0.08
+  },
+  {
+    "page_id": "011e012b28d60278c243b200eaf19952a725370c_page_0010",
+    "dpi": 150,
+    "word_count": 41,
+    "mean_word_confidence": 91.23418709756098,
+    "character_weighted_confidence": 89.6274823952569,
+    "low_confidence_word_fraction": 0.024390243902439025
+  },
+  {
+    "page_id": "011e012b28d60278c243b200eaf19952a725370c_page_0010",
+    "dpi": 300,
+    "word_count": 41,
+    "mean_word_confidence": 93.38072375609758,
+    "character_weighted_confidence": 92.07374069169958,
+    "low_confidence_word_fraction": 0.024390243902439025
+  },
+  {
+    "page_id": "015834912780c3a83a8c27aa66c52252994a8b16_page_0001",
+    "dpi": 150,
+    "word_count": 5,
+    "mean_word_confidence": 89.65209359999999,
+    "character_weighted_confidence": 85.807675,
+    "low_confidence_word_fraction": 0.0
+  },
+  {
+    "page_id": "015834912780c3a83a8c27aa66c52252994a8b16_page_0001",
+    "dpi": 300,
+    "word_count": 7,
+    "mean_word_confidence": 93.07397357142857,
+    "character_weighted_confidence": 91.10068426530611,
+    "low_confidence_word_fraction": 0.0
+  },
+  {
+    "page_id": "015834912780c3a83a8c27aa66c52252994a8b16_page_0007",
+    "dpi": 150,
+    "word_count": 730,
+    "mean_word_confidence": 93.80885093150681,
+    "character_weighted_confidence": 93.68790236622024,
+    "low_confidence_word_fraction": 0.012328767123287671
+  },
+  {
+    "page_id": "015834912780c3a83a8c27aa66c52252994a8b16_page_0007",
+    "dpi": 300,
+    "word_count": 731,
+    "mean_word_confidence": 95.13026737209307,
+    "character_weighted_confidence": 94.86703422532125,
+    "low_confidence_word_fraction": 0.005471956224350205
+  },
+  {
+    "page_id": "015834912780c3a83a8c27aa66c52252994a8b16_page_0010",
+    "dpi": 150,
+    "word_count": 254,
+    "mean_word_confidence": 85.1823915,
+    "character_weighted_confidence": 86.07967888300837,
+    "low_confidence_word_fraction": 0.051181102362204724
+  },
+  {
+    "page_id": "015834912780c3a83a8c27aa66c52252994a8b16_page_0010",
+    "dpi": 300,
+    "word_count": 283,
+    "mean_word_confidence": 92.60320046996469,
+    "character_weighted_confidence": 94.18667150667602,
+    "low_confidence_word_fraction": 0.007067137809187279
+  },
+  {
+    "page_id": "015834912780c3a83a8c27aa66c52252994a8b16_page_0017",
+    "dpi": 150,
+    "word_count": 30,
+    "mean_word_confidence": 64.70568473333334,
+    "character_weighted_confidence": 56.94314825139665,
+    "low_confidence_word_fraction": 0.36666666666666664
+  },
+  {
+    "page_id": "015834912780c3a83a8c27aa66c52252994a8b16_page_0017",
+    "dpi": 300,
+    "word_count": 102,
+    "mean_word_confidence": 47.72088781372549,
+    "character_weighted_confidence": 51.70453351267606,
+    "low_confidence_word_fraction": 0.6470588235294118
+  },
+  {
+    "page_id": "017b534723c463c51f4031ccbba8ce156a502b42_page_0001",
+    "dpi": 150,
+    "word_count": 32,
+    "mean_word_confidence": 88.92041662500002,
+    "character_weighted_confidence": 94.02710728846152,
+    "low_confidence_word_fraction": 0.09375
+  },
+  {
+    "page_id": "017b534723c463c51f4031ccbba8ce156a502b42_page_0001",
+    "dpi": 300,
+    "word_count": 34,
+    "mean_word_confidence": 84.27385388235292,
+    "character_weighted_confidence": 90.93909427976189,
+    "low_confidence_word_fraction": 0.14705882352941177
+  },
+  {
+    "page_id": "017b534723c463c51f4031ccbba8ce156a502b42_page_0003",
+    "dpi": 150,
+    "word_count": 164,
+    "mean_word_confidence": 90.69648254878051,
+    "character_weighted_confidence": 94.3308609859155,
+    "low_confidence_word_fraction": 0.054878048780487805
+  },
+  {
+    "page_id": "017b534723c463c51f4031ccbba8ce156a502b42_page_0003",
+    "dpi": 300,
+    "word_count": 164,
+    "mean_word_confidence": 91.37222715243905,
+    "character_weighted_confidence": 94.123204909836,
+    "low_confidence_word_fraction": 0.04878048780487805
+  },
+  {
+    "page_id": "017b534723c463c51f4031ccbba8ce156a502b42_page_0008",
+    "dpi": 150,
+    "word_count": 492,
+    "mean_word_confidence": 96.06053058333336,
+    "character_weighted_confidence": 95.96327115101566,
+    "low_confidence_word_fraction": 0.0
+  },
+  {
+    "page_id": "017b534723c463c51f4031ccbba8ce156a502b42_page_0008",
+    "dpi": 300,
+    "word_count": 513,
+    "mean_word_confidence": 93.53056018323592,
+    "character_weighted_confidence": 95.14855519977262,
+    "low_confidence_word_fraction": 0.029239766081871343
+  },
+  {
+    "page_id": "017b534723c463c51f4031ccbba8ce156a502b42_page_0012",
+    "dpi": 150,
+    "word_count": 11,
+    "mean_word_confidence": 82.71584372727274,
+    "character_weighted_confidence": 90.1425483773585,
+    "low_confidence_word_fraction": 0.18181818181818182
+  },
+  {
+    "page_id": "017b534723c463c51f4031ccbba8ce156a502b42_page_0012",
+    "dpi": 300,
+    "word_count": 8,
+    "mean_word_confidence": 91.4910135,
+    "character_weighted_confidence": 90.55616800000001,
+    "low_confidence_word_fraction": 0.0
+  },
+  {
+    "page_id": "01ada48daaf576de7e173f212b032ab06b742e24_page_0001",
+    "dpi": 150,
+    "word_count": 2,
+    "mean_word_confidence": 2.210144,
+    "character_weighted_confidence": 0.9822862222222223,
+    "low_confidence_word_fraction": 1.0
+  },
+  {
+    "page_id": "01ada48daaf576de7e173f212b032ab06b742e24_page_0001",
+    "dpi": 300,
+    "word_count": 2,
+    "mean_word_confidence": 3.841633,
+    "character_weighted_confidence": 2.88122475,
+    "low_confidence_word_fraction": 1.0
+  },
+  {
+    "page_id": "01ada48daaf576de7e173f212b032ab06b742e24_page_0002",
+    "dpi": 150,
+    "word_count": 84,
+    "mean_word_confidence": 90.04067600000002,
+    "character_weighted_confidence": 91.5902415721393,
+    "low_confidence_word_fraction": 0.05952380952380952
+  },
+  {
+    "page_id": "01ada48daaf576de7e173f212b032ab06b742e24_page_0002",
+    "dpi": 300,
+    "word_count": 88,
+    "mean_word_confidence": 85.93100370454543,
+    "character_weighted_confidence": 89.27682502439022,
+    "low_confidence_word_fraction": 0.07954545454545454
+  },
+  {
+    "page_id": "01ada48daaf576de7e173f212b032ab06b742e24_page_0007",
+    "dpi": 150,
+    "word_count": 206,
+    "mean_word_confidence": 92.56144825728146,
+    "character_weighted_confidence": 93.7587554310065,
+    "low_confidence_word_fraction": 0.04854368932038835
+  },
+  {
+    "page_id": "01ada48daaf576de7e173f212b032ab06b742e24_page_0007",
+    "dpi": 300,
+    "word_count": 261,
+    "mean_word_confidence": 81.13345970881223,
+    "character_weighted_confidence": 88.2208629693206,
+    "low_confidence_word_fraction": 0.19540229885057472
+  },
+  {
+    "page_id": "01ada48daaf576de7e173f212b032ab06b742e24_page_0012",
+    "dpi": 150,
+    "word_count": 87,
+    "mean_word_confidence": 86.12313116091954,
+    "character_weighted_confidence": 86.4482913902439,
+    "low_confidence_word_fraction": 0.12643678160919541
+  },
+  {
+    "page_id": "01ada48daaf576de7e173f212b032ab06b742e24_page_0012",
+    "dpi": 300,
+    "word_count": 82,
+    "mean_word_confidence": 87.6874846585366,
+    "character_weighted_confidence": 88.15057889705886,
+    "low_confidence_word_fraction": 0.06097560975609756
+  },
+  {
+    "page_id": "01dc52ed80b475c6ac81bc9def3e03dad93e33de_page_0001",
+    "dpi": 150,
+    "word_count": 22,
+    "mean_word_confidence": 95.12850504545453,
+    "character_weighted_confidence": 93.50168779432624,
+    "low_confidence_word_fraction": 0.0
+  },
+  {
+    "page_id": "01dc52ed80b475c6ac81bc9def3e03dad93e33de_page_0001",
+    "dpi": 300,
+    "word_count": 22,
+    "mean_word_confidence": 94.20717104545453,
+    "character_weighted_confidence": 92.47579063829788,
+    "low_confidence_word_fraction": 0.0
+  },
+  {
+    "page_id": "01dc52ed80b475c6ac81bc9def3e03dad93e33de_page_0003",
+    "dpi": 150,
+    "word_count": 51,
+    "mean_word_confidence": 90.33584854901957,
+    "character_weighted_confidence": 93.63625057388315,
+    "low_confidence_word_fraction": 0.058823529411764705
+  },
+  {
+    "page_id": "01dc52ed80b475c6ac81bc9def3e03dad93e33de_page_0003",
+    "dpi": 300,
+    "word_count": 50,
+    "mean_word_confidence": 91.74806669999998,
+    "character_weighted_confidence": 94.03215665051903,
+    "low_confidence_word_fraction": 0.04
+  },
+  {
+    "page_id": "01dc52ed80b475c6ac81bc9def3e03dad93e33de_page_0019",
+    "dpi": 150,
+    "word_count": 56,
+    "mean_word_confidence": 88.10145423214284,
+    "character_weighted_confidence": 89.04420042261904,
+    "low_confidence_word_fraction": 0.07142857142857142
+  },
+  {
+    "page_id": "01dc52ed80b475c6ac81bc9def3e03dad93e33de_page_0019",
+    "dpi": 300,
+    "word_count": 59,
+    "mean_word_confidence": 92.4940930677966,
+    "character_weighted_confidence": 93.33032064102561,
+    "low_confidence_word_fraction": 0.03389830508474576
+  },
+  {
+    "page_id": "01dc52ed80b475c6ac81bc9def3e03dad93e33de_page_0021",
+    "dpi": 150,
+    "word_count": 33,
+    "mean_word_confidence": 90.93199251515149,
+    "character_weighted_confidence": 94.16078005371901,
+    "low_confidence_word_fraction": 0.06060606060606061
+  },
+  {
+    "page_id": "01dc52ed80b475c6ac81bc9def3e03dad93e33de_page_0021",
+    "dpi": 300,
+    "word_count": 35,
+    "mean_word_confidence": 90.35138942857142,
+    "character_weighted_confidence": 92.48786447580643,
+    "low_confidence_word_fraction": 0.05714285714285714
+  },
+  {
+    "page_id": "0258acc3a8560dbfd515a78c429125106f29abf3_page_0001",
+    "dpi": 150,
+    "word_count": 30,
+    "mean_word_confidence": 84.61528476666669,
+    "character_weighted_confidence": 84.4822856451613,
+    "low_confidence_word_fraction": 0.13333333333333333
+  },
+  {
+    "page_id": "0258acc3a8560dbfd515a78c429125106f29abf3_page_0001",
+    "dpi": 300,
+    "word_count": 34,
+    "mean_word_confidence": 94.03648102941177,
+    "character_weighted_confidence": 93.39441849282296,
+    "low_confidence_word_fraction": 0.0
+  },
+  {
+    "page_id": "0258acc3a8560dbfd515a78c429125106f29abf3_page_0011",
+    "dpi": 150,
+    "word_count": 38,
+    "mean_word_confidence": 62.764537947368424,
+    "character_weighted_confidence": 68.26053482424241,
+    "low_confidence_word_fraction": 0.3684210526315789
+  },
+  {
+    "page_id": "0258acc3a8560dbfd515a78c429125106f29abf3_page_0011",
+    "dpi": 300,
+    "word_count": 54,
+    "mean_word_confidence": 82.77185038888891,
+    "character_weighted_confidence": 90.76166265652174,
+    "low_confidence_word_fraction": 0.12962962962962962
+  },
+  {
+    "page_id": "0258acc3a8560dbfd515a78c429125106f29abf3_page_0016",
+    "dpi": 150,
+    "word_count": 77,
+    "mean_word_confidence": 81.95377674025973,
+    "character_weighted_confidence": 87.62260279012341,
+    "low_confidence_word_fraction": 0.15584415584415584
+  },
+  {
+    "page_id": "0258acc3a8560dbfd515a78c429125106f29abf3_page_0016",
+    "dpi": 300,
+    "word_count": 111,
+    "mean_word_confidence": 85.6241497297297,
+    "character_weighted_confidence": 89.37580248516946,
+    "low_confidence_word_fraction": 0.13513513513513514
+  },
+  {
+    "page_id": "0258acc3a8560dbfd515a78c429125106f29abf3_page_0020",
+    "dpi": 150,
+    "word_count": 3,
+    "mean_word_confidence": 91.34899133333333,
+    "character_weighted_confidence": 92.33025072727273,
+    "low_confidence_word_fraction": 0.0
+  },
+  {
+    "page_id": "0258acc3a8560dbfd515a78c429125106f29abf3_page_0020",
+    "dpi": 300,
+    "word_count": 7,
+    "mean_word_confidence": 95.48871485714287,
+    "character_weighted_confidence": 95.56916945833332,
+    "low_confidence_word_fraction": 0.0
+  },
+  {
+    "page_id": "02862397eb1a6a6a9011506457d8f88d48654cab_page_0001",
+    "dpi": 150,
+    "word_count": 8,
+    "mean_word_confidence": 78.35979475000002,
+    "character_weighted_confidence": 84.79298454054056,
+    "low_confidence_word_fraction": 0.25
+  },
+  {
+    "page_id": "02862397eb1a6a6a9011506457d8f88d48654cab_page_0001",
+    "dpi": 300,
+    "word_count": 7,
+    "mean_word_confidence": 82.55186028571428,
+    "character_weighted_confidence": 88.06307554285715,
+    "low_confidence_word_fraction": 0.14285714285714285
+  },
+  {
+    "page_id": "02862397eb1a6a6a9011506457d8f88d48654cab_page_0003",
+    "dpi": 150,
+    "word_count": 88,
+    "mean_word_confidence": 93.8306374431818,
+    "character_weighted_confidence": 95.26637236305734,
+    "low_confidence_word_fraction": 0.022727272727272728
+  },
+  {
+    "page_id": "02862397eb1a6a6a9011506457d8f88d48654cab_page_0003",
+    "dpi": 300,
+    "word_count": 104,
+    "mean_word_confidence": 83.90921144230768,
+    "character_weighted_confidence": 90.20555221894739,
+    "low_confidence_word_fraction": 0.14423076923076922
+  },
+  {
+    "page_id": "02862397eb1a6a6a9011506457d8f88d48654cab_page_0006",
+    "dpi": 150,
+    "word_count": 45,
+    "mean_word_confidence": 94.97264595555555,
+    "character_weighted_confidence": 95.812618972,
+    "low_confidence_word_fraction": 0.022222222222222223
+  },
+  {
+    "page_id": "02862397eb1a6a6a9011506457d8f88d48654cab_page_0006",
+    "dpi": 300,
+    "word_count": 45,
+    "mean_word_confidence": 94.58430446666664,
+    "character_weighted_confidence": 95.40694695200003,
+    "low_confidence_word_fraction": 0.022222222222222223
+  },
+  {
+    "page_id": "02862397eb1a6a6a9011506457d8f88d48654cab_page_0010",
+    "dpi": 150,
+    "word_count": 94,
+    "mean_word_confidence": 78.86758219148936,
+    "character_weighted_confidence": 74.09457669352011,
+    "low_confidence_word_fraction": 0.14893617021276595
+  },
+  {
+    "page_id": "02862397eb1a6a6a9011506457d8f88d48654cab_page_0010",
+    "dpi": 300,
+    "word_count": 112,
+    "mean_word_confidence": 91.83973375892859,
+    "character_weighted_confidence": 93.16176799691361,
+    "low_confidence_word_fraction": 0.03571428571428571
+  },
+  {
+    "page_id": "0295f1ca960d29e2327e90a848235693d965d308_page_0001",
+    "dpi": 150,
+    "word_count": 55,
+    "mean_word_confidence": 38.37216301818181,
+    "character_weighted_confidence": 45.12114738167939,
+    "low_confidence_word_fraction": 0.7454545454545455
+  },
+  {
+    "page_id": "0295f1ca960d29e2327e90a848235693d965d308_page_0001",
+    "dpi": 300,
+    "word_count": 76,
+    "mean_word_confidence": 34.415536657894734,
+    "character_weighted_confidence": 39.02367781632653,
+    "low_confidence_word_fraction": 0.8026315789473685
+  },
+  {
+    "page_id": "0295f1ca960d29e2327e90a848235693d965d308_page_0008",
+    "dpi": 150,
+    "word_count": 139,
+    "mean_word_confidence": 91.07647327338135,
+    "character_weighted_confidence": 92.94921213895782,
+    "low_confidence_word_fraction": 0.050359712230215826
+  },
+  {
+    "page_id": "0295f1ca960d29e2327e90a848235693d965d308_page_0008",
+    "dpi": 300,
+    "word_count": 153,
+    "mean_word_confidence": 86.344372248366,
+    "character_weighted_confidence": 91.18307536536189,
+    "low_confidence_word_fraction": 0.11764705882352941
+  },
+  {
+    "page_id": "0295f1ca960d29e2327e90a848235693d965d308_page_0013",
+    "dpi": 150,
+    "word_count": 7,
+    "mean_word_confidence": 78.77495571428571,
+    "character_weighted_confidence": 69.86215966666666,
+    "low_confidence_word_fraction": 0.14285714285714285
+  },
+  {
+    "page_id": "0295f1ca960d29e2327e90a848235693d965d308_page_0013",
+    "dpi": 300,
+    "word_count": 7,
+    "mean_word_confidence": 66.97379857142856,
+    "character_weighted_confidence": 73.623803125,
+    "low_confidence_word_fraction": 0.42857142857142855
+  },
+  {
+    "page_id": "0295f1ca960d29e2327e90a848235693d965d308_page_0015",
+    "dpi": 150,
+    "word_count": 5,
+    "mean_word_confidence": 95.9243896,
+    "character_weighted_confidence": 96.12065459090908,
+    "low_confidence_word_fraction": 0.0
+  },
+  {
+    "page_id": "0295f1ca960d29e2327e90a848235693d965d308_page_0015",
+    "dpi": 300,
+    "word_count": 5,
+    "mean_word_confidence": 96.4488464,
+    "character_weighted_confidence": 96.3936194090909,
+    "low_confidence_word_fraction": 0.0
+  },
+  {
+    "page_id": "031271a581b8802789a540ffaeca23b68166195b_page_0001",
+    "dpi": 150,
+    "word_count": 42,
+    "mean_word_confidence": 93.69983857142857,
+    "character_weighted_confidence": 94.42804433064516,
+    "low_confidence_word_fraction": 0.023809523809523808
+  },
+  {
+    "page_id": "031271a581b8802789a540ffaeca23b68166195b_page_0001",
+    "dpi": 300,
+    "word_count": 44,
+    "mean_word_confidence": 91.8681809090909,
+    "character_weighted_confidence": 93.84564285317457,
+    "low_confidence_word_fraction": 0.06818181818181818
+  },
+  {
+    "page_id": "031271a581b8802789a540ffaeca23b68166195b_page_0002",
+    "dpi": 150,
+    "word_count": 23,
+    "mean_word_confidence": 84.18972326086956,
+    "character_weighted_confidence": 88.97915926126126,
+    "low_confidence_word_fraction": 0.13043478260869565
+  },
+  {
+    "page_id": "031271a581b8802789a540ffaeca23b68166195b_page_0002",
+    "dpi": 300,
+    "word_count": 28,
+    "mean_word_confidence": 73.6518707142857,
+    "character_weighted_confidence": 76.96026049999998,
+    "low_confidence_word_fraction": 0.25
+  },
+  {
+    "page_id": "031271a581b8802789a540ffaeca23b68166195b_page_0014",
+    "dpi": 150,
+    "word_count": 94,
+    "mean_word_confidence": 90.24718270212767,
+    "character_weighted_confidence": 94.64314082649253,
+    "low_confidence_word_fraction": 0.07446808510638298
+  },
+  {
+    "page_id": "031271a581b8802789a540ffaeca23b68166195b_page_0014",
+    "dpi": 300,
+    "word_count": 94,
+    "mean_word_confidence": 92.03235809574467,
+    "character_weighted_confidence": 94.40572067039103,
+    "low_confidence_word_fraction": 0.031914893617021274
+  },
+  {
+    "page_id": "031271a581b8802789a540ffaeca23b68166195b_page_0016",
+    "dpi": 150,
+    "word_count": 76,
+    "mean_word_confidence": 86.35832530263158,
+    "character_weighted_confidence": 87.14598565333334,
+    "low_confidence_word_fraction": 0.13157894736842105
+  },
+  {
+    "page_id": "031271a581b8802789a540ffaeca23b68166195b_page_0016",
+    "dpi": 300,
+    "word_count": 85,
+    "mean_word_confidence": 84.43270124705884,
+    "character_weighted_confidence": 87.48919187261149,
+    "low_confidence_word_fraction": 0.15294117647058825
+  },
+  {
+    "page_id": "03244446f5499b38d84fb09e3ba09f995eb0692a_page_0001",
+    "dpi": 150,
+    "word_count": 0,
+    "mean_word_confidence": null,
+    "character_weighted_confidence": null,
+    "low_confidence_word_fraction": null
+  },
+  {
+    "page_id": "03244446f5499b38d84fb09e3ba09f995eb0692a_page_0001",
+    "dpi": 300,
+    "word_count": 0,
+    "mean_word_confidence": null,
+    "character_weighted_confidence": null,
+    "low_confidence_word_fraction": null
+  },
+  {
+    "page_id": "03244446f5499b38d84fb09e3ba09f995eb0692a_page_0004",
+    "dpi": 150,
+    "word_count": 119,
+    "mean_word_confidence": 94.61074994957984,
+    "character_weighted_confidence": 94.79444063525305,
+    "low_confidence_word_fraction": 0.008403361344537815
+  },
+  {
+    "page_id": "03244446f5499b38d84fb09e3ba09f995eb0692a_page_0004",
+    "dpi": 300,
+    "word_count": 121,
+    "mean_word_confidence": 92.24086119008264,
+    "character_weighted_confidence": 93.49561829668413,
+    "low_confidence_word_fraction": 0.04132231404958678
+  },
+  {
+    "page_id": "03244446f5499b38d84fb09e3ba09f995eb0692a_page_0009",
+    "dpi": 150,
+    "word_count": 231,
+    "mean_word_confidence": 89.02602600000002,
+    "character_weighted_confidence": 90.60106064313726,
+    "low_confidence_word_fraction": 0.07792207792207792
+  },
+  {
+    "page_id": "03244446f5499b38d84fb09e3ba09f995eb0692a_page_0009",
+    "dpi": 300,
+    "word_count": 280,
+    "mean_word_confidence": 87.15239401428573,
+    "character_weighted_confidence": 90.14061569868643,
+    "low_confidence_word_fraction": 0.11428571428571428
+  },
+  {
+    "page_id": "03244446f5499b38d84fb09e3ba09f995eb0692a_page_0016",
+    "dpi": 150,
+    "word_count": 35,
+    "mean_word_confidence": 85.8177672,
+    "character_weighted_confidence": 88.00750043589743,
+    "low_confidence_word_fraction": 0.11428571428571428
+  },
+  {
+    "page_id": "03244446f5499b38d84fb09e3ba09f995eb0692a_page_0016",
+    "dpi": 300,
+    "word_count": 33,
+    "mean_word_confidence": 89.88108442424243,
+    "character_weighted_confidence": 91.86023318367344,
+    "low_confidence_word_fraction": 0.06060606060606061
+  },
+  {
+    "page_id": "0325f2543fd5aa5598d96e475cebc6135842f554_page_0001",
+    "dpi": 150,
+    "word_count": 27,
+    "mean_word_confidence": 74.39878277777777,
+    "character_weighted_confidence": 76.95898786956522,
+    "low_confidence_word_fraction": 0.2222222222222222
+  },
+  {
+    "page_id": "0325f2543fd5aa5598d96e475cebc6135842f554_page_0001",
+    "dpi": 300,
+    "word_count": 50,
+    "mean_word_confidence": 64.83141805999998,
+    "character_weighted_confidence": 73.63616138647343,
+    "low_confidence_word_fraction": 0.42
+  },
+  {
+    "page_id": "0325f2543fd5aa5598d96e475cebc6135842f554_page_0010",
+    "dpi": 150,
+    "word_count": 5,
+    "mean_word_confidence": 38.1683104,
+    "character_weighted_confidence": 41.48729391304348,
+    "low_confidence_word_fraction": 0.6
+  },
+  {
+    "page_id": "0325f2543fd5aa5598d96e475cebc6135842f554_page_0010",
+    "dpi": 300,
+    "word_count": 32,
+    "mean_word_confidence": 48.43647396874999,
+    "character_weighted_confidence": 45.6247655142857,
+    "low_confidence_word_fraction": 0.59375
+  },
+  {
+    "page_id": "0325f2543fd5aa5598d96e475cebc6135842f554_page_0013",
+    "dpi": 150,
+    "word_count": 156,
+    "mean_word_confidence": 93.78681225000001,
+    "character_weighted_confidence": 94.9785321114519,
+    "low_confidence_word_fraction": 0.02564102564102564
+  },
+  {
+    "page_id": "0325f2543fd5aa5598d96e475cebc6135842f554_page_0013",
+    "dpi": 300,
+    "word_count": 156,
+    "mean_word_confidence": 93.50630025,
+    "character_weighted_confidence": 94.52214647088867,
+    "low_confidence_word_fraction": 0.02564102564102564
+  },
+  {
+    "page_id": "0325f2543fd5aa5598d96e475cebc6135842f554_page_0024",
+    "dpi": 150,
+    "word_count": 7,
+    "mean_word_confidence": 94.45722314285713,
+    "character_weighted_confidence": 95.02189047826086,
+    "low_confidence_word_fraction": 0.0
+  },
+  {
+    "page_id": "0325f2543fd5aa5598d96e475cebc6135842f554_page_0024",
+    "dpi": 300,
+    "word_count": 7,
+    "mean_word_confidence": 93.62103385714286,
+    "character_weighted_confidence": 94.26355817391304,
+    "low_confidence_word_fraction": 0.0
+  },
+  {
+    "page_id": "032c88c2530df468cd1180a3313ebf4707f9b2f1_page_0001",
+    "dpi": 150,
+    "word_count": 54,
+    "mean_word_confidence": 66.7535371666667,
+    "character_weighted_confidence": 75.13291276229509,
+    "low_confidence_word_fraction": 0.4074074074074074
+  },
+  {
+    "page_id": "032c88c2530df468cd1180a3313ebf4707f9b2f1_page_0001",
+    "dpi": 300,
+    "word_count": 50,
+    "mean_word_confidence": 76.53839618000002,
+    "character_weighted_confidence": 73.07982730399999,
+    "low_confidence_word_fraction": 0.24
+  },
+  {
+    "page_id": "032c88c2530df468cd1180a3313ebf4707f9b2f1_page_0004",
+    "dpi": 150,
+    "word_count": 490,
+    "mean_word_confidence": 94.76168101020424,
+    "character_weighted_confidence": 95.23148473821986,
+    "low_confidence_word_fraction": 0.01020408163265306
+  },
+  {
+    "page_id": "032c88c2530df468cd1180a3313ebf4707f9b2f1_page_0004",
+    "dpi": 300,
+    "word_count": 487,
+    "mean_word_confidence": 95.28106008008207,
+    "character_weighted_confidence": 95.78587098427427,
+    "low_confidence_word_fraction": 0.01642710472279261
+  },
+  {
+    "page_id": "032c88c2530df468cd1180a3313ebf4707f9b2f1_page_0005",
+    "dpi": 150,
+    "word_count": 369,
+    "mean_word_confidence": 89.24011818428181,
+    "character_weighted_confidence": 88.65039523360072,
+    "low_confidence_word_fraction": 0.08130081300813008
+  },
+  {
+    "page_id": "032c88c2530df468cd1180a3313ebf4707f9b2f1_page_0005",
+    "dpi": 300,
+    "word_count": 368,
+    "mean_word_confidence": 89.88164862771738,
+    "character_weighted_confidence": 91.46536328733461,
+    "low_confidence_word_fraction": 0.07065217391304347
+  },
+  {
+    "page_id": "032c88c2530df468cd1180a3313ebf4707f9b2f1_page_0008",
+    "dpi": 150,
+    "word_count": 1243,
+    "mean_word_confidence": 93.84535540627513,
+    "character_weighted_confidence": 93.23119268755433,
+    "low_confidence_word_fraction": 0.012872083668543845
+  },
+  {
+    "page_id": "032c88c2530df468cd1180a3313ebf4707f9b2f1_page_0008",
+    "dpi": 300,
+    "word_count": 1243,
+    "mean_word_confidence": 95.6857864167338,
+    "character_weighted_confidence": 95.37254779314357,
+    "low_confidence_word_fraction": 0.007240547063555913
+  },
+  {
+    "page_id": "035014aaf996fa3b7f8b099068e31c6550a9b19d_page_0001",
+    "dpi": 150,
+    "word_count": 20,
+    "mean_word_confidence": 86.62508199999999,
+    "character_weighted_confidence": 90.98941599166668,
+    "low_confidence_word_fraction": 0.05
+  },
+  {
+    "page_id": "035014aaf996fa3b7f8b099068e31c6550a9b19d_page_0001",
+    "dpi": 300,
+    "word_count": 30,
+    "mean_word_confidence": 67.17607463333333,
+    "character_weighted_confidence": 85.99781632330826,
+    "low_confidence_word_fraction": 0.3333333333333333
+  },
+  {
+    "page_id": "035014aaf996fa3b7f8b099068e31c6550a9b19d_page_0012",
+    "dpi": 150,
+    "word_count": 105,
+    "mean_word_confidence": 85.19436371428571,
+    "character_weighted_confidence": 89.34817602153845,
+    "low_confidence_word_fraction": 0.13333333333333333
+  },
+  {
+    "page_id": "035014aaf996fa3b7f8b099068e31c6550a9b19d_page_0012",
+    "dpi": 300,
+    "word_count": 111,
+    "mean_word_confidence": 85.65221671171176,
+    "character_weighted_confidence": 89.43616640639269,
+    "low_confidence_word_fraction": 0.13513513513513514
+  },
+  {
+    "page_id": "035014aaf996fa3b7f8b099068e31c6550a9b19d_page_0017",
+    "dpi": 150,
+    "word_count": 50,
+    "mean_word_confidence": 91.07685414000001,
+    "character_weighted_confidence": 91.74612705278594,
+    "low_confidence_word_fraction": 0.04
+  },
+  {
+    "page_id": "035014aaf996fa3b7f8b099068e31c6550a9b19d_page_0017",
+    "dpi": 300,
+    "word_count": 49,
+    "mean_word_confidence": 93.68825357142858,
+    "character_weighted_confidence": 92.6907650265487,
+    "low_confidence_word_fraction": 0.0
+  },
+  {
+    "page_id": "035014aaf996fa3b7f8b099068e31c6550a9b19d_page_0019",
+    "dpi": 150,
+    "word_count": 9,
+    "mean_word_confidence": 96.12948700000001,
+    "character_weighted_confidence": 96.17538466037736,
+    "low_confidence_word_fraction": 0.0
+  },
+  {
+    "page_id": "035014aaf996fa3b7f8b099068e31c6550a9b19d_page_0019",
+    "dpi": 300,
+    "word_count": 19,
+    "mean_word_confidence": 67.49693747368423,
+    "character_weighted_confidence": 80.19963028000001,
+    "low_confidence_word_fraction": 0.42105263157894735
+  },
+  {
+    "page_id": "03712a39c4aac9d622685456983c12257318df02_page_0001",
+    "dpi": 150,
+    "word_count": 31,
+    "mean_word_confidence": 84.69008567741933,
+    "character_weighted_confidence": 81.35183331325302,
+    "low_confidence_word_fraction": 0.0967741935483871
+  },
+  {
+    "page_id": "03712a39c4aac9d622685456983c12257318df02_page_0001",
+    "dpi": 300,
+    "word_count": 31,
+    "mean_word_confidence": 89.23580980645158,
+    "character_weighted_confidence": 89.33510672891568,
+    "low_confidence_word_fraction": 0.06451612903225806
+  },
+  {
+    "page_id": "03712a39c4aac9d622685456983c12257318df02_page_0008",
+    "dpi": 150,
+    "word_count": 203,
+    "mean_word_confidence": 93.69131559113296,
+    "character_weighted_confidence": 94.5080609668162,
+    "low_confidence_word_fraction": 0.03940886699507389
+  },
+  {
+    "page_id": "03712a39c4aac9d622685456983c12257318df02_page_0008",
+    "dpi": 300,
+    "word_count": 200,
+    "mean_word_confidence": 93.29557817999999,
+    "character_weighted_confidence": 93.81823823492348,
+    "low_confidence_word_fraction": 0.035
+  },
+  {
+    "page_id": "03712a39c4aac9d622685456983c12257318df02_page_0020",
+    "dpi": 150,
+    "word_count": 53,
+    "mean_word_confidence": 89.59122294339622,
+    "character_weighted_confidence": 93.70153591034484,
+    "low_confidence_word_fraction": 0.05660377358490566
+  },
+  {
+    "page_id": "03712a39c4aac9d622685456983c12257318df02_page_0020",
+    "dpi": 300,
+    "word_count": 51,
+    "mean_word_confidence": 93.66525992156859,
+    "character_weighted_confidence": 95.02076904827584,
+    "low_confidence_word_fraction": 0.0
+  },
+  {
+    "page_id": "03712a39c4aac9d622685456983c12257318df02_page_0021",
+    "dpi": 150,
+    "word_count": 35,
+    "mean_word_confidence": 86.93445048571431,
+    "character_weighted_confidence": 86.33023060098522,
+    "low_confidence_word_fraction": 0.05714285714285714
+  },
+  {
+    "page_id": "03712a39c4aac9d622685456983c12257318df02_page_0021",
+    "dpi": 300,
+    "word_count": 35,
+    "mean_word_confidence": 91.14257551428571,
+    "character_weighted_confidence": 88.98060550990098,
+    "low_confidence_word_fraction": 0.02857142857142857
+  },
+  {
+    "page_id": "03e90a945dafd353e9d86b46ca2774a29149048d_page_0001",
+    "dpi": 150,
+    "word_count": 285,
+    "mean_word_confidence": 88.35790688421054,
+    "character_weighted_confidence": 92.01591530105256,
+    "low_confidence_word_fraction": 0.10175438596491228
+  },
+  {
+    "page_id": "03e90a945dafd353e9d86b46ca2774a29149048d_page_0001",
+    "dpi": 300,
+    "word_count": 295,
+    "mean_word_confidence": 88.17091796949158,
+    "character_weighted_confidence": 91.73597577203864,
+    "low_confidence_word_fraction": 0.09830508474576272
+  },
+  {
+    "page_id": "03e90a945dafd353e9d86b46ca2774a29149048d_page_0002",
+    "dpi": 150,
+    "word_count": 198,
+    "mean_word_confidence": 86.07943206565656,
+    "character_weighted_confidence": 87.20992731594205,
+    "low_confidence_word_fraction": 0.11616161616161616
+  },
+  {
+    "page_id": "03e90a945dafd353e9d86b46ca2774a29149048d_page_0002",
+    "dpi": 300,
+    "word_count": 229,
+    "mean_word_confidence": 90.14336982969432,
+    "character_weighted_confidence": 91.65865534536502,
+    "low_confidence_word_fraction": 0.06986899563318777
+  },
+  {
+    "page_id": "03e90a945dafd353e9d86b46ca2774a29149048d_page_0008",
+    "dpi": 150,
+    "word_count": 110,
+    "mean_word_confidence": 95.03512040909094,
+    "character_weighted_confidence": 95.29310100995022,
+    "low_confidence_word_fraction": 0.0
+  },
+  {
+    "page_id": "03e90a945dafd353e9d86b46ca2774a29149048d_page_0008",
+    "dpi": 300,
+    "word_count": 110,
+    "mean_word_confidence": 94.81084994545454,
+    "character_weighted_confidence": 94.92799947603305,
+    "low_confidence_word_fraction": 0.0
+  },
+  {
+    "page_id": "03e90a945dafd353e9d86b46ca2774a29149048d_page_0017",
+    "dpi": 150,
+    "word_count": 32,
+    "mean_word_confidence": 91.10531243750003,
+    "character_weighted_confidence": 93.80926528333336,
+    "low_confidence_word_fraction": 0.0625
+  },
+  {
+    "page_id": "03e90a945dafd353e9d86b46ca2774a29149048d_page_0017",
+    "dpi": 300,
+    "word_count": 32,
+    "mean_word_confidence": 91.78638387500003,
+    "character_weighted_confidence": 93.32280670416667,
+    "low_confidence_word_fraction": 0.0625
+  },
+  {
+    "page_id": "0403e30c9f87e8e6cb38c6858878e2726542f8e9_page_0001",
+    "dpi": 150,
+    "word_count": 24,
+    "mean_word_confidence": 91.37281958333335,
+    "character_weighted_confidence": 92.78520863636365,
+    "low_confidence_word_fraction": 0.08333333333333333
+  },
+  {
+    "page_id": "0403e30c9f87e8e6cb38c6858878e2726542f8e9_page_0001",
+    "dpi": 300,
+    "word_count": 28,
+    "mean_word_confidence": 87.26573535714284,
+    "character_weighted_confidence": 90.77931323225806,
+    "low_confidence_word_fraction": 0.10714285714285714
+  },
+  {
+    "page_id": "0403e30c9f87e8e6cb38c6858878e2726542f8e9_page_0015",
+    "dpi": 150,
+    "word_count": 5,
+    "mean_word_confidence": 94.07974540000001,
+    "character_weighted_confidence": 93.68058923809524,
+    "low_confidence_word_fraction": 0.0
+  },
+  {
+    "page_id": "0403e30c9f87e8e6cb38c6858878e2726542f8e9_page_0015",
+    "dpi": 300,
+    "word_count": 11,
+    "mean_word_confidence": 58.09970627272728,
+    "character_weighted_confidence": 63.93886143243245,
+    "low_confidence_word_fraction": 0.5454545454545454
+  },
+  {
+    "page_id": "0403e30c9f87e8e6cb38c6858878e2726542f8e9_page_0019",
+    "dpi": 150,
+    "word_count": 88,
+    "mean_word_confidence": 60.84978772727276,
+    "character_weighted_confidence": 70.68235139100348,
+    "low_confidence_word_fraction": 0.4318181818181818
+  },
+  {
+    "page_id": "0403e30c9f87e8e6cb38c6858878e2726542f8e9_page_0019",
+    "dpi": 300,
+    "word_count": 103,
+    "mean_word_confidence": 53.758750883495125,
+    "character_weighted_confidence": 64.66737854798762,
+    "low_confidence_word_fraction": 0.5728155339805825
+  },
+  {
+    "page_id": "0403e30c9f87e8e6cb38c6858878e2726542f8e9_page_0025",
+    "dpi": 150,
+    "word_count": 2,
+    "mean_word_confidence": 96.3877255,
+    "character_weighted_confidence": 96.378984125,
+    "low_confidence_word_fraction": 0.0
+  },
+  {
+    "page_id": "0403e30c9f87e8e6cb38c6858878e2726542f8e9_page_0025",
+    "dpi": 300,
+    "word_count": 8,
+    "mean_word_confidence": 50.546563500000005,
+    "character_weighted_confidence": 46.210815307692314,
+    "low_confidence_word_fraction": 0.5
+  },
+  {
+    "page_id": "0454efb78bc1e03ae39f9552cb4c165495b11e4b_page_0001",
+    "dpi": 150,
+    "word_count": 11,
+    "mean_word_confidence": 89.2398748181818,
+    "character_weighted_confidence": 90.56472541666668,
+    "low_confidence_word_fraction": 0.09090909090909091
+  },
+  {
+    "page_id": "0454efb78bc1e03ae39f9552cb4c165495b11e4b_page_0001",
+    "dpi": 300,
+    "word_count": 11,
+    "mean_word_confidence": 95.0190990909091,
+    "character_weighted_confidence": 95.21879991549295,
+    "low_confidence_word_fraction": 0.0
+  },
+  {
+    "page_id": "0454efb78bc1e03ae39f9552cb4c165495b11e4b_page_0002",
+    "dpi": 150,
+    "word_count": 158,
+    "mean_word_confidence": 94.4141317911392,
+    "character_weighted_confidence": 94.71142255223883,
+    "low_confidence_word_fraction": 0.012658227848101266
+  },
+  {
+    "page_id": "0454efb78bc1e03ae39f9552cb4c165495b11e4b_page_0002",
+    "dpi": 300,
+    "word_count": 158,
+    "mean_word_confidence": 94.02135286708864,
+    "character_weighted_confidence": 94.55827482604052,
+    "low_confidence_word_fraction": 0.012658227848101266
+  },
+  {
+    "page_id": "0454efb78bc1e03ae39f9552cb4c165495b11e4b_page_0004",
+    "dpi": 150,
+    "word_count": 156,
+    "mean_word_confidence": 85.59525984615387,
+    "character_weighted_confidence": 90.23775151865222,
+    "low_confidence_word_fraction": 0.12179487179487179
+  },
+  {
+    "page_id": "0454efb78bc1e03ae39f9552cb4c165495b11e4b_page_0004",
+    "dpi": 300,
+    "word_count": 149,
+    "mean_word_confidence": 80.79044828859068,
+    "character_weighted_confidence": 86.32435566623543,
+    "low_confidence_word_fraction": 0.18791946308724833
+  },
+  {
+    "page_id": "0454efb78bc1e03ae39f9552cb4c165495b11e4b_page_0012",
+    "dpi": 150,
+    "word_count": 12,
+    "mean_word_confidence": 93.34219624999999,
+    "character_weighted_confidence": 93.09972315714286,
+    "low_confidence_word_fraction": 0.0
+  },
+  {
+    "page_id": "0454efb78bc1e03ae39f9552cb4c165495b11e4b_page_0012",
+    "dpi": 300,
+    "word_count": 12,
+    "mean_word_confidence": 93.92781566666667,
+    "character_weighted_confidence": 93.6349421857143,
+    "low_confidence_word_fraction": 0.0
+  },
+  {
+    "page_id": "047733d6ecb0f878c9f6fe1a9fdaa0c2b86eff61_page_0001",
+    "dpi": 150,
+    "word_count": 30,
+    "mean_word_confidence": 93.8753094,
+    "character_weighted_confidence": 94.7123079314286,
+    "low_confidence_word_fraction": 0.0
+  },
+  {
+    "page_id": "047733d6ecb0f878c9f6fe1a9fdaa0c2b86eff61_page_0001",
+    "dpi": 300,
+    "word_count": 30,
+    "mean_word_confidence": 94.3836379333333,
+    "character_weighted_confidence": 94.79402445142858,
+    "low_confidence_word_fraction": 0.0
+  },
+  {
+    "page_id": "047733d6ecb0f878c9f6fe1a9fdaa0c2b86eff61_page_0004",
+    "dpi": 150,
+    "word_count": 521,
+    "mean_word_confidence": 95.05408781765847,
+    "character_weighted_confidence": 95.07444360950826,
+    "low_confidence_word_fraction": 0.009596928982725527
+  },
+  {
+    "page_id": "047733d6ecb0f878c9f6fe1a9fdaa0c2b86eff61_page_0004",
+    "dpi": 300,
+    "word_count": 522,
+    "mean_word_confidence": 94.61312310919558,
+    "character_weighted_confidence": 94.71401004165304,
+    "low_confidence_word_fraction": 0.011494252873563218
+  },
+  {
+    "page_id": "047733d6ecb0f878c9f6fe1a9fdaa0c2b86eff61_page_0006",
+    "dpi": 150,
+    "word_count": 247,
+    "mean_word_confidence": 95.22041702429146,
+    "character_weighted_confidence": 95.00321490611351,
+    "low_confidence_word_fraction": 0.004048582995951417
+  },
+  {
+    "page_id": "047733d6ecb0f878c9f6fe1a9fdaa0c2b86eff61_page_0006",
+    "dpi": 300,
+    "word_count": 247,
+    "mean_word_confidence": 95.1144887327935,
+    "character_weighted_confidence": 94.989097778343,
+    "low_confidence_word_fraction": 0.008097165991902834
+  },
+  {
+    "page_id": "047733d6ecb0f878c9f6fe1a9fdaa0c2b86eff61_page_0007",
+    "dpi": 150,
+    "word_count": 34,
+    "mean_word_confidence": 75.50080129411765,
+    "character_weighted_confidence": 78.80719767307693,
+    "low_confidence_word_fraction": 0.23529411764705882
+  },
+  {
+    "page_id": "047733d6ecb0f878c9f6fe1a9fdaa0c2b86eff61_page_0007",
+    "dpi": 300,
+    "word_count": 33,
+    "mean_word_confidence": 80.987905969697,
+    "character_weighted_confidence": 86.81167841062802,
+    "low_confidence_word_fraction": 0.15151515151515152
+  },
+  {
+    "page_id": "048ce9cbabf9b58c9764e8be143b7196b5478ac1_page_0007",
+    "dpi": 150,
+    "word_count": 0,
+    "mean_word_confidence": null,
+    "character_weighted_confidence": null,
+    "low_confidence_word_fraction": null
+  },
+  {
+    "page_id": "048ce9cbabf9b58c9764e8be143b7196b5478ac1_page_0007",
+    "dpi": 300,
+    "word_count": 0,
+    "mean_word_confidence": null,
+    "character_weighted_confidence": null,
+    "low_confidence_word_fraction": null
+  },
+  {
+    "page_id": "04d14102144bfa97bf1f2e41bda7986bd3f712c1_page_0001",
+    "dpi": 150,
+    "word_count": 23,
+    "mean_word_confidence": 96.27547321739132,
+    "character_weighted_confidence": 96.21029661224487,
+    "low_confidence_word_fraction": 0.0
+  },
+  {
+    "page_id": "04d14102144bfa97bf1f2e41bda7986bd3f712c1_page_0001",
+    "dpi": 300,
+    "word_count": 23,
+    "mean_word_confidence": 96.1825974782609,
+    "character_weighted_confidence": 96.11948790476191,
+    "low_confidence_word_fraction": 0.0
+  },
+  {
+    "page_id": "04d14102144bfa97bf1f2e41bda7986bd3f712c1_page_0004",
+    "dpi": 150,
+    "word_count": 150,
+    "mean_word_confidence": 92.54505593999997,
+    "character_weighted_confidence": 95.00825302124832,
+    "low_confidence_word_fraction": 0.04
+  },
+  {
+    "page_id": "04d14102144bfa97bf1f2e41bda7986bd3f712c1_page_0004",
+    "dpi": 300,
+    "word_count": 150,
+    "mean_word_confidence": 92.64629604000001,
+    "character_weighted_confidence": 94.84204813395226,
+    "low_confidence_word_fraction": 0.04
+  },
+  {
+    "page_id": "04d14102144bfa97bf1f2e41bda7986bd3f712c1_page_0013",
+    "dpi": 150,
+    "word_count": 111,
+    "mean_word_confidence": 88.77716612612615,
+    "character_weighted_confidence": 89.6620730611511,
+    "low_confidence_word_fraction": 0.09009009009009009
+  },
+  {
+    "page_id": "04d14102144bfa97bf1f2e41bda7986bd3f712c1_page_0013",
+    "dpi": 300,
+    "word_count": 113,
+    "mean_word_confidence": 86.74335902654869,
+    "character_weighted_confidence": 88.38162179573716,
+    "low_confidence_word_fraction": 0.10619469026548672
+  },
+  {
+    "page_id": "04d14102144bfa97bf1f2e41bda7986bd3f712c1_page_0024",
+    "dpi": 150,
+    "word_count": 3,
+    "mean_word_confidence": 96.47362299999999,
+    "character_weighted_confidence": 96.46824681818181,
+    "low_confidence_word_fraction": 0.0
+  },
+  {
+    "page_id": "04d14102144bfa97bf1f2e41bda7986bd3f712c1_page_0024",
+    "dpi": 300,
+    "word_count": 3,
+    "mean_word_confidence": 95.12012466666665,
+    "character_weighted_confidence": 95.01083145454545,
+    "low_confidence_word_fraction": 0.0
+  },
+  {
+    "page_id": "054e98cc2676ed1ab0f94f2ae43010514596aa6b_page_0001",
+    "dpi": 150,
+    "word_count": 146,
+    "mean_word_confidence": 76.07425806849314,
+    "character_weighted_confidence": 72.83896472902495,
+    "low_confidence_word_fraction": 0.23972602739726026
+  },
+  {
+    "page_id": "054e98cc2676ed1ab0f94f2ae43010514596aa6b_page_0001",
+    "dpi": 300,
+    "word_count": 158,
+    "mean_word_confidence": 86.71758920253163,
+    "character_weighted_confidence": 86.50214446420324,
+    "low_confidence_word_fraction": 0.10126582278481013
+  },
+  {
+    "page_id": "054e98cc2676ed1ab0f94f2ae43010514596aa6b_page_0004",
+    "dpi": 150,
+    "word_count": 120,
+    "mean_word_confidence": 94.4142868916666,
+    "character_weighted_confidence": 93.70658973283584,
+    "low_confidence_word_fraction": 0.008333333333333333
+  },
+  {
+    "page_id": "054e98cc2676ed1ab0f94f2ae43010514596aa6b_page_0004",
+    "dpi": 300,
+    "word_count": 129,
+    "mean_word_confidence": 84.6386559689922,
+    "character_weighted_confidence": 90.08881038325283,
+    "low_confidence_word_fraction": 0.13178294573643412
+  },
+  {
+    "page_id": "054e98cc2676ed1ab0f94f2ae43010514596aa6b_page_0007",
+    "dpi": 150,
+    "word_count": 499,
+    "mean_word_confidence": 50.4614047995992,
+    "character_weighted_confidence": 46.434332461285614,
+    "low_confidence_word_fraction": 0.6192384769539078
+  },
+  {
+    "page_id": "054e98cc2676ed1ab0f94f2ae43010514596aa6b_page_0007",
+    "dpi": 300,
+    "word_count": 740,
+    "mean_word_confidence": 82.09416204189195,
+    "character_weighted_confidence": 82.40448133000226,
+    "low_confidence_word_fraction": 0.1662162162162162
+  },
+  {
+    "page_id": "054e98cc2676ed1ab0f94f2ae43010514596aa6b_page_0008",
+    "dpi": 150,
+    "word_count": 16,
+    "mean_word_confidence": 55.756559187499995,
+    "character_weighted_confidence": 68.26013840909091,
+    "low_confidence_word_fraction": 0.5
+  },
+  {
+    "page_id": "054e98cc2676ed1ab0f94f2ae43010514596aa6b_page_0008",
+    "dpi": 300,
+    "word_count": 8,
+    "mean_word_confidence": 85.88352725,
+    "character_weighted_confidence": 88.73599775510203,
+    "low_confidence_word_fraction": 0.125
+  },
+  {
+    "page_id": "05b9ceacc63e3172d16670189ec129499b77c7b1_page_0001",
+    "dpi": 150,
+    "word_count": 11,
+    "mean_word_confidence": 92.31684954545455,
+    "character_weighted_confidence": 90.8238805875,
+    "low_confidence_word_fraction": 0.09090909090909091
+  },
+  {
+    "page_id": "05b9ceacc63e3172d16670189ec129499b77c7b1_page_0001",
+    "dpi": 300,
+    "word_count": 11,
+    "mean_word_confidence": 87.38129981818182,
+    "character_weighted_confidence": 84.12491983749999,
+    "low_confidence_word_fraction": 0.09090909090909091
+  },
+  {
+    "page_id": "05b9ceacc63e3172d16670189ec129499b77c7b1_page_0004",
+    "dpi": 150,
+    "word_count": 57,
+    "mean_word_confidence": 81.35649026315788,
+    "character_weighted_confidence": 85.64398082876713,
+    "low_confidence_word_fraction": 0.17543859649122806
+  },
+  {
+    "page_id": "05b9ceacc63e3172d16670189ec129499b77c7b1_page_0004",
+    "dpi": 300,
+    "word_count": 48,
+    "mean_word_confidence": 86.30415443750002,
+    "character_weighted_confidence": 89.67689806563708,
+    "low_confidence_word_fraction": 0.14583333333333334
+  },
+  {
+    "page_id": "05b9ceacc63e3172d16670189ec129499b77c7b1_page_0014",
+    "dpi": 150,
+    "word_count": 88,
+    "mean_word_confidence": 91.39643204545452,
+    "character_weighted_confidence": 92.15454186192473,
+    "low_confidence_word_fraction": 0.056818181818181816
+  },
+  {
+    "page_id": "05b9ceacc63e3172d16670189ec129499b77c7b1_page_0014",
+    "dpi": 300,
+    "word_count": 149,
+    "mean_word_confidence": 69.51642283221477,
+    "character_weighted_confidence": 81.72333104464292,
+    "low_confidence_word_fraction": 0.348993288590604
+  },
+  {
+    "page_id": "05b9ceacc63e3172d16670189ec129499b77c7b1_page_0016",
+    "dpi": 150,
+    "word_count": 126,
+    "mean_word_confidence": 93.90127081746033,
+    "character_weighted_confidence": 93.0485822627907,
+    "low_confidence_word_fraction": 0.023809523809523808
+  },
+  {
+    "page_id": "05b9ceacc63e3172d16670189ec129499b77c7b1_page_0016",
+    "dpi": 300,
+    "word_count": 127,
+    "mean_word_confidence": 94.13985029133862,
+    "character_weighted_confidence": 93.0520506383721,
+    "low_confidence_word_fraction": 0.015748031496062992
+  }
+]

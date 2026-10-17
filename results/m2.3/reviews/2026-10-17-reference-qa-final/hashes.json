@@ -1,0 +1,57 @@
+[
+  {
+    "path": "change_log.json",
+    "size_bytes": 42191,
+    "sha256": "880638c69f60b2287fd4302dcdebf04c248c3a87957f34357095a15db290de19"
+  },
+  {
+    "path": "changes.diff",
+    "size_bytes": 11506,
+    "sha256": "e8126000165061d05a477c7a20e96faff1ba6b374622be97c1e0e7740c064fc3"
+  },
+  {
+    "path": "human_reviews.corrected.json",
+    "size_bytes": 88940,
+    "sha256": "3d0bf2283bc75e18bd57def002067bd4930a82de03efb93dd0ed85c051bad078"
+  },
+  {
+    "path": "index.html",
+    "size_bytes": 474098,
+    "sha256": "c0a0b6dbc9c54eb02510a108d453adea4b81914c66eb768d8e71a65043b87699"
+  },
+  {
+    "path": "page_metrics.csv",
+    "size_bytes": 7315,
+    "sha256": "0cd100fe5c252f86beaea42ee205f213b547017ab0fdd8db175a4f02fef2ad45"
+  },
+  {
+    "path": "page_metrics.json",
+    "size_bytes": 22543,
+    "sha256": "d9b015a3aaa71d317b0aeeb1d81163fea483dcaaababfc30e5b9847911ae2031"
+  },
+  {
+    "path": "patch.json",
+    "size_bytes": 11803,
+    "sha256": "cd44472111bb33c6c3366109a89345bd174fa66f0d586f46da77f25eac0b2044"
+  },
+  {
+    "path": "provenance.json",
+    "size_bytes": 2000,
+    "sha256": "1a5c9cf2364a4ba905f6b38b55dd5643568a396531ccfa373a833a48ba1c4917"
+  },
+  {
+    "path": "reference_subset.json",
+    "size_bytes": 10268,
+    "sha256": "855bceba9d8e6c596cd08a411947c49e3bcc7bd0d105d06d2e31a4b350dbcbe8"
+  },
+  {
+    "path": "references.md",
+    "size_bytes": 16993,
+    "sha256": "13b656a1efabbcee7bab319542005233ea3d632152c36b24c1811e3e1a4d065d"
+  },
+  {
+    "path": "summary.json",
+    "size_bytes": 5248,
+    "sha256": "f197352a68a07e799e3fa9ec9ae46e42d3ccc092ef91da4ec257f079bdd0fab0"
+  }
+]

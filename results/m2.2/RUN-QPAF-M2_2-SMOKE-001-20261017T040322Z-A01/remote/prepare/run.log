@@ -1,0 +1,9 @@
+Started prepare
+Calibration stage failed
+Traceback (most recent call last):
+  File "/root/qpaf/m22/worker.py", line 242, in execute
+    result = resolve_text(config, root, output) if stage == 'prepare' else run_channel(stage, config, root, output, telemetry, logger)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/qpaf/m22/worker.py", line 116, in resolve_text
+    raise ValueError('Sample extraction failed; see prepare/failures.json')
+ValueError: Sample extraction failed; see prepare/failures.json

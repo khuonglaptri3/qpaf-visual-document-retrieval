@@ -1,0 +1,30 @@
+{
+  "status": "FAIL",
+  "failure_kind": "ERROR",
+  "error": "ValueError: Sample extraction failed; see prepare/failures.json",
+  "traceback": "Traceback (most recent call last):\n  File \"/root/qpaf/m22/worker.py\", line 242, in execute\n    result = resolve_text(config, root, output) if stage == 'prepare' else run_channel(stage, config, root, output, telemetry, logger)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/root/qpaf/m22/worker.py\", line 116, in resolve_text\n    raise ValueError('Sample extraction failed; see prepare/failures.json')\nValueError: Sample extraction failed; see prepare/failures.json\n",
+  "stage": "prepare",
+  "completed_utc": "2026-10-17T04:05:42.722791+00:00",
+  "resources": {
+    "phases": [
+      {
+        "phase": "prepare",
+        "seconds": 2.6828815089999996,
+        "peak_rss_mb": 3379.3515625,
+        "peak_cuda_allocated_mb": 0.0,
+        "peak_cuda_reserved_mb": 0.0
+      }
+    ],
+    "elapsed_seconds": 5.200102842,
+    "peak_rss_mb": 3379.3515625,
+    "peak_cuda_reserved_mb": 0.0,
+    "artifact_bytes": 23106,
+    "rss_poll_interval_seconds": 0.02
+  },
+  "resource_checks": {
+    "ram": true,
+    "vram": true,
+    "time": true,
+    "artifact": true
+  }
+}

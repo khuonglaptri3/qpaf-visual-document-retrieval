@@ -1,0 +1,72 @@
+[
+  {
+    "path": "candidate_aggregates.csv",
+    "size_bytes": 2165,
+    "sha256": "0d782fd1202a536ba7c4abceb08790df224a13e80b6da953f5868c76f65517f6"
+  },
+  {
+    "path": "candidate_configs.json",
+    "size_bytes": 1211,
+    "sha256": "b261b22f6043ec8b4e868ae21bf0de5a77fb5b99dd0999018a366f16f14e579c"
+  },
+  {
+    "path": "candidate_metrics.json",
+    "size_bytes": 123457,
+    "sha256": "3b3aebf3b68ee962a5dc1004e7b7fedcdaa5ca91b92da1e94863e6730419bf45"
+  },
+  {
+    "path": "confidence_changes.json",
+    "size_bytes": 5830,
+    "sha256": "17db65af4ab6a83ecd892cbac46b513cf014cf9b6f579fc8bf42c789dc8a2c80"
+  },
+  {
+    "path": "confidence_rederived.json",
+    "size_bytes": 66823,
+    "sha256": "aef2cc6e9204739fdf1118169c9ff455b6d396b458e6c583adceed8448a3ab67"
+  },
+  {
+    "path": "decision.json",
+    "size_bytes": 8995,
+    "sha256": "dbc5896fae70c72ee5775bf70095355867a2a1b39e2ca6ebdf4ef94f833c2f99"
+  },
+  {
+    "path": "human_reviews.final.json",
+    "size_bytes": 93630,
+    "sha256": "4a2f3566abbbc26eea830786b685834a745c85e02d7276929723f7beda8efae0"
+  },
+  {
+    "path": "index.html",
+    "size_bytes": 577059,
+    "sha256": "e440912f2c3fc530ac81e543eefbb14ac54214a81a812f0d98d12b4b563d4b6c"
+  },
+  {
+    "path": "native_geometry.json",
+    "size_bytes": 1567976,
+    "sha256": "edd8d5524bf227ba621e1010c5c72b263c81f5c2713a7b43cff5f675ba3d6a82"
+  },
+  {
+    "path": "native_review_changes.json",
+    "size_bytes": 16705,
+    "sha256": "0658c031bce13896d967bbf051dee9b82cd1ef40e4b9d441ef7ffe18d1107b5b"
+  },
+  {
+    "path": "ocr_policy_frozen.toml",
+    "size_bytes": 1712,
+    "sha256": "c0fcf0b3b13b27070716179d75545ba33ae406cc99a74902737bcf2dad19c4b8"
+  },
+  {
+    "path": "provenance.json",
+    "size_bytes": 1186,
+    "sha256": "bb1d9d4a895129405e2c5bde7f9e38b88a76c1f1925d57ccc51e449b9fe25202"
+  },
+  {
+    "path": "resolved_pages.json",
+    "size_bytes": 222512,
+    "sha256": "7e2047536293c0552aaf8370dd62a9e341397fae4d1469e43dc8ea437933cb19"
+  },
+  {
+    "path": "resources.json",
+    "size_bytes": 852,
+    "sha256": "3d3a58b2b44fbf8a227a88e1aec8bf96d7cefe84cecc735a8bd7c8c455911b6a"
+  }
+]

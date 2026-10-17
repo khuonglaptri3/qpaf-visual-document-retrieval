@@ -1,0 +1,158 @@
+{
+  "task_id": "M2.3",
+  "status": "REFERENCE_QA_COMPLETE_NATIVE_REVIEW_PENDING",
+  "source_run": "RUN-QPAF-M2_3-CAL-001-20261017T101949Z-A01",
+  "dataset_sha256": "dd5423699964e723daeca36d6a1309ff7ef343bd4c75087d4d63b6bacbd25c94",
+  "source_review_sha256": "3b6ca8f0beabede2c4c75396c6c97976a388a0d3687be63a5edc9bda02e1b69e",
+  "created_at": "2026-10-17T13:13:48.233715+00:00",
+  "selected_reference_count": 18,
+  "reference_confirmed_count": 18,
+  "reference_draft_count": 0,
+  "text_reference_count": 17,
+  "no_text_reference_count": 1,
+  "changed_text_count": 10,
+  "formal_references_pending_in_revised_scope": [],
+  "reference_reviewer_type": "AI assistant, amendments authorized by user",
+  "user_reported_all_18_checked": true,
+  "native_decisions_all_121": {
+    "PASS": 107,
+    "HAS_ERRORS": 6,
+    "PENDING": 7,
+    "UNSURE": 1
+  },
+  "unresolved_native_page_ids": [
+    "011e012b28d60278c243b200eaf19952a725370c_page_0001",
+    "01ada48daaf576de7e173f212b032ab06b742e24_page_0001",
+    "01ada48daaf576de7e173f212b032ab06b742e24_page_0002",
+    "0295f1ca960d29e2327e90a848235693d965d308_page_0013",
+    "03e90a945dafd353e9d86b46ca2774a29149048d_page_0001",
+    "0454efb78bc1e03ae39f9552cb4c165495b11e4b_page_0012",
+    "048ce9cbabf9b58c9764e8be143b7196b5478ac1_page_0007",
+    "04d14102144bfa97bf1f2e41bda7986bd3f712c1_page_0013"
+  ],
+  "thresholds_frozen": false,
+  "coverage": [
+    {
+      "split": "development",
+      "pages": 15,
+      "documents": 9
+    },
+    {
+      "split": "holdout",
+      "pages": 3,
+      "documents": 3
+    },
+    {
+      "split": "regression",
+      "pages": 0,
+      "documents": 0
+    }
+  ],
+  "aggregates": [
+    {
+      "split": "development",
+      "channel": "native",
+      "selected_pages": 15,
+      "text_pages": 14,
+      "no_text_pages": 1,
+      "reference_chars": 11778,
+      "reference_words": 1819,
+      "char_edits": 3857,
+      "word_edits": 632,
+      "micro_cer": 0.3274749533027679,
+      "micro_wer": 0.3474436503573392,
+      "macro_cer": 0.37722680137293857,
+      "unavailable_outputs": 0,
+      "false_positive_chars": 0
+    },
+    {
+      "split": "development",
+      "channel": "ocr150",
+      "selected_pages": 15,
+      "text_pages": 14,
+      "no_text_pages": 1,
+      "reference_chars": 11778,
+      "reference_words": 1819,
+      "char_edits": 3168,
+      "word_edits": 599,
+      "micro_cer": 0.26897605705552724,
+      "micro_wer": 0.32930181418361737,
+      "macro_cer": 0.27764100333824027,
+      "unavailable_outputs": 0,
+      "false_positive_chars": 0
+    },
+    {
+      "split": "development",
+      "channel": "ocr300",
+      "selected_pages": 15,
+      "text_pages": 14,
+      "no_text_pages": 1,
+      "reference_chars": 11778,
+      "reference_words": 1819,
+      "char_edits": 2954,
+      "word_edits": 581,
+      "micro_cer": 0.25080658855493293,
+      "micro_wer": 0.3194062671797691,
+      "macro_cer": 0.26723255123316647,
+      "unavailable_outputs": 0,
+      "false_positive_chars": 0
+    },
+    {
+      "split": "holdout",
+      "channel": "native",
+      "selected_pages": 3,
+      "text_pages": 3,
+      "no_text_pages": 0,
+      "reference_chars": 1049,
+      "reference_words": 162,
+      "char_edits": 369,
+      "word_edits": 62,
+      "micro_cer": 0.3517635843660629,
+      "micro_wer": 0.38271604938271603,
+      "macro_cer": 0.3353032371849576,
+      "unavailable_outputs": 0,
+      "false_positive_chars": 0
+    },
+    {
+      "split": "holdout",
+      "channel": "ocr150",
+      "selected_pages": 3,
+      "text_pages": 3,
+      "no_text_pages": 0,
+      "reference_chars": 1049,
+      "reference_words": 162,
+      "char_edits": 380,
+      "word_edits": 68,
+      "micro_cer": 0.3622497616777884,
+      "micro_wer": 0.41975308641975306,
+      "macro_cer": 0.3558869545428685,
+      "unavailable_outputs": 0,
+      "false_positive_chars": 0
+    },
+    {
+      "split": "holdout",
+      "channel": "ocr300",
+      "selected_pages": 3,
+      "text_pages": 3,
+      "no_text_pages": 0,
+      "reference_chars": 1049,
+      "reference_words": 162,
+      "char_edits": 417,
+      "word_edits": 78,
+      "micro_cer": 0.39752144899904673,
+      "micro_wer": 0.48148148148148145,
+      "macro_cer": 0.3846174312018715,
+      "unavailable_outputs": 0,
+      "false_positive_chars": 0
+    }
+  ],
+  "normalization": "NFC; trim/collapse whitespace; preserve case, punctuation and digits; WER uses whitespace tokens",
+  "limitations": [
+    "CONFIRMED amendments are signed by Codex, not attributed to a human reviewer.",
+    "The cohort is the user-selected 18 pages; 15 development, 3 holdout, no regression.",
+    "Full-page sequence CER/WER includes reading-order and math/word-cloud serialization effects.",
+    "Only complete legible ruler numerals were transcribed; obscured fragments are documented in change_log.json.",
+    "Existing human native PASS labels were not rewritten; graphics omitted by native can conflict with a full-page PASS interpretation.",
+    "Eight native conclusions remain unresolved; no DPI selection, threshold freeze, or M2.3 acceptance is implied."
+  ]
+}

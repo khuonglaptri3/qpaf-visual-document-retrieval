@@ -1,0 +1,16 @@
+{
+  "status": "REDIRECT_TO_REAL_M23_REVIEW",
+  "target": "../review/index.html",
+  "html_sha256": "3e4c16be897cfe805adf66fe9d1717a29cca8068efcbceb5d0edd57be7e3034b",
+  "original_prototype_manifest": {
+    "schema_version": 1,
+    "demo": true,
+    "dataset_id": "m23-review-ui-v1",
+    "dataset_sha256": "ba130267a433bffd3bd8dbfb41a838fda72cc17d06cb3475ae24c767625d5386",
+    "source_run": "RUN-QPAF-M2_2-SMOKE-001-20261017T041244Z-A01",
+    "page_count": 16,
+    "html_sha256": "e3c3bf76e9d2cd1e8ea80162abd24aeef985ccd290f404f5a2003b90cab54689",
+    "note": "UI prototype using M2.2 pages; no new OCR, reference labels, or M2.3 calibration run."
+  },
+  "note": "Historical prototype can be regenerated using build_m23_review_demo.py with a separate --output."
+}

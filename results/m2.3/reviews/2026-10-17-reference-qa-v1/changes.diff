@@ -1,0 +1,304 @@
+--- original/position-3
++++ corrected/position-3
+@@ -1,6 +1,6 @@
+-What is the partnership set-up process in this school district?
+-What documentation do we need, e.g. Memorandum of Understanding or Letter of Agreement?
+-What are the general dates and timeline for the program and partnership?
++▪ What is the partnership set-up process in this school district?
++▪ What documentation do we need, e.g. Memorandum of Understanding or Letter of Agreement?
++▪ What are the general dates and timeline for the program and partnership?
+ Timeline Template
+ Mar Apr May Jun Jul Aug Sep
+ Task 1 Activity
+--- original/position-6
++++ corrected/position-6
+@@ -1,4 +1,17 @@
+ Contents
++
++GOVERNMENT FACTOR MANAGE ONLINE DAY WORLDWIDE TECHNOLOGIES MASSIVE DEFINITION USING
++RESULTS SOCIAL YEARS SYSTEMS PROCESS MAKING INTEGRATION FRAMEWORK BETWEEN STATISTICS BUSINESS EFFECTIVE VISUALIZATION
++DRIVE REPLICATION HANDLE SOURCES SAN NAS SOFTWARE VOLUME DATABASES PROCESSING SIZE ANALYTICS SIMULATIONS
++LIMITS COMPLEX CHALLENGES ANNOUNCED PAST LARGE HAND CAPACITY STORAGE MILLION INCLUDE NETWORKS HYPOTHESIS SCIENCE
++BIG ONE OUT SETS DEVELOPMENT TECHNOLOGY MANY APPROACH BILLION NEW CRITIQUES PARALLEL STATE CRITIQUE PEOPLE TRAFFIC USE CURRENTLY
++END MOST YEARLY MAPREDUCE FUTURE
++DETERMINE WELL SET DEPARTMENT QUERIES HIGH USERS EXABYTES ALGORITHMS COMPANIES
++AMOUNT REAL STRUCTURE WORK RATE APPLICATIONS INFRASTRUCTURE PETABYTES ANALYSIS TERMS RESEARCH PRIVATE YEAR
++MANAGEMENT INFORMATION PRIVACY INTERNATIONAL IMPLEMENTATION BECOMES
++DATA SECOND NATIONAL FLOW INTELLIGENCE INITIATIVE ECONOMIC TERABYTES MARKET VARIETY RELATED TIME SENSOR WOULD PROJECT ANNUAL NOW DISTRIBUTED RELEVANT USED PER
++LEARNING LESS HUGE EVERY WORLD VARIOUS BASED TIMES INTERNET CAPABILITIES SUCCESSFUL NEEDED USES COMPARE SHARED
++APPROACHES PROCESS SEARCH ARCHITECTURE PARADIGM FUNDING RECORDS COST INSIGHT TOOLS CENTER
+ 
+ • Introduction
+ • What is new about Big Data?
+--- original/position-9
++++ corrected/position-9
+@@ -5,5 +5,5 @@
+ Let’s Rethink How We Do MEP Routings in
+ Revit
+ 
+-Michael Porsker – Orbicon
++Michael Porskær – Orbicon
+ 23. November 2017--- original/position-15
++++ corrected/position-15
+@@ -2,15 +2,9 @@
+ 
+ Mediation Effect of Meaningful Work on Constructs
+ 
+-Construct           SIE     SE      p      κ²     Effect Size     Result
+-
+-Job Resources       .172    .059    .001    0.192  Medium          Supported
+-(H8)
+-
+-Personal            .238    .062    .000    0.247  Medium          Supported
+-Resources (H9)
+-
+-Transformational    -.017   .050    .724    0.058  Small           Not Supported
+-Leadership (H10)
++Construct SIE SE p κ² Effect Size Result
++Job Resources (H8) .172 .059 .001 0.192 Medium Supported
++Personal Resources (H9) .238 .062 .000 0.247 Medium Supported
++Transformational Leadership (H10) -.017 .050 .724 0.058 Small Not Supported
+ 
+ 18--- original/position-22
++++ corrected/position-22
+@@ -22,4 +22,14 @@
+ American Eel
+ Alewife
+ 
+-Number of Individuals+0 2000 4000 6000 8000
++0 2000 4000 6000 8000
++0 2000 4000 6000 8000
++0 2000 4000 6000 8000
++0 2000 4000 6000 8000
++Number of Individuals
++
++40
++4
++55 62
++10 14--- original/position-27
++++ corrected/position-27
+@@ -8,13 +8,13 @@
+ 
+ If e_A and e_1 are uncorrelated, then
+ 
+-<ΔS_A-1²> = <e_A²> + <e_1²>
+-<ΔS_A-2²> = <e_A²> + <e_2²>
+-<ΔS_1-2²> = <e_1²> + <e_2²>
++<ΔS_(A-1)²> = <e_A²> + <e_1²>
++<ΔS_(A-2)²> = <e_A²> + <e_2²>
++<ΔS_(1-2)²> = <e_1²> + <e_2²>
+ 
+ Solving above equations, then
+ 
+-<e_A²> = {<ΔS_A-1²> + <ΔS_A-2²> - <ΔS_1-2²>}/2
++<e_A²> = {<ΔS_(A-1)²> + <ΔS_(A-2)²> - <ΔS_(1-2)²>}/2
+ 
+ Aquarius Data Retrieval Error (psu):
+ 
+--- original/position-30
++++ corrected/position-30
+@@ -1,5 +1,28 @@
+ The Slovenian Society of Nephrology
+ Slovenian Renal Replacement Therapy Registry
+ 
++MURSKA SOBOTA
++SLOVENJ GRADEC
++MARIBOR
++PTUJ
++JESENICE
++VOJNIK
++NAKLO
++CELJE
++CELJE FMC
++TX
++UKC
++MOB
++LEONIŠČE
++PD
++ČRNUČE
++TRBOVLJE
++LJUBLJANA
++KRŠKO
++NOVA GORICA
++NOVO MESTO
++SEŽANA
++IZOLA
++
+ 2006 ANNUAL REPORT
+ Ljubljana, September 2008--- original/position-35
++++ corrected/position-35
+@@ -2,62 +2,40 @@
+ and competitive edge
+ 
+ Key success factors
+-
+ Reliable and asset-backed supply
+ Global scale and flexibility
+ ~100 years of ammonia experience
+ Track record of safe operations
+ Market insight
+-Existing long-term customer
+-relationships
+-
+-Unique starting position as the market
+-leader in midstream ammonia¹
++Existing long-term customer relationships
++Unique starting position as the market leader in midstream ammonia¹
+ 
+ YCA’s competitive edge
+ 
+ Upstream
+-Integrated
+-midstream
+-Downstream
++Handled by Yara today – own production to be developed by YCA
++▪ Access to Yara’s project portfolio
++▪ Project development expertise
++▪ Credible offtaker
+ 
+-Handled by Yara today –
+-own production to be
+-developed by YCA
+-
+-• Access to Yara’s project
+-  portfolio
+-• Project development
+-  expertise
+-• Credible offtaker
+-
++Integrated midstream
+ Current presence
+ #1 global midstream player
++▪ Asset-backed supply
++▪ Existing platform and access to infrastructure
++▪ Long-standing relationships
+ 
+-• Asset-backed supply
+-• Existing platform and
+-  access to infrastructure
+-• Long-standing
+-  relationships
+-
+-Leverage commercial
+-partners to create demand
+-“pull” in new segments
+-
+-• Asset-backed supply
+-• Partnerships with sector
+-  leaders
+-• Sites near key hubs and
+-  terminals
++Downstream
++Leverage commercial partners to create demand “pull” in new segments
++▪ Asset-backed supply
++▪ Partnerships with sector leaders
++▪ Sites near key hubs and terminals
+ 
+ Track record of safe handling and operations
++Integration will remain critical in building scale and creating value in the developing clean ammonia market
+ 
+-Integration will remain critical in building scale and creating value in the developing
+-clean ammonia market
+-
++YARA
+ Yara Clean Ammonia
+-
+ Source: Company information
+ 1) Based on volumes of traded ammonia in 2021 - Argus market study (2022)
+-
+ 6--- original/position-36
++++ corrected/position-36
+@@ -30,7 +30,7 @@
+ 
+ ~0.4mT
+ volume by
+-2030E³
++2030E²
+ 
+ 2
+ Own pilots
+@@ -39,23 +39,24 @@
+ 
+ Key success factors
+ 
+-Access to existing production assets
++✓ Access to existing production assets
+ that can be converted to blue or green at
+ lower costs compared to greenfield
+ investments
+ 
+-Knowledge and experience built
++✓ Knowledge and experience built
+ through Yara’s almost 100 years of
+ ammonia track record and over 8mT
+ ammonia production capacity³
+ 
+-Market leading position makes YCA the
++✓ Market leading position makes YCA the
+ preferred offtaker and partner for Yara
+ and other third-parties, in turn enabling
+ new projects
+ 
+ Well-positioned with a maturing project hopper and additional long-term opportunities
+ 
++YARA
+ Yara Clean Ammonia
+ 
+ Source: Company information
+--- original/position-42
++++ corrected/position-42
+@@ -2,29 +2,29 @@
+ 
+ COMPANY INFORMATION
+ 
+-W5 Solutions AB (publ), Corp. ID No. 556873-2034 is a limited liability company with its registered office in Nacka and Parent Company of the W5 Group.
++W5 Solutions AB (publ), Corp. ID No. 556973-2034 is a limited liability company with its registered office in Nacka and Parent Company of the W5 Group.
+ 
+ SALES AND PROFIT
+ 
+ OCTOBER–DECEMBER 2022
+ 
+-The operating income of the Group amounted to KSEK 78 425. In the corresponding quarter last year, income amounted to KSEK 54 753. Of the current period's income, KSEK 388 relates to acquired entities.
++The operating income of the Group amounted to KSEK 78 425. In the corresponding quarter last year, income amounted to KSEK 54 753. Of the current period’s income, KSEK 388 relates to acquired entities.
+ 
+ Operating profit, EBITA, for the quarter amounted to KSEK 8 045 (2 447), an EBITA margin of 10.3% (4.5%).
+ 
+-Profit for the period amounted to KSEK 5 317 (2 896). Earnings per share amounted to SEK 0.42 (0.28).
++Profit for the period amounted to KSEK 5 317 (2 898). Earnings per share amounted to SEK 0.42 (0.28).
+ 
+ This quarter has also seen a continued shortage of electronic components, which has negatively affected the business. As a result, some deliveries have been delayed and postponed until 2023, and additional costs have been incurred, resulting in margin deterioration.
+ 
+ JANUARY–DECEMBER 2022
+ 
+-The Group's operating income for the period amounts to KSEK 179 744 (143 472) with an operating profit (EBITA) of KSEK 19 987 (15 627).
++The Group’s operating income for the period amounts to KSEK 179 744 (143 472) with an operating profit (EBITA) of KSEK 19 987 (15 627).
+ 
+ The EBITA margin amounts to 11.1% (10.9%).
+ 
+-Net profit for the period amounted to KSEK 13 702 (13 408). Earnings per share amounted to SEK 1.13 (1.33).
++Net profit for the period amounted to KSEK 13 702 (13 409). Earnings per share amounted to SEK 1.13 (1.33).
+ 
+-Income for the period was negatively impacted due to delayed deliveries. In addition, operating profit has been negatively affected due to changes in the prices of electronic components, which are deemed extraordinary. During the financial year, work has been activated on own account, for development costs amounting to KSEK 2 121.
++Income for the period was negatively impacted due to delayed deliveries. In addition, operating profit has been negatively affected due to changes in the prices of electronic components, which are deemed extraordinary. During the financial year, work has been activated on own account for development costs amounting to KSEK 2 121.
+ 
+ CASH FLOW, INVESTMENTS, AND FINANCIAL POSITION
+ 
+@@ -46,15 +46,15 @@
+ 
+ Cash and financial position
+ 
+-The Group's cash at the end of the period amounted to KSEK 48 055 (55 378). In addition to cash, the Group has an unused overdraft of KSEK 2 000 (5 000).
++The Group’s cash at the end of the period amounted to KSEK 48 035 (55 378). In addition to cash, the Group has an unused overdraft of KSEK 2 000 (5 000).
+ 
+-The Group's long-term liabilities at the end of the period amounted to KSEK 4 858 (3 681).
++The Group’s long-term liabilities at the end of the period amounted to KSEK 4 858 (3 681).
+ 
+ OTHER INFORMATION
+ 
+ Group structure
+ 
+-As of the date of this report, the Group consists of the Parent Company W5 Solutions AB and the five wholly owned subsidiaries W5 Solutions Production AB, W5 Solutions Teleanalys AB, W5 Omnifinity AB, MR Targets AB, and W5 Finland Oy. The Parent Company is the contracting party to several key customers and acts as a sales company. All development and production at W5 Solutions Production takes place at the Company's facilities in Älmhult, Nacka Strand.
++As of the date of this report, the Group consists of the Parent Company W5 Solutions AB and the five wholly owned subsidiaries W5 Solutions Production AB, W5 Solutions Teleanalys AB, W5 Omnifinity AB, MR Targets AB, and W5 Finland Oy. The Parent Company is the contracting party to several key customers and acts as a sales company. All development and production at W5 Solutions Production takes place at the Company’s facilities in Älmhult, Nacka Strand,
+ 
+ Year-end report | January–December 2022 | W5 Solutions AB
+ 

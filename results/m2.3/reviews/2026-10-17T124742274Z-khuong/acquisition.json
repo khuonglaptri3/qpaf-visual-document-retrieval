@@ -1,0 +1,15 @@
+{
+  "artifact_type": "m23_review_acquisition",
+  "method": "Export button in an isolated headless Edge context populated from a temporary copy of the user's Edge Default localStorage",
+  "source_storage_key": "qpaf:m23:review:dd5423699964e723daeca36d6a1309ff7ef343bd4c75087d4d63b6bacbd25c94",
+  "source_storage_exported_at": "2026-10-17T12:40:24.558Z",
+  "download_path": "C:/Users/lanph/Downloads/m23-review-2026-10-17T12-47-42-274Z.json",
+  "exported_at": "2026-10-17T12:47:42.274Z",
+  "sha256": "3b6ca8f0beabede2c4c75396c6c97976a388a0d3687be63a5edc9bda02e1b69e",
+  "reference_text_drafts": 17,
+  "reference_no_text_drafts": 1,
+  "reference_confirmed": 0,
+  "original_labels_modified": false,
+  "user_statement": "Giữ 18 trang tôi đã làm; tự tải về và nhận xét",
+  "visual_audit_positions": [3, 6, 8, 9, 12, 15, 17, 22, 27, 30, 32, 35, 36, 38, 40, 41, 42, 46]
+}

@@ -1,0 +1,14 @@
+# Direct pins; m22-modal.lock also pins transitive packages.
+numpy==2.2.6
+torch==2.7.1
+torchvision==0.22.1
+transformers==4.53.3
+sentence-transformers==3.4.1
+colpali-engine==0.3.12
+peft==0.16.0
+accelerate==1.8.1
+huggingface-hub==0.34.4
+Pillow==11.3.0
+pypdfium2==4.30.0
+pytesseract==0.3.13
+psutil==7.2.2

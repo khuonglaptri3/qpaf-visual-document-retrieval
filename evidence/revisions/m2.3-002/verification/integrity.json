@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "verified_at": "2026-10-17T13:48:08.102095+00:00",
+  "artifact": "results/m2.3/closure/2026-10-17-closed",
+  "policy_sha256": "c0fcf0b3b13b27070716179d75545ba33ae406cc99a74902737bcf2dad19c4b8",
+  "checks": [
+    "Original and final package hashes verified",
+    "121 native decisions resolved; 21 explicit AI amendments; all 18 references unchanged",
+    "All 121 frozen-policy outputs reproduced from raw TSV and crop-corrected native geometry",
+    "Config raw-byte hash matches the hash in all 121 page records",
+    "144 candidate metric records and all aggregates checked; development-only selection verified",
+    "Selected text BWE independently verified with sorted-token multiset arithmetic",
+    "17 selected text WER distances independently verified with dynamic programming",
+    "Zero technical failures; empty-reference CER/WER excluded",
+    "Implementation source hashes match final provenance"
+  ],
+  "source_run": "RUN-QPAF-M2_3-CAL-001-20261017T101949Z-A01"
+}

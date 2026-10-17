@@ -1,0 +1,23 @@
+{
+  "phases": [
+    {
+      "phase": "score",
+      "seconds": 0.0022696159999995302,
+      "peak_rss_mb": 3379.80859375,
+      "peak_cuda_allocated_mb": 0.0,
+      "peak_cuda_reserved_mb": 0.0
+    },
+    {
+      "phase": "total_channel",
+      "seconds": 0.07597291699999964,
+      "peak_rss_mb": 3379.79296875,
+      "peak_cuda_allocated_mb": 0.0,
+      "peak_cuda_reserved_mb": 0.0
+    }
+  ],
+  "elapsed_seconds": 0.15648161599999888,
+  "peak_rss_mb": 3379.80859375,
+  "peak_cuda_reserved_mb": 0.0,
+  "artifact_bytes": 19715,
+  "rss_poll_interval_seconds": 0.02
+}

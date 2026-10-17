@@ -1,0 +1,500 @@
+[
+  {
+    "position": 3,
+    "page_id": "0004b995666f8846b92ffc3d741a930bba0638e3_page_0009",
+    "image_sha256": "37b0ed95561bb18f456588fecc8709e898e0018c934097906ab16b9397a580d5",
+    "text_changed": true,
+    "before": {
+      "status": "DRAFT",
+      "text": "What is the partnership set-up process in this school district?\nWhat documentation do we need, e.g. Memorandum of Understanding or Letter of Agreement?\nWhat are the general dates and timeline for the program and partnership?\nTimeline Template\nMar Apr May Jun Jul Aug Sep\nTask 1 Activity\nTask 2 Activity\nTask 3 Activity\nTask 4 Activity\nTask 5 Activity\nTask 6 Activity\nLegend\nActivity Example\nThis Photo by Unknown author is licensed under CC BY.\nTIMELINE",
+      "scope": "full_page",
+      "region": "",
+      "no_text": false,
+      "reviewer": "",
+      "reviewed_at": null
+    },
+    "after": {
+      "status": "CONFIRMED",
+      "text": "▪ What is the partnership set-up process in this school district?\n▪ What documentation do we need, e.g. Memorandum of Understanding or Letter of Agreement?\n▪ What are the general dates and timeline for the program and partnership?\nTimeline Template\nMar Apr May Jun Jul Aug Sep\nTask 1 Activity\nTask 2 Activity\nTask 3 Activity\nTask 4 Activity\nTask 5 Activity\nTask 6 Activity\nLegend\nActivity Example\nThis Photo by Unknown author is licensed under CC BY.\nTIMELINE",
+      "scope": "full_page",
+      "region": "",
+      "no_text": false,
+      "reviewer": "Codex (AI visual QA; user-authorized)",
+      "reviewed_at": "2026-10-17T13:13:48.233715+00:00"
+    },
+    "reason": "Đối chiếu timeline và bổ sung ba dấu đầu dòng vuông nhìn thấy trên ảnh.",
+    "notes": [],
+    "layout_sensitive": true
+  },
+  {
+    "position": 6,
+    "page_id": "00171a1b5e1078fd6fa76e72d361d1c647d77eb5_page_0002",
+    "image_sha256": "1861e5fb9799be975801e1f4f4004fa2014719114a0b81ebbcfa311dae2d5523",
+    "text_changed": true,
+    "before": {
+      "status": "DRAFT",
+      "text": "Contents\n\n• Introduction\n• What is new about Big Data?\n• Statistical learning and machine learning approaches\n• How can machine learning approaches be employed to\n  help with causal inference?\n• One example: preventing model misspecification in\n  quasi-experimental evaluations\n• Conclusion\n\nJune 2017\n© 2017 Oxford Policy Management Ltd\n2",
+      "scope": "full_page",
+      "region": "",
+      "no_text": false,
+      "reviewer": "",
+      "reviewed_at": null
+    },
+    "after": {
+      "status": "CONFIRMED",
+      "text": "Contents\n\nGOVERNMENT FACTOR MANAGE ONLINE DAY WORLDWIDE TECHNOLOGIES MASSIVE DEFINITION USING\nRESULTS SOCIAL YEARS SYSTEMS PROCESS MAKING INTEGRATION FRAMEWORK BETWEEN STATISTICS BUSINESS EFFECTIVE VISUALIZATION\nDRIVE REPLICATION HANDLE SOURCES SAN NAS SOFTWARE VOLUME DATABASES PROCESSING SIZE ANALYTICS SIMULATIONS\nLIMITS COMPLEX CHALLENGES ANNOUNCED PAST LARGE HAND CAPACITY STORAGE MILLION INCLUDE NETWORKS HYPOTHESIS SCIENCE\nBIG ONE OUT SETS DEVELOPMENT TECHNOLOGY MANY APPROACH BILLION NEW CRITIQUES PARALLEL STATE CRITIQUE PEOPLE TRAFFIC USE CURRENTLY\nEND MOST YEARLY MAPREDUCE FUTURE\nDETERMINE WELL SET DEPARTMENT QUERIES HIGH USERS EXABYTES ALGORITHMS COMPANIES\nAMOUNT REAL STRUCTURE WORK RATE APPLICATIONS INFRASTRUCTURE PETABYTES ANALYSIS TERMS RESEARCH PRIVATE YEAR\nMANAGEMENT INFORMATION PRIVACY INTERNATIONAL IMPLEMENTATION BECOMES\nDATA SECOND NATIONAL FLOW INTELLIGENCE INITIATIVE ECONOMIC TERABYTES MARKET VARIETY RELATED TIME SENSOR WOULD PROJECT ANNUAL NOW DISTRIBUTED RELEVANT USED PER\nLEARNING LESS HUGE EVERY WORLD VARIOUS BASED TIMES INTERNET CAPABILITIES SUCCESSFUL NEEDED USES COMPARE SHARED\nAPPROACHES PROCESS SEARCH ARCHITECTURE PARADIGM FUNDING RECORDS COST INSIGHT TOOLS CENTER\n\n• Introduction\n• What is new about Big Data?\n• Statistical learning and machine learning approaches\n• How can machine learning approaches be employed to\n  help with causal inference?\n• One example: preventing model misspecification in\n  quasi-experimental evaluations\n• Conclusion\n\nJune 2017\n© 2017 Oxford Policy Management Ltd\n2",
+      "scope": "full_page",
+      "region": "",
+      "no_text": false,
+      "reviewer": "Codex (AI visual QA; user-authorized)",
+      "reviewed_at": "2026-10-17T13:13:48.233715+00:00"
+    },
+    "reason": "Bổ sung chữ trong word cloud, gồm cả chữ dọc; giữ nguyên phần nội dung và footer người dùng đã chép.",
+    "notes": [
+      "Word cloud không có thứ tự đọc tuyến tính duy nhất. Chuỗi từ ở đây là quy ước chép thủ công, không lấy thứ tự từ một đầu ra OCR. PROCESS xuất hiện ở hai vị trí nên được giữ hai lần."
+    ],
+    "layout_sensitive": true
+  },
+  {
+    "position": 8,
+    "page_id": "00171a1b5e1078fd6fa76e72d361d1c647d77eb5_page_0018",
+    "image_sha256": "5903595eef68dc36610096c66e58a2868678201b29a47ebfec29f24cdb33f40b",
+    "text_changed": false,
+    "before": {
+      "status": "DRAFT",
+      "text": "Oxford Policy Management\n\nThank you",
+      "scope": "full_page",
+      "region": "",
+      "no_text": false,
+      "reviewer": "",
+      "reviewed_at": null
+    },
+    "after": {
+      "status": "CONFIRMED",
+      "text": "Oxford Policy Management\n\nThank you",
+      "scope": "full_page",
+      "region": "",
+      "no_text": false,
+      "reviewer": "Codex (AI visual QA; user-authorized)",
+      "reviewed_at": "2026-10-17T13:13:48.233715+00:00"
+    },
+    "reason": "Ảnh khớp bản chữ, gồm cả logo Oxford Policy Management; giữ nguyên.",
+    "notes": [],
+    "layout_sensitive": false
+  },
+  {
+    "position": 9,
+    "page_id": "0065038b9255be3283bedc7bbe75ef5c2660d3a8_page_0001",
+    "image_sha256": "1596791461fb2cd017e267176294ef54ce86b756dbadde940f8fcb6164812d7e",
+    "text_changed": true,
+    "before": {
+      "status": "DRAFT",
+      "text": "ORBICON\n\nBIM Aarhus\nNetværksmøde | Highlights\nLet’s Rethink How We Do MEP Routings in\nRevit\n\nMichael Porsker – Orbicon\n23. November 2017",
+      "scope": "full_page",
+      "region": "",
+      "no_text": false,
+      "reviewer": "",
+      "reviewed_at": null
+    },
+    "after": {
+      "status": "CONFIRMED",
+      "text": "ORBICON\n\nBIM Aarhus\nNetværksmøde | Highlights\nLet’s Rethink How We Do MEP Routings in\nRevit\n\nMichael Porskær – Orbicon\n23. November 2017",
+      "scope": "full_page",
+      "region": "",
+      "no_text": false,
+      "reviewer": "Codex (AI visual QA; user-authorized)",
+      "reviewed_at": "2026-10-17T13:13:48.233715+00:00"
+    },
+    "reason": "Sửa tên riêng theo ảnh, giữ đúng ký tự æ.",
+    "notes": [],
+    "layout_sensitive": false
+  },
+  {
+    "position": 12,
+    "page_id": "0065038b9255be3283bedc7bbe75ef5c2660d3a8_page_0013",
+    "image_sha256": "d0ec43cb4fc0d1867b4f89df4f975e5dcee1b2c901d10be8b654d65826c4bb26",
+    "text_changed": false,
+    "before": {
+      "status": "DRAFT",
+      "text": "Value to your BIM process?\n\n• Do you think it make sense?\n• Do you think this is the right way to go in the early project\n  phases?\n\n13",
+      "scope": "full_page",
+      "region": "",
+      "no_text": false,
+      "reviewer": "",
+      "reviewed_at": null
+    },
+    "after": {
+      "status": "CONFIRMED",
+      "text": "Value to your BIM process?\n\n• Do you think it make sense?\n• Do you think this is the right way to go in the early project\n  phases?\n\n13",
+      "scope": "full_page",
+      "region": "",
+      "no_text": false,
+      "reviewer": "Codex (AI visual QA; user-authorized)",
+      "reviewed_at": "2026-10-17T13:13:48.233715+00:00"
+    },
+    "reason": "Ảnh khớp bản chữ; giữ nguyên cả ngữ pháp gốc 'it make sense'.",
+    "notes": [],
+    "layout_sensitive": false
+  },
+  {
+    "position": 15,
+    "page_id": "0073d1c9d37a124a69560a42acf492e6fae6fb55_page_0018",
+    "image_sha256": "71ca07f8abe0c890e0ef32d15650c94f0b68f3112b342ffa3af3b406dbac286e",
+    "text_changed": true,
+    "before": {
+      "status": "DRAFT",
+      "text": "Results (Objective 5)\n\nMediation Effect of Meaningful Work on Constructs\n\nConstruct           SIE     SE      p      κ²     Effect Size     Result\n\nJob Resources       .172    .059    .001    0.192  Medium          Supported\n(H8)\n\nPersonal            .238    .062    .000    0.247  Medium          Supported\nResources (H9)\n\nTransformational    -.017   .050    .724    0.058  Small           Not Supported\nLeadership (H10)\n\n18",
+      "scope": "full_page",
+      "region": "",
+      "no_text": false,
+      "reviewer": "",
+      "reviewed_at": null
+    },
+    "after": {
+      "status": "CONFIRMED",
+      "text": "Results (Objective 5)\n\nMediation Effect of Meaningful Work on Constructs\n\nConstruct SIE SE p κ² Effect Size Result\nJob Resources (H8) .172 .059 .001 0.192 Medium Supported\nPersonal Resources (H9) .238 .062 .000 0.247 Medium Supported\nTransformational Leadership (H10) -.017 .050 .724 0.058 Small Not Supported\n\n18",
+      "scope": "full_page",
+      "region": "",
+      "no_text": false,
+      "reviewer": "Codex (AI visual QA; user-authorized)",
+      "reviewed_at": "2026-10-17T13:13:48.233715+00:00"
+    },
+    "reason": "Tuyến tính hóa mỗi hàng bảng, đặt nhãn H8/H9/H10 cạnh đúng construct trước các giá trị.",
+    "notes": [],
+    "layout_sensitive": true
+  },
+  {
+    "position": 17,
+    "page_id": "008363273c77bfd99cc0bbe473189616006e7c72_page_0001",
+    "image_sha256": "6eed0734800a2a5b0657abedd0785e46cfaa88c260fd37d63ecfcaa6121a75b2",
+    "text_changed": false,
+    "before": {
+      "status": "DRAFT",
+      "text": "Clinical Data plus Proactive Notifications equals\nimproved Quality Measure Performance\n\nPresented By:\nLynda Rowe, Senior Advisor, Value-based Markets – InterSystems\nKate Beck, Director, Health Information Exchange – Healthfirst\nAutumn Kerr, AVP, Clinical Quality – Healthfirst\n\nRISE",
+      "scope": "full_page",
+      "region": "",
+      "no_text": false,
+      "reviewer": "",
+      "reviewed_at": null
+    },
+    "after": {
+      "status": "CONFIRMED",
+      "text": "Clinical Data plus Proactive Notifications equals\nimproved Quality Measure Performance\n\nPresented By:\nLynda Rowe, Senior Advisor, Value-based Markets – InterSystems\nKate Beck, Director, Health Information Exchange – Healthfirst\nAutumn Kerr, AVP, Clinical Quality – Healthfirst\n\nRISE",
+      "scope": "full_page",
+      "region": "",
+      "no_text": false,
+      "reviewer": "Codex (AI visual QA; user-authorized)",
+      "reviewed_at": "2026-10-17T13:13:48.233715+00:00"
+    },
+    "reason": "Ảnh khớp bản chữ và logo RISE; giữ nguyên.",
+    "notes": [],
+    "layout_sensitive": false
+  },
+  {
+    "position": 22,
+    "page_id": "009856a0cdcc230d983c3a3e460a0c1b83cb09d4_page_0017",
+    "image_sha256": "ad1a1b434966486a85a53682d002f5c4c406b69c05d42c4ca1ca3bd37a050408",
+    "text_changed": true,
+    "before": {
+      "status": "DRAFT",
+      "text": "Beach Seine Surveys of Georgica Pond\n\n2018  2019  2021  2022  2023\n\nWinter Flounder\nWhite Perch\nWhite Mullet\nThree-Spine Stickleback\nStriped Killifish\nSilver Jenny Mojarra\nSheepshead Minnows\nRainwater Killifish\nNine-Spine Stickleback\nMummichog\nMenhaden\nFour-Spine Stickleback\nBlue Crab\nBay anchovy\nBanded Killifish\nAtlantic Silverside\nAtlantic croaker\nAmerican Eel\nAlewife\n\nNumber of Individuals",
+      "scope": "full_page",
+      "region": "",
+      "no_text": false,
+      "reviewer": "",
+      "reviewed_at": null
+    },
+    "after": {
+      "status": "CONFIRMED",
+      "text": "Beach Seine Surveys of Georgica Pond\n\n2018  2019  2021  2022  2023\n\nWinter Flounder\nWhite Perch\nWhite Mullet\nThree-Spine Stickleback\nStriped Killifish\nSilver Jenny Mojarra\nSheepshead Minnows\nRainwater Killifish\nNine-Spine Stickleback\nMummichog\nMenhaden\nFour-Spine Stickleback\nBlue Crab\nBay anchovy\nBanded Killifish\nAtlantic Silverside\nAtlantic croaker\nAmerican Eel\nAlewife\n\n0 2000 4000 6000 8000\n0 2000 4000 6000 8000\n0 2000 4000 6000 8000\n0 2000 4000 6000 8000\n0 2000 4000 6000 8000\nNumber of Individuals\n\n40\n4\n55 62\n10 14",
+      "scope": "full_page",
+      "region": "",
+      "no_text": false,
+      "reviewer": "Codex (AI visual QA; user-authorized)",
+      "reviewed_at": "2026-10-17T13:13:48.233715+00:00"
+    },
+    "reason": "Bổ sung năm nhóm mốc trục 0–8000 và các số hoàn chỉnh đọc được trên thước trong ảnh cá.",
+    "notes": [
+      "Thứ tự: tiêu đề, năm, tên loài, năm nhóm mốc trục từ trái sang phải, tên trục, số trên bốn ảnh cá từ trên xuống dưới.",
+      "Ảnh trên phải: chỉ 40 đọc được hoàn chỉnh; chữ số 9 sát mép trái là mảnh số bị cắt nên không suy ra thành 39.",
+      "Ảnh giữa trái: 4; các phần số tại mép ảnh không đủ ký tự để xác định.",
+      "Ảnh giữa phải: 55 và 62 đọc trực tiếp từ crop; không nội suy các mốc bị cá che.",
+      "Ảnh dưới trái: 10 và 14; phần ở khoảng 13 và số bị cắt ở mép phải không được khôi phục theo dãy thước."
+    ],
+    "layout_sensitive": true
+  },
+  {
+    "position": 27,
+    "page_id": "00c9161083ca956372a7548e69650556a8c7f358_page_0018",
+    "image_sha256": "20fe6a0fc35ce0f0e8a52e500d65826c45f8271d6ccc2085e659ac855cf0cba6",
+    "text_changed": true,
+    "before": {
+      "status": "DRAFT",
+      "text": "Triple-Point Analysis\n\nFormulation:\n\nS_A = S ± e_A\nS_1 = S ± e_1\nS_2 = S ± e_2\n\nIf e_A and e_1 are uncorrelated, then\n\n<ΔS_A-1²> = <e_A²> + <e_1²>\n<ΔS_A-2²> = <e_A²> + <e_2²>\n<ΔS_1-2²> = <e_1²> + <e_2²>\n\nSolving above equations, then\n\n<e_A²> = {<ΔS_A-1²> + <ΔS_A-2²> - <ΔS_1-2²>}/2\n\nAquarius Data Retrieval Error (psu):\n\n[Aquarius, Drifter, Wave Glider]\n0.13\n\n[Aquarius, WHOI Mooring, Wave Glider]\n0.14\n\n[Aquarius, WHOI Mooring, Drifter]\n0.14\n\nErrors for drifter, mooring and wave glider are 0.072, 0.062, & 0.02 psu, respectively\n\n18",
+      "scope": "full_page",
+      "region": "",
+      "no_text": false,
+      "reviewer": "",
+      "reviewed_at": null
+    },
+    "after": {
+      "status": "CONFIRMED",
+      "text": "Triple-Point Analysis\n\nFormulation:\n\nS_A = S ± e_A\nS_1 = S ± e_1\nS_2 = S ± e_2\n\nIf e_A and e_1 are uncorrelated, then\n\n<ΔS_(A-1)²> = <e_A²> + <e_1²>\n<ΔS_(A-2)²> = <e_A²> + <e_2²>\n<ΔS_(1-2)²> = <e_1²> + <e_2²>\n\nSolving above equations, then\n\n<e_A²> = {<ΔS_(A-1)²> + <ΔS_(A-2)²> - <ΔS_(1-2)²>}/2\n\nAquarius Data Retrieval Error (psu):\n\n[Aquarius, Drifter, Wave Glider]\n0.13\n\n[Aquarius, WHOI Mooring, Wave Glider]\n0.14\n\n[Aquarius, WHOI Mooring, Drifter]\n0.14\n\nErrors for drifter, mooring and wave glider are 0.072, 0.062, & 0.02 psu, respectively\n\n18",
+      "scope": "full_page",
+      "region": "",
+      "no_text": false,
+      "reviewer": "Codex (AI visual QA; user-authorized)",
+      "reviewed_at": "2026-10-17T13:13:48.233715+00:00"
+    },
+    "reason": "Giữ nội dung toán đã chép; nhóm rõ các chỉ số ghép A-1, A-2, 1-2 theo quy ước ký hiệu văn bản.",
+    "notes": [
+      "Ký hiệu _ và ngoặc nhóm là quy ước biểu diễn chỉ số dưới, không phải ký tự in trên slide. CER/WER thuần chuỗi không tách được sai nhận dạng với khác biểu diễn toán."
+    ],
+    "layout_sensitive": true
+  },
+  {
+    "position": 30,
+    "page_id": "00d8d22ded241c20c75d49578359057cd25739d1_page_0002",
+    "image_sha256": "49bfd79e348fbf8372a5248ee9f72c937c9a583368c5f0594f6227ae70b9ffae",
+    "text_changed": true,
+    "before": {
+      "status": "DRAFT",
+      "text": "The Slovenian Society of Nephrology\nSlovenian Renal Replacement Therapy Registry\n\n2006 ANNUAL REPORT\nLjubljana, September 2008",
+      "scope": "full_page",
+      "region": "",
+      "no_text": false,
+      "reviewer": "",
+      "reviewed_at": null
+    },
+    "after": {
+      "status": "CONFIRMED",
+      "text": "The Slovenian Society of Nephrology\nSlovenian Renal Replacement Therapy Registry\n\nMURSKA SOBOTA\nSLOVENJ GRADEC\nMARIBOR\nPTUJ\nJESENICE\nVOJNIK\nNAKLO\nCELJE\nCELJE FMC\nTX\nUKC\nMOB\nLEONIŠČE\nPD\nČRNUČE\nTRBOVLJE\nLJUBLJANA\nKRŠKO\nNOVA GORICA\nNOVO MESTO\nSEŽANA\nIZOLA\n\n2006 ANNUAL REPORT\nLjubljana, September 2008",
+      "scope": "full_page",
+      "region": "",
+      "no_text": false,
+      "reviewer": "Codex (AI visual QA; user-authorized)",
+      "reviewed_at": "2026-10-17T13:13:48.233715+00:00"
+    },
+    "reason": "Bổ sung toàn bộ nhãn đọc được trên bản đồ, giữ đúng dấu tiếng Slovenia.",
+    "notes": [],
+    "layout_sensitive": true
+  },
+  {
+    "position": 32,
+    "page_id": "00d8d22ded241c20c75d49578359057cd25739d1_page_0023",
+    "image_sha256": "be9e81b570c11ba7ac020cd9517ee27fa023faf2130e1dfa0f2394dd6609dfab",
+    "text_changed": false,
+    "before": {
+      "status": "DRAFT",
+      "text": "",
+      "scope": "full_page",
+      "region": "",
+      "no_text": true,
+      "reviewer": "",
+      "reviewed_at": null
+    },
+    "after": {
+      "status": "CONFIRMED",
+      "text": "",
+      "scope": "full_page",
+      "region": "",
+      "no_text": true,
+      "reviewer": "Codex (AI visual QA; user-authorized)",
+      "reviewed_at": "2026-10-17T13:13:48.233715+00:00"
+    },
+    "reason": "Đã xem toàn ảnh bìa sau, không có chữ; giữ text rỗng và no_text=true.",
+    "notes": [],
+    "layout_sensitive": false
+  },
+  {
+    "position": 35,
+    "page_id": "01056efdbb585d355a073b6aba9a906611fc1cc4_page_0006",
+    "image_sha256": "382bc53ef763fb540f837da9973e5c3673893aa74a662b9225dc07189fcc7f6c",
+    "text_changed": true,
+    "before": {
+      "status": "DRAFT",
+      "text": "YCA’s strategy builds on existing success factors\nand competitive edge\n\nKey success factors\n\nReliable and asset-backed supply\nGlobal scale and flexibility\n~100 years of ammonia experience\nTrack record of safe operations\nMarket insight\nExisting long-term customer\nrelationships\n\nUnique starting position as the market\nleader in midstream ammonia¹\n\nYCA’s competitive edge\n\nUpstream\nIntegrated\nmidstream\nDownstream\n\nHandled by Yara today –\nown production to be\ndeveloped by YCA\n\n• Access to Yara’s project\n  portfolio\n• Project development\n  expertise\n• Credible offtaker\n\nCurrent presence\n#1 global midstream player\n\n• Asset-backed supply\n• Existing platform and\n  access to infrastructure\n• Long-standing\n  relationships\n\nLeverage commercial\npartners to create demand\n“pull” in new segments\n\n• Asset-backed supply\n• Partnerships with sector\n  leaders\n• Sites near key hubs and\n  terminals\n\nTrack record of safe handling and operations\n\nIntegration will remain critical in building scale and creating value in the developing\nclean ammonia market\n\nYara Clean Ammonia\n\nSource: Company information\n1) Based on volumes of traded ammonia in 2021 - Argus market study (2022)\n\n6",
+      "scope": "full_page",
+      "region": "",
+      "no_text": false,
+      "reviewer": "",
+      "reviewed_at": null
+    },
+    "after": {
+      "status": "CONFIRMED",
+      "text": "YCA’s strategy builds on existing success factors\nand competitive edge\n\nKey success factors\nReliable and asset-backed supply\nGlobal scale and flexibility\n~100 years of ammonia experience\nTrack record of safe operations\nMarket insight\nExisting long-term customer relationships\nUnique starting position as the market leader in midstream ammonia¹\n\nYCA’s competitive edge\n\nUpstream\nHandled by Yara today – own production to be developed by YCA\n▪ Access to Yara’s project portfolio\n▪ Project development expertise\n▪ Credible offtaker\n\nIntegrated midstream\nCurrent presence\n#1 global midstream player\n▪ Asset-backed supply\n▪ Existing platform and access to infrastructure\n▪ Long-standing relationships\n\nDownstream\nLeverage commercial partners to create demand “pull” in new segments\n▪ Asset-backed supply\n▪ Partnerships with sector leaders\n▪ Sites near key hubs and terminals\n\nTrack record of safe handling and operations\nIntegration will remain critical in building scale and creating value in the developing clean ammonia market\n\nYARA\nYara Clean Ammonia\nSource: Company information\n1) Based on volumes of traded ammonia in 2021 - Argus market study (2022)\n6",
+      "scope": "full_page",
+      "region": "",
+      "no_text": false,
+      "reviewer": "Codex (AI visual QA; user-authorized)",
+      "reviewed_at": "2026-10-17T13:13:48.233715+00:00"
+    },
+    "reason": "Bổ sung chữ YARA trong logo; đọc trọn từng cột theo thứ tự Upstream, Integrated midstream, Downstream; giữ dấu đầu dòng vuông.",
+    "notes": [],
+    "layout_sensitive": true
+  },
+  {
+    "position": 36,
+    "page_id": "01056efdbb585d355a073b6aba9a906611fc1cc4_page_0007",
+    "image_sha256": "fbee948665b7b8568b0335be5651e389e707a54d71f0ffe3fcdfd0830dc158bf",
+    "text_changed": true,
+    "before": {
+      "status": "DRAFT",
+      "text": "Growth supported by solid upstream projects,\nbuilding on YCA’s leading¹ midstream position\n\nBlue ammonia\nRobust pipeline with solid project economics and\nprofitability without need for further subsidies\n\nKey regions\n\nSelected project candidates\n\n~2.1mT\nvolume by\n2030E²\n\n1\nMajority stake\n\n2\nOfftake-only\n\nGreen ammonia\nEarly mover strategy where government support\nwill be required – anticipated lower costs in the\nfuture will increase competitiveness\n\nKey regions\n\nSelected project candidates\n\n~0.4mT\nvolume by\n2030E³\n\n2\nOwn pilots\n\nHEGRA\n\nKey success factors\n\nAccess to existing production assets\nthat can be converted to blue or green at\nlower costs compared to greenfield\ninvestments\n\nKnowledge and experience built\nthrough Yara’s almost 100 years of\nammonia track record and over 8mT\nammonia production capacity³\n\nMarket leading position makes YCA the\npreferred offtaker and partner for Yara\nand other third-parties, in turn enabling\nnew projects\n\nWell-positioned with a maturing project hopper and additional long-term opportunities\n\nYara Clean Ammonia\n\nSource: Company information\n1) Based on volumes of traded ammonia in 2021 - Argus market study (2022)\n2) Estimated volume by the company for the selected candidate projects, excluding third-party project offtake\n3) Ammonia production capacity as of 2021\n\n7",
+      "scope": "full_page",
+      "region": "",
+      "no_text": false,
+      "reviewer": "",
+      "reviewed_at": null
+    },
+    "after": {
+      "status": "CONFIRMED",
+      "text": "Growth supported by solid upstream projects,\nbuilding on YCA’s leading¹ midstream position\n\nBlue ammonia\nRobust pipeline with solid project economics and\nprofitability without need for further subsidies\n\nKey regions\n\nSelected project candidates\n\n~2.1mT\nvolume by\n2030E²\n\n1\nMajority stake\n\n2\nOfftake-only\n\nGreen ammonia\nEarly mover strategy where government support\nwill be required – anticipated lower costs in the\nfuture will increase competitiveness\n\nKey regions\n\nSelected project candidates\n\n~0.4mT\nvolume by\n2030E²\n\n2\nOwn pilots\n\nHEGRA\n\nKey success factors\n\n✓ Access to existing production assets\nthat can be converted to blue or green at\nlower costs compared to greenfield\ninvestments\n\n✓ Knowledge and experience built\nthrough Yara’s almost 100 years of\nammonia track record and over 8mT\nammonia production capacity³\n\n✓ Market leading position makes YCA the\npreferred offtaker and partner for Yara\nand other third-parties, in turn enabling\nnew projects\n\nWell-positioned with a maturing project hopper and additional long-term opportunities\n\nYARA\nYara Clean Ammonia\n\nSource: Company information\n1) Based on volumes of traded ammonia in 2021 - Argus market study (2022)\n2) Estimated volume by the company for the selected candidate projects, excluding third-party project offtake\n3) Ammonia production capacity as of 2021\n\n7",
+      "scope": "full_page",
+      "region": "",
+      "no_text": false,
+      "reviewer": "Codex (AI visual QA; user-authorized)",
+      "reviewed_at": "2026-10-17T13:13:48.233715+00:00"
+    },
+    "reason": "Sửa chú thích Green ammonia thành 2030E²; thêm chữ YARA trong logo và ba dấu check ở cột Key success factors.",
+    "notes": [],
+    "layout_sensitive": true
+  },
+  {
+    "position": 38,
+    "page_id": "011e012b28d60278c243b200eaf19952a725370c_page_0003",
+    "image_sha256": "a27cea565d347d10ba5cd0452c3cb183f780b971faae4bd6b7fd3f7446e0371f",
+    "text_changed": false,
+    "before": {
+      "status": "DRAFT",
+      "text": "Train-to-NZEB\nThe Building Knowledge Hubs\n\nRESULTS SO FAR\n\nSUBMITTED DELIVERABLES\n\n• D 3.1 A set of new/adopted training\n  programmes\n\n• D 3.2 Training programs for\n  professional and pedagogic training\n  of trainers\n\n• D3.3 Presentations and participants\n  lists from TTT courses\n\n• D 4.5 List of trained professionals\n\n• D 5.3 Website – done. Local sites\n  done\n\nwww.train-to-nzeb.com\n\nEnEffect",
+      "scope": "full_page",
+      "region": "",
+      "no_text": false,
+      "reviewer": "",
+      "reviewed_at": null
+    },
+    "after": {
+      "status": "CONFIRMED",
+      "text": "Train-to-NZEB\nThe Building Knowledge Hubs\n\nRESULTS SO FAR\n\nSUBMITTED DELIVERABLES\n\n• D 3.1 A set of new/adopted training\n  programmes\n\n• D 3.2 Training programs for\n  professional and pedagogic training\n  of trainers\n\n• D3.3 Presentations and participants\n  lists from TTT courses\n\n• D 4.5 List of trained professionals\n\n• D 5.3 Website – done. Local sites\n  done\n\nwww.train-to-nzeb.com\n\nEnEffect",
+      "scope": "full_page",
+      "region": "",
+      "no_text": false,
+      "reviewer": "Codex (AI visual QA; user-authorized)",
+      "reviewed_at": "2026-10-17T13:13:48.233715+00:00"
+    },
+    "reason": "Ảnh khớp bản chữ, gồm logo Train-to-NZEB và EnEffect; giữ nguyên.",
+    "notes": [],
+    "layout_sensitive": false
+  },
+  {
+    "position": 40,
+    "page_id": "011e012b28d60278c243b200eaf19952a725370c_page_0010",
+    "image_sha256": "942841b5145fa634bedef7b40630d25013e6b3cda0e05a05314483faa9cb2068",
+    "text_changed": false,
+    "before": {
+      "status": "DRAFT",
+      "text": "Train-to-NZEB\nThe Building Knowledge Hubs\n\nContact\nInformation\n\nCOORDINATOR OF THE\nPROJECT\n\nCenter for Energy Efficiency EnEffect\n\n1, Hristo Smirnenski Blvd, fl.#3\n1164 Sofia, Bulgaria\nTel: +359 2 963 17 14\nFax: +359 2 963 25 74\nEmail: eneffect@eneffect.bg\nWeb: www.eneffect.bg\n\nContact person:\nDragomir Tzanev\nEmail: dtzanev@eneffect.bg\n\nEnEffect",
+      "scope": "full_page",
+      "region": "",
+      "no_text": false,
+      "reviewer": "",
+      "reviewed_at": null
+    },
+    "after": {
+      "status": "CONFIRMED",
+      "text": "Train-to-NZEB\nThe Building Knowledge Hubs\n\nContact\nInformation\n\nCOORDINATOR OF THE\nPROJECT\n\nCenter for Energy Efficiency EnEffect\n\n1, Hristo Smirnenski Blvd, fl.#3\n1164 Sofia, Bulgaria\nTel: +359 2 963 17 14\nFax: +359 2 963 25 74\nEmail: eneffect@eneffect.bg\nWeb: www.eneffect.bg\n\nContact person:\nDragomir Tzanev\nEmail: dtzanev@eneffect.bg\n\nEnEffect",
+      "scope": "full_page",
+      "region": "",
+      "no_text": false,
+      "reviewer": "Codex (AI visual QA; user-authorized)",
+      "reviewed_at": "2026-10-17T13:13:48.233715+00:00"
+    },
+    "reason": "Ảnh khớp bản chữ, gồm địa chỉ, liên hệ và hai logo; giữ nguyên.",
+    "notes": [],
+    "layout_sensitive": false
+  },
+  {
+    "position": 41,
+    "page_id": "015834912780c3a83a8c27aa66c52252994a8b16_page_0001",
+    "image_sha256": "bd21777c519e7cd7da4f5436b05b98828c344ee2dd3ae50922ca38ef59fac4bd",
+    "text_changed": false,
+    "before": {
+      "status": "DRAFT",
+      "text": "W5\n\n– A SAFER TOMORROW\n\nw5solutions.com\n\nYEAR-END REPORT\nJANUARY–DECEMBER 2022",
+      "scope": "full_page",
+      "region": "",
+      "no_text": false,
+      "reviewer": "",
+      "reviewed_at": null
+    },
+    "after": {
+      "status": "CONFIRMED",
+      "text": "W5\n\n– A SAFER TOMORROW\n\nw5solutions.com\n\nYEAR-END REPORT\nJANUARY–DECEMBER 2022",
+      "scope": "full_page",
+      "region": "",
+      "no_text": false,
+      "reviewer": "Codex (AI visual QA; user-authorized)",
+      "reviewed_at": "2026-10-17T13:13:48.233715+00:00"
+    },
+    "reason": "Ảnh khớp bản chữ bìa và logo W5; giữ nguyên.",
+    "notes": [],
+    "layout_sensitive": false
+  },
+  {
+    "position": 42,
+    "page_id": "015834912780c3a83a8c27aa66c52252994a8b16_page_0007",
+    "image_sha256": "49cb0bd70050dc7b949c5ba497cf3def91f9310d1ecf83f152c5fb8b05717260",
+    "text_changed": true,
+    "before": {
+      "status": "DRAFT",
+      "text": "FINANCIAL REPORT\n\nCOMPANY INFORMATION\n\nW5 Solutions AB (publ), Corp. ID No. 556873-2034 is a limited liability company with its registered office in Nacka and Parent Company of the W5 Group.\n\nSALES AND PROFIT\n\nOCTOBER–DECEMBER 2022\n\nThe operating income of the Group amounted to KSEK 78 425. In the corresponding quarter last year, income amounted to KSEK 54 753. Of the current period's income, KSEK 388 relates to acquired entities.\n\nOperating profit, EBITA, for the quarter amounted to KSEK 8 045 (2 447), an EBITA margin of 10.3% (4.5%).\n\nProfit for the period amounted to KSEK 5 317 (2 896). Earnings per share amounted to SEK 0.42 (0.28).\n\nThis quarter has also seen a continued shortage of electronic components, which has negatively affected the business. As a result, some deliveries have been delayed and postponed until 2023, and additional costs have been incurred, resulting in margin deterioration.\n\nJANUARY–DECEMBER 2022\n\nThe Group's operating income for the period amounts to KSEK 179 744 (143 472) with an operating profit (EBITA) of KSEK 19 987 (15 627).\n\nThe EBITA margin amounts to 11.1% (10.9%).\n\nNet profit for the period amounted to KSEK 13 702 (13 408). Earnings per share amounted to SEK 1.13 (1.33).\n\nIncome for the period was negatively impacted due to delayed deliveries. In addition, operating profit has been negatively affected due to changes in the prices of electronic components, which are deemed extraordinary. During the financial year, work has been activated on own account, for development costs amounting to KSEK 2 121.\n\nCASH FLOW, INVESTMENTS, AND FINANCIAL POSITION\n\nCash flow and investments\n\nCash flow from operating activities during the quarter amounted to KSEK -33 361 (16 310). The weak cash flow is mainly due to the increased account receivables concerning invoicing made in December. These receivables were converted into cash and cash equivalents in January 2023.\n\nFor January–December, cash flow from operating activities amounted to KSEK -40 883 (17 631).\n\nDuring the quarter, investments in tangible fixed assets amounted to KSEK 307 (0), and in compensation for sold vehicles, KSEK 280 were received. The investments relate to machinery for production and vehicles. Furthermore, additional investments related to acquiring MR Targets of KSEK 527 and investments in W5 Finland Oy of KSEK 4 321 have been booked in the period. Total investments for the year amount to KSEK 2 881 in machinery and equipment, KSEK 2 121 in capitalized development costs, KSEK 4 031 in acquired goodwill, and KSEK 20 597 in subsidiary investments, with KSEK 280 received as compensation for sold investments.\n\nThe directed new share issue resulted in a cash injection of KSEK 60 693, which was added to the Group at the beginning of July 2022.\n\nAcquisition of subsidiaries\n\nW5 Solutions AB acquired 100% of the shares in MR Targets AB on 1 May 2022. The purchase price, including the additional consideration and costs of the acquisition, amounted to KSEK 21 868, which has been paid in cash. Acquired net assets amount to KSEK 3 607 and goodwill amounts to KSEK 18 262. Goodwill is amortized at 20% per year, and the annual amortization amount is expected to be KSEK 3 652.\n\nW5 Solutions established a new Finnish subsidiary, W5 Finland Oy, on 20 December 2022. The acquisition cost amounts to KSEK 290. In addition, a business was acquired for a total of KSEK 4 453. Acquired goodwill totalling KSEK 4 031 will be amortized at 20% per year from 1 January 2023, with annual amortization estimated at KSEK 806, which will also be amortized at 20% per year.\n\nCash and financial position\n\nThe Group's cash at the end of the period amounted to KSEK 48 055 (55 378). In addition to cash, the Group has an unused overdraft of KSEK 2 000 (5 000).\n\nThe Group's long-term liabilities at the end of the period amounted to KSEK 4 858 (3 681).\n\nOTHER INFORMATION\n\nGroup structure\n\nAs of the date of this report, the Group consists of the Parent Company W5 Solutions AB and the five wholly owned subsidiaries W5 Solutions Production AB, W5 Solutions Teleanalys AB, W5 Omnifinity AB, MR Targets AB, and W5 Finland Oy. The Parent Company is the contracting party to several key customers and acts as a sales company. All development and production at W5 Solutions Production takes place at the Company's facilities in Älmhult, Nacka Strand.\n\nYear-end report | January–December 2022 | W5 Solutions AB\n\n7",
+      "scope": "full_page",
+      "region": "",
+      "no_text": false,
+      "reviewer": "",
+      "reviewed_at": null
+    },
+    "after": {
+      "status": "CONFIRMED",
+      "text": "FINANCIAL REPORT\n\nCOMPANY INFORMATION\n\nW5 Solutions AB (publ), Corp. ID No. 556973-2034 is a limited liability company with its registered office in Nacka and Parent Company of the W5 Group.\n\nSALES AND PROFIT\n\nOCTOBER–DECEMBER 2022\n\nThe operating income of the Group amounted to KSEK 78 425. In the corresponding quarter last year, income amounted to KSEK 54 753. Of the current period’s income, KSEK 388 relates to acquired entities.\n\nOperating profit, EBITA, for the quarter amounted to KSEK 8 045 (2 447), an EBITA margin of 10.3% (4.5%).\n\nProfit for the period amounted to KSEK 5 317 (2 898). Earnings per share amounted to SEK 0.42 (0.28).\n\nThis quarter has also seen a continued shortage of electronic components, which has negatively affected the business. As a result, some deliveries have been delayed and postponed until 2023, and additional costs have been incurred, resulting in margin deterioration.\n\nJANUARY–DECEMBER 2022\n\nThe Group’s operating income for the period amounts to KSEK 179 744 (143 472) with an operating profit (EBITA) of KSEK 19 987 (15 627).\n\nThe EBITA margin amounts to 11.1% (10.9%).\n\nNet profit for the period amounted to KSEK 13 702 (13 409). Earnings per share amounted to SEK 1.13 (1.33).\n\nIncome for the period was negatively impacted due to delayed deliveries. In addition, operating profit has been negatively affected due to changes in the prices of electronic components, which are deemed extraordinary. During the financial year, work has been activated on own account for development costs amounting to KSEK 2 121.\n\nCASH FLOW, INVESTMENTS, AND FINANCIAL POSITION\n\nCash flow and investments\n\nCash flow from operating activities during the quarter amounted to KSEK -33 361 (16 310). The weak cash flow is mainly due to the increased account receivables concerning invoicing made in December. These receivables were converted into cash and cash equivalents in January 2023.\n\nFor January–December, cash flow from operating activities amounted to KSEK -40 883 (17 631).\n\nDuring the quarter, investments in tangible fixed assets amounted to KSEK 307 (0), and in compensation for sold vehicles, KSEK 280 were received. The investments relate to machinery for production and vehicles. Furthermore, additional investments related to acquiring MR Targets of KSEK 527 and investments in W5 Finland Oy of KSEK 4 321 have been booked in the period. Total investments for the year amount to KSEK 2 881 in machinery and equipment, KSEK 2 121 in capitalized development costs, KSEK 4 031 in acquired goodwill, and KSEK 20 597 in subsidiary investments, with KSEK 280 received as compensation for sold investments.\n\nThe directed new share issue resulted in a cash injection of KSEK 60 693, which was added to the Group at the beginning of July 2022.\n\nAcquisition of subsidiaries\n\nW5 Solutions AB acquired 100% of the shares in MR Targets AB on 1 May 2022. The purchase price, including the additional consideration and costs of the acquisition, amounted to KSEK 21 868, which has been paid in cash. Acquired net assets amount to KSEK 3 607 and goodwill amounts to KSEK 18 262. Goodwill is amortized at 20% per year, and the annual amortization amount is expected to be KSEK 3 652.\n\nW5 Solutions established a new Finnish subsidiary, W5 Finland Oy, on 20 December 2022. The acquisition cost amounts to KSEK 290. In addition, a business was acquired for a total of KSEK 4 453. Acquired goodwill totalling KSEK 4 031 will be amortized at 20% per year from 1 January 2023, with annual amortization estimated at KSEK 806, which will also be amortized at 20% per year.\n\nCash and financial position\n\nThe Group’s cash at the end of the period amounted to KSEK 48 035 (55 378). In addition to cash, the Group has an unused overdraft of KSEK 2 000 (5 000).\n\nThe Group’s long-term liabilities at the end of the period amounted to KSEK 4 858 (3 681).\n\nOTHER INFORMATION\n\nGroup structure\n\nAs of the date of this report, the Group consists of the Parent Company W5 Solutions AB and the five wholly owned subsidiaries W5 Solutions Production AB, W5 Solutions Teleanalys AB, W5 Omnifinity AB, MR Targets AB, and W5 Finland Oy. The Parent Company is the contracting party to several key customers and acts as a sales company. All development and production at W5 Solutions Production takes place at the Company’s facilities in Älmhult, Nacka Strand,\n\nYear-end report | January–December 2022 | W5 Solutions AB\n\n7",
+      "scope": "full_page",
+      "region": "",
+      "no_text": false,
+      "reviewer": "Codex (AI visual QA; user-authorized)",
+      "reviewed_at": "2026-10-17T13:13:48.233715+00:00"
+    },
+    "reason": "Sửa bốn số, dấu nháy cong theo ảnh, bỏ dấu phẩy thêm sau own account và giữ dấu phẩy thật ở cuối đoạn Group structure.",
+    "notes": [
+      "Thứ tự đọc ba cột từ trái qua phải, footer cuối. Dấu phẩy cuối dòng trên ảnh được giữ nguyên, không sửa văn phong nguồn."
+    ],
+    "layout_sensitive": true
+  },
+  {
+    "position": 46,
+    "page_id": "017b534723c463c51f4031ccbba8ce156a502b42_page_0003",
+    "image_sha256": "bf4ee19387e51cfffc244cf2c218d6fd2ed1e45941e70bc518c99257a6b31fd0",
+    "text_changed": false,
+    "before": {
+      "status": "DRAFT",
+      "text": "Supporting the Health of Survivors\nof Family Violence in Family Law Proceedings Community of Practice\n\n• Study Purpose: To initiate, host, and support a Community of Practice (CoP)\n  comprised of experts and practitioners in the family violence and family law sectors to\n  enhance the capacity of practitioners to address family violence safely and effectively.\n  Through the CoP, there will be enhanced support to survivors of violence through\n  the family law system by increasing opportunities for family law practitioners to\n  have training, guidance and resources to support trauma-informed practice, and\n  to improve coordination of services that will enhance the safety and wellbeing\n  of all parties.\n\n• Timeline: November 2020 to November 2023\n\n• Funder: Public Health Agency of Canada\n\n• National Alliance of Gender-Based Violence Research Centres in Canada (Western\n  University is lead)\n\n• CoP Experts (family law, IPV-serving organizations, special populations, IPV\n  survivors)",
+      "scope": "full_page",
+      "region": "",
+      "no_text": false,
+      "reviewer": "",
+      "reviewed_at": null
+    },
+    "after": {
+      "status": "CONFIRMED",
+      "text": "Supporting the Health of Survivors\nof Family Violence in Family Law Proceedings Community of Practice\n\n• Study Purpose: To initiate, host, and support a Community of Practice (CoP)\n  comprised of experts and practitioners in the family violence and family law sectors to\n  enhance the capacity of practitioners to address family violence safely and effectively.\n  Through the CoP, there will be enhanced support to survivors of violence through\n  the family law system by increasing opportunities for family law practitioners to\n  have training, guidance and resources to support trauma-informed practice, and\n  to improve coordination of services that will enhance the safety and wellbeing\n  of all parties.\n\n• Timeline: November 2020 to November 2023\n\n• Funder: Public Health Agency of Canada\n\n• National Alliance of Gender-Based Violence Research Centres in Canada (Western\n  University is lead)\n\n• CoP Experts (family law, IPV-serving organizations, special populations, IPV\n  survivors)",
+      "scope": "full_page",
+      "region": "",
+      "no_text": false,
+      "reviewer": "Codex (AI visual QA; user-authorized)",
+      "reviewed_at": "2026-10-17T13:13:48.233715+00:00"
+    },
+    "reason": "Ảnh khớp bản chữ, gồm đủ phần Study Purpose và các đầu dòng; giữ nguyên.",
+    "notes": [],
+    "layout_sensitive": false
+  }
+]

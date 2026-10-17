@@ -1,0 +1,58 @@
+[
+  {
+    "name": "native",
+    "method": "native",
+    "dpi": 0
+  },
+  {
+    "name": "ocr150",
+    "method": "ocr",
+    "dpi": 150
+  },
+  {
+    "name": "ocr300",
+    "method": "ocr",
+    "dpi": 300
+  },
+  {
+    "name": "legacy40_150",
+    "method": "legacy",
+    "dpi": 150
+  },
+  {
+    "name": "mixed150_c60",
+    "method": "mixed",
+    "dpi": 150,
+    "supplement_min_confidence": 60,
+    "warning_mean_confidence": 60.0,
+    "native_overlap_fraction": 0.5,
+    "min_printable_ratio": 0.85
+  },
+  {
+    "name": "mixed150_c80",
+    "method": "mixed",
+    "dpi": 150,
+    "supplement_min_confidence": 80,
+    "warning_mean_confidence": 60.0,
+    "native_overlap_fraction": 0.5,
+    "min_printable_ratio": 0.85
+  },
+  {
+    "name": "mixed300_c60",
+    "method": "mixed",
+    "dpi": 300,
+    "supplement_min_confidence": 60,
+    "warning_mean_confidence": 60.0,
+    "native_overlap_fraction": 0.5,
+    "min_printable_ratio": 0.85
+  },
+  {
+    "name": "mixed300_c80",
+    "method": "mixed",
+    "dpi": 300,
+    "supplement_min_confidence": 80,
+    "warning_mean_confidence": 60.0,
+    "native_overlap_fraction": 0.5,
+    "min_printable_ratio": 0.85
+  }
+]

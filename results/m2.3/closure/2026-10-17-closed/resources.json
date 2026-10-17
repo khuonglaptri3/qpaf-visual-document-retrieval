@@ -1,0 +1,29 @@
+{
+  "worker": {
+    "wall_seconds": 285.917394725,
+    "render_seconds": 131.057546387,
+    "peak_python_and_children_rss_mib": 1281.484375,
+    "gpu_requested": false,
+    "workers": 2,
+    "artifact_bytes": 315791405,
+    "rss_poll_interval_seconds": 0.02
+  },
+  "dpi": {
+    "150": {
+      "median_seconds": 0.567474035999993,
+      "p95_seconds": 2.1206117339999935,
+      "p99_seconds": 4.845656130199994,
+      "max_seconds": 5.042312242000008,
+      "total_attempt_seconds": 104.0074818959998,
+      "max_child_rss_mib": 152.1875
+    },
+    "300": {
+      "median_seconds": 1.0109244429999933,
+      "p95_seconds": 3.8949617149999654,
+      "p99_seconds": 6.610788247399993,
+      "max_seconds": 7.328757424999992,
+      "total_attempt_seconds": 190.83865533099996,
+      "max_child_rss_mib": 433.796875
+    }
+  }
+}

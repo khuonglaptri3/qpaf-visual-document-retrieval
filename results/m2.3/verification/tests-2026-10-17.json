@@ -1,0 +1,25 @@
+{
+  "completed_utc": "2026-10-17T10:16:03.894446+00:00",
+  "command": [
+    "C:\\Users\\lanph\\OneDrive\\Desktop\\Artificial_Intelligent_Project\\.venv\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests",
+    "-p",
+    "test_m23_calibration.py",
+    "-v"
+  ],
+  "returncode": 0,
+  "stdout": "",
+  "stderr": "test_bit_distance_matches_independent_dynamic_programming (test_m23_calibration.CalibrationTests.test_bit_distance_matches_independent_dynamic_programming) ... ok\ntest_cpu_and_caps_fail_closed (test_m23_calibration.CalibrationTests.test_cpu_and_caps_fail_closed) ... ok\ntest_document_selection_is_deterministic_and_disjoint (test_m23_calibration.CalibrationTests.test_document_selection_is_deterministic_and_disjoint) ... ok\ntest_metrics_unicode_empty_reference_and_insertions (test_m23_calibration.CalibrationTests.test_metrics_unicode_empty_reference_and_insertions) ... ok\ntest_page_selection_includes_sparse_rich_and_boundaries (test_m23_calibration.CalibrationTests.test_page_selection_includes_sparse_rich_and_boundaries) ... ok\ntest_signals_do_not_treat_newlines_as_corrupt_content (test_m23_calibration.CalibrationTests.test_signals_do_not_treat_newlines_as_corrupt_content) ... ok\ntest_timeout_kills_real_child_and_records_failure (test_m23_calibration.CalibrationTests.test_timeout_kills_real_child_and_records_failure) ... ok\ntest_tsv_confidence_excludes_layout_and_invalid_values (test_m23_calibration.CalibrationTests.test_tsv_confidence_excludes_layout_and_invalid_values) ... ok\ntest_confirmed_reference_computes_real_errors_without_freezing (test_m23_calibration.ReviewTests.test_confirmed_reference_computes_real_errors_without_freezing) ... ok\ntest_dataset_identity_is_independent_of_workspace_location (test_m23_calibration.ReviewTests.test_dataset_identity_is_independent_of_workspace_location) ... ok\ntest_import_rejects_demo_and_wrong_image (test_m23_calibration.ReviewTests.test_import_rejects_demo_and_wrong_image) ... ok\ntest_partial_review_does_not_claim_calibration_complete (test_m23_calibration.ReviewTests.test_partial_review_does_not_claim_calibration_complete) ... ok\n\n----------------------------------------------------------------------\nRan 12 tests in 0.444s\n\nOK\n",
+  "source_digest": "09372ba2084bdd362c8b8a3ae353932cb221968735babae41784ebabce04d939",
+  "source_unchanged_during_tests": true,
+  "matches_run_source": true,
+  "test_sha256": "f6c2979c702cbc752a9509788b296d4633fbe83d2f25a2f84a49290e03d63d86",
+  "python": "3.11.16 (main, Aug 25 2026, 13:59:19) [MSC v.1944 64 bit (AMD64)]",
+  "source_snapshot_sha256": "a2288e2a12ef07f71edb1335dea2202553f4d6d8509a100c7dcd5b2a12b47642"
+}

@@ -1,0 +1,20 @@
+{
+  "user_instruction": "m đọc và sửa luôn đi 18 bản là t đã check rồi draft chỗ nào ?",
+  "user_reported_all_18_checked": true,
+  "amendments_reviewer": "Codex (AI visual QA; user-authorized)",
+  "reviewed_at": "2026-10-17T13:15:56.246904+00:00",
+  "policy": {
+    "scope": "Keep exactly the user's 18 references; transcribe visible, legible page text including graphics and logos.",
+    "provenance": "The user states all 18 were checked. CONFIRMED in the revised transport file records Codex's image QA and amendments, not a fabricated human signature on those amendments.",
+    "reading_order": "Title; main blocks left to right, each block top to bottom; footer last. Tables: header then complete rows. Graphics with no natural reading order use the explicit token sequence in this patch and are marked layout_sensitive.",
+    "math": "ASCII underscore for subscripts; parentheses group compound subscripts; Unicode superscript ² for squares; retain visible angle brackets and ±. This is a transcription convention, not math recognition accuracy.",
+    "legibility": "Do not reconstruct obscured or cropped characters. Include only complete legible ruler numerals; excluded fragments are recorded outside the reference text.",
+    "metrics": "NFC plus whitespace collapse; preserve case, digits and punctuation. Full-page sequence CER/WER includes layout and serialization effects. No automatic DPI or threshold decision."
+  },
+  "patch_sha256": "52997f04a8efddd0d3f49208d9e5efcf136702a636a359d20d77b4a657979dc3",
+  "source_review": "results/m2.3/reviews/2026-10-17T124742274Z-khuong/human_reviews.original.json",
+  "source_review_sha256": "3b6ca8f0beabede2c4c75396c6c97976a388a0d3687be63a5edc9bda02e1b69e",
+  "human_native_decisions_preserved": true,
+  "original_browser_storage_modified": false,
+  "transport_schema_note": "m23_human_review is the existing interchange format; reference amendment provenance is explicitly AI, not a new human review."
+}

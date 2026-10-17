@@ -1,0 +1,72 @@
+[
+  {
+    "path": "acquisition.json",
+    "size_bytes": 880,
+    "sha256": "5984effb1f5f0e0bd1d0df54f99fd13a88f6bcf9e072163cafc7614cd77e8507"
+  },
+  {
+    "path": "analyze_received_drafts.py",
+    "size_bytes": 6751,
+    "sha256": "546bbf8357f24325e8d2212e9f6de03475ccf9d04c5cadf31d9208ef230f9c7c"
+  },
+  {
+    "path": "browser_stored_review.json",
+    "size_bytes": 60875,
+    "sha256": "8e8ada5294a5cdeb90dc4af90e4c244d580f872bb0c3900d0737e952c839d663"
+  },
+  {
+    "path": "diagnostic/page_metrics.csv",
+    "size_bytes": 7163,
+    "sha256": "1aee5a27c7acb811079cba2948dfa46bfaac8c278cef0153ae5bebcddd1d9299"
+  },
+  {
+    "path": "diagnostic/page_metrics.json",
+    "size_bytes": 22443,
+    "sha256": "7845d0ba4589f9d795dc5343ba867651ca7360dfff3d58020cec9972c515c63b"
+  },
+  {
+    "path": "diagnostic/reference_subset.json",
+    "size_bytes": 11430,
+    "sha256": "f7bfc76e8c76e9e58a193b59c8f5fc795c6a61e0d2414044507edf4d594cb3c8"
+  },
+  {
+    "path": "diagnostic/summary.json",
+    "size_bytes": 7136,
+    "sha256": "050521f2efce164477bfb2b78610b9f987091375a61207617fcc55fbc72dc12a"
+  },
+  {
+    "path": "human_reviews.original.json",
+    "size_bytes": 83605,
+    "sha256": "3b6ca8f0beabede2c4c75396c6c97976a388a0d3687be63a5edc9bda02e1b69e"
+  },
+  {
+    "path": "raw_validation/hashes.json",
+    "size_bytes": 598,
+    "sha256": "91edd7c21fae1a029b930cd45e2fa28b9d4f5e53681eccd169749b04378c1bd2"
+  },
+  {
+    "path": "raw_validation/human_reviews.json",
+    "size_bytes": 86178,
+    "sha256": "ee6b4abbb7125e872113eb9b4fcf3910e82e2c3d3d9eea0e69f071037e112e1a"
+  },
+  {
+    "path": "raw_validation/page_metrics.json",
+    "size_bytes": 4,
+    "sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f"
+  },
+  {
+    "path": "raw_validation/report.md",
+    "size_bytes": 368,
+    "sha256": "a91abec7b3a9725e2a66ba96bca1444bb2db35cb813b5f360e127c562816c9f5"
+  },
+  {
+    "path": "raw_validation/summary.json",
+    "size_bytes": 3739,
+    "sha256": "e2062ab30702e13823306ce79254ea5ee50d3d863074eeaa4e18ccfb3ca7b6f8"
+  },
+  {
+    "path": "verification.json",
+    "size_bytes": 1195,
+    "sha256": "598c4f5d4b119bf409c9896fcabdf03bec86acee315a1db32593b530b77ef7e2"
+  }
+]

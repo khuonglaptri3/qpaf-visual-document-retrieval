@@ -84,3 +84,20 @@ indexes/
 cache/
 *.npy
 *.npz
+*.parquet
+
+# M2.2 rendered sample payloads; portable manifests and reports remain tracked.
+results/m2.2/**/images/
+
+# Generated M2.3 review demo embeds source page images; rebuild from the template.
+results/m2.3/review-demo-*/index.html
+results/m2.3/review-demo-*/previews/
+
+# M2.3 source PDFs, rendered pages, raw OCR and generated browser workspaces.
+results/m2.3/RUN-*/inputs/pdfs/
+results/m2.3/RUN-*/remote/images150/
+results/m2.3/RUN-*/remote/images300/
+results/m2.3/RUN-*/remote/ocr/
+results/m2.3/RUN-*/review/index.html
+results/m2.3/review/index.html
+results/m2.3/review/previews/

@@ -1,0 +1,15 @@
+{
+  "status": "DATA_READY_WITH_ERRORS_REVIEW_PENDING",
+  "human_review_status": "PENDING",
+  "thresholds_frozen": false,
+  "page_count": 121,
+  "completed_ocr_jobs": 226,
+  "reference_required_count": 41,
+  "completed_utc": "2026-10-17T10:18:58.103047+00:00",
+  "errors": 8,
+  "resource_checks": {
+    "wall": true,
+    "rss": true,
+    "artifacts": true
+  }
+}

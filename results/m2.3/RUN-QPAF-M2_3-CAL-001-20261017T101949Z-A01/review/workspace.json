@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "demo": false,
+  "dataset_id": "m23-calibration-review-v1",
+  "dataset_sha256": "dd5423699964e723daeca36d6a1309ff7ef343bd4c75087d4d63b6bacbd25c94",
+  "source_run": "RUN-QPAF-M2_3-CAL-001-20261017T101949Z-A01",
+  "image_dpi": 300,
+  "human_review_status": "PENDING",
+  "page_count": 121,
+  "reference_required_count": 41,
+  "html_sha256": "6d592127c256a77b5ed5c71ab38c57f131c34db70a6a1ca5bedf69fd2190131f",
+  "template_sha256": "d08b73a88127b46698359bcb15b259960623468c0ea340d95a3e94ce19d688f5"
+}

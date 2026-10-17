@@ -1,0 +1,31 @@
+{
+  "status": "PASS",
+  "page_count": 16,
+  "sample_identity_sha256": "c6637ded97ea39a583aadfe11268438969caa60fb744309ed8b01abf1ef1b090",
+  "no_text_detected_pages": 1,
+  "text_quality_acceptance": "M23_PENDING",
+  "stage": "prepare",
+  "completed_utc": "2026-10-17T04:11:10.974899+00:00",
+  "resources": {
+    "phases": [
+      {
+        "phase": "prepare",
+        "seconds": 2.554637239,
+        "peak_rss_mb": 3381.04296875,
+        "peak_cuda_allocated_mb": 0.0,
+        "peak_cuda_reserved_mb": 0.0
+      }
+    ],
+    "elapsed_seconds": 5.14983351,
+    "peak_rss_mb": 3381.04296875,
+    "peak_cuda_reserved_mb": 0.0,
+    "artifact_bytes": 22570,
+    "rss_poll_interval_seconds": 0.02
+  },
+  "resource_checks": {
+    "ram": true,
+    "vram": true,
+    "time": true,
+    "artifact": true
+  }
+}

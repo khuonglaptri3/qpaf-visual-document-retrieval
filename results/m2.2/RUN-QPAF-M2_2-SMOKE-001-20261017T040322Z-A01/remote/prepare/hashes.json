@@ -1,0 +1,42 @@
+[
+  {
+    "path": "environment.json",
+    "size_bytes": 2210,
+    "sha256": "f8c40e0c854380bbdc7793af197360acb8160c56324de0e782e170b07f9d4c5b"
+  },
+  {
+    "path": "extraction_summary.json",
+    "size_bytes": 508,
+    "sha256": "64b7139fac05d945975ff44ec5a718d29448a63e8b6a9dd8e6a0787aee716dbf"
+  },
+  {
+    "path": "failures.json",
+    "size_bytes": 162,
+    "sha256": "40c4e15d46060c3b3c2aaa3963d95d78b35a36dcde5717c21b7720dacff9f748"
+  },
+  {
+    "path": "pages.json",
+    "size_bytes": 19631,
+    "sha256": "c04d34094c655baaa79bf8a143553ba01ad46012559b1a6205e13f299fa863c1"
+  },
+  {
+    "path": "resources.json",
+    "size_bytes": 365,
+    "sha256": "da82857ca304b8e9760861455ffaa8a70eaebf17733a0e099f7efdb5915ad510"
+  },
+  {
+    "path": "run.log",
+    "size_bytes": 516,
+    "sha256": "3aeefae005182b2e3db6d7d9c5d136466c994031b68ba3643835a7f85d27d7ff"
+  },
+  {
+    "path": "status.json",
+    "size_bytes": 78,
+    "sha256": "db888ed60e18dbcd31cea93564ad3612cf05ddcf7bc3ca02bde993e0213a9a91"
+  },
+  {
+    "path": "summary.json",
+    "size_bytes": 1223,
+    "sha256": "e8cf19fc3bfd99dff1e9cf50f40bf44be65d9009ab0a28e9a9a94da13157c46d"
+  }
+]

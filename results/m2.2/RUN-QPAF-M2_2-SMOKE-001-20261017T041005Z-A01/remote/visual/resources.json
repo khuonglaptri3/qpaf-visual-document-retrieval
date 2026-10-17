@@ -1,0 +1,86 @@
+{
+  "phases": [
+    {
+      "phase": "download_models",
+      "seconds": 12.620112798999997,
+      "peak_rss_mb": 4787.328125,
+      "peak_cuda_allocated_mb": 8.125,
+      "peak_cuda_reserved_mb": 20.0
+    },
+    {
+      "phase": "load_model",
+      "seconds": 2.682840702,
+      "peak_rss_mb": 9681.96875,
+      "peak_cuda_allocated_mb": 7629.35546875,
+      "peak_cuda_reserved_mb": 7656.0
+    },
+    {
+      "phase": "load_processor",
+      "seconds": 0.651358811999998,
+      "peak_rss_mb": 5015.3671875,
+      "peak_cuda_allocated_mb": 7400.71484375,
+      "peak_cuda_reserved_mb": 7656.0
+    },
+    {
+      "phase": "encode_queries",
+      "seconds": 0.33005114799999546,
+      "peak_rss_mb": 5284.31640625,
+      "peak_cuda_allocated_mb": 7430.59619140625,
+      "peak_cuda_reserved_mb": 7656.0
+    },
+    {
+      "phase": "encode_pages",
+      "seconds": 3.9127144630000004,
+      "peak_rss_mb": 5925.1015625,
+      "peak_cuda_allocated_mb": 7567.78076171875,
+      "peak_cuda_reserved_mb": 7700.0
+    },
+    {
+      "phase": "score",
+      "seconds": 0.003123713000000805,
+      "peak_rss_mb": 5899.3203125,
+      "peak_cuda_allocated_mb": 7409.833984375,
+      "peak_cuda_reserved_mb": 7700.0
+    },
+    {
+      "phase": "reference_encode_queries",
+      "seconds": 0.2397450240000012,
+      "peak_rss_mb": 5899.3359375,
+      "peak_cuda_allocated_mb": 7416.35498046875,
+      "peak_cuda_reserved_mb": 7700.0
+    },
+    {
+      "phase": "reference_encode_pages",
+      "seconds": 3.2756290750000048,
+      "peak_rss_mb": 5907.92578125,
+      "peak_cuda_allocated_mb": 7486.38037109375,
+      "peak_cuda_reserved_mb": 7700.0
+    },
+    {
+      "phase": "reference_score",
+      "seconds": 0.008388396000000853,
+      "peak_rss_mb": 5907.91015625,
+      "peak_cuda_allocated_mb": 7405.05810546875,
+      "peak_cuda_reserved_mb": 7700.0
+    },
+    {
+      "phase": "reference_maxsim",
+      "seconds": 0.00565070200000406,
+      "peak_rss_mb": 5868.02734375,
+      "peak_cuda_allocated_mb": 8.125,
+      "peak_cuda_reserved_mb": 7700.0
+    },
+    {
+      "phase": "total_channel",
+      "seconds": 24.227475938999998,
+      "peak_rss_mb": 9681.96875,
+      "peak_cuda_allocated_mb": 8.125,
+      "peak_cuda_reserved_mb": 7700.0
+    }
+  ],
+  "elapsed_seconds": 24.312064829,
+  "peak_rss_mb": 9681.96875,
+  "peak_cuda_reserved_mb": 7700.0,
+  "artifact_bytes": 2138764,
+  "rss_poll_interval_seconds": 0.02
+}

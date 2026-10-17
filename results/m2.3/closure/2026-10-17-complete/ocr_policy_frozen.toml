@@ -1,0 +1,55 @@
+# M2.3 bounded operating point. See decision.json for evidence and limitations.
+schema_version = 1
+policy_id = "m23-native-preserving-v1"
+quality_status = "FROZEN"
+freeze_scope = "bounded_operating_configuration_not_corpus_accuracy_certificate"
+source_run = "RUN-QPAF-M2_3-CAL-001-20261017T101949Z-A01"
+dataset_sha256 = "dd5423699964e723daeca36d6a1309ff7ef343bd4c75087d4d63b6bacbd25c94"
+reference_count = 18
+reference_reviewer = "Codex AI amendments to user-checked references"
+selection_metric = "development_macro_retrieval_bwe"
+selected_candidate = "mixed300_c60"
+
+[engine]
+parser = "pypdfium2"
+parser_version = "4.30.0"
+name = "tesseract"
+version = "5.3.0"
+package = "5.3.0-2"
+language_package = "1:4.1.0-2"
+traineddata_sha256 = "7d4322bd2a7749724879683fc3912cb542f19906c83bcc1a52132556427170b2"
+language = "eng"
+dpi = 300
+oem = 3
+psm = 3
+preprocessing = "none"
+omp_threads = 1
+page_ocr_timeout_seconds = 15
+
+[routing]
+mode = "native_plus_uncovered_ocr"
+min_native_chars = 1
+min_ocr_chars = 1
+min_printable_ratio = 0.85
+printable_denominator = "non_whitespace_characters_excluding_PUA_and_replacement"
+supplement_min_confidence = 60.0
+warning_mean_confidence = 60.0
+native_overlap_fraction = 0.5
+confidence_action = "warning_not_accuracy_or_page_rejection"
+empty_action = "NO_TEXT_DETECTED_preserve_visual_page"
+tsv_quoting = "QUOTE_NONE"
+
+[resources]
+cpu = 4
+workers = 2
+ram_mib = 4096
+max_pixels = 40000000
+retries = 0
+
+[failure]
+max_failure_fraction = 0.01
+denominator = "all_scheduled_pages"
+include = "render_error_parse_error_timeout_ocr_error"
+exclude = "successful_no_text_detection_and_quality_warnings"
+threshold_basis = "operational_stop_rule_not_estimated_corpus_error_rate"
+preserve_rows = true

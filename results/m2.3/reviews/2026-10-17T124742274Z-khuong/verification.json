@@ -1,0 +1,28 @@
+{
+  "status": "VERIFIED_DIAGNOSTIC_ARTIFACTS",
+  "verified_at": "2026-10-17T12:55:25.659450+00:00",
+  "checks": [
+    "Original export matches preserved browser pages/labels",
+    "Raw import/hash validation passes",
+    "18 selected drafts, 17 text plus 1 no-text, 15 dev and 3 holdout",
+    "All 54 metric rows checked; WER independently recomputed by dynamic programming; blank references excluded",
+    "Aggregate counts/edits/denominators checked",
+    "49 local documentation links resolve"
+  ],
+  "source_hashes": [
+    {
+      "path": "src/qpaf/m23/review.py",
+      "sha256": "d4a3194da7c44d16b62c83e04b54e493809e2428ce4ea56c456163226f74e39a"
+    },
+    {
+      "path": "src/qpaf/m11/artifacts.py",
+      "sha256": "a71ac1d3a0ea26e9c7de60d4de4f821d910c72039499adba6ad87c9bc43ec691"
+    },
+    {
+      "path": "docs/superpowers/reports/2026-10-17-m23-18-page-review.md",
+      "sha256": "6ffbcdbadc0aef0b9cbf69b1f56655e223d43d94924d7cc03ec948c5b8d0e4df"
+    }
+  ],
+  "thresholds_frozen": false,
+  "browser_profile_cleanup": "Blocked by tool policy; temporary isolated profile remains under .superpowers/m23-review-browser/recovery-2026-10-17T12-47-41-439Z"
+}

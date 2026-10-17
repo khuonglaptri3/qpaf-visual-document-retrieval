@@ -1,0 +1,495 @@
+[
+  {
+    "position": 3,
+    "page_id": "0004b995666f8846b92ffc3d741a930bba0638e3_page_0009",
+    "image_sha256": "37b0ed95561bb18f456588fecc8709e898e0018c934097906ab16b9397a580d5",
+    "before": {
+      "status": "PASS",
+      "issues": [],
+      "note": "",
+      "image_checked": true,
+      "reviewer": "Khuong",
+      "reviewed_at": "2026-10-17T10:47:08.902Z"
+    },
+    "after": {
+      "status": "HAS_ERRORS",
+      "issues": [
+        "missing"
+      ],
+      "note": "Native keeps the questions but omits text inside the timeline graphic.",
+      "image_checked": true,
+      "reviewer": "Codex (AI visual QA; completion authorized by user)",
+      "reviewed_at": "2026-10-17T13:41:58.388382+00:00"
+    }
+  },
+  {
+    "position": 6,
+    "page_id": "00171a1b5e1078fd6fa76e72d361d1c647d77eb5_page_0002",
+    "image_sha256": "1861e5fb9799be975801e1f4f4004fa2014719114a0b81ebbcfa311dae2d5523",
+    "before": {
+      "status": "PASS",
+      "issues": [],
+      "note": "",
+      "image_checked": true,
+      "reviewer": "Khuong",
+      "reviewed_at": "2026-10-17T10:47:44.641Z"
+    },
+    "after": {
+      "status": "HAS_ERRORS",
+      "issues": [
+        "missing"
+      ],
+      "note": "Native omits the top-right word cloud; the main contents and footer are present.",
+      "image_checked": true,
+      "reviewer": "Codex (AI visual QA; completion authorized by user)",
+      "reviewed_at": "2026-10-17T13:41:58.388382+00:00"
+    }
+  },
+  {
+    "position": 8,
+    "page_id": "00171a1b5e1078fd6fa76e72d361d1c647d77eb5_page_0018",
+    "image_sha256": "5903595eef68dc36610096c66e58a2868678201b29a47ebfec29f24cdb33f40b",
+    "before": {
+      "status": "PASS",
+      "issues": [],
+      "note": "",
+      "image_checked": true,
+      "reviewer": "Khuong",
+      "reviewed_at": "2026-10-17T10:48:28.947Z"
+    },
+    "after": {
+      "status": "HAS_ERRORS",
+      "issues": [
+        "missing"
+      ],
+      "note": "Native only has Thank you; Oxford Policy Management in the logo is missing.",
+      "image_checked": true,
+      "reviewer": "Codex (AI visual QA; completion authorized by user)",
+      "reviewed_at": "2026-10-17T13:41:58.388382+00:00"
+    }
+  },
+  {
+    "position": 9,
+    "page_id": "0065038b9255be3283bedc7bbe75ef5c2660d3a8_page_0001",
+    "image_sha256": "1596791461fb2cd017e267176294ef54ce86b756dbadde940f8fcb6164812d7e",
+    "before": {
+      "status": "PASS",
+      "issues": [],
+      "note": "",
+      "image_checked": true,
+      "reviewer": "Khuong",
+      "reviewed_at": "2026-10-17T10:48:36.960Z"
+    },
+    "after": {
+      "status": "HAS_ERRORS",
+      "issues": [
+        "missing"
+      ],
+      "note": "Main native text and Porskær are correct; the separate ORBICON logo is omitted.",
+      "image_checked": true,
+      "reviewer": "Codex (AI visual QA; completion authorized by user)",
+      "reviewed_at": "2026-10-17T13:41:58.388382+00:00"
+    }
+  },
+  {
+    "position": 17,
+    "page_id": "008363273c77bfd99cc0bbe473189616006e7c72_page_0001",
+    "image_sha256": "6eed0734800a2a5b0657abedd0785e46cfaa88c260fd37d63ecfcaa6121a75b2",
+    "before": {
+      "status": "PASS",
+      "issues": [],
+      "note": "",
+      "image_checked": true,
+      "reviewer": "Khuong",
+      "reviewed_at": "2026-10-17T10:49:54.217Z"
+    },
+    "after": {
+      "status": "HAS_ERRORS",
+      "issues": [
+        "missing"
+      ],
+      "note": "Native main title/presenters are present; the RISE logo is omitted.",
+      "image_checked": true,
+      "reviewer": "Codex (AI visual QA; completion authorized by user)",
+      "reviewed_at": "2026-10-17T13:41:58.388382+00:00"
+    }
+  },
+  {
+    "position": 22,
+    "page_id": "009856a0cdcc230d983c3a3e460a0c1b83cb09d4_page_0017",
+    "image_sha256": "ad1a1b434966486a85a53682d002f5c4c406b69c05d42c4ca1ca3bd37a050408",
+    "before": {
+      "status": "PASS",
+      "issues": [],
+      "note": "",
+      "image_checked": true,
+      "reviewer": "Khuong",
+      "reviewed_at": "2026-10-17T10:51:51.229Z"
+    },
+    "after": {
+      "status": "HAS_ERRORS",
+      "issues": [
+        "missing"
+      ],
+      "note": "Native contains only the slide title; species labels, years, axis numerals and legible ruler numerals are missing.",
+      "image_checked": true,
+      "reviewer": "Codex (AI visual QA; completion authorized by user)",
+      "reviewed_at": "2026-10-17T13:41:58.388382+00:00"
+    }
+  },
+  {
+    "position": 30,
+    "page_id": "00d8d22ded241c20c75d49578359057cd25739d1_page_0002",
+    "image_sha256": "49bfd79e348fbf8372a5248ee9f72c937c9a583368c5f0594f6227ae70b9ffae",
+    "before": {
+      "status": "PASS",
+      "issues": [],
+      "note": "",
+      "image_checked": true,
+      "reviewer": "Khuong",
+      "reviewed_at": "2026-10-17T10:54:04.195Z"
+    },
+    "after": {
+      "status": "HAS_ERRORS",
+      "issues": [
+        "missing",
+        "wrong_characters"
+      ],
+      "note": "Native omits map labels and merges several adjacent words in the cover text.",
+      "image_checked": true,
+      "reviewer": "Codex (AI visual QA; completion authorized by user)",
+      "reviewed_at": "2026-10-17T13:41:58.388382+00:00"
+    }
+  },
+  {
+    "position": 32,
+    "page_id": "00d8d22ded241c20c75d49578359057cd25739d1_page_0023",
+    "image_sha256": "be9e81b570c11ba7ac020cd9517ee27fa023faf2130e1dfa0f2394dd6609dfab",
+    "before": {
+      "status": "PASS",
+      "issues": [],
+      "note": "",
+      "image_checked": true,
+      "reviewer": "Khuong",
+      "reviewed_at": "2026-10-17T10:55:00.894Z"
+    },
+    "after": {
+      "status": "NO_TEXT",
+      "issues": [],
+      "note": "Viewed the full back cover. No visible text; consistent with the user's selected no_text reference.",
+      "image_checked": true,
+      "reviewer": "Codex (AI visual QA; completion authorized by user)",
+      "reviewed_at": "2026-10-17T13:41:58.388382+00:00"
+    }
+  },
+  {
+    "position": 35,
+    "page_id": "01056efdbb585d355a073b6aba9a906611fc1cc4_page_0006",
+    "image_sha256": "382bc53ef763fb540f837da9973e5c3673893aa74a662b9225dc07189fcc7f6c",
+    "before": {
+      "status": "PASS",
+      "issues": [],
+      "note": "",
+      "image_checked": true,
+      "reviewer": "Khuong",
+      "reviewed_at": "2026-10-17T10:56:01.260Z"
+    },
+    "after": {
+      "status": "HAS_ERRORS",
+      "issues": [
+        "missing",
+        "reading_order"
+      ],
+      "note": "Native omits YARA / Yara Clean Ammonia logo text and serializes columns/footer in a different order.",
+      "image_checked": true,
+      "reviewer": "Codex (AI visual QA; completion authorized by user)",
+      "reviewed_at": "2026-10-17T13:41:58.388382+00:00"
+    }
+  },
+  {
+    "position": 36,
+    "page_id": "01056efdbb585d355a073b6aba9a906611fc1cc4_page_0007",
+    "image_sha256": "fbee948665b7b8568b0335be5651e389e707a54d71f0ffe3fcdfd0830dc158bf",
+    "before": {
+      "status": "PASS",
+      "issues": [],
+      "note": "",
+      "image_checked": true,
+      "reviewer": "Khuong",
+      "reviewed_at": "2026-10-17T10:56:09.739Z"
+    },
+    "after": {
+      "status": "HAS_ERRORS",
+      "issues": [
+        "missing",
+        "reading_order"
+      ],
+      "note": "Native omits YARA / Yara Clean Ammonia logo text; column/footer order differs. Plain numeric footnote serialization is not treated as a new image transcription.",
+      "image_checked": true,
+      "reviewer": "Codex (AI visual QA; completion authorized by user)",
+      "reviewed_at": "2026-10-17T13:41:58.388382+00:00"
+    }
+  },
+  {
+    "position": 37,
+    "page_id": "011e012b28d60278c243b200eaf19952a725370c_page_0001",
+    "image_sha256": "d675f858ab8c9c49dfcae93203a60f9e172386d90a2a7f9744a42c9c0724e627",
+    "before": {
+      "status": "PENDING",
+      "issues": [],
+      "note": "",
+      "image_checked": true,
+      "reviewer": "",
+      "reviewed_at": null
+    },
+    "after": {
+      "status": "HAS_ERRORS",
+      "issues": [
+        "missing"
+      ],
+      "note": "Main title/date present; Train-to-NZEB / The Building Knowledge Hubs and EnEffect logo text are absent. Date superscript spacing is a serialization issue.",
+      "image_checked": true,
+      "reviewer": "Codex (AI visual QA; completion authorized by user)",
+      "reviewed_at": "2026-10-17T13:41:58.388382+00:00"
+    }
+  },
+  {
+    "position": 38,
+    "page_id": "011e012b28d60278c243b200eaf19952a725370c_page_0003",
+    "image_sha256": "a27cea565d347d10ba5cd0452c3cb183f780b971faae4bd6b7fd3f7446e0371f",
+    "before": {
+      "status": "PASS",
+      "issues": [],
+      "note": "",
+      "image_checked": true,
+      "reviewer": "Khuong",
+      "reviewed_at": "2026-10-17T10:56:20.715Z"
+    },
+    "after": {
+      "status": "HAS_ERRORS",
+      "issues": [
+        "missing",
+        "wrong_characters",
+        "encoding"
+      ],
+      "note": "Logo words missing; PresentaUons and parUcipants disagree with the image's Presentations and participants.",
+      "image_checked": true,
+      "reviewer": "Codex (AI visual QA; completion authorized by user)",
+      "reviewed_at": "2026-10-17T13:41:58.388382+00:00"
+    }
+  },
+  {
+    "position": 40,
+    "page_id": "011e012b28d60278c243b200eaf19952a725370c_page_0010",
+    "image_sha256": "942841b5145fa634bedef7b40630d25013e6b3cda0e05a05314483faa9cb2068",
+    "before": {
+      "status": "PASS",
+      "issues": [],
+      "note": "",
+      "image_checked": true,
+      "reviewer": "Khuong",
+      "reviewed_at": "2026-10-17T10:56:49.653Z"
+    },
+    "after": {
+      "status": "HAS_ERRORS",
+      "issues": [
+        "missing",
+        "wrong_characters",
+        "encoding"
+      ],
+      "note": "Train-to-NZEB logo/tagline and footer logo omitted; native InformaRon disagrees with Information on the image.",
+      "image_checked": true,
+      "reviewer": "Codex (AI visual QA; completion authorized by user)",
+      "reviewed_at": "2026-10-17T13:41:58.388382+00:00"
+    }
+  },
+  {
+    "position": 41,
+    "page_id": "015834912780c3a83a8c27aa66c52252994a8b16_page_0001",
+    "image_sha256": "bd21777c519e7cd7da4f5436b05b98828c344ee2dd3ae50922ca38ef59fac4bd",
+    "before": {
+      "status": "PASS",
+      "issues": [],
+      "note": "",
+      "image_checked": true,
+      "reviewer": "Khuong",
+      "reviewed_at": "2026-10-17T10:56:59.151Z"
+    },
+    "after": {
+      "status": "HAS_ERRORS",
+      "issues": [
+        "missing"
+      ],
+      "note": "Native cover text is otherwise present but omits W5 in the logo.",
+      "image_checked": true,
+      "reviewer": "Codex (AI visual QA; completion authorized by user)",
+      "reviewed_at": "2026-10-17T13:41:58.388382+00:00"
+    }
+  },
+  {
+    "position": 49,
+    "page_id": "01ada48daaf576de7e173f212b032ab06b742e24_page_0001",
+    "image_sha256": "6b8a593d4ff70680e29d357d244a8ed875706d2c01a7e702e25a291ed5f9f2b1",
+    "before": {
+      "status": "PENDING",
+      "issues": [],
+      "note": "",
+      "image_checked": true,
+      "reviewer": "",
+      "reviewed_at": null
+    },
+    "after": {
+      "status": "HAS_ERRORS",
+      "issues": [
+        "missing"
+      ],
+      "note": "Native only has the rotated PRESS KIT. The French cover title, event date, entrance information, URL and venue are visible but absent. Both OCR variants are also poor on this page.",
+      "image_checked": true,
+      "reviewer": "Codex (AI visual QA; completion authorized by user)",
+      "reviewed_at": "2026-10-17T13:41:58.388382+00:00"
+    }
+  },
+  {
+    "position": 50,
+    "page_id": "01ada48daaf576de7e173f212b032ab06b742e24_page_0002",
+    "image_sha256": "6803752063f55fc16c8ed58ed80d7e68eff39f9a6ff051e6228cc5608b561542",
+    "before": {
+      "status": "PENDING",
+      "issues": [],
+      "note": "",
+      "image_checked": true,
+      "reviewer": "",
+      "reviewed_at": null
+    },
+    "after": {
+      "status": "HAS_ERRORS",
+      "issues": [
+        "missing",
+        "encoding"
+      ],
+      "note": "Most table-of-contents/contact text present. Small logo expansion is absent and contact icons appear as private-use glyphs. Native title ordering differs.",
+      "image_checked": true,
+      "reviewer": "Codex (AI visual QA; completion authorized by user)",
+      "reviewed_at": "2026-10-17T13:41:58.388382+00:00"
+    }
+  },
+  {
+    "position": 67,
+    "page_id": "0295f1ca960d29e2327e90a848235693d965d308_page_0013",
+    "image_sha256": "54abe977861c3571b208098222ff7cdcee11feb83d48ddc06f88d9c9ab2be8f1",
+    "before": {
+      "status": "PENDING",
+      "issues": [],
+      "note": "",
+      "image_checked": true,
+      "reviewer": "",
+      "reviewed_at": null
+    },
+    "after": {
+      "status": "PASS",
+      "issues": [],
+      "note": "Native contains SECTION 3 and DESIGN. Letter spacing and order differ, but the short heading content is present. OCR is not required merely because the page is sparse.",
+      "image_checked": true,
+      "reviewer": "Codex (AI visual QA; completion authorized by user)",
+      "reviewed_at": "2026-10-17T13:41:58.388382+00:00"
+    }
+  },
+  {
+    "position": 93,
+    "page_id": "03e90a945dafd353e9d86b46ca2774a29149048d_page_0001",
+    "image_sha256": "3bd186b045c28aa7257321c4aecaeb63c1ce0b12556a0f65f3aff357c335e2a7",
+    "before": {
+      "status": "PENDING",
+      "issues": [
+        "missing"
+      ],
+      "note": "",
+      "image_checked": false,
+      "reviewer": "",
+      "reviewed_at": null
+    },
+    "after": {
+      "status": "HAS_ERRORS",
+      "issues": [
+        "missing"
+      ],
+      "note": "Native is only 1; the page visibly has a title, paragraphs, speakers, dates and convention logos. OCR recovers much of the page.",
+      "image_checked": true,
+      "reviewer": "Codex (AI visual QA; completion authorized by user)",
+      "reviewed_at": "2026-10-17T13:41:58.388382+00:00"
+    }
+  },
+  {
+    "position": 104,
+    "page_id": "0454efb78bc1e03ae39f9552cb4c165495b11e4b_page_0012",
+    "image_sha256": "509565fb1a6cb8fa755c7224f32ddf6bbdea6d4850676715313b217dabfb4d34",
+    "before": {
+      "status": "PENDING",
+      "issues": [
+        "missing"
+      ],
+      "note": "",
+      "image_checked": false,
+      "reviewer": "",
+      "reviewed_at": null
+    },
+    "after": {
+      "status": "HAS_ERRORS",
+      "issues": [
+        "missing"
+      ],
+      "note": "Native empty despite visible ONO PHARMACEUTICAL CO., LTD. and Dedicated to Man’s Fight against Disease and Pain.",
+      "image_checked": true,
+      "reviewer": "Codex (AI visual QA; completion authorized by user)",
+      "reviewed_at": "2026-10-17T13:41:58.388382+00:00"
+    }
+  },
+  {
+    "position": 109,
+    "page_id": "048ce9cbabf9b58c9764e8be143b7196b5478ac1_page_0007",
+    "image_sha256": "4d35449c250e8c2f278b65e9dd0082aa0b0def25c0634d5dc870eef032eb1422",
+    "before": {
+      "status": "UNSURE",
+      "issues": [],
+      "note": "",
+      "image_checked": true,
+      "reviewer": "Khuong",
+      "reviewed_at": "2026-10-17T11:05:57.185Z"
+    },
+    "after": {
+      "status": "HAS_ERRORS",
+      "issues": [
+        "missing"
+      ],
+      "note": "Photo-collage regression: no document heading/body, but small object/clothing brand lettering is visible. Native and both OCR outputs are empty. Do not label the image literally text-free; retain NO_TEXT_DETECTED as engine observation and preserve the visual page. No regression transcription/CER reference is added.",
+      "image_checked": true,
+      "reviewer": "Codex (AI visual QA; completion authorized by user)",
+      "reviewed_at": "2026-10-17T13:41:58.388382+00:00"
+    }
+  },
+  {
+    "position": 112,
+    "page_id": "04d14102144bfa97bf1f2e41bda7986bd3f712c1_page_0013",
+    "image_sha256": "79f6b1e2b72a46932e55a83667703f6f89d4c6728f3360b99163a4ff71d23be0",
+    "before": {
+      "status": "PENDING",
+      "issues": [
+        "missing"
+      ],
+      "note": "",
+      "image_checked": true,
+      "reviewer": "",
+      "reviewed_at": null
+    },
+    "after": {
+      "status": "HAS_ERRORS",
+      "issues": [
+        "missing"
+      ],
+      "note": "Native omits the top slide title, most bar percentages, footnote, branding and page number. Labels and diffusion index values alone are incomplete.",
+      "image_checked": true,
+      "reviewer": "Codex (AI visual QA; completion authorized by user)",
+      "reviewed_at": "2026-10-17T13:41:58.388382+00:00"
+    }
+  }
+]

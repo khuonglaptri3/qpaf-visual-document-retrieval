@@ -1,0 +1,263 @@
+{
+  "task_id": "M2.3",
+  "status": "COMPLETE_BOUNDED_CALIBRATION",
+  "completed_at": "2026-10-17T13:37:34.943239+00:00",
+  "review_authority": "Codex (AI visual QA; completion authorized by user)",
+  "team_independent_signoff_claimed": false,
+  "source_run": "RUN-QPAF-M2_3-CAL-001-20261017T101949Z-A01",
+  "dataset_sha256": "dd5423699964e723daeca36d6a1309ff7ef343bd4c75087d4d63b6bacbd25c94",
+  "selected_candidate": "mixed300_c60",
+  "selection_split": "development",
+  "selection_metric": "macro_retrieval_bwe",
+  "selected_policy": {
+    "name": "mixed300_c60",
+    "method": "mixed",
+    "dpi": 300,
+    "supplement_min_confidence": 60,
+    "warning_mean_confidence": 60.0,
+    "native_overlap_fraction": 0.5,
+    "min_printable_ratio": 0.85
+  },
+  "thresholds_frozen": true,
+  "freeze_scope": "operating_configuration_and_failure_contract",
+  "native_decisions_all_121": {
+    "PASS": 95,
+    "HAS_ERRORS": 25,
+    "NO_TEXT": 1
+  },
+  "native_unresolved": 0,
+  "original_review_records_retained": 100,
+  "ai_native_amendments": 21,
+  "reference_count": 18,
+  "references_pending_in_user_scope": 0,
+  "reference_texts_unchanged": true,
+  "technical_failure_check": {
+    "pages": 121,
+    "technical_failures": 0,
+    "failure_fraction": 0.0
+  },
+  "confidence_rows_rederived": 242,
+  "confidence_rows_changed": 11,
+  "quality_warning_pages": 23,
+  "text_sources": {
+    "native": 45,
+    "native+ocr": 70,
+    "ocr": 6
+  },
+  "no_text_detected_pages": [
+    "00d8d22ded241c20c75d49578359057cd25739d1_page_0023",
+    "048ce9cbabf9b58c9764e8be143b7196b5478ac1_page_0007"
+  ],
+  "aggregates": [
+    {
+      "candidate": "native",
+      "split": "development",
+      "text_pages": 14,
+      "no_text_pages": 1,
+      "macro_retrieval_bwe": 0.22721777883958014,
+      "micro_retrieval_bwe": 0.11046511627906977,
+      "micro_strict_bwe": 0.11051693404634581,
+      "micro_cer": 0.3274749533027679,
+      "micro_wer": 0.3474436503573392,
+      "false_positive_chars": 0
+    },
+    {
+      "candidate": "native",
+      "split": "holdout",
+      "text_pages": 3,
+      "no_text_pages": 0,
+      "macro_retrieval_bwe": 0.09424119384219871,
+      "micro_retrieval_bwe": 0.11564625850340136,
+      "micro_strict_bwe": 0.1360544217687075,
+      "micro_cer": 0.3517635843660629,
+      "micro_wer": 0.38271604938271603,
+      "false_positive_chars": 0
+    },
+    {
+      "candidate": "ocr150",
+      "split": "development",
+      "text_pages": 14,
+      "no_text_pages": 1,
+      "macro_retrieval_bwe": 0.16774294945024218,
+      "micro_retrieval_bwe": 0.11926091825307951,
+      "micro_strict_bwe": 0.1574153145459721,
+      "micro_cer": 0.26897605705552724,
+      "micro_wer": 0.32930181418361737,
+      "false_positive_chars": 0
+    },
+    {
+      "candidate": "ocr150",
+      "split": "holdout",
+      "text_pages": 3,
+      "no_text_pages": 0,
+      "macro_retrieval_bwe": 0.15507154882154883,
+      "micro_retrieval_bwe": 0.14893617021276595,
+      "micro_strict_bwe": 0.23674911660777384,
+      "micro_cer": 0.3622497616777884,
+      "micro_wer": 0.41975308641975306,
+      "false_positive_chars": 0
+    },
+    {
+      "candidate": "ocr300",
+      "split": "development",
+      "text_pages": 14,
+      "no_text_pages": 1,
+      "macro_retrieval_bwe": 0.1824155089908608,
+      "micro_retrieval_bwe": 0.12421512421512422,
+      "micro_strict_bwe": 0.16114790286975716,
+      "micro_cer": 0.25080658855493293,
+      "micro_wer": 0.3194062671797691,
+      "false_positive_chars": 0
+    },
+    {
+      "candidate": "ocr300",
+      "split": "holdout",
+      "text_pages": 3,
+      "no_text_pages": 0,
+      "macro_retrieval_bwe": 0.1729837645418677,
+      "micro_retrieval_bwe": 0.1695501730103806,
+      "micro_strict_bwe": 0.27147766323024053,
+      "micro_cer": 0.39752144899904673,
+      "micro_wer": 0.48148148148148145,
+      "false_positive_chars": 0
+    },
+    {
+      "candidate": "legacy40_150",
+      "split": "development",
+      "text_pages": 14,
+      "no_text_pages": 1,
+      "macro_retrieval_bwe": 0.14000141921512782,
+      "micro_retrieval_bwe": 0.08894572321682297,
+      "micro_strict_bwe": 0.09080325960419092,
+      "micro_cer": 0.2862964849719817,
+      "micro_wer": 0.31500824628916985,
+      "false_positive_chars": 0
+    },
+    {
+      "candidate": "legacy40_150",
+      "split": "holdout",
+      "text_pages": 3,
+      "no_text_pages": 0,
+      "macro_retrieval_bwe": 0.09424119384219871,
+      "micro_retrieval_bwe": 0.11564625850340136,
+      "micro_strict_bwe": 0.1360544217687075,
+      "micro_cer": 0.3517635843660629,
+      "micro_wer": 0.38271604938271603,
+      "false_positive_chars": 0
+    },
+    {
+      "candidate": "mixed150_c60",
+      "split": "development",
+      "text_pages": 14,
+      "no_text_pages": 1,
+      "macro_retrieval_bwe": 0.12328270499608297,
+      "micro_retrieval_bwe": 0.08497467642093416,
+      "micro_strict_bwe": 0.08876080691642652,
+      "micro_cer": 0.2966547800984887,
+      "micro_wer": 0.32600329851566795,
+      "false_positive_chars": 0
+    },
+    {
+      "candidate": "mixed150_c60",
+      "split": "holdout",
+      "text_pages": 3,
+      "no_text_pages": 0,
+      "macro_retrieval_bwe": 0.08981151499391522,
+      "micro_retrieval_bwe": 0.1111111111111111,
+      "micro_strict_bwe": 0.13131313131313133,
+      "micro_cer": 0.36129647283126787,
+      "micro_wer": 0.3950617283950617,
+      "false_positive_chars": 0
+    },
+    {
+      "candidate": "mixed150_c80",
+      "split": "development",
+      "text_pages": 14,
+      "no_text_pages": 1,
+      "macro_retrieval_bwe": 0.12709117580313004,
+      "micro_retrieval_bwe": 0.08458274398868458,
+      "micro_strict_bwe": 0.08685581933989578,
+      "micro_cer": 0.2983528612667686,
+      "micro_wer": 0.3243540406816932,
+      "false_positive_chars": 0
+    },
+    {
+      "candidate": "mixed150_c80",
+      "split": "holdout",
+      "text_pages": 3,
+      "no_text_pages": 0,
+      "macro_retrieval_bwe": 0.08981151499391522,
+      "micro_retrieval_bwe": 0.1111111111111111,
+      "micro_strict_bwe": 0.13131313131313133,
+      "micro_cer": 0.36129647283126787,
+      "micro_wer": 0.3950617283950617,
+      "false_positive_chars": 0
+    },
+    {
+      "candidate": "mixed300_c60",
+      "split": "development",
+      "text_pages": 14,
+      "no_text_pages": 1,
+      "macro_retrieval_bwe": 0.1132350906154773,
+      "micro_retrieval_bwe": 0.08472686733556299,
+      "micro_strict_bwe": 0.0889903023388477,
+      "micro_cer": 0.3021735438953982,
+      "micro_wer": 0.34084661902144037,
+      "false_positive_chars": 0
+    },
+    {
+      "candidate": "mixed300_c60",
+      "split": "holdout",
+      "text_pages": 3,
+      "no_text_pages": 0,
+      "macro_retrieval_bwe": 0.08464355633758447,
+      "micro_retrieval_bwe": 0.10437710437710437,
+      "micro_strict_bwe": 0.12457912457912458,
+      "micro_cer": 0.36701620591039086,
+      "micro_wer": 0.3950617283950617,
+      "false_positive_chars": 0
+    },
+    {
+      "candidate": "mixed300_c80",
+      "split": "development",
+      "text_pages": 14,
+      "no_text_pages": 1,
+      "macro_retrieval_bwe": 0.11427215151000031,
+      "micro_retrieval_bwe": 0.08335672186359809,
+      "micro_strict_bwe": 0.08641975308641975,
+      "micro_cer": 0.3056546102903719,
+      "micro_wer": 0.3336998350742166,
+      "false_positive_chars": 0
+    },
+    {
+      "candidate": "mixed300_c80",
+      "split": "holdout",
+      "text_pages": 3,
+      "no_text_pages": 0,
+      "macro_retrieval_bwe": 0.08779278114378603,
+      "micro_retrieval_bwe": 0.10810810810810811,
+      "micro_strict_bwe": 0.12837837837837837,
+      "micro_cer": 0.35843660629170637,
+      "micro_wer": 0.3888888888888889,
+      "false_positive_chars": 0
+    }
+  ],
+  "limitations": [
+    "18 selected references, 15 development and 3 holdout; no new regression transcription.",
+    "References amended and remaining native reviews completed by AI under explicit user authorization; no fabricated human sign-off.",
+    "Retrospective metric amendment; previously inspected holdout is descriptive, not a fresh independent validation set.",
+    "FROZEN fixes an operating configuration, not a corpus OCR accuracy guarantee or proof of less than 1 percent quality error.",
+    "Small rotated French cover and scene-text regression remain recognized quality limitations; visual pages are retained.",
+    "All OCR/render evidence reuses the original pinned run. New geometry/fusion analysis runs locally without another inference engine."
+  ],
+  "ready_for": [
+    "M2.4 loader/feature/quality-state contract",
+    "M2.6 implementation using frozen OCR policy",
+    "M2.8 shared preprocessing identity"
+  ],
+  "not_executed": [
+    "full-corpus OCR M2.6",
+    "retriever cache M2.8",
+    "learned training"
+  ]
+}

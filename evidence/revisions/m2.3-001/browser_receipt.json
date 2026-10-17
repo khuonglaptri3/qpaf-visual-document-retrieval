@@ -1,0 +1,20 @@
+{
+  "status": "PASS",
+  "browser": "155.0.4283.45",
+  "source_run": "RUN-QPAF-M2_3-CAL-001-20261017T101949Z-A01",
+  "dataset_sha256": "dd5423699964e723daeca36d6a1309ff7ef343bd4c75087d4d63b6bacbd25c94",
+  "checks": [
+    "121 real pages / 41 required references; no inherited demo reviews",
+    "Holdout/reference filters select matching pages; next-page stays inside the active filter",
+    "Actual OCR 300 output is visible; metrics stay empty without a confirmed reference",
+    "Real review export/import preserves run identity and all pending records",
+    "Confirmation/edit invalidation works on real data in an ephemeral test profile",
+    "No browser errors; mobile has no horizontal overflow"
+  ],
+  "note": "No test decisions were written to human review artifacts.",
+  "backend_accepts_export": true,
+  "pending_native_reviews": 121,
+  "pending_required_references": 41,
+  "template_sha256": "8357724f5f54559bcbcda192c3f5bfe1d7a0f95c5aaf74b1cee517d9aa39fb22",
+  "test_script_sha256": "16cd9d2c34c0ec35a4b8ad5c7bc084d64f1efdc568de7ae928257aa304efa887"
+}

@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "recorded_at": "2026-10-17T13:43:01.768194+00:00",
+  "command": ".venv/Scripts/python.exe -X utf8 -m unittest discover -s tests -p test_m23*.py -v",
+  "exit_code": 0,
+  "tests_run": 23,
+  "failures": 0,
+  "errors": 0,
+  "evidence": "Executed in this session after final policy/geometry implementation; stdout reported Ran 23 tests / OK. Later finalizer presentation and byte-preserving package output changes are covered by independent integrity and browser verification.",
+  "source_hashes": {
+    "tests\\test_m23_calibration.py": "f6317104c2b4df9f9f32b45ac9050a4f413714601c835aa673e6645d4301e4eb",
+    "tests\\test_m23_policy.py": "196a08d5ae2bcfe913f99bffa1242f9ed85ba616994774a938b53d423809176b",
+    "src\\qpaf\\m23\\policy.py": "dbe767583baa75136cd10c4dc630d830a085508f5c8ac53d2243fd94c15331e6",
+    "src\\qpaf\\m23\\worker.py": "b0172f5cffc7d7be3ab38d876380f438fb7c509bc65646b89d988169a373476d"
+  }
+}

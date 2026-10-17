@@ -1,0 +1,14 @@
+{
+  "version": "tesseract 5.3.0\n leptonica-1.82.0\n  libgif 5.2.1 : libjpeg 6b (libjpeg-turbo 2.1.2) : libpng 1.6.39 : libtiff 4.5.0 : zlib 1.2.13 : libwebp 1.2.4 : libopenjp2 2.5.0\n Found AVX512BW\n Found AVX512F\n Found AVX512VNNI\n Found AVX2\n Found AVX\n Found FMA\n Found SSE4.1\n Found OpenMP 201511\n Found libarchive 3.6.2 zlib/1.2.13 liblzma/5.4.1 bz2lib/1.0.8 liblz4/1.9.4 libzstd/1.5.4\n Found libcurl/7.88.1 OpenSSL/3.0.16 zlib/1.2.13 brotli/1.0.9 zstd/1.5.4 libidn2/2.3.3 libpsl/0.21.2 (+libidn2/2.3.3) libssh2/1.10.0 nghttp2/1.52.0 librtmp/2.3 OpenLDAP/2.5.13\n",
+  "packages": "liblept5:amd64\t1.82.0-3+b3\nlibtesseract5:amd64\t5.3.0-2\ntesseract-ocr\t5.3.0-2\ntesseract-ocr-eng\t1:4.1.0-2\n",
+  "traineddata": [
+    {
+      "path": "/usr/share/tesseract-ocr/5/tessdata/eng.traineddata",
+      "sha256": "7d4322bd2a7749724879683fc3912cb542f19906c83bcc1a52132556427170b2",
+      "bytes": 4113088
+    }
+  ],
+  "app_id": "ap-S33BnEil3T4XDMrWW7VVQx",
+  "source_script": "import hashlib,json,subprocess\nfrom pathlib import Path\nimport modal\n\ndef identity():\n    paths=list(Path('/usr/share/tesseract-ocr').rglob('eng.traineddata'))\n    return {'version':subprocess.check_output(['tesseract','--version'],text=True,stderr=subprocess.STDOUT),'packages':subprocess.check_output(['dpkg-query','-W','tesseract-ocr','tesseract-ocr-eng','libtesseract5','liblept5'],text=True),'traineddata':[{'path':str(p),'sha256':hashlib.sha256(p.read_bytes()).hexdigest(),'bytes':p.stat().st_size} for p in paths]}\n\nif __name__=='__main__':\n    image=modal.Image.debian_slim(python_version='3.11').apt_install('tesseract-ocr=5.3.0-2','tesseract-ocr-eng=1:4.1.0-2')\n    app=modal.App('qpaf-m23-preflight')\n    f=app.function(image=image,cpu=1,memory=1024,timeout=120,retries=0,max_containers=1)(identity)\n    with modal.enable_output(),app.run():\n        result=f.remote()\n    path=Path('.superpowers/m23/runtime-preflight.json')\n    path.write_text(json.dumps(result,indent=2)+'\\n',encoding='utf-8')\n    print(json.dumps(result,indent=2))\n",
+  "source_script_sha256": "205e7cc21ab1baf6527eddaaef7eca7bf3c813319a05a41e06c6cabbdc06d217"
+}

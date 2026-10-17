@@ -1,0 +1,14 @@
+{
+  "status": "PASS",
+  "browser": "155.0.4283.45",
+  "artifact": "C:\\Users\\lanph\\OneDrive\\Desktop\\Artificial_Intelligent_Project\\results\\m2.3\\closure\\2026-10-17-closed",
+  "checks": [
+    "121 resolved native decisions / zero pending; exactly 21 AI amendments",
+    "18 original references confirmed / zero pending; texts unchanged",
+    "Frozen-policy text selectable and matches resolved artifact",
+    "No-text reference has no CER division by zero",
+    "Export/import/reload preserves all 121 records",
+    "Images loaded; no JavaScript errors"
+  ],
+  "screenshot": "C:\\Users\\lanph\\OneDrive\\Desktop\\Artificial_Intelligent_Project\\.superpowers\\m23-review-browser\\closure-closed\\policy-comparison.png"
+}

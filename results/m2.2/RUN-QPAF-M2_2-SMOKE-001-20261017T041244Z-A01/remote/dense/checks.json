@@ -1,0 +1,80 @@
+{
+  "batch_reference": {
+    "passed": true,
+    "max_abs_error": 1.7881393432617188e-07,
+    "max_relative_error": 4.728123892732486e-07,
+    "atol": 1e-05,
+    "rtol": 1e-05,
+    "shape": [
+      4,
+      16
+    ]
+  },
+  "query_embedding_batch_reference": {
+    "passed": true,
+    "max_abs_error": 1.1734664440155029e-07,
+    "max_relative_error": 0.05815748316160926,
+    "atol": 1e-05,
+    "rtol": 1e-05,
+    "shape": [
+      4,
+      1024
+    ]
+  },
+  "query_unit_norm": {
+    "passed": true,
+    "max_abs_error": 5.960464477539063e-08,
+    "max_relative_error": 5.960464477539063e-08,
+    "atol": 1e-05,
+    "rtol": 0,
+    "shape": [
+      4
+    ]
+  },
+  "page_embedding_batch_reference": {
+    "passed": true,
+    "max_abs_error": 2.9616057872772217e-07,
+    "max_relative_error": 0.010466650880970343,
+    "atol": 1e-05,
+    "rtol": 1e-05,
+    "shape": [
+      16,
+      1024
+    ]
+  },
+  "page_unit_norm": {
+    "passed": true,
+    "max_abs_error": 5.960464477539063e-08,
+    "max_relative_error": 5.960464477539063e-08,
+    "atol": 1e-05,
+    "rtol": 0,
+    "shape": [
+      16
+    ]
+  },
+  "embedding_score_reload": {
+    "passed": true,
+    "max_abs_error": 0.0,
+    "max_relative_error": 0.0,
+    "atol": 0,
+    "rtol": 0,
+    "shape": [
+      4,
+      16
+    ]
+  },
+  "cache_reload": {
+    "passed": true,
+    "max_abs_error": 0.0,
+    "max_relative_error": 0.0,
+    "atol": 0,
+    "rtol": 0,
+    "shape": [
+      4,
+      16
+    ]
+  },
+  "ranking_reload": {
+    "passed": true
+  }
+}

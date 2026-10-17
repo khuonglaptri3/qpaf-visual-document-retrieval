@@ -1,0 +1,4 @@
+# CPU-only OCR runtime; these packages have no unpinned Python dependencies.
+Pillow==11.3.0
+pypdfium2==4.30.0
+psutil==7.0.0

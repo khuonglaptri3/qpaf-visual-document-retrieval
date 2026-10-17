@@ -1,0 +1,184 @@
+[
+  {
+    "repo_id": "vidore/colqwen2.5-base",
+    "revision": "92908120384b7a2110c5beda3ab29cbdb2c08e49",
+    "files": [
+      {
+        "path": "added_tokens.json",
+        "size_bytes": 605,
+        "sha256": "58b54bbe36fc752f79a24a271ef66a0a0830054b4dfad94bde757d851968060b"
+      },
+      {
+        "path": "chat_template.json",
+        "size_bytes": 1049,
+        "sha256": "94174d7176c52a7192f96fc34eb2cf23c7c2059d63cdbfadca1586ba89731fb7"
+      },
+      {
+        "path": "config.json",
+        "size_bytes": 1221,
+        "sha256": "926d8dfab0b8cb7cc5382f073609365851faec995eb21013414aea893938d8fc"
+      },
+      {
+        "path": "generation_config.json",
+        "size_bytes": 249,
+        "sha256": "c685cb6ca7485922d0c1778c30da8102e0fbeeda9d1fbe58fc19c327ac79ea8c"
+      },
+      {
+        "path": "merges.txt",
+        "size_bytes": 1671853,
+        "sha256": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5"
+      },
+      {
+        "path": "model-00001-of-00002.safetensors",
+        "size_bytes": 4997750760,
+        "sha256": "6b45c7afe391b4d9cc49f1ed3f6976f4a25ed40aa2165ed2ae118ff549355985"
+      },
+      {
+        "path": "model-00002-of-00002.safetensors",
+        "size_bytes": 2512111904,
+        "sha256": "32c18f3342ed82c900e02a01b0a6fe7c6aef16eb8ae9a4a83547fbe6e057d512"
+      },
+      {
+        "path": "model.safetensors.index.json",
+        "size_bytes": 65580,
+        "sha256": "1005cf1c7dd7e0fb6ab269c6e4f1dd33122d4fce1aae697aac44bce960626cbe"
+      },
+      {
+        "path": "preprocessor_config.json",
+        "size_bytes": 622,
+        "sha256": "b29d9dc1c26965d1fb17434337fac9cd20b5504dcc90577b00aead08e99941ac"
+      },
+      {
+        "path": "special_tokens_map.json",
+        "size_bytes": 613,
+        "sha256": "76862e765266b85aa9459767e33cbaf13970f327a0e88d1c65846c2ddd3a1ecd"
+      },
+      {
+        "path": "tokenizer.json",
+        "size_bytes": 11421896,
+        "sha256": "9c5ae00e602b8860cbd784ba82a8aa14e8feecec692e7076590d014d7b7fdafa"
+      },
+      {
+        "path": "tokenizer_config.json",
+        "size_bytes": 7301,
+        "sha256": "9e7e46f59413165450410ebae71e148f8d43955cffc2d690f9312c2810e6c1c5"
+      },
+      {
+        "path": "vocab.json",
+        "size_bytes": 2776833,
+        "sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+      }
+    ]
+  },
+  {
+    "repo_id": "vidore/colqwen2.5-v0.2",
+    "revision": "dcbe8d9cede518bce830488364ba0e40c873645b",
+    "files": [
+      {
+        "path": "1_Dense/config.json",
+        "size_bytes": 252,
+        "sha256": "8df0ff833f7695d9484988594a3cf306430a74cb1840dbc2b10a00be34583847"
+      },
+      {
+        "path": "1_Dense/model.safetensors",
+        "size_bytes": 1049248,
+        "sha256": "b35bce0dafb74c041f970a8f2a3e8d8f43343756f3498609ed89743655d0bc14"
+      },
+      {
+        "path": "2_Normalize/config.json",
+        "size_bytes": 94,
+        "sha256": "6d5d8f9c53fc983daed09cbfd278701b293a629a6906630ee6ae18f5d07cfe2a"
+      },
+      {
+        "path": "3_MultiVectorMask/config.json",
+        "size_bytes": 29,
+        "sha256": "2cee71b59d303d7779fe6a866f30fc5a4024b6ccd0c22c375b27c3bb0d55a898"
+      },
+      {
+        "path": "adapter_config.json",
+        "size_bytes": 813,
+        "sha256": "b19199f316cd17bb5198239e7d4d462657b694b1b386ef54486f32fd36495107"
+      },
+      {
+        "path": "adapter_model.safetensors",
+        "size_bytes": 239815040,
+        "sha256": "d8a0a2aa5b97160cde30d9fc26874e11f7c9dfce607fd3e2a02c91a09b17e697"
+      },
+      {
+        "path": "added_tokens.json",
+        "size_bytes": 605,
+        "sha256": "58b54bbe36fc752f79a24a271ef66a0a0830054b4dfad94bde757d851968060b"
+      },
+      {
+        "path": "additional_chat_templates/sentence_transformers.jinja",
+        "size_bytes": 872,
+        "sha256": "6020cc87759df0a66d73c6b108d80b2898b3ae3fe0ff2b3ae86da9adf9c4c46b"
+      },
+      {
+        "path": "chat_template.jinja",
+        "size_bytes": 1018,
+        "sha256": "aaf381d167b6ecc234debecac3bff63439af2a2477f82b99f63aa9bce1330eeb"
+      },
+      {
+        "path": "config_sentence_transformers.json",
+        "size_bytes": 455,
+        "sha256": "c3a2a1df7c1c887e66d617d8eeb96c125df47d73d189068b9b4ee74d728ff6b2"
+      },
+      {
+        "path": "git_hash.txt",
+        "size_bytes": 40,
+        "sha256": "a626fba49e871c9b8d76b7c661658b60f9a7531547fda5cdda4c2d9620f8aec7"
+      },
+      {
+        "path": "merges.txt",
+        "size_bytes": 1671853,
+        "sha256": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5"
+      },
+      {
+        "path": "modules.json",
+        "size_bytes": 580,
+        "sha256": "2b09d169b37950de5f82f835269c17883c6773d5325e6d8c6546ecf86dcc4477"
+      },
+      {
+        "path": "preprocessor_config.json",
+        "size_bytes": 621,
+        "sha256": "76dedebbc3633c73604fec7174425f42fa1194d32a800926ea9d69d228170edb"
+      },
+      {
+        "path": "results.json",
+        "size_bytes": 45147,
+        "sha256": "9d7b183e737e75fe62486a40416fd997c7855d6aae2ae2141c0d8e09b560ec83"
+      },
+      {
+        "path": "sentence_bert_config.json",
+        "size_bytes": 772,
+        "sha256": "679aa1404652cb28004efdbc9a500b0aa130832a6f65813560e4aa05136f3cc0"
+      },
+      {
+        "path": "special_tokens_map.json",
+        "size_bytes": 613,
+        "sha256": "76862e765266b85aa9459767e33cbaf13970f327a0e88d1c65846c2ddd3a1ecd"
+      },
+      {
+        "path": "tokenizer.json",
+        "size_bytes": 11421896,
+        "sha256": "9c5ae00e602b8860cbd784ba82a8aa14e8feecec692e7076590d014d7b7fdafa"
+      },
+      {
+        "path": "tokenizer_config.json",
+        "size_bytes": 7326,
+        "sha256": "a2f74e5023393afbabffce1db06a30fac09962e35636e77a18a6c31b840ee707"
+      },
+      {
+        "path": "video_preprocessor_config.json",
+        "size_bytes": 53,
+        "sha256": "7a758d2d1cc5edcb0570af2288768f9405897798efb2128795440d39d9e3840b"
+      },
+      {
+        "path": "vocab.json",
+        "size_bytes": 2776833,
+        "sha256": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+      }
+    ]
+  }
+]

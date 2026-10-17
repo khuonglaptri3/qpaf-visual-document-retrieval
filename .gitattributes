@@ -8,6 +8,11 @@
 /results/m1.1/implementation-check/** -text -whitespace
 /results/m1.2/** -text -whitespace
 
+# M2.2 receipts bind exact artifact bytes, including Windows line endings.
+/results/m2.2/RUN-*/** -text -eol -whitespace
+/results/m2.2/verification/** -text -eol -whitespace
+/evidence/revisions/m2.2-001/** -text -eol -whitespace
+
 # Preserve the hash-addressed historical M1.5 freeze bytes, including mixed EOLs.
 /evidence/M1_FINAL/02_protocol/*_policy.md -text -eol
 /evidence/M1_FINAL/02_protocol/frozen_protocol.md -text -eol
@@ -50,4 +55,14 @@ vimdoc_archive_audit_modal.py -text
 
 # Preserve newly integrated immutable evidence revision bytes.
 /evidence/M1_FINAL/02_protocol/amendments_after_import.md -text -eol -whitespace
+/results/m2.3/RUN-*/** -text -eol -whitespace
+/results/m2.3/verification/** -text -eol -whitespace
+/evidence/revisions/m2.3-001/** -text -eol -whitespace
+# M2.3 review/closure manifests bind exact bytes on every checkout.
+/results/m2.3/reviews/** -text -eol -whitespace
+/results/m2.3/closure/** -text -eol -whitespace
+/evidence/revisions/m2.3-002/** -text -eol -whitespace
+/configs/m2.3/ocr_policy_frozen.toml -text -eol
+# The final handover pins the original report bytes, including line endings.
+/docs/superpowers/reports/2026-10-17-m23-research-and-final-decision.md -text -eol -whitespace
 /evidence/revisions/** -text -eol -whitespace
