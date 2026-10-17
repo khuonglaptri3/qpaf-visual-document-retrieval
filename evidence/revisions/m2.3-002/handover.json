@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "task_id": "M2.3",
+  "status": "COMPLETE_BOUNDED_CALIBRATION",
+  "published_at": "2026-10-17T13:51:55.268780+00:00",
+  "revision": "m2.3-002",
+  "supersedes": "m2.3-001 review-pending status; original run remains immutable",
+  "source_run": "RUN-QPAF-M2_3-CAL-001-20261017T101949Z-A01",
+  "dataset_sha256": "dd5423699964e723daeca36d6a1309ff7ef343bd4c75087d4d63b6bacbd25c94",
+  "thresholds_frozen": true,
+  "policy": {
+    "path": "configs/m2.3/ocr_policy_frozen.toml",
+    "revision_path": "evidence/revisions/m2.3-002/ocr_policy_frozen.toml",
+    "sha256": "c0fcf0b3b13b27070716179d75545ba33ae406cc99a74902737bcf2dad19c4b8",
+    "policy_id": "m23-native-preserving-v1",
+    "selected_candidate": "mixed300_c60"
+  },
+  "sample_pages": {
+    "path": "evidence/revisions/m2.3-002/resolved_pages.json",
+    "sha256": "7e2047536293c0552aaf8370dd62a9e341397fae4d1469e43dc8ea437933cb19",
+    "page_count": 121,
+    "preprocessing_identity_sha256": "d439154711d93337c21aa46f2ed9c3641e09af0db77f7d9b2447d6d451a5bb06"
+  },
+  "review": {
+    "native_complete": 121,
+    "native_pending": 0,
+    "reference_complete": 18,
+    "references_pending_in_user_scope": 0,
+    "native_decisions": {
+      "PASS": 95,
+      "HAS_ERRORS": 25,
+      "NO_TEXT": 1
+    },
+    "original_native_records_retained": 100,
+    "ai_native_amendments": 21,
+    "review_authority": "Codex (AI visual QA; completion authorized by user)",
+    "independent_team_signature_claimed": false
+  },
+  "implementation": {
+    "path": "src/qpaf/m23/policy.py",
+    "sha256": "dbe767583baa75136cd10c4dc630d830a085508f5c8ac53d2243fd94c15331e6",
+    "source_snapshot_sha256": "462a73900c53efbacbab0346e0264dccad918e959805ab53568093dc04fa4844"
+  },
+  "report": {
+    "source_path": "docs/superpowers/reports/2026-10-17-m23-research-and-final-decision.md",
+    "source_sha256": "af457cadeb7ff2e01c5a7d567ed217c89c7d657a39f1d7a0c39dcd7d95268a54",
+    "snapshot_path": "evidence/revisions/m2.3-002/report_snapshot.md",
+    "snapshot_sha256": "dff65cb1e05efea3c9833fe1cb50e37c5ecd2a19d95169249980b685a02f8b3a",
+    "snapshot_transform": "Relative spec link rebased for the revision directory"
+  },
+  "ready_for": [
+    "M2.4 loader/feature/quality-state contract",
+    "M2.6 implementation using frozen OCR policy",
+    "M2.8 shared preprocessing identity"
+  ],
+  "limitations": [
+    "18 selected references, 15 development and 3 holdout; no new regression transcription.",
+    "References amended and remaining native reviews completed by AI under explicit user authorization; no fabricated human sign-off.",
+    "Retrospective metric amendment; previously inspected holdout is descriptive, not a fresh independent validation set.",
+    "FROZEN fixes an operating configuration, not a corpus OCR accuracy guarantee or proof of less than 1 percent quality error.",
+    "Small rotated French cover and scene-text regression remain recognized quality limitations; visual pages are retained.",
+    "All OCR/render evidence reuses the original pinned run. New geometry/fusion analysis runs locally without another inference engine."
+  ],
+  "full_corpus_executed": false,
+  "text_cache_must_match_policy_hash": true,
+  "formal_model_training_executed": false
+}

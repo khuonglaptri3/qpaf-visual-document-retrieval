@@ -1,0 +1,26 @@
+{
+  "completed_utc": "2026-10-17T10:24:15.697468+00:00",
+  "command": [
+    "C:\\Users\\lanph\\OneDrive\\Desktop\\Artificial_Intelligent_Project\\.venv\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests",
+    "-p",
+    "test_m23_calibration.py",
+    "-v"
+  ],
+  "returncode": 0,
+  "stdout": "",
+  "stderr": "test_bit_distance_matches_independent_dynamic_programming (test_m23_calibration.CalibrationTests.test_bit_distance_matches_independent_dynamic_programming) ... ok\ntest_cpu_and_caps_fail_closed (test_m23_calibration.CalibrationTests.test_cpu_and_caps_fail_closed) ... ok\ntest_document_selection_is_deterministic_and_disjoint (test_m23_calibration.CalibrationTests.test_document_selection_is_deterministic_and_disjoint) ... ok\ntest_metrics_unicode_empty_reference_and_insertions (test_m23_calibration.CalibrationTests.test_metrics_unicode_empty_reference_and_insertions) ... ok\ntest_page_selection_includes_sparse_rich_and_boundaries (test_m23_calibration.CalibrationTests.test_page_selection_includes_sparse_rich_and_boundaries) ... ok\ntest_render_projection_handles_large_square_pages (test_m23_calibration.CalibrationTests.test_render_projection_handles_large_square_pages) ... ok\ntest_signals_do_not_treat_newlines_as_corrupt_content (test_m23_calibration.CalibrationTests.test_signals_do_not_treat_newlines_as_corrupt_content) ... ok\ntest_timeout_kills_real_child_and_records_failure (test_m23_calibration.CalibrationTests.test_timeout_kills_real_child_and_records_failure) ... ok\ntest_tsv_confidence_excludes_layout_and_invalid_values (test_m23_calibration.CalibrationTests.test_tsv_confidence_excludes_layout_and_invalid_values) ... ok\ntest_confirmed_reference_computes_real_errors_without_freezing (test_m23_calibration.ReviewTests.test_confirmed_reference_computes_real_errors_without_freezing) ... ok\ntest_dataset_identity_is_independent_of_workspace_location (test_m23_calibration.ReviewTests.test_dataset_identity_is_independent_of_workspace_location) ... ok\ntest_import_rejects_demo_and_wrong_image (test_m23_calibration.ReviewTests.test_import_rejects_demo_and_wrong_image) ... ok\ntest_partial_review_does_not_claim_calibration_complete (test_m23_calibration.ReviewTests.test_partial_review_does_not_claim_calibration_complete) ... ok\n\n----------------------------------------------------------------------\nRan 13 tests in 0.400s\n\nOK\n",
+  "source_digest": "067e0256733367e3913a76272abad58c4b76e5de6c841b9765641be3a7ca72be",
+  "source_unchanged_during_tests": true,
+  "matches_run_source": true,
+  "run_id": "RUN-QPAF-M2_3-CAL-001-20261017T101949Z-A01",
+  "test_sha256": "f6317104c2b4df9f9f32b45ac9050a4f413714601c835aa673e6645d4301e4eb",
+  "source_snapshot_sha256": "148dd9aaba9de37879690784431038e0216d885da9d694cf1d3cb39cb884dfc2",
+  "sample_rows_identical_to_parent": true
+}

@@ -1,0 +1,178 @@
+[
+  {
+    "page_id": "0004b995666f8846b92ffc3d741a930bba0638e3_page_0001",
+    "dpi": 150,
+    "old": {
+      "word_count": 41,
+      "mean_word_confidence": 88.29538387804877,
+      "character_weighted_confidence": 93.6256981768421,
+      "low_confidence_word_fraction": 0.0975609756097561
+    },
+    "corrected": {
+      "word_count": 46,
+      "mean_word_confidence": 87.34053202173912,
+      "character_weighted_confidence": 90.00068807751934,
+      "low_confidence_word_fraction": 0.13043478260869565
+    }
+  },
+  {
+    "page_id": "0004b995666f8846b92ffc3d741a930bba0638e3_page_0001",
+    "dpi": 300,
+    "old": {
+      "word_count": 50,
+      "mean_word_confidence": 93.92810465999999,
+      "character_weighted_confidence": 93.1217144283019,
+      "low_confidence_word_fraction": 0.02
+    },
+    "corrected": {
+      "word_count": 55,
+      "mean_word_confidence": 90.63191163636364,
+      "character_weighted_confidence": 90.8754310355987,
+      "low_confidence_word_fraction": 0.05454545454545454
+    }
+  },
+  {
+    "page_id": "00171a1b5e1078fd6fa76e72d361d1c647d77eb5_page_0002",
+    "dpi": 300,
+    "old": {
+      "word_count": 55,
+      "mean_word_confidence": 46.841907490909094,
+      "character_weighted_confidence": 77.70116143035344,
+      "low_confidence_word_fraction": 0.6545454545454545
+    },
+    "corrected": {
+      "word_count": 171,
+      "mean_word_confidence": 59.50208522222224,
+      "character_weighted_confidence": 66.54414391281374,
+      "low_confidence_word_fraction": 0.4619883040935672
+    }
+  },
+  {
+    "page_id": "0065038b9255be3283bedc7bbe75ef5c2660d3a8_page_0010",
+    "dpi": 300,
+    "old": {
+      "word_count": 16,
+      "mean_word_confidence": 61.913241875,
+      "character_weighted_confidence": 35.680806675365346,
+      "low_confidence_word_fraction": 0.4375
+    },
+    "corrected": {
+      "word_count": 78,
+      "mean_word_confidence": 51.194815153846164,
+      "character_weighted_confidence": 56.37400478470254,
+      "low_confidence_word_fraction": 0.6025641025641025
+    }
+  },
+  {
+    "page_id": "009856a0cdcc230d983c3a3e460a0c1b83cb09d4_page_0024",
+    "dpi": 300,
+    "old": {
+      "word_count": 62,
+      "mean_word_confidence": 64.92352716129032,
+      "character_weighted_confidence": 28.942308908414,
+      "low_confidence_word_fraction": 0.4032258064516129
+    },
+    "corrected": {
+      "word_count": 76,
+      "mean_word_confidence": 67.93805039473685,
+      "character_weighted_confidence": 78.32576976130652,
+      "low_confidence_word_fraction": 0.3684210526315789
+    }
+  },
+  {
+    "page_id": "01056efdbb585d355a073b6aba9a906611fc1cc4_page_0006",
+    "dpi": 150,
+    "old": {
+      "word_count": 87,
+      "mean_word_confidence": 93.99497027586207,
+      "character_weighted_confidence": 30.49858937212502,
+      "low_confidence_word_fraction": 0.011494252873563218
+    },
+    "corrected": {
+      "word_count": 157,
+      "mean_word_confidence": 86.27724377707005,
+      "character_weighted_confidence": 89.74092082863578,
+      "low_confidence_word_fraction": 0.12101910828025478
+    }
+  },
+  {
+    "page_id": "01056efdbb585d355a073b6aba9a906611fc1cc4_page_0006",
+    "dpi": 300,
+    "old": {
+      "word_count": 171,
+      "mean_word_confidence": 84.10325169590641,
+      "character_weighted_confidence": 46.83215074900172,
+      "low_confidence_word_fraction": 0.15789473684210525
+    },
+    "corrected": {
+      "word_count": 189,
+      "mean_word_confidence": 84.17865047619044,
+      "character_weighted_confidence": 91.12679402055505,
+      "low_confidence_word_fraction": 0.15873015873015872
+    }
+  },
+  {
+    "page_id": "0258acc3a8560dbfd515a78c429125106f29abf3_page_0001",
+    "dpi": 150,
+    "old": {
+      "word_count": 28,
+      "mean_word_confidence": 87.41094046428574,
+      "character_weighted_confidence": 61.267021624746455,
+      "low_confidence_word_fraction": 0.10714285714285714
+    },
+    "corrected": {
+      "word_count": 30,
+      "mean_word_confidence": 84.61528476666669,
+      "character_weighted_confidence": 84.4822856451613,
+      "low_confidence_word_fraction": 0.13333333333333333
+    }
+  },
+  {
+    "page_id": "0295f1ca960d29e2327e90a848235693d965d308_page_0001",
+    "dpi": 150,
+    "old": {
+      "word_count": 34,
+      "mean_word_confidence": 46.11995379411765,
+      "character_weighted_confidence": 5.138018249201279,
+      "low_confidence_word_fraction": 0.6176470588235294
+    },
+    "corrected": {
+      "word_count": 55,
+      "mean_word_confidence": 38.37216301818181,
+      "character_weighted_confidence": 45.12114738167939,
+      "low_confidence_word_fraction": 0.7454545454545455
+    }
+  },
+  {
+    "page_id": "0295f1ca960d29e2327e90a848235693d965d308_page_0001",
+    "dpi": 300,
+    "old": {
+      "word_count": 21,
+      "mean_word_confidence": 26.796762047619048,
+      "character_weighted_confidence": 16.36705164094896,
+      "low_confidence_word_fraction": 0.9047619047619048
+    },
+    "corrected": {
+      "word_count": 76,
+      "mean_word_confidence": 34.415536657894734,
+      "character_weighted_confidence": 39.02367781632653,
+      "low_confidence_word_fraction": 0.8026315789473685
+    }
+  },
+  {
+    "page_id": "031271a581b8802789a540ffaeca23b68166195b_page_0016",
+    "dpi": 300,
+    "old": {
+      "word_count": 12,
+      "mean_word_confidence": 67.87507816666667,
+      "character_weighted_confidence": 0.6734987235086343,
+      "low_confidence_word_fraction": 0.3333333333333333
+    },
+    "corrected": {
+      "word_count": 85,
+      "mean_word_confidence": 84.43270124705884,
+      "character_weighted_confidence": 87.48919187261149,
+      "low_confidence_word_fraction": 0.15294117647058825
+    }
+  }
+]

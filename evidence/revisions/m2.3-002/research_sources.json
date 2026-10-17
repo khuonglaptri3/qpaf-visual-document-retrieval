@@ -1,0 +1,33 @@
+{
+  "accessed_date": "2026-10-17",
+  "sources": [
+    {
+      "title": "ViDoSeek dataset card",
+      "url": "https://huggingface.co/datasets/Qiuchen-Wang/ViDoSeek/blob/main/README.md"
+    },
+    {
+      "title": "ViDoRAG paper v2, Appendix A",
+      "url": "https://arxiv.org/html/2502.18017v2"
+    },
+    {
+      "title": "Official PP-OCRv3 preprocessing code",
+      "url": "https://github.com/Alibaba-NLP/ViDoRAG/blob/main/scripts/ocr_triditional.py"
+    },
+    {
+      "title": "Tesseract improve quality",
+      "url": "https://tesseract-ocr.github.io/tessdoc/ImproveQuality.html"
+    },
+    {
+      "title": "OCR-D evaluation definitions",
+      "url": "https://ocr-d.de/en/spec/ocrd_eval"
+    },
+    {
+      "title": "PyMuPDF native/partial/full OCR",
+      "url": "https://pymupdf.readthedocs.io/en/latest/recipes-ocr.html"
+    },
+    {
+      "title": "PDFium v4 native rectangle API",
+      "url": "https://pypdfium2.readthedocs.io/en/v4/python_api.html"
+    }
+  ]
+}

@@ -39,6 +39,36 @@ Các thành phần sau đã có implementation, run và revision bàn giao.
 | Bằng chứng bàn giao theo revision | `evidence/revisions/m2.2-001/` |
 | Điểm tra cứu revision được chọn | `evidence/M2_FINAL/02_retriever_calibration/README.md` |
 
+## M2.3 — Hiệu chuẩn OCR và review thủ công
+
+**Trạng thái mới nhất:** COMPLETE_BOUNDED_CALIBRATION — checklist 16/16,
+121 native đã chốt, 18 references giữ nguyên. Config đã FROZEN: native hợp lệ
++ OCR 300 DPI ở vùng chưa có native, confidence bổ sung60. Có review bổ sung
+của Codex AI theo yêu cầu người dùng. Xem
+[nghiên cứu và quyết định](reports/2026-10-17-m23-research-and-final-decision.md),
+[bàn giao cho M2.4/M2.6/M2.8](reports/2026-10-17-m23-downstream-handoff.md) và
+[revision m2.3-002](../../evidence/revisions/m2.3-002/README.md).
+Ngưỡng chốt là cấu hình vận hành từ mẫu nhỏ, không chứng nhận accuracy corpus.
+
+| Thứ tự | Tài liệu | Nội dung |
+|---|---|---|
+| 1 | [Đặc tả M2.3](specs/2026-10-17-m23-ocr-calibration-design.md) | Cấu hình, chọn mẫu, giới hạn và ranh giới review |
+| 2 | [Kế hoạch M2.3](plans/2026-10-17-m23-ocr-calibration.md) | Checklist thực hiện và phần còn chờ người dùng |
+| 3 | [Nhật ký M2.3](progress/2026-10-17-m23-ocr-calibration.md) | Lệnh, runtime, run IDs, lỗi và kết quả thực tế |
+| 4 | [Runbook và vị trí dữ liệu](../../results/m2.3/README.md) | Chạy/verify, mở HTML, xuất JSON và tổng hợp |
+| 5 | [Báo cáo dữ liệu và tài nguyên](reports/2026-10-17-m23-ocr-calibration.md) | Kết quả thật, run history, kiểm chứng và phần chờ review |
+
+Bằng chứng kỹ thuật: [revision m2.3-001](../../evidence/revisions/m2.3-001/README.md),
+[điểm tra cứu M2_FINAL](../../evidence/M2_FINAL/03_ocr_calibration/README.md).
+
+- [Thiết kế và cách review bước 2/bước 4](specs/2026-10-17-m23-manual-review-design.md).
+- [Nhật ký thiết kế](progress/2026-10-17-m23-manual-review.md).
+- [Mở giao diện offline](../../results/m2.3/review-demo-2026-10-17/index.html)
+  từ 16 trang mẫu M2.2 có sẵn. HTML được sinh local, không đưa ảnh nguồn vào Git.
+- [Giao diện dữ liệu M2.3 thật](../../results/m2.3/review/index.html), tạo sau khi tải run về;
+  tách namespace với bản demo.
+
+
 ## Quy tắc cập nhật
 
 - `specs/`: đặc tả và quyết định thiết kế; thay đổi quan trọng phải có lý do và ngày.

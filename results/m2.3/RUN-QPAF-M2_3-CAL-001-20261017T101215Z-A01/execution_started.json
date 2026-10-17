@@ -1,0 +1,9 @@
+{
+  "started_utc": "2026-10-17T10:12:50.519037+00:00",
+  "command": [
+    "C:\\Users\\lanph\\OneDrive\\Desktop\\Artificial_Intelligent_Project\\.venv\\Scripts\\python.exe",
+    "scripts/run_m23_calibration.py",
+    "--execute-prepared",
+    "results/m2.3/RUN-QPAF-M2_3-CAL-001-20261017T101215Z-A01"
+  ]
+}

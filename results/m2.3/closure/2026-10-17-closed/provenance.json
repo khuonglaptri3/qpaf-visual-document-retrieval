@@ -1,0 +1,26 @@
+{
+  "original_run_hashes_sha256": "5142b1572d13a0c2cfcc68ec396322f07b00805fe49138a5cd9624e8da6b8c73",
+  "remote_manifest_sha256": "1f4a3de4a9bfd1aa5d1caba855b4be4943d951dc4dad9e789159aba0100761cf",
+  "original_review_sha256": "3d0bf2283bc75e18bd57def002067bd4930a82de03efb93dd0ed85c051bad078",
+  "native_overlay_sha256": "52e6e2c9816de4e3a34ee49004c2f35ee4ac9027d0eb08603f47b5b4ec2cf32b",
+  "geometry_sha256": "7e3106bb44830cb6f2f84f3480fd9893aa33d5a7452eb67a766a31979681366f",
+  "decision_protocol_sha256": "c7174b82fdfefd6de4d975826e7a14b1c0d1b9b3844f52c66ba48b761983438d",
+  "source_files": [
+    {
+      "path": "scripts/finalize_m23_calibration.py",
+      "sha256": "8dfb76eb0ea7ae20a58e587d91bbddf6104a92754d21ae57bd3ca938173c1689"
+    },
+    {
+      "path": "src/qpaf/m23/policy.py",
+      "sha256": "dbe767583baa75136cd10c4dc630d830a085508f5c8ac53d2243fd94c15331e6"
+    },
+    {
+      "path": "src/qpaf/m23/worker.py",
+      "sha256": "b0172f5cffc7d7be3ab38d876380f438fb7c509bc65646b89d988169a373476d"
+    },
+    {
+      "path": "tests/test_m23_policy.py",
+      "sha256": "196a08d5ae2bcfe913f99bffa1242f9ed85ba616994774a938b53d423809176b"
+    }
+  ]
+}

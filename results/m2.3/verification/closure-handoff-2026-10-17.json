@@ -1,0 +1,17 @@
+{
+  "status": "PASS",
+  "verified_at": "2026-10-17T13:53:31.067365+00:00",
+  "revision": "m2.3-002",
+  "revision_manifest_sha256": "8c76a4081bd2da72ea6a22563c8bf38f7ffa71f8d0beb8bc721f8d23db561595",
+  "policy_sha256": "c0fcf0b3b13b27070716179d75545ba33ae406cc99a74902737bcf2dad19c4b8",
+  "preprocessing_identity_sha256": "d439154711d93337c21aa46f2ed9c3641e09af0db77f7d9b2447d6d451a5bb06",
+  "checked_local_links": 77,
+  "checklist_done": 16,
+  "checklist_total": 16,
+  "native_complete": 121,
+  "references_complete": 18,
+  "independent_tests_passed": 23,
+  "handoff_example_executed": true,
+  "note": "Verified exact frozen bytes, revision and package manifests, source hashes, 121 routed texts, selected metric arithmetic, browser round trip, and local handoff links. Bounded operating decision, not an accuracy certificate.",
+  "git_preserves_exact_artifact_bytes": true
+}

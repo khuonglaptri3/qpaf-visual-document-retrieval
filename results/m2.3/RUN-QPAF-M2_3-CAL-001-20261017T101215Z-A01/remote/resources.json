@@ -1,0 +1,9 @@
+{
+  "wall_seconds": 240.851842633,
+  "render_seconds": 111.78043696600001,
+  "peak_python_and_children_rss_mib": 1092.67578125,
+  "gpu_requested": false,
+  "workers": 2,
+  "artifact_bytes": 285583303,
+  "rss_poll_interval_seconds": 0.02
+}

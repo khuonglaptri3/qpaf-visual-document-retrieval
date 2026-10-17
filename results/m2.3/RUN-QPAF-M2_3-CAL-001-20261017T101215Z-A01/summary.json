@@ -1,0 +1,27 @@
+{
+  "task_id": "M2.3",
+  "run_id": "RUN-QPAF-M2_3-CAL-001-20261017T101215Z-A01",
+  "completed_utc": "2026-10-17T10:23:19.941791+00:00",
+  "worker": {
+    "status": "DATA_READY_WITH_ERRORS_REVIEW_PENDING",
+    "human_review_status": "PENDING",
+    "thresholds_frozen": false,
+    "page_count": 121,
+    "completed_ocr_jobs": 226,
+    "reference_required_count": 41,
+    "completed_utc": "2026-10-17T10:18:58.103047+00:00",
+    "errors": 8,
+    "resource_checks": {
+      "wall": true,
+      "rss": true,
+      "artifacts": true
+    }
+  },
+  "cloud_error": null,
+  "status": "DATA_READY_WITH_ERRORS_REVIEW_PENDING",
+  "human_review_status": "PENDING",
+  "thresholds_frozen": false,
+  "modal_volume": "qpaf-m23-ocr-artifacts",
+  "modal_path": "runs/RUN-QPAF-M2_3-CAL-001-20261017T101215Z-A01",
+  "app_id": "ap-orUcQupV7t3JA4PEiTa6Ly"
+}

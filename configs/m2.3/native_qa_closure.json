@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "source_review_sha256": "3d0bf2283bc75e18bd57def002067bd4930a82de03efb93dd0ed85c051bad078",
+  "reviewer": "Codex (AI visual QA; completion authorized by user)",
+  "scope": "Visual comparison with the rendered page; complete document text including explicit graphic labels and logos. PASS means usable native content, not identical linear serialization. No additional CER/WER ground truth is created.",
+  "pages": [
+    {"position": 3, "status": "HAS_ERRORS", "issues": ["missing"], "note": "Native keeps the questions but omits text inside the timeline graphic."},
+    {"position": 6, "status": "HAS_ERRORS", "issues": ["missing"], "note": "Native omits the top-right word cloud; the main contents and footer are present."},
+    {"position": 8, "status": "HAS_ERRORS", "issues": ["missing"], "note": "Native only has Thank you; Oxford Policy Management in the logo is missing."},
+    {"position": 9, "status": "HAS_ERRORS", "issues": ["missing"], "note": "Main native text and Porskær are correct; the separate ORBICON logo is omitted."},
+    {"position": 17, "status": "HAS_ERRORS", "issues": ["missing"], "note": "Native main title/presenters are present; the RISE logo is omitted."},
+    {"position": 22, "status": "HAS_ERRORS", "issues": ["missing"], "note": "Native contains only the slide title; species labels, years, axis numerals and legible ruler numerals are missing."},
+    {"position": 30, "status": "HAS_ERRORS", "issues": ["missing", "wrong_characters"], "note": "Native omits map labels and merges several adjacent words in the cover text."},
+    {"position": 32, "status": "NO_TEXT", "issues": [], "note": "Viewed the full back cover. No visible text; consistent with the user's selected no_text reference."},
+    {"position": 35, "status": "HAS_ERRORS", "issues": ["missing", "reading_order"], "note": "Native omits YARA / Yara Clean Ammonia logo text and serializes columns/footer in a different order."},
+    {"position": 36, "status": "HAS_ERRORS", "issues": ["missing", "reading_order"], "note": "Native omits YARA / Yara Clean Ammonia logo text; column/footer order differs. Plain numeric footnote serialization is not treated as a new image transcription."},
+    {"position": 37, "status": "HAS_ERRORS", "issues": ["missing"], "note": "Main title/date present; Train-to-NZEB / The Building Knowledge Hubs and EnEffect logo text are absent. Date superscript spacing is a serialization issue."},
+    {"position": 38, "status": "HAS_ERRORS", "issues": ["missing", "wrong_characters", "encoding"], "note": "Logo words missing; PresentaUons and parUcipants disagree with the image's Presentations and participants."},
+    {"position": 40, "status": "HAS_ERRORS", "issues": ["missing", "wrong_characters", "encoding"], "note": "Train-to-NZEB logo/tagline and footer logo omitted; native InformaRon disagrees with Information on the image."},
+    {"position": 41, "status": "HAS_ERRORS", "issues": ["missing"], "note": "Native cover text is otherwise present but omits W5 in the logo."},
+    {"position": 49, "status": "HAS_ERRORS", "issues": ["missing"], "note": "Native only has the rotated PRESS KIT. The French cover title, event date, entrance information, URL and venue are visible but absent. Both OCR variants are also poor on this page."},
+    {"position": 50, "status": "HAS_ERRORS", "issues": ["missing", "encoding"], "note": "Most table-of-contents/contact text present. Small logo expansion is absent and contact icons appear as private-use glyphs. Native title ordering differs."},
+    {"position": 67, "status": "PASS", "issues": [], "note": "Native contains SECTION 3 and DESIGN. Letter spacing and order differ, but the short heading content is present. OCR is not required merely because the page is sparse."},
+    {"position": 93, "status": "HAS_ERRORS", "issues": ["missing"], "note": "Native is only 1; the page visibly has a title, paragraphs, speakers, dates and convention logos. OCR recovers much of the page."},
+    {"position": 104, "status": "HAS_ERRORS", "issues": ["missing"], "note": "Native empty despite visible ONO PHARMACEUTICAL CO., LTD. and Dedicated to Man’s Fight against Disease and Pain."},
+    {"position": 109, "status": "HAS_ERRORS", "issues": ["missing"], "note": "Photo-collage regression: no document heading/body, but small object/clothing brand lettering is visible. Native and both OCR outputs are empty. Do not label the image literally text-free; retain NO_TEXT_DETECTED as engine observation and preserve the visual page. No regression transcription/CER reference is added."},
+    {"position": 112, "status": "HAS_ERRORS", "issues": ["missing"], "note": "Native omits the top slide title, most bar percentages, footnote, branding and page number. Labels and diffusion index values alone are incomplete."}
+  ]
+}

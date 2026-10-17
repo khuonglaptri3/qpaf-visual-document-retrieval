@@ -1,0 +1,118 @@
+{
+  "schema_version": 1,
+  "source_review": "results/m2.3/reviews/2026-10-17T124742274Z-khuong/human_reviews.original.json",
+  "source_review_sha256": "3b6ca8f0beabede2c4c75396c6c97976a388a0d3687be63a5edc9bda02e1b69e",
+  "source_run": "RUN-QPAF-M2_3-CAL-001-20261017T101949Z-A01",
+  "dataset_sha256": "dd5423699964e723daeca36d6a1309ff7ef343bd4c75087d4d63b6bacbd25c94",
+  "user_instruction": "m đọc và sửa luôn đi 18 bản là t đã check rồi draft chỗ nào ?",
+  "reviewer": "Codex (AI visual QA; user-authorized)",
+  "policy": {
+    "scope": "Keep exactly the user's 18 references; transcribe visible, legible page text including graphics and logos.",
+    "provenance": "The user states all 18 were checked. CONFIRMED in the revised transport file records Codex's image QA and amendments, not a fabricated human signature on those amendments.",
+    "reading_order": "Title; main blocks left to right, each block top to bottom; footer last. Tables: header then complete rows. Graphics with no natural reading order use the explicit token sequence in this patch and are marked layout_sensitive.",
+    "math": "ASCII underscore for subscripts; parentheses group compound subscripts; Unicode superscript ² for squares; retain visible angle brackets and ±. This is a transcription convention, not math recognition accuracy.",
+    "legibility": "Do not reconstruct obscured or cropped characters. Include only complete legible ruler numerals; excluded fragments are recorded outside the reference text.",
+    "metrics": "NFC plus whitespace collapse; preserve case, digits and punctuation. Full-page sequence CER/WER includes layout and serialization effects. No automatic DPI or threshold decision."
+  },
+  "pages": [
+    {
+      "position": 3,
+      "reason": "Đối chiếu timeline và bổ sung ba dấu đầu dòng vuông nhìn thấy trên ảnh.",
+      "layout_sensitive": true,
+      "replacements": [
+        ["What is the partnership", "▪ What is the partnership"],
+        ["What documentation", "▪ What documentation"],
+        ["What are the general", "▪ What are the general"]
+      ]
+    },
+    {
+      "position": 6,
+      "reason": "Bổ sung chữ trong word cloud, gồm cả chữ dọc; giữ nguyên phần nội dung và footer người dùng đã chép.",
+      "layout_sensitive": true,
+      "replacements": [
+        ["Contents\n\n", "Contents\n\nGOVERNMENT FACTOR MANAGE ONLINE DAY WORLDWIDE TECHNOLOGIES MASSIVE DEFINITION USING\nRESULTS SOCIAL YEARS SYSTEMS PROCESS MAKING INTEGRATION FRAMEWORK BETWEEN STATISTICS BUSINESS EFFECTIVE VISUALIZATION\nDRIVE REPLICATION HANDLE SOURCES SAN NAS SOFTWARE VOLUME DATABASES PROCESSING SIZE ANALYTICS SIMULATIONS\nLIMITS COMPLEX CHALLENGES ANNOUNCED PAST LARGE HAND CAPACITY STORAGE MILLION INCLUDE NETWORKS HYPOTHESIS SCIENCE\nBIG ONE OUT SETS DEVELOPMENT TECHNOLOGY MANY APPROACH BILLION NEW CRITIQUES PARALLEL STATE CRITIQUE PEOPLE TRAFFIC USE CURRENTLY\nEND MOST YEARLY MAPREDUCE FUTURE\nDETERMINE WELL SET DEPARTMENT QUERIES HIGH USERS EXABYTES ALGORITHMS COMPANIES\nAMOUNT REAL STRUCTURE WORK RATE APPLICATIONS INFRASTRUCTURE PETABYTES ANALYSIS TERMS RESEARCH PRIVATE YEAR\nMANAGEMENT INFORMATION PRIVACY INTERNATIONAL IMPLEMENTATION BECOMES\nDATA SECOND NATIONAL FLOW INTELLIGENCE INITIATIVE ECONOMIC TERABYTES MARKET VARIETY RELATED TIME SENSOR WOULD PROJECT ANNUAL NOW DISTRIBUTED RELEVANT USED PER\nLEARNING LESS HUGE EVERY WORLD VARIOUS BASED TIMES INTERNET CAPABILITIES SUCCESSFUL NEEDED USES COMPARE SHARED\nAPPROACHES PROCESS SEARCH ARCHITECTURE PARADIGM FUNDING RECORDS COST INSIGHT TOOLS CENTER\n\n"]
+      ],
+      "notes": ["Word cloud không có thứ tự đọc tuyến tính duy nhất. Chuỗi từ ở đây là quy ước chép thủ công, không lấy thứ tự từ một đầu ra OCR. PROCESS xuất hiện ở hai vị trí nên được giữ hai lần."]
+    },
+    {"position": 8, "reason": "Ảnh khớp bản chữ, gồm cả logo Oxford Policy Management; giữ nguyên."},
+    {
+      "position": 9,
+      "reason": "Sửa tên riêng theo ảnh, giữ đúng ký tự æ.",
+      "replacements": [["Michael Porsker", "Michael Porskær"]]
+    },
+    {"position": 12, "reason": "Ảnh khớp bản chữ; giữ nguyên cả ngữ pháp gốc 'it make sense'."},
+    {
+      "position": 15,
+      "reason": "Tuyến tính hóa mỗi hàng bảng, đặt nhãn H8/H9/H10 cạnh đúng construct trước các giá trị.",
+      "layout_sensitive": true,
+      "text": "Results (Objective 5)\n\nMediation Effect of Meaningful Work on Constructs\n\nConstruct SIE SE p κ² Effect Size Result\nJob Resources (H8) .172 .059 .001 0.192 Medium Supported\nPersonal Resources (H9) .238 .062 .000 0.247 Medium Supported\nTransformational Leadership (H10) -.017 .050 .724 0.058 Small Not Supported\n\n18"
+    },
+    {"position": 17, "reason": "Ảnh khớp bản chữ và logo RISE; giữ nguyên."},
+    {
+      "position": 22,
+      "reason": "Bổ sung năm nhóm mốc trục 0–8000 và các số hoàn chỉnh đọc được trên thước trong ảnh cá.",
+      "layout_sensitive": true,
+      "replacements": [["Number of Individuals", "0 2000 4000 6000 8000\n0 2000 4000 6000 8000\n0 2000 4000 6000 8000\n0 2000 4000 6000 8000\n0 2000 4000 6000 8000\nNumber of Individuals\n\n40\n4\n55 62\n10 14"]],
+      "notes": [
+        "Thứ tự: tiêu đề, năm, tên loài, năm nhóm mốc trục từ trái sang phải, tên trục, số trên bốn ảnh cá từ trên xuống dưới.",
+        "Ảnh trên phải: chỉ 40 đọc được hoàn chỉnh; chữ số 9 sát mép trái là mảnh số bị cắt nên không suy ra thành 39.",
+        "Ảnh giữa trái: 4; các phần số tại mép ảnh không đủ ký tự để xác định.",
+        "Ảnh giữa phải: 55 và 62 đọc trực tiếp từ crop; không nội suy các mốc bị cá che.",
+        "Ảnh dưới trái: 10 và 14; phần ở khoảng 13 và số bị cắt ở mép phải không được khôi phục theo dãy thước."
+      ]
+    },
+    {
+      "position": 27,
+      "reason": "Giữ nội dung toán đã chép; nhóm rõ các chỉ số ghép A-1, A-2, 1-2 theo quy ước ký hiệu văn bản.",
+      "layout_sensitive": true,
+      "replacements": [["ΔS_A-1²", "ΔS_(A-1)²"], ["ΔS_A-2²", "ΔS_(A-2)²"], ["ΔS_1-2²", "ΔS_(1-2)²"]],
+      "notes": ["Ký hiệu _ và ngoặc nhóm là quy ước biểu diễn chỉ số dưới, không phải ký tự in trên slide. CER/WER thuần chuỗi không tách được sai nhận dạng với khác biểu diễn toán."]
+    },
+    {
+      "position": 30,
+      "reason": "Bổ sung toàn bộ nhãn đọc được trên bản đồ, giữ đúng dấu tiếng Slovenia.",
+      "layout_sensitive": true,
+      "replacements": [["\n\n2006 ANNUAL REPORT", "\n\nMURSKA SOBOTA\nSLOVENJ GRADEC\nMARIBOR\nPTUJ\nJESENICE\nVOJNIK\nNAKLO\nCELJE\nCELJE FMC\nTX\nUKC\nMOB\nLEONIŠČE\nPD\nČRNUČE\nTRBOVLJE\nLJUBLJANA\nKRŠKO\nNOVA GORICA\nNOVO MESTO\nSEŽANA\nIZOLA\n\n2006 ANNUAL REPORT"]]
+    },
+    {"position": 32, "reason": "Đã xem toàn ảnh bìa sau, không có chữ; giữ text rỗng và no_text=true."},
+    {
+      "position": 35,
+      "reason": "Bổ sung chữ YARA trong logo; đọc trọn từng cột theo thứ tự Upstream, Integrated midstream, Downstream; giữ dấu đầu dòng vuông.",
+      "layout_sensitive": true,
+      "text": "YCA’s strategy builds on existing success factors\nand competitive edge\n\nKey success factors\nReliable and asset-backed supply\nGlobal scale and flexibility\n~100 years of ammonia experience\nTrack record of safe operations\nMarket insight\nExisting long-term customer relationships\nUnique starting position as the market leader in midstream ammonia¹\n\nYCA’s competitive edge\n\nUpstream\nHandled by Yara today – own production to be developed by YCA\n▪ Access to Yara’s project portfolio\n▪ Project development expertise\n▪ Credible offtaker\n\nIntegrated midstream\nCurrent presence\n#1 global midstream player\n▪ Asset-backed supply\n▪ Existing platform and access to infrastructure\n▪ Long-standing relationships\n\nDownstream\nLeverage commercial partners to create demand “pull” in new segments\n▪ Asset-backed supply\n▪ Partnerships with sector leaders\n▪ Sites near key hubs and terminals\n\nTrack record of safe handling and operations\nIntegration will remain critical in building scale and creating value in the developing clean ammonia market\n\nYARA\nYara Clean Ammonia\nSource: Company information\n1) Based on volumes of traded ammonia in 2021 - Argus market study (2022)\n6"
+    },
+    {
+      "position": 36,
+      "reason": "Sửa chú thích Green ammonia thành 2030E²; thêm chữ YARA trong logo và ba dấu check ở cột Key success factors.",
+      "layout_sensitive": true,
+      "replacements": [
+        ["2030E³", "2030E²"],
+        ["Access to existing production assets", "✓ Access to existing production assets"],
+        ["Knowledge and experience built", "✓ Knowledge and experience built"],
+        ["Market leading position", "✓ Market leading position"],
+        ["Yara Clean Ammonia", "YARA\nYara Clean Ammonia"]
+      ]
+    },
+    {"position": 38, "reason": "Ảnh khớp bản chữ, gồm logo Train-to-NZEB và EnEffect; giữ nguyên."},
+    {"position": 40, "reason": "Ảnh khớp bản chữ, gồm địa chỉ, liên hệ và hai logo; giữ nguyên."},
+    {"position": 41, "reason": "Ảnh khớp bản chữ bìa và logo W5; giữ nguyên."},
+    {
+      "position": 42,
+      "reason": "Sửa bốn số, dấu nháy cong theo ảnh, bỏ dấu phẩy thêm sau own account và giữ dấu phẩy thật ở cuối đoạn Group structure.",
+      "layout_sensitive": true,
+      "replacements": [
+        ["556873-2034", "556973-2034"],
+        ["5 317 (2 896)", "5 317 (2 898)"],
+        ["13 702 (13 408)", "13 702 (13 409)"],
+        ["48 055 (55 378)", "48 035 (55 378)"],
+        ["period's", "period’s"],
+        ["Group's", "Group’s"],
+        ["Company's", "Company’s"],
+        ["own account, for", "own account for"],
+        ["Älmhult, Nacka Strand.", "Älmhult, Nacka Strand,"]
+      ],
+      "notes": ["Thứ tự đọc ba cột từ trái qua phải, footer cuối. Dấu phẩy cuối dòng trên ảnh được giữ nguyên, không sửa văn phong nguồn."]
+    },
+    {"position": 46, "reason": "Ảnh khớp bản chữ, gồm đủ phần Study Purpose và các đầu dòng; giữ nguyên."}
+  ]
+}

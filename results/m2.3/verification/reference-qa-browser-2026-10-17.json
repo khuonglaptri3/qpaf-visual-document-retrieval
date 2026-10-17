@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "browser": "155.0.4283.45",
+  "artifact": "results/m2.3/reviews/2026-10-17-reference-qa-final/index.html",
+  "checks": [
+    "All 121 seeded records match corrected JSON; native decisions preserved",
+    "Initial reference filter selects first supplied reference; exactly 18 targets, 18 confirmed, zero pending",
+    "Original 41-target dataset metadata preserved; explicit 18-page overlay",
+    "Separate storage namespace; original browser drafts untouched",
+    "Corrected Porskaer visible with proper ligature; image loaded; screenshot saved in isolated verification directory",
+    "Export/import/reload preserve all 121 records and initial 18-page filter",
+    "No browser runtime errors"
+  ],
+  "dataset_sha256": "dd5423699964e723daeca36d6a1309ff7ef343bd4c75087d4d63b6bacbd25c94",
+  "source_run": "RUN-QPAF-M2_3-CAL-001-20261017T101949Z-A01"
+}

@@ -1,0 +1,23 @@
+{
+  "status": "PASS",
+  "verified_at": "2026-10-17T13:16:35.319592+00:00",
+  "checks": [
+    "Original review package manifest intact",
+    "Corrected package manifest intact",
+    "Full 121-page payload passes backend schema validation",
+    "Exactly original 18 references selected and confirmed under AI reviewer; 10 text changes",
+    "All 121 native decisions and 103 unselected pages preserved",
+    "54 metric rows checked; all 51 WER distances independently verified with dynamic programming",
+    "30 character distances independently verified with dynamic programming",
+    "Empty reference excluded from CER/WER denominators; all 3 channels zero false-positive characters",
+    "All split aggregates independently checked",
+    "Eight unresolved native IDs retained; no thresholds frozen",
+    "Final package reference texts, patch, and all 54 metrics match independently checked package; only UI initialization changed",
+    "All 121 image links and SHA-256 values verified from final workspace"
+  ],
+  "source_review_sha256": "3b6ca8f0beabede2c4c75396c6c97976a388a0d3687be63a5edc9bda02e1b69e",
+  "corrected_review_sha256": "3d0bf2283bc75e18bd57def002067bd4930a82de03efb93dd0ed85c051bad078",
+  "patch_sha256": "52997f04a8efddd0d3f49208d9e5efcf136702a636a359d20d77b4a657979dc3",
+  "script_sha256": "9cf3642670750116cd630664fb73961a3a049f539634e27e1aa29c2e36070be0",
+  "artifact": "results/m2.3/reviews/2026-10-17-reference-qa-final"
+}

@@ -1,0 +1,16 @@
+{
+  "status": "ENGINEERING_DATA_VERIFIED_HUMAN_REVIEW_PENDING",
+  "task_id": "M2.3",
+  "published_utc": "2026-10-17T10:36:42.864496+00:00",
+  "source_run": "RUN-QPAF-M2_3-CAL-001-20261017T101949Z-A01",
+  "run_location": "results/m2.3/RUN-QPAF-M2_3-CAL-001-20261017T101949Z-A01",
+  "dataset_sha256": "dd5423699964e723daeca36d6a1309ff7ef343bd4c75087d4d63b6bacbd25c94",
+  "native_review_target": 121,
+  "reference_review_target": 41,
+  "human_reviews_received": 0,
+  "thresholds_frozen": false,
+  "source_snapshot_sha256": "148dd9aaba9de37879690784431038e0216d885da9d694cf1d3cb39cb884dfc2",
+  "review_template_at_run_sha256": "d08b73a88127b46698359bcb15b259960623468c0ea340d95a3e94ce19d688f5",
+  "review_template_at_handover_sha256": "8357724f5f54559bcbcda192c3f5bfe1d7a0f95c5aaf74b1cee517d9aa39fb22",
+  "note": "UI navigation improved after inference; raw OCR, sample and namespace unchanged. Frozen run UI/source snapshot preserved. No human quality sign-off."
+}

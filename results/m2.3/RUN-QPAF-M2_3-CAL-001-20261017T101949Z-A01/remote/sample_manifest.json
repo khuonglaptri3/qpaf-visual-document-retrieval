@@ -1,0 +1,378 @@
+{
+  "task_id": "M2.3",
+  "seed": 2026,
+  "dataset": {
+    "name": "Qiuchen-Wang/ViDoSeek",
+    "revision": "e91a92ba5f38690696c7e66be5c5474b54c6e791",
+    "source_manifest": "data/manifests/vidoseek-e91a92b-location.json",
+    "source_manifest_sha256": "eeb74f436ebf579359d54d05589c8b47c9017d8df35f0ebb1bff423f286e65cd"
+  },
+  "documents": [
+    {
+      "document_id": "0004b995666f8846b92ffc3d741a930bba0638e3",
+      "page_count": 17,
+      "length_stratum": "medium",
+      "calibration_split": "holdout",
+      "population_documents_in_stratum": 118
+    },
+    {
+      "document_id": "00171a1b5e1078fd6fa76e72d361d1c647d77eb5",
+      "page_count": 18,
+      "length_stratum": "medium",
+      "calibration_split": "development",
+      "population_documents_in_stratum": 118
+    },
+    {
+      "document_id": "0065038b9255be3283bedc7bbe75ef5c2660d3a8",
+      "page_count": 13,
+      "length_stratum": "medium",
+      "calibration_split": "development",
+      "population_documents_in_stratum": 118
+    },
+    {
+      "document_id": "0073d1c9d37a124a69560a42acf492e6fae6fb55",
+      "page_count": 21,
+      "length_stratum": "long",
+      "calibration_split": "holdout",
+      "population_documents_in_stratum": 156
+    },
+    {
+      "document_id": "008363273c77bfd99cc0bbe473189616006e7c72",
+      "page_count": 23,
+      "length_stratum": "long",
+      "calibration_split": "holdout",
+      "population_documents_in_stratum": 156
+    },
+    {
+      "document_id": "009856a0cdcc230d983c3a3e460a0c1b83cb09d4",
+      "page_count": 25,
+      "length_stratum": "long",
+      "calibration_split": "development",
+      "population_documents_in_stratum": 156
+    },
+    {
+      "document_id": "00c9161083ca956372a7548e69650556a8c7f358",
+      "page_count": 22,
+      "length_stratum": "long",
+      "calibration_split": "development",
+      "population_documents_in_stratum": 156
+    },
+    {
+      "document_id": "00d8d22ded241c20c75d49578359057cd25739d1",
+      "page_count": 23,
+      "length_stratum": "long",
+      "calibration_split": "development",
+      "population_documents_in_stratum": 156
+    },
+    {
+      "document_id": "01056efdbb585d355a073b6aba9a906611fc1cc4",
+      "page_count": 7,
+      "length_stratum": "short",
+      "calibration_split": "development",
+      "population_documents_in_stratum": 18
+    },
+    {
+      "document_id": "011e012b28d60278c243b200eaf19952a725370c",
+      "page_count": 10,
+      "length_stratum": "short",
+      "calibration_split": "development",
+      "population_documents_in_stratum": 18
+    },
+    {
+      "document_id": "015834912780c3a83a8c27aa66c52252994a8b16",
+      "page_count": 17,
+      "length_stratum": "medium",
+      "calibration_split": "development",
+      "population_documents_in_stratum": 118
+    },
+    {
+      "document_id": "017b534723c463c51f4031ccbba8ce156a502b42",
+      "page_count": 12,
+      "length_stratum": "medium",
+      "calibration_split": "development",
+      "population_documents_in_stratum": 118
+    },
+    {
+      "document_id": "01ada48daaf576de7e173f212b032ab06b742e24",
+      "page_count": 12,
+      "length_stratum": "medium",
+      "calibration_split": "development",
+      "population_documents_in_stratum": 118
+    },
+    {
+      "document_id": "01dc52ed80b475c6ac81bc9def3e03dad93e33de",
+      "page_count": 21,
+      "length_stratum": "long",
+      "calibration_split": "holdout",
+      "population_documents_in_stratum": 156
+    },
+    {
+      "document_id": "0258acc3a8560dbfd515a78c429125106f29abf3",
+      "page_count": 20,
+      "length_stratum": "long",
+      "calibration_split": "development",
+      "population_documents_in_stratum": 156
+    },
+    {
+      "document_id": "02862397eb1a6a6a9011506457d8f88d48654cab",
+      "page_count": 10,
+      "length_stratum": "short",
+      "calibration_split": "development",
+      "population_documents_in_stratum": 18
+    },
+    {
+      "document_id": "0295f1ca960d29e2327e90a848235693d965d308",
+      "page_count": 15,
+      "length_stratum": "medium",
+      "calibration_split": "development",
+      "population_documents_in_stratum": 118
+    },
+    {
+      "document_id": "031271a581b8802789a540ffaeca23b68166195b",
+      "page_count": 16,
+      "length_stratum": "medium",
+      "calibration_split": "development",
+      "population_documents_in_stratum": 118
+    },
+    {
+      "document_id": "03244446f5499b38d84fb09e3ba09f995eb0692a",
+      "page_count": 16,
+      "length_stratum": "medium",
+      "calibration_split": "holdout",
+      "population_documents_in_stratum": 118
+    },
+    {
+      "document_id": "0325f2543fd5aa5598d96e475cebc6135842f554",
+      "page_count": 24,
+      "length_stratum": "long",
+      "calibration_split": "development",
+      "population_documents_in_stratum": 156
+    },
+    {
+      "document_id": "032c88c2530df468cd1180a3313ebf4707f9b2f1",
+      "page_count": 8,
+      "length_stratum": "short",
+      "calibration_split": "development",
+      "population_documents_in_stratum": 18
+    },
+    {
+      "document_id": "035014aaf996fa3b7f8b099068e31c6550a9b19d",
+      "page_count": 19,
+      "length_stratum": "long",
+      "calibration_split": "development",
+      "population_documents_in_stratum": 156
+    },
+    {
+      "document_id": "03712a39c4aac9d622685456983c12257318df02",
+      "page_count": 21,
+      "length_stratum": "long",
+      "calibration_split": "holdout",
+      "population_documents_in_stratum": 156
+    },
+    {
+      "document_id": "03e90a945dafd353e9d86b46ca2774a29149048d",
+      "page_count": 17,
+      "length_stratum": "medium",
+      "calibration_split": "holdout",
+      "population_documents_in_stratum": 118
+    },
+    {
+      "document_id": "0403e30c9f87e8e6cb38c6858878e2726542f8e9",
+      "page_count": 25,
+      "length_stratum": "long",
+      "calibration_split": "development",
+      "population_documents_in_stratum": 156
+    },
+    {
+      "document_id": "0454efb78bc1e03ae39f9552cb4c165495b11e4b",
+      "page_count": 12,
+      "length_stratum": "medium",
+      "calibration_split": "holdout",
+      "population_documents_in_stratum": 118
+    },
+    {
+      "document_id": "047733d6ecb0f878c9f6fe1a9fdaa0c2b86eff61",
+      "page_count": 7,
+      "length_stratum": "short",
+      "calibration_split": "holdout",
+      "population_documents_in_stratum": 18
+    },
+    {
+      "document_id": "04d14102144bfa97bf1f2e41bda7986bd3f712c1",
+      "page_count": 24,
+      "length_stratum": "long",
+      "calibration_split": "development",
+      "population_documents_in_stratum": 156
+    },
+    {
+      "document_id": "054e98cc2676ed1ab0f94f2ae43010514596aa6b",
+      "page_count": 8,
+      "length_stratum": "short",
+      "calibration_split": "holdout",
+      "population_documents_in_stratum": 18
+    },
+    {
+      "document_id": "05b9ceacc63e3172d16670189ec129499b77c7b1",
+      "page_count": 16,
+      "length_stratum": "medium",
+      "calibration_split": "development",
+      "population_documents_in_stratum": 118
+    }
+  ],
+  "page_ids": [
+    "0004b995666f8846b92ffc3d741a930bba0638e3_page_0001",
+    "0004b995666f8846b92ffc3d741a930bba0638e3_page_0002",
+    "0004b995666f8846b92ffc3d741a930bba0638e3_page_0009",
+    "0004b995666f8846b92ffc3d741a930bba0638e3_page_0017",
+    "00171a1b5e1078fd6fa76e72d361d1c647d77eb5_page_0001",
+    "00171a1b5e1078fd6fa76e72d361d1c647d77eb5_page_0002",
+    "00171a1b5e1078fd6fa76e72d361d1c647d77eb5_page_0017",
+    "00171a1b5e1078fd6fa76e72d361d1c647d77eb5_page_0018",
+    "0065038b9255be3283bedc7bbe75ef5c2660d3a8_page_0001",
+    "0065038b9255be3283bedc7bbe75ef5c2660d3a8_page_0002",
+    "0065038b9255be3283bedc7bbe75ef5c2660d3a8_page_0010",
+    "0065038b9255be3283bedc7bbe75ef5c2660d3a8_page_0013",
+    "0073d1c9d37a124a69560a42acf492e6fae6fb55_page_0001",
+    "0073d1c9d37a124a69560a42acf492e6fae6fb55_page_0007",
+    "0073d1c9d37a124a69560a42acf492e6fae6fb55_page_0018",
+    "0073d1c9d37a124a69560a42acf492e6fae6fb55_page_0021",
+    "008363273c77bfd99cc0bbe473189616006e7c72_page_0001",
+    "008363273c77bfd99cc0bbe473189616006e7c72_page_0010",
+    "008363273c77bfd99cc0bbe473189616006e7c72_page_0014",
+    "008363273c77bfd99cc0bbe473189616006e7c72_page_0023",
+    "009856a0cdcc230d983c3a3e460a0c1b83cb09d4_page_0001",
+    "009856a0cdcc230d983c3a3e460a0c1b83cb09d4_page_0017",
+    "009856a0cdcc230d983c3a3e460a0c1b83cb09d4_page_0024",
+    "009856a0cdcc230d983c3a3e460a0c1b83cb09d4_page_0025",
+    "00c9161083ca956372a7548e69650556a8c7f358_page_0001",
+    "00c9161083ca956372a7548e69650556a8c7f358_page_0011",
+    "00c9161083ca956372a7548e69650556a8c7f358_page_0018",
+    "00c9161083ca956372a7548e69650556a8c7f358_page_0022",
+    "00d8d22ded241c20c75d49578359057cd25739d1_page_0001",
+    "00d8d22ded241c20c75d49578359057cd25739d1_page_0002",
+    "00d8d22ded241c20c75d49578359057cd25739d1_page_0009",
+    "00d8d22ded241c20c75d49578359057cd25739d1_page_0023",
+    "01056efdbb585d355a073b6aba9a906611fc1cc4_page_0001",
+    "01056efdbb585d355a073b6aba9a906611fc1cc4_page_0003",
+    "01056efdbb585d355a073b6aba9a906611fc1cc4_page_0006",
+    "01056efdbb585d355a073b6aba9a906611fc1cc4_page_0007",
+    "011e012b28d60278c243b200eaf19952a725370c_page_0001",
+    "011e012b28d60278c243b200eaf19952a725370c_page_0003",
+    "011e012b28d60278c243b200eaf19952a725370c_page_0005",
+    "011e012b28d60278c243b200eaf19952a725370c_page_0010",
+    "015834912780c3a83a8c27aa66c52252994a8b16_page_0001",
+    "015834912780c3a83a8c27aa66c52252994a8b16_page_0007",
+    "015834912780c3a83a8c27aa66c52252994a8b16_page_0010",
+    "015834912780c3a83a8c27aa66c52252994a8b16_page_0017",
+    "017b534723c463c51f4031ccbba8ce156a502b42_page_0001",
+    "017b534723c463c51f4031ccbba8ce156a502b42_page_0003",
+    "017b534723c463c51f4031ccbba8ce156a502b42_page_0008",
+    "017b534723c463c51f4031ccbba8ce156a502b42_page_0012",
+    "01ada48daaf576de7e173f212b032ab06b742e24_page_0001",
+    "01ada48daaf576de7e173f212b032ab06b742e24_page_0002",
+    "01ada48daaf576de7e173f212b032ab06b742e24_page_0007",
+    "01ada48daaf576de7e173f212b032ab06b742e24_page_0012",
+    "01dc52ed80b475c6ac81bc9def3e03dad93e33de_page_0001",
+    "01dc52ed80b475c6ac81bc9def3e03dad93e33de_page_0003",
+    "01dc52ed80b475c6ac81bc9def3e03dad93e33de_page_0019",
+    "01dc52ed80b475c6ac81bc9def3e03dad93e33de_page_0021",
+    "0258acc3a8560dbfd515a78c429125106f29abf3_page_0001",
+    "0258acc3a8560dbfd515a78c429125106f29abf3_page_0011",
+    "0258acc3a8560dbfd515a78c429125106f29abf3_page_0016",
+    "0258acc3a8560dbfd515a78c429125106f29abf3_page_0020",
+    "02862397eb1a6a6a9011506457d8f88d48654cab_page_0001",
+    "02862397eb1a6a6a9011506457d8f88d48654cab_page_0003",
+    "02862397eb1a6a6a9011506457d8f88d48654cab_page_0006",
+    "02862397eb1a6a6a9011506457d8f88d48654cab_page_0010",
+    "0295f1ca960d29e2327e90a848235693d965d308_page_0001",
+    "0295f1ca960d29e2327e90a848235693d965d308_page_0008",
+    "0295f1ca960d29e2327e90a848235693d965d308_page_0013",
+    "0295f1ca960d29e2327e90a848235693d965d308_page_0015",
+    "031271a581b8802789a540ffaeca23b68166195b_page_0001",
+    "031271a581b8802789a540ffaeca23b68166195b_page_0002",
+    "031271a581b8802789a540ffaeca23b68166195b_page_0014",
+    "031271a581b8802789a540ffaeca23b68166195b_page_0016",
+    "03244446f5499b38d84fb09e3ba09f995eb0692a_page_0001",
+    "03244446f5499b38d84fb09e3ba09f995eb0692a_page_0004",
+    "03244446f5499b38d84fb09e3ba09f995eb0692a_page_0009",
+    "03244446f5499b38d84fb09e3ba09f995eb0692a_page_0016",
+    "0325f2543fd5aa5598d96e475cebc6135842f554_page_0001",
+    "0325f2543fd5aa5598d96e475cebc6135842f554_page_0010",
+    "0325f2543fd5aa5598d96e475cebc6135842f554_page_0013",
+    "0325f2543fd5aa5598d96e475cebc6135842f554_page_0024",
+    "032c88c2530df468cd1180a3313ebf4707f9b2f1_page_0001",
+    "032c88c2530df468cd1180a3313ebf4707f9b2f1_page_0004",
+    "032c88c2530df468cd1180a3313ebf4707f9b2f1_page_0005",
+    "032c88c2530df468cd1180a3313ebf4707f9b2f1_page_0008",
+    "035014aaf996fa3b7f8b099068e31c6550a9b19d_page_0001",
+    "035014aaf996fa3b7f8b099068e31c6550a9b19d_page_0012",
+    "035014aaf996fa3b7f8b099068e31c6550a9b19d_page_0017",
+    "035014aaf996fa3b7f8b099068e31c6550a9b19d_page_0019",
+    "03712a39c4aac9d622685456983c12257318df02_page_0001",
+    "03712a39c4aac9d622685456983c12257318df02_page_0008",
+    "03712a39c4aac9d622685456983c12257318df02_page_0020",
+    "03712a39c4aac9d622685456983c12257318df02_page_0021",
+    "03e90a945dafd353e9d86b46ca2774a29149048d_page_0001",
+    "03e90a945dafd353e9d86b46ca2774a29149048d_page_0002",
+    "03e90a945dafd353e9d86b46ca2774a29149048d_page_0008",
+    "03e90a945dafd353e9d86b46ca2774a29149048d_page_0017",
+    "0403e30c9f87e8e6cb38c6858878e2726542f8e9_page_0001",
+    "0403e30c9f87e8e6cb38c6858878e2726542f8e9_page_0015",
+    "0403e30c9f87e8e6cb38c6858878e2726542f8e9_page_0019",
+    "0403e30c9f87e8e6cb38c6858878e2726542f8e9_page_0025",
+    "0454efb78bc1e03ae39f9552cb4c165495b11e4b_page_0001",
+    "0454efb78bc1e03ae39f9552cb4c165495b11e4b_page_0002",
+    "0454efb78bc1e03ae39f9552cb4c165495b11e4b_page_0004",
+    "0454efb78bc1e03ae39f9552cb4c165495b11e4b_page_0012",
+    "047733d6ecb0f878c9f6fe1a9fdaa0c2b86eff61_page_0001",
+    "047733d6ecb0f878c9f6fe1a9fdaa0c2b86eff61_page_0004",
+    "047733d6ecb0f878c9f6fe1a9fdaa0c2b86eff61_page_0006",
+    "047733d6ecb0f878c9f6fe1a9fdaa0c2b86eff61_page_0007",
+    "048ce9cbabf9b58c9764e8be143b7196b5478ac1_page_0007",
+    "04d14102144bfa97bf1f2e41bda7986bd3f712c1_page_0001",
+    "04d14102144bfa97bf1f2e41bda7986bd3f712c1_page_0004",
+    "04d14102144bfa97bf1f2e41bda7986bd3f712c1_page_0013",
+    "04d14102144bfa97bf1f2e41bda7986bd3f712c1_page_0024",
+    "054e98cc2676ed1ab0f94f2ae43010514596aa6b_page_0001",
+    "054e98cc2676ed1ab0f94f2ae43010514596aa6b_page_0004",
+    "054e98cc2676ed1ab0f94f2ae43010514596aa6b_page_0007",
+    "054e98cc2676ed1ab0f94f2ae43010514596aa6b_page_0008",
+    "05b9ceacc63e3172d16670189ec129499b77c7b1_page_0001",
+    "05b9ceacc63e3172d16670189ec129499b77c7b1_page_0004",
+    "05b9ceacc63e3172d16670189ec129499b77c7b1_page_0014",
+    "05b9ceacc63e3172d16670189ec129499b77c7b1_page_0016"
+  ],
+  "page_count": 121,
+  "reference_required_count": 41,
+  "sampling": "document-length quotas; bounded page probes; first/last/sparse/rich with hash fill",
+  "uses_query_text": false,
+  "uses_qrels": false,
+  "test_queries_used": 0,
+  "shared_document_corpus": true,
+  "population_rate_estimate": false,
+  "config_sha256": "5cee35c09a667ee264fab43749746387970b405ff64ee488fba61534b58425bf",
+  "m21_manifest_sha256": "ea5a19f93dce07cce375d6fb6afed630606e00916c5daa10938562aee9cddfad",
+  "page_manifest_sha256": "431fa92d2959daadd9fc394bcbec5c90d1caf393be2a607150eeea33530652a9",
+  "m21_verification": {
+    "status": "VERIFIED",
+    "query_count": 1142,
+    "checks": {
+      "source_payload_hashes": "PASS",
+      "split_disjointness": "PASS",
+      "split_union_matches_annotations": "PASS"
+    },
+    "integrity": {
+      "pairwise_overlap": {
+        "train_validation": 0,
+        "train_test": 0,
+        "validation_test": 0
+      },
+      "union_count": 1142,
+      "annotation_query_count": 1142
+    }
+  },
+  "native_environment": {
+    "parser": "4.30.0",
+    "pdfium": "126.0.6462.0"
+  }
+}

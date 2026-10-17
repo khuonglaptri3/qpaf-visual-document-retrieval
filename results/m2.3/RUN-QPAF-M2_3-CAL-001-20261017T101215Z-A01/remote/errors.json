@@ -1,0 +1,42 @@
+[
+  {
+    "page_id": "047733d6ecb0f878c9f6fe1a9fdaa0c2b86eff61_page_0001",
+    "stage": "render",
+    "error": "ValueError: Rendered image exceeds pixel cap"
+  },
+  {
+    "page_id": "047733d6ecb0f878c9f6fe1a9fdaa0c2b86eff61_page_0004",
+    "stage": "render",
+    "error": "ValueError: Rendered image exceeds pixel cap"
+  },
+  {
+    "page_id": "047733d6ecb0f878c9f6fe1a9fdaa0c2b86eff61_page_0006",
+    "stage": "render",
+    "error": "ValueError: Rendered image exceeds pixel cap"
+  },
+  {
+    "page_id": "047733d6ecb0f878c9f6fe1a9fdaa0c2b86eff61_page_0007",
+    "stage": "render",
+    "error": "ValueError: Rendered image exceeds pixel cap"
+  },
+  {
+    "page_id": "05b9ceacc63e3172d16670189ec129499b77c7b1_page_0001",
+    "stage": "render",
+    "error": "ValueError: Rendered image exceeds pixel cap"
+  },
+  {
+    "page_id": "05b9ceacc63e3172d16670189ec129499b77c7b1_page_0004",
+    "stage": "render",
+    "error": "ValueError: Rendered image exceeds pixel cap"
+  },
+  {
+    "page_id": "05b9ceacc63e3172d16670189ec129499b77c7b1_page_0014",
+    "stage": "render",
+    "error": "ValueError: Rendered image exceeds pixel cap"
+  },
+  {
+    "page_id": "05b9ceacc63e3172d16670189ec129499b77c7b1_page_0016",
+    "stage": "render",
+    "error": "ValueError: Rendered image exceeds pixel cap"
+  }
+]

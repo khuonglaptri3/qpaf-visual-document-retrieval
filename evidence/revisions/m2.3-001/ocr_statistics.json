@@ -1,0 +1,38 @@
+{
+  "150": {
+    "statuses": {
+      "OK": 118,
+      "NO_TEXT_DETECTED": 3
+    },
+    "sum_attempt_seconds": 104.0074818959998,
+    "mean_seconds": 0.859565966082643,
+    "p50_seconds": 0.567474035999993,
+    "p95_seconds": 2.1206117339999935,
+    "p99_seconds": 4.845656130199994,
+    "max_seconds": 5.042312242000008,
+    "max_tesseract_rss_mib": 152.1875,
+    "empty_page_ids": [
+      "00d8d22ded241c20c75d49578359057cd25739d1_page_0023",
+      "03244446f5499b38d84fb09e3ba09f995eb0692a_page_0001",
+      "048ce9cbabf9b58c9764e8be143b7196b5478ac1_page_0007"
+    ]
+  },
+  "300": {
+    "statuses": {
+      "OK": 118,
+      "NO_TEXT_DETECTED": 3
+    },
+    "sum_attempt_seconds": 190.83865533099996,
+    "mean_seconds": 1.5771789696776857,
+    "p50_seconds": 1.0109244429999933,
+    "p95_seconds": 3.8949617149999654,
+    "p99_seconds": 6.610788247399993,
+    "max_seconds": 7.328757424999992,
+    "max_tesseract_rss_mib": 433.796875,
+    "empty_page_ids": [
+      "00d8d22ded241c20c75d49578359057cd25739d1_page_0023",
+      "03244446f5499b38d84fb09e3ba09f995eb0692a_page_0001",
+      "048ce9cbabf9b58c9764e8be143b7196b5478ac1_page_0007"
+    ]
+  }
+}

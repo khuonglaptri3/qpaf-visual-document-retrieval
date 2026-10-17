@@ -1,0 +1,22 @@
+[
+  {
+    "path": "human_reviews.json",
+    "size_bytes": 86178,
+    "sha256": "ee6b4abbb7125e872113eb9b4fcf3910e82e2c3d3d9eea0e69f071037e112e1a"
+  },
+  {
+    "path": "page_metrics.json",
+    "size_bytes": 4,
+    "sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f"
+  },
+  {
+    "path": "report.md",
+    "size_bytes": 368,
+    "sha256": "a91abec7b3a9725e2a66ba96bca1444bb2db35cb813b5f360e127c562816c9f5"
+  },
+  {
+    "path": "summary.json",
+    "size_bytes": 3739,
+    "sha256": "e2062ab30702e13823306ce79254ea5ee50d3d863074eeaa4e18ccfb3ca7b6f8"
+  }
+]

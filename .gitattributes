@@ -18,3 +18,13 @@
 /evidence/M1_FINAL/02_protocol/frozen_protocol.md -text -eol
 /evidence/M1_FINAL/02_protocol/protocol_amendments.md -text -eol -whitespace
 /evidence/M1_FINAL/02_protocol/amendments_after_import.md -text -eol -whitespace
+/results/m2.3/RUN-*/** -text -eol -whitespace
+/results/m2.3/verification/** -text -eol -whitespace
+/evidence/revisions/m2.3-001/** -text -eol -whitespace
+# M2.3 review/closure manifests bind exact bytes on every checkout.
+/results/m2.3/reviews/** -text -eol -whitespace
+/results/m2.3/closure/** -text -eol -whitespace
+/evidence/revisions/m2.3-002/** -text -eol -whitespace
+/configs/m2.3/ocr_policy_frozen.toml -text -eol
+# The final handover pins the original report bytes, including line endings.
+/docs/superpowers/reports/2026-10-17-m23-research-and-final-decision.md -text -eol -whitespace
