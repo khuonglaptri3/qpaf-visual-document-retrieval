@@ -37,7 +37,7 @@ def main(argv=None):
     }
     source = source_provenance(ROOT, 'requirements/m12-cpu.txt')
     paths = [*sorted((ROOT/'tests').glob('test_m12*.py')),
-             ROOT/'docs/m1.2-method-core.md', args.config.resolve()]
+             ROOT/'docs/03_method/m1.2-method-core.md', args.config.resolve()]
     source['method_inputs'] = [{'path': path.relative_to(ROOT).as_posix() if path.is_relative_to(ROOT)
                                else str(path), 'sha256': digest(path)} for path in paths]
     source['digest'] = object_hash({'implementation': source['digest'], 'method_inputs': source['method_inputs']})

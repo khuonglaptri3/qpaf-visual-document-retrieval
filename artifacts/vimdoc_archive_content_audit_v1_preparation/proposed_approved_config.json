@@ -1,0 +1,160 @@
+{
+  "schema_version": 1,
+  "package_id": "vimdoc_archive_content_audit_v1",
+  "status": "APPROVED_FOR_ONE_INVOCATION",
+  "prepared_at_utc": "2026-09-11T05:12:53.7762589Z",
+  "purpose": "Classify ViMDoc duplicate page-name assets by uncompressed content hash and freeze canonical page identity before OCR.",
+  "classification": "DATA_INTEGRITY_ONLY_NOT_OCR_NOT_SCORE_EXTRACTION_NOT_TRAINING",
+  "authorization": {
+    "execution_authorized": true,
+    "approved_actor": "codex",
+    "required_source_commit": "d3b0f16aea6acbc3d110f8ca73c5511de3460b29",
+    "approved_invocations": 1,
+    "approved_retries": 0,
+    "approved_timeout_seconds": 21600
+  },
+  "input": {
+    "volume_name": "qpaf-artifacts",
+    "volume_mount": "/vol",
+    "dataset_id": "kaistdata/ViMDoc",
+    "dataset_revision": "25657f1fe0358f49147148ca89e231291ba42788",
+    "archive_relative_path": "datasets/vimdoc/25657f1fe0358f49147148ca89e231291ba42788/ViMDoc_pages.tar.gz",
+    "archive_sha256": "de569c8d4d499b8fac84d4d03a0ddb59054e30351dcb7b1e6da3d1945d2d2c71",
+    "archive_bytes_from_historical_probe": 17455193968,
+    "materialization_receipt": "artifacts/dataset_materialization_vimdoc.json",
+    "identity_spec": "configs/vimdoc_ocr_page_identity_v1.json",
+    "qrels_access": false,
+    "query_table_access": false
+  },
+  "resources": {
+    "cpu_physical_cores": 1.0,
+    "memory_mb": 4096,
+    "gpu": null,
+    "timeout_seconds": 21600,
+    "retries": 0,
+    "region": null,
+    "max_output_bytes": 134217728,
+    "minimum_free_volume_bytes": 1073741824
+  },
+  "modal": {
+    "app_name": "qpaf-vimdoc-archive-audit-v1",
+    "function_name": "audit_vimdoc_archive",
+    "wrapper": "vimdoc_archive_audit_modal.py",
+    "python": "3.11",
+    "modal_version": "1.4.2",
+    "image": "modal.Image.debian_slim",
+    "volume_name": "qpaf-artifacts",
+    "create_volume_if_missing": false,
+    "secret_names": [],
+    "network_required": false
+  },
+  "output": {
+    "directory_relative_path": "audits/vimdoc/vimdoc_archive_content_audit_v1",
+    "create_once": true,
+    "source_archive_mutation_allowed": false,
+    "success_files": [
+      "_ATTEMPTED.json",
+      "asset_inventory.jsonl",
+      "audit_summary.json",
+      "canonical_pages.jsonl",
+      "run_manifest.json",
+      "_SUCCESS.json"
+    ],
+    "failure_files": [
+      "_ATTEMPTED.json",
+      "audit_summary.json if scan completed",
+      "asset_inventory.jsonl if scan completed",
+      "_FAILED.json"
+    ],
+    "source_snapshot_directory": "source_snapshot",
+    "success_marker_only_after_second_hash_and_count_validation": true
+  },
+  "expected": {
+    "asset_count": 76347,
+    "unique_page_id_count": 70080,
+    "extra_assets_sharing_page_id": 6267,
+    "document_count": 1247,
+    "different_content_page_id_collisions": 0,
+    "archive_hash_match": true,
+    "asset_inventory_hash_match": true,
+    "canonical_pages_hash_match": true
+  },
+  "pricing_snapshot": {
+    "checked_at_utc": "2026-09-11T05:12:53.7762589Z",
+    "source": "https://modal.com/pricing",
+    "refresh_method": "official pricing page; Modal CLI 1.4.2 has no billing rates subcommand",
+    "cpu_usd_per_core_second": 0.0000131,
+    "memory_usd_per_gib_second": 0.00000222,
+    "maximum_reserved_compute_usd_at_timeout": 0.474768,
+    "review_budget_usd": 0.6,
+    "caveat": "Base-rate reservation estimate only; actual billing can reflect max(requested, actual burst usage). No region or non-preemptible multiplier is authorized."
+  },
+  "runtime_review": {
+    "status": "UNCALIBRATED_UPPER_BOUND",
+    "timeout_seconds": 21600,
+    "expected_runtime_seconds": null,
+    "reason": "No prior full content-hash/decompression timing exists for the 17.5-GB archive. Timeout is a cost/resource cap, not a runtime prediction.",
+    "preemption_policy": "Attempt marker is committed before scanning; any restart sees the create-once output and must refuse. No scientific or OCR result is at risk.",
+    "retry_policy": "No automatic or manual retry. Any failure or interruption consumes the one-shot authorization and requires review."
+  },
+  "source_files": {
+    "configs/vimdoc_ocr_page_identity_v1.json": "804f555703e02d44e1d182bdda1a9c5a3f0ad8f12cb64276c4f10a17fbd513ac",
+    "artifacts/dataset_materialization_vimdoc.json": "20ececf7be4e2e726a0e657de32e80dfc5b380130d907626269cec54a11f1d9d",
+    "scripts/validate_vimdoc_ocr_page_identity.py": "96ec7e72871b403cc712e439462b669e2f1b067161b4d42e6747ca49784b5367",
+    "scripts/run_vimdoc_archive_content_audit.py": "7dfe3daa01f61d66476df03a9e85248468c44e95d1bdf6b6e05ec8aed34b3c00",
+    "vimdoc_archive_audit_modal.py": "3e18aeee78c4cc119f7c394d0d1dabda477254d9aa7fd7d175f3fb5fab1dbe53"
+  },
+  "supersedes": {
+    "activation_commit": "20b65c0b7e2d0733f94fc50025342563f751aaac",
+    "approved_config_sha256": "baeb51bd5429a32443c64d4620928c75b06e65f722c33f24ec3c1a8f924d4013",
+    "outcome": "LOCAL_IMPORT_REFUSAL_BEFORE_MODAL_FUNCTION_INVOCATION",
+    "remote_function_invocation_started": false,
+    "authorization_reusable": false
+  },
+  "consumed_invocation": {
+    "activation_commit": "6a0db676a8b5b43d14081463f835ec6b0fcb8abc",
+    "approved_config_sha256": "f3eadaa97ff0df20f5e2ad288aed5cea920502321cd42b18cf2d687192950014",
+    "modal_app_page_id": "ap-50h0xf7emXuFfMZ75fHvAu",
+    "outcome": "REMOTE_FUNCTION_SOURCE_VALIDATION_REFUSAL_BEFORE_ARCHIVE_OR_OUTPUT",
+    "error": "Source/input hash drift: artifacts/dataset_materialization_vimdoc.json",
+    "remote_function_invocation_started": true,
+    "run_audit_entered": true,
+    "archive_opened": false,
+    "output_directory_created": false,
+    "audit_attempt_marker_created": false,
+    "retry_performed": false,
+    "authorization_reusable": false
+  },
+  "activation": {
+    "live_config_path": "configs/vimdoc_archive_content_audit_v1.json",
+    "candidate_path": "artifacts/vimdoc_archive_content_audit_v1_preparation/proposed_approved_config.json",
+    "requires_exact_explicit_user_approval": true,
+    "must_copy_candidate_bytes_exactly": true,
+    "approval_commit_changed_paths": [
+      "configs/vimdoc_archive_content_audit_v1.json"
+    ]
+  },
+  "stop_conditions": [
+    "Config/source/archive hash mismatch.",
+    "Output directory already exists.",
+    "Volume has less than 1 GiB free for evidence.",
+    "Any unsafe tar path, link, duplicate member path or malformed page ID.",
+    "Any expected count mismatch.",
+    "Any same-page-ID group contains different uncompressed content hashes.",
+    "Evidence exceeds 128 MiB.",
+    "Persisted JSONL hash or row count differs from in-memory audit.",
+    "Timeout, interruption, exception or missing success marker."
+  ],
+  "out_of_scope": [
+    "OCR",
+    "Pillow image decoding",
+    "BM25/BGE-M3/ColQwen2.5 inference",
+    "retriever score extraction",
+    "qrels or query access",
+    "GPU",
+    "optimizer steps",
+    "training",
+    "scientific metrics",
+    "QPAF improvement claim"
+  ]
+}

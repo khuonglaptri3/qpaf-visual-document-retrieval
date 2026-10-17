@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "status": "PASS",
+  "phase": "P0-03",
+  "scope": "qpaf_candidate_score_bundle_not_heaven_full_score",
+  "source_commit": "86b7dccefb430f0018b6614a13f6a4795264fcf0",
+  "source_tree_clean_before_outputs": true,
+  "extraction_source_commit": "b81316ebeb53a19d2053ac5d480cc566e3b9edbb",
+  "extraction_function_call_id": "fc-01M10R4QY157YJMZPQ2CVZY04C",
+  "protocol_sha256": "ec81605f49fc045de98bf1ff7a5cef07aef9fb8823ad9931692afe3aca99c914",
+  "dataset": {
+    "id": "vidore/vidore_v3_finance_en",
+    "pages": 2942,
+    "queries": 309,
+    "revision": "7f432c176d82e27546501ad8064a713ac3071809"
+  },
+  "hardware": {
+    "actual_gpu": "NVIDIA A100-SXM4-40GB",
+    "actual_gpu_vram_bytes": 42405855232,
+    "actual_gpu_vram_gb": 42.406,
+    "actual_gpu_vram_gib": 39.494,
+    "cuda_available": true,
+    "cuda_runtime": "12.6",
+    "cudnn": 90501,
+    "driver": "580.95.05"
+  },
+  "python": "3.13.7 (tags/v3.13.7:bcee1c3, Aug 14 2025, 14:15:11) [MSC v.1944 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "packages": {
+    "numpy": "2.4.4",
+    "pandas": "3.0.2",
+    "pyarrow": "24.0.0",
+    "PyYAML": "6.0.3",
+    "torch": "2.11.0"
+  },
+  "config_sha256": {
+    "configs/datasets.yaml": "93a28b7d4a642f1d65ee72db14622bcda7aaa5e71a8e4efe915d19dbbe0249fa",
+    "configs/environment.yaml": "1573dfc314353d8d93276cb42e3a6be8251ca86dde435b17a49d36e513629db8",
+    "configs/preregistered.yaml": "46a255ffdf2cf703c816fa906b5d88cb91dfdf7e81cc09042ee78df9a108d73f"
+  }
+}

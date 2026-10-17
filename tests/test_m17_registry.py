@@ -262,6 +262,14 @@ class M17RegistryDraftTests(unittest.TestCase):
         )
 
         sentinels = {"NA", "PENDING", "UNKNOWN", "NOT_RECORDED"}
+        # Historical ledger rows are append-only. Resolve relocated documents
+        # through the catalog without changing their recorded references.
+        catalog = json.loads((ROOT / "docs/catalog.json").read_text(encoding="utf-8"))
+        relocated_documents = {
+            entry["original_path"]: entry
+            for entry in catalog["files"]
+            if entry["original_path"] != entry["current_path"]
+        }
         for row in trace_rows:
             self.assertTrue(all(value not in ("", None) for value in row.values()), row)
             for column in (
@@ -273,7 +281,15 @@ class M17RegistryDraftTests(unittest.TestCase):
             ):
                 value = row[column]
                 if value not in sentinels:
-                    self.assertTrue((ROOT / value).exists(), f"Missing {column}: {value}")
+                    path = ROOT / value
+                    if not path.exists() and value in relocated_documents:
+                        entry = relocated_documents[value]
+                        path = ROOT / entry["current_path"]
+                        self.assertTrue(path.is_file(), f"Missing relocated {column}: {value}")
+                        self.assertEqual(
+                            entry["sha256"], hashlib.sha256(path.read_bytes()).hexdigest(), value
+                        )
+                    self.assertTrue(path.exists(), f"Missing {column}: {value}")
             for column in ("data_hash", "output_hash"):
                 value = row[column]
                 if value not in sentinels:

@@ -1,0 +1,17 @@
+{
+  "status": "PASS_PREPARED_CALIBRATION_EXECUTION_CLOSED",
+  "verified_at": "2026-09-09T08:06:19.0719362Z",
+  "classification": "synthetic_w66_calibration_preparation_not_result",
+  "config_path": "configs/vidoseek_w66_resource_calibration_v1.json",
+  "config_sha256": "66787b48940b148bf615c05b57494721af3034b726211b3468eb7749cd7e154a",
+  "source_pin_count": 29,
+  "source_hashes_match": true,
+  "resource_budget_status": "PREPARED_CALIBRATION_EXECUTION_CLOSED",
+  "proposed_wall_timeout_seconds": 21600,
+  "approved_wall_timeout_seconds": 0,
+  "authorized_invocations": 0,
+  "automatic_retries": 0,
+  "execution_authorized": false,
+  "actual_relevance_allowed": false,
+  "scientific_result_produced": false
+}

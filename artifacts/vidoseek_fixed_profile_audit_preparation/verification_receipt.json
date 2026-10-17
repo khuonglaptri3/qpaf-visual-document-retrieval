@@ -1,0 +1,153 @@
+{
+  "status": "PASS_PREPARATION_ONLY_EXECUTION_CLOSED",
+  "verified_at": "2026-09-07T15:20:11.066898+00:00",
+  "preparation_authorization_text": "Ok keep continue please",
+  "authorization_interpretation": "Continuation of the explicitly proposed implementation and tests step; not live execution approval",
+  "full_suite": {
+    "command": [
+      "C:\\Python313\\python.exe",
+      "-m",
+      "pytest",
+      "-q"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 100.55115569999907,
+    "final_line": "213 passed in 88.46s (0:01:28)",
+    "runner_sha256": "2eebbb6db9853eacedcfe143d5cac6910e116e6c469ed64d9cf0cbaab52b1e6f",
+    "tests_sha256": "43cfd69845c07be51f83a33e1662a0e9279cd01075df2ce1b5825f888dd81fb3"
+  },
+  "focused_tests_in_full_suite": 31,
+  "preflight": {
+    "status": "PASS",
+    "classification": "read_only_preflight_not_result",
+    "base_preflight": {
+      "schema_version": 1,
+      "status": "PASS",
+      "protocol_id": "vidoseek_p1_02r_oracle_w7_v1",
+      "protocol_sha256": "8d37e6c4dbe46146e9f2d5d3da439a2c72f4e06f3d9c8ce33511484fceccbe34",
+      "retrieval_score_sha256": "32b39da19e9507a0a5060157630cb40bf5c6bcf6464d88e4bb6136888473173b",
+      "retrieval_score_content_sha256": "41c55a82fd4cd3607347aba68461a11dd4a0781f1e6825a107e44bb4544315e7",
+      "rows": 6149670,
+      "queries": 1142,
+      "pages_per_query": 5385,
+      "coverage": 1.0,
+      "semantic_integrity_inherited_from_hash_pinned_review": true,
+      "actual_relevance_loaded": false,
+      "oracle_executed": false,
+      "scientific_result_produced": false,
+      "authorization_attempt_consumed": false,
+      "recorded_probe_evidence_accepted": true
+    },
+    "queries": 1142,
+    "pages_per_query": 5385,
+    "query_order_sha256": "a59da8a89b9bc0ffcb4f4588c96c3a5a5256c9df95a3a707cbd5e98eb1944535",
+    "actual_relevance_loaded": false,
+    "scientific_result_produced": false,
+    "execution_authorized": false,
+    "attempt_exists": false
+  },
+  "preservation_and_lint": {
+    "status": "PASS",
+    "source_pins_verified": 22,
+    "original_scientific_source_pins_verified": 22,
+    "original_run_artifacts_verified": 43,
+    "recovery_run_artifacts_verified": 78,
+    "old_report_and_chart_unchanged": true,
+    "attempt_exists": false,
+    "execution_authorized": false,
+    "checks": [
+      {
+        "command": [
+          "C:\\Python313\\python.exe",
+          "-m",
+          "ruff",
+          "check",
+          "scripts/audit_vidoseek_fixed_profiles.py",
+          "tests/test_vidoseek_fixed_profile_audit.py"
+        ],
+        "exit_code": 0,
+        "stdout": "All checks passed!"
+      },
+      {
+        "command": [
+          "C:\\Python313\\python.exe",
+          "-m",
+          "ruff",
+          "format",
+          "--check",
+          "scripts/audit_vidoseek_fixed_profiles.py",
+          "tests/test_vidoseek_fixed_profile_audit.py"
+        ],
+        "exit_code": 0,
+        "stdout": "2 files already formatted"
+      },
+      {
+        "command": [
+          "git",
+          "diff",
+          "--check"
+        ],
+        "exit_code": 0,
+        "stdout": ""
+      }
+    ],
+    "config_sha256": "53f59852512cc28c2ab5f03233db3cde6a68549691086532275af4c1ee6b7e27",
+    "runner_sha256": "2eebbb6db9853eacedcfe143d5cac6910e116e6c469ed64d9cf0cbaab52b1e6f",
+    "tests_sha256": "43cfd69845c07be51f83a33e1662a0e9279cd01075df2ce1b5825f888dd81fb3"
+  },
+  "closed_cli_refusal": {
+    "status": "PASS",
+    "returncode": 1,
+    "reason": "Separate fixed-profile audit approval pending",
+    "attempt_created": false,
+    "relevance_loaded": false
+  },
+  "document_checks": {
+    "status": "PASS",
+    "utf8_and_fences_checked": [
+      "docs/QPAF_FIXED_PROFILE_AUDIT_EXECUTION_REVIEW.md",
+      "docs/QPAF_NEXT_EVALUATION_PROPOSAL.md",
+      "Context.md",
+      "PROJECT_TRACKING.md",
+      "Tasks.md",
+      "experiments/CHANGELOG.md"
+    ],
+    "relative_links_checked": 9,
+    "review_sha256_pins_match": true,
+    "no_downstream_execution_flags_open": true
+  },
+  "prepared_path_sha256": {
+    "scripts/audit_vidoseek_fixed_profiles.py": "2eebbb6db9853eacedcfe143d5cac6910e116e6c469ed64d9cf0cbaab52b1e6f",
+    "configs/vidoseek_fixed_profile_audit_v1.json": "53f59852512cc28c2ab5f03233db3cde6a68549691086532275af4c1ee6b7e27",
+    "tests/test_vidoseek_fixed_profile_audit.py": "43cfd69845c07be51f83a33e1662a0e9279cd01075df2ce1b5825f888dd81fb3",
+    "docs/QPAF_FIXED_PROFILE_AUDIT_EXECUTION_REVIEW.md": "8316ff988c23e2b98fe461d2a03e249b103893896e91b623f60d229e17402239",
+    "docs/QPAF_NEXT_EVALUATION_PROPOSAL.md": "a4c26a4ea7bade1059e0201418b8413d824bb4023837a77f44da5130712f0e4a",
+    "Context.md": "1a532ee53ec67e42553227b9b2c7065773875fb94079015a4199144a3df9e0dd",
+    "PROJECT_TRACKING.md": "50d5cf359e0ffe0ce4ad4ab24557e0c313571a8a82315e820c3657ae7485c5a3",
+    "Tasks.md": "8c633bee3ba9a84e13aeb049a64a92b183cd7047ae26ae7aad04d55d8e434213",
+    "experiments/CHANGELOG.md": "908a4e6434398b9ed16ddb02c570a1b6775a4569efc8fbbefedbc2b24ebadd19"
+  },
+  "evidence_sha256": {
+    "closed_cli_refusal.json": "737ba178e0eb260f40df2b1b8770965fe518d2caadc3b0aa19a04b5d96df0e6c",
+    "document_checks.json": "d550dc4a4f89ee0cfaba1ec3678343431cf37b73b8eebf2c5bd16af2fbb51ac5",
+    "final_full_test_suite.log": "c116c04787732f0d54dbab2981d88123023732380d93be8221ec9dca9d608462",
+    "final_preflight_receipt.json": "b97b354d77ee2304c8f9ab87a609fc7bcb636c3afce51a121cc000e0cd8080af",
+    "final_test_receipt.json": "66eefd24831da056edb96390fc4d5d25a5ea79a397d90efe205c3c343449d892",
+    "full_test_suite.log": "40a2d199823caa2844eb4f5f27fe193b7867eef401ba501373f28a428f44cf5e",
+    "preflight.json": "b0cebdff1a510cb55a8eebe59ae290f65c5cbd0d0426fdc121c89a497f8bbef0",
+    "preservation_and_lint_checks.json": "883162531e132296bac8f69a984b8cf49530af9ab98fa7b6aa7e124c3d14ae5f",
+    "reviewed_closed_config.json": "53f59852512cc28c2ab5f03233db3cde6a68549691086532275af4c1ee6b7e27",
+    "test_receipt.json": "6f6696c6900b2c6e5310a2aa21bd139dc55da491d45d50c6ff3df17af0b614e2"
+  },
+  "run_output_exists": false,
+  "new_retrieval_metrics_computed": false,
+  "live_relevance_loaded": false,
+  "qpaf_search_executed": false,
+  "w66_executed": false,
+  "training_executed": false,
+  "modal_gpu_used": false,
+  "frozen_p1_02_status": "BLOCKED",
+  "p1_03_dependency_unchanged": true,
+  "commit_or_push_performed": false,
+  "next_step": "Explicit approval of the prepared one-invocation, one-worker/thread, 1800-second, zero-retry audit; then record approval and execute once"
+}

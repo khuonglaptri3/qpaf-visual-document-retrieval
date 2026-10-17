@@ -1,0 +1,111 @@
+{
+  "status": "PASS",
+  "classification": "independent_review_of_exact_output_optimized_w66_sensitivity_on_frozen_exploratory24_subset",
+  "verified_at": "2026-09-10T03:50:58.8609931Z",
+  "source_commit": "181047598e8e22627b9f3b1a06b68ba140b6c98e",
+  "queries": 24,
+  "pages_per_query": 5385,
+  "candidate_pairs": 129240,
+  "profile_grid": "w66",
+  "profile_count": 66,
+  "elapsed_seconds": 1551.236275000003,
+  "recomputed": {
+    "global_profile": [
+      0.0,
+      0.2,
+      0.8
+    ],
+    "mean_global_ndcg10": 0.8296782270669829,
+    "mean_qarf_ndcg10": 0.8538451195715936,
+    "mean_qpaf_ndcg10": 0.8859108127976215,
+    "mean_qarf_vs_global_delta_ndcg10": 0.02416689250461061,
+    "qarf_vs_global_ci95": [
+      0.0,
+      0.06371171194374382
+    ],
+    "qarf_vs_global_win_tie_loss": {
+      "win": 2,
+      "tie": 22,
+      "loss": 0
+    },
+    "mean_qpaf_vs_qarf_delta_ndcg10": 0.03206569322602797,
+    "qpaf_vs_qarf_ci95": [
+      0.002888476746941956,
+      0.07116543024082586
+    ],
+    "qpaf_vs_qarf_win_tie_loss": {
+      "win": 4,
+      "tie": 20,
+      "loss": 0
+    },
+    "qpaf_vs_qarf_top_5pct_gain_share": 0.7397878446931598,
+    "mean_qpaf_vs_global_delta_ndcg10": 0.05623258573063858,
+    "qpaf_vs_global_ci95": [
+      0.015377926934522603,
+      0.10714133906910528
+    ],
+    "changed_queries": 4,
+    "changed_candidates": 5,
+    "w66_minus_w7": {
+      "mean_global_ndcg10": 0.0120443677632452,
+      "mean_qarf_ndcg10": 0.0,
+      "mean_qpaf_ndcg10": -0.0179448565863913,
+      "mean_qpaf_vs_qarf_delta_ndcg10": -0.01794485658639138
+    },
+    "tie_order_diagnostic": {
+      "audit_index": 798,
+      "query_id": "04450a0f59f81025574451222aa26322ae7ede42_2",
+      "w7_qarf_profile": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "w66_qarf_profile": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "both_qarf_ndcg10": 0.0,
+      "w7_qpaf_ndcg10": 0.43067655807339306,
+      "w66_qpaf_ndcg10": 0.0,
+      "lost_gain_divided_by_24": 0.017944856586391377,
+      "interpretation": "The complete W7-versus-W66 mean QPAF gap is explained by a tied zero-metric QARF initialization choosing a different first profile under grid order; this is algorithm order sensitivity, not evidence that the W66 profile set is intrinsically worse."
+    }
+  },
+  "verification": {
+    "manifest_artifacts": 97,
+    "checkpoint_envelopes": 50,
+    "source_snapshots": 32,
+    "telemetry_samples": 1503,
+    "fixed_profile_rankings_reconstructed": 1584,
+    "final_method_rankings_reconstructed": 72,
+    "raw_ranking_metric_values": 6624,
+    "aggregate_metric_and_delta_comparisons": 127,
+    "maximum_monotonic_telemetry_gap_seconds": 1.1164282000027015,
+    "maximum_wall_telemetry_gap_seconds": 1.109303,
+    "allowed_telemetry_gap_seconds": 5.0,
+    "peak_process_tree_private_bytes": 495525888,
+    "minimum_system_free_bytes": 6379503616,
+    "maximum_output_bytes": 1563288
+  },
+  "sha256": {
+    "run_manifest": "9e691aa27bddfdaa92728da171128ceadf64e1f21863acf2c221b7e5dde5c78f",
+    "summary": "4129db3a9d3b104ea44384b113ce02d472d6ccf34e012ea4e85c1a8844319508",
+    "per_query": "ff084afca65246bfa84c6cf9c4aaa8a4ea7f8a201df73d4dcd546695383a504d",
+    "resolved_config": "c637df9fd8fcffd114879d6f2d65a4734dac35ceb9390385b81fa4e0ced58696",
+    "retrieval_scores": "32b39da19e9507a0a5060157630cb40bf5c6bcf6464d88e4bb6136888473173b",
+    "query_list": "95715b6a8c0c2d684b3a34e9130eca25ea641aafb62678f7daa764f0ab585f5b",
+    "w66_profiles": "c04139858954fd0a7f7baa5dad548f3675a41b8682e9798039508e4077da5973",
+    "parent_w7_independent_review": "716a184eedcbe73c34dc166bcaa60d594546625dcb288049fd71807f63b61319"
+  },
+  "boundaries": {
+    "exploratory_w66_subset_executed": true,
+    "formal_full_discovery_w66_executed": false,
+    "formal_phase1_decision": false,
+    "frozen_p1_02_status": "BLOCKED",
+    "p1_03_status": "BLOCKED",
+    "training_executed": false,
+    "modal_gpu_used": false,
+    "remaining_authorized_invocations": 0
+  }
+}

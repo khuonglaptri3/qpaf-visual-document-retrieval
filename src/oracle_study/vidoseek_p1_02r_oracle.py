@@ -1,0 +1,1639 @@
+from __future__ import annotations
+
+import argparse
+import hashlib
+import json
+import multiprocessing as mp
+import os
+import platform
+import queue
+import subprocess
+import sys
+import tempfile
+import time
+from datetime import datetime, timezone
+from importlib.metadata import PackageNotFoundError, version
+from pathlib import Path
+from typing import Any
+
+import numpy as np
+import pandas as pd
+import pyarrow.parquet as pq
+import yaml
+
+from .qpaf import run_qpaf_oracle
+
+
+PROTOCOL_ID = "vidoseek_p1_02r_oracle_w7_v1"
+PREPARED_STATUS = "preexecution_safeguards_prepared_review_required"
+APPROVED_STATUS = "bounded_cpu_performance_probe_replacement_execution_approved"
+RECORDED_STATUS = "bounded_cpu_performance_probe_pass_recorded"
+SHARDED_PREPARED_STATUS = "query_sharded_resumable_wrapper_prepared_review_required"
+FULL_PAGE_CALIBRATION_APPROVED_STATUS = (
+    "one_human_full_page_synthetic_calibration_execution_approved"
+)
+ORIGINAL_PROBE_SCOPE = "one_local_cpu_non_result_performance_probe"
+PROBE_SCOPE = "one_replacement_local_cpu_non_result_performance_probe"
+APPROVED_SAFEGUARD_COMMIT = "024f2f0a0998f0c781ac738d259603c6bbf29ba9"
+FAILED_EXECUTION_APPROVAL_COMMIT = "fd2f411214b4b47750ffe6488bb0b5b654b55f66"
+REPLACEMENT_APPROVAL_PARENT_COMMIT = FAILED_EXECUTION_APPROVAL_COMMIT
+EXECUTED_PROBE_COMMIT = "aebeef11d5964b9c45ea56242f41ad4202aec95c"
+EXECUTION_COMMIT_RULE = "single_non_merge_direct_child_with_exact_changed_paths"
+APPROVAL_COMMIT_PATHS = [
+    "Context.md",
+    "Tasks.md",
+    "configs/vidoseek_p1_02r_oracle_w7_v1.yaml",
+    "experiments/CHANGELOG.md",
+    "src/oracle_study/vidoseek_p1_02r_oracle.py",
+    "tests/test_vidoseek_p1_02r_oracle_protocol.py",
+    "tests/test_vidoseek_p1_02r_oracle_safeguards.py",
+]
+FULL_PAGE_CALIBRATION_APPROVAL_PARENT_COMMIT = (
+    "9821d100a4d64d73e8772f48f68f30388f851c06"
+)
+FULL_PAGE_CALIBRATION_APPROVAL_COMMIT_PATHS = [
+    "Context.md",
+    "Tasks.md",
+    "configs/vidoseek_p1_02r_oracle_w7_v1.yaml",
+    "experiments/CHANGELOG.md",
+    "src/oracle_study/vidoseek_p1_02r_oracle.py",
+    "tests/test_vidoseek_p1_02r_oracle_protocol.py",
+    "tests/test_vidoseek_p1_02r_oracle_safeguards.py",
+]
+CPU_THREAD_ENV = (
+    "OMP_NUM_THREADS",
+    "MKL_NUM_THREADS",
+    "OPENBLAS_NUM_THREADS",
+    "NUMEXPR_NUM_THREADS",
+)
+PROBE_SCORE_COLUMNS = [
+    "dataset",
+    "query_id",
+    "page_id",
+    "source",
+    "bm25_score",
+    "dense_score",
+    "visual_score",
+]
+PREPARATION_APPROVAL_TEXT = (
+    "Approve local preparation and commit of the P1-02R-O1 pre-execution safeguards: "
+    "add a protocol-bound input preflight, an immutable run-manifest writer, and a "
+    "bounded CPU performance-probe entry point with tests. Do not execute the "
+    "performance probe or W7 oracle, do not write oracle results, do not run Modal/GPU "
+    "or P1-03, and do not relabel P1-02. Return the complete diff, proposed probe "
+    "limits, runtime stop condition, and exact future command for review."
+)
+ORIGINAL_EXECUTION_APPROVAL_TEXT = (
+    "Approve preparing and committing the execution-guard/provenance amendment for "
+    "exactly one human-run P1-02R-O1 bounded CPU performance probe from commit "
+    "024f2f0a0998f0c781ac738d259603c6bbf29ba9. Keep the fixed limits and no-retry "
+    "rule. Do not execute the probe yourself, W7 oracle, Modal/GPU, or P1-03, and "
+    "do not relabel P1-02."
+)
+EXECUTION_APPROVAL_TEXT = (
+    "Approve preparing and committing a corrective P1-02R-O1 execution-guard/"
+    "provenance amendment for exactly one replacement human-run CPU performance-probe "
+    "invocation. Record the prior invocation as failed before Python/project startup "
+    "because the approved CMD used unquoted set assignments and set PYTHONUTF8 to 1 ; "
+    "no attempt marker preflight, probe, manifest, or oracle result was produced. "
+    "Replace the command with quoted CMD assignments, preserve all fixed limits and "
+    "no-retry rules, and do not execute the probe yourself, W7 oracle, Modal/GPU, or "
+    "P1-03, and do not relabel P1-02."
+)
+RECORDING_APPROVAL_TEXT = (
+    "Approve preparing and committing the P1-02R-O1 bounded CPU performance-probe "
+    "PASS recording using the existing immutable attempt marker and run manifest. "
+    "Close the consumed probe authorization, update only provenance, task state, "
+    "protocol, and tests, and return a review-only full-W7 runtime/resource "
+    "recommendation. Do not execute or authorize W7, Modal/GPU, P1-03/P1-03R, "
+    "learned QPAF, or relabel P1-02"
+)
+SHARDED_PREPARATION_APPROVAL_TEXT = (
+    "Approve local preparation and commit of a query-sharded, resumable CPU wrapper "
+    "for P1-02R-O1 with exact-semantic equivalence tests against the frozen monolithic "
+    "W7 implementation. Preparation only: do not run the full-page calibration or W7 "
+    "oracle, do not write live oracle results, do not run Modal/GPU, P1-03/P1-03R, or "
+    "learned QPAF, and do not relabel P1-02. Keep all current input hashes, W7 profiles, "
+    "metrics, tie-breaks, seed, bootstrap semantics,and execution guards unchanged. "
+    "Return the complete allowlisted diff, tests, checkpoint/resume contract, "
+    "proposedone-query calibration command, and stop/go gates for review."
+)
+REVIEW_HARDENING_APPROVAL_TEXT = (
+    "Go ahead with a local-only P1-02R-O1 review-hardening patch and commit it "
+    "using an explicit allowlist. Fix the recorded-state CLI preflight, add Git "
+    "provenance enforcement for future calibration/full-W7 guards, and add "
+    "synthetic end-to-end calibration tests. Do not run calibration, W7, "
+    "Modal/GPU, P1-03/P1-03R, or learned QPAF, and do not relabel P1-02."
+)
+FULL_PAGE_CALIBRATION_APPROVAL_TEXT = (
+    "Approve local preparation and commit of the guard/provenance amendment for "
+    "exactly one human-run P1-02R-O1 full-page synthetic calibration from parent "
+    "commit 9821d100a4d64d73e8772f48f68f30388f851c06, using query index 570, "
+    "5,385 pages, 100 resamples, one CPU worker/thread, a 2,700-second hard stop, "
+    "and no retry. Use an explicit commit allowlist. Do not execute the calibration, "
+    "W7, Modal/GPU, P1-03/P1-03R, or learned QPAF, and keep P1-02 BLOCKED"
+)
+FAILED_PYTHON_ERROR = (
+    "Fatal Python error: preconfig_init_utf8_mode: invalid PYTHONUTF8 environment "
+    "variable value"
+)
+FAILED_PERFORMANCE_PROBE_COMMAND_CMD = (
+    "set OMP_NUM_THREADS=1 && set MKL_NUM_THREADS=1 && "
+    "set OPENBLAS_NUM_THREADS=1 && set NUMEXPR_NUM_THREADS=1 && "
+    "set PYTHONUTF8=1 && set PYTHONIOENCODING=utf-8 && set PYTHONPATH=src && "
+    "C:\\Python313\\python.exe -m oracle_study.vidoseek_p1_02r_oracle "
+    "performance-probe --protocol configs\\vidoseek_p1_02r_oracle_w7_v1.yaml"
+)
+PREFLIGHT_COMMAND_CMD = (
+    'set "PYTHONUTF8=1" && set "PYTHONIOENCODING=utf-8" && '
+    'set "PYTHONPATH=src" && C:\\Python313\\python.exe -m '
+    "oracle_study.vidoseek_p1_02r_oracle preflight --protocol "
+    "configs\\vidoseek_p1_02r_oracle_w7_v1.yaml"
+)
+PERFORMANCE_PROBE_COMMAND_CMD = (
+    'set "OMP_NUM_THREADS=1" && set "MKL_NUM_THREADS=1" && '
+    'set "OPENBLAS_NUM_THREADS=1" && set "NUMEXPR_NUM_THREADS=1" && '
+    'set "PYTHONUTF8=1" && set "PYTHONIOENCODING=utf-8" && '
+    'set "PYTHONPATH=src" && C:\\Python313\\python.exe -m '
+    "oracle_study.vidoseek_p1_02r_oracle performance-probe --protocol "
+    "configs\\vidoseek_p1_02r_oracle_w7_v1.yaml"
+)
+FULL_PAGE_CALIBRATION_COMMAND_CMD = (
+    'set "OMP_NUM_THREADS=1" && set "MKL_NUM_THREADS=1" && '
+    'set "OPENBLAS_NUM_THREADS=1" && set "NUMEXPR_NUM_THREADS=1" && '
+    'set "PYTHONUTF8=1" && set "PYTHONIOENCODING=utf-8" && '
+    'set "PYTHONPATH=src" && '
+    "C:\\Python313\\python.exe -m oracle_study.vidoseek_p1_02r_oracle "
+    "full-page-calibration --protocol "
+    "configs\\vidoseek_p1_02r_oracle_w7_v1.yaml"
+)
+FULL_W7_COMMAND_CMD = (
+    'set "OMP_NUM_THREADS=1" && set "MKL_NUM_THREADS=1" && '
+    'set "OPENBLAS_NUM_THREADS=1" && set "NUMEXPR_NUM_THREADS=1" && '
+    'set "PYTHONUTF8=1" && set "PYTHONIOENCODING=utf-8" && '
+    'set "PYTHONPATH=src" && '
+    "C:\\Python313\\python.exe -m oracle_study.vidoseek_p1_02r_oracle "
+    "full-w7 --protocol configs\\vidoseek_p1_02r_oracle_w7_v1.yaml"
+)
+
+
+def file_sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def text_sha256(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes().replace(b"\r\n", b"\n")).hexdigest()
+
+
+def load_protocol(path: Path) -> dict[str, Any]:
+    value = yaml.safe_load(path.read_text(encoding="utf-8"))
+    if not isinstance(value, dict):
+        raise ValueError("P1-02R-O1 protocol must be a mapping")
+    return value
+
+
+def _repo_path(repo_root: Path, relative: str) -> Path:
+    path = Path(relative)
+    if path.is_absolute():
+        raise ValueError(f"Protocol path must be repository-relative: {relative}")
+    root = repo_root.resolve()
+    resolved = (root / path).resolve()
+    if resolved != root and root not in resolved.parents:
+        raise ValueError(f"Protocol path escapes the repository: {relative}")
+    return resolved
+
+
+def _validate_sharded_preparation(protocol: dict[str, Any]) -> None:
+    calibration_authorized = (
+        protocol.get("status") == FULL_PAGE_CALIBRATION_APPROVED_STATUS
+    )
+    authorization = protocol.get("authorization", {}).get(
+        "sharded_wrapper_preparation", {}
+    )
+    if authorization != {
+        "scope": "local_query_sharded_resumable_wrapper_preparation_only",
+        "approved_by": "user",
+        "approved_on": "2026-09-02",
+        "approval_text": SHARDED_PREPARATION_APPROVAL_TEXT,
+        "execution_authorized": False,
+    }:
+        raise ValueError("P1-02R-O1 sharded-wrapper preparation approval drifted")
+    hardening = protocol.get("authorization", {}).get("review_hardening", {})
+    if hardening != {
+        "scope": "local_review_hardening_code_protocol_docs_and_tests_only",
+        "approved_by": "user",
+        "approved_on": "2026-09-04",
+        "approval_text": REVIEW_HARDENING_APPROVAL_TEXT,
+        "execution_authorized": False,
+    }:
+        raise ValueError("P1-02R-O1 review-hardening approval drifted")
+    calibration_approval = protocol.get("authorization", {}).get(
+        "full_page_calibration_execution"
+    )
+    if calibration_authorized:
+        if calibration_approval != {
+            "scope": "one_human_p1_02r_o1_full_page_synthetic_cpu_calibration",
+            "approved_by": "user",
+            "approved_on": "2026-09-05",
+            "approval_text": FULL_PAGE_CALIBRATION_APPROVAL_TEXT,
+            "execution_actor": "human",
+            "approved_parent_commit": FULL_PAGE_CALIBRATION_APPROVAL_PARENT_COMMIT,
+            "execution_commit_rule": EXECUTION_COMMIT_RULE,
+            "approval_commit_changed_paths": (
+                FULL_PAGE_CALIBRATION_APPROVAL_COMMIT_PATHS
+            ),
+            "authorized_invocations": 1,
+            "consumed_invocations": 0,
+            "remaining_authorized_invocations": 1,
+            "automatic_retry_allowed": False,
+        }:
+            raise ValueError("P1-02R-O1 full-page calibration approval drifted")
+    elif calibration_approval is not None:
+        raise ValueError(
+            "Prepared P1-02R-O1 must not claim calibration execution approval"
+        )
+
+    scores = protocol.get("input_bundle", {}).get("retrieval_scores", {})
+    wrapper = protocol.get("sharded_wrapper", {})
+    expected_wrapper_fields = {
+        "classification": "preparation_only_no_live_oracle_result",
+        "grid": "w7",
+        "query_order": "candidate_audit_row_order",
+        "input_scan": "parquet_row_groups_in_file_order",
+        "input_row_groups": scores.get("row_groups"),
+        "input_query_chunk_size": 8,
+        "expected_queries": scores.get("queries"),
+        "expected_pages_per_query": scores.get("pages_per_query"),
+        "checkpoint_root": "artifacts/vidoseek_p1_02r_oracle_w7_v1_checkpoints",
+        "checkpoint_write_mode": "atomic_create_once_no_overwrite",
+        "resume_policy": (
+            "reuse_existing_only_after_exact_identity_and_content_hash_validation"
+        ),
+        "absent_expected_checkpoint_action": "compute_once_in_canonical_pass",
+        "invalid_existing_or_unexpected_checkpoint_action": (
+            "fail_closed_no_overwrite"
+        ),
+        "full_w7_future_command_cmd": FULL_W7_COMMAND_CMD,
+        "command_currently_authorized": False,
+    }
+    for field, expected in expected_wrapper_fields.items():
+        if wrapper.get(field) != expected:
+            raise ValueError(f"P1-02R-O1 sharded-wrapper contract drifted: {field}")
+    phases = wrapper.get("phases", {})
+    global_phase = phases.get("global_profile", {})
+    query_phase = phases.get("query_oracle", {})
+    finalization = phases.get("finalization", {})
+    if wrapper.get("checkpoint_envelope") != {
+        "schema_version": 1,
+        "canonical_json_sha256": "required",
+        "run_identity_sha256": "required",
+        "input_query_sha256": "required_per_query",
+    }:
+        raise ValueError("P1-02R-O1 checkpoint-envelope contract drifted")
+    if (
+        global_phase.get("profiles_per_query") != 7
+        or global_phase.get("checkpoint_per_query") is not True
+        or global_phase.get("reduce_across_all_queries_before_query_oracle") is not True
+        or global_phase.get("reduction_order") != "candidate_audit_row_order"
+        or global_phase.get("profile_tie_break")
+        != ["ndcg_at_10", "recall_at_3", "mrr_at_10"]
+        or global_phase.get("retain_earliest_profile_within_tolerance") != 1e-12
+    ):
+        raise ValueError("P1-02R-O1 global-profile sharding semantics drifted")
+    if (
+        query_phase.get("checkpoint_per_query") is not True
+        or query_phase.get("requires_frozen_global_selection") is not True
+        or query_phase.get("canonical_order") != "candidate_audit_row_order"
+        or query_phase.get("qarf_and_qpaf_are_query_local") is not True
+        or query_phase.get("qpaf_max_sweeps") != 2
+    ):
+        raise ValueError("P1-02R-O1 query-oracle sharding semantics drifted")
+    if (
+        finalization.get("requires_exact_unique_query_count") != scores.get("queries")
+        or finalization.get("rejects_missing_duplicate_or_unexpected_checkpoints")
+        is not True
+        or finalization.get("bootstrap_once_after_canonical_merge") is not True
+        or finalization.get("immutable_output_directory")
+        != protocol.get("planned_outputs", {}).get("immutable_output_dir")
+    ):
+        raise ValueError("P1-02R-O1 sharded finalization semantics drifted")
+    equivalence = wrapper.get("exact_semantic_equivalence", {})
+    if (
+        equivalence.get("reference") != "frozen_run_qpaf_oracle_w7"
+        or equivalence.get("rows") != "exact"
+        or equivalence.get("summary") != "exact"
+        or equivalence.get("subgroups") != "exact"
+        or equivalence.get("numeric_tolerance") != 0.0
+    ):
+        raise ValueError("P1-02R-O1 exact-semantic equivalence contract drifted")
+
+    calibration = protocol.get("full_page_calibration", {})
+    expected_calibration_fields = {
+        "classification": "engineering_full_page_calibration_not_result",
+        "device": "cpu",
+        "grid": "w7",
+        "query_selection": "candidate_audit_fixed_index",
+        "query_index": 570,
+        "pages_per_query": scores.get("pages_per_query"),
+        "bootstrap_resamples": 100,
+        "max_workers": 1,
+        "cpu_thread_limit": 1,
+        "hard_timeout_seconds": 2700,
+        "actual_relevance_loaded": False,
+        "synthetic_relevance_rule": "first_and_middle_page_binary_relevant",
+        "automatic_retry_allowed": False,
+        "attempt_marker_path": (
+            "artifacts/vidoseek_p1_02r_oracle_w7_v1_full_page_calibration/"
+            "_ATTEMPTED.json"
+        ),
+        "output_manifest_path": (
+            "artifacts/vidoseek_p1_02r_oracle_w7_v1_full_page_calibration/"
+            "run_manifest.json"
+        ),
+        "future_command_cmd": FULL_PAGE_CALIBRATION_COMMAND_CMD,
+        "command_currently_authorized": calibration_authorized,
+    }
+    for field, expected in expected_calibration_fields.items():
+        if calibration.get(field) != expected:
+            raise ValueError(f"P1-02R-O1 full-page calibration drifted: {field}")
+
+    readiness = protocol.get("execution_readiness", {})
+    expected_readiness = {
+        "full_oracle_protocol_wrapper_exists": True,
+        "query_sharded_resume_contract_exists": True,
+        "exact_semantic_equivalence_tests_exist": True,
+        "ready_for_full_page_calibration_approval": not calibration_authorized,
+        "full_page_calibration_authorized": calibration_authorized,
+        "full_page_calibration_executed": False,
+        "ready_for_execution_approval": False,
+        "next_gate": (
+            "one_human_full_page_single_query_calibration_execution_then_review"
+            if calibration_authorized
+            else "separate_human_full_page_single_query_calibration_approval"
+        ),
+    }
+    for field, expected in expected_readiness.items():
+        if readiness.get(field) != expected:
+            raise ValueError(f"P1-02R-O1 sharded readiness drifted: {field}")
+    expected_execution = {
+        "performance_probe_allowed": False,
+        "performance_probe_output_write_allowed": False,
+        "full_page_calibration_allowed": calibration_authorized,
+        "full_page_calibration_output_write_allowed": calibration_authorized,
+        "local_cpu_oracle_allowed": False,
+        "modal_allowed": False,
+        "gpu_allowed": False,
+        "oracle_analysis_allowed": False,
+        "full_w7_sharded_allowed": False,
+        "checkpoint_writes_allowed": calibration_authorized,
+        "p1_03_allowed": False,
+        "learned_qpaf_allowed": False,
+        "output_writes_allowed": False,
+    }
+    if protocol.get("execution") != expected_execution:
+        raise ValueError("P1-02R-O1 sharded execution guards drifted")
+
+
+def validate_protocol(protocol: dict[str, Any], repo_root: Path) -> None:
+    if (
+        protocol.get("schema_version") != 1
+        or protocol.get("protocol_id") != PROTOCOL_ID
+    ):
+        raise ValueError("Unsupported P1-02R-O1 protocol identity")
+    status = protocol.get("status")
+    if status not in {
+        PREPARED_STATUS,
+        APPROVED_STATUS,
+        RECORDED_STATUS,
+        SHARDED_PREPARED_STATUS,
+        FULL_PAGE_CALIBRATION_APPROVED_STATUS,
+    }:
+        raise ValueError("Unsupported P1-02R-O1 protocol status")
+    if (
+        protocol.get("authorization", {})
+        .get("preexecution_preparation", {})
+        .get("approval_text")
+        != PREPARATION_APPROVAL_TEXT
+    ):
+        raise ValueError("P1-02R-O1 pre-execution preparation approval drifted")
+
+    graph = protocol.get("parent_task_graph", {})
+    if graph.get("frozen_p1_02", {}).get("status") != "BLOCKED":
+        raise ValueError("P1-02 must remain BLOCKED")
+    if graph.get("frozen_p1_02", {}).get("relabel_allowed") is not False:
+        raise ValueError("P1-02 relabeling must remain forbidden")
+    if graph.get("verified_recovery", {}).get("status") != "PASS":
+        raise ValueError("P1-02R recovery must remain a verified PASS")
+    if graph.get("frozen_p1_03", {}).get("status") != "BLOCKED":
+        raise ValueError("P1-03 must remain BLOCKED")
+    if graph.get("frozen_p1_03", {}).get("execution_authorized") is not False:
+        raise ValueError("P1-03 execution must remain unauthorized")
+
+    probe = protocol.get("performance_probe", {})
+    query_indices = probe.get("query_indices")
+    page_limits = probe.get("page_limits")
+    if query_indices != [0, 570, 1141]:
+        raise ValueError("Performance probe query indices must remain [0, 570, 1141]")
+    if page_limits != [128, 256, 512]:
+        raise ValueError("Performance probe page limits must remain [128, 256, 512]")
+    if probe.get("bootstrap_resamples") != 100 or probe.get("repetitions") != 1:
+        raise ValueError("Performance probe repetition/bootstrap limits drifted")
+    if probe.get("per_case_timeout_seconds") != 120:
+        raise ValueError("Performance probe per-case timeout must remain 120 seconds")
+    if probe.get("ladder_timeout_seconds") != 300:
+        raise ValueError("Performance probe ladder timeout must remain 300 seconds")
+    if probe.get("actual_relevance_loaded") is not False:
+        raise ValueError("Performance probe must not load actual relevance")
+    if probe.get("device") != "cpu" or probe.get("grid") != "w7":
+        raise ValueError("Performance probe must remain CPU-only W7 timing")
+    if probe.get("classification") != "engineering_performance_probe_not_result":
+        raise ValueError("Performance probe must remain classified as a non-result")
+    if probe.get("max_case_candidate_rows") != 1536:
+        raise ValueError("Performance probe must remain bounded to 1,536 rows per case")
+    if probe.get("max_concurrent_cases") != 1 or probe.get("cpu_thread_limit") != 1:
+        raise ValueError("Performance probe must remain single-process/single-threaded")
+    if probe.get("automatic_retry_allowed") is not False:
+        raise ValueError("Performance probe automatic retry must remain forbidden")
+    if probe.get("query_selection") != (
+        "systematic_floor_indices_over_candidate_audit_order"
+    ):
+        raise ValueError("Performance probe query selection drifted")
+    if probe.get("page_selection") != "systematic_floor_indices_over_ascending_page_id":
+        raise ValueError("Performance probe page selection drifted")
+    if probe.get("unused_required_columns_rule") != (
+        "deterministic_stage1_and_branch_rank_placeholders"
+    ):
+        raise ValueError("Performance probe placeholder rule drifted")
+    evidence_produced = status in {
+        RECORDED_STATUS,
+        SHARDED_PREPARED_STATUS,
+        FULL_PAGE_CALIBRATION_APPROVED_STATUS,
+    }
+    if probe.get("output_manifest_produced") is not evidence_produced:
+        raise ValueError("Performance-probe manifest production state drifted")
+    if probe.get("attempt_marker_produced") is not evidence_produced:
+        raise ValueError("Performance-probe attempt-marker production state drifted")
+    if probe.get("future_command_cmd") != PERFORMANCE_PROBE_COMMAND_CMD:
+        raise ValueError("Performance-probe CMD command must use quoted assignments")
+
+    preflight = protocol.get("preflight_contract", {})
+    if preflight.get("mode") != "read_only":
+        raise ValueError("P1-02R-O1 preflight must remain read-only")
+    if preflight.get("command") != PREFLIGHT_COMMAND_CMD:
+        raise ValueError("Preflight CMD command must use quoted assignments")
+    for field in [
+        "actual_relevance_values_loaded",
+        "report_persisted",
+        "oracle_executed",
+    ]:
+        if preflight.get(field) is not False:
+            raise ValueError(f"P1-02R-O1 preflight boundary drifted: {field}")
+    if (
+        preflight.get(
+            "verifies_input_bytes_hashes_parquet_metadata_and_evidence_cross_links"
+        )
+        is not True
+    ):
+        raise ValueError("P1-02R-O1 preflight verification contract is incomplete")
+
+    manifest_contract = protocol.get("run_manifest_contract", {})
+    if manifest_contract.get("write_mode") != "atomic_create_once_no_overwrite":
+        raise ValueError("P1-02R-O1 run manifest must remain immutable")
+    if manifest_contract.get("classification") != probe.get("classification"):
+        raise ValueError("P1-02R-O1 run-manifest classification drifted")
+    if manifest_contract.get("path") != probe.get("output_manifest_path"):
+        raise ValueError("P1-02R-O1 run-manifest path drifted")
+    if manifest_contract.get("attempt_marker_sha256_required") is not True:
+        raise ValueError("P1-02R-O1 run manifest must link the consumed attempt")
+    for field in ["actual_relevance_values_allowed", "oracle_result_fields_allowed"]:
+        if manifest_contract.get(field) is not False:
+            raise ValueError(f"P1-02R-O1 run-manifest boundary drifted: {field}")
+
+    attempt_contract = protocol.get("attempt_marker_contract", {})
+    if attempt_contract.get("write_mode") != "atomic_create_once_no_overwrite":
+        raise ValueError("P1-02R-O1 attempt marker must remain immutable")
+    if attempt_contract.get("classification") != "engineering_probe_attempt_not_result":
+        raise ValueError("P1-02R-O1 attempt-marker classification drifted")
+    if attempt_contract.get("path") != probe.get("attempt_marker_path"):
+        raise ValueError("P1-02R-O1 attempt-marker path drifted")
+    if attempt_contract.get("consumes_authorization_before_preflight") is not True:
+        raise ValueError("P1-02R-O1 attempt marker must consume before preflight")
+    if attempt_contract.get("automatic_retry_allowed") is not False:
+        raise ValueError("P1-02R-O1 attempt marker must forbid retry")
+
+    readiness = protocol.get("execution_readiness", {})
+    for field in [
+        "protocol_bound_preflight_exists",
+        "immutable_run_manifest_writer_exists",
+        "performance_probe_entrypoint_exists",
+    ]:
+        if readiness.get(field) is not True:
+            raise ValueError(f"P1-02R-O1 readiness field must be true: {field}")
+    if readiness.get("all_corpus_runtime_measured") is not False:
+        raise ValueError("All-corpus runtime must remain unmeasured")
+    if readiness.get("ready_for_execution_approval") is not False:
+        raise ValueError("Full W7 execution must remain unready")
+    wrapper_exists = status in {
+        SHARDED_PREPARED_STATUS,
+        FULL_PAGE_CALIBRATION_APPROVED_STATUS,
+    }
+    if readiness.get("full_oracle_protocol_wrapper_exists") is not wrapper_exists:
+        raise ValueError("Full W7 protocol-wrapper readiness drifted")
+    if readiness.get("performance_probe_runtime_measured") is not evidence_produced:
+        raise ValueError("Performance-probe runtime measurement state drifted")
+
+    execution = protocol.get("execution", {})
+    authorization = protocol.get("authorization", {})
+    if status == PREPARED_STATUS:
+        if readiness.get("ready_for_performance_probe_execution_approval") is not True:
+            raise ValueError("Prepared performance probe must be ready for approval")
+        if probe.get("command_currently_authorized") is not False:
+            raise ValueError("Reviewed future command must remain unauthorized")
+        if readiness.get("performance_probe_authorized") is not False:
+            raise ValueError("Prepared performance probe must remain unauthorized")
+        if not execution or any(value is not False for value in execution.values()):
+            raise ValueError(
+                "Prepared P1-02R-O1 execution guards must all remain closed"
+            )
+        if "performance_probe_execution" in authorization:
+            raise ValueError(
+                "Prepared protocol must not claim probe execution approval"
+            )
+    else:
+        prior_approval = authorization.get("performance_probe_execution", {})
+        expected_failure = {
+            "outcome": "failed_before_python_runtime_initialization_and_project_import",
+            "failure_stage": "cpython_preinitialization",
+            "failure_cause": "unquoted_cmd_set_assignment_added_trailing_space",
+            "error": FAILED_PYTHON_ERROR,
+            "failed_command_cmd": FAILED_PERFORMANCE_PROBE_COMMAND_CMD,
+            "pythonutf8_observed_value": "1 ",
+            "python_runtime_initialized": False,
+            "project_module_imported": False,
+            "attempt_marker_produced": False,
+            "preflight_executed": False,
+            "performance_probe_executed": False,
+            "probe_manifest_produced": False,
+            "oracle_result_produced": False,
+        }
+        if (
+            prior_approval.get("scope") != ORIGINAL_PROBE_SCOPE
+            or prior_approval.get("approved_by") != "user"
+            or prior_approval.get("approved_on") != "2026-09-02"
+            or prior_approval.get("approval_text") != ORIGINAL_EXECUTION_APPROVAL_TEXT
+            or prior_approval.get("execution_actor") != "human"
+            or prior_approval.get("approved_safeguard_commit")
+            != APPROVED_SAFEGUARD_COMMIT
+            or prior_approval.get("approval_commit") != FAILED_EXECUTION_APPROVAL_COMMIT
+            or prior_approval.get("execution_commit_rule") != EXECUTION_COMMIT_RULE
+            or prior_approval.get("approval_commit_changed_paths")
+            != APPROVAL_COMMIT_PATHS
+            or prior_approval.get("authorized_invocations") != 1
+            or prior_approval.get("consumed_invocations") != 1
+            or prior_approval.get("remaining_authorized_invocations") != 0
+            or prior_approval.get("automatic_retry_allowed") is not False
+            or prior_approval.get("failure_record") != expected_failure
+        ):
+            raise ValueError("P1-02R-O1 failed original invocation provenance drifted")
+        replacement = authorization.get("replacement_performance_probe_execution", {})
+        if (
+            replacement.get("approval_text") != EXECUTION_APPROVAL_TEXT
+            or replacement.get("authorized_invocations") != 1
+            or replacement.get("automatic_retry_allowed") is not False
+            or replacement.get("execution_actor") != "human"
+        ):
+            raise ValueError("P1-02R-O1 replacement execution approval drifted")
+
+    if status == APPROVED_STATUS:
+        if readiness.get("ready_for_performance_probe_execution_approval") is not False:
+            raise ValueError("Approved performance probe must not await approval")
+        if probe.get("command_currently_authorized") is not True:
+            raise ValueError(
+                "Approved performance-probe command must be marked authorized"
+            )
+        if readiness.get("performance_probe_authorized") is not True:
+            raise ValueError("Approved performance probe must be authorized")
+        if readiness.get("performance_probe_executed") is not False:
+            raise ValueError("Approved performance probe must remain unexecuted")
+        if execution.get("performance_probe_allowed") is not True:
+            raise ValueError("Approved performance-probe execution guard is closed")
+        if execution.get("performance_probe_output_write_allowed") is not True:
+            raise ValueError("Approved performance-probe output guard is closed")
+        for field in [
+            "local_cpu_oracle_allowed",
+            "modal_allowed",
+            "gpu_allowed",
+            "oracle_analysis_allowed",
+            "p1_03_allowed",
+            "learned_qpaf_allowed",
+            "output_writes_allowed",
+        ]:
+            if execution.get(field) is not False:
+                raise ValueError(f"Approved protocol opened forbidden guard: {field}")
+        replacement = authorization["replacement_performance_probe_execution"]
+        if (
+            replacement.get("consumed_invocations") != 0
+            or replacement.get("remaining_authorized_invocations") != 1
+        ):
+            raise ValueError("Approved replacement invocation count drifted")
+    elif status in {
+        RECORDED_STATUS,
+        SHARDED_PREPARED_STATUS,
+        FULL_PAGE_CALIBRATION_APPROVED_STATUS,
+    }:
+        if readiness.get("ready_for_performance_probe_execution_approval") is not False:
+            raise ValueError("Recorded performance probe must not await approval")
+        if probe.get("command_currently_authorized") is not False:
+            raise ValueError("Recorded performance-probe command must be closed")
+        if readiness.get("performance_probe_authorized") is not False:
+            raise ValueError("Recorded performance probe must be unauthorized")
+        if readiness.get("performance_probe_executed") is not True:
+            raise ValueError("Recorded performance probe must be marked executed")
+        expected_next_gate = {
+            RECORDED_STATUS: "human_review_full_w7_resource_plan_only",
+            SHARDED_PREPARED_STATUS: (
+                "separate_human_full_page_single_query_calibration_approval"
+            ),
+            FULL_PAGE_CALIBRATION_APPROVED_STATUS: (
+                "one_human_full_page_single_query_calibration_execution_then_review"
+            ),
+        }[status]
+        if readiness.get("next_gate") != expected_next_gate:
+            raise ValueError("Recorded P1-02R-O1 next gate drifted")
+        if status == RECORDED_STATUS and (
+            not execution or any(value is not False for value in execution.values())
+        ):
+            raise ValueError("Recorded P1-02R-O1 execution guards must all be closed")
+        replacement = authorization["replacement_performance_probe_execution"]
+        if (
+            replacement.get("consumed_invocations") != 1
+            or replacement.get("remaining_authorized_invocations") != 0
+            or replacement.get("outcome") != "PASS"
+        ):
+            raise ValueError("Recorded replacement invocation closure drifted")
+        recording = authorization.get("performance_probe_pass_recording", {})
+        if recording != {
+            "scope": "local_probe_pass_recording_and_runtime_resource_review_only",
+            "approved_by": "user",
+            "approved_on": "2026-09-02",
+            "approval_text": RECORDING_APPROVAL_TEXT,
+            "execution_authorized": False,
+        }:
+            raise ValueError("P1-02R-O1 PASS-recording approval drifted")
+        resource_review = protocol.get("full_w7_runtime_resource_review", {})
+        if (
+            resource_review.get("classification")
+            != "engineering_estimate_review_only_not_execution_authorization"
+            or resource_review.get("evidence_basis")
+            != "recorded_three_query_synthetic_relevance_probe"
+            or resource_review.get("estimate_status") != "derived_not_measured"
+            or resource_review.get("recommendation")
+            != "no_go_current_monolithic_single_worker_full_w7"
+            or resource_review.get("execution_authorized") is not False
+        ):
+            raise ValueError("Full-W7 runtime/resource review boundary drifted")
+        validate_recorded_probe_evidence(protocol, repo_root)
+        if status in {
+            SHARDED_PREPARED_STATUS,
+            FULL_PAGE_CALIBRATION_APPROVED_STATUS,
+        }:
+            _validate_sharded_preparation(protocol)
+
+    source_contract = protocol.get("implementation_contract", {})
+    if source_contract.get("source_sha256_basis") != "utf8_lf_bytes":
+        raise ValueError("Source hashes must use UTF-8/LF-normalized bytes")
+    sources = source_contract.get("source_files")
+    if not isinstance(sources, list) or not sources:
+        raise ValueError("P1-02R-O1 must pin its source files")
+    for source in sources:
+        path = _repo_path(repo_root, source["path"])
+        if not path.is_file() or text_sha256(path) != source["sha256"]:
+            raise RuntimeError(f"P1-02R-O1 source hash mismatch: {source['path']}")
+
+
+def _parquet_shape(path: Path) -> dict[str, Any]:
+    parquet = pq.ParquetFile(path)
+    return {
+        "rows": parquet.metadata.num_rows,
+        "row_groups": parquet.metadata.num_row_groups,
+        "columns": [field.name for field in parquet.schema_arrow],
+        "column_types": {field.name: str(field.type) for field in parquet.schema_arrow},
+    }
+
+
+def _check_file(
+    path: Path, expected_bytes: int, expected_sha256: str, label: str
+) -> None:
+    if not path.is_file():
+        raise FileNotFoundError(f"Missing {label}: {path}")
+    if path.stat().st_size != expected_bytes:
+        raise RuntimeError(f"{label} byte count does not match the protocol")
+    if file_sha256(path) != expected_sha256:
+        raise RuntimeError(f"{label} SHA-256 does not match the protocol")
+
+
+def protocol_bound_preflight(
+    protocol_path: Path,
+    repo_root: Path | None = None,
+    *,
+    allow_consumed_attempt: bool = False,
+    allow_recorded_probe_evidence: bool = False,
+) -> dict[str, Any]:
+    protocol_path = protocol_path.resolve()
+    root = (repo_root or protocol_path.parents[1]).resolve()
+    protocol = load_protocol(protocol_path)
+    validate_protocol(protocol, root)
+
+    bundle = protocol["input_bundle"]
+    scores = bundle["retrieval_scores"]
+    audit = bundle["candidate_audit"]
+    score_path = _repo_path(root, scores["path"])
+    audit_path = _repo_path(root, audit["path"])
+    manifest_path = _repo_path(root, scores["manifest_path"])
+    review_path = _repo_path(root, scores["integrity_review_path"])
+
+    _check_file(score_path, scores["bytes"], scores["byte_sha256"], "retrieval scores")
+    _check_file(audit_path, audit["bytes"], audit["byte_sha256"], "candidate audit")
+    _check_file(
+        manifest_path,
+        scores["manifest_bytes"],
+        scores["manifest_sha256"],
+        "extraction manifest",
+    )
+    _check_file(
+        review_path,
+        scores["integrity_review_bytes"],
+        scores["integrity_review_sha256"],
+        "integrity review",
+    )
+
+    score_shape = _parquet_shape(score_path)
+    audit_shape = _parquet_shape(audit_path)
+    for field in ["rows", "row_groups", "columns", "column_types"]:
+        if score_shape[field] != scores[field]:
+            raise RuntimeError(f"Retrieval-score {field} does not match the protocol")
+        if audit_shape[field] != audit[field]:
+            raise RuntimeError(f"Candidate-audit {field} does not match the protocol")
+
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    review = json.loads(review_path.read_text(encoding="utf-8"))
+    for name, expected in [
+        ("retrieval_scores.parquet", scores),
+        ("candidate_audit.parquet", audit),
+    ]:
+        recorded = manifest.get("artifacts", {}).get(name, {})
+        if recorded.get("bytes") != expected["bytes"]:
+            raise RuntimeError(f"Manifest {name} byte count mismatch")
+        if recorded.get("rows") != expected["rows"]:
+            raise RuntimeError(f"Manifest {name} row count mismatch")
+        if recorded.get("sha256") != expected["byte_sha256"]:
+            raise RuntimeError(f"Manifest {name} SHA-256 mismatch")
+        reviewed = review.get("payloads", {}).get(name, {})
+        for field, key in [
+            ("bytes", "bytes"),
+            ("rows", "rows"),
+            ("sha256", "byte_sha256"),
+        ]:
+            if reviewed.get(field) != expected[key]:
+                raise RuntimeError(f"Integrity-review {name} {field} mismatch")
+    if (
+        manifest["artifacts"]["retrieval_scores.parquet"].get("content_sha256")
+        != scores["content_sha256"]
+    ):
+        raise RuntimeError("Manifest retrieval-score content SHA-256 mismatch")
+    checks = review.get("checks")
+    if (
+        review.get("status") != "PASS"
+        or not isinstance(checks, dict)
+        or not checks
+        or any(value is not True for value in checks.values())
+    ):
+        raise RuntimeError("P1-02R integrity review is not a complete PASS")
+    contract = review.get("contract", {})
+    expected_contract = {
+        "rows_checked_each_score_file": scores["rows"],
+        "queries": scores["queries"],
+        "pages_per_query": scores["pages_per_query"],
+        "coverage": scores["coverage"],
+        "missing_relevant_pairs": scores["missing_relevant_pairs"],
+        "queries_with_zero_relevant_candidates": scores[
+            "queries_with_zero_relevant_candidates"
+        ],
+        "full_score_produced": False,
+    }
+    for field, expected in expected_contract.items():
+        if contract.get(field) != expected:
+            raise RuntimeError(f"Integrity-review contract mismatch: {field}")
+    boundaries = review.get("boundaries", {})
+    if boundaries.get("frozen_p1_02_status") != "BLOCKED":
+        raise RuntimeError("Integrity review relabeled frozen P1-02")
+    if boundaries.get("p1_03_authorized") is not False:
+        raise RuntimeError("Integrity review authorized P1-03")
+
+    oracle_output = _repo_path(
+        root, protocol["planned_outputs"]["immutable_output_dir"]
+    )
+    probe_manifest = _repo_path(
+        root, protocol["performance_probe"]["output_manifest_path"]
+    )
+    attempt_marker = _repo_path(
+        root, protocol["performance_probe"]["attempt_marker_path"]
+    )
+    if oracle_output.exists():
+        raise FileExistsError(
+            f"Oracle output directory already exists: {oracle_output}"
+        )
+    if probe_manifest.exists() and not allow_recorded_probe_evidence:
+        raise FileExistsError(
+            f"Performance-probe manifest already exists: {probe_manifest}"
+        )
+    if (
+        attempt_marker.exists()
+        and not allow_consumed_attempt
+        and not allow_recorded_probe_evidence
+    ):
+        raise FileExistsError(
+            f"Performance-probe authorization is already consumed: {attempt_marker}"
+        )
+    if allow_consumed_attempt and not attempt_marker.is_file():
+        raise FileNotFoundError("Performance-probe attempt marker was not created")
+    if allow_recorded_probe_evidence:
+        if allow_consumed_attempt:
+            raise ValueError(
+                "Recorded-probe and in-progress-attempt preflight modes are exclusive"
+            )
+        validate_recorded_probe_evidence(protocol, root)
+
+    return {
+        "schema_version": 1,
+        "status": "PASS",
+        "protocol_id": PROTOCOL_ID,
+        "protocol_sha256": text_sha256(protocol_path),
+        "retrieval_score_sha256": scores["byte_sha256"],
+        "retrieval_score_content_sha256": scores["content_sha256"],
+        "rows": scores["rows"],
+        "queries": scores["queries"],
+        "pages_per_query": scores["pages_per_query"],
+        "coverage": scores["coverage"],
+        "semantic_integrity_inherited_from_hash_pinned_review": True,
+        "actual_relevance_loaded": False,
+        "oracle_executed": False,
+        "scientific_result_produced": False,
+        "authorization_attempt_consumed": allow_consumed_attempt,
+        "recorded_probe_evidence_accepted": allow_recorded_probe_evidence,
+    }
+
+
+def require_exact_git_execution_checkout(
+    repo_root: Path,
+    *,
+    approved_parent_commit: str,
+    approval_commit_changed_paths: list[str],
+    execution_label: str,
+) -> str:
+    if (
+        len(approved_parent_commit) != 40
+        or any(
+            character not in "0123456789abcdef" for character in approved_parent_commit
+        )
+        or not approval_commit_changed_paths
+        or any(
+            not isinstance(path, str)
+            or not path
+            or "\\" in path
+            or Path(path).is_absolute()
+            or ".." in Path(path).parts
+            for path in approval_commit_changed_paths
+        )
+        or len(set(approval_commit_changed_paths)) != len(approval_commit_changed_paths)
+    ):
+        raise RuntimeError(f"{execution_label} approval Git provenance is incomplete")
+    live_commit = subprocess.run(
+        ["git", "rev-parse", "HEAD"],
+        cwd=repo_root,
+        check=True,
+        capture_output=True,
+        text=True,
+        timeout=30,
+    ).stdout.strip()
+    commit_and_parents = subprocess.run(
+        ["git", "rev-list", "--parents", "-n", "1", "HEAD"],
+        cwd=repo_root,
+        check=True,
+        capture_output=True,
+        text=True,
+        timeout=30,
+    ).stdout.split()
+    if commit_and_parents != [live_commit, approved_parent_commit]:
+        raise RuntimeError(
+            f"{execution_label} checkout must be one non-merge direct child of "
+            "the approved parent commit"
+        )
+    changed_paths = subprocess.run(
+        ["git", "diff", "--name-only", approved_parent_commit, "HEAD", "--"],
+        cwd=repo_root,
+        check=True,
+        capture_output=True,
+        text=True,
+        timeout=30,
+    ).stdout.splitlines()
+    if changed_paths != approval_commit_changed_paths:
+        raise RuntimeError(f"{execution_label} approval commit changed-path drifted")
+    tracked_status = subprocess.run(
+        ["git", "status", "--porcelain", "--untracked-files=no"],
+        cwd=repo_root,
+        check=True,
+        capture_output=True,
+        text=True,
+        timeout=30,
+    ).stdout.strip()
+    if tracked_status:
+        raise RuntimeError(f"{execution_label} requires a clean tracked checkout")
+    return live_commit
+
+
+def require_performance_probe_execution_approval(
+    protocol: dict[str, Any],
+    repo_root: Path,
+) -> str:
+    validate_protocol(protocol, repo_root)
+    readiness = protocol["execution_readiness"]
+    execution = protocol["execution"]
+    if readiness.get("performance_probe_authorized") is not True:
+        raise RuntimeError("P1-02R-O1 performance probe is prepared but not authorized")
+    if execution.get("performance_probe_allowed") is not True:
+        raise RuntimeError("P1-02R-O1 performance-probe execution guard is closed")
+    for field in [
+        "local_cpu_oracle_allowed",
+        "modal_allowed",
+        "gpu_allowed",
+        "oracle_analysis_allowed",
+        "p1_03_allowed",
+        "learned_qpaf_allowed",
+        "output_writes_allowed",
+    ]:
+        if execution.get(field) is not False:
+            raise RuntimeError(f"P1-02R-O1 forbidden execution flag opened: {field}")
+    if execution.get("performance_probe_output_write_allowed") is not True:
+        raise RuntimeError("P1-02R-O1 performance-probe output guard is closed")
+
+    approval = protocol.get("authorization", {}).get(
+        "replacement_performance_probe_execution"
+    )
+    required = {
+        "scope": PROBE_SCOPE,
+        "approved_by": "user",
+        "approved_on": "2026-09-02",
+        "approval_text": EXECUTION_APPROVAL_TEXT,
+        "authorized_invocations": 1,
+        "consumed_invocations": 0,
+        "remaining_authorized_invocations": 1,
+        "automatic_retry_allowed": False,
+        "execution_actor": "human",
+        "replaces_failed_approval_commit": FAILED_EXECUTION_APPROVAL_COMMIT,
+        "approved_correction_base_commit": REPLACEMENT_APPROVAL_PARENT_COMMIT,
+        "automatic_retry_under_prior_authorization": False,
+        "execution_commit_rule": EXECUTION_COMMIT_RULE,
+        "approval_commit_changed_paths": APPROVAL_COMMIT_PATHS,
+    }
+    if not isinstance(approval, dict) or any(
+        approval.get(field) != expected for field, expected in required.items()
+    ):
+        raise RuntimeError(
+            "P1-02R-O1 performance-probe approval provenance is incomplete"
+        )
+    if any(os.environ.get(name) != "1" for name in CPU_THREAD_ENV):
+        raise RuntimeError("P1-02R-O1 CPU thread limits are not pinned to one")
+    return require_exact_git_execution_checkout(
+        repo_root,
+        approved_parent_commit=REPLACEMENT_APPROVAL_PARENT_COMMIT,
+        approval_commit_changed_paths=APPROVAL_COMMIT_PATHS,
+        execution_label="P1-02R-O1 performance probe",
+    )
+
+
+def _systematic_positions(total: int, count: int) -> np.ndarray:
+    if count < 2 or count > total:
+        raise ValueError("Systematic probe size must be between 2 and the full size")
+    return np.floor(np.linspace(0, total - 1, count)).astype(int)
+
+
+def load_probe_candidates(
+    protocol: dict[str, Any],
+    repo_root: Path,
+) -> tuple[pd.DataFrame, list[str]]:
+    scores = protocol["input_bundle"]["retrieval_scores"]
+    audit = protocol["input_bundle"]["candidate_audit"]
+    probe = protocol["performance_probe"]
+    audit_frame = pd.read_parquet(
+        _repo_path(repo_root, audit["path"]), columns=["query_id"]
+    )
+    if (
+        audit_frame["query_id"].duplicated().any()
+        or len(audit_frame) != scores["queries"]
+    ):
+        raise RuntimeError("Candidate-audit query order is invalid")
+    query_ids = (
+        audit_frame.iloc[probe["query_indices"]]["query_id"].astype(str).tolist()
+    )
+    frame = pd.read_parquet(
+        _repo_path(repo_root, scores["path"]),
+        columns=PROBE_SCORE_COLUMNS,
+        filters=[("query_id", "in", query_ids)],
+    )
+    counts = frame.groupby("query_id", sort=False).size().to_dict()
+    if any(counts.get(query_id) != scores["pages_per_query"] for query_id in query_ids):
+        raise RuntimeError("Probe queries do not contain the full frozen page set")
+    return frame, query_ids
+
+
+def build_probe_case(
+    candidates: pd.DataFrame,
+    query_ids: list[str],
+    page_limit: int,
+) -> pd.DataFrame:
+    if "relevance" in candidates.columns:
+        raise ValueError(
+            "Performance probe candidates must not contain actual relevance"
+        )
+    parts = []
+    for query_id in query_ids:
+        group = candidates.loc[
+            candidates["query_id"].astype(str).eq(query_id)
+        ].sort_values("page_id", kind="stable")
+        selected = group.iloc[_systematic_positions(len(group), page_limit)].copy()
+        selected["stage1_score"] = 0.0
+        selected["branch_ranks"] = "synthetic_probe_placeholder"
+        selected["relevance"] = 0.0
+        selected.iloc[0, selected.columns.get_loc("relevance")] = 1.0
+        selected.iloc[len(selected) // 2, selected.columns.get_loc("relevance")] = 1.0
+        parts.append(selected)
+    return pd.concat(parts, ignore_index=True)
+
+
+def _probe_case_worker(
+    frame: pd.DataFrame,
+    bootstrap_resamples: int,
+    result_queue: Any,
+) -> None:
+    try:
+        started = time.perf_counter()
+        run_qpaf_oracle(frame, grids=("w7",), n_bootstrap=bootstrap_resamples)
+        result_queue.put({"elapsed_seconds": time.perf_counter() - started})
+    except (
+        BaseException
+    ) as error:  # pragma: no cover - exercised through parent failure
+        result_queue.put({"error": f"{type(error).__name__}: {error}"})
+
+
+def complete_process_with_timeout(process: Any, timeout_seconds: float) -> None:
+    process.start()
+    process.join(timeout_seconds)
+    if process.is_alive():
+        process.terminate()
+        process.join(5)
+        if process.is_alive():
+            process.kill()
+            process.join(5)
+        raise TimeoutError(f"Performance-probe case exceeded {timeout_seconds} seconds")
+    if process.exitcode != 0:
+        raise RuntimeError(
+            f"Performance-probe worker exited with code {process.exitcode}"
+        )
+
+
+def _package_version(name: str) -> str | None:
+    try:
+        return version(name)
+    except PackageNotFoundError:
+        return None
+
+
+def validate_probe_run_manifest(manifest: dict[str, Any]) -> None:
+    expected_boundaries = {
+        "actual_relevance_loaded": False,
+        "scientific_oracle_analysis_executed": False,
+        "oracle_results_persisted": False,
+        "full_w7_oracle_executed": False,
+        "modal_or_gpu_used": False,
+        "p1_03_authorized": False,
+        "learned_qpaf_executed": False,
+        "frozen_p1_02_status": "BLOCKED",
+    }
+    expected_top_level = {
+        "schema_version",
+        "status",
+        "classification",
+        "protocol_id",
+        "protocol_sha256",
+        "source_commit",
+        "attempt_marker_sha256",
+        "completed_at",
+        "environment",
+        "preflight",
+        "probe_contract",
+        "timings",
+        "boundaries",
+    }
+    if set(manifest) != expected_top_level:
+        unexpected = sorted(set(manifest) - expected_top_level)
+        missing = sorted(expected_top_level - set(manifest))
+        raise ValueError(
+            f"Run manifest fields drifted; missing={missing}, unexpected={unexpected}"
+        )
+    if manifest.get("schema_version") != 1 or manifest.get("status") != "PASS":
+        raise ValueError("Run manifest identity/status is invalid")
+    if manifest.get("protocol_id") != PROTOCOL_ID:
+        raise ValueError("Run manifest protocol identity is invalid")
+    if (
+        not isinstance(manifest.get("protocol_sha256"), str)
+        or len(manifest["protocol_sha256"]) != 64
+    ):
+        raise ValueError("Run manifest protocol SHA-256 is invalid")
+    if (
+        not isinstance(manifest.get("source_commit"), str)
+        or len(manifest["source_commit"]) != 40
+    ):
+        raise ValueError("Run manifest source commit is invalid")
+    if (
+        not isinstance(manifest.get("attempt_marker_sha256"), str)
+        or len(manifest["attempt_marker_sha256"]) != 64
+    ):
+        raise ValueError("Run manifest attempt-marker SHA-256 is invalid")
+    if not isinstance(manifest.get("completed_at"), str):
+        raise ValueError("Run manifest completion time is invalid")
+    if manifest.get("classification") != "engineering_performance_probe_not_result":
+        raise ValueError("Run manifest classification is not a non-result probe")
+    if manifest.get("boundaries") != expected_boundaries:
+        raise ValueError("Run manifest scientific boundaries are incomplete")
+    environment = manifest.get("environment")
+    if not isinstance(environment, dict) or environment.get("device") != "cpu":
+        raise ValueError("Run manifest environment is not CPU-only")
+    if environment.get("thread_limits") != {name: "1" for name in CPU_THREAD_ENV}:
+        raise ValueError("Run manifest CPU thread limits are invalid")
+    preflight = manifest.get("preflight")
+    if not isinstance(preflight, dict) or any(
+        preflight.get(field) is not False
+        for field in [
+            "actual_relevance_loaded",
+            "oracle_executed",
+            "scientific_result_produced",
+        ]
+    ):
+        raise ValueError("Run manifest preflight boundaries are invalid")
+    expected_probe_contract = {
+        "query_indices": [0, 570, 1141],
+        "page_limits": [128, 256, 512],
+        "bootstrap_resamples": 100,
+        "repetitions": 1,
+        "max_case_candidate_rows": 1536,
+        "max_concurrent_cases": 1,
+        "cpu_thread_limit": 1,
+        "per_case_timeout_seconds": 120,
+        "ladder_timeout_seconds": 300,
+        "actual_relevance_loaded": False,
+        "synthetic_relevance_rule": "first_and_middle_sampled_page_binary_relevant",
+    }
+    if manifest.get("probe_contract") != expected_probe_contract:
+        raise ValueError("Run manifest probe contract drifted")
+    timings = manifest.get("timings")
+    if not isinstance(timings, list) or len(timings) != 3:
+        raise ValueError("Run manifest must contain exactly three probe timings")
+    for timing, page_limit in zip(timings, [128, 256, 512]):
+        if set(timing) != {
+            "queries",
+            "pages_per_query",
+            "candidate_rows",
+            "elapsed_seconds",
+        }:
+            raise ValueError("Run manifest timing fields drifted")
+        if timing.get("queries") != 3 or timing.get("pages_per_query") != page_limit:
+            raise ValueError("Run manifest timing dimensions drifted")
+        if timing.get("candidate_rows") != 3 * page_limit:
+            raise ValueError("Run manifest timing row count drifted")
+        if (
+            not isinstance(timing.get("elapsed_seconds"), (int, float))
+            or timing["elapsed_seconds"] < 0
+        ):
+            raise ValueError("Run manifest timing value is invalid")
+
+    def collect_keys(value: Any) -> set[str]:
+        if isinstance(value, dict):
+            return {str(key).lower() for key in value} | set().union(
+                *(collect_keys(item) for item in value.values())
+            )
+        if isinstance(value, list):
+            return set().union(*(collect_keys(item) for item in value))
+        return set()
+
+    forbidden_result_keys = {
+        "accepted_updates",
+        "changed_candidates",
+        "changed_pages",
+        "global_metrics",
+        "mrr10",
+        "ndcg10",
+        "profile_counts",
+        "qpaf_metrics",
+        "qarf_metrics",
+        "recall1",
+        "recall3",
+        "relevant_count",
+    }
+    keys = collect_keys(manifest)
+    present = (keys & forbidden_result_keys) | {
+        key
+        for key in keys
+        if any(metric in key for metric in ["ndcg", "recall", "mrr"])
+    }
+    if present:
+        raise ValueError(
+            "Run manifest contains forbidden result fields: "
+            + ", ".join(sorted(present))
+        )
+
+
+def validate_probe_attempt_marker(marker: dict[str, Any]) -> None:
+    expected_boundaries = {
+        "authorization_attempt_consumed": True,
+        "automatic_retry_allowed": False,
+        "actual_relevance_loaded": False,
+        "scientific_oracle_analysis_executed": False,
+        "oracle_results_persisted": False,
+        "full_w7_oracle_executed": False,
+        "modal_or_gpu_used": False,
+        "p1_03_authorized": False,
+        "learned_qpaf_executed": False,
+        "frozen_p1_02_status": "BLOCKED",
+    }
+    expected_fields = {
+        "schema_version",
+        "status",
+        "classification",
+        "protocol_id",
+        "protocol_sha256",
+        "approval_commit",
+        "started_at",
+        "authorization",
+        "boundaries",
+    }
+    if set(marker) != expected_fields:
+        raise ValueError("Performance-probe attempt-marker fields drifted")
+    if marker.get("schema_version") != 1 or marker.get("status") != "STARTED":
+        raise ValueError("Performance-probe attempt-marker identity/status is invalid")
+    if marker.get("classification") != "engineering_probe_attempt_not_result":
+        raise ValueError("Performance-probe attempt-marker classification is invalid")
+    if marker.get("protocol_id") != PROTOCOL_ID:
+        raise ValueError("Performance-probe attempt-marker protocol is invalid")
+    if (
+        not isinstance(marker.get("protocol_sha256"), str)
+        or len(marker["protocol_sha256"]) != 64
+    ):
+        raise ValueError("Performance-probe attempt-marker protocol hash is invalid")
+    if (
+        not isinstance(marker.get("approval_commit"), str)
+        or len(marker["approval_commit"]) != 40
+    ):
+        raise ValueError("Performance-probe attempt-marker approval commit is invalid")
+    if not isinstance(marker.get("started_at"), str):
+        raise ValueError("Performance-probe attempt-marker start time is invalid")
+    if marker.get("authorization") != {
+        "authorized_invocations": 1,
+        "attempt_number": 1,
+        "remaining_authorized_invocations_after_start": 0,
+    }:
+        raise ValueError("Performance-probe attempt-marker authorization drifted")
+    if marker.get("boundaries") != expected_boundaries:
+        raise ValueError("Performance-probe attempt-marker boundaries drifted")
+
+
+def validate_recorded_probe_evidence(protocol: dict[str, Any], repo_root: Path) -> None:
+    result = protocol.get("performance_probe_result")
+    expected_fields = {
+        "status",
+        "classification",
+        "recorded_on",
+        "executed_source_commit",
+        "executed_protocol_sha256",
+        "attempt_marker",
+        "run_manifest",
+        "started_at",
+        "completed_at",
+        "case_elapsed_seconds_total",
+        "full_w7_runtime_measured",
+        "scientific_result_produced",
+    }
+    if not isinstance(result, dict) or set(result) != expected_fields:
+        raise ValueError("Recorded performance-probe result fields drifted")
+    if (
+        result.get("status") != "PASS"
+        or result.get("classification") != "engineering_performance_probe_not_result"
+        or result.get("recorded_on") != "2026-09-02"
+        or result.get("executed_source_commit") != EXECUTED_PROBE_COMMIT
+        or result.get("full_w7_runtime_measured") is not False
+        or result.get("scientific_result_produced") is not False
+    ):
+        raise ValueError("Recorded performance-probe result contract drifted")
+
+    probe = protocol["performance_probe"]
+    marker_record = result.get("attempt_marker")
+    manifest_record = result.get("run_manifest")
+    for record, expected_path, label in [
+        (marker_record, probe["attempt_marker_path"], "attempt marker"),
+        (manifest_record, probe["output_manifest_path"], "run manifest"),
+    ]:
+        if not isinstance(record, dict) or set(record) != {
+            "path",
+            "bytes",
+            "sha256",
+        }:
+            raise ValueError(f"Recorded performance-probe {label} metadata drifted")
+        if record.get("path") != expected_path:
+            raise ValueError(f"Recorded performance-probe {label} path drifted")
+        if not isinstance(record.get("bytes"), int) or record["bytes"] <= 0:
+            raise ValueError(
+                f"Recorded performance-probe {label} byte count is invalid"
+            )
+        if not isinstance(record.get("sha256"), str) or len(record["sha256"]) != 64:
+            raise ValueError(f"Recorded performance-probe {label} hash is invalid")
+
+    marker_path = _repo_path(repo_root, marker_record["path"])
+    manifest_path = _repo_path(repo_root, manifest_record["path"])
+    _check_file(
+        marker_path,
+        marker_record["bytes"],
+        marker_record["sha256"],
+        "recorded performance-probe attempt marker",
+    )
+    _check_file(
+        manifest_path,
+        manifest_record["bytes"],
+        manifest_record["sha256"],
+        "recorded performance-probe run manifest",
+    )
+    marker = json.loads(marker_path.read_text(encoding="utf-8"))
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    validate_probe_attempt_marker(marker)
+    validate_probe_run_manifest(manifest)
+
+    executed_protocol_sha256 = result.get("executed_protocol_sha256")
+    if (
+        not isinstance(executed_protocol_sha256, str)
+        or len(executed_protocol_sha256) != 64
+        or marker.get("protocol_sha256") != executed_protocol_sha256
+        or manifest.get("protocol_sha256") != executed_protocol_sha256
+    ):
+        raise ValueError("Recorded performance-probe protocol provenance drifted")
+    if (
+        marker.get("approval_commit") != EXECUTED_PROBE_COMMIT
+        or manifest.get("source_commit") != EXECUTED_PROBE_COMMIT
+        or manifest.get("attempt_marker_sha256") != marker_record["sha256"]
+    ):
+        raise ValueError("Recorded performance-probe source/attempt provenance drifted")
+    if result.get("started_at") != marker.get("started_at") or result.get(
+        "completed_at"
+    ) != manifest.get("completed_at"):
+        raise ValueError("Recorded performance-probe timestamps drifted")
+    elapsed_total = sum(item["elapsed_seconds"] for item in manifest["timings"])
+    if (
+        not isinstance(result.get("case_elapsed_seconds_total"), (int, float))
+        or abs(result["case_elapsed_seconds_total"] - elapsed_total) > 1e-12
+    ):
+        raise ValueError("Recorded performance-probe elapsed-time total drifted")
+
+
+def _write_json_atomic_create_once(path: Path, value: dict[str, Any]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    payload = (
+        json.dumps(value, ensure_ascii=False, indent=2, sort_keys=True) + "\n"
+    ).encode("utf-8")
+    descriptor, temporary_name = tempfile.mkstemp(
+        prefix=f".{path.name}.", suffix=".tmp", dir=path.parent
+    )
+    temporary = Path(temporary_name)
+    try:
+        with os.fdopen(descriptor, "wb") as handle:
+            handle.write(payload)
+            handle.flush()
+            os.fsync(handle.fileno())
+        os.link(temporary, path)
+    finally:
+        temporary.unlink(missing_ok=True)
+
+
+def write_immutable_run_manifest(path: Path, manifest: dict[str, Any]) -> None:
+    validate_probe_run_manifest(manifest)
+    _write_json_atomic_create_once(path, manifest)
+
+
+def write_immutable_attempt_marker(path: Path, marker: dict[str, Any]) -> None:
+    validate_probe_attempt_marker(marker)
+    _write_json_atomic_create_once(path, marker)
+
+
+def consume_performance_probe_authorization(
+    protocol_path: Path,
+    protocol: dict[str, Any],
+    repo_root: Path,
+    approval_commit: str,
+) -> Path:
+    marker = {
+        "schema_version": 1,
+        "status": "STARTED",
+        "classification": "engineering_probe_attempt_not_result",
+        "protocol_id": PROTOCOL_ID,
+        "protocol_sha256": text_sha256(protocol_path),
+        "approval_commit": approval_commit,
+        "started_at": datetime.now(timezone.utc).isoformat(),
+        "authorization": {
+            "authorized_invocations": 1,
+            "attempt_number": 1,
+            "remaining_authorized_invocations_after_start": 0,
+        },
+        "boundaries": {
+            "authorization_attempt_consumed": True,
+            "automatic_retry_allowed": False,
+            "actual_relevance_loaded": False,
+            "scientific_oracle_analysis_executed": False,
+            "oracle_results_persisted": False,
+            "full_w7_oracle_executed": False,
+            "modal_or_gpu_used": False,
+            "p1_03_authorized": False,
+            "learned_qpaf_executed": False,
+            "frozen_p1_02_status": "BLOCKED",
+        },
+    }
+    path = _repo_path(repo_root, protocol["performance_probe"]["attempt_marker_path"])
+    write_immutable_attempt_marker(path, marker)
+    return path
+
+
+def run_bounded_performance_probe(protocol_path: Path) -> Path:
+    protocol_path = protocol_path.resolve()
+    repo_root = protocol_path.parents[1]
+    protocol = load_protocol(protocol_path)
+    source_commit = require_performance_probe_execution_approval(protocol, repo_root)
+    attempt_marker = consume_performance_probe_authorization(
+        protocol_path,
+        protocol,
+        repo_root,
+        source_commit,
+    )
+    preflight = protocol_bound_preflight(
+        protocol_path,
+        repo_root,
+        allow_consumed_attempt=True,
+    )
+    probe = protocol["performance_probe"]
+    candidates, query_ids = load_probe_candidates(protocol, repo_root)
+
+    context = mp.get_context("spawn")
+    ladder_started = time.perf_counter()
+    timings = []
+    for page_limit in probe["page_limits"]:
+        elapsed = time.perf_counter() - ladder_started
+        remaining = probe["ladder_timeout_seconds"] - elapsed
+        if remaining <= 0:
+            raise TimeoutError("Performance-probe ladder exceeded its 300-second limit")
+        case = build_probe_case(candidates, query_ids, page_limit)
+        if len(case) > probe["max_case_candidate_rows"]:
+            raise RuntimeError("Performance-probe case exceeds its row cap")
+        result_queue = context.Queue()
+        process = context.Process(
+            target=_probe_case_worker,
+            args=(case, probe["bootstrap_resamples"], result_queue),
+        )
+        complete_process_with_timeout(
+            process,
+            min(float(probe["per_case_timeout_seconds"]), remaining),
+        )
+        try:
+            result = result_queue.get(timeout=5)
+        except queue.Empty as error:
+            raise RuntimeError("Performance-probe worker returned no timing") from error
+        finally:
+            result_queue.close()
+        if "error" in result:
+            raise RuntimeError(f"Performance-probe worker failed: {result['error']}")
+        if time.perf_counter() - ladder_started > probe["ladder_timeout_seconds"]:
+            raise TimeoutError("Performance-probe ladder exceeded its 300-second limit")
+        timings.append(
+            {
+                "queries": len(query_ids),
+                "pages_per_query": page_limit,
+                "candidate_rows": len(query_ids) * page_limit,
+                "elapsed_seconds": result["elapsed_seconds"],
+            }
+        )
+
+    completed = datetime.now(timezone.utc).isoformat()
+    manifest = {
+        "schema_version": 1,
+        "status": "PASS",
+        "classification": "engineering_performance_probe_not_result",
+        "protocol_id": PROTOCOL_ID,
+        "protocol_sha256": preflight["protocol_sha256"],
+        "source_commit": source_commit,
+        "attempt_marker_sha256": file_sha256(attempt_marker),
+        "completed_at": completed,
+        "environment": {
+            "python": sys.version,
+            "platform": platform.platform(),
+            "device": "cpu",
+            "thread_limits": {name: os.environ[name] for name in CPU_THREAD_ENV},
+            "packages": {
+                name: _package_version(name)
+                for name in ["numpy", "pandas", "pyarrow", "PyYAML"]
+            },
+        },
+        "preflight": preflight,
+        "probe_contract": {
+            "query_indices": probe["query_indices"],
+            "page_limits": probe["page_limits"],
+            "bootstrap_resamples": probe["bootstrap_resamples"],
+            "repetitions": probe["repetitions"],
+            "max_case_candidate_rows": probe["max_case_candidate_rows"],
+            "max_concurrent_cases": probe["max_concurrent_cases"],
+            "cpu_thread_limit": probe["cpu_thread_limit"],
+            "per_case_timeout_seconds": probe["per_case_timeout_seconds"],
+            "ladder_timeout_seconds": probe["ladder_timeout_seconds"],
+            "actual_relevance_loaded": probe["actual_relevance_loaded"],
+            "synthetic_relevance_rule": probe["synthetic_relevance_rule"],
+        },
+        "timings": timings,
+        "boundaries": {
+            "actual_relevance_loaded": False,
+            "scientific_oracle_analysis_executed": False,
+            "oracle_results_persisted": False,
+            "full_w7_oracle_executed": False,
+            "modal_or_gpu_used": False,
+            "p1_03_authorized": False,
+            "learned_qpaf_executed": False,
+            "frozen_p1_02_status": "BLOCKED",
+        },
+    }
+    output = _repo_path(repo_root, probe["output_manifest_path"])
+    write_immutable_run_manifest(output, manifest)
+    return output
+
+
+def parser() -> argparse.ArgumentParser:
+    root = argparse.ArgumentParser(prog="p1-02r-o1-safeguards")
+    commands = root.add_subparsers(dest="command", required=True)
+    preflight = commands.add_parser(
+        "preflight", help="Validate the frozen bundle without W7"
+    )
+    preflight.add_argument("--protocol", type=Path, required=True)
+    probe = commands.add_parser(
+        "performance-probe",
+        help="Run the separately approved CPU-only non-result timing ladder",
+    )
+    probe.add_argument("--protocol", type=Path, required=True)
+    calibration = commands.add_parser(
+        "full-page-calibration",
+        help="Run the separately approved one-query engineering calibration",
+    )
+    calibration.add_argument("--protocol", type=Path, required=True)
+    full_w7 = commands.add_parser(
+        "full-w7",
+        help="Run the separately approved query-sharded W7 oracle",
+    )
+    full_w7.add_argument("--protocol", type=Path, required=True)
+    return root
+
+
+def run_cli_preflight(protocol_path: Path) -> dict[str, Any]:
+    status = load_protocol(protocol_path).get("status")
+    return protocol_bound_preflight(
+        protocol_path,
+        allow_recorded_probe_evidence=status
+        in {
+            RECORDED_STATUS,
+            SHARDED_PREPARED_STATUS,
+            FULL_PAGE_CALIBRATION_APPROVED_STATUS,
+        },
+    )
+
+
+def main() -> None:
+    args = parser().parse_args()
+    if args.command == "preflight":
+        print(json.dumps(run_cli_preflight(args.protocol), indent=2, sort_keys=True))
+    elif args.command == "performance-probe":
+        print(run_bounded_performance_probe(args.protocol))
+    elif args.command == "full-page-calibration":
+        from .vidoseek_p1_02r_sharded import run_protocol_full_page_calibration
+
+        print(run_protocol_full_page_calibration(args.protocol))
+    else:
+        from .vidoseek_p1_02r_sharded import run_protocol_sharded_w7
+
+        print(run_protocol_sharded_w7(args.protocol))
+
+
+if __name__ == "__main__":
+    main()

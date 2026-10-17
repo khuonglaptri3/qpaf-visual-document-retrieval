@@ -14,7 +14,7 @@
 
 **Cập nhật triển khai ngày 26/09/2026:** M1.1 được chấp nhận ở phạm vi khả thi theo
 [báo cáo Oracle trên ViDoSeek](../../results/m1.1/README.md); artifact từng query
-và tái lập còn chờ. [Lõi M1.2](../m1.2-method-core.md) đã triển khai 13 features,
+và tái lập còn chờ. [Lõi M1.2](../03_method/m1.2-method-core.md) đã triển khai 13 features,
 gate QARF/QPAF, fusion và loss, có kiểm chứng gradient trên fixture tổng hợp.
 Chưa có kết quả learned QPAF trên corpus thật hoặc nghiệm thu độc lập của nhóm;
 các giả thuyết nghiên cứu bên dưới vẫn cần kiểm chứng thực nghiệm.

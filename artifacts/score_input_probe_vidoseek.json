@@ -1,0 +1,134 @@
+{
+  "app_name": "qpaf-research",
+  "dataset_id": "Qiuchen-Wang/ViDoSeek",
+  "dataset_key": "vidoseek",
+  "dataset_revision": "e91a92ba5f38690696c7e66be5c5474b54c6e791",
+  "dataset_root": "/vol/datasets/vidoseek/e91a92ba5f38690696c7e66be5c5474b54c6e791",
+  "files": {
+    ".gitattributes": {
+      "bytes": 2461,
+      "kind": "opaque"
+    },
+    "README.md": {
+      "bytes": 3100,
+      "kind": "opaque"
+    },
+    "slidevqa_pdf_document.zip": {
+      "bytes": 951730002,
+      "files": 400,
+      "kind": "zip",
+      "sample_names": [
+        "pdf/02marcelovanzen-150624000117-lva1-app6891_95.pdf",
+        "pdf/0903organizingforbiandbigdatainthe21stcentury-clean-140922112024-phpapp02_95.pdf",
+        "pdf/1-150711120533-lva1-app6892_95.pdf",
+        "pdf/141121organicwayforward-141123090600-conversion-gate02_95.pdf",
+        "pdf/19-amines-wade7th-140409034223-phpapp02_95.pdf",
+        "pdf/1shangxichinassubnationaldebts-issuesandsuggestions-160229201053_95.pdf",
+        "pdf/2012-02-20fy11roadshow-120221022442-phpapp02_95.pdf",
+        "pdf/2013alapurchasing-130214144910-phpapp02_95.pdf",
+        "pdf/2014-04-24graalmodularity-140505094942-phpapp01_95.pdf",
+        "pdf/2014-11-14-inriaprovappt-141112043127-conversion-gate02_95.pdf"
+      ],
+      "suffix_counts": {
+        ".pdf": 400
+      }
+    },
+    "slidevqa_refined.json": {
+      "bytes": 1250100,
+      "kind": "json",
+      "top_level_keys": [
+        "examples"
+      ],
+      "top_level_type": "dict"
+    },
+    "vidoseek.json": {
+      "bytes": 597200,
+      "kind": "json",
+      "top_level_keys": [
+        "examples"
+      ],
+      "top_level_type": "dict"
+    },
+    "vidoseek_pdf_document.zip": {
+      "bytes": 758769613,
+      "files": 292,
+      "kind": "zip",
+      "sample_names": [
+        "pdf/0003504fb992941d93dee794e4d017b76bc5e5f8.pdf",
+        "pdf/0004b995666f8846b92ffc3d741a930bba0638e3.pdf",
+        "pdf/000787f166f057643ae6a2c248fe104742fade2b.pdf",
+        "pdf/00136f54532dfe44863f718dea07afadc9d9b1bd.pdf",
+        "pdf/00171a1b5e1078fd6fa76e72d361d1c647d77eb5.pdf",
+        "pdf/001c68b131356935e1ed82a77300a0d40250cfbb.pdf",
+        "pdf/001d373f0f9c22ae1a7a3a086f7859aa74c140a8.pdf",
+        "pdf/00222bf4bff30ff446c45fee544767a33532ee56.pdf",
+        "pdf/0022f971d841560d6ab3eee650475ad2218692c2.pdf",
+        "pdf/00291389a275d8392d91e1e9f5b462afa26f3732.pdf"
+      ],
+      "suffix_counts": {
+        ".pdf": 292
+      }
+    }
+  },
+  "function_call_id": "fc-01M0Y2T20DFFZMKDJR8Z1ZYVTM",
+  "function_name": "score-input-probe",
+  "image_definition_sha256": "496ad187f08b2e463a760bf7e5182c45dcab0e1f28130965d3cce9e45eb81eee",
+  "qrels_contract": "annotations_in_vidoseek_json_unverified",
+  "read_only": true,
+  "required_file_count": 6,
+  "retriever_signatures": {
+    "available_modules": [
+      "base_vision_retriever",
+      "bge_m3_colbert_retriever",
+      "bge_m3_retriever",
+      "biqwen2_retriever",
+      "bm25_retriever",
+      "cohere_api_retriever",
+      "colidefics3_retriever",
+      "colpali_retriever",
+      "colqwen2_retriever",
+      "dse_qwen2_retriever",
+      "dummy_vision_retriever",
+      "jina_clip_retriever",
+      "nomic_retriever",
+      "registry_utils",
+      "siglip_retriever",
+      "vision_retriever"
+    ],
+    "imports": {
+      "bge_m3": {
+        "class": "BGEM3Retriever",
+        "module": "vidore_benchmark.retrievers.bge_m3_retriever",
+        "signature": "(pretrained_model_name_or_path: str = 'BAAI/bge-m3', device: str = 'auto', **kwargs)",
+        "status": "available"
+      },
+      "bm25": {
+        "class": "BM25Retriever",
+        "module": "vidore_benchmark.retrievers.bm25_retriever",
+        "signature": "(device: str = 'auto', **kwargs)",
+        "status": "available"
+      },
+      "colqwen25": {
+        "class": "ColQwen2_5_Retriever",
+        "error": "ModuleNotFoundError: No module named 'vidore_benchmark.retrievers.colqwen2_5_retriever'",
+        "module": "vidore_benchmark.retrievers.colqwen2_5_retriever",
+        "status": "missing"
+      },
+      "colqwen25_processor": {
+        "class": "ColQwen2_5_Processor",
+        "module": "colpali_engine.models",
+        "signature": "(*args, **kwargs)",
+        "status": "available"
+      },
+      "dse": {
+        "class": "DSEQwen2Retriever",
+        "module": "vidore_benchmark.retrievers.dse_qwen2_retriever",
+        "signature": "(pretrained_model_name_or_path: 'str' = 'MrLight/dse-qwen2-2b-mrl-v1', num_image_tokens: 'int' = 1024, device: 'str' = 'auto', **kwargs)",
+        "status": "available"
+      }
+    }
+  },
+  "schema_version": 1,
+  "score_extraction_started": false,
+  "source_commit": "2c891795aa4527565c55102bd3a0e7d3f28da790"
+}

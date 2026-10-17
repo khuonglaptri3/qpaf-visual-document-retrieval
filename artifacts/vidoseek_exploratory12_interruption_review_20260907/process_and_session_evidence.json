@@ -1,0 +1,37 @@
+﻿{
+    "stdout_sha256":  "a37047603277727ad6bdd44aecae3c111afc27338c01fe6de48829db4f27e468",
+    "original_pid_occupants":  [
+                                   {
+                                       "ProcessId":  18784,
+                                       "Name":  "ETDCtrl.exe",
+                                       "CreationDate":  "\/Date(1788772999411)\/"
+                                   }
+                               ],
+    "previous_session_id":  "01a079c8-13af-7f33-8d50-1d4c1ae86430",
+    "run_termination_cause":  "unknown",
+    "previous_session_end_utc":  "2026-09-07T05:42:17.826Z",
+    "previous_session_error":  "usage_limit_exceeded",
+    "observed_at":  "2026-09-07T09:34:54.9476823Z",
+    "python_processes":  [
+
+                         ],
+    "query_checkpoint_times":  [
+                                   {
+                                       "last_write_utc":  "2026-09-07T05:28:00.9558722Z",
+                                       "file":  "000000.json"
+                                   },
+                                   {
+                                       "last_write_utc":  "2026-09-07T05:50:05.3806491Z",
+                                       "file":  "000001.json"
+                                   },
+                                   {
+                                       "last_write_utc":  "2026-09-07T06:04:19.9934655Z",
+                                       "file":  "000002.json"
+                                   },
+                                   {
+                                       "last_write_utc":  "2026-09-07T06:22:36.2941843Z",
+                                       "file":  "000003.json"
+                                   }
+                               ],
+    "stderr_sha256":  "06cbc6e7b7ba768e724782a8d2b1532215c7be7a9eee6ad98c980ab1d0c844f9"
+}

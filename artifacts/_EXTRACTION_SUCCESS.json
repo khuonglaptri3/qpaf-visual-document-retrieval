@@ -1,0 +1,9 @@
+{
+  "artifact_count": 4,
+  "full_score_produced": false,
+  "manifest_sha256": "077cbad1132c2a13de422d1841f933cd5797d30c7fa877c3cfccf39e98527c9b",
+  "protocol_sha256": "ec81605f49fc045de98bf1ff7a5cef07aef9fb8823ad9931692afe3aca99c914",
+  "schema_version": 1,
+  "scope": "full",
+  "status": "complete"
+}

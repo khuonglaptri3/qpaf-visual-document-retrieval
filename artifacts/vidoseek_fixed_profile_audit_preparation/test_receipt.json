@@ -1,0 +1,11 @@
+{
+  "command": [
+    "C:\\Python313\\python.exe",
+    "-m",
+    "pytest",
+    "-q"
+  ],
+  "exit_code": 0,
+  "elapsed_seconds": 98.2625326999987,
+  "final_line": "213 passed in 88.99s (0:01:28)"
+}

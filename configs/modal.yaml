@@ -1,0 +1,21 @@
+app_name: qpaf-research
+function_name: environment-probe
+requested_gpu: L4
+minimum_gpu_memory_gb: 23.5
+vidoseek_calibration_gpu: L4
+vidoseek_score_extraction_gpu: L4
+vidoseek_score_extraction_timeout_seconds: 86400
+score_extraction_gpu: A100-40GB
+timeout_seconds: 600
+volume:
+  name: qpaf-artifacts
+  mount: /vol
+secret:
+  name: huggingface-secret
+  required_keys:
+    - HF_TOKEN
+image:
+  base: modal.Image.debian_slim
+  python: "3.11"
+  requirements_lock: requirements-lock.txt
+  requirements_lock_sha256: 17e6673bc89d0e10470c27250c34961058308823399c6b003519576cdd46c1be

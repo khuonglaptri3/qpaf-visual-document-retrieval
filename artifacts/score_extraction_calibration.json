@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "status": "PASS",
+  "scope": "calibration_q10_p128",
+  "source_commit": "b2d6a9a1970cf8b38b0000e75887eb5a67be1e2e",
+  "function_call_id": "fc-01M10QR2N648SN7WKZ3T67MPG6",
+  "protocol_sha256": "ec81605f49fc045de98bf1ff7a5cef07aef9fb8823ad9931692afe3aca99c914",
+  "remote_manifest_path": "/vol/score_extraction/vidore_v3_finance_en/ec81605f49fc045de98bf1ff7a5cef07aef9fb8823ad9931692afe3aca99c914/calibration_q10_p128/output/extraction_manifest.json",
+  "remote_manifest_sha256": "a1f6e40df682ff07e4ca0d8af1d3b84bb87acf88c0629fb8f4794dd46ecb6c4c",
+  "success_marker": {
+    "artifact_count": 4,
+    "full_score_produced": false,
+    "status": "complete"
+  },
+  "dataset": {
+    "id": "vidore/vidore_v3_finance_en",
+    "pages": 128,
+    "queries": 10,
+    "revision": "7f432c176d82e27546501ad8064a713ac3071809"
+  },
+  "dse_conversion": {
+    "protocol_sha256": "9e1eb557acb668c05baee6aafbcce96a9740549f720079861db714d5ed4674d9",
+    "safetensors_sha256": "22f40afa7845f739cdcd6b8b8e2cf97b6a7b01c4a72b4ec5395fb685d048080a"
+  },
+  "hardware": {
+    "actual_gpu": "NVIDIA A100-SXM4-40GB",
+    "actual_gpu_vram_bytes": 42405855232
+  },
+  "batch_sizes": {
+    "bge_passages": 32,
+    "bge_queries": 64,
+    "colqwen25_passages": 2,
+    "colqwen25_queries": 8,
+    "dse_passages": 4,
+    "dse_queries": 16
+  },
+  "max_memory_allocated_bytes": {
+    "bge_m3": 3479980544,
+    "colqwen25": 8273135616,
+    "dse": 7764034560
+  },
+  "timings_seconds": {
+    "bge_m3": 31.692118582,
+    "bm25": 1.086087568,
+    "colqwen25": 107.91499002499998,
+    "dse": 101.86007230499999,
+    "total": 262.013513876
+  },
+  "coverage": {
+    "final": 1.0,
+    "mean_candidates": 128.0,
+    "queries_with_zero_relevant_candidates": 9,
+    "interpretation": "non_gating_truncated_corpus_calibration_only"
+  },
+  "full_run_estimate": {
+    "method": "linear_page_and_query_scaling_from_observed_stage_encoding_times",
+    "linear_subtotal_seconds": 3342.70576848,
+    "linear_subtotal_minutes": 55.711762808,
+    "budgeted_runtime_minutes": [
+      60,
+      75
+    ],
+    "function_timeout_seconds": 14400
+  },
+  "full_score_status": "not_produced_by_human_approved_protocol"
+}

@@ -1,0 +1,74 @@
+{
+  "status": "PASS_COMPLETE_AND_INDEPENDENTLY_VERIFIED",
+  "verified_at": "2026-09-08T06:42:52.5512089Z",
+  "protocol_id": "vidoseek_p1_02r_w7_exploratory24_v1",
+  "execution": {
+    "actor": "codex",
+    "device": "cpu",
+    "workers": 1,
+    "threads_per_library": 1,
+    "invocations_consumed": 1,
+    "remaining_authorized_invocations": 0,
+    "automatic_retries": 0,
+    "timeout_seconds": 43200,
+    "elapsed_seconds": 8700.394427099993,
+    "queries": 24,
+    "pages_per_query": 5385,
+    "candidate_pairs": 129240
+  },
+  "results": {
+    "mean_global_ndcg10": 0.8176338593037377,
+    "mean_qarf_ndcg10": 0.8538451195715936,
+    "mean_qpaf_ndcg10": 0.9038556693840128,
+    "mean_qpaf_vs_qarf_delta_ndcg10": 0.05001054981241935,
+    "qpaf_vs_qarf_ci95": [
+      0.008343883145752686,
+      0.10192128410987107
+    ],
+    "qpaf_vs_qarf_win_tie_loss": {
+      "win": 5,
+      "tie": 19,
+      "loss": 0
+    },
+    "qpaf_vs_qarf_top_5pct_gain_share": 0.6663150804360639,
+    "changed_queries": 5,
+    "changed_candidates": 6
+  },
+  "verification": {
+    "manifest_artifacts": 82,
+    "checkpoint_envelopes": 50,
+    "source_snapshots": 25,
+    "raw_ranking_metrics": 960,
+    "aggregate_metric_and_delta_comparisons": 415,
+    "result_chart_visual_review": "PASS",
+    "focused_tests": "19 passed in 6.23s",
+    "full_test_suite": "232 passed in 57.58s",
+    "ruff_check": "PASS",
+    "ruff_format_check": "PASS",
+    "git_diff_check": "PASS"
+  },
+  "sha256": {
+    "live_config": "6214fc6f11259dc20609bf9e305be3f1f1411d65aa281ff57e81c19fe17acbb9",
+    "proposal": "1f3d76ce5976a8568fac1119e7de5791af0550ddea8331641613ff7a91a086b2",
+    "runner": "7165db755bc9f53fec96489464113ae36274f666ea1d1180b33ab1953bca04e7",
+    "independent_verifier": "4666a3738194964e3ce8b22262b6237e9e5e8f5463007128b3a41b381296ade1",
+    "focused_tests": "e280cfa97ab38492cf45ab484c0858afd26d21b1e24973ee351ad4518e90acfb",
+    "result_report": "f6d86cfba35a28e211632d0b209a66bef8d36f2cafdd505cb9a556212b20e4f3",
+    "execution_review": "28eba13d0522e2a8bb90d9fe05f20fc9437a6c0659b9faa048650004a1e396ef",
+    "run_manifest": "0fcfbceee0e581240f241447abae1cb85cbb4f11cfee4f4d5343c2f81e06d9ee",
+    "summary": "4f5b3bf7e798fad51751ebbfb3060472886d0158dc096675e5ba42dcc87998c3",
+    "per_query": "86f08523482c2373c17dd425edf19d41c6a3a251626e5441baf60a6cc4e41bec",
+    "independent_review": "716a184eedcbe73c34dc166bcaa60d594546625dcb288049fd71807f63b61319",
+    "query_comparison_csv": "87f28a8be90d55432a52d0766d33b0d1c8eb4290f64cc79632d1d8ecc1e3cc5a",
+    "comparison_png": "f63a7aa2c5eee83b7e74958c2ca65e855006c5ba80c1155dc05b00e4e11e83dd"
+  },
+  "boundaries": {
+    "formal_phase1_decision": false,
+    "full_w7_authorized": false,
+    "w66_authorized": false,
+    "training_authorized": false,
+    "modal_gpu_authorized": false,
+    "p1_03_authorized": false,
+    "frozen_p1_02_status": "BLOCKED"
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "status": "FROZEN_REFERENCE",
+  "absolute_tolerance": 1e-12,
+  "definitions": {
+    "gain": "2^relevance - 1",
+    "discount_at_one_based_rank_i": "1 / log2(i + 1)",
+    "ndcg_at_10": "DCG@10 / ideal DCG@10; zero when ideal DCG is zero",
+    "recall_at_k": "positive relevant items in top k / all positive relevant items",
+    "mrr_at_10": "reciprocal rank of first positive item in top 10; zero when absent",
+    "tie_break": "score descending, then page_id ascending"
+  },
+  "fixtures": {
+    "one_positive_at_rank_2": {
+      "scores": [4.0, 3.0, 2.0, 1.0],
+      "page_ids": ["p0", "p1", "p2", "p3"],
+      "relevance": [0.0, 1.0, 0.0, 0.0],
+      "ranked_relevance": [0.0, 1.0, 0.0, 0.0],
+      "expected": {
+        "ndcg10": 0.6309297535714575,
+        "recall1": 0.0,
+        "recall3": 1.0,
+        "mrr10": 0.5
+      }
+    },
+    "graded_relevance_with_score_tie": {
+      "scores": [1.0, 1.0, 0.5, 0.0],
+      "page_ids": ["b", "a", "c", "d"],
+      "relevance": [3.0, 1.0, 2.0, 0.0],
+      "stable_order": [1, 0, 2, 3],
+      "ranked_relevance": [1.0, 3.0, 2.0, 0.0],
+      "dcg10": 6.9165082750002025,
+      "ideal_dcg10": 9.392789260714373,
+      "expected": {
+        "ndcg10": 0.7363636171343382,
+        "recall1": 0.3333333333333333,
+        "recall3": 1.0,
+        "mrr10": 1.0
+      }
+    },
+    "empty": {
+      "scores": [],
+      "page_ids": [],
+      "relevance": [],
+      "expected": {
+        "ndcg10": 0.0,
+        "recall1": 0.0,
+        "recall3": 0.0,
+        "mrr10": 0.0
+      }
+    }
+  },
+  "normalization_fixture": {
+    "raw_scores": [
+      [5.0, 2.0, 7.0],
+      [3.0, 2.0, 9.0],
+      [1.0, 2.0, 8.0]
+    ],
+    "expected": [
+      [1.0, 0.0, 0.0],
+      [0.5, 0.0, 1.0],
+      [0.0, 0.0, 0.5]
+    ],
+    "constant_range_threshold": 1e-15,
+    "missing_score_policy": "reject_non_finite"
+  }
+}

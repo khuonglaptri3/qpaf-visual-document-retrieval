@@ -1,0 +1,14 @@
+# Modal runtime and frozen retriever stack. Resolve for Linux/Python 3.11 only.
+modal==1.4.2
+torch==2.7.1
+torchvision==0.22.1
+vidore-benchmark[all-retrievers]==5.0.0
+colpali-engine==0.3.12
+transformers==4.53.3
+datasets==3.6.0
+numpy==2.2.6
+pandas==2.2.3
+pyarrow==20.0.0
+Pillow==11.3.0
+PyYAML==6.0.2
+matplotlib==3.10.3

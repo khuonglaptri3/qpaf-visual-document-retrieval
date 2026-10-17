@@ -95,7 +95,7 @@ class TestM13CLI(unittest.TestCase):
                 "--generate-splits",
             ]
 
-            res = subprocess.run(cmd, capture_output=True, text=True, env={"PYTHONPATH": "src"})
+            res = subprocess.run(cmd, capture_output=True, text=True, env={**os.environ, "PYTHONUTF8": "1"})
             self.assertEqual(res.returncode, 0, f"CLI failed: {res.stderr}\n{res.stdout}")
             self.assertTrue(out_report.exists())
 

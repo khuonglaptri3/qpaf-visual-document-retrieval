@@ -1,0 +1,350 @@
+{
+  "adapter_readiness": {
+    "blockers": [],
+    "status": "ready_for_gpu_smoke"
+  },
+  "app_name": "qpaf-research",
+  "dataset_id": "vidore/vidore_v3_finance_en",
+  "dataset_key": "vidore_v3_finance_en",
+  "dataset_revision": "7f432c176d82e27546501ad8064a713ac3071809",
+  "dataset_root": "/vol/datasets/vidore_v3_finance_en/7f432c176d82e27546501ad8064a713ac3071809",
+  "files": {
+    ".gitattributes": {
+      "bytes": 2843,
+      "kind": "opaque"
+    },
+    "README.md": {
+      "bytes": 9487,
+      "kind": "opaque"
+    },
+    "corpus/test-00000-of-00003.parquet": {
+      "bytes": 449439390,
+      "columns": [
+        {
+          "name": "corpus_id",
+          "type": "int64"
+        },
+        {
+          "name": "image",
+          "type": "struct<bytes: binary, path: string>"
+        },
+        {
+          "name": "doc_id",
+          "type": "string"
+        },
+        {
+          "name": "markdown",
+          "type": "string"
+        },
+        {
+          "name": "page_number_in_doc",
+          "type": "int64"
+        }
+      ],
+      "kind": "parquet",
+      "row_groups": 5,
+      "rows": 981
+    },
+    "corpus/test-00001-of-00003.parquet": {
+      "bytes": 367340393,
+      "columns": [
+        {
+          "name": "corpus_id",
+          "type": "int64"
+        },
+        {
+          "name": "image",
+          "type": "struct<bytes: binary, path: string>"
+        },
+        {
+          "name": "doc_id",
+          "type": "string"
+        },
+        {
+          "name": "markdown",
+          "type": "string"
+        },
+        {
+          "name": "page_number_in_doc",
+          "type": "int64"
+        }
+      ],
+      "kind": "parquet",
+      "row_groups": 5,
+      "rows": 981
+    },
+    "corpus/test-00002-of-00003.parquet": {
+      "bytes": 448564350,
+      "columns": [
+        {
+          "name": "corpus_id",
+          "type": "int64"
+        },
+        {
+          "name": "image",
+          "type": "struct<bytes: binary, path: string>"
+        },
+        {
+          "name": "doc_id",
+          "type": "string"
+        },
+        {
+          "name": "markdown",
+          "type": "string"
+        },
+        {
+          "name": "page_number_in_doc",
+          "type": "int64"
+        }
+      ],
+      "kind": "parquet",
+      "row_groups": 5,
+      "rows": 980
+    },
+    "documents_metadata/test-00000-of-00001.parquet": {
+      "bytes": 5710,
+      "columns": [
+        {
+          "name": "file_name",
+          "type": "string"
+        },
+        {
+          "name": "doc_id",
+          "type": "string"
+        },
+        {
+          "name": "url",
+          "type": "string"
+        },
+        {
+          "name": "doc_type",
+          "type": "string"
+        },
+        {
+          "name": "doc_language",
+          "type": "string"
+        },
+        {
+          "name": "doc_year",
+          "type": "int64"
+        },
+        {
+          "name": "visual_types",
+          "type": "list<element: string>"
+        },
+        {
+          "name": "page_number",
+          "type": "int64"
+        },
+        {
+          "name": "license",
+          "type": "string"
+        }
+      ],
+      "kind": "parquet",
+      "row_groups": 1,
+      "rows": 6
+    },
+    "pdfs/bank_of_america_2024.pdf": {
+      "bytes": 3069167,
+      "kind": "opaque"
+    },
+    "pdfs/citigroup_2024.pdf": {
+      "bytes": 6551884,
+      "kind": "opaque"
+    },
+    "pdfs/goldman_sachs_2024.pdf": {
+      "bytes": 5087574,
+      "kind": "opaque"
+    },
+    "pdfs/jpmorgan_chase_2024.pdf": {
+      "bytes": 5836567,
+      "kind": "opaque"
+    },
+    "pdfs/metadata.csv": {
+      "bytes": 265,
+      "kind": "opaque"
+    },
+    "pdfs/morgan_stanley_2024.pdf": {
+      "bytes": 3352054,
+      "kind": "opaque"
+    },
+    "pdfs/wells_fargo_2024.pdf": {
+      "bytes": 3592614,
+      "kind": "opaque"
+    },
+    "qrels/test-00000-of-00001.parquet": {
+      "bytes": 145165,
+      "columns": [
+        {
+          "name": "query_id",
+          "type": "int64"
+        },
+        {
+          "name": "corpus_id",
+          "type": "int64"
+        },
+        {
+          "name": "score",
+          "type": "int64"
+        },
+        {
+          "name": "content_type",
+          "type": "list<element: string>"
+        },
+        {
+          "name": "bounding_boxes",
+          "type": "list<element: struct<annotator: int64, x1: int64, x2: int64, y1: int64, y2: int64>>"
+        }
+      ],
+      "kind": "parquet",
+      "row_groups": 1,
+      "rows": 8766
+    },
+    "queries/test-00000-of-00001.parquet": {
+      "bytes": 505684,
+      "columns": [
+        {
+          "name": "query_id",
+          "type": "int64"
+        },
+        {
+          "name": "query",
+          "type": "string"
+        },
+        {
+          "name": "language",
+          "type": "string"
+        },
+        {
+          "name": "query_types",
+          "type": "list<element: string>"
+        },
+        {
+          "name": "query_format",
+          "type": "string"
+        },
+        {
+          "name": "content_type",
+          "type": "list<element: string>"
+        },
+        {
+          "name": "raw_answers",
+          "type": "list<element: string>"
+        },
+        {
+          "name": "query_generator",
+          "type": "string"
+        },
+        {
+          "name": "query_generation_pipeline",
+          "type": "string"
+        },
+        {
+          "name": "source_type",
+          "type": "string"
+        },
+        {
+          "name": "query_type_for_generation",
+          "type": "string"
+        },
+        {
+          "name": "answer",
+          "type": "string"
+        }
+      ],
+      "kind": "parquet",
+      "row_groups": 1,
+      "rows": 1854
+    }
+  },
+  "function_call_id": "fc-01M0Y435TS7VMACCD3ZVHNJNHV",
+  "function_name": "score-input-probe",
+  "image_definition_sha256": "fac1c759dd842cca340d02d17f3ac3fbba930b7276d9d10dac90c4de6e9641cb",
+  "models": {
+    "bge_m3": {
+      "gated": false,
+      "id": "BAAI/bge-m3",
+      "license": "mit",
+      "revision": "5617a9f61b028005a4858fdac845db406aefb181"
+    },
+    "colqwen25": {
+      "base_id": "vidore/colqwen2.5-base",
+      "base_revision": "92908120384b7a2110c5beda3ab29cbdb2c08e49",
+      "gated": false,
+      "id": "vidore/colqwen2.5-v0.2",
+      "license": "mit",
+      "revision": "dcbe8d9cede518bce830488364ba0e40c873645b"
+    },
+    "dse": {
+      "gated": false,
+      "id": "MrLight/dse-qwen2-2b-mrl-v1",
+      "license": "apache-2.0",
+      "revision": "3fde4464ea72da2a863ed8fa51f0f1b8045f0426"
+    }
+  },
+  "qrels_contract": "page_level_graded_qrels",
+  "read_only": true,
+  "required_file_count": 15,
+  "retriever_signatures": {
+    "available_modules": [
+      "base_vision_retriever",
+      "bge_m3_colbert_retriever",
+      "bge_m3_retriever",
+      "biqwen2_retriever",
+      "bm25_retriever",
+      "cohere_api_retriever",
+      "colidefics3_retriever",
+      "colpali_retriever",
+      "colqwen2_retriever",
+      "dse_qwen2_retriever",
+      "dummy_vision_retriever",
+      "jina_clip_retriever",
+      "nomic_retriever",
+      "registry_utils",
+      "siglip_retriever",
+      "vision_retriever"
+    ],
+    "imports": {
+      "bge_m3": {
+        "class": "BGEM3Retriever",
+        "module": "vidore_benchmark.retrievers.bge_m3_retriever",
+        "signature": "(pretrained_model_name_or_path: str = 'BAAI/bge-m3', device: str = 'auto', **kwargs)",
+        "status": "available"
+      },
+      "bm25": {
+        "class": "BM25Retriever",
+        "module": "vidore_benchmark.retrievers.bm25_retriever",
+        "signature": "(device: str = 'auto', **kwargs)",
+        "status": "available"
+      },
+      "colqwen25": {
+        "class": "ColQwen2_5_Retriever",
+        "error": "ModuleNotFoundError: No module named 'vidore_benchmark.retrievers.colqwen2_5_retriever'",
+        "module": "vidore_benchmark.retrievers.colqwen2_5_retriever",
+        "status": "missing"
+      },
+      "colqwen25_processor": {
+        "class": "ColQwen2_5_Processor",
+        "module": "colpali_engine.models",
+        "signature": "(*args, **kwargs)",
+        "status": "available"
+      },
+      "dse": {
+        "class": "DSEQwen2Retriever",
+        "module": "vidore_benchmark.retrievers.dse_qwen2_retriever",
+        "signature": "(pretrained_model_name_or_path: 'str' = 'MrLight/dse-qwen2-2b-mrl-v1', num_image_tokens: 'int' = 1024, device: 'str' = 'auto', **kwargs)",
+        "status": "available"
+      },
+      "local_colqwen25_adapter": {
+        "class": "ColQwen25Retriever",
+        "module": "scripts.colqwen25_retriever",
+        "signature": "(base_model_id: 'str', base_revision: 'str', adapter_model_id: 'str', adapter_revision: 'str', device: 'str' = 'auto', num_workers: 'int' = 0) -> 'None'",
+        "status": "available"
+      }
+    }
+  },
+  "schema_version": 1,
+  "score_extraction_started": false,
+  "source_commit": "2c891795aa4527565c55102bd3a0e7d3f28da790"
+}

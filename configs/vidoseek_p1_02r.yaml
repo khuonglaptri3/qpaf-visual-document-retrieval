@@ -1,0 +1,249 @@
+schema_version: 1
+protocol_id: vidoseek_p1_02r_all_corpus_v1
+status: full_extraction_integrity_verified
+classification: post_hoc
+prepared_on: "2026-08-30"
+authorization:
+  draft:
+    scope: local_protocol_and_tests_only
+    requested_by: user
+    request_text: >-
+      Prepare the P1-02R post-hoc protocol draft. Keep the retrievers unchanged,
+      revise only the candidate-pool rule, add local tests, and do not run Modal.
+  local_integration:
+    scope: local_integration_and_cpu_audit_preparation_only
+    approved_by: user
+    approved_on: "2026-08-30"
+    approval_text: >-
+      Approve P1-02R all-corpus protocol for local integration and CPU-audit
+      preparation only. Do not execute Modal
+  cpu_audit_execution:
+    scope: p1_02r_cpu_coverage_audit_only
+    approved_by: user
+    approved_on: "2026-08-30"
+    approval_text: >-
+      Approve execution of the P1-02R CPU-only coverage audit on Modal. Do not
+      run GPU
+  cost_calibration_preparation:
+    scope: local_code_tests_and_command_only
+    approved_by: user
+    approved_on: "2026-08-30"
+    approval_text: >-
+      Record the P1-02R CPU-audit PASS and prepare a bounded L4 cost-calibration
+      command locally. Do not execute Modal or GPU
+  cost_calibration_execution:
+    scope: p1_02r_bounded_l4_cost_calibration_only
+    approved_by: user
+    approved_on: "2026-08-30"
+    approval_text: >-
+      Approve execution of the bounded P1-02R L4 cost calibration on Modal. Do
+      not run full extraction.
+  full_extraction_preparation:
+    scope: record_calibration_and_prepare_chunked_full_extraction_locally_only
+    approved_by: user
+    approved_on: "2026-08-30"
+    approval_text: >-
+      Record the P1-02R L4 calibration result and prepare a memory-safe chunked
+      full-extraction implementation locally. Do not execute Modal or GPU.
+  full_extraction_execution:
+    scope: one_human_run_p1_02r_chunked_l4_full_extraction
+    approved_by: user
+    approved_on: "2026-08-30"
+    prepared_source_commit: 09aa4bad08fd5362a64537b506e48dca640cfb4e
+    prepared_protocol_sha256: 49e63f2b017fa66a43a3af4d6189a2ab218b61fff838270ebfab954f4933b421
+    authorized_invocations: 1
+    execution_actor: human
+    automatic_retry_allowed: false
+    approval_text: >-
+      Approve one human-run P1-02R chunked full-extraction invocation on Modal
+      L4 using frozen limits query=8, page=512, visual batch=128. Update and
+      commit only the execution guards and provenance. Do not execute Modal
+      yourself, run P1-03, or relabel frozen P1-02
+frozen_parent:
+  task_id: P1-02
+  status: BLOCKED
+  extraction_protocol_sha256: 072599c016f836637655485fc628a20c33f7284622fe808466fb7e6626714486
+  expanded_coverage_audit_sha256: 80bd3fa2f9368a395a51528b484f511ad0d4a4e6a33588c52f78c4ba16001d1e
+  remaining_uncovered_query_id: 027dee01b7aced677eb5093c754ebad82a89015d_1
+dataset:
+  id: Qiuchen-Wang/ViDoSeek
+  revision: e91a92ba5f38690696c7e66be5c5474b54c6e791
+  expected_queries: 1142
+  expected_pages: 5385
+retrievers:
+  changed: false
+  definitions_from: configs/environment.yaml
+  contract_fields:
+    - bm25
+    - models
+  contract_sha256: a8e09f0e6999e2f033e9768ef87f668b7c236dc24c8e871638efa10006883df3
+candidate_pool:
+  method: all_corpus
+  version: 1
+  membership_rule: every_prepared_corpus_page_for_every_query
+  ordering: prepared_corpus_marker_order
+  query_independent: true
+  score_independent: true
+  qrels_used: false
+  candidate_rows_frozen_before_qrels: true
+  candidates_per_query: 5385
+  expected_candidate_pairs: 6149670
+  provenance_label: all_corpus_p1_02r_v1
+coverage_gate:
+  minimum_relevant_pair_coverage: 0.95
+  maximum_queries_with_zero_relevant_candidates: 0
+  qrels_use: post_candidate_coverage_audit_and_evaluation_only
+coverage_audit_result:
+  status: PASS
+  decision: p1_02r_coverage_gate_passes
+  completed_on: "2026-08-30"
+  artifact_path: artifacts/vidoseek_p1_02r_coverage_audit.json
+  artifact_sha256: bbb947ca9b04bf291e94298516d8529888b677eee92e212dd8967fac413beca0
+  function_call_id: fc-01M18KYEZTRZANMQKXZ6KY467H
+  source_commit: 318b09d487eb93ea4690ebe7cb54812d4bffdc72
+  executed_protocol_config_sha256: 1411724e3bc330f1821ab75ff1bb84838334a214c1c65261c53044c7b1100c17
+  image_definition_sha256: aa154e0a604c4d82a8902a2d8956a2e40514248c527f63c83b3d08d09e487777
+  coverage: 1.0
+  relevant_pairs: 1142
+  selected_relevant_pairs: 1142
+  missing_relevant_pairs: 0
+  queries_with_zero_relevant_candidates: 0
+  gpu_used: false
+cost_calibration:
+  status: complete
+  function_name: calibrate-vidoseek-p1-02r-cost
+  gpu_if_approved: L4
+  query_limit: 8
+  page_limit: 512
+  candidate_pairs: 4096
+  visual_score_batch_size: 128
+  sample_selection: systematic_floor_indices_over_frozen_order
+  membership_rule: every_sampled_page_for_every_sampled_query
+  qrels_used: false
+  output_artifact_path: artifacts/vidoseek_p1_02r_l4_cost_calibration.json
+  result_scope: cost_projection_only_not_score_extraction
+cost_calibration_result:
+  status: complete
+  decision: requires_human_cost_review
+  completed_on: "2026-08-30"
+  artifact_path: artifacts/vidoseek_p1_02r_l4_cost_calibration.json
+  artifact_sha256: b53d0e885e9e979f7dc85b4588cae70d305a7ad17da9d303abf0b278310b93af
+  function_call_id: fc-01M18YTTTN7Y33Z8W0Z3ZQGY5J
+  source_commit: 6fdbd99ebd349ff1a9ce950faf154d6518a4b8bb
+  executed_protocol_status: approved_l4_cost_calibration_execution_only
+  executed_protocol_config_sha256: 77cd5f8920cb9f01d3a69ccd409e15391e68e4a759d8dfad9d7b889eb98307af
+  image_definition_sha256: b15c3728c3af7b08ca76f52fdf0a35fdb3c4d51196a372a6d93dc278fe0925a6
+  requested_gpu: L4
+  actual_gpu: NVIDIA L4
+  actual_gpu_vram_gib: 22.034
+  sample_queries: 8
+  sample_pages: 512
+  candidate_pairs: 4096
+  total_seconds: 588.160496293
+  peak_memory_allocated_bytes: 8288322048
+  projected_total_gpu_seconds: 7860.383886004963
+  projected_total_gpu_hours: 2.183439968334712
+  calibration_score_cache_sha256: 9550af44e6cf89fdb8bfe4a7b9fcfd366caf27aa673ec1f79fdcdb6cd1277807
+  full_extraction_started: false
+full_extraction:
+  status: complete_integrity_verified
+  function_name: extract-vidoseek-p1-02r-scores
+  gpu_if_approved: L4
+  source_score_cache_root: frozen_parent_full_run
+  required_source_score_caches:
+    bm25: cache/bm25_scores.pt
+    bge_m3: cache/bge_m3_scores.pt
+    dse: cache/dse_scores.pt
+  query_chunk_size: 8
+  page_chunk_size: 512
+  passage_encode_batch_candidates:
+    - 2
+    - 1
+  query_encode_batch_candidates:
+    - 8
+    - 4
+    - 2
+  visual_score_batch_size: 128
+  expected_query_chunks: 143
+  expected_page_chunks: 11
+  expected_candidate_pairs: 6149670
+  candidate_provenance: all_corpus_p1_02r_v1
+  qrels_use: post_candidate_coverage_audit_and_evaluation_only
+  output_artifact_path: artifacts/vidoseek_p1_02r_score_extraction_full.json
+  result_scope: post_hoc_all_corpus_score_bundle_not_frozen_p1_02
+full_extraction_result:
+  status: PASS
+  decision: p1_02r_full_extraction_integrity_verified
+  completed_on: "2026-08-31"
+  function_call_id: fc-01M19RE4SXMJ54M15049QSMXKA
+  source_commit: c7d84aaee0e9caab691a11bba377f4a87c6e059c
+  executed_protocol_status: approved_l4_chunked_full_extraction_execution_only
+  executed_protocol_config_sha256: cfbfcb24ae477a93b3d6a65b40022d688b8172babb2e8080f82363f73fdd8be2
+  receipt_path: artifacts/vidoseek_p1_02r_score_extraction_full.json
+  receipt_sha256: 467e8c32e468f065306539d0a22d161431c9af411a0e1475fc9fb297c8a88c87
+  manifest_path: artifacts/vidoseek_p1_02r_import/extraction_manifest.json
+  manifest_sha256: 7600d3483d526710d2613a37f030daec71596b20ed73d9cebb3b1a1ad507b7b8
+  success_marker_path: artifacts/vidoseek_p1_02r_import/_EXTRACTION_SUCCESS.json
+  success_marker_sha256: ce95947b5a160847208dacf90bd6cc71a804007a2fc8ddd1356b1bee5101dd2b
+  integrity_review_path: artifacts/vidoseek_p1_02r_integrity_review.json
+  integrity_review_sha256: d2b704252c3973dfd2a19053560dd13a84f940bccd378f89028a60f49deb773c
+  image_definition_sha256: bae5ac751ab0a22ca31b22a5f9a217d696da4b3fc0f3ea88e3a02e898807d637
+  extractor_sha256: c328088abe849c18e160ba2d127c16609f1429a657f4389a346c5c80cd02c244
+  retriever_contract_sha256: a8e09f0e6999e2f033e9768ef87f668b7c236dc24c8e871638efa10006883df3
+  authorized_invocations: 1
+  consumed_invocations: 1
+  remaining_authorized_invocations: 0
+  automatic_retry_allowed: false
+  oracle_analysis_run: false
+  task_graph_decision_required: true
+  artifact_count: 4
+  queries: 1142
+  pages: 5385
+  candidate_pairs: 6149670
+  coverage: 1.0
+  missing_relevant_pairs: 0
+  queries_with_zero_relevant_candidates: 0
+  full_score_produced: false
+  actual_gpu: NVIDIA L4
+  actual_gpu_vram_gib: 22.034
+  total_seconds: 7818.803704091
+  result_scope: verified_score_bundle_not_frozen_p1_02_not_oracle_result
+execution:
+  modal_allowed: false
+  modal_execution_scope: none
+  allowed_modal_function: null
+  prepared_modal_function: extract-vidoseek-p1-02r-scores
+  modal_code_preparation_allowed: true
+  cpu_audit_entrypoint_preparation_allowed: true
+  cost_calibration_entrypoint_preparation_allowed: true
+  full_extraction_entrypoint_preparation_allowed: true
+  cpu_audit_execution_allowed: false
+  cost_calibration_execution_allowed: false
+  full_extraction_execution_allowed: false
+  gpu_execution_allowed: false
+  prior_l4_approval_reused: false
+  cost_review_required: false
+  cpu_audit_execution_approval_required: false
+  cost_calibration_execution_approval_required: false
+  full_extraction_execution_approval_required: true
+  gpu_execution_approval_required: true
+  next_gate: explicit_p1_02r_post_hoc_oracle_protocol_decision
+unchanged_contracts:
+  - dataset_and_preprocessing
+  - retriever_implementations_and_model_revisions
+  - raw_score_definitions
+  - normalization_and_metrics
+  - zero_uncovered_query_gate
+  - qrels_boundary
+prohibitions:
+  - do_not_drop_the_uncovered_query
+  - do_not_inject_a_relevant_page
+  - do_not_select_depths_from_observed_relevance_rank
+  - do_not_relabel_the_frozen_p1_02_result
+  - do_not_treat_cost_calibration_as_score_extraction
+  - do_not_rerun_the_completed_cost_calibration
+  - do_not_rerun_the_completed_full_extraction
+  - do_not_change_calibration_limits_or_visual_score_batch_size
+  - do_not_execute_modal_or_gpu_from_the_coding_agent
+  - do_not_exceed_one_human_run_full_extraction_invocation_without_new_approval
+  - do_not_run_p1_03_or_relabel_frozen_p1_02

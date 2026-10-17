@@ -1,0 +1,41 @@
+{
+  "boundaries": {
+    "formal_phase1_decision": false,
+    "frozen_p1_02_status": "BLOCKED",
+    "full_w7_executed": false,
+    "modal_gpu_used": false,
+    "remaining_authorized_invocations": 0,
+    "training_executed": false,
+    "w66_executed": false
+  },
+  "candidate_pairs": 129240,
+  "classification": "independent_review_of_exploratory24_subset_oracle",
+  "elapsed_seconds": 8700.394427099993,
+  "pages_per_query": 5385,
+  "queries": 24,
+  "recomputed": {
+    "changed_candidates": 6,
+    "changed_queries": 5,
+    "mean_global_ndcg10": 0.8176338593037377,
+    "mean_qarf_ndcg10": 0.8538451195715936,
+    "mean_qpaf_ndcg10": 0.9038556693840128,
+    "mean_qpaf_vs_qarf_delta_ndcg10": 0.05001054981241935,
+    "qpaf_vs_qarf_ci95": [
+      0.008343883145752686,
+      0.10192128410987107
+    ],
+    "qpaf_vs_qarf_top_5pct_gain_share": 0.6663150804360639,
+    "qpaf_vs_qarf_win_tie_loss": {
+      "loss": 0,
+      "tie": 19,
+      "win": 5
+    }
+  },
+  "run_manifest_sha256": "0fcfbceee0e581240f241447abae1cb85cbb4f11cfee4f4d5343c2f81e06d9ee",
+  "status": "PASS",
+  "verified_checkpoint_envelopes": 50,
+  "verified_manifest_artifacts": 82,
+  "verified_metric_values_and_deltas": 415,
+  "verified_raw_ranking_metrics": 960,
+  "verified_source_snapshots": 25
+}

@@ -1,0 +1,194 @@
+schema_version: 1
+metadata_checked_at_utc: "2026-08-25T15:00:19Z"
+policy:
+  mode: modal_only_materialization
+  download_performed: true
+  local_download_performed: false
+  modal_materialization_approved: true
+  volume_root: /vol/datasets
+  qrels_access: hash and evaluate only in the declared protocol stage
+datasets:
+  - key: vidoseek
+    role: discovery
+    id: Qiuchen-Wang/ViDoSeek
+    revision: e91a92ba5f38690696c7e66be5c5474b54c6e791
+    license: apache-2.0
+    gated: false
+    private: false
+    local_dir: /vol/datasets/vidoseek/e91a92ba5f38690696c7e66be5c5474b54c6e791
+    download_status: materialized_on_modal
+    remote_file_count: 6
+    qrels_contract: page_level_binary_from_uid_prefix_and_reference_page
+    qrels_metadata:
+      query_id_field: uid
+      query_text_field: query
+      document_filename_field: meta_info.file_name
+      document_id_transform: remove_final_underscore_segment_from_uid
+      relevance_page_field: meta_info.reference_page
+      page_id_format: "<document_id>_<one_based_page_number>"
+      relevance_mapping: listed_page_is_binary_relevance_1
+      granularity: page
+      query_count: 1142
+      referenced_document_count: 290
+      reference_pair_count: 1142
+      unique_reference_page_count: 890
+      annotation_file_sha256: ca4949bfc16231d129cd7565f20e07683854ab5aa8d05f05a86a12a9b71a7fab
+    discovery_extraction:
+      protocol_status: approved
+      protocol_approval:
+        decision: native_pdf_text
+        approved_by: user
+        approved_on: "2026-08-29"
+        approval_text: Approve native PDF text for P1-02
+      full_extraction_gpu_approval:
+        requested_gpu: L4
+        approved_by: user
+        approved_on: "2026-08-29"
+        approval_text: Approve L4 for full ViDoSeek extraction
+        timeout_seconds: 86400
+        calibration_manifest_sha256: 2213b96ee99f4e2409355db80d650590393a8953f67f90de8259cd84373499c7
+        measured_gpu_vram_gib: 22.034
+        measured_peak_allocation_gib: 7.720
+      review_blocker: null
+      annotation_file: vidoseek.json
+      pdf_archive: vidoseek_pdf_document.zip
+      pdf_archive_sha256: 3b999a798ceab38703118e4cc7d9b852f86538d5bb7caad64eb545251ee00454
+      expected_archive_pdf_count: 292
+      expected_query_count: 1142
+      expected_referenced_document_count: 290
+      expected_reference_pair_count: 1142
+      page_renderer: poppler_pdftoppm
+      render_dpi: 200
+      render_intermediate_format: ppm
+      render_format: jpeg
+      jpeg_encoder: pillow_default
+      page_numbering: one_based
+      text_extractor: poppler_pdftotext_layout
+      text_source: native_pdf_text_not_ocr
+      official_reference:
+        repository: Alibaba-NLP/ViDoRAG
+        revision: 2c1ec39c5e3a04daa01f91545feaaa79512134bf
+        page_render_script: scripts/pdf2images.py
+        ocr_script: scripts/ocr_triditional.py
+      qrels_use: calibration_query_eligibility_and_post_candidate_coverage_evaluation_only
+    qrels_files:
+      - vidoseek.json
+    split_files:
+      - vidoseek.json
+    required_files:
+      - .gitattributes
+      - README.md
+      - slidevqa_pdf_document.zip
+      - slidevqa_refined.json
+      - vidoseek.json
+      - vidoseek_pdf_document.zip
+  - key: vimdoc
+    role: confirmation
+    id: kaistdata/ViMDoc
+    revision: 25657f1fe0358f49147148ca89e231291ba42788
+    license: apache-2.0
+    gated: false
+    private: false
+    local_dir: /vol/datasets/vimdoc/25657f1fe0358f49147148ca89e231291ba42788
+    download_status: materialized_on_modal
+    remote_file_count: 4
+    qrels_contract: heaven_aligned_document_level_binary_qrels
+    qrels_metadata:
+      query_id_field: id
+      query_text_field: query
+      source_relevance_id_field: doc_ids
+      document_id_transform: remove_final_underscore_segment
+      relevance_mapping: transformed_document_is_binary_relevance_1
+      granularity: document
+      multi_document_queries_supported: true
+      split: ViMDoc
+      remote_query_count: 10904
+      dataset_card_document_count: 1379
+      expected_heaven_document_count: 1247
+      expected_page_asset_file_count: 76347
+      expected_unique_extension_stripped_page_id_count: 70080
+      expected_raw_ids_not_resolving_exactly_once: 362
+      evidence:
+        dataset_card: https://huggingface.co/datasets/kaistdata/ViMDoc
+        paper: https://aclanthology.org/2026.findings-acl.54/
+        reference_code_revision: 3eea5ca61f492d3fa18594d455ee10024932f851
+        reference_code: https://github.com/juyeonnn/HEAVEN/tree/3eea5ca61f492d3fa18594d455ee10024932f851
+        mapping_code: https://github.com/juyeonnn/HEAVEN/blob/3eea5ca61f492d3fa18594d455ee10024932f851/retrieval/heaven/utils.py#L31-L101
+        evaluation_code: https://github.com/juyeonnn/HEAVEN/blob/3eea5ca61f492d3fa18594d455ee10024932f851/retrieval/heaven/stage1.py#L183-L190
+      pending_materialization_checks:
+        - every_transformed_qrels_document_resolves_to_at_least_one_page_asset
+        - archive_counts_match_frozen_asset_and_heaven_mapping_counts
+        - every_query_has_at_least_one_relevant_document
+        - query_ids_are_unique
+        - qrels_and_split_hashes_are_frozen
+    page_qrels_validation:
+      status: resolved_by_document_level_protocol
+      checked_at_utc: "2026-08-25T15:56:10.684982+00:00"
+      unique_raw_ids_not_resolving_exactly_once: 362
+      evidence_artifact: artifacts/vimdoc_page_qrels_blocker.json
+      interpretation: exact page-level qrels remain ineligible; user approved HEAVEN-aligned document-level confirmation on 2026-08-26
+    confirmation_evaluation:
+      status: approved
+      approved_at: "2026-08-26"
+      unit: document
+      page_to_document: remove_final_underscore_segment
+      document_score_aggregation: max_page_score
+      tie_break: ascending_page_id
+      qrels_use: training_loss_and_evaluation_only
+    protocol_status: approved_label_free_sha256_query_id_sample
+    protocol_note: select the 2000 smallest SHA-256 digests of UTF-8 "20260820:<query_id>"; never use doc_ids, qrels, relevance counts, document length, or retrieval scores
+    confirmation_sample:
+      sample_size: 2000
+      seed: 20260820
+      algorithm: sha256_seed_colon_query_id
+      input_encoding: UTF-8
+      selection: smallest_digest_then_query_id
+      allowed_fields:
+        - id
+      forbidden_fields:
+        - doc_ids
+        - qrels
+        - relevance_counts
+        - document_length
+        - retrieval_scores
+    qrels_files:
+      - data/ViMDoc-00000-of-00001.parquet
+    split_files:
+      - data/ViMDoc-00000-of-00001.parquet
+    required_files:
+      - .gitattributes
+      - README.md
+      - ViMDoc_pages.tar.gz
+      - data/ViMDoc-00000-of-00001.parquet
+  - key: vidore_v3_finance_en
+    role: sealed_external_validation
+    id: vidore/vidore_v3_finance_en
+    revision: 7f432c176d82e27546501ad8064a713ac3071809
+    license: cc-by-4.0
+    gated: false
+    private: false
+    local_dir: /vol/datasets/vidore_v3_finance_en/7f432c176d82e27546501ad8064a713ac3071809
+    download_status: materialized_on_modal
+    remote_file_count: 15
+    qrels_contract: page_level_graded_qrels
+    qrels_files:
+      - qrels/test-00000-of-00001.parquet
+    split_files:
+      - queries/test-00000-of-00001.parquet
+      - qrels/test-00000-of-00001.parquet
+    required_files:
+      - .gitattributes
+      - README.md
+      - corpus/test-00000-of-00003.parquet
+      - corpus/test-00001-of-00003.parquet
+      - corpus/test-00002-of-00003.parquet
+      - documents_metadata/test-00000-of-00001.parquet
+      - pdfs/bank_of_america_2024.pdf
+      - pdfs/citigroup_2024.pdf
+      - pdfs/goldman_sachs_2024.pdf
+      - pdfs/jpmorgan_chase_2024.pdf
+      - pdfs/metadata.csv
+      - pdfs/morgan_stanley_2024.pdf
+      - pdfs/wells_fargo_2024.pdf
+      - qrels/test-00000-of-00001.parquet
+      - queries/test-00000-of-00001.parquet

@@ -1,0 +1,34 @@
+{
+  "status": "PASS_CLOSEOUT_AND_CASE_STUDY",
+  "checked_at": "2026-09-07T14:49:11.354267+00:00",
+  "recovery_artifact_hashes_checked": 78,
+  "original_artifact_hashes_checked": 43,
+  "report_review_hashes_checked": 7,
+  "original_and_recovery_evidence_unchanged": true,
+  "recorded_independent_review_checks": 16,
+  "new_independent_saved_metric_checks": 144,
+  "query797_page_rows": 5385,
+  "branch_rank_values_cross_checked": 16155,
+  "relative_document_links_checked": 31,
+  "visual_qa": {
+    "status": "PASS",
+    "method": "Codex inspected the complete comparison.png image in conversation; labels, all 12 query groups, bars, gain panels and exploratory caption agree with saved tables",
+    "plot_sha256": "e834f378e78af429b90846af64dbd9f89bf25c9407fde170f08d7c2e20782bf7"
+  },
+  "case_review_sha256": "787ba165bcae54b10ecb4360c4ff10a03205097c19aeef1bf17522d69b954417",
+  "document_sha256": {
+    "docs/QPAF_QUERY797_CASE_STUDY.md": "e48e9acd05b8d46ce24e44bd21378af5824db314d2456b750ac0f34d0d2ff093",
+    "docs/QPAF_NEXT_EVALUATION_PROPOSAL.md": "b21acbd76a466e16e1e0c0645d39712ebaef5c4bd9893502dc17115d0928ca29",
+    "docs/QPAF_EXPLORATORY12_RECOVERY_RUN_STATUS.md": "c8d8efab734b616461e5202cbefd82ade747c19b1838748ded119321be796573",
+    "docs/QPAF_EXPLORATORY12_RUN_STATUS.md": "c38cca9ed7db334a46be7917d2c5a0385c246c4d0e8094fd518fe9c1b802f33e",
+    "PROJECT_TRACKING.md": "549579f47acf936cddf908311e32a8f61b413ac233ea96ee1902762d93b6bf85",
+    "Tasks.md": "17bc4fb3d8413ff01ac73fd4cbac11eabc8af0fd80de849425ca4e268b760841",
+    "Context.md": "4b3a0f180ea0ba088b7a5928b410b4e4e8b872723763fdf25cfe80849466b68b",
+    "experiments/CHANGELOG.md": "63780384253ac4dfceb82438603c3f8eeff52148a40a2fddd4d63313c23a60ef"
+  },
+  "new_oracle_search_executed": false,
+  "new_experiment_authorized": false,
+  "phase1_decision": "NOT_APPLICABLE_EXPLORATORY_SUBSET",
+  "frozen_p1_02_status": "BLOCKED",
+  "git_state": "uncommitted local changes; no commit or push in this task"
+}

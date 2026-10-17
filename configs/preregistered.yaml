@@ -1,0 +1,37 @@
+study_version: 1
+seed: 20260820
+primary_metric: ndcg_at_10
+bootstrap_resamples: 10000
+candidate_pool:
+  initial: {stage1_top_k: 200, bm25_top_k: 100, dense_top_k: 100}
+  expanded: {stage1_top_k: 300, bm25_top_k: 200, dense_top_k: 200}
+  minimum_relevant_page_coverage: 0.95
+qpaf:
+  grids: [w7, w66]
+  max_sweeps: 2
+  discovery_mean_gain: 0.03
+  confirmation_mean_gain: 0.02
+  confirmation_fraction_gain_ge_005: 0.20
+  no_go_confirmation_mean_gain: 0.01
+  concentrated_gain_top_fraction: 0.05
+  concentrated_gain_share: 0.90
+budget_aware:
+  invocation_budgets_percent: [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100]
+  beneficial_gain: 0.01
+  quality_absolute_tolerance: 0.01
+  full_minus_stage1_go: 0.02
+  minimum_class_fraction: 0.20
+  maximum_b_star_go_percent: 50
+  minimum_control_gap: 0.01
+  minimum_retention: 0.98
+  no_go_full_minus_stage1: 0.01
+  no_go_b_star_percent: 70
+heaven:
+  stage1_model: dse
+  stage2_model: colqwen25
+  reduction_factor: 15
+  alpha: 0.1
+  filter_ratio_stage1: 0.5
+  k: 200
+  filter_ratio_stage2: 0.25
+  beta: 0.3

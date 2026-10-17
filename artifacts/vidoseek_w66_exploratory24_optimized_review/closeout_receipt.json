@@ -1,0 +1,89 @@
+{
+  "status": "PASS_COMPLETE_AND_INDEPENDENTLY_VERIFIED",
+  "verified_at": "2026-09-10T03:50:58.8609931Z",
+  "protocol_id": "vidoseek_p1_02r_w66_exploratory24_optimized_v1",
+  "execution": {
+    "actor": "codex",
+    "source_commit": "181047598e8e22627b9f3b1a06b68ba140b6c98e",
+    "device": "cpu",
+    "workers": 1,
+    "threads_per_library": 1,
+    "invocations_consumed": 1,
+    "remaining_authorized_invocations": 0,
+    "automatic_retries": 0,
+    "timeout_seconds": 7200,
+    "elapsed_seconds": 1551.236275000003,
+    "completed_at": "2026-09-09T18:28:22.965083+00:00",
+    "queries": 24,
+    "profiles": 66,
+    "pages_per_query": 5385,
+    "candidate_pairs": 129240
+  },
+  "results": {
+    "global_profile": [
+      0.0,
+      0.2,
+      0.8
+    ],
+    "mean_global_ndcg10": 0.8296782270669829,
+    "mean_qarf_ndcg10": 0.8538451195715936,
+    "mean_qpaf_ndcg10": 0.8859108127976215,
+    "mean_qarf_vs_global_delta_ndcg10": 0.02416689250461061,
+    "qarf_vs_global_ci95": [
+      0.0,
+      0.06371171194374382
+    ],
+    "mean_qpaf_vs_qarf_delta_ndcg10": 0.03206569322602797,
+    "qpaf_vs_qarf_ci95": [
+      0.002888476746941956,
+      0.07116543024082586
+    ],
+    "qpaf_vs_qarf_win_tie_loss": {
+      "win": 4,
+      "tie": 20,
+      "loss": 0
+    },
+    "qpaf_vs_qarf_top_5pct_gain_share": 0.7397878446931598,
+    "changed_queries": 4,
+    "changed_candidates": 5,
+    "w66_minus_w7_mean_qpaf_ndcg10": -0.0179448565863913,
+    "w66_minus_w7_mean_qpaf_vs_qarf_delta_ndcg10": -0.01794485658639138,
+    "interpretation": "W66 clears the bounded exploratory continuation thresholds but does not outperform W7; the entire observed W7-W66 QPAF gap is explained by one tied-profile initialization-order case."
+  },
+  "verification": {
+    "manifest_artifacts": 97,
+    "checkpoint_envelopes": 50,
+    "source_snapshots": 32,
+    "telemetry_samples": 1503,
+    "fixed_profile_rankings_reconstructed": 1584,
+    "final_method_rankings_reconstructed": 72,
+    "raw_ranking_metric_values": 6624,
+    "aggregate_metric_and_delta_comparisons": 127,
+    "telemetry_gap_check": "PASS",
+    "resource_limits_check": "PASS",
+    "scope_flags_check": "PASS"
+  },
+  "sha256": {
+    "live_config": "808842940c2e60742b935553a4e7802f2fcac5062774a019a1646ffc5a31889a",
+    "proposal": "043736c86473a89b31a1a54d804155b0cf3fa24a75d5df782c612cd529d9e726",
+    "execution_review": "543dcd23276068ddf82399e8708ba36e7939c8717a58cf8b14d13f63e7cf649c",
+    "runner": "0534a4dfe8e1b064d4d66d2c267030d62e8219b4eba54603302c6e43d20501f3",
+    "candidate_oracle": "3322b024fa689e0b08ba2e9d6cd08347b5e889cbd26980c4cd19a3a002d4c4e5",
+    "run_manifest": "9e691aa27bddfdaa92728da171128ceadf64e1f21863acf2c221b7e5dde5c78f",
+    "summary": "4129db3a9d3b104ea44384b113ce02d472d6ccf34e012ea4e85c1a8844319508",
+    "per_query": "ff084afca65246bfa84c6cf9c4aaa8a4ea7f8a201df73d4dcd546695383a504d",
+    "resolved_config": "c637df9fd8fcffd114879d6f2d65a4734dac35ceb9390385b81fa4e0ced58696",
+    "parent_w7_independent_review": "716a184eedcbe73c34dc166bcaa60d594546625dcb288049fd71807f63b61319",
+    "result_report": "1b8f3b7c6807e36de4a4db43d6c6c0674f020b5d9105e71a1962d00c2cb3974e",
+    "independent_review": "a84036ba16639b4938c19a7272d9384cbed4e0f9f9e1846e2963f70d15113ee8"
+  },
+  "boundaries": {
+    "classification": "exploratory_subset_oracle_upper_bound",
+    "formal_phase1_decision": false,
+    "full_discovery_w7_w66_authorized": false,
+    "training_authorized": false,
+    "modal_gpu_authorized": false,
+    "p1_03_authorized": false,
+    "frozen_p1_02_status": "BLOCKED"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "status": "PASS_CLOSED_BEFORE_INPUT_OR_WRITES",
+  "verified_at": "2026-09-09T02:49:55.6262108+00:00",
+  "classification": "execution_guard_check_not_attempt",
+  "command": "C:\\Python313\\python.exe scripts\\run_vidoseek_exploratory24_w66.py run --actor codex",
+  "exit_code": 1,
+  "error_type": "PermissionError",
+  "error": "Separate exploratory-24 W66 resource and execution approval pending; no attempt consumed",
+  "output_directory_exists_before_refusal": false,
+  "output_directory_exists_after_refusal": false,
+  "attempt_consumed": false,
+  "w66_oracle_executed": false,
+  "scientific_result_produced": false
+}

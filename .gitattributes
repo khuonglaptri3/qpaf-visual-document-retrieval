@@ -17,6 +17,43 @@
 /evidence/M1_FINAL/02_protocol/*_policy.md -text -eol
 /evidence/M1_FINAL/02_protocol/frozen_protocol.md -text -eol
 /evidence/M1_FINAL/02_protocol/protocol_amendments.md -text -eol -whitespace
+
+# Preserve byte-addressed files from the existing oracle-study repository.
+.gitignore -text
+README.md -text
+pyproject.toml -text
+configs/preregistered.yaml -text
+docs/** -text
+notebooks/** -text
+src/** -text
+tests/** -text
+artifacts/vidoseek_score_extraction_calibration.json -text -diff
+artifacts/vidoseek_score_extraction_calibration_manifest.json -text -diff
+artifacts/vidoseek_expanded_coverage_audit.json -text -diff
+artifacts/vidoseek_p1_02r_score_extraction_full.json -text -diff
+artifacts/vidoseek_p1_02r_import/extraction_manifest.json -text -diff
+artifacts/vidoseek_p1_02r_import/_EXTRACTION_SUCCESS.json -text -diff
+artifacts/vidoseek_p1_02r_import/coverage_report.json -text -diff
+artifacts/vidoseek_p1_02r_import/candidate_audit.parquet -text -diff
+artifacts/vidoseek_p1_02r_integrity_review.json -text -diff
+artifacts/vidoseek_p1_02r_oracle_w7_v1_probe/_ATTEMPTED.json -text -diff
+artifacts/vidoseek_p1_02r_oracle_w7_v1_probe/run_manifest.json -text -diff
+artifacts/qpaf_p2_method_core_verification.json -text -diff
+artifacts/qpaf_posthoc_continuation_decision_v1.json -text -diff
+artifacts/vidoseek_w66_exploratory24_optimized_review/** -text -diff
+artifacts/vimdoc_archive_content_audit_v1_preparation/** -text -diff
+artifacts/vimdoc_m3_local_v1/** -text -diff
+configs/vimdoc_archive_content_audit_v1.json -text
+configs/vimdoc_m3_local_v1.json -text
+configs/vimdoc_ocr_page_identity_v1.json -text
+requirements-learned-local.txt -text
+scripts/prepare_vimdoc_archive_content_audit.py -text
+scripts/prepare_vimdoc_m3.py -text
+scripts/run_vimdoc_archive_content_audit.py -text
+scripts/validate_vimdoc_ocr_page_identity.py -text
+vimdoc_archive_audit_modal.py -text
+
+# Preserve newly integrated immutable evidence revision bytes.
 /evidence/M1_FINAL/02_protocol/amendments_after_import.md -text -eol -whitespace
 /results/m2.3/RUN-*/** -text -eol -whitespace
 /results/m2.3/verification/** -text -eol -whitespace
@@ -28,3 +65,4 @@
 /configs/m2.3/ocr_policy_frozen.toml -text -eol
 # The final handover pins the original report bytes, including line endings.
 /docs/superpowers/reports/2026-10-17-m23-research-and-final-decision.md -text -eol -whitespace
+/evidence/revisions/** -text -eol -whitespace

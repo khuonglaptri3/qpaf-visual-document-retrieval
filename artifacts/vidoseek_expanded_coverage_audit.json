@@ -1,0 +1,68 @@
+{
+  "app_name": "qpaf-research",
+  "audit_only": true,
+  "audit_type": "vidoseek_frozen_expanded_candidate_coverage",
+  "candidate_generation_used_qrels": false,
+  "dataset": {
+    "annotation_sha256": "ca4949bfc16231d129cd7565f20e07683854ab5aa8d05f05a86a12a9b71a7fab",
+    "id": "Qiuchen-Wang/ViDoSeek",
+    "pages": 5385,
+    "preparation_marker_sha256": "77f3ec63c4a43be5f9705eabc2c85cbba0eabd7a337c1e41a3822c94d57ec16d",
+    "queries": 1142,
+    "revision": "e91a92ba5f38690696c7e66be5c5474b54c6e791"
+  },
+  "decision": "expanded_depths_still_fail_existing_gate",
+  "expanded": {
+    "coverage": 0.999124343257443,
+    "depths": {
+      "bm25": 200,
+      "dense": 200,
+      "stage1": 300
+    },
+    "mean_candidates": 594.1978984238178,
+    "queries_with_zero_relevant_candidates": 1,
+    "zero_relevant_query_ids": [
+      "027dee01b7aced677eb5093c754ebad82a89015d_1"
+    ]
+  },
+  "function_call_id": "fc-01M17BMSRGAZB51F6PYEYA1ECK",
+  "function_name": "audit-vidoseek-expanded-coverage",
+  "gpu_used": false,
+  "image_definition_sha256": "851f1db5e311085b4df1a6c2b0e2e4996b6bf1346fd9cd3f730830e82a17fcb3",
+  "initial": {
+    "coverage": 0.9973730297723292,
+    "depths": {
+      "bm25": 100,
+      "dense": 100,
+      "stage1": 200
+    },
+    "mean_candidates": 349.87740805604204,
+    "queries_with_zero_relevant_candidates": 3,
+    "zero_relevant_query_ids": [
+      "027dee01b7aced677eb5093c754ebad82a89015d_1",
+      "04450a0f59f81025574451222aa26322ae7ede42_2",
+      "051d54d0f3b1788c764783d1bfc6b9f3cc830ce8_2"
+    ]
+  },
+  "minimum_coverage": 0.95,
+  "qrels_use": "post_candidate_coverage_audit_only",
+  "requested_cpu": 2.0,
+  "requested_memory_mb": 4096,
+  "rescued_query_ids": [
+    "04450a0f59f81025574451222aa26322ae7ede42_2",
+    "051d54d0f3b1788c764783d1bfc6b9f3cc830ce8_2"
+  ],
+  "schema_version": 1,
+  "score_cache_sha256": {
+    "bge_m3_scores.pt": "9e6ef23f031a5b2f544dacdbb7e518f22711661263be7b81ca479f1f395372a6",
+    "bm25_scores.pt": "387cf800eaee34a5b326b0fe295a78e7e35060659349707807d82d6669b81cb0",
+    "dse_scores.pt": "472302614916519ece71ffa9a78424fef74f0ac1d37ec876763c40d4707903a2"
+  },
+  "source_commit": "8f61c30b5745874fda514979ed8bfebafe1ca7a9",
+  "source_protocol_sha256": "072599c016f836637655485fc628a20c33f7284622fe808466fb7e6626714486",
+  "source_run_root": "/vol/score_extraction/vidoseek/072599c016f836637655485fc628a20c33f7284622fe808466fb7e6626714486/full",
+  "status": "complete",
+  "still_uncovered_query_ids": [
+    "027dee01b7aced677eb5093c754ebad82a89015d_1"
+  ]
+}

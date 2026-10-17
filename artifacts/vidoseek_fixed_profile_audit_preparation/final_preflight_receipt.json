@@ -1,0 +1,10 @@
+{
+  "command": [
+    "C:\\Python313\\python.exe",
+    "scripts/audit_vidoseek_fixed_profiles.py",
+    "preflight"
+  ],
+  "runner_sha256": "2eebbb6db9853eacedcfe143d5cac6910e116e6c469ed64d9cf0cbaab52b1e6f",
+  "config_sha256": "53f59852512cc28c2ab5f03233db3cde6a68549691086532275af4c1ee6b7e27",
+  "status": "PASS"
+}

@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "status": "FAIL_CONSUMED_TELEMETRY_GAP_NO_RESULT",
+  "reviewed_at": "2026-09-09T09:36:18.6121737Z",
+  "classification": "independent_interruption_review_not_w66_result",
+  "protocol_id": "vidoseek_w66_resource_calibration_v1",
+  "source_commit": "90719a8cbbdf5cc8fe7c31020b3b60810c297b09",
+  "attempt": {
+    "started_at": "2026-09-09T08:29:35.312311+00:00",
+    "execution_actor": "codex",
+    "config_sha256": "a955a96eb2147e3b47dd5e2e42e8b510aab45104a086bfa9fd7fd66e6bff408b",
+    "consumed_invocations": 1,
+    "remaining_authorized_invocations": 0,
+    "automatic_retry_allowed": false
+  },
+  "failure": {
+    "reason": "Telemetry cadence violated the approved one-second monitoring contract during a Windows sleep transition",
+    "maximum_telemetry_gap_seconds": 1296.324537,
+    "gap_started_at": "2026-09-09T09:07:11.223434+00:00",
+    "gap_ended_at": "2026-09-09T09:28:47.547971+00:00",
+    "manual_fail_closed_stop": true,
+    "automatic_incomplete_marker_written": false,
+    "missing_incomplete_marker_explanation": "Console interruption terminated the process tree before the runner exception handler wrote _INCOMPLETE.json; the external review records the failure without modifying the partial run directory",
+    "retry_performed": false
+  },
+  "windows_power_evidence": {
+    "system_log_provider": "Microsoft-Windows-Kernel-Power",
+    "sleep_event_id": 42,
+    "sleep_event_record_id": 44483,
+    "sleep_event_time_utc": "2026-09-09T09:07:11.2854592Z",
+    "sleep_reason": "Button or Lid",
+    "resume_event_id": 107,
+    "resume_event_record_id": 44484,
+    "resume_event_time_recorded_utc": "2026-09-09T09:07:12.2827840Z",
+    "telemetry_gap_matches_sleep_transition_start": true
+  },
+  "integrity": {
+    "live_config_matches_resolved_config": true,
+    "attempt_config_hash_matches": true,
+    "source_snapshot_count": 29,
+    "source_snapshot_hash_mismatches": [],
+    "tracked_changes_patch_bytes": 0,
+    "run_plan_checkpoint_valid": true,
+    "global_checkpoint_valid": true,
+    "global_selection_checkpoint_valid": true,
+    "global_selection_hash_chain_valid": true,
+    "global_profile_metrics_count": 66,
+    "query_checkpoint_exists": false,
+    "calibration_result_exists": false,
+    "worker_complete_exists": false,
+    "run_manifest_exists": false,
+    "partial_run_artifact_count": 42,
+    "partial_run_bytes": 1670925,
+    "artifact_hash_mapping_sha256": "535770dfbaf7722e16fd8758ace9ae38b63055f3a0ecdc542af77d6f1b104267"
+  },
+  "critical_artifact_sha256": {
+    "_ATTEMPTED.json": "443fe28460499f1fe8fe572291366c0f71dac484b50d62d7a5ee47657cae9762",
+    "resource_telemetry.jsonl": "e0a4a025fd24490ea8289827e3a9c0c8a40a66ad5c0b4c0eec25025858006ec7",
+    "checkpoints/run_plan.json": "2e2a14252770bb47e6abecb797f70d48639149759352ca74d831cc47faf17950",
+    "checkpoints/global/000000.json": "03e05ef451670ddddbe2a98d70029fd3d0f47eeaab4789c04e2a4c28b908f34e",
+    "checkpoints/global_selection.json": "4cd552da552eb89b9b597d085d67a10dc530cd42e96f5c2bf328f72ce9aef6f9"
+  },
+  "thread_state": {
+    "openblas_threads": 1,
+    "arrow_cpu_threads": 1,
+    "arrow_io_threads": 1,
+    "thread_environment_all_one": true
+  },
+  "telemetry": {
+    "samples": 2353,
+    "first_sample_at": "2026-09-09T08:29:35.819132+00:00",
+    "last_sample_at": "2026-09-09T09:31:57.325282+00:00",
+    "observed_span_seconds": 3741.50615,
+    "gaps_over_five_seconds": 1,
+    "peak_process_tree_private_bytes": 466206720,
+    "minimum_free_physical_bytes": 4262223872,
+    "maximum_output_bytes": 1670379,
+    "last_worker_cpu_user_seconds": 2290.4375,
+    "memory_limit_breached": false,
+    "free_memory_abort_threshold_breached": false,
+    "output_limit_breached": false
+  },
+  "boundaries": {
+    "actual_relevance_loaded": false,
+    "synthetic_relevance_only": true,
+    "synthetic_query_search_completed": false,
+    "scientific_result_produced": false,
+    "full_w66_executed": false,
+    "formal_p1_03_executed": false,
+    "training_executed": false,
+    "modal_gpu_used": false,
+    "frozen_p1_02_status": "BLOCKED"
+  },
+  "next_gate": "Prepare and verify an exactly equivalent faster W66 candidate-search implementation and a separate recovery calibration protocol; any live recovery requires new explicit approval"
+}

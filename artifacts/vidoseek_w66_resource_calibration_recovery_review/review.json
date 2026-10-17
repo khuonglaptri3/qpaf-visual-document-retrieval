@@ -1,0 +1,98 @@
+{
+  "schema_version": 1,
+  "status": "PASS_COMPLETE_ENGINEERING_RECOVERY_NOT_SCIENTIFIC_RESULT",
+  "reviewed_at": "2026-09-09T15:50:25.2713595Z",
+  "protocol_id": "vidoseek_w66_resource_calibration_recovery_v1",
+  "reviewed_source_commit": "c94fb8edd9f8adf5eaf5089ce8fb0f71e72bc311",
+  "decision": "GO_PREPARE_EXACT_OPTIMIZED_FULL_W66_PROTOCOL_ONLY",
+  "full_w66_execution_authorized": false,
+  "reviewed_artifacts": {
+    "run_manifest_path": "runs/vidoseek_w66_resource_calibration_recovery_v1/run_manifest.json",
+    "run_manifest_sha256": "fa99a2ada9562348d2e65acb09634b0a637b26f52b1e5bf8771425295857b0af",
+    "calibration_result_sha256": "2dd8e5b9eed8dde0d5855d4f1cf0f9d63b3178e9929414014f7e2beea7d43494",
+    "resource_telemetry_sha256": "ffd5b60ba279f39f876da0c1e4580927032404eac3136b7a85c71cfc4a17764a",
+    "manifest_artifacts_checked": 49,
+    "manifest_artifact_hash_mismatches": [],
+    "source_snapshots_checked": 33,
+    "source_snapshot_hash_mismatches": [],
+    "tracked_changes_patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "identity_and_lifecycle": {
+    "approval_commit_is_exact_direct_child": true,
+    "approval_commit_changed_path_count": 3,
+    "config_canonical_sha256": "5b044194624884d2e0779f2b7e9dda116959000895ff98d8bc7b1ae23aa8c5d4",
+    "run_identity_sha256": "220ba85292efbb18939c2e9d128f49c1a663509b6d34bcf081225900915a9a5d",
+    "attempt_consumed_invocations": 1,
+    "remaining_authorized_invocations": 0,
+    "automatic_retries": 0,
+    "previous_checkpoint_reused": false,
+    "checkpoint_count": 4,
+    "checkpoint_replay_verified_without_search": true,
+    "independent_replay_forbade_candidate_search": true,
+    "incomplete_marker_exists": false
+  },
+  "input_and_threads": {
+    "input_rows_rechecked": 129240,
+    "input_columns": 9,
+    "actual_relevance_column_loaded": false,
+    "selected_pages": 5385,
+    "synthetic_relevant_pages": 1,
+    "numeric_threads": 1,
+    "arrow_cpu_threads": 1,
+    "arrow_io_threads": 1
+  },
+  "timing": {
+    "elapsed_seconds": 70.61111119999987,
+    "input_load_seconds": 1.063986000001023,
+    "global_profile_evaluation_seconds": 0.9993353000027128,
+    "query_oracle_seconds": 62.574621200001275,
+    "checkpoint_replay_seconds": 0.06908169999951497,
+    "accepted_updates": 0,
+    "changed_candidates": 0,
+    "sweeps_exercised": 1,
+    "maximum_sweeps": 2
+  },
+  "resources": {
+    "telemetry_samples": 69,
+    "maximum_wall_gap_seconds": 1.075006,
+    "maximum_monotonic_gap_seconds": 1.0695474999956787,
+    "maximum_allowed_telemetry_gap_seconds": 5.0,
+    "telemetry_cadence_passed": true,
+    "peak_process_tree_private_bytes": 442408960,
+    "process_tree_private_bytes_limit": 2147483648,
+    "minimum_free_physical_bytes": 5373321216,
+    "abort_free_physical_bytes_below": 2147483648,
+    "maximum_observed_output_bytes": 487694,
+    "output_byte_limit": 104857600,
+    "wall_timeout_seconds": 3600
+  },
+  "conditional_full24_timing": {
+    "classification": "conditional_arithmetic_not_measured_full_w66_runtime_or_timeout",
+    "one_sweep_query_search_seconds": 1501.7909088000306,
+    "conservative_two_times_query_search_seconds": 3003.581817600061,
+    "scaled_global_profile_seconds": 23.984047200065108,
+    "observed_non_query_seconds": 8.036489999998594,
+    "one_sweep_total_illustration_seconds": 1533.8114459999944,
+    "conservative_two_times_total_illustration_seconds": 3035.602354800025,
+    "selected_query_had_zero_updates": true,
+    "full_page_two_sweep_update_path_measured": false,
+    "safe_full_w66_timeout_established": false
+  },
+  "interpretation": {
+    "optimized_full_page_engineering_timing_obtained": true,
+    "current_scientific_w66_runner_uses_optimized_oracle": false,
+    "optimized_implementation_exactness_supported_by_bounded_tests": true,
+    "synthetic_metrics_are_retrieval_results": false,
+    "scientific_result_produced": false,
+    "checkpoint_reuse_into_scientific_run_allowed": false,
+    "next_step": "Prepare and verify a separately versioned full exploratory-24 W66 runner using the exact-output optimized candidate oracle, then perform a separate timeout and execution review",
+    "next_step_execution_authorized": false
+  },
+  "boundaries": {
+    "full_w66_executed": false,
+    "formal_p1_03_executed": false,
+    "training_executed": false,
+    "modal_gpu_used": false,
+    "frozen_p1_02_status": "BLOCKED"
+  }
+}

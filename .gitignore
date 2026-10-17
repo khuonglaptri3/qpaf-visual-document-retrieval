@@ -1,43 +1,87 @@
-# Local environments and generated files
-.venv/
-venv/
-__pycache__/
-*.py[cod]
-*.egg-info/
-build/
-dist/
-.pytest_cache/
-.ruff_cache/
-.cache/
-.coverage
-htmlcov/
-.superpowers/
-.worktrees/
-.codex/
-.agents/
-.DS_Store
-Thumbs.db
-
-# Credentials
+# Local environments and secrets
 .env
 .env.*
 !.env.example
-*.pem
-*.key
-*.p12
+.venv/
+venv/
 
-# Research payloads are stored outside Git; manifests remain versioned.
-data/raw/
-data/processed/
-data/external/
-artifacts/
-checkpoints/
-indexes/
-cache/
+# Python bytecode and packages
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg
+*.egg-info/
+.eggs/
+build/
+dist/
+
+# Test, lint, type-check, and coverage output
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.pyright/
+.tox/
+.nox/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Local AI-agent instructions
+/.AGENTS/
+
+# Local CodeGraph index
+/.codegraph/
+
+# Editors and operating systems
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*~
+
+# Logs and temporary files
+*.log
+*.tmp
+*.temp
+
+# Model checkpoints and tensor caches
 *.pt
 *.pth
 *.ckpt
 *.safetensors
+*.onnx
+
+# Local experiment outputs and materialized datasets
+/runs/
+/vidoseek/
+/artifacts/vidoseek_full_failed_output
+
+# Large hash-addressed payloads retained locally
+/artifacts/vidoseek_p1_02r_import/candidate_raw_scores.parquet
+/artifacts/vidoseek_p1_02r_import/retrieval_scores.parquet
+/artifacts/vidoseek_p1_02r_oracle_w7_v1_checkpoints/
+
+# Additional research tooling, credentials and materialized payloads
+.cache/
+.superpowers/
+.worktrees/
+.codex/
+.agents/
+*.pem
+*.key
+*.p12
+data/raw/
+data/processed/
+data/external/
+checkpoints/
+indexes/
+cache/
 *.npy
 *.npz
 *.parquet
@@ -57,4 +101,3 @@ results/m2.3/RUN-*/remote/ocr/
 results/m2.3/RUN-*/review/index.html
 results/m2.3/review/index.html
 results/m2.3/review/previews/
-

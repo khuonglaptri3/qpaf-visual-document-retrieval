@@ -1,0 +1,29 @@
+{
+  "status": "PASS",
+  "classification": "read_only_preflight_not_result",
+  "base_preflight": {
+    "schema_version": 1,
+    "status": "PASS",
+    "protocol_id": "vidoseek_p1_02r_oracle_w7_v1",
+    "protocol_sha256": "8d37e6c4dbe46146e9f2d5d3da439a2c72f4e06f3d9c8ce33511484fceccbe34",
+    "retrieval_score_sha256": "32b39da19e9507a0a5060157630cb40bf5c6bcf6464d88e4bb6136888473173b",
+    "retrieval_score_content_sha256": "41c55a82fd4cd3607347aba68461a11dd4a0781f1e6825a107e44bb4544315e7",
+    "rows": 6149670,
+    "queries": 1142,
+    "pages_per_query": 5385,
+    "coverage": 1.0,
+    "semantic_integrity_inherited_from_hash_pinned_review": true,
+    "actual_relevance_loaded": false,
+    "oracle_executed": false,
+    "scientific_result_produced": false,
+    "authorization_attempt_consumed": false,
+    "recorded_probe_evidence_accepted": true
+  },
+  "queries": 1142,
+  "pages_per_query": 5385,
+  "query_order_sha256": "a59da8a89b9bc0ffcb4f4588c96c3a5a5256c9df95a3a707cbd5e98eb1944535",
+  "actual_relevance_loaded": false,
+  "scientific_result_produced": false,
+  "execution_authorized": false,
+  "attempt_exists": false
+}

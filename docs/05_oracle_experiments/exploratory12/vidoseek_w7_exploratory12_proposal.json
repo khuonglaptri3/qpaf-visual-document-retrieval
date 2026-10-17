@@ -1,0 +1,127 @@
+{
+  "proposal_id": "vidoseek_p1_02r_w7_exploratory12_v1_draft",
+  "status": "DRAFT_REQUIRES_PROTOCOL_APPROVAL_NOT_RUNNABLE",
+  "execution_authorized": false,
+  "classification": "proposed_exploratory_subset_not_full_w7_or_phase_gate",
+  "selection": {
+    "rule": "Python 3.13 random.Random(20260820).sample(range(1142),12), sorted audit indices",
+    "seed": 20260820,
+    "queries": [
+      {
+        "audit_index": 147,
+        "dataset": "Qiuchen-Wang/ViDoSeek",
+        "query_id": "009e328fc7136f2a006b114ff3154d3eafd04ecb_2"
+      },
+      {
+        "audit_index": 396,
+        "dataset": "Qiuchen-Wang/ViDoSeek",
+        "query_id": "01dc52ed80b475c6ac81bc9def3e03dad93e33de_0"
+      },
+      {
+        "audit_index": 510,
+        "dataset": "Qiuchen-Wang/ViDoSeek",
+        "query_id": "02d9d6c3d872469119ce9ff49442967c9209d1cd_3"
+      },
+      {
+        "audit_index": 682,
+        "dataset": "Qiuchen-Wang/ViDoSeek",
+        "query_id": "0362524caefe112f57cbfa547ad8a1b3be756e08_0"
+      },
+      {
+        "audit_index": 792,
+        "dataset": "Qiuchen-Wang/ViDoSeek",
+        "query_id": "0441317ce9deb3da74c85d08fe3a2137d7832df0_1"
+      },
+      {
+        "audit_index": 797,
+        "dataset": "Qiuchen-Wang/ViDoSeek",
+        "query_id": "04450a0f59f81025574451222aa26322ae7ede42_1"
+      },
+      {
+        "audit_index": 848,
+        "dataset": "Qiuchen-Wang/ViDoSeek",
+        "query_id": "04877fbd1a0ba6c62b516596391983ab8e3f47ef_0"
+      },
+      {
+        "audit_index": 880,
+        "dataset": "Qiuchen-Wang/ViDoSeek",
+        "query_id": "04973d056d9522006d5bdaefd92627ebedea7ba1_2"
+      },
+      {
+        "audit_index": 881,
+        "dataset": "Qiuchen-Wang/ViDoSeek",
+        "query_id": "04a385633c2c14185d3ca288083efdcc6350420e_0"
+      },
+      {
+        "audit_index": 940,
+        "dataset": "Qiuchen-Wang/ViDoSeek",
+        "query_id": "04dc0db4eefee1ab8f9d77c40047cce2d0a5f087_3"
+      },
+      {
+        "audit_index": 1023,
+        "dataset": "Qiuchen-Wang/ViDoSeek",
+        "query_id": "0541896ed71e7eb1098ad3dbee66bf4444855b17_2"
+      },
+      {
+        "audit_index": 1081,
+        "dataset": "Qiuchen-Wang/ViDoSeek",
+        "query_id": "05a312877bb2a2360f336e7a99bb52ec6f313339_1"
+      }
+    ],
+    "canonical_query_list_sha256": "03b6480ae76d8de483106ae48e3c3a10da99cdad0812ffe1aa2c54687a2d7a64",
+    "candidate_audit_sha256": "938aab50bbf981c7b5d4609a6345be18f9a9c7797714a2c42bea099f8ad39151",
+    "relevance_or_scores_used_for_selection": false
+  },
+  "input": {
+    "retrieval_scores_path": "artifacts/vidoseek_p1_02r_import/retrieval_scores.parquet",
+    "retrieval_scores_byte_sha256": "32b39da19e9507a0a5060157630cb40bf5c6bcf6464d88e4bb6136888473173b",
+    "pages_per_query": 5385,
+    "candidate_pairs": 64620,
+    "normalization": "reuse_frozen_per_query_minmax_no_changes"
+  },
+  "oracle": {
+    "grid": "w7",
+    "global_scope": "one_profile_selected_across_only_the_12_frozen_queries_before_any_QPAF_results",
+    "global_is_full_1142_query_global": false,
+    "qarf": "existing_frozen_query_local_search",
+    "qpaf": "existing_frozen_coordinate_ascent_max_two_sweeps_not_exhaustive_assignment_search",
+    "bootstrap_resamples": 10000,
+    "bootstrap_seed": 20260820,
+    "primary_metric": "ndcg_at_10",
+    "relevance_use": "oracle_selection_and_evaluation_only"
+  },
+  "proposed_limits": {
+    "device": "cpu",
+    "workers": 1,
+    "threads_per_library": 1,
+    "total_wall_timeout_seconds": 21600,
+    "automatic_retries": 0,
+    "invocations": 1,
+    "timeout_result": "incomplete_no_subset_reselection_or_partial_mean_claim",
+    "checkpoint_policy": "hash_bound_query_checkpoints_for_audit; any_restart_requires_separate_approval"
+  },
+  "planned_output_fields": [
+    "per_query_global_qarf_qpaf_metrics",
+    "delta_qarf_vs_global",
+    "delta_qpaf_vs_qarf",
+    "exploratory_mean_and_query_bootstrap_ci95",
+    "win_tie_loss_counts",
+    "per_query_runtime",
+    "immutable_attempt_marker_and_run_manifest"
+  ],
+  "decision_policy": {
+    "can_pass_or_fail_full_phase1": false,
+    "can_authorize_training": false,
+    "interpretation": "initial_exploratory_evidence_only; inspect_all_12_queries_and_failures; no_selection_changes_after_labels",
+    "next_after_completion": "human_review_of_headroom_and_runtime_before_any_larger_run"
+  },
+  "implementation_status": "not_implemented; separate_guarded_entrypoint_and_fixture_tests_required_after_protocol_approval",
+  "unchanged_boundaries": {
+    "p1_02": "BLOCKED",
+    "full_w7_authorized": false,
+    "p1_03_authorized": false,
+    "learned_qpaf_authorized": false,
+    "modal_gpu_authorized": false,
+    "vidore_external_labels_used": false
+  }
+}

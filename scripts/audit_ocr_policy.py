@@ -91,7 +91,7 @@ def generate_ocr_failure_threshold_content() -> str:
 
 ## 1. Cơ sở Khoa học & Cam kết Không Bịa đặt Số liệu
 
-Theo đúng Nghị định thư bàn giao tại `docs/m1-restart-handoff.md` (mục 4) và kế hoạch Superpowers:
+Theo đúng Nghị định thư bàn giao tại `docs/06_handover/m1-restart-handoff.md` (mục 4) và kế hoạch Superpowers:
 - **Ranh giới:** M1.8 xây dựng khung công thức toán học và thiết lập các giá trị tham chiếu dự kiến (**Provisional Benchmark Heuristics**) lấy từ thực hành tiêu chuẩn công nghiệp (Unstructured.io, PDFMiner, Tesseract Guidelines).
 - **Điều kiện Freeze chính thức:** Các giá trị số học chỉ được chốt chính thức (Frozen) sau đợt đo đạc mẫu thực nghiệm (Calibration Run) trên tập PDF thật của ViDoSeek tại **Milestone M2.3**.
 

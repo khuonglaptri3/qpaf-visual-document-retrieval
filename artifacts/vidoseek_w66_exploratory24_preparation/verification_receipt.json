@@ -1,0 +1,71 @@
+{
+  "status": "PASS_PREPARED_RESOURCE_AND_EXECUTION_CLOSED",
+  "verified_at": "2026-09-09T02:54:32.0402962+00:00",
+  "classification": "preparation_closeout_not_w66_result",
+  "preparation_git": {
+    "prepared_parent_commit": "c7f3b48cd95b5fa1ca8fd2ae8299d235fd70513b",
+    "commit_rule": "single_non_merge_direct_child_with_exact_changed_paths",
+    "changed_path_count": 13,
+    "changed_paths_match_allowlist": true,
+    "non_merge_direct_child": true
+  },
+  "contract": {
+    "queries": 24,
+    "pages_per_query": 5385,
+    "candidate_pairs": 129240,
+    "query_list_sha256": "95715b6a8c0c2d684b3a34e9130eca25ea641aafb62678f7daa764f0ab585f5b",
+    "grid": "w66",
+    "profile_count": 66,
+    "profiles_canonical_sha256": "c04139858954fd0a7f7baa5dad548f3675a41b8682e9798039508e4077da5973",
+    "retrieval_score_sha256": "32b39da19e9507a0a5060157630cb40bf5c6bcf6464d88e4bb6136888473173b",
+    "bootstrap_resamples": 10000,
+    "seed": 20260820
+  },
+  "checks": {
+    "all_preparation_json_valid": true,
+    "source_inventory_pins": 27,
+    "source_hashes_match": true,
+    "closed_config_hash_matches_review_receipt": true,
+    "malformed_query_hash_occurrences": 0,
+    "read_only_preflight": "PASS",
+    "preflight_payload_matches_clean_checkout_run": true,
+    "preflight_loaded_relevance": false,
+    "preflight_executed_w66_oracle": false,
+    "closed_cli_refused_before_input_or_writes": true,
+    "closed_cli_exit_code": 1,
+    "output_directory_exists": false,
+    "attempt_consumed": false,
+    "focused_tests": "23 passed in 12.86s",
+    "full_test_suite": "255 passed in 77.71s",
+    "ruff_check": "PASS",
+    "ruff_format_check": "PASS",
+    "git_diff_check": "PASS"
+  },
+  "sha256": {
+    "live_closed_config_bytes": "776d454c317a784c4a46bcf606c75c4f567297f8e0daedcb2a2d3a90107489dd",
+    "reviewed_closed_config_receipt": "873b7dd871fd6d6591a307d24eedbe303ce6b7ff27f40f99aab24a847821bc17",
+    "proposal": "697ca8b31412f80533293db88880e5eb54921f69c3c231e631a1a2cd93c4efa2",
+    "runner": "2afa3e592e476174b343a4cb34a30b0b6d62f29856577df3ac55450703558053",
+    "tests": "28174e5a8f1576f5a6b44e1bd179b1f8dcbfe65f77bcd6f5cf58a2a086a6b52f",
+    "execution_review": "1b5f0f97b69e046cdcf6ff7b572894b9755905be709bc4743a397668163a1b90",
+    "preflight": "eed5fdf7e22c9c51ace54beb18a25cdf7e4945e69272506891011531c74af1fe",
+    "closed_cli_refusal": "f88861079afafcf28396c179b36585029c4e9750cd220e50631208df6e4d8220",
+    "parent_w7_result_review": "716a184eedcbe73c34dc166bcaa60d594546625dcb288049fd71807f63b61319",
+    "parent_w7_manifest": "0fcfbceee0e581240f241447abae1cb85cbb4f11cfee4f4d5343c2f81e06d9ee"
+  },
+  "boundaries": {
+    "resource_budget_status": "PENDING_SEPARATE_RESOURCE_REVIEW",
+    "approved_wall_timeout_seconds": 0,
+    "authorized_invocations": 0,
+    "automatic_retries": 0,
+    "protocol_adopted": false,
+    "resource_budget_approved": false,
+    "execution_authorized": false,
+    "w66_oracle_executed": false,
+    "scientific_result_produced": false,
+    "formal_p1_03_changed": false,
+    "training_authorized": false,
+    "modal_gpu_authorized": false,
+    "frozen_p1_02_status": "BLOCKED"
+  }
+}

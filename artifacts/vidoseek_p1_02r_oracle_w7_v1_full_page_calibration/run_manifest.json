@@ -1,0 +1,49 @@
+{
+  "attempt_marker_sha256": "9e555783f6d4f3d4de7015cbf0614b8301c4ddad643a4cec90a080e26c20b6d7",
+  "boundaries": {
+    "actual_relevance_loaded": false,
+    "frozen_p1_02_status": "BLOCKED",
+    "full_w7_oracle_executed": false,
+    "learned_qpaf_executed": false,
+    "modal_or_gpu_used": false,
+    "oracle_results_persisted": false,
+    "p1_03_authorized": false,
+    "scientific_oracle_analysis_executed": false
+  },
+  "calibration_contract": {
+    "actual_relevance_loaded": false,
+    "bootstrap_resamples": 100,
+    "cpu_thread_limit": 1,
+    "hard_timeout_seconds": 2700,
+    "max_workers": 1,
+    "pages_per_query": 5385,
+    "query_id": "031b7b7d18c37c9bc134212f6ccf7bac1f06e606_2",
+    "query_index": 570,
+    "synthetic_relevance_rule": "first_and_middle_page_binary_relevant"
+  },
+  "classification": "engineering_full_page_calibration_not_result",
+  "completed_at": "2026-09-06T15:03:20.923660+00:00",
+  "elapsed_seconds": 752.7996488000001,
+  "environment": {
+    "device": "cpu",
+    "packages": {
+      "PyYAML": "6.0.3",
+      "numpy": "2.4.4",
+      "pandas": "3.0.2",
+      "pyarrow": "24.0.0"
+    },
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.13.7 (tags/v3.13.7:bcee1c3, Aug 14 2025, 14:15:11) [MSC v.1944 64 bit (AMD64)]",
+    "thread_limits": {
+      "MKL_NUM_THREADS": "1",
+      "NUMEXPR_NUM_THREADS": "1",
+      "OMP_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1"
+    }
+  },
+  "protocol_id": "vidoseek_p1_02r_oracle_w7_v1",
+  "protocol_sha256": "8d37e6c4dbe46146e9f2d5d3da439a2c72f4e06f3d9c8ce33511484fceccbe34",
+  "schema_version": 1,
+  "source_commit": "b252080d4ea32ea7b5b11450b54a7cb58f214990",
+  "status": "PASS"
+}

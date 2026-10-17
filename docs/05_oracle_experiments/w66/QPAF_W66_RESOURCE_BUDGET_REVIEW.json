@@ -1,0 +1,301 @@
+{
+  "schema_version": 1,
+  "classification": "read_only_resource_review_no_w66_execution",
+  "reviewed_commit": "592846a5ea8c680a66297144aca13a2ba8411f9d",
+  "observed_at": "2026-09-09T03:34:03.5591980+00:00",
+  "decision": "NO_GO_FULL_W66_PENDING_CALIBRATION_AND_RESOURCE_GUARDS",
+  "full_w66_timeout_recommended_seconds": null,
+  "verified_inputs": {
+    "manifest_sha256": "0fcfbceee0e581240f241447abae1cb85cbb4f11cfee4f4d5343c2f81e06d9ee",
+    "manifest_artifacts_checked": 82,
+    "manifest_artifact_hash_mismatches": [],
+    "retrieval_score_sha256": "32b39da19e9507a0a5060157630cb40bf5c6bcf6464d88e4bb6136888473173b",
+    "retrieval_score_bytes": 248445561,
+    "source_pins": 27,
+    "source_mismatches": [],
+    "protected_sha256": {
+      "Context.md": "dac08e3535a9c8241187b119a74b0e347b5480c96dd6a2738bbed934a64031d9",
+      "PROJECT_TRACKING.md": "aa76196f1a6aaaf3aecbb7d6aa0cc484b5cc23b5b5b2b98b62a867a79a0716bf",
+      "Tasks.md": "36909ce816521185411685e65f03d1c8b194eec9497f47681f2ee7abdc9233b2",
+      "artifacts/vidoseek_w66_exploratory24_preparation/closed_cli_refusal.json": "f88861079afafcf28396c179b36585029c4e9750cd220e50631208df6e4d8220",
+      "artifacts/vidoseek_w66_exploratory24_preparation/preflight.json": "eed5fdf7e22c9c51ace54beb18a25cdf7e4945e69272506891011531c74af1fe",
+      "artifacts/vidoseek_w66_exploratory24_preparation/reviewed_closed_config.json": "873b7dd871fd6d6591a307d24eedbe303ce6b7ff27f40f99aab24a847821bc17",
+      "artifacts/vidoseek_w66_exploratory24_preparation/verification_receipt.json": "502081c9823f008097d5deaad218359a3077f0edd6e370ac9d22878ed5d1b66c",
+      "configs/vidoseek_w66_exploratory24_v1.json": "776d454c317a784c4a46bcf606c75c4f567297f8e0daedcb2a2d3a90107489dd",
+      "docs/QPAF_W66_EXPLORATORY24_EXECUTION_REVIEW.md": "1b5f0f97b69e046cdcf6ff7b572894b9755905be709bc4743a397668163a1b90",
+      "docs/vidoseek_w66_exploratory24_proposal.json": "697ca8b31412f80533293db88880e5eb54921f69c3c231e631a1a2cd93c4efa2",
+      "experiments/CHANGELOG.md": "b9bcc194b1cd648de92a40e2cb973266ec8ffb47da7ad79113d2e5a06cd2ea36",
+      "scripts/run_vidoseek_exploratory24_w66.py": "2afa3e592e476174b343a4cb34a30b0b6d62f29856577df3ac55450703558053",
+      "tests/test_vidoseek_exploratory24_w66.py": "28174e5a8f1576f5a6b44e1bd179b1f8dcbfe65f77bcd6f5cf58a2a086a6b52f"
+    }
+  },
+  "w7": {
+    "elapsed_seconds": 8700.394427099993,
+    "global_pass_seconds": 2.7251582000462804,
+    "query_pass_seconds": 8688.940272700042,
+    "unattributed_seconds": 8.72899619990672,
+    "query_pass_percent": 99.86834902146191,
+    "query_timings": [
+      {
+        "audit_index": 92,
+        "query_id": "0073d1c9d37a124a69560a42acf492e6fae6fb55_0",
+        "seconds": 312.3358145999955,
+        "accepted_updates": 0,
+        "changed_candidates": 0
+      },
+      {
+        "audit_index": 141,
+        "query_id": "009856a0cdcc230d983c3a3e460a0c1b83cb09d4_3",
+        "seconds": 289.8418525000161,
+        "accepted_updates": 0,
+        "changed_candidates": 0
+      },
+      {
+        "audit_index": 148,
+        "query_id": "009e328fc7136f2a006b114ff3154d3eafd04ecb_3",
+        "seconds": 368.5427849999978,
+        "accepted_updates": 0,
+        "changed_candidates": 0
+      },
+      {
+        "audit_index": 398,
+        "query_id": "01dc52ed80b475c6ac81bc9def3e03dad93e33de_2",
+        "seconds": 650.6484223000007,
+        "accepted_updates": 1,
+        "changed_candidates": 1
+      },
+      {
+        "audit_index": 513,
+        "query_id": "02e22d6e970bef1b48efd32bf2a524c6bd3263c7_2",
+        "seconds": 307.47308280001744,
+        "accepted_updates": 0,
+        "changed_candidates": 0
+      },
+      {
+        "audit_index": 640,
+        "query_id": "034a1a1dd2c6d0d58c3c9c95754f33fd786527a1_3",
+        "seconds": 297.0087669999921,
+        "accepted_updates": 0,
+        "changed_candidates": 0
+      },
+      {
+        "audit_index": 676,
+        "query_id": "035f7ae44821cbb6191454cffc3a81cbc5cfc9d5_4",
+        "seconds": 583.336535200011,
+        "accepted_updates": 2,
+        "changed_candidates": 2
+      },
+      {
+        "audit_index": 686,
+        "query_id": "036d37910cd4b143a98986f1facbe9d84f7e6ca3_0",
+        "seconds": 270.15049269999145,
+        "accepted_updates": 0,
+        "changed_candidates": 0
+      },
+      {
+        "audit_index": 798,
+        "query_id": "04450a0f59f81025574451222aa26322ae7ede42_2",
+        "seconds": 534.7902299000125,
+        "accepted_updates": 1,
+        "changed_candidates": 1
+      },
+      {
+        "audit_index": 803,
+        "query_id": "0454efb78bc1e03ae39f9552cb4c165495b11e4b_3",
+        "seconds": 654.9497856000089,
+        "accepted_updates": 1,
+        "changed_candidates": 1
+      },
+      {
+        "audit_index": 832,
+        "query_id": "046c8aeae3495fae63c6b029a72b048b5b91ed0a_0",
+        "seconds": 344.17771350001567,
+        "accepted_updates": 0,
+        "changed_candidates": 0
+      },
+      {
+        "audit_index": 842,
+        "query_id": "04787b8b2a5d62fdd928d716356ca6c3e7554251_2",
+        "seconds": 296.4771609000163,
+        "accepted_updates": 0,
+        "changed_candidates": 0
+      },
+      {
+        "audit_index": 855,
+        "query_id": "0487dcb861f03c1c838213788c0ab0b7e2cb0715_1",
+        "seconds": 270.4307353999757,
+        "accepted_updates": 0,
+        "changed_candidates": 0
+      },
+      {
+        "audit_index": 889,
+        "query_id": "04ad1ed44c5d12daf9bc5cc290e7eade424ee761_0",
+        "seconds": 260.8813379999774,
+        "accepted_updates": 0,
+        "changed_candidates": 0
+      },
+      {
+        "audit_index": 890,
+        "query_id": "04ad1ed44c5d12daf9bc5cc290e7eade424ee761_1",
+        "seconds": 244.31633170001442,
+        "accepted_updates": 0,
+        "changed_candidates": 0
+      },
+      {
+        "audit_index": 892,
+        "query_id": "04ad1ed44c5d12daf9bc5cc290e7eade424ee761_3",
+        "seconds": 249.25456739999936,
+        "accepted_updates": 0,
+        "changed_candidates": 0
+      },
+      {
+        "audit_index": 950,
+        "query_id": "04fbac4cb4c0de17f371d1ef6de15d535c9c875f_1",
+        "seconds": 498.0539238000056,
+        "accepted_updates": 1,
+        "changed_candidates": 1
+      },
+      {
+        "audit_index": 992,
+        "query_id": "051d7a1acd648d364a5ccaf6a7b5d1ed16f1adeb_0",
+        "seconds": 250.55965680000372,
+        "accepted_updates": 0,
+        "changed_candidates": 0
+      },
+      {
+        "audit_index": 1034,
+        "query_id": "054adbf8327de7348cba0375cbaea22cb7f80813_0",
+        "seconds": 246.31486459998996,
+        "accepted_updates": 0,
+        "changed_candidates": 0
+      },
+      {
+        "audit_index": 1067,
+        "query_id": "058f6bca5179d3ca48d85a2c29dfd2c727518ac1_3",
+        "seconds": 249.4241276999819,
+        "accepted_updates": 0,
+        "changed_candidates": 0
+      },
+      {
+        "audit_index": 1082,
+        "query_id": "05a312877bb2a2360f336e7a99bb52ec6f313339_2",
+        "seconds": 250.77777200000128,
+        "accepted_updates": 0,
+        "changed_candidates": 0
+      },
+      {
+        "audit_index": 1084,
+        "query_id": "05a3b8bbe4978f54c15901725d146b952aa36fc5_0",
+        "seconds": 262.0417875999992,
+        "accepted_updates": 0,
+        "changed_candidates": 0
+      },
+      {
+        "audit_index": 1093,
+        "query_id": "05b3364e2aa2aa8b644a335529979724b658414b_1",
+        "seconds": 305.94531750000897,
+        "accepted_updates": 0,
+        "changed_candidates": 0
+      },
+      {
+        "audit_index": 1129,
+        "query_id": "05e2dbaf2d299e33a0e7bf92a434214c84381bf1_5",
+        "seconds": 691.2072082000086,
+        "accepted_updates": 0,
+        "changed_candidates": 0
+      }
+    ],
+    "inferred_sweeps": 29,
+    "inferred_alternative_evaluations": 936990,
+    "inference": "19 zero-update queries use one sweep; five positive-update queries use two sweeps; derived from unchanged loop semantics"
+  },
+  "w66_work": {
+    "queries": 24,
+    "pages_per_query": 5385,
+    "profiles": 66,
+    "global_profile_evaluations": 1584,
+    "qarf_profile_evaluations": 1584,
+    "alternative_evaluations_min": 8400600,
+    "alternative_evaluations_max": 16801200,
+    "complexity": "O(Q*S*(P-1)*N^2*log(N)) approximate upper-order ranking work; S in {1,2}"
+  },
+  "scenarios": {
+    "classification": "conditional_arithmetic_not_timeout_or_confidence_interval",
+    "fixed_overhead_seconds": 34.42334494320022,
+    "unchanged_sweep_mix_hours": 26.15683600903527,
+    "all_one_sweep_hours": 21.76064090968336,
+    "all_two_sweeps_hours": 43.51171977910473,
+    "all_queries_two_sweeps_at_slowest_w7_sweep_hours": 99.84104118444569
+  },
+  "hardware_snapshot": {
+    "Name": "Intel(R) Core(TM) i7-10510U CPU @ 1.80GHz",
+    "NumberOfCores": 4,
+    "NumberOfLogicalProcessors": 8,
+    "TotalVisibleMemorySize": 16576500,
+    "FreePhysicalMemory": 3985008,
+    "TotalVirtualMemorySize": 24702964,
+    "FreeVirtualMemory": 6411536,
+    "disk_free_bytes": 24273297408,
+    "memory_units": "Win32 memory fields are KiB; snapshot is transient, not W7 peak usage"
+  },
+  "installed_arrow_probe": {
+    "pyarrow_version": "24.0.0",
+    "OMP_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "NUMEXPR_NUM_THREADS": "1",
+    "observed_cpu_pool": 1,
+    "observed_io_pool": 8,
+    "read_table_use_threads_default": true,
+    "read_table_pre_buffer_default": true,
+    "no_data_rows_read": true
+  },
+  "parquet_metadata": {
+    "rows": 6149670,
+    "row_groups": 143,
+    "first_row_group_rows": 43080,
+    "first_row_group_uncompressed_bytes": 3467417
+  },
+  "minimal_calibration_proposal": {
+    "status": "DRAFT_NOT_IMPLEMENTED_OR_AUTHORIZED",
+    "protocol_id": "vidoseek_w66_resource_calibration_v1",
+    "selection_rule": "Slowest recorded W7 query_oracle elapsed time; tie ascending audit_index; performance selection only",
+    "audit_index": 1129,
+    "query_id": "05e2dbaf2d299e33a0e7bf92a434214c84381bf1_5",
+    "pages": 5385,
+    "input_loading": "24 frozen queries, all original columns except relevance; synthetic labels added after loading; no actual relevance decoded",
+    "synthetic_relevance_rule": "For calibration query sorted by ascending page_id, relevance=1 at zero-based index 2692, 0 elsewhere",
+    "oracle_calls": 1,
+    "max_sweeps": 2,
+    "grid": "w66",
+    "profile_sha256": "c04139858954fd0a7f7baa5dad548f3675a41b8682e9798039508e4077da5973",
+    "proposed_wall_timeout_seconds": 21600,
+    "timeout_is_cost_cap_not_completion_guarantee": true,
+    "proposed_invocations": 1,
+    "currently_authorized_invocations": 0,
+    "automatic_retries": 0,
+    "proposed_worker_count": 1,
+    "proposed_cpu_and_io_pool_sizes": 1,
+    "proposed_process_tree_private_bytes_limit": 2147483648,
+    "proposed_prestart_free_physical_bytes_min": 4294967296,
+    "proposed_abort_free_physical_bytes_below": 2147483648,
+    "proposed_prestart_disk_free_bytes_min": 5368709120,
+    "proposed_output_byte_limit": 104857600,
+    "proposed_sample_interval_seconds": 1,
+    "proposed_output_namespace": "runs/vidoseek_w66_resource_calibration_v1",
+    "output_namespace_created": false,
+    "checkpoint_reuse_into_scientific_run_allowed": false,
+    "result_policy": "Report engineering timings, memory, counts and integrity only; synthetic metrics cannot establish W66 scientific gains or full-run timeout",
+    "pass_policy": "Completion, guard/identity/thread checks, memory budget, telemetry and immutable checkpoint replay verified; full24 budget still requires review"
+  },
+  "boundaries": {
+    "execution_authorized": false,
+    "invocation_consumed": false,
+    "w66_output_created": false,
+    "w66_oracle_executed": false,
+    "modal_gpu_used": false,
+    "training_executed": false,
+    "p1_03_executed": false,
+    "config_modified": false
+  }
+}

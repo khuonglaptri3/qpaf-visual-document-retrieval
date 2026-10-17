@@ -1,0 +1,123 @@
+{
+  "app_name": "qpaf-research",
+  "dataset_id": "kaistdata/ViMDoc",
+  "dataset_key": "vimdoc",
+  "dataset_revision": "25657f1fe0358f49147148ca89e231291ba42788",
+  "dataset_root": "/vol/datasets/vimdoc/25657f1fe0358f49147148ca89e231291ba42788",
+  "files": {
+    ".gitattributes": {
+      "bytes": 2461,
+      "kind": "opaque"
+    },
+    "README.md": {
+      "bytes": 2285,
+      "kind": "opaque"
+    },
+    "ViMDoc_pages.tar.gz": {
+      "bytes": 17455193968,
+      "files": 76347,
+      "kind": "tar.gz",
+      "sample_names": [
+        "pages/0001_0.png",
+        "pages/0001_1.png",
+        "pages/0001_10.png",
+        "pages/0001_100.png",
+        "pages/0001_101.png",
+        "pages/0001_102.png",
+        "pages/0001_103.png",
+        "pages/0001_104.png",
+        "pages/0001_105.png",
+        "pages/0001_106.png"
+      ],
+      "suffix_counts": {
+        ".jpg": 20395,
+        ".png": 55952
+      }
+    },
+    "data/ViMDoc-00000-of-00001.parquet": {
+      "bytes": 747911,
+      "columns": [
+        {
+          "name": "id",
+          "type": "string"
+        },
+        {
+          "name": "query",
+          "type": "string"
+        },
+        {
+          "name": "doc_ids",
+          "type": "list<element: string>"
+        },
+        {
+          "name": "source",
+          "type": "string"
+        }
+      ],
+      "kind": "parquet",
+      "row_groups": 1,
+      "rows": 10904
+    }
+  },
+  "function_call_id": "fc-01M0Y2VSCMDCWAJ16XRRVMCKRZ",
+  "function_name": "score-input-probe",
+  "image_definition_sha256": "496ad187f08b2e463a760bf7e5182c45dcab0e1f28130965d3cce9e45eb81eee",
+  "qrels_contract": "heaven_aligned_document_level_binary_qrels",
+  "read_only": true,
+  "required_file_count": 4,
+  "retriever_signatures": {
+    "available_modules": [
+      "base_vision_retriever",
+      "bge_m3_colbert_retriever",
+      "bge_m3_retriever",
+      "biqwen2_retriever",
+      "bm25_retriever",
+      "cohere_api_retriever",
+      "colidefics3_retriever",
+      "colpali_retriever",
+      "colqwen2_retriever",
+      "dse_qwen2_retriever",
+      "dummy_vision_retriever",
+      "jina_clip_retriever",
+      "nomic_retriever",
+      "registry_utils",
+      "siglip_retriever",
+      "vision_retriever"
+    ],
+    "imports": {
+      "bge_m3": {
+        "class": "BGEM3Retriever",
+        "module": "vidore_benchmark.retrievers.bge_m3_retriever",
+        "signature": "(pretrained_model_name_or_path: str = 'BAAI/bge-m3', device: str = 'auto', **kwargs)",
+        "status": "available"
+      },
+      "bm25": {
+        "class": "BM25Retriever",
+        "module": "vidore_benchmark.retrievers.bm25_retriever",
+        "signature": "(device: str = 'auto', **kwargs)",
+        "status": "available"
+      },
+      "colqwen25": {
+        "class": "ColQwen2_5_Retriever",
+        "error": "ModuleNotFoundError: No module named 'vidore_benchmark.retrievers.colqwen2_5_retriever'",
+        "module": "vidore_benchmark.retrievers.colqwen2_5_retriever",
+        "status": "missing"
+      },
+      "colqwen25_processor": {
+        "class": "ColQwen2_5_Processor",
+        "module": "colpali_engine.models",
+        "signature": "(*args, **kwargs)",
+        "status": "available"
+      },
+      "dse": {
+        "class": "DSEQwen2Retriever",
+        "module": "vidore_benchmark.retrievers.dse_qwen2_retriever",
+        "signature": "(pretrained_model_name_or_path: 'str' = 'MrLight/dse-qwen2-2b-mrl-v1', num_image_tokens: 'int' = 1024, device: 'str' = 'auto', **kwargs)",
+        "status": "available"
+      }
+    }
+  },
+  "schema_version": 1,
+  "score_extraction_started": false,
+  "source_commit": "2c891795aa4527565c55102bd3a0e7d3f28da790"
+}
