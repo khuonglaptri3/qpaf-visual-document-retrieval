@@ -1,0 +1,32 @@
+{
+  "checks": {
+    "source_payload_hashes": "PASS",
+    "split_disjointness": "PASS",
+    "split_union_matches_annotations": "PASS"
+  },
+  "integrity": {
+    "annotation_query_count": 1142,
+    "pairwise_overlap": {
+      "train_test": 0,
+      "train_validation": 0,
+      "validation_test": 0
+    },
+    "union_count": 1142
+  },
+  "provenance": {
+    "command": [
+      "D:\\Users\\User\\CodeDaiHoc\\TLCN\\qpaf-visual-document-retrieval\\.venv\\Scripts\\python.exe",
+      "scripts/freeze_m21_data_splits.py"
+    ],
+    "generated_at_utc": "2026-10-04T03:29:16.271912+00:00",
+    "python": "3.11.15 (main, Apr 14 2026, 14:31:26) [MSC v.1944 64 bit (AMD64)]",
+    "source_commit": "1a7c725793fea528dfaba3579c610b26a6d3488a",
+    "source_hashes": {
+      "scripts/freeze_m21_data_splits.py": "9a627296b40f46e4725e9621f3b9c3edbd2058d216f520b7d6db95906ad3aa28",
+      "src/qpaf/m21/data_splits.py": "731e6454824b68035d8a0bd788bcf64e6d04853235742d49cefdb8b26d38c812"
+    },
+    "tracked_tree_dirty": false
+  },
+  "query_count": 1142,
+  "status": "VERIFIED"
+}
