@@ -31,7 +31,7 @@ jobs:
       - name: Install CPU tensor test dependencies
         run: python -m pip install -r requirements-learned-local.txt
       - name: Install research test dependencies
-        run: python -m pip install -e ".[verification,calibration,modal]" pytest safetensors==0.8.0
+        run: python -m pip install -e ".[verification,calibration,modal]" pytest safetensors==0.8.0 threadpoolctl==3.6.0
       - name: Test audit and Oracle tooling
         run: python -m unittest discover -s tests -v
 
@@ -50,7 +50,7 @@ jobs:
       - name: Install pinned CPU method dependencies
         run: python -m pip install -r requirements/m12-cpu.txt
       - name: Install existing verification dependencies
-        run: python -m pip install -e ".[verification,calibration,method,modal]" pytest safetensors==0.8.0
+        run: python -m pip install -e ".[verification,calibration,method,modal]" pytest safetensors==0.8.0 threadpoolctl==3.6.0
       - name: Test research tooling including method core
         run: python -m unittest discover -s tests -v
       - name: Verify method core with no skipped checks
