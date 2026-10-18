@@ -1,0 +1,29 @@
+{
+  "phases": [
+    {
+      "phase": "load",
+      "seconds": 0.027925700007472187,
+      "peak_rss_mb": 258.984375,
+      "peak_cuda_allocated_mb": 0.0,
+      "peak_cuda_reserved_mb": 0.0
+    },
+    {
+      "phase": "train",
+      "seconds": 8.017234500031918,
+      "peak_rss_mb": 265.51171875,
+      "peak_cuda_allocated_mb": 0.0,
+      "peak_cuda_reserved_mb": 0.0
+    },
+    {
+      "phase": "reload_and_evaluate",
+      "seconds": 0.12486509996233508,
+      "peak_rss_mb": 265.6640625,
+      "peak_cuda_allocated_mb": 0.0,
+      "peak_cuda_reserved_mb": 0.0
+    }
+  ],
+  "peak_rss_mb": 265.6640625,
+  "device": "cpu",
+  "dtype": "float64",
+  "threads": 1
+}

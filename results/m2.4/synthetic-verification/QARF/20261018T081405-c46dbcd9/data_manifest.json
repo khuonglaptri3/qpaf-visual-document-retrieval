@@ -1,0 +1,24 @@
+{
+  "train": {
+    "queries": 24,
+    "candidates": 288,
+    "max_candidates": 12,
+    "relevant_in_candidates": 24,
+    "relevant_total": 48,
+    "candidate_recall": 0.5,
+    "query_ids_sha256": "ab47dd0f191ea199c189747d2826e472a214ec54f9101972ea3a02b80a5a3943"
+  },
+  "validation": {
+    "queries": 8,
+    "candidates": 96,
+    "max_candidates": 12,
+    "relevant_in_candidates": 8,
+    "relevant_total": 16,
+    "candidate_recall": 0.5,
+    "query_ids_sha256": "41a98d3f15f574dd4935226e4840335ef7556ab1769816e7b250c13576ccc27e"
+  },
+  "test": {
+    "queries": 8,
+    "state": "not_opened"
+  }
+}

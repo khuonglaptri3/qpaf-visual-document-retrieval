@@ -1,0 +1,91 @@
+{
+  "config_sha256": "c6e0b337280464b17f7173bc6663534c89cbce3ba1d550fb4b6a8ba816745891",
+  "cache_config_sha256": "c6e0b337280464b17f7173bc6663534c89cbce3ba1d550fb4b6a8ba816745891",
+  "inputs": {
+    "config": "257c28dbeeccc08a6087ecc94044d8b91d7af6d39cb93353562b6125651d535a",
+    "synthetic_fixture": "qpaf.m24.synthetic:20260820"
+  },
+  "source_digest": "328e71c19b6d19f3de3d3fb3c96e16eab0db34c33ff9d9637f478cc5d9b99e40",
+  "outputs": [
+    {
+      "path": "checkpoints/best.pt",
+      "size_bytes": 15032,
+      "sha256": "f26ef9ad398f2de09374b1814dc6f68588cd3f74db29a8e671da3d0bb26a9b33"
+    },
+    {
+      "path": "checkpoints/last.pt",
+      "size_bytes": 15736,
+      "sha256": "f167aab177944b8d1ebdaab1f399cb58e6bcacb6c7f5581fcacca1156eefd4b7"
+    },
+    {
+      "path": "data_manifest.json",
+      "size_bytes": 622,
+      "sha256": "7b6eed6ca6bd9d679898ab40fac37e626d2f6871826f788949bd8c35ad6eda1d"
+    },
+    {
+      "path": "epochs.csv",
+      "size_bytes": 1941,
+      "sha256": "96136bc49c550f267233e83534026cac94e7f7cac883a8865422bcf90912794e"
+    },
+    {
+      "path": "provenance.json",
+      "size_bytes": 28455,
+      "sha256": "d8443242288c90a7aabf8e9e853f13ccf568d53043ef3f4f246627019017e9ef"
+    },
+    {
+      "path": "report.md",
+      "size_bytes": 491,
+      "sha256": "dbc6a9132311b9e4c6153ee3a33b67b14c30f4f8d88fc05afe0679148cb856d5"
+    },
+    {
+      "path": "resolved_config.json",
+      "size_bytes": 729,
+      "sha256": "1f062a1153111ddf896a80af588821f9194ded8fff85329ef6d3057fafcdc9c0"
+    },
+    {
+      "path": "run.log",
+      "size_bytes": 2217,
+      "sha256": "01f0c05ab8f0c32f8af1c4c9c80178f2d47fb5cea80f387a6a7502c1ce634cd8"
+    },
+    {
+      "path": "status.json",
+      "size_bytes": 158,
+      "sha256": "439d33fda2e37beace41ba08f76f8a7cb2c90be2a535fd54ccc49b08a8791b27"
+    },
+    {
+      "path": "steps.csv",
+      "size_bytes": 2171,
+      "sha256": "f955ecaf3ae306b97403b1c2fc14dc5a1149db632631a9bd5f9c435476a30a78"
+    },
+    {
+      "path": "summary.json",
+      "size_bytes": 898,
+      "sha256": "5c582395f7d852ce0b9d48af82f86a76b18e99199c80f96ee6cc0399e818bd43"
+    },
+    {
+      "path": "telemetry.json",
+      "size_bytes": 690,
+      "sha256": "bd7652b6e8da3531e8835adaebde6ccf037a940072ab74f605bd6078e09f26b7"
+    },
+    {
+      "path": "validation_metrics.json",
+      "size_bytes": 134,
+      "sha256": "645a2b82ec76207e37251e8a79c037a9c7ea3d679aae3ac9d444f361e9c5830e"
+    },
+    {
+      "path": "validation_per_query.csv",
+      "size_bytes": 538,
+      "sha256": "05753d61119c6c5e2db1a2e9c153e5ee6808e65c447d1ac25f1769ba942a2c67"
+    },
+    {
+      "path": "validation_predictions.json",
+      "size_bytes": 16609,
+      "sha256": "38fb1b31f8cfc142ddf459ce153e301bcc418c2e19efccc6e5ee6296acb5277b"
+    },
+    {
+      "path": "hashes.csv",
+      "size_bytes": 1337,
+      "sha256": "56ee13c20919c00bc747db387965acc4b8e5d3213812045ba49eb79f7c0262b9"
+    }
+  ]
+}
