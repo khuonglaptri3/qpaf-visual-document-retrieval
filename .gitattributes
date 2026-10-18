@@ -66,3 +66,5 @@ vimdoc_archive_audit_modal.py -text
 # The final handover pins the original report bytes, including line endings.
 /docs/superpowers/reports/2026-10-17-m23-research-and-final-decision.md -text -eol -whitespace
 /evidence/revisions/** -text -eol -whitespace
+# M2.4 receipts bind exact artifact bytes, including Windows line endings.
+/results/m2.4/synthetic-verification/** -text -eol -whitespace
