@@ -1,0 +1,10 @@
+{
+  "status": "VERIFIED_SOURCE_SNAPSHOT",
+  "run_id": "RUN-QPAF-M2_6-FULL-OCR-001-20261019T135838Z-A01",
+  "source_commit": "9976150de48a6b20cafc36ffc651d8353f2a285b",
+  "source_files_verified": 143,
+  "source_digest": "3d12d0f6e2d02d8a14fbef29e48480fa5a5deee599096a20dcdd39f26d1e03d4",
+  "source_snapshot_sha256": "146813a964a13359b9d619b6db06ec10d1224ea9ee332abd3edfd0de2ca002ea",
+  "config_matches_archive": true,
+  "policy_matches_archive": true
+}

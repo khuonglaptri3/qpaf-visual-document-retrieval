@@ -101,3 +101,8 @@ results/m2.3/RUN-*/remote/ocr/
 results/m2.3/RUN-*/review/index.html
 results/m2.3/review/index.html
 results/m2.3/review/previews/
+
+# M2.6 full OCR payloads. Portable text/hash manifests and receipts stay tracked.
+results/m2.6/RUN-*/output/pages/
+results/m2.6/RUN-*/output/archives/
+results/m2.6/RUN-*/source_snapshot.zip

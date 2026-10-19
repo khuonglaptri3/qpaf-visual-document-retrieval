@@ -1,0 +1,11 @@
+{
+  "status": "TARGETED_PASS",
+  "recorded_utc": "2026-10-19T15:45:04.684861+00:00",
+  "command": ".\\.venv\\Scripts\\python.exe -X utf8 -m unittest tests.test_m26_full_ocr tests.test_m23_policy tests.test_m23_calibration tests.test_m25_freeze -v",
+  "tests": 54,
+  "failures": 0,
+  "errors": 0,
+  "log_path": "results/m2.6/verification/2026-10-19-resumed-targeted-tests.txt",
+  "log_sha256": "0bded505d75d650b032be74c68cbcb807811be5fcba0285ea1ab96387f2ecd1c",
+  "note": "Fresh targeted verification after resuming collection; the earlier baseline/project-suite comparison remains in 2026-10-19-software-checks.json."
+}

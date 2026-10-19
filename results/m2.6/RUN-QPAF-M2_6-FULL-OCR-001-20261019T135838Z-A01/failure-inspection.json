@@ -1,0 +1,16 @@
+[
+  {
+    "page_id": "038c7d9e4cc19a5b729d9d2a7ca5b304e6756ea1_page_0007",
+    "document_id": "038c7d9e4cc19a5b729d9d2a7ca5b304e6756ea1",
+    "page_number": 7,
+    "extraction_status": "OCR_TIMEOUT",
+    "reason": "ocr: Per-page or remaining wall-time cap exceeded",
+    "text_source": "native",
+    "stage_errors": [
+      {
+        "stage": "ocr",
+        "error": "Per-page or remaining wall-time cap exceeded"
+      }
+    ]
+  }
+]

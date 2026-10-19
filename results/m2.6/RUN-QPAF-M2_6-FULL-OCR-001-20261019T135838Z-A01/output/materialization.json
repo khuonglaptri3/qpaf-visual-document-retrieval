@@ -1,0 +1,10 @@
+{
+  "status": "VERIFIED",
+  "transport": "pinned_huggingface_archive",
+  "source_url": "https://huggingface.co/datasets/Qiuchen-Wang/ViDoSeek/resolve/e91a92ba5f38690696c7e66be5c5474b54c6e791/vidoseek_pdf_document.zip",
+  "source_archive_sha256": "3b999a798ceab38703118e4cc7d9b852f86538d5bb7caad64eb545251ee00454",
+  "source_archive_bytes": 758769613,
+  "verified_documents": 292,
+  "wall_seconds": 20.336058205,
+  "completed_utc": "2026-10-19T14:00:56.193774+00:00"
+}

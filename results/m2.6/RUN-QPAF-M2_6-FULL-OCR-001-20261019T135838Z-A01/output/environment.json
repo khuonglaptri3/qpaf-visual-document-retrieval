@@ -1,0 +1,17 @@
+{
+  "python": "3.11.12 (main, May 21 2025, 23:34:13) [GCC 12.2.0]",
+  "platform": "Linux-4.19.0-gvisor-x86_64-with-glibc2.36",
+  "packages": {
+    "pypdfium2": "4.30.0",
+    "Pillow": "11.3.0",
+    "psutil": "7.0.0"
+  },
+  "tesseract_version": "tesseract 5.3.0\n leptonica-1.82.0\n  libgif 5.2.1 : libjpeg 6b (libjpeg-turbo 2.1.2) : libpng 1.6.39 : libtiff 4.5.0 : zlib 1.2.13 : libwebp 1.2.4 : libopenjp2 2.5.0\n Found AVX512BW\n Found AVX512F\n Found AVX512VNNI\n Found AVX2\n Found AVX\n Found FMA\n Found SSE4.1\n Found OpenMP 201511\n Found libarchive 3.6.2 zlib/1.2.13 liblzma/5.4.1 bz2lib/1.0.8 liblz4/1.9.4 libzstd/1.5.4\n Found libcurl/7.88.1 OpenSSL/3.0.16 zlib/1.2.13 brotli/1.0.9 zstd/1.5.4 libidn2/2.3.3 libpsl/0.21.2 (+libidn2/2.3.3) libssh2/1.10.0 nghttp2/1.52.0 librtmp/2.3 OpenLDAP/2.5.13\n",
+  "traineddata_path": "/usr/share/tesseract-ocr/5/tessdata/eng.traineddata",
+  "traineddata_sha256": "7d4322bd2a7749724879683fc3912cb542f19906c83bcc1a52132556427170b2",
+  "system_packages": "liblept5:amd64\t1.82.0-3+b3\nlibtesseract5:amd64\t5.3.0-2\ntesseract-ocr\t5.3.0-2\ntesseract-ocr-eng\t1:4.1.0-2\n",
+  "gpu_requested": false,
+  "cpu_requested": 4,
+  "omp_thread_limit": "1",
+  "app_id": null
+}

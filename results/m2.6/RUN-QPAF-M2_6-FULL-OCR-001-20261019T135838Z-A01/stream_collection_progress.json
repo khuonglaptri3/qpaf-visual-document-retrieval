@@ -1,0 +1,12 @@
+{
+  "documents_collected": 174,
+  "bytes_collected": 4906431975,
+  "worker_progress": {
+    "status": "COMPLETE",
+    "completed": 5385,
+    "scheduled": 5385,
+    "technical_failures": 1,
+    "wall_seconds": 4846.418582064,
+    "utc": "2026-10-19T15:25:00.522924+00:00"
+  }
+}

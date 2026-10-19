@@ -68,3 +68,7 @@ vimdoc_archive_audit_modal.py -text
 /evidence/revisions/** -text -eol -whitespace
 # M2.4 receipts bind exact artifact bytes, including Windows line endings.
 /results/m2.4/synthetic-verification/** -text -eol -whitespace
+/results/m2.6/RUN-*/** -text -eol -whitespace
+/results/m2.6/verification/** -text -eol -whitespace
+/docs/superpowers/reports/2026-10-19-m26-full-ocr.md -text -eol -whitespace
+/configs/m2.6/full_ocr.toml -text -eol

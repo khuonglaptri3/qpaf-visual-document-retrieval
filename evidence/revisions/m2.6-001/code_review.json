@@ -1,0 +1,31 @@
+{
+  "status": "NO_OUTSTANDING_MATERIAL_FINDINGS",
+  "reviewer": "independent read-only code-review agent",
+  "source_commit": "9976150de48a6b20cafc36ffc651d8353f2a285b",
+  "run_id": "RUN-QPAF-M2_6-FULL-OCR-001-20261019T135838Z-A01",
+  "review_scope": [
+    "Full-run source/configuration, artifact and page identity verification",
+    "Failed-page native fallback, raw OCR retention, geometry and text-policy replay",
+    "Interrupted-run recovery and partial collection",
+    "Pinned archive materialization and per-PDF integrity checks",
+    "Active source snapshot, exact config and frozen policy bytes"
+  ],
+  "resolved_findings": [
+    "Validate the actual canonical schedule rather than trusting declared counts",
+    "Verify runtime, resource checks and the page-hash CSV against saved records",
+    "Recompute retained raw OCR hashes and replay failed-page native fallback",
+    "Preserve interrupted native/render evidence and support absent partial page directories"
+  ],
+  "final_review": {
+    "new_material_findings": [],
+    "m26_tests_passed": 25,
+    "source_snapshot_records_independently_verified": 143,
+    "source_snapshot_verified": true,
+    "exact_config_and_policy_bytes_verified": true,
+    "reviewer_changed_files": false
+  },
+  "limitations": [
+    "Code and provenance review is separate from full-bundle local verification.",
+    "This receipt does not certify OCR accuracy or represent human milestone sign-off."
+  ]
+}

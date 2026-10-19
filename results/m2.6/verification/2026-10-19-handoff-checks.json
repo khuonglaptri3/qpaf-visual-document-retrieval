@@ -1,0 +1,32 @@
+{
+  "status": "VERIFIED_HANDOFF_LINKS_AND_RECEIPTS",
+  "recorded_utc": "2026-10-19T16:36:49.053464+00:00",
+  "run_id": "RUN-QPAF-M2_6-FULL-OCR-001-20261019T135838Z-A01",
+  "full_bundle_verification_sha256": "e89f65afba43a218656df7b157c8b77511543837cbb4805907784159684c3e78",
+  "evidence_manifest_sha256": "b36ba802914cb212660bf0c3b4fdb814e2a7ec0a882cdf4227e1a5342da871de",
+  "report_sha256": "dfdbf5083b6ea4ae8a28e048d6c77ffb05f218ceeea3af4961914b6495f1b7a8",
+  "local_link_targets_verified": [
+    "docs/superpowers/reports/2026-10-19-m26-full-ocr.md",
+    "evidence/revisions/m2.6-001/README.md",
+    "evidence/revisions/m2.6-001/code_review.json",
+    "evidence/revisions/m2.6-001/environment.json",
+    "evidence/revisions/m2.6-001/handover.json",
+    "evidence/revisions/m2.6-001/hashes.json",
+    "evidence/revisions/m2.6-001/ocr_policy_frozen.toml",
+    "evidence/revisions/m2.6-001/report_snapshot.md",
+    "evidence/revisions/m2.6-001/resolved_config.json",
+    "evidence/revisions/m2.6-001/resources.json",
+    "evidence/revisions/m2.6-001/resumed_checks.json",
+    "evidence/revisions/m2.6-001/software_checks.json",
+    "evidence/revisions/m2.6-001/source.json",
+    "evidence/revisions/m2.6-001/source_snapshot_verification.json",
+    "evidence/revisions/m2.6-001/summary.json",
+    "evidence/revisions/m2.6-001/verification.json",
+    "results/m2.6/README.md"
+  ],
+  "evidence_files_verified": 17,
+  "transport_logs_verified": 7,
+  "fresh_targeted_tests": 54,
+  "baseline_project_failures_unchanged": true,
+  "note": "Checks the published handoff. The separate full-bundle receipt binds all raw artifact hashes and frozen-policy replay."
+}

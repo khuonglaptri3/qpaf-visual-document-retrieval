@@ -4,6 +4,19 @@ Các thư mục ở đây tổ chức tài liệu theo quy ước Superpowers đ
 Việc có tài liệu trong thư mục này không đồng nghĩa một skill/plugin đã được chạy,
 hay một milestone đã được nghiệm thu.
 
+## M2.6 — Full OCR và hash theo trang
+
+Nhiệm vụ của Khương: xử lý toàn bộ 292 PDF / 5.385 trang ViDoSeek theo policy
+M2.3 đã khóa, giữ lỗi tường minh và kiểm chứng hash trước khi bàn giao cho M2.8.
+
+- [Thiết kế](specs/2026-10-19-m26-full-ocr-design.md)
+- [Kế hoạch](plans/2026-10-19-m26-full-ocr.md)
+- [Báo cáo thực thi và kết quả](reports/2026-10-19-m26-full-ocr.md)
+- [Vị trí file, cấu trúc bundle và lệnh tái lập](../../results/m2.6/README.md)
+- [Biên nhận kiểm thử phần mềm](../../results/m2.6/verification/2026-10-19-software-checks.json)
+- [Biên nhận kiểm tra mới khi tiếp tục thu thập](../../results/m2.6/verification/2026-10-19-resumed-checks.json)
+- [Bằng chứng bất biến và handover](../../evidence/revisions/m2.6-001/README.md)
+
 ## M2.2 — Chạy thử có kiểm soát ba retriever
 
 **Trạng thái:** PASS kỹ thuật — đã chạy mẫu thật đủ ba kênh trên Modal.
