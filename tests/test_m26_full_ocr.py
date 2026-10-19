@@ -350,6 +350,31 @@ class FullOCRTests(unittest.TestCase):
             self.assertTrue((folder / 'partial-output/pages/doc_page_0001/image.png').is_file())
             self.assertFalse((folder / 'verification.json').exists())
 
+    def test_failure_with_successful_ocr_still_verifies_its_raw_text_hash(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            folder = Path(tmp)
+            rows, scheduled, policy = self.fixture(folder)
+            rows[0].update(technical_failure=True, extraction_status='GEOMETRY_ERROR',
+                           reason='geometry failed', raw_ocr_text_sha256='wrong')
+            with self.assertRaisesRegex(ValueError, 'hash'):
+                self.verify(folder, rows, scheduled, policy, maximum=1.)
+
+    def test_worker_killed_before_pages_exist_exports_zero_terminal_partial_receipt(self):
+        collection = self.module('collection')
+        with tempfile.TemporaryDirectory() as tmp:
+            folder = Path(tmp)
+            write_json(folder / 'input_manifest.json', {'scheduled_pages': [
+                {'page_id': 'doc_page_0001', 'document_id': 'doc', 'page_number': 1}]})
+            write_json(folder / 'resolved_config.json', self.module('config').load_config(ROOT / 'configs/m2.6/full_ocr.toml'))
+            (folder / 'ocr_policy_frozen.toml').write_bytes((ROOT / 'configs/m2.3/ocr_policy_frozen.toml').read_bytes())
+            class Volume:
+                def iterdir(self, *args, **kwargs):
+                    raise FileNotFoundError('No page directory was committed')
+            receipt = collection.collect_partial(folder, Volume())
+            self.assertEqual(receipt['status'], 'PARTIAL_NOT_COMPLETE')
+            self.assertEqual(receipt['completed_records_verified'], 0)
+            self.assertEqual(receipt['incomplete_page_ids'], ['doc_page_0001'])
+
 
 if __name__ == '__main__':
     unittest.main()

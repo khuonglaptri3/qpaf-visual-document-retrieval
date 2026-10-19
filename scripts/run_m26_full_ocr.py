@@ -66,7 +66,7 @@ def collect(folder):
     if manifest_path.exists() and manifest_path.read_bytes() != data:
         raise ValueError('Completed remote manifest changed')
     if not manifest_path.exists():
-        manifest_path.write_bytes(data)
+        atomic_payload(manifest_path, data)
     records = read_json(manifest_path)
     lookup = {r['path']: r for r in records}
     if len(lookup) != len(records):

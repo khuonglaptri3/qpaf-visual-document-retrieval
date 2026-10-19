@@ -125,7 +125,9 @@ def validate_records(rows, scheduled, folder, policy, policy_sha256, *, maximum_
                 if list(im.size) != row.get('image_size'):
                     raise ValueError('Image dimensions mismatch')
                 im.verify()
-        if not row['technical_failure']:
+        if row['ocr']['status'] in ('OK', 'NO_TEXT_DETECTED'):
+            if not {'raw_ocr_txt', 'raw_ocr_tsv', 'raw_ocr_stderr'}.issubset(artifacts):
+                raise ValueError('Successful OCR metadata lacks raw artifacts')
             raw = checked_path(folder, artifacts['raw_ocr_txt']['path']).read_text(encoding='utf-8').strip()
             if raw != row['ocr']['text'] or text_hash(raw) != row['raw_ocr_text_sha256']:
                 raise ValueError('Raw OCR text hash mismatch')
@@ -135,6 +137,12 @@ def validate_records(rows, scheduled, folder, policy, policy_sha256, *, maximum_
                 raise ValueError('OCR confidence metadata differs from raw TSV')
             if (signals['word_count'] == 0) != (row['ocr']['status'] == 'NO_TEXT_DETECTED'):
                 raise ValueError('No-text state differs from raw TSV')
+        elif row['raw_ocr_text_sha256'] is not None:
+            if ('raw_ocr_txt' not in artifacts or text_hash(checked_path(folder, artifacts['raw_ocr_txt']['path'])
+                    .read_text(encoding='utf-8').strip()) != row['raw_ocr_text_sha256']):
+                raise ValueError('Retained raw OCR text hash mismatch')
+        if not row['technical_failure']:
+            tsv = checked_path(folder, artifacts['raw_ocr_tsv']['path'])
             geometry = read_json(checked_path(folder, artifacts['geometry']['path']))
             if geometry.get('native_text_sha256') != row['native_text_sha256']:
                 raise ValueError('Native geometry/text identity mismatch')

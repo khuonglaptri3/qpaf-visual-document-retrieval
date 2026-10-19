@@ -28,8 +28,16 @@ def collect_partial(folder, volume):
     remote = 'runs/' + folder.name + '/output/'
     output = folder / 'partial-output'
     output.mkdir(exist_ok=True)
-    entries = [entry.path.lstrip('/') for entry in volume.iterdir('/' + remote + 'pages', recursive=True)
-               if entry.path.endswith('/record.json')]
+    try:
+        entries = [entry.path.lstrip('/') for entry in volume.iterdir('/' + remote + 'pages', recursive=True)
+                   if entry.path.endswith('/record.json')]
+    except FileNotFoundError:
+        entries = []
+    except Exception as exc:
+        from modal.exception import NotFoundError
+        if not isinstance(exc, NotFoundError):
+            raise
+        entries = []
 
     def saved(path, payload, sha=None):
         if sha is not None and hashlib.sha256(payload).hexdigest() != sha:
