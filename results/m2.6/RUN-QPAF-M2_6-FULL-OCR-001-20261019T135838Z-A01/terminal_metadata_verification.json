@@ -1,0 +1,15 @@
+{
+  "status": "VERIFIED_TERMINAL_METADATA_FULL_RAW_BUNDLE_PENDING",
+  "run_id": "RUN-QPAF-M2_6-FULL-OCR-001-20261019T135838Z-A01",
+  "pages": 5385,
+  "document_count": 292,
+  "native_and_final_text_hashes_recomputed": 10770,
+  "page_hash_csv_rows_verified": 5385,
+  "technical_failures": 1,
+  "artifacts": {
+    "resolved_pages.json": "d3a6b633b70fcd0e63a0bf94122e876ed5e7677e000d7320f71243e3a0a3eb8c",
+    "page_hashes.csv": "f09d8d5509b44291df6a4c3e7ff41a7e64241eeafff04ae514d96d867ab94d67",
+    "failures.json": "ba512704074f37bc9c6da138b2da6852122241410e2c5b58d22988a4fd2a2d22"
+  },
+  "note": "Metadata audit only. Full raw file, image and policy-replay checks are in verification.json after collection."
+}

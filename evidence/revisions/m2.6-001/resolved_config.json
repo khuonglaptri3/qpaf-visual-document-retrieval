@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "experiment_id": "QPAF-M2_6-FULL-OCR-001",
+  "corpus": {
+    "dataset": "Qiuchen-Wang/ViDoSeek",
+    "raw_directory": "data/raw/vidoseek-e91a92b",
+    "pdf_directory": "data/raw/vidoseek-e91a92b/pdfs/pdf",
+    "split_freeze": "configs/m2.5/freeze.json",
+    "page_manifest": "evidence/revisions/m1.6-002/page_manifest.csv",
+    "document_count": 292,
+    "page_count": 5385
+  },
+  "policy": {
+    "handover": "evidence/revisions/m2.3-002/handover.json",
+    "path": "configs/m2.3/ocr_policy_frozen.toml",
+    "sha256": "c0fcf0b3b13b27070716179d75545ba33ae406cc99a74902737bcf2dad19c4b8"
+  },
+  "execution": {
+    "input_transport": "pinned_huggingface_archive",
+    "workers": 2,
+    "cpu": 4,
+    "ram_mib": 4096,
+    "max_pixels": 40000000,
+    "ocr_timeout_seconds": 15,
+    "wall_seconds": 21600,
+    "checkpoint_pages": 25,
+    "png_compress_level": 1,
+    "retries": 0
+  },
+  "modal": {
+    "app_name": "qpaf-m26-full-ocr",
+    "volume_name": "qpaf-m26-full-ocr",
+    "mount_path": "/m26",
+    "python_version": "3.11",
+    "requirements_file": "requirements/m23-modal.lock"
+  },
+  "output": {
+    "directory": "results/m2.6"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "wall_seconds": 4846.418582064,
+  "peak_python_and_children_rss_mib": 1431.91015625,
+  "workers": 2,
+  "cpu": 4,
+  "gpu_requested": false,
+  "ocr_timeout_seconds": 15,
+  "render_seconds_sum": 1685.3971097019935,
+  "ocr_subprocess_seconds_sum": 6210.481068536012,
+  "artifact_bytes_before_manifests": 17488275423
+}

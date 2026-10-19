@@ -1,0 +1,8 @@
+{
+  "started_utc": "2026-10-19T16:12:54.110292+00:00",
+  "ended_utc": "2026-10-19T16:36:44.933488+00:00",
+  "worker_exit_code": 0,
+  "verification_receipt_exists": true,
+  "stdout_sha256": "8289e9438f06eff01dd3aea89a67ca35b2f3c0bcd4ec8f3c275dced46d18fe4d",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

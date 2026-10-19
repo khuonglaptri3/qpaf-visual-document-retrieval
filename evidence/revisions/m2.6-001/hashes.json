@@ -1,0 +1,87 @@
+[
+  {
+    "path": "code_review.json",
+    "size_bytes": 1449,
+    "sha256": "601f4f4370bb03a1378a84693cd6f2c17e18122fc12bb351f3fdc5d5814863e2"
+  },
+  {
+    "path": "collection_audit.json",
+    "size_bytes": 858,
+    "sha256": "2f3d7945e5b9c3581bff456d95d8f31fab842aff876c6c3f439946aea6b179d8"
+  },
+  {
+    "path": "collection_recovery.json",
+    "size_bytes": 1997,
+    "sha256": "286fa571525d7d6f392b80c7dc97bc49259687e2a7877250b122184832bbb388"
+  },
+  {
+    "path": "environment.json",
+    "size_bytes": 1211,
+    "sha256": "3155cd402302cf155ca79fd309eb6dc66be5324e6a5b5bcacf244b683a095f1b"
+  },
+  {
+    "path": "execution.json",
+    "size_bytes": 266,
+    "sha256": "bbc397e25d0f5c6526b3cf5b9670865996f8f7b8846876bacfd89e5f5c70beaf"
+  },
+  {
+    "path": "handover.json",
+    "size_bytes": 1270,
+    "sha256": "64cb69c0256e77b9fc00b9ca5810bee07ac3205b9388b050e598d66c53822649"
+  },
+  {
+    "path": "ocr_policy_frozen.toml",
+    "size_bytes": 1712,
+    "sha256": "c0fcf0b3b13b27070716179d75545ba33ae406cc99a74902737bcf2dad19c4b8"
+  },
+  {
+    "path": "README.md",
+    "size_bytes": 1326,
+    "sha256": "e401344349f585dec26f1ceb8dfce6e24cf640aaffd4b2b04d0d19977d59de5c"
+  },
+  {
+    "path": "report_snapshot.md",
+    "size_bytes": 8398,
+    "sha256": "dfdbf5083b6ea4ae8a28e048d6c77ffb05f218ceeea3af4961914b6495f1b7a8"
+  },
+  {
+    "path": "resolved_config.json",
+    "size_bytes": 1204,
+    "sha256": "234b6d1032622b7298ae4c1924faa5027e179386eeaaac7da9c64133036bd2bf"
+  },
+  {
+    "path": "resources.json",
+    "size_bytes": 318,
+    "sha256": "9fec98a93b67cee0701d8c35a08e1fb2b4e88e5d002e27d868fc82e9e04f5e14"
+  },
+  {
+    "path": "resumed_checks.json",
+    "size_bytes": 631,
+    "sha256": "ff5c7115c9e270261e236ee9c1bb8f534035c29b65e314c943a4e6c4bd20ce7b"
+  },
+  {
+    "path": "software_checks.json",
+    "size_bytes": 8254,
+    "sha256": "3be567d62dfc158165fa59ff5ca2943579db072cd66cb7f6cb43d4403b1265d1"
+  },
+  {
+    "path": "source.json",
+    "size_bytes": 21416,
+    "sha256": "5135aec154568a0c46bc2b413383360e8de90bec1bed02b8c556d1542cf9d5e7"
+  },
+  {
+    "path": "source_snapshot_verification.json",
+    "size_bytes": 462,
+    "sha256": "a28c726d45cf4322beeeaba27131d47c9fb1a6157e6e0d460187a5ec4e38cd77"
+  },
+  {
+    "path": "summary.json",
+    "size_bytes": 982,
+    "sha256": "199772371a6a4f4667d9fc36c7636f3150fac89d18c587c86ed041f088b9f748"
+  },
+  {
+    "path": "verification.json",
+    "size_bytes": 1182,
+    "sha256": "e89f65afba43a218656df7b157c8b77511543837cbb4805907784159684c3e78"
+  }
+]

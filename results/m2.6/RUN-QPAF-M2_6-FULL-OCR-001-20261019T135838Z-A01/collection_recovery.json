@@ -1,0 +1,23 @@
+{
+  "status": "RECOVERED_WITH_CANONICAL_FULL_VERIFICATION",
+  "condition": "Windows WinError 5 denied atomic replacement during overlapping transfers; the later collector ended during local verification without a receipt or traceback.",
+  "affected_archives": [
+    "037565607baae0e594a768a081618926ef9d5658.zip",
+    "04b864a0038b563f9569725f01e6fc8b50a8696b.zip"
+  ],
+  "recovery": "The unmodified single collector finished extraction. All 43,384 declared files were present with correct sizes. The unchanged canonical verify_bundle then ran in a separate process with progress-only call-through wrappers, crash logging and an explicit exit receipt.",
+  "interrupted_verifier_exit_cause": "Undetermined; no Python traceback or matching Windows application error was observed.",
+  "canonical_verifier_exit_code": 0,
+  "ocr_resubmitted": false,
+  "hash_checks_weakened": false,
+  "verification_receipt_sha256": "e89f65afba43a218656df7b157c8b77511543837cbb4805907784159684c3e78",
+  "logs": {
+    "results/m2.6/verification/2026-10-19-run-and-transfer.txt": "407ef5c206a082a891e7a6eab84fdbabe3affcf81d7b5b1c3e31027e1787d381",
+    "results/m2.6/verification/2026-10-19-canonical-prefetch.txt": "8f48cace646c4bbe74d0616247a52368b8b90e343fae8546a4c4104aecc8e7bf",
+    "results/m2.6/verification/2026-10-19-final-collection.txt": "e82dc6d5dd7991279fb885f09e1ce9d68ff30972d1ec0338424652bd24b3b43a",
+    "results/m2.6/verification/2026-10-19-canonical-verification.txt": "8289e9438f06eff01dd3aea89a67ca35b2f3c0bcd4ec8f3c275dced46d18fe4d",
+    "results/m2.6/verification/2026-10-19-canonical-verification-stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "results/m2.6/verification/2026-10-19-canonical-verification-exit.json": "b6ea7b7000e8d0fc2423dd5c94d2c1a442f39c9b63c4a82268e9a41f92e62aec",
+    "results/m2.6/verification/2026-10-19-canonical-verification-launch.json": "d418500b89c268c4b72220336c676503e6d3014dbf57912ad0362e56072e5ffd"
+  }
+}

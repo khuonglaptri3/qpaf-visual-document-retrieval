@@ -1,5 +1,8 @@
 # QPAF — Query-Page Adaptive Fusion
 
+M2.6 full OCR: [execution report](docs/superpowers/reports/2026-10-19-m26-full-ocr.md)
+and [saved-file index / reproduction commands](results/m2.6/README.md).
+
 Repository này gom công cụ oracle trong `src/oracle_study` và các module nghiên cứu M1–M2.1 trong `src/qpaf`.
 
 ## Trạng thái sau khi tích hợp các branch

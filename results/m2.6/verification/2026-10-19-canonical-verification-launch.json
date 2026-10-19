@@ -1,0 +1,8 @@
+{
+  "supervisor_pid": 13972,
+  "worker_pid": 21028,
+  "started_utc": "2026-10-19T16:12:54.110292+00:00",
+  "source_script": "C:\\Users\\lanph\\OneDrive\\Desktop\\Artificial_Intelligent_Project\\.superpowers\\m26\\canonical_verify.py",
+  "run_id": "RUN-QPAF-M2_6-FULL-OCR-001-20261019T135838Z-A01",
+  "mode": "canonical_verify_bundle_with_call_through_progress_wrappers"
+}

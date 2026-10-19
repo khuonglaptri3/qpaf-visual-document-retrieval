@@ -1,0 +1,353 @@
+{
+  "status": "TARGETED_PASS_PROJECT_SUITE_HAS_PREEXISTING_ENVIRONMENT_FAILURES",
+  "source_commit": "9976150",
+  "baseline_commit": "6cb2e88",
+  "baseline": {
+    "tests": 227,
+    "outcome": "FAILED",
+    "failure_summary": "failures=1, errors=39, skipped=3",
+    "failures": [
+      {
+        "kind": "ERROR",
+        "name": "test_budget"
+      },
+      {
+        "kind": "ERROR",
+        "name": "test_cache"
+      },
+      {
+        "kind": "ERROR",
+        "name": "test_cli_e2e"
+      },
+      {
+        "kind": "ERROR",
+        "name": "test_dataset_materialization"
+      },
+      {
+        "kind": "ERROR",
+        "name": "test_dse_safetensors_verification"
+      },
+      {
+        "kind": "ERROR",
+        "name": "test_environment_contract"
+      },
+      {
+        "kind": "ERROR",
+        "name": "test_exploratory12_recovery"
+      },
+      {
+        "kind": "ERROR",
+        "name": "test_features"
+      },
+      {
+        "kind": "ERROR",
+        "name": "test_gradients"
+      },
+      {
+        "kind": "ERROR",
+        "name": "test_losses"
+      },
+      {
+        "kind": "ERROR",
+        "name": "test_m12_core"
+      },
+      {
+        "kind": "ERROR",
+        "name": "test_m24_pipeline"
+      },
+      {
+        "kind": "ERROR",
+        "name": "test_metric_reference"
+      },
+      {
+        "kind": "ERROR",
+        "name": "test_models"
+      },
+      {
+        "kind": "ERROR",
+        "name": "test_p0_03_finalizer"
+      },
+      {
+        "kind": "ERROR",
+        "name": "test_preflight"
+      },
+      {
+        "kind": "ERROR",
+        "name": "test_qpaf"
+      },
+      {
+        "kind": "ERROR",
+        "name": "test_qpaf_optimized"
+      },
+      {
+        "kind": "ERROR",
+        "name": "test_sampling"
+      },
+      {
+        "kind": "ERROR",
+        "name": "test_score_extractor"
+      },
+      {
+        "kind": "ERROR",
+        "name": "test_score_input_probe"
+      },
+      {
+        "kind": "ERROR",
+        "name": "test_three_channel_contract"
+      },
+      {
+        "kind": "ERROR",
+        "name": "test_vidoseek_coverage_audit"
+      },
+      {
+        "kind": "ERROR",
+        "name": "test_vidoseek_exploratory12"
+      },
+      {
+        "kind": "ERROR",
+        "name": "test_vidoseek_exploratory24"
+      },
+      {
+        "kind": "ERROR",
+        "name": "test_vidoseek_exploratory24_w66"
+      },
+      {
+        "kind": "ERROR",
+        "name": "test_vidoseek_exploratory24_w66_optimized"
+      },
+      {
+        "kind": "ERROR",
+        "name": "test_vidoseek_extractor"
+      },
+      {
+        "kind": "ERROR",
+        "name": "test_vidoseek_fixed_profile_audit"
+      },
+      {
+        "kind": "ERROR",
+        "name": "test_vidoseek_p1_02r"
+      },
+      {
+        "kind": "ERROR",
+        "name": "test_vidoseek_p1_02r_full"
+      },
+      {
+        "kind": "ERROR",
+        "name": "test_vidoseek_p1_02r_oracle_protocol"
+      },
+      {
+        "kind": "ERROR",
+        "name": "test_vidoseek_p1_02r_oracle_safeguards"
+      },
+      {
+        "kind": "ERROR",
+        "name": "test_vidoseek_p1_02r_oracle_sharded"
+      },
+      {
+        "kind": "ERROR",
+        "name": "test_vidoseek_w66_resource_calibration"
+      },
+      {
+        "kind": "ERROR",
+        "name": "test_vidoseek_w66_resource_calibration_recovery"
+      },
+      {
+        "kind": "ERROR",
+        "name": "test_vimdoc_archive_content_audit"
+      },
+      {
+        "kind": "ERROR",
+        "name": "test_vimdoc_m3_preparation"
+      },
+      {
+        "kind": "ERROR",
+        "name": "test_vimdoc_ocr_page_identity"
+      },
+      {
+        "kind": "FAIL",
+        "name": "test_cli_exports_verified_evidence_and_preserves_existing_output"
+      }
+    ],
+    "log_sha256": "46997663e111819b6cad6f5c775ae43d096ec07aaf28f3feeb950fc20eeb591c"
+  },
+  "current": {
+    "tests": 252,
+    "outcome": "FAILED",
+    "failure_summary": "failures=1, errors=39, skipped=3",
+    "failures": [
+      {
+        "kind": "ERROR",
+        "name": "test_budget"
+      },
+      {
+        "kind": "ERROR",
+        "name": "test_cache"
+      },
+      {
+        "kind": "ERROR",
+        "name": "test_cli_e2e"
+      },
+      {
+        "kind": "ERROR",
+        "name": "test_dataset_materialization"
+      },
+      {
+        "kind": "ERROR",
+        "name": "test_dse_safetensors_verification"
+      },
+      {
+        "kind": "ERROR",
+        "name": "test_environment_contract"
+      },
+      {
+        "kind": "ERROR",
+        "name": "test_exploratory12_recovery"
+      },
+      {
+        "kind": "ERROR",
+        "name": "test_features"
+      },
+      {
+        "kind": "ERROR",
+        "name": "test_gradients"
+      },
+      {
+        "kind": "ERROR",
+        "name": "test_losses"
+      },
+      {
+        "kind": "ERROR",
+        "name": "test_m12_core"
+      },
+      {
+        "kind": "ERROR",
+        "name": "test_m24_pipeline"
+      },
+      {
+        "kind": "ERROR",
+        "name": "test_metric_reference"
+      },
+      {
+        "kind": "ERROR",
+        "name": "test_models"
+      },
+      {
+        "kind": "ERROR",
+        "name": "test_p0_03_finalizer"
+      },
+      {
+        "kind": "ERROR",
+        "name": "test_preflight"
+      },
+      {
+        "kind": "ERROR",
+        "name": "test_qpaf"
+      },
+      {
+        "kind": "ERROR",
+        "name": "test_qpaf_optimized"
+      },
+      {
+        "kind": "ERROR",
+        "name": "test_sampling"
+      },
+      {
+        "kind": "ERROR",
+        "name": "test_score_extractor"
+      },
+      {
+        "kind": "ERROR",
+        "name": "test_score_input_probe"
+      },
+      {
+        "kind": "ERROR",
+        "name": "test_three_channel_contract"
+      },
+      {
+        "kind": "ERROR",
+        "name": "test_vidoseek_coverage_audit"
+      },
+      {
+        "kind": "ERROR",
+        "name": "test_vidoseek_exploratory12"
+      },
+      {
+        "kind": "ERROR",
+        "name": "test_vidoseek_exploratory24"
+      },
+      {
+        "kind": "ERROR",
+        "name": "test_vidoseek_exploratory24_w66"
+      },
+      {
+        "kind": "ERROR",
+        "name": "test_vidoseek_exploratory24_w66_optimized"
+      },
+      {
+        "kind": "ERROR",
+        "name": "test_vidoseek_extractor"
+      },
+      {
+        "kind": "ERROR",
+        "name": "test_vidoseek_fixed_profile_audit"
+      },
+      {
+        "kind": "ERROR",
+        "name": "test_vidoseek_p1_02r"
+      },
+      {
+        "kind": "ERROR",
+        "name": "test_vidoseek_p1_02r_full"
+      },
+      {
+        "kind": "ERROR",
+        "name": "test_vidoseek_p1_02r_oracle_protocol"
+      },
+      {
+        "kind": "ERROR",
+        "name": "test_vidoseek_p1_02r_oracle_safeguards"
+      },
+      {
+        "kind": "ERROR",
+        "name": "test_vidoseek_p1_02r_oracle_sharded"
+      },
+      {
+        "kind": "ERROR",
+        "name": "test_vidoseek_w66_resource_calibration"
+      },
+      {
+        "kind": "ERROR",
+        "name": "test_vidoseek_w66_resource_calibration_recovery"
+      },
+      {
+        "kind": "ERROR",
+        "name": "test_vimdoc_archive_content_audit"
+      },
+      {
+        "kind": "ERROR",
+        "name": "test_vimdoc_m3_preparation"
+      },
+      {
+        "kind": "ERROR",
+        "name": "test_vimdoc_ocr_page_identity"
+      },
+      {
+        "kind": "FAIL",
+        "name": "test_cli_exports_verified_evidence_and_preserves_existing_output"
+      }
+    ],
+    "log_sha256": "37c46a0bf45bab4c7ecd5acbd79357a7bddb36e4679aa0ad0359c54867787f5c"
+  },
+  "targeted": {
+    "tests": 54,
+    "outcome": "PASS",
+    "failure_summary": null,
+    "failures": [],
+    "log_sha256": "1ca07be51979e796a79100667e196c7dc2d28cae0adb25d1377f1ef26f8b02c8"
+  },
+  "new_project_failures": [],
+  "notes": [
+    "Full discovery has missing pandas/pytest imports and Windows PyTorch shm.dll WinError 126.",
+    "All 25 M2.6 regressions and 29 M2.3/M2.5 checks pass; no model training is performed."
+  ]
+}

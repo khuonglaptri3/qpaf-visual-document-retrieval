@@ -23,11 +23,19 @@ Each run is stored in `results/m2.6/<RUN-ID>/`:
 | `output/pages/<PAGE-ID>/` | `native.txt`, `geometry.json`, `image.png`, `ocr.txt`, `ocr.tsv`, `ocr.stderr.txt`, `text.txt`, `record.json` |
 | `output/archives/<DOCUMENT-ID>.zip` | Portable per-document raw bundles |
 | `verification.json` | Independent local full-corpus, hash, CSV, runtime and policy-replay checks |
+| `collection_audit.json` | Local collection time, archive count and authoritative receipt hashes |
+| `collection_recovery.json`, `transport_*.py`, `operator_canonical_verify.py` | Transfer recovery, exact log hashes, transport helpers and verifier diagnostics |
+| `source_snapshot_verification.json` | Separate verification of the source ZIP, config and policy bytes |
+| `portable_payloads.json` (if present) | Exact compressed/uncompressed SHA-256 and sizes for large JSON files |
 
 Large page payloads, archives and source snapshot ZIPs are retained locally and
 in Modal Volume `qpaf-m26-full-ocr`; Git retains the portable manifests, text and
 receipts. Original PDFs remain under `data/raw/vidoseek-e91a92b/pdfs/pdf/`.
 The Volume path is `/runs/<RUN-ID>/` (mounted at `/m26/runs/<RUN-ID>/`).
+JSON files larger than the portable Git size threshold use exact-byte `.gz`
+copies in Git, with recovery hashes in `portable_payloads.json`. The original
+JSON remains locally and in the Volume. On a fresh checkout, `--collect` restores
+the declared original files and raw page bundles before `--verify`.
 
 ## Commands
 

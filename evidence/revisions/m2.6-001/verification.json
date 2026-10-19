@@ -1,0 +1,35 @@
+{
+  "status": "VERIFIED_FULL_OCR_BUNDLE",
+  "run_id": "RUN-QPAF-M2_6-FULL-OCR-001-20261019T135838Z-A01",
+  "pages": 5385,
+  "technical_failures": 1,
+  "failure_fraction": 0.00018570102135561745,
+  "policy_replayed_pages": 5384,
+  "failure_fallback_replayed_pages": 1,
+  "artifacts_verified": 37695,
+  "extraction_statuses": {
+    "NATIVE_PLUS_OCR": 3428,
+    "NATIVE_TEXT_USED": 1804,
+    "NO_TEXT_DETECTED": 19,
+    "OCR_TEXT_USED": 133,
+    "OCR_TIMEOUT": 1
+  },
+  "text_sources": {
+    "native": 1805,
+    "native+ocr": 3428,
+    "ocr": 152
+  },
+  "warnings": {
+    "low_ocr_confidence": 307,
+    "native_quality_rejected": 18,
+    "no_text_requires_visual_channel": 19,
+    "suspected_native_encoding": 364
+  },
+  "policy_sha256": "c0fcf0b3b13b27070716179d75545ba33ae406cc99a74902737bcf2dad19c4b8",
+  "hash_manifest_sha256": "e3b92c379a2021d8a3a4361073deaad096542d2cdef03b3ef034610b44c0cfe2",
+  "preprocessing_identity_sha256": "6bd09e6f7615cca14a20f7fa23e29d67d3589f4d18cdb8c51b8e870912b41213",
+  "manifest_files_verified": 43384,
+  "manifest_bytes_verified": 17488277993,
+  "training_executed": false,
+  "retrieval_results_claimed": false
+}

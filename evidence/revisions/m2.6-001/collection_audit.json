@@ -1,0 +1,18 @@
+{
+  "status": "LOCAL_FULL_BUNDLE_COLLECTED_AND_VERIFIED",
+  "recorded_utc": "2026-10-19T16:36:46.547034+00:00",
+  "run_id": "RUN-QPAF-M2_6-FULL-OCR-001-20261019T135838Z-A01",
+  "verification_receipt_sha256": "e89f65afba43a218656df7b157c8b77511543837cbb4805907784159684c3e78",
+  "canonical_output_hash_manifest_sha256": "e3b92c379a2021d8a3a4361073deaad096542d2cdef03b3ef034610b44c0cfe2",
+  "archive_count": 292,
+  "archive_bytes": 8729397596,
+  "operator_source_paths": [
+    "transport_overlap.py",
+    "transport_preextract.py",
+    "transport_prefetch_metadata.py",
+    "transport_prefetch_canonical.py",
+    "operator_canonical_verify.py"
+  ],
+  "operator_original_directory": ".superpowers/m26/",
+  "note": "Operator transport is separate from the pinned scientific processor. Final canonical manifest verification is authoritative."
+}

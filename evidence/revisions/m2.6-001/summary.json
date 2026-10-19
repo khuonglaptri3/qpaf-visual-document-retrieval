@@ -1,0 +1,39 @@
+{
+  "status": "COMPLETE",
+  "task_id": "M2.6",
+  "run_id": "RUN-QPAF-M2_6-FULL-OCR-001-20261019T135838Z-A01",
+  "completed_utc": "2026-10-19T15:21:50.253596+00:00",
+  "pages": 5385,
+  "technical_failures": 1,
+  "failure_fraction": 0.00018570102135561745,
+  "policy_replayed_pages": 5384,
+  "failure_fallback_replayed_pages": 1,
+  "artifacts_verified": 37695,
+  "extraction_statuses": {
+    "NATIVE_PLUS_OCR": 3428,
+    "NATIVE_TEXT_USED": 1804,
+    "NO_TEXT_DETECTED": 19,
+    "OCR_TEXT_USED": 133,
+    "OCR_TIMEOUT": 1
+  },
+  "text_sources": {
+    "native": 1805,
+    "native+ocr": 3428,
+    "ocr": 152
+  },
+  "warnings": {
+    "low_ocr_confidence": 307,
+    "native_quality_rejected": 18,
+    "no_text_requires_visual_channel": 19,
+    "suspected_native_encoding": 364
+  },
+  "resource_checks": {
+    "wall": true,
+    "ram": true,
+    "failure_cap": true
+  },
+  "worker_error": null,
+  "gpu_requested": false,
+  "training_executed": false,
+  "corpus_accuracy_certified": false
+}
