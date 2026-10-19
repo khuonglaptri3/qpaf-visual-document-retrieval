@@ -19,7 +19,7 @@ def validate(config):
     keys = {'corpus': {'dataset', 'raw_directory', 'pdf_directory', 'split_freeze', 'page_manifest',
                        'document_count', 'page_count'},
             'policy': {'handover', 'path', 'sha256'},
-            'execution': {'workers', 'cpu', 'ram_mib', 'max_pixels', 'ocr_timeout_seconds',
+            'execution': {'input_transport', 'workers', 'cpu', 'ram_mib', 'max_pixels', 'ocr_timeout_seconds',
                           'wall_seconds', 'checkpoint_pages', 'png_compress_level', 'retries'},
             'modal': {'app_name', 'volume_name', 'mount_path', 'python_version', 'requirements_file'},
             'output': {'directory'}}
@@ -35,6 +35,8 @@ def validate(config):
         raise ValueError('Full corpus must be the frozen 292-document / 5385-page ViDoSeek corpus')
     if policy['sha256'] != POLICY_SHA:
         raise ValueError('M2.3 policy hash changed')
+    if execution['input_transport'] != 'pinned_huggingface_archive':
+        raise ValueError('M2.6 source transfer must use the pinned archive')
     for name, expected in {'workers': 2, 'cpu': 4, 'ram_mib': 4096, 'max_pixels': 40000000,
                             'ocr_timeout_seconds': 15, 'retries': 0}.items():
         if type(execution[name]) is not int or execution[name] != expected:

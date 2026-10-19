@@ -38,16 +38,11 @@ def prepare(config, config_path):
 
 def upload(volume, folder, inputs):
     remote = '/runs/' + folder.name
-    print(f"Uploading {len(inputs['documents'])} verified PDFs to the M2.6 Volume...", flush=True)
+    print(f"Uploading verified schedule/source/policy; {len(inputs['documents'])} PDFs will be fetched by hash in cloud...", flush=True)
     with volume.batch_upload() as batch:
         for name in ('input_manifest.json', 'source.json', 'resolved_config.json',
                      'ocr_policy_frozen.toml', 'source_snapshot.zip'):
             batch.put_file(folder / name, remote + '/' + name)
-        for item in inputs['documents']:
-            path = ROOT / item['path']
-            if digest(path) != item['sha256']:
-                raise ValueError('PDF changed after preparation: ' + item['document_id'])
-            batch.put_file(path, remote + '/inputs/pdfs/' + item['document_id'] + '.pdf')
 
 
 def collect(folder):

@@ -12,6 +12,7 @@ from qpaf.m23.worker import MemoryMonitor, runtime_identity
 from .bundle import PAGE_HASH_FIELDS, validate_records, validate_schedule
 from .config import validate
 from .engine import finish_page, prepare_page, recover_page
+from .materialize import materialize_pdfs
 
 
 def execute_run(config, run_id, source):
@@ -63,6 +64,11 @@ def execute_run(config, run_id, source):
             if identity['packages'] != {'pypdfium2': '4.30.0', 'Pillow': '11.3.0', 'psutil': '7.0.0'}:
                 raise ValueError('Worker packages differ from the pinned OCR runtime')
             write_json(output / 'environment.json', identity)
+            write_json(run / 'progress.json', {'status': 'RUNNING', 'phase': 'materializing_pinned_inputs',
+                                              'completed': 0, 'scheduled': len(scheduled), 'utc': utc()})
+            volume.commit()
+            materialization = materialize_pdfs(run, inputs)
+            write_json(output / 'materialization.json', materialization)
             for doc in inputs['documents']:
                 pdf = run / 'inputs/pdfs' / (doc['document_id'] + '.pdf')
                 if pdf.stat().st_size != doc['size_bytes'] or digest(pdf) != doc['sha256']:

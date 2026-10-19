@@ -8,6 +8,7 @@ from pathlib import Path
 import sys
 import tempfile
 import unittest
+import zipfile
 from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -374,6 +375,47 @@ class FullOCRTests(unittest.TestCase):
             self.assertEqual(receipt['status'], 'PARTIAL_NOT_COMPLETE')
             self.assertEqual(receipt['completed_records_verified'], 0)
             self.assertEqual(receipt['incomplete_page_ids'], ['doc_page_0001'])
+
+    def archive_fixture(self, folder):
+        doc = 'a' * 40
+        archive = folder / 'source.zip'
+        with zipfile.ZipFile(archive, 'x') as z:
+            z.writestr('pdf/' + doc + '.pdf', b'%PDF pinned fixture bytes')
+        inputs = {'dataset': {'name': 'Qiuchen-Wang/ViDoSeek', 'revision': 'e91a92ba5f38690696c7e66be5c5474b54c6e791'},
+                  'source_files': [{'path': 'data/raw/vidoseek_pdf_document.zip',
+                                    'sha256': digest(archive), 'size_bytes': archive.stat().st_size}],
+                  'documents': [{'document_id': doc, 'sha256': hashlib.sha256(b'%PDF pinned fixture bytes').hexdigest(),
+                                 'size_bytes': len(b'%PDF pinned fixture bytes')}]}
+        return archive, inputs
+
+    def test_cloud_materialization_verifies_archive_and_pdf_bytes(self):
+        materializer = self.module('materialize')
+        with tempfile.TemporaryDirectory() as tmp:
+            folder = Path(tmp)
+            archive, inputs = self.archive_fixture(folder)
+            result = materializer.materialize_pdfs(folder / 'run', inputs, archive_path=archive)
+            pdf = folder / 'run/inputs/pdfs' / ('a' * 40 + '.pdf')
+            self.assertEqual(pdf.read_bytes(), b'%PDF pinned fixture bytes')
+            self.assertEqual(result['verified_documents'], 1)
+
+    def test_cloud_materialization_rejects_wrong_archive_before_pdf_extraction(self):
+        materializer = self.module('materialize')
+        with tempfile.TemporaryDirectory() as tmp:
+            folder = Path(tmp)
+            archive, inputs = self.archive_fixture(folder)
+            inputs['source_files'][0]['sha256'] = '0' * 64
+            with self.assertRaisesRegex(ValueError, 'archive'):
+                materializer.materialize_pdfs(folder / 'run', inputs, archive_path=archive)
+            self.assertFalse((folder / 'run/inputs/pdfs' / ('a' * 40 + '.pdf')).exists())
+
+    def test_cloud_materialization_rejects_pdf_hash_mismatch(self):
+        materializer = self.module('materialize')
+        with tempfile.TemporaryDirectory() as tmp:
+            folder = Path(tmp)
+            archive, inputs = self.archive_fixture(folder)
+            inputs['documents'][0]['sha256'] = '0' * 64
+            with self.assertRaisesRegex(ValueError, 'PDF'):
+                materializer.materialize_pdfs(folder / 'run', inputs, archive_path=archive)
 
 
 if __name__ == '__main__':

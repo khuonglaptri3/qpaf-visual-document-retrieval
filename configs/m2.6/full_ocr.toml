@@ -16,6 +16,7 @@ path = "configs/m2.3/ocr_policy_frozen.toml"
 sha256 = "c0fcf0b3b13b27070716179d75545ba33ae406cc99a74902737bcf2dad19c4b8"
 
 [execution]
+input_transport = "pinned_huggingface_archive"
 workers = 2
 cpu = 4
 ram_mib = 4096

@@ -30,7 +30,11 @@ single CPU-only Modal container with at most two OCR subprocesses. Render and
 extract geometry on the main thread because PDFium is not thread-safe; overlap
 that work with the two external OCR jobs using a bounded pending queue.
 
-Upload verified PDF inputs to a dedicated Modal Volume. Each canonical run is
+Upload the verified input schedule, policy and source to a dedicated Modal
+Volume. The worker fetches the exact M2.1-pinned public archive, verifies its
+758,769,613 bytes and SHA-256, and verifies all extracted PDF identities before
+OCR. This avoids stalled large-file PUTs on the local network without changing
+input bytes or the OCR operating configuration. Each canonical run is
 create-once. Persist terminal per-page records and raw outputs, and commit
 progress with no open PDF/Volume file handles. Resume downloads by hash;
 never silently rerun a completed OCR attempt. Failed execution retains evidence.
