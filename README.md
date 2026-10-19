@@ -16,6 +16,7 @@ Các đoạn oracle và run lịch sử bên dưới giữ phạm vi, kết qu�
 Bắt đầu tại [mục lục tài liệu](docs/README.md). Các tài liệu được phân nhóm theo tổng quan, kế hoạch, phương pháp, dữ liệu, thí nghiệm và bàn giao.
 
 - [Milestone hoàn chỉnh](docs/GUILDLINE_OVERVIEWS_PROPOSAL/POAI_Milestone_Group01_Hoan_Chinh.xlsx), sheet `Milestones`.
+- [M2.5 baseline, thống kê và leakage](docs/03_method/m2.5-baselines-statistics-leakage.md) và [bằng chứng software verification](evidence/revisions/m2.5-001/README.md).
 - [Tổng quan phối hợp](docs/GUILDLINE_OVERVIEWS_PROPOSAL/overview.md) và [timeline tham chiếu](docs/GUILDLINE_OVERVIEWS_PROPOSAL/TIMELINE_fixed.md).
 - [Đề xuất nghiên cứu](docs/GUILDLINE_OVERVIEWS_PROPOSAL/DE_XUAT_NGHIEN_CUU_QPAF.md).
 - [Checklist của Khương](docs/06_handover/khuong-m1-checklist.md), [báo cáo audit M1.4–M1.6](docs/06_handover/m1.4-m1.5-m1.6-audit-report.md) và [gói bằng chứng M1](evidence/M1_FINAL/README.md).

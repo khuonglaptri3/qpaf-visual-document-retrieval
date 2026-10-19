@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "task_id": "M2.5",
+  "dataset": "Qiuchen-Wang/ViDoSeek",
+  "split_manifest": "evidence/revisions/m2.1-002/data_split_manifest.json",
+  "split_manifest_sha256": "ea5a19f93dce07cce375d6fb6afed630606e00916c5daa10938562aee9cddfad",
+  "evaluation_unit": "page",
+  "primary_metric": "ndcg_at_10",
+  "candidate_contract": "qpaf_score_rows_v1",
+  "normalization": "per_query_per_channel_minmax; constant channel becomes zero",
+  "ranking_tie_break": "page_id_ascending",
+  "required_deployable_baselines": [
+    "bm25", "bge_m3", "colqwen25", "uniform_combsum", "rrf_k60",
+    "train_fitted_static", "learned_qarf"
+  ],
+  "single_channel_mapping": {
+    "bm25": "bm25_score",
+    "bge_m3": "dense_score",
+    "colqwen25": "visual_score"
+  },
+  "uniform_weights": [0.3333333333333333, 0.3333333333333333, 0.3333333333333333],
+  "rrf_k": 60,
+  "static_fit": {
+    "partition": "train_only",
+    "grid_denominator": 10,
+    "objective": "mean_train_ndcg_at_10",
+    "tie_rule": "lexicographically_first_weight_tuple_within_1e-12"
+  },
+  "strongest_selection": {
+    "partition": "validation_only",
+    "metric": "mean_ndcg_at_10",
+    "tie_tolerance": 1e-12,
+    "rule": "retain_all_co_strongest"
+  },
+  "statistics": {
+    "seeds": [20260820, 20260821, 20260822],
+    "bootstrap_seed": 20260820,
+    "resamples": 10000,
+    "ci_percentiles": [2.5, 97.5],
+    "wtl_tolerance": 1e-12,
+    "aggregation": "average_paired_delta_over_seeds_per_query_then_resample_queries"
+  },
+  "oracle_baselines_deployable": false,
+  "status": "FROZEN_METHOD_AND_SOFTWARE_FIXTURE_ONLY"
+}
