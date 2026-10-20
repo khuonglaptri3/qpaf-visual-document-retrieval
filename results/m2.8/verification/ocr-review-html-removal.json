@@ -1,0 +1,56 @@
+﻿{
+    "scope":  "User confirmed removal of generated HTML review exports under results/m2.3; source templates preserved",
+    "files":  [
+                  {
+                      "path":  "results/m2.3/closure/2026-10-17-closed/index.html",
+                      "size_bytes":  577059,
+                      "sha256":  "e440912f2c3fc530ac81e543eefbb14ac54214a81a812f0d98d12b4b563d4b6c"
+                  },
+                  {
+                      "path":  "results/m2.3/closure/2026-10-17-complete/index.html",
+                      "size_bytes":  577059,
+                      "sha256":  "94417bec64dfb09420487ccacc15f813a55ffb599d478dc36c97d142772bb2a5"
+                  },
+                  {
+                      "path":  "results/m2.3/closure/2026-10-17-final/index.html",
+                      "size_bytes":  478310,
+                      "sha256":  "c829500dd05fbb3d504c9c06e41df5410aad0d4a23d6ee6022ed15de7a816f01"
+                  },
+                  {
+                      "path":  "results/m2.3/closure/2026-10-17-v1/index.html",
+                      "size_bytes":  478310,
+                      "sha256":  "cfb00885d48174e872ed8f4f37f3aabfec349a93404c42bdaafdb188a2c47c9f"
+                  },
+                  {
+                      "path":  "results/m2.3/review/index.html",
+                      "size_bytes":  404706,
+                      "sha256":  "a6d1a4d6e9c297a37507af20fdd22b47b0b425de17c628a26b06634c8274a5b1"
+                  },
+                  {
+                      "path":  "results/m2.3/review-demo-2026-10-17/index.html",
+                      "size_bytes":  307,
+                      "sha256":  "3e4c16be897cfe805adf66fe9d1717a29cca8068efcbceb5d0edd57be7e3034b"
+                  },
+                  {
+                      "path":  "results/m2.3/reviews/2026-10-17-reference-qa-final/index.html",
+                      "size_bytes":  474098,
+                      "sha256":  "c0a0b6dbc9c54eb02510a108d453adea4b81914c66eb768d8e71a65043b87699"
+                  },
+                  {
+                      "path":  "results/m2.3/reviews/2026-10-17-reference-qa-v1/index.html",
+                      "size_bytes":  473832,
+                      "sha256":  "2333c35d3d075b69e502ed1141ee930b0ce5d4aafb59c6e534713e1745aa1d81"
+                  },
+                  {
+                      "path":  "results/m2.3/RUN-QPAF-M2_3-CAL-001-20261017T101215Z-A01/review/index.html",
+                      "size_bytes":  382234,
+                      "sha256":  "8fe5cc26fbbb931ca626bbfc2b5a0163fa3d5f23168f9995dca9af045fe5c8ea"
+                  },
+                  {
+                      "path":  "results/m2.3/RUN-QPAF-M2_3-CAL-001-20261017T101949Z-A01/review/index.html",
+                      "size_bytes":  398207,
+                      "sha256":  "1e7576a028a7b1733027f54dd5e22f5d0400927a276fcd450094c327dc237114"
+                  }
+              ],
+    "deleted_count":  10
+}

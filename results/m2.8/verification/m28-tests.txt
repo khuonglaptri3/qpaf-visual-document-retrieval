@@ -1,0 +1,69 @@
+python : test_default_depth_caps_at_number_of_pages 
+(test_m28_bundle.CandidateConstructionTests.test_default_depth_caps_at_number_of_pages) ... ok
+At line:2 char:1
++ python -m unittest discover -s tests -p 'test_m28*.py' -v *> results/ ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (test_default_de...f_pages) ... ok:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+test_float64_range_at_epsilon_is_exact_zero 
+(test_m28_bundle.CandidateConstructionTests.test_float64_range_at_epsilon_is_exact_zero) ... ok
+test_invalid_array_values_and_shapes_fail_closed 
+(test_m28_bundle.CandidateConstructionTests.test_invalid_array_values_and_shapes_fail_closed) ... ok
+test_invalid_ids_and_depth_fail_closed 
+(test_m28_bundle.CandidateConstructionTests.test_invalid_ids_and_depth_fail_closed) ... ok
+test_normalization_uses_union_not_corpus_and_zeroes_constant_channel 
+(test_m28_bundle.CandidateConstructionTests.test_normalization_uses_union_not_corpus_and_zeroes_constant_channel) ... 
+ok
+test_ties_and_union_keep_all_channels_with_five_columns 
+(test_m28_bundle.CandidateConstructionTests.test_ties_and_union_keep_all_channels_with_five_columns) ... ok
+test_all_1142_queries_including_test_are_audited 
+(test_m28_bundle.CandidateCoverageTests.test_all_1142_queries_including_test_are_audited) ... ok
+test_invalid_candidates_qrels_and_split_namespaces_fail 
+(test_m28_bundle.CandidateCoverageTests.test_invalid_candidates_qrels_and_split_namespaces_fail) ... ok
+test_positives_outside_union_stay_in_full_denominator 
+(test_m28_bundle.CandidateCoverageTests.test_positives_outside_union_stay_in_full_denominator) ... ok
+test_threshold_is_inclusive_and_zero_positive_qrels_block 
+(test_m28_bundle.CandidateCoverageTests.test_threshold_is_inclusive_and_zero_positive_qrels_block) ... ok
+test_uncovered_queries_are_retained_even_when_macro_exceeds_threshold 
+(test_m28_bundle.CandidateCoverageTests.test_uncovered_queries_are_retained_even_when_macro_exceeds_threshold) ... ok
+test_changed_artifact_bytes_fail_hash_verification 
+(test_m28_bundle.CandidatePublicationTests.test_changed_artifact_bytes_fail_hash_verification) ... ok
+test_complete_array_identity_includes_pages_outside_union 
+(test_m28_bundle.CandidatePublicationTests.test_complete_array_identity_includes_pages_outside_union) ... ok
+test_frozen_parquet_schemas_and_existing_trainers_are_compatible 
+(test_m28_bundle.CandidatePublicationTests.test_frozen_parquet_schemas_and_existing_trainers_are_compatible) ... ok
+test_publication_is_create_once_and_preserves_first_bytes 
+(test_m28_bundle.CandidatePublicationTests.test_publication_is_create_once_and_preserves_first_bytes) ... ok
+test_publication_rejects_label_columns_before_writing 
+(test_m28_bundle.CandidatePublicationTests.test_publication_rejects_label_columns_before_writing) ... ok
+test_semantic_verification_rejects_rehashed_scores_toplists_and_candidates 
+(test_m28_bundle.CandidatePublicationTests.test_semantic_verification_rejects_rehashed_scores_toplists_and_candidates) 
+... ok
+test_wrong_float_precision_is_rejected_after_rehashing 
+(test_m28_bundle.CandidatePublicationTests.test_wrong_float_precision_is_rejected_after_rehashing) ... ok
+test_collection_replay_rejects_corrupt_non_score_artifacts 
+(test_m28_cli.CliRegressionTests.test_collection_replay_rejects_corrupt_non_score_artifacts) ... ok
+test_latest_invocation_includes_resumed_calls 
+(test_m28_cli.CliRegressionTests.test_latest_invocation_includes_resumed_calls) ... ok
+test_query_text_and_split_ownership_are_bound_to_preflight 
+(test_m28_cli.CliRegressionTests.test_query_text_and_split_ownership_are_bound_to_preflight) ... ok
+test_verify_does_not_recreate_missing_handover 
+(test_m28_cli.CliRegressionTests.test_verify_does_not_recreate_missing_handover) ... ok
+test_bm25_reference_uses_full_corpus_statistics 
+(test_m28_runtime.RuntimeGuards.test_bm25_reference_uses_full_corpus_statistics) ... ok
+test_orphan_payload_is_not_reused (test_m28_runtime.RuntimeGuards.test_orphan_payload_is_not_reused) ... ok
+test_query_reader_preserves_exact_ids_and_ignores_reference_metadata 
+(test_m28_runtime.RuntimeGuards.test_query_reader_preserves_exact_ids_and_ignores_reference_metadata) ... ok
+test_reject_nonfinite_or_bool_before_writing 
+(test_m28_runtime.RuntimeGuards.test_reject_nonfinite_or_bool_before_writing) ... ok
+test_requires_cuda_no_cpu_fallback (test_m28_runtime.RuntimeGuards.test_requires_cuda_no_cpu_fallback) ... ok
+test_shard_roundtrip_rejects_identity_and_corruption 
+(test_m28_runtime.RuntimeGuards.test_shard_roundtrip_rejects_identity_and_corruption) ... ok
+test_text_hash_policy_and_namespace_must_match 
+(test_m28_runtime.RuntimeGuards.test_text_hash_policy_and_namespace_must_match) ... ok
+
+----------------------------------------------------------------------
+Ran 29 tests in 1.481s
+
+OK
