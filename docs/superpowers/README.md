@@ -4,6 +4,17 @@ Các thư mục ở đây tổ chức tài liệu theo quy ước Superpowers đ
 Việc có tài liệu trong thư mục này không đồng nghĩa một skill/plugin đã được chạy,
 hay một milestone đã được nghiệm thu.
 
+## M2.7 — Matched config cho QARF/QPAF
+
+Nhiệm vụ của Tấn Phát: khóa config dùng chung cho QARF/QPAF và chứng minh khác
+biệt ngữ nghĩa duy nhất là `gate_granularity`. Trạng thái:
+`FROZEN_CONFIG_PENDING_M2.8_INPUTS`; independent review chờ M2.10.
+
+- [Thiết kế](specs/2026-10-20-m27-matched-configs-design.md)
+- [Kế hoạch](plans/2026-10-20-m27-matched-configs.md)
+- [Đặc tả phương pháp và lệnh chạy](../03_method/m2.7-matched-configs.md)
+- [Bằng chứng bất biến](../../evidence/revisions/m2.7-001/README.md)
+
 ## M2.6 — Full OCR và hash theo trang
 
 Nhiệm vụ của Khương: xử lý toàn bộ 292 PDF / 5.385 trang ViDoSeek theo policy

@@ -8,3 +8,4 @@ Các nhận xét về tiến độ trong tài liệu là snapshot theo thời đ
 - [QPAF post-hoc continuation decision](QPAF_POSTHOC_CONTINUATION_DECISION.md)
 - [M1.2 — lõi learned QARF/QPAF](m1.2-method-core.md)
 - [M2.4 — pipeline huấn luyện/đánh giá learned tối thiểu](m2.4-learned-pipeline.md)
+- [M2.7 — matched config cho QARF/QPAF](m2.7-matched-configs.md)
