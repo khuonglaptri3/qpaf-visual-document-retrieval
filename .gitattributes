@@ -72,3 +72,5 @@ vimdoc_archive_audit_modal.py -text
 /results/m2.6/verification/** -text -eol -whitespace
 /docs/superpowers/reports/2026-10-19-m26-full-ocr.md -text -eol -whitespace
 /configs/m2.6/full_ocr.toml -text -eol
+# M2.7 parity checks hash the matched-config bytes.
+/configs/m2.7/** -text -eol
