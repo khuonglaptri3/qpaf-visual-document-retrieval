@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "status": "PASS",
+  "scientific_handover_status": "BLOCKED_COVERAGE",
+  "reviewed_utc": "2026-10-20T16:28:40.373904+00:00",
+  "run_id": "RUN-QPAF-M2_8-CACHE-001-20261020T144311Z-A01",
+  "identity": {
+    "config_sha256": "0a60bbc36d1a26db97ec51986c61da2c06c08f247b105f1b4cdb9457b169c0f9",
+    "source_sha256": "5582b7a540c3453808b2efbdb6bd13d613a728a2c45b6b4364c33667c158d686",
+    "input_sha256": "d1bbd303835c11e8cdb0db5b53bc32aad096f770a0236e23c3cdc486ced74d8d"
+  },
+  "bundle_file_count": 16,
+  "manifested_artifact_count": 15,
+  "manifest_excludes_its_own_hash": true,
+  "all_bundle_file_hashes_checked": true,
+  "independent_replay": {
+    "full_array_pairs_per_channel": 6149670,
+    "all_channel_top_lists_and_union": true,
+    "all_raw_rows_and_normalization": true,
+    "candidate_count": 549689,
+    "channel_top_list_count": 685200
+  },
+  "coverage": {
+    "status": "BLOCKED",
+    "query_count": 1142,
+    "macro_recall": 0.999124343257443,
+    "uncovered_query_ids": [
+      "04450a0f59f81025574451222aa26322ae7ede42_2"
+    ],
+    "candidate_count": 549689,
+    "relevant_total": 1142,
+    "captured_relevant": 1141
+  },
+  "by_split": {
+    "train": {
+      "status": "BLOCKED",
+      "query_count": 799,
+      "macro_recall": 0.9987484355444305,
+      "uncovered_query_ids": [
+        "04450a0f59f81025574451222aa26322ae7ede42_2"
+      ],
+      "candidate_count": 384881,
+      "relevant_total": 799,
+      "captured_relevant": 798
+    },
+    "validation": {
+      "status": "PASS",
+      "query_count": 171,
+      "macro_recall": 1.0,
+      "uncovered_query_ids": [],
+      "candidate_count": 81982,
+      "relevant_total": 171,
+      "captured_relevant": 171
+    },
+    "test": {
+      "status": "PASS",
+      "query_count": 172,
+      "macro_recall": 1.0,
+      "uncovered_query_ids": [],
+      "candidate_count": 82826,
+      "relevant_total": 172,
+      "captured_relevant": 172
+    }
+  },
+  "uncovered_diagnosis": [
+    {
+      "query_id": "04450a0f59f81025574451222aa26322ae7ede42_2",
+      "split": "train",
+      "candidate_count": 448,
+      "positives": {
+        "04450a0f59f81025574451222aa26322ae7ede42_page_0007": {
+          "bm25": {
+            "rank": 271,
+            "score": 11.58600389119631
+          },
+          "dense": {
+            "rank": 273,
+            "score": 0.417117178440094
+          },
+          "visual": {
+            "rank": 769,
+            "score": 14.120915412902832
+          },
+          "ocr": {
+            "text_characters": 341,
+            "extraction_status": "NATIVE_PLUS_OCR",
+            "technical_failure": false,
+            "image_sha256": "322492a655a30e58027494b16056409c14796a6269e68df986208ed14b0e541b",
+            "text_sha256": "f189e0ca362dbfab9ab145a4ffdf1eee286ef514f9a87f03397af783d2f89dee"
+          }
+        }
+      }
+    }
+  ],
+  "conclusion": "Legitimate miss by the frozen retrievers at the fixed top-200 depth; no technical artifact corruption detected by this review. Cache remains scientifically BLOCKED_COVERAGE.",
+  "limits": [
+    "No new model inference, training, Modal calls, candidate-depth changes, positive injection, or query removal.",
+    "Visual embedding payloads and the underlying image pixels were not downloaded, visually inspected, or recomputed in this artifact review.",
+    "This review checks the retained scores, manifests, label separation, pinned OCR text, and published Parquet artifacts; it does not establish absolute retriever quality or correctness of dataset annotations."
+  ],
+  "key_input_sha256": {
+    "results/m2.8/RUN-QPAF-M2_8-CACHE-001-20261020T144311Z-A01/bundle/hashes.json": "a31e072022f8b5088bac7f7a477d214301dc191abc4bfb48a5663121cecfb6e4",
+    "results/m2.8/RUN-QPAF-M2_8-CACHE-001-20261020T144311Z-A01/bundle/handover.json": "8664d01b48720826bf5ceda4dc4f07f9ba0aea29d414ffbd39f8d35ef3ae5b37",
+    "results/m2.8/RUN-QPAF-M2_8-CACHE-001-20261020T144311Z-A01/bundle/candidate_freeze.json": "4ff420008b9ccaa3a4d3afc565c43e2c974b3f95dd39a22a742b47297aead06e",
+    "results/m2.8/RUN-QPAF-M2_8-CACHE-001-20261020T144311Z-A01/bundle/candidate_set.parquet": "943b0284e2dc3ba18a97c2f5efc6c2664759ab9944912848cd0a4da37e623132",
+    "results/m2.8/RUN-QPAF-M2_8-CACHE-001-20261020T144311Z-A01/bundle/channel_top_lists.parquet": "bc22c7adf2ca10056268e5b0164f6c18d417353b0a3f6c905e4dd5489d62833f",
+    "results/m2.8/RUN-QPAF-M2_8-CACHE-001-20261020T144311Z-A01/bundle/raw_scores.parquet": "1556bd330af560a42e30299e46acdaa40654e5b8522cc3cda4d15bd1942177ca",
+    "results/m2.8/RUN-QPAF-M2_8-CACHE-001-20261020T144311Z-A01/bundle/normalized_scores.parquet": "9e5b46289a32a14f94d6d2dd5f0606dfd655c8cc210f952ee2740f93c1967481",
+    "results/m2.8/RUN-QPAF-M2_8-CACHE-001-20261020T144311Z-A01/bundle/coverage_report.json": "598a68b513112abb4eb98d5b798b4ce60f17476eb8f07390a002434a100b4d62",
+    "results/m2.8/RUN-QPAF-M2_8-CACHE-001-20261020T144311Z-A01/bundle/qrels_development.json": "691b6bc4ada3bc64fe3c408fe32498b04c7f30900eadb39ae09ddbe29aea302c",
+    "results/m2.8/RUN-QPAF-M2_8-CACHE-001-20261020T144311Z-A01/bundle/qrels_test_sealed.json": "05eaaa810e47d35d4eb06b3d36a05f03b002ec9d3c5ee6bce5fc27d2e336d154",
+    "results/m2.8/RUN-QPAF-M2_8-CACHE-001-20261020T144311Z-A01/bundle/queries.json": "e7994373c9fd5157cde0fb0c5a1440c37c275b85fa19b2b0b566f61d584c4ab4",
+    "results/m2.8/RUN-QPAF-M2_8-CACHE-001-20261020T144311Z-A01/bundle/split_ids.json": "5e0291b196f167aafa3122b4dc774a9aa71517b57ad78889580ea8ffb70b0487",
+    "results/m2.8/RUN-QPAF-M2_8-CACHE-001-20261020T144311Z-A01/input_manifest.json": "62163846a7ab66136f5445459c66107e0269a42b184b8a9e59434d1220556cbc",
+    "results/m2.8/RUN-QPAF-M2_8-CACHE-001-20261020T144311Z-A01/resolved_config.json": "049b00c2456146f6d39da3b184722b5f6f6e9f97b5c44a52ac86be92d97400c7",
+    "results/m2.8/RUN-QPAF-M2_8-CACHE-001-20261020T144311Z-A01/source.json": "bd66be12da154bded8a253719ab1504eb0170f58cbe938a262175fb2e84904c6",
+    "results/m2.8/RUN-QPAF-M2_8-CACHE-001-20261020T144311Z-A01/remote/portable_manifest.json": "e5c3799a207dabb5456efac81204be4799a1423915e0b84f105e977c99f92cf5",
+    "results/m2.8/RUN-QPAF-M2_8-CACHE-001-20261020T144311Z-A01/remote/summary.json": "512b7c9caf2542a8064f997852addaf4418aa37c54961c6f328f7e9354adae87",
+    "results/m2.8/RUN-QPAF-M2_8-CACHE-001-20261020T144311Z-A01/remote/bm25/scores.npy": "fb481bac6743492def76b696f1ef11a372a4e28afd80229ed445e3d69c1e21e1",
+    "results/m2.8/RUN-QPAF-M2_8-CACHE-001-20261020T144311Z-A01/remote/dense/scores.npy": "ba5df08df1321db9ed2c3534ed4acfea804584a03ee55f897958f237073e0d4f",
+    "results/m2.8/RUN-QPAF-M2_8-CACHE-001-20261020T144311Z-A01/remote/visual/scores.npy": "0ba572e0ce379e581ad470b581ccb186eb2844adfbd8bdb970eb574fac6dbe32",
+    "data/raw/vidoseek-e91a92b/vidoseek.json": "ca4949bfc16231d129cd7565f20e07683854ab5aa8d05f05a86a12a9b71a7fab",
+    "results/m2.6/RUN-QPAF-M2_6-FULL-OCR-001-20261019T135838Z-A01/output/resolved_pages.json": "d3a6b633b70fcd0e63a0bf94122e876ed5e7677e000d7320f71243e3a0a3eb8c",
+    "scripts/run_m28_cache.py": "7ef8b221bcf23df7aad43cb5a9b043f8e81856c5479d8f694461a83c2ed0ccb5"
+  },
+  "verifier_source_sha256": "696d9992ea7b69d3499363d7783afacb48f9b8e8de39d77baa037cecfc0d6c18",
+  "verifier_source": "import hashlib,json,math,sys\nfrom collections import Counter\nfrom datetime import datetime,timezone\nfrom pathlib import Path\nimport numpy as np\nimport pyarrow.parquet as pq\n\nroot=Path.cwd()\nrun=root/'results/m2.8/RUN-QPAF-M2_8-CACHE-001-20261020T144311Z-A01'\nbundle=run/'bundle'\ndef load(path): return json.loads(path.read_text(encoding='utf-8'))\ndef sha(path):\n    with path.open('rb') as f: return hashlib.file_digest(f,'sha256').hexdigest()\ndef objhash(value): return hashlib.sha256(json.dumps(value,sort_keys=True,ensure_ascii=False,allow_nan=False).encode()).hexdigest()\ndef idhash(value): return hashlib.sha256((json.dumps(value,sort_keys=True,ensure_ascii=False,indent=2,allow_nan=False)+'\\n').encode()).hexdigest()\ndef require(condition,message):\n    if not condition: raise AssertionError(message)\n\nhandover=load(bundle/'handover.json');freeze=load(bundle/'candidate_freeze.json');coverage=load(bundle/'coverage_report.json')\ninputs=load(run/'input_manifest.json');config=load(run/'resolved_config.json');source=load(run/'source.json')\nqids=inputs['query_ids'];pids=inputs['page_ids'];qidset=set(qids);pidset=set(pids)\nidentity={'config_sha256':objhash(config),'source_sha256':source['digest'],'input_sha256':objhash(inputs)}\nrequire(all(handover[k]==v and freeze['provenance'][k]==v for k,v in identity.items()),'Frozen/handover identity mismatch')\nrequire(handover['run_id']==run.name==freeze['provenance']['run_id'],'Run identity mismatch')\nrequire(freeze['provenance']['uses_qrels'] is False,'Candidate freeze not label-free')\nrequire(freeze['provenance']['m26_preprocessing_identity_sha256']==inputs['preprocessing_identity_sha256'],'OCR identity mismatch')\nrequire(freeze['provenance']['m27_manifest_sha256']==inputs['m27_manifest_sha256'],'M2.7 identity mismatch')\nrequire(sha(root/'scripts/run_m28_cache.py')==handover['finalizer_source_sha256'],'Finalizer source hash mismatch')\nrequire(freeze['query_ids_sha256']==idhash(qids) and freeze['page_ids_sha256']==idhash(pids),'Array namespace identity mismatch')\nmanifest=load(bundle/'hashes.json');listed=set()\nfor row in manifest:\n    path=(bundle/row['path']).resolve()\n    require(path.is_relative_to(bundle.resolve()) and row['path'] not in listed,'Unsafe/duplicate bundle hash path')\n    require(path.is_file() and path.stat().st_size==row['size_bytes'] and sha(path)==row['sha256'],'Bundle byte hash mismatch: '+row['path'])\n    listed.add(row['path'])\nactual={p.relative_to(bundle).as_posix() for p in bundle.rglob('*') if p.is_file()}\nrequire(actual==listed|{'hashes.json'},'Bundle hash manifest file set mismatch')\nfor name,record in freeze['artifacts'].items():\n    require(sha(bundle/name)==record['sha256'] and (bundle/name).stat().st_size==record['size_bytes'],'Freeze artifact mismatch: '+name)\n    table=pq.read_table(bundle/name)\n    require(table.num_rows==record['row_count'] and table.column_names==record['columns'],'Freeze table shape mismatch: '+name)\nfor key,name in [('candidate_freeze_sha256','candidate_freeze.json'),('score_cache_sha256','raw_scores.parquet'),('qrels_development_sha256','qrels_development.json'),('qrels_test_sha256','qrels_test_sealed.json'),('query_texts_sha256','queries.json'),('splits_sha256','split_ids.json'),('coverage_report_sha256','coverage_report.json')]:\n    require(handover[key]==sha(bundle/name),'Handover path hash mismatch: '+name)\nsplits=load(bundle/'split_ids.json');queries=load(bundle/'queries.json')\nrequire(objhash(queries)==inputs['query_texts_sha256'],'Frozen query text mismatch')\nrequire(queries==load(run/'remote/queries.json'),'Cloud/local query text mismatch')\nowner={}\nfor role,filename in [('train','train_ids.txt'),('validation','val_ids.txt'),('test','test_ids.txt')]:\n    ids=splits[role];payload=''.join(q+'\\n' for q in ids).encode()\n    require((bundle/'splits'/filename).read_bytes()==payload,'Canonical split bytes mismatch')\n    require(hashlib.sha256(payload).hexdigest()==inputs['split_verification']['role_sha256'][role]==handover['split_role_sha256'][role],'Split identity mismatch')\n    require(len(ids)==inputs['split_verification']['role_counts'][role],'Split count mismatch')\n    for q in ids:\n        require(q not in owner,'Split overlap');owner[q]=role\nrequire(set(owner)==qidset==set(queries),'Query namespace mismatch')\ndev=load(bundle/'qrels_development.json');test=load(bundle/'qrels_test_sealed.json')\nrequire(set(dev)==set(splits['train'])|set(splits['validation']),'Development qrels namespace mismatch')\nrequire(set(test)==set(splits['test']) and not set(dev)&set(test),'Test qrels separation mismatch')\nqrels={**dev,**test};annotation=root/inputs['annotation']['path']\nrequire(sha(annotation)==inputs['annotation']['sha256'],'Qrels annotation source hash mismatch')\nsource_qrels={}\nfor row in load(annotation)['examples']:\n    require(row['uid'] not in source_qrels,'Duplicate source qrels query')\n    source_qrels[row['uid']]={f\"{Path(row['meta_info']['file_name']).stem}_page_{p:04d}\":1 for p in row['meta_info']['reference_page']}\nrequire(qrels==source_qrels,'Exported qrels differ from pinned annotation')\n\nct=pq.read_table(bundle/'candidate_set.parquet');cq=ct['query_id'].to_pylist();cp=ct['page_id'].to_pylist()\nrequire(ct.column_names==['query_id','page_id'],'Unexpected candidate schema')\ngroups={q:[] for q in qids}\nfor q,p in zip(cq,cp):\n    require(q in qidset and p in pidset,'Candidate namespace mismatch');groups[q].append(p)\nrequire(sum(len(set(v)) for v in groups.values())==len(cq),'Duplicate candidate keys')\nrequire([(q,p) for q in qids for p in sorted(groups[q])]==list(zip(cq,cp)),'Candidate ordering mismatch')\nrequire(all(200<=len(v)<=600 for v in groups.values()),'Candidate cap/depth mismatch')\nper_query=[]\nfor q in qids:\n    positives={p for p,r in qrels[q].items() if r>=1}\n    require(positives and positives<=pidset,'Invalid positive namespace')\n    captured=len(positives&set(groups[q]));total=len(positives)\n    per_query.append({'query_id':q,'candidate_count':len(groups[q]),'relevant_total':total,'captured_relevant':captured,'recall':captured/total})\ndef summarize(rows):\n    uncovered=[r['query_id'] for r in rows if not r['captured_relevant']]\n    macro=math.fsum(r['recall'] for r in rows)/len(rows) if rows else None\n    return {'status':'PASS' if not uncovered and (macro is None or macro>=.95) else 'BLOCKED','query_count':len(rows),'macro_recall':macro,'uncovered_query_ids':uncovered,'candidate_count':sum(r['candidate_count'] for r in rows),'relevant_total':sum(r['relevant_total'] for r in rows),'captured_relevant':sum(r['captured_relevant'] for r in rows)}\nindependent=summarize(per_query)\nrequire(coverage['per_query']==per_query,'Per-query coverage replay differs')\nrequire(all(coverage[k]==v for k,v in independent.items()),'Global coverage replay differs')\nby_split={role:summarize([r for r in per_query if owner[r['query_id']]==role]) for role in splits}\nrequire(coverage['by_split']==by_split,'Split coverage replay differs')\nrequire(handover['macro_candidate_recall']==independent['macro_recall'] and handover['uncovered_query_ids']==independent['uncovered_query_ids'],'Handover coverage mismatch')\nrequire(handover['status']==('PASS' if independent['status']=='PASS' else 'BLOCKED_COVERAGE'),'Incorrect handover gate status')\n\nchannels=('bm25','dense','visual');arrays={}\nfor channel in channels:\n    path=run/'remote'/channel/'scores.npy';receipt=load(path.with_suffix('.json'))\n    require(receipt['identity']=={**identity,'kind':channel+'_full'},'Score identity mismatch')\n    require(sha(path)==receipt['sha256'] and path.stat().st_size==receipt['size_bytes'],'Score receipt mismatch')\n    array=np.load(path,allow_pickle=False)\n    require(array.shape==(len(qids),len(pids)) and array.dtype==np.dtype('float64') and np.isfinite(array).all(),'Full score shape/precision/finite mismatch')\n    require(hashlib.sha256(array.tobytes(order='C')).hexdigest()==freeze['score_arrays_sha256'][channel],'Frozen array hash mismatch')\n    arrays[channel]=array\nraw=pq.read_table(bundle/'raw_scores.parquet');norm=pq.read_table(bundle/'normalized_scores.parquet')\nexpected_columns=['query_id','page_id','bm25_score','dense_score','visual_score']\nrequire(raw.column_names==norm.column_names==expected_columns,'Score-row schema mismatch')\nfor table in (raw,norm):\n    require(table['query_id'].to_pylist()==cq and table['page_id'].to_pylist()==cp,'Score candidate keys mismatch')\n    require(all(str(table.schema.field(name).type)=='double' for name in expected_columns[2:]),'Score precision mismatch')\nraw_values=np.column_stack([raw[c+'_score'].to_numpy() for c in channels]);normalized=np.column_stack([norm[c+'_score'].to_numpy() for c in channels])\ntops=pq.read_table(bundle/'channel_top_lists.parquet');tq=tops['query_id'].to_pylist();tp=tops['page_id'].to_pylist();tc=tops['channel'].to_pylist();tr=tops['rank'].to_numpy();ts=tops['raw_score'].to_numpy()\nrequire(len(tq)==len(qids)*len(channels)*200,'Top-list row count mismatch')\npindex={p:i for i,p in enumerate(pids)};cursor=0;top_cursor=0;misses=[]\nfor qi,q in enumerate(qids):\n    union=set();miss={'query_id':q,'split':owner[q],'candidate_count':len(groups[q]),'positives':{}}\n    positive_ids=[p for p,r in qrels[q].items() if r>=1]\n    for channel in channels:\n        values=arrays[channel][qi]\n        order=sorted(range(len(pids)),key=lambda i:(-float(values[i]),pids[i]))\n        for rank,index in enumerate(order[:200],1):\n            require((tq[top_cursor],tp[top_cursor],tc[top_cursor],int(tr[top_cursor]),float(ts[top_cursor]))==(q,pids[index],channel,rank,float(values[index])),'Independent deterministic top-list mismatch')\n            top_cursor+=1;union.add(pids[index])\n        if q in independent['uncovered_query_ids']:\n            for p in positive_ids:\n                miss['positives'].setdefault(p,{})[channel]={'rank':order.index(pindex[p])+1,'score':float(values[pindex[p]])}\n    require(sorted(union)==groups[q],'Independent top-200 union mismatch')\n    indices=[pindex[p] for p in groups[q]];count=len(indices)\n    block=np.column_stack([arrays[c][qi,indices] for c in channels])\n    require(np.array_equal(raw_values[cursor:cursor+count],block),'Independent raw score alignment mismatch')\n    low=np.min(block,axis=0);high=np.max(block,axis=0);width=high-low\n    expected_norm=np.zeros_like(block)\n    for c in range(3):\n        if width[c]>1e-15:expected_norm[:,c]=(block[:,c]-low[c])/width[c]\n    require(np.array_equal(normalized[cursor:cursor+count],expected_norm),'Independent union normalization mismatch')\n    cursor+=count\n    if q in independent['uncovered_query_ids']:misses.append(miss)\nrequire(cursor==len(cq) and top_cursor==len(tq),'Incomplete array replay')\nocr=root/config['ocr']['local_output']/'resolved_pages.json'\nrequire(sha(ocr)==inputs['m26_handover']['resolved_pages_sha256'],'Pinned OCR text hash mismatch')\nocr_rows={row['page_id']:row for row in load(ocr)}\nfor miss in misses:\n    for p,details in miss['positives'].items():\n        row=ocr_rows[p]\n        require(hashlib.sha256(row['text'].encode()).hexdigest()==row['text_sha256'],'Missed positive text hash mismatch')\n        details['ocr']={'text_characters':len(row['text']),'extraction_status':row.get('extraction_status'),'technical_failure':row.get('technical_failure'),'image_sha256':row['image_sha256'],'text_sha256':row['text_sha256']}\n        require(p not in groups[miss['query_id']] and all(details[c]['rank']>200 for c in channels),'Miss explanation contradicts frozen scores')\nkey_paths=[bundle/name for name in ['hashes.json','handover.json','candidate_freeze.json','candidate_set.parquet','channel_top_lists.parquet','raw_scores.parquet','normalized_scores.parquet','coverage_report.json','qrels_development.json','qrels_test_sealed.json','queries.json','split_ids.json']]\nkey_paths += [run/name for name in ['input_manifest.json','resolved_config.json','source.json','remote/portable_manifest.json','remote/summary.json']]\nkey_paths += [run/'remote'/c/'scores.npy' for c in channels]+[annotation,ocr,root/'scripts/run_m28_cache.py']\nresult={'schema_version':1,'status':'PASS','scientific_handover_status':handover['status'],'reviewed_utc':datetime.now(timezone.utc).isoformat(),'run_id':run.name,'identity':identity,'bundle_file_count':len(actual),'manifested_artifact_count':len(listed),'manifest_excludes_its_own_hash':True,'all_bundle_file_hashes_checked':True,'independent_replay':{'full_array_pairs_per_channel':len(qids)*len(pids),'all_channel_top_lists_and_union':True,'all_raw_rows_and_normalization':True,'candidate_count':len(cq),'channel_top_list_count':len(tq)},'coverage':independent,'by_split':by_split,'uncovered_diagnosis':misses,'conclusion':'Legitimate miss by the frozen retrievers at the fixed top-200 depth; no technical artifact corruption detected by this review. Cache remains scientifically BLOCKED_COVERAGE.','limits':['No new model inference, training, Modal calls, candidate-depth changes, positive injection, or query removal.','Visual embedding payloads and the underlying image pixels were not downloaded, visually inspected, or recomputed in this artifact review.','This review checks the retained scores, manifests, label separation, pinned OCR text, and published Parquet artifacts; it does not establish absolute retriever quality or correctness of dataset annotations.'],'key_input_sha256':{p.relative_to(root).as_posix():sha(p) for p in key_paths},'verifier_source_sha256':hashlib.sha256(verifier_source.encode()).hexdigest(),'verifier_source':verifier_source}\nreport=run/'artifact_review.json'\nrequire(not report.exists(),'Independent artifact report already exists')\nwith report.open('xb') as f:f.write((json.dumps(result,indent=2,ensure_ascii=False,allow_nan=False)+'\\n').encode())\nprint(json.dumps({k:v for k,v in result.items() if k not in ('verifier_source','key_input_sha256')},indent=2))\n"
+}

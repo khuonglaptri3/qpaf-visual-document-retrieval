@@ -1,0 +1,19 @@
+{
+  "command": [
+    "C:\\ProgramData\\anaconda3\\python.exe",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests",
+    "-p",
+    "test_m28*.py",
+    "-v"
+  ],
+  "exit_code": 0,
+  "elapsed_seconds": 3.9998063999955775,
+  "test_count": 34,
+  "status": "PASS",
+  "python": "3.14.6 | packaged by Anaconda, Inc. | (main, Jul  9 2026, 14:29:05) [MSC v.1942 64 bit (AMD64)]",
+  "verified_utc": "2026-10-20T16:20:56.990093+00:00"
+}

@@ -50,6 +50,36 @@ def latest_execution(folder):
     return max(records, key=lambda item: datetime.fromisoformat(item[1]['started_utc']))
 
 
+def invocation_result(folder, execution):
+    """Recover an unserializable result only from this invocation's durable JSON."""
+    import modal
+    try:
+        return modal.FunctionCall.from_id(execution['function_call_id']).get(timeout=1)
+    except modal.exception.DeserializationError:
+        # A TorchVersion return value can import local Torch while unpickling.
+        # Read the plain JSON committed by the worker, without deserialization.
+        folder = Path(folder)
+        config = read_json(folder/'resolved_config.json')
+        source = read_json(folder/'source.json')
+        inputs = read_json(folder/'input_manifest.json')
+        volume = modal.Volume.from_name(config['modal']['volume_name'])
+        summary = json.loads(b''.join(volume.read_file('/runs/'+folder.name+'/summary.json')))
+        identity = {'config_sha256': object_hash(config), 'source_sha256': source['digest'],
+                    'input_sha256': object_hash(inputs)}
+        if (not isinstance(summary, dict) or summary.get('run_id') != folder.name
+                or summary.get('status') not in ('COMPLETE', 'FAIL')
+                or summary.get('identity') != identity):
+            raise ValueError('Committed GPU summary has a nonterminal or mismatched run identity')
+        try:
+            completed = datetime.fromisoformat(summary['completed_utc'])
+            started = datetime.fromisoformat(latest_execution(folder)[1]['started_utc'])
+            if completed.utcoffset() is None or started.utcoffset() is None or completed < started:
+                raise ValueError('Committed GPU summary predates the latest invocation')
+        except (KeyError, TypeError, ValueError) as exc:
+            raise ValueError('Committed GPU summary lacks a fresh terminal timestamp') from exc
+        return summary
+
+
 def launch(folder, resume=False):
     import modal
     from qpaf.m28.worker import build_app
@@ -65,7 +95,7 @@ def launch(folder, resume=False):
         old = latest_execution(folder)[1]
         # Do not race a still-running GPU worker on the same Volume.
         try:
-            modal.FunctionCall.from_id(old['function_call_id']).get(timeout=1)
+            invocation_result(folder, old)
         except TimeoutError:
             raise RuntimeError('Previous GPU invocation is still running; resume is refused')
         marker = folder/('execution-resume-'+datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%SZ')+'.json')
@@ -186,6 +216,18 @@ def _write_once(path, value):
         write_json(path, value)
 
 
+def _bytes_once(path, payload, verify_only):
+    if path.exists():
+        if path.read_bytes() != payload:
+            raise ValueError('Immutable input artifact changed: '+str(path))
+    elif verify_only:
+        raise ValueError('Missing immutable input artifact: '+str(path))
+    else:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        with path.open('xb') as stream:
+            stream.write(payload)
+
+
 def finalize(folder, verify_only=False):
     from qpaf.m28.bundle import build_candidates, freeze_candidates, verify_candidates, audit_coverage
     from qpaf.m24.dataset import read_score_rows, build_records
@@ -234,6 +276,16 @@ def finalize(folder, verify_only=False):
         if verify_only and (not (output/name).exists() or read_json(output/name) != value):
             raise ValueError('Missing/changed closure artifact: '+name)
         _write_once(output/name, value)
+    # Keep identical input bytes inside the portable bundle: cloud-generated
+    # JSON can use different line endings from the local preparation files.
+    for name in ('queries.json', 'split_ids.json'):
+        _bytes_once(output/name, (folder/name).read_bytes(), verify_only)
+    split_names = {'train': 'train_ids.txt', 'validation': 'val_ids.txt', 'test': 'test_ids.txt'}
+    split_hashes = {}
+    for role, filename in split_names.items():
+        payload = ''.join(q+'\n' for q in splits[role]).encode('utf-8')
+        _bytes_once(output/'splits'/filename, payload, verify_only)
+        split_hashes[role] = digest(output/'splits'/filename)
     handover = {'schema_version': 1, 'task_id': 'M2.8', 'run_id': folder.name,
         'status': 'PASS' if coverage['status'] == 'PASS' else 'BLOCKED_COVERAGE',
         'evaluation_unit': 'page', 'query_count': len(qids), 'page_count': len(pids),
@@ -243,6 +295,10 @@ def finalize(folder, verify_only=False):
         'qrels_development_sha256': digest(output/'qrels_development.json'),
         'qrels_test_sha256': digest(output/'qrels_test_sealed.json'),
         'query_texts_sha256': digest(folder/'queries.json'), 'splits_sha256': digest(folder/'split_ids.json'),
+        'score_cache_path': 'raw_scores.parquet', 'query_texts_path': 'queries.json',
+        'qrels_development_path': 'qrels_development.json',
+        'qrels_test_sealed_path': 'qrels_test_sealed.json',
+        'split_ids_path': 'split_ids.json', 'splits_directory': 'splits', 'split_role_sha256': split_hashes,
         'coverage_report_sha256': digest(output/'coverage_report.json'),
         'macro_candidate_recall': coverage['macro_recall'], 'uncovered_query_ids': coverage['uncovered_query_ids'],
         'm24_m25_row_audit': row_audit,
@@ -253,6 +309,10 @@ def finalize(folder, verify_only=False):
     if verify_only and read_json(output/'handover.json') != handover:
         raise ValueError('Immutable handover.json differs from full verification replay')
     _write_once(output/'handover.json', handover)
+    hashes = file_manifest(output, exclude=('hashes.json',))
+    if verify_only and (not (output/'hashes.json').is_file() or read_json(output/'hashes.json') != hashes):
+        raise ValueError('Portable bundle byte/hash manifest differs from verification replay')
+    _write_once(output/'hashes.json', hashes)
     print(json.dumps(handover, indent=2), flush=True)
     return handover
 
@@ -274,10 +334,9 @@ def main():
     elif args.finalize or args.verify:
         finalize((args.finalize or args.verify).resolve(), bool(args.verify))
     elif args.status:
-        import modal
         record = latest_execution(args.status)[1]
         try:
-            result = modal.FunctionCall.from_id(record['function_call_id']).get(timeout=1)
+            result = invocation_result(args.status, record)
             print(json.dumps(result, indent=2))
         except TimeoutError:
             print('RUNNING')

@@ -1,0 +1,9 @@
+{
+  "started_utc": "2026-10-20T14:43:59.022173+00:00",
+  "app_id": "ap-HNWFiUPRZS12OoWYOBr138",
+  "function_call_id": "fc-01M5CWA5A503AXSS1NKZNP0G4Q",
+  "gpu_requested": "A10",
+  "volume": "qpaf-m28-score-cache",
+  "remote_path": "/runs/RUN-QPAF-M2_8-CACHE-001-20261020T144311Z-A01",
+  "resume": false
+}

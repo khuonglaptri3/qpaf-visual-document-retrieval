@@ -73,6 +73,8 @@ is honestly BLOCKED, retained with report and cannot be silently repaired.
 
 ## OCR HTML cleanup
 
-No review HTML was found in M2.4; existing exports are in results/m2.3.
-An asynchronous scope clarification is pending. Delete only confirmed exported
-HTML, with exact path/SHA inventory. Preserve templates and scientific OCR data.
+No review HTML was found in M2.4; existing exports were in results/m2.3.
+The user explicitly confirmed removal of those exports while retaining the
+source templates. Ten exported HTML files were removed, with exact path/size/SHA
+inventory in results/m2.8/verification/ocr-review-html-removal.json. Templates
+and scientific OCR data are preserved.

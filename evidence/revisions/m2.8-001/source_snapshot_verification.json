@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "source_sha256": "5582b7a540c3453808b2efbdb6bd13d613a728a2c45b6b4364c33667c158d686",
+  "archive_sha256": "b085a150a8161e0fd725cf1d5b876747c3912ba9d8f2ef9928290d95bc8b91d7",
+  "unique_source_file_count": 151,
+  "archive_member_count_including_resolved_config": 152,
+  "source_record_count_including_selected_requirements": 152,
+  "all_archived_bytes_match_launched_source": true,
+  "archived_resolved_config_matches": true
+}

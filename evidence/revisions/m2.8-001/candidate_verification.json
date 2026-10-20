@@ -1,0 +1,62 @@
+{
+  "status": "PASS",
+  "evaluation_unit": "page",
+  "counts": {
+    "query_count": 1142,
+    "page_count": 5385,
+    "candidate_count": 549689,
+    "raw_row_count": 549689,
+    "normalized_row_count": 549689,
+    "channel_top_list_count": 685200,
+    "top_k": 200,
+    "effective_top_k": 200
+  },
+  "candidate_freeze_sha256": "4ff420008b9ccaa3a4d3afc565c43e2c974b3f95dd39a22a742b47297aead06e",
+  "artifacts": {
+    "candidate_set.parquet": {
+      "columns": [
+        "query_id",
+        "page_id"
+      ],
+      "row_count": 549689,
+      "sha256": "943b0284e2dc3ba18a97c2f5efc6c2664759ab9944912848cd0a4da37e623132",
+      "size_bytes": 1424032
+    },
+    "channel_top_lists.parquet": {
+      "columns": [
+        "query_id",
+        "page_id",
+        "channel",
+        "rank",
+        "raw_score"
+      ],
+      "row_count": 685200,
+      "sha256": "bc22c7adf2ca10056268e5b0164f6c18d417353b0a3f6c905e4dd5489d62833f",
+      "size_bytes": 6607953
+    },
+    "normalized_scores.parquet": {
+      "columns": [
+        "query_id",
+        "page_id",
+        "bm25_score",
+        "dense_score",
+        "visual_score"
+      ],
+      "row_count": 549689,
+      "sha256": "9e5b46289a32a14f94d6d2dd5f0606dfd655c8cc210f952ee2740f93c1967481",
+      "size_bytes": 13362032
+    },
+    "raw_scores.parquet": {
+      "columns": [
+        "query_id",
+        "page_id",
+        "bm25_score",
+        "dense_score",
+        "visual_score"
+      ],
+      "row_count": 549689,
+      "sha256": "1556bd330af560a42e30299e46acdaa40654e5b8522cc3cda4d15bd1942177ca",
+      "size_bytes": 9397270
+    }
+  }
+}

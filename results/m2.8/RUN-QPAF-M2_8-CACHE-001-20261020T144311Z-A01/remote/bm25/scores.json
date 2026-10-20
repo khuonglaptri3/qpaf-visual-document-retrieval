@@ -1,0 +1,15 @@
+{
+  "identity": {
+    "config_sha256": "0a60bbc36d1a26db97ec51986c61da2c06c08f247b105f1b4cdb9457b169c0f9",
+    "source_sha256": "5582b7a540c3453808b2efbdb6bd13d613a728a2c45b6b4364c33667c158d686",
+    "input_sha256": "d1bbd303835c11e8cdb0db5b53bc32aad096f770a0236e23c3cdc486ced74d8d",
+    "kind": "bm25_full"
+  },
+  "shape": [
+    1142,
+    5385
+  ],
+  "dtype": "float64",
+  "sha256": "fb481bac6743492def76b696f1ef11a372a4e28afd80229ed445e3d69c1e21e1",
+  "size_bytes": 49197488
+}

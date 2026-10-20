@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "command": [
+    ".venv/Scripts/python.exe",
+    "scripts/run_m28_cache.py",
+    "--status",
+    "results\\m2.8\\RUN-QPAF-M2_8-CACHE-001-20261020T144311Z-A01"
+  ],
+  "exit_code": 0,
+  "observed_status": "COMPLETE",
+  "uses_existing_invocation_only": true,
+  "new_gpu_invocations": 0
+}

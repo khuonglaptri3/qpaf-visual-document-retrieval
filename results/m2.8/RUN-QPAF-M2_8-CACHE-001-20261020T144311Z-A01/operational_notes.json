@@ -1,0 +1,23 @@
+{
+  "gpu_execution_status": "COMPLETE",
+  "remote_completed_utc": "2026-10-20T16:15:49.671479+00:00",
+  "gpu_attempts": 1,
+  "gpu_retries": 0,
+  "observer_terminal_event": {
+    "status": "LOCAL_RESULT_DESERIALIZATION_ERROR_AFTER_REMOTE_COMPLETION",
+    "exception": "modal.exception.DeserializationError",
+    "cause": "The torch.__version__ TorchVersion subclass in the return value imports local Torch while unpickling; the existing Windows environment cannot load torch/lib/shm.dll (WinError126).",
+    "gpu_inference_or_artifact_failure": false,
+    "recovery": "Read the committed plain-JSON summary and checksum manifest directly from the output Volume; collection and independent verification do not import local Torch.",
+    "authoritative_result": "remote/summary.json",
+    "cli_status_and_resume_fix": "Catch only result DeserializationError and require committed summary terminal status, exact run/config/source/input identity and a timestamp newer than the latest invocation.",
+    "real_status_command_after_fix": "PASS / COMPLETE; zero new GPU invocations",
+    "regression_tests": "5 new tests reproduced RED then GREEN; 34 total M2.8 tests pass"
+  },
+  "source_identity": {
+    "scientific_gpu_source_unchanged": true,
+    "source_snapshot_zip_sha256": "b085a150a8161e0fd725cf1d5b876747c3912ba9d8f2ef9928290d95bc8b91d7",
+    "closure_cli_changes_recorded_separately": true
+  },
+  "billing": "Worker elapsed time and resources are measured. No unverified dollar-cost estimate is reported."
+}

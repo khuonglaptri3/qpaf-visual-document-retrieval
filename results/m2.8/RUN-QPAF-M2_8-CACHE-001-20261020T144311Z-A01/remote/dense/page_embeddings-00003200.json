@@ -1,0 +1,17 @@
+{
+  "identity": {
+    "config_sha256": "0a60bbc36d1a26db97ec51986c61da2c06c08f247b105f1b4cdb9457b169c0f9",
+    "source_sha256": "5582b7a540c3453808b2efbdb6bd13d613a728a2c45b6b4364c33667c158d686",
+    "input_sha256": "d1bbd303835c11e8cdb0db5b53bc32aad096f770a0236e23c3cdc486ced74d8d",
+    "kind": "dense_pages",
+    "start": 3200,
+    "stop": 3328
+  },
+  "shape": [
+    128,
+    1024
+  ],
+  "dtype": "float32",
+  "sha256": "aa95a3ab1de3936f93fa59b3cc6bea58dc3ebdb642d4f73da318e3f46cffa4f4",
+  "size_bytes": 524416
+}

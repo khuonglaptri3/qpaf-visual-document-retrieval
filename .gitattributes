@@ -74,3 +74,7 @@ vimdoc_archive_audit_modal.py -text
 /configs/m2.6/full_ocr.toml -text -eol
 # M2.7 parity checks hash the matched-config bytes.
 /configs/m2.7/** -text -eol
+# M2.8 manifests/checksums must survive checkout with identical bytes.
+/configs/m2.8/** -text -eol -whitespace
+/results/m2.8/RUN-*/** -text -eol -whitespace
+/results/m2.8/verification/** -text -eol -whitespace

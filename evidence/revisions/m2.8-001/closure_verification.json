@@ -1,0 +1,20 @@
+{
+  "status": "PASS",
+  "scientific_handover_status": "BLOCKED_COVERAGE",
+  "verified_utc": "2026-10-20T16:26:35.058419+00:00",
+  "command": [
+    "C:\\ProgramData\\anaconda3\\python.exe",
+    "C:\\Users\\lanph\\OneDrive\\Desktop\\Artificial_Intelligent_Project\\scripts\\run_m28_cache.py",
+    "--verify",
+    "C:\\Users\\lanph\\OneDrive\\Desktop\\Artificial_Intelligent_Project\\results\\m2.8\\RUN-QPAF-M2_8-CACHE-001-20261020T144311Z-A01"
+  ],
+  "exit_code": 0,
+  "elapsed_seconds": 142.22359649999999,
+  "bundle_file_count": 16,
+  "bundle_bytes": 31473182,
+  "read_only_bundle_bytes_unchanged": true,
+  "m24_portable_split_loader": "PASS",
+  "bundle_hashes_sha256": "a31e072022f8b5088bac7f7a477d214301dc191abc4bfb48a5663121cecfb6e4",
+  "finalizer_source_sha256": "7ef8b221bcf23df7aad43cb5a9b043f8e81856c5479d8f694461a83c2ed0ccb5",
+  "verifier_sha256": "62ad06780fe1497aa675424bd5ede014fc239806829879098b8427df33997881"
+}
