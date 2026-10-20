@@ -5,6 +5,7 @@ import importlib.util
 import json
 from pathlib import Path
 import shutil
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -215,6 +216,46 @@ class ParityChecksTests(TempDirTest):
         with mock.patch.dict(sys.modules, {'torch': None}):
             with self.assertRaisesRegex(ParityError, 'torch is required'):
                 check_parity(self.manifest(), self.root)
+
+
+@unittest.skipUnless(HAS_TORCH, 'install requirements-learned-local.txt for the verifier CLI')
+class ScriptTests(TempDirTest):
+    def run_script(self, *args, cwd=None):
+        return subprocess.run([sys.executable, str(ROOT/'scripts/verify_m27_matched.py'), *args],
+                              capture_output=True, text=True, encoding='utf-8', cwd=cwd)
+
+    def test_prints_report_from_any_cwd(self):
+        result = self.run_script(cwd=self.tmp)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        report = json.loads(result.stdout)
+        self.assertEqual(report['independent_review'], 'PENDING')
+        self.assertEqual(report['wall_time_cap_minutes'], 60)
+        self.assertEqual(report['status'], 'FROZEN_CONFIG_PENDING_M2.8_INPUTS')
+        self.assertEqual(report['task_id'], 'M2.7')
+        self.assertEqual(report['experiment_id'], 'QPAF-M2_7-MTH-001')
+        self.assertEqual(report['manifest_sha256'], hashlib.sha256(MANIFEST.read_bytes()).hexdigest())
+        self.assertEqual(set(report['source_sha256']),
+                         {'src/qpaf/m27/matched.py', 'src/qpaf/m24/config.py',
+                          'src/qpaf/m24/trainer.py', 'scripts/verify_m27_matched.py'})
+        self.assertEqual(report['pairs'], {str(s): {'gate_granularity': ['query', 'page']} for s in SEEDS})
+
+    def test_output_is_create_once(self):
+        target = self.tmp/'verification.json'
+        first_run = self.run_script('--output', str(target))
+        self.assertEqual(first_run.returncode, 0, first_run.stderr)
+        first = target.read_bytes()
+        self.assertNotIn(b'\r', first)
+        again = self.run_script('--output', str(target))
+        self.assertEqual(again.returncode, 2)
+        self.assertIn('Error:', again.stderr)
+        self.assertEqual(target.read_bytes(), first)
+
+    def test_parity_error_exits_2(self):
+        data = json.loads(MANIFEST.read_text(encoding='utf-8'))
+        data['extra'] = 1
+        result = self.run_script('--manifest', str(write_manifest(self.tmp, data)))
+        self.assertEqual(result.returncode, 2)
+        self.assertIn('Error:', result.stderr)
 
 
 if __name__ == '__main__':
