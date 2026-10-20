@@ -20,6 +20,12 @@ rows and 18,449,010 full-corpus scores. Actual NVIDIA A10 worker wall time was
 See the [measured report](../../docs/superpowers/reports/2026-10-20-m28-score-cache.md)
 and [immutable evidence](../../evidence/revisions/m2.8-001/README.md).
 
+The [2026-10-21 train-query follow-up note](../../docs/superpowers/reports/2026-10-21-m28-uncovered-query-followup.md)
+records the reviewed dates, the missed page, and a proposed bounded document
+expansion policy with implementation/verification steps. The note is complete;
+the new policy is not implemented or approved, and the baseline remains
+`BLOCKED_COVERAGE`.
+
 | Artifact | Purpose |
 |---|---|
 | `resolved_config.json`, `input_manifest.json`, `source.json`, `source_snapshot.zip` | Pinned scientific inputs and exact GPU implementation |
