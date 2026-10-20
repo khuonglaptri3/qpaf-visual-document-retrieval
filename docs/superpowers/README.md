@@ -11,7 +11,6 @@ biệt ngữ nghĩa duy nhất là `gate_granularity`. Trạng thái:
 `FROZEN_CONFIG_PENDING_M2.8_INPUTS`; independent review chờ M2.10.
 
 - [Thiết kế](specs/2026-10-20-m27-matched-configs-design.md)
-- [Kế hoạch](plans/2026-10-20-m27-matched-configs.md)
 - [Đặc tả phương pháp và lệnh chạy](../03_method/m2.7-matched-configs.md)
 - [Bằng chứng bất biến m2.7-002](../../evidence/revisions/m2.7-002/README.md) (thay thế m2.7-001)
 
