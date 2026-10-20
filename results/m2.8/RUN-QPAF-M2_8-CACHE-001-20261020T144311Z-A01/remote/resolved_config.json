@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "task_id": "M2.8",
+  "experiment_id": "QPAF-M2_8-CACHE-001",
+  "model_source": {
+    "path": "configs/m2.2/retriever_smoke.toml",
+    "sha256": "d68c07b660625628e102ba5af4262b8c9b774f1d459fd8357bb96ee2541541d3"
+  },
+  "retrievers": {
+    "bm25": {
+      "k1": 1.5,
+      "b": 0.75,
+      "tokenizer": "unicode_word_lowercase"
+    },
+    "dense": {
+      "model_id": "BAAI/bge-m3",
+      "revision": "5617a9f61b028005a4858fdac845db406aefb181",
+      "tokenizer_id": "BAAI/bge-m3",
+      "tokenizer_revision": "5617a9f61b028005a4858fdac845db406aefb181",
+      "batch_size": 2,
+      "max_seq_length": 8192,
+      "query_prefix": "",
+      "page_prefix": "",
+      "device": "cuda",
+      "dtype": "float32",
+      "normalize_embeddings": true
+    },
+    "visual": {
+      "family": "colqwen2_5",
+      "model_id": "vidore/colqwen2.5-v0.2",
+      "revision": "dcbe8d9cede518bce830488364ba0e40c873645b",
+      "base_model_id": "vidore/colqwen2.5-base",
+      "base_revision": "92908120384b7a2110c5beda3ab29cbdb2c08e49",
+      "processor_id": "vidore/colqwen2.5-v0.2",
+      "processor_revision": "dcbe8d9cede518bce830488364ba0e40c873645b",
+      "processor_local_snapshot": true,
+      "processor_use_fast": false,
+      "tokenizer_id": "vidore/colqwen2.5-v0.2",
+      "tokenizer_revision": "dcbe8d9cede518bce830488364ba0e40c873645b",
+      "batch_size": 2,
+      "query_batch_size": 2,
+      "score_batch_size": 4,
+      "embedding_shard_size": 16,
+      "device": "cuda",
+      "dtype": "float32",
+      "attention": "sdpa",
+      "max_pixels": 200704,
+      "min_pixels": 3136,
+      "query_prefix": "Query: ",
+      "query_suffix_tokens": 10,
+      "max_query_tokens": 256,
+      "mask_non_image_embeddings": false
+    }
+  },
+  "parity": {
+    "bm25_atol": 1e-12,
+    "dense_atol": 1e-05,
+    "dense_rtol": 1e-05,
+    "visual_atol": 0.25,
+    "visual_rtol": 0.005,
+    "visual_embedding_atol": 0.02,
+    "visual_embedding_rtol": 0.05
+  },
+  "ocr": {
+    "run_id": "RUN-QPAF-M2_6-FULL-OCR-001-20261019T135838Z-A01",
+    "local_output": "results/m2.6/RUN-QPAF-M2_6-FULL-OCR-001-20261019T135838Z-A01/output",
+    "volume_name": "qpaf-m26-full-ocr",
+    "mount_path": "/m26",
+    "remote_output": "/m26/runs/RUN-QPAF-M2_6-FULL-OCR-001-20261019T135838Z-A01/output",
+    "handover_sha256": "64cb69c0256e77b9fc00b9ca5810bee07ac3205b9388b050e598d66c53822649"
+  },
+  "candidates": {
+    "top_k_per_channel": 200,
+    "max_union": 600,
+    "normalization_epsilon": 1e-15
+  },
+  "execution": {
+    "gpu": "A10",
+    "cpu": 4,
+    "memory_mib": 32768,
+    "timeout_seconds": 21600,
+    "retries": 0,
+    "dense_shard_size": 128,
+    "visual_shard_size": 64,
+    "requirements_file": "requirements/m22-modal.lock"
+  },
+  "modal": {
+    "app_name": "qpaf-m28-score-cache",
+    "volume_name": "qpaf-m28-score-cache",
+    "mount_path": "/m28",
+    "model_volume_name": "qpaf-m22-smoke-artifacts",
+    "model_mount_path": "/m22"
+  },
+  "output_directory": "results/m2.8"
+}

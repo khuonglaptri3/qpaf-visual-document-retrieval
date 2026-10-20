@@ -1,0 +1,38 @@
+{
+  "batch_reference": {
+    "passed": true,
+    "max_abs_error": 0.00017547607421875,
+    "max_relative_error": 1.2139654586361503e-05,
+    "atol": 0.25,
+    "rtol": 0.005,
+    "shape": [
+      4,
+      16
+    ]
+  },
+  "query_embedding_reference": {
+    "passed": true,
+    "count": 4,
+    "max_abs_error": 8.568167686462402e-06,
+    "atol": 0.02,
+    "rtol": 0.05
+  },
+  "page_embedding_reference": {
+    "passed": true,
+    "count": 16,
+    "max_abs_error": 0.0036801770329475403,
+    "atol": 0.02,
+    "rtol": 0.05
+  },
+  "independent_maxsim": {
+    "passed": true,
+    "max_abs_error": 1.9073486328125e-06,
+    "max_relative_error": 1.6788799587398462e-07,
+    "atol": 0.25,
+    "rtol": 0.005,
+    "shape": [
+      4,
+      16
+    ]
+  }
+}

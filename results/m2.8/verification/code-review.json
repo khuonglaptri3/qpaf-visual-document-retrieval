@@ -1,0 +1,70 @@
+{
+  "status": "PASS_SCOPED_CODE_REVIEW",
+  "reviewer": "fresh Codex review agent m28_review",
+  "scope": [
+    "src/qpaf/m28",
+    "scripts/run_m28_cache.py",
+    "tests/test_m28*.py",
+    "configs/m2.8/cache.json"
+  ],
+  "reviewed_fixes": [
+    {
+      "finding": "Query text and split ownership not bound during closure",
+      "resolution": "Frozen query object hash and remote equality; exact role ID hashes/counts; regression passes"
+    },
+    {
+      "finding": "Portable collection checksums not replayed",
+      "resolution": "Manifest receipt and every collected artifact verified; stage PASS/reference evidence required; regression passes"
+    },
+    {
+      "finding": "Resume/status ignored later invocations",
+      "resolution": "Use latest invocation marker; regression passes"
+    },
+    {
+      "finding": "Verify could recreate missing handover",
+      "resolution": "Verify requires existing immutable handover and makes no writes; regression passes"
+    }
+  ],
+  "focused_regression_test_count": 4,
+  "focused_regression_status": "PASS",
+  "human_M2_10_D1_signoff": "PENDING_SEPARATE_SCOPE",
+  "reviewed_source_sha256": {
+    "src/qpaf/m28/__init__.py": "d84316269e4dc88d7c1a137574a54a2c084218b91c757a4419fe1bf384a7050f",
+    "src/qpaf/m28/bundle.py": "3b8e7eccf0850d345c0dfc58fd644fbb3bc3f421321666474a1ed3c470b9673c",
+    "src/qpaf/m28/preflight.py": "8bd1c14c94cd06de1737dbed90f295f4f9a55e904732b2d4056c0e260c12b482",
+    "src/qpaf/m28/runtime.py": "e1bdc02ab06ba033bfd679f21ed3180e2c77d4ab57bd6fffe40a8235ce1dbe06",
+    "src/qpaf/m28/worker.py": "2d08bd28899ea10f70a067b87825bdd28c4bea3c1b2d84d4e53b13e0f8dab033",
+    "scripts/run_m28_cache.py": "7ef8b221bcf23df7aad43cb5a9b043f8e81856c5479d8f694461a83c2ed0ccb5",
+    "configs/m2.8/cache.json": "049b00c2456146f6d39da3b184722b5f6f6e9f97b5c44a52ac86be92d97400c7"
+  },
+  "portable_handover_review": {
+    "status": "PASS",
+    "exact_query_bytes_and_M24_splits": true,
+    "read_only_verify_preserves_all_bytes": true,
+    "no_circular_manifest_hash": true
+  },
+  "closure_helpers_review": {
+    "status": "PASS",
+    "reviewer": "fresh Codex review agent m28_review",
+    "verified_skip_recovery": true,
+    "immutable_receipt_recovery": true,
+    "readback_bound_to_frozen_upload_manifest": true,
+    "metadata_mutation_during_fake_volume_upload_rejected": true,
+    "real_modal_calls_by_reviewer": false,
+    "source_sha256": {
+      "results/m2.8/verification/persist_closed_bundle.py": "d7488c22ca6631b34399cf8c42067f549ffe5244ec6d067e87f2cf404cfa0951",
+      "results/m2.8/verification/verify_embedding_indexes.py": "f9e7d0908ee969786ca8e30df05d01855cd99c7644a14893a49b8761562bba52"
+    },
+    "final_metadata_additions": "Source archive audit, fresh artifact review, uncovered train-query diagnosis, operational notes and actual status replay"
+  },
+  "invocation_fallback_review": {
+    "status": "PASS",
+    "reviewer": "fresh Codex review agent m28_review",
+    "focused_cli_tests": 9,
+    "new_red_green_tests": 5,
+    "scoped_deserialization_exception": true,
+    "exact_terminal_identity_and_latest_invocation_timestamp": true,
+    "timeouts_and_unrelated_errors_preserved": true,
+    "real_modal_calls_by_reviewer": false
+  }
+}

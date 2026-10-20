@@ -1,0 +1,14 @@
+{
+  "status": "RUNNING",
+  "stage": "visual",
+  "completed": 5385,
+  "total": 5385,
+  "wall_seconds": 5482.774621925,
+  "utc": "2026-10-20T16:15:42.091154+00:00",
+  "gpu": {
+    "name": "NVIDIA A10",
+    "total_memory_bytes": 23684186112,
+    "cuda_version": "12.6",
+    "torch_version": "2.7.1+cu126"
+  }
+}

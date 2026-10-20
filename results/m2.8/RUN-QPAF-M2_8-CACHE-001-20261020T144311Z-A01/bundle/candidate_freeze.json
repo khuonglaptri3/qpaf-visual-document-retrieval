@@ -1,0 +1,89 @@
+{
+  "artifacts": {
+    "candidate_set.parquet": {
+      "columns": [
+        "query_id",
+        "page_id"
+      ],
+      "row_count": 549689,
+      "sha256": "943b0284e2dc3ba18a97c2f5efc6c2664759ab9944912848cd0a4da37e623132",
+      "size_bytes": 1424032
+    },
+    "channel_top_lists.parquet": {
+      "columns": [
+        "query_id",
+        "page_id",
+        "channel",
+        "rank",
+        "raw_score"
+      ],
+      "row_count": 685200,
+      "sha256": "bc22c7adf2ca10056268e5b0164f6c18d417353b0a3f6c905e4dd5489d62833f",
+      "size_bytes": 6607953
+    },
+    "normalized_scores.parquet": {
+      "columns": [
+        "query_id",
+        "page_id",
+        "bm25_score",
+        "dense_score",
+        "visual_score"
+      ],
+      "row_count": 549689,
+      "sha256": "9e5b46289a32a14f94d6d2dd5f0606dfd655c8cc210f952ee2740f93c1967481",
+      "size_bytes": 13362032
+    },
+    "raw_scores.parquet": {
+      "columns": [
+        "query_id",
+        "page_id",
+        "bm25_score",
+        "dense_score",
+        "visual_score"
+      ],
+      "row_count": 549689,
+      "sha256": "1556bd330af560a42e30299e46acdaa40654e5b8522cc3cda4d15bd1942177ca",
+      "size_bytes": 9397270
+    }
+  },
+  "counts": {
+    "candidate_count": 549689,
+    "channel_top_list_count": 685200,
+    "effective_top_k": 200,
+    "normalized_row_count": 549689,
+    "page_count": 5385,
+    "query_count": 1142,
+    "raw_row_count": 549689,
+    "top_k": 200
+  },
+  "created_utc": "2026-10-20T16:21:49.185938Z",
+  "evaluation_unit": "page",
+  "normalization": {
+    "constant_range_epsilon": 1e-15,
+    "method": "query_union_min_max_float64"
+  },
+  "ordering": {
+    "candidates": "page_id_ascending",
+    "channel_top_lists": "raw_score_descending_page_id_ascending",
+    "queries": "input_query_ids"
+  },
+  "page_ids_sha256": "12143ca5cc9e83fb9a92e25db92fa33765a65e29c5de881c2eccf72cb6d28aa2",
+  "provenance": {
+    "config_sha256": "0a60bbc36d1a26db97ec51986c61da2c06c08f247b105f1b4cdb9457b169c0f9",
+    "input_sha256": "d1bbd303835c11e8cdb0db5b53bc32aad096f770a0236e23c3cdc486ced74d8d",
+    "m26_preprocessing_identity_sha256": "6bd09e6f7615cca14a20f7fa23e29d67d3589f4d18cdb8c51b8e870912b41213",
+    "m27_manifest_sha256": "705dd5705a3849239568eebee2542a9f39ccc2f123e334e7e933fde74f55fa6d",
+    "run_id": "RUN-QPAF-M2_8-CACHE-001-20261020T144311Z-A01",
+    "source_sha256": "5582b7a540c3453808b2efbdb6bd13d613a728a2c45b6b4364c33667c158d686",
+    "uses_qrels": false
+  },
+  "query_ids_sha256": "9b46447c4cc84c7c4f48b590fc97c987adbcb17757a83271f31d57c39b43113c",
+  "schema_version": "qpaf_m28_candidate_freeze_v1",
+  "score_arrays_sha256": {
+    "bm25": "2b964342bc100b8ff574668506e0fb6959ae0f9342d8e7738696dc590780864a",
+    "dense": "bfe96ed22554d8562f5c06d8782d777d54c2f19cb33046fa953b64ed52cf15e3",
+    "visual": "b67b785a5e8b7226e0f9e4284619fe402d81305af811a1ccc24fc681627e9d28"
+  },
+  "score_row_schema": "qpaf_score_rows_v1",
+  "status": "FROZEN"
+}

@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "task_id": "M2.8",
+  "run_id": "RUN-QPAF-M2_8-CACHE-001-20261020T144311Z-A01",
+  "status": "BLOCKED_COVERAGE",
+  "evaluation_unit": "page",
+  "query_count": 1142,
+  "page_count": 5385,
+  "candidate_count": 549689,
+  "candidate_freeze_sha256": "4ff420008b9ccaa3a4d3afc565c43e2c974b3f95dd39a22a742b47297aead06e",
+  "score_cache_sha256": "1556bd330af560a42e30299e46acdaa40654e5b8522cc3cda4d15bd1942177ca",
+  "qrels_development_sha256": "691b6bc4ada3bc64fe3c408fe32498b04c7f30900eadb39ae09ddbe29aea302c",
+  "qrels_test_sha256": "05eaaa810e47d35d4eb06b3d36a05f03b002ec9d3c5ee6bce5fc27d2e336d154",
+  "query_texts_sha256": "e7994373c9fd5157cde0fb0c5a1440c37c275b85fa19b2b0b566f61d584c4ab4",
+  "splits_sha256": "5e0291b196f167aafa3122b4dc774a9aa71517b57ad78889580ea8ffb70b0487",
+  "score_cache_path": "raw_scores.parquet",
+  "query_texts_path": "queries.json",
+  "qrels_development_path": "qrels_development.json",
+  "qrels_test_sealed_path": "qrels_test_sealed.json",
+  "split_ids_path": "split_ids.json",
+  "splits_directory": "splits",
+  "split_role_sha256": {
+    "train": "61dfe867c27b91a0a96594440b0f0e5ecf51501da0fcecdac94badaf16962191",
+    "validation": "46f8af5853942f6697cc3a995347a1832206212e93ff8aa87acb1775b3a060b4",
+    "test": "d34210f901759a4f174da0c6c2e9b810616dcb33a71a0bd128a25d5d8d12e6f6"
+  },
+  "coverage_report_sha256": "598a68b513112abb4eb98d5b798b4ce60f17476eb8f07390a002434a100b4d62",
+  "macro_candidate_recall": 0.999124343257443,
+  "uncovered_query_ids": [
+    "04450a0f59f81025574451222aa26322ae7ede42_2"
+  ],
+  "m24_m25_row_audit": {
+    "status": "PASS",
+    "query_count": 1142,
+    "candidate_count": 549689,
+    "candidate_keys_sha256": "b4f9c7e61a973a9285ced37e37124ae9d193649e5ce228f185ca04364c89dc99"
+  },
+  "m24_development_record_counts": {
+    "train": 799,
+    "validation": 171
+  },
+  "test_labels_used_only_for_frozen_candidate_coverage": true,
+  "test_ranking_metrics_computed": false,
+  "training_executed": false,
+  "finalizer_source_sha256": "7ef8b221bcf23df7aad43cb5a9b043f8e81856c5479d8f694461a83c2ed0ccb5",
+  "config_sha256": "0a60bbc36d1a26db97ec51986c61da2c06c08f247b105f1b4cdb9457b169c0f9",
+  "source_sha256": "5582b7a540c3453808b2efbdb6bd13d613a728a2c45b6b4364c33667c158d686",
+  "input_sha256": "d1bbd303835c11e8cdb0db5b53bc32aad096f770a0236e23c3cdc486ced74d8d"
+}

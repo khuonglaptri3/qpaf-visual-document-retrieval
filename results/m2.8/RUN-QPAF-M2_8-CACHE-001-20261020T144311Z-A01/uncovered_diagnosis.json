@@ -1,0 +1,53 @@
+{
+  "status": "CONFIRMED_FROZEN_RETRIEVER_MISS",
+  "run_id": "RUN-QPAF-M2_8-CACHE-001-20261020T144311Z-A01",
+  "query_id": "04450a0f59f81025574451222aa26322ae7ede42_2",
+  "split": "train",
+  "test_ranking_metrics_computed": false,
+  "query_text": "What year did the European Commission's Pilot Project on Integrated Techniques for the Seismic Strengthening & Energy Efficiency of Existing Buildings start?",
+  "qrels": {
+    "04450a0f59f81025574451222aa26322ae7ede42_page_0007": 1
+  },
+  "global_page_index": 3763,
+  "candidate_count": 448,
+  "page_number": 7,
+  "page_present_in_full_corpus": true,
+  "render_status": "OK",
+  "technical_failure": false,
+  "text_source": "native+ocr",
+  "text_length": 341,
+  "text_sha256_verified": "f189e0ca362dbfab9ab145a4ffdf1eee286ef514f9a87f03397af783d2f89dee",
+  "image_sha256_verified": "322492a655a30e58027494b16056409c14796a6269e68df986208ed14b0e541b",
+  "text_preview": "7\r\nTimeline\r\nNov 2021\r\nFinal \r\nworkshop\r\nFeb 2022\r\nTechnical \r\nguidelines\r\nNov 2020\r\nMidterm \r\nworkshop\r\nMay 2019\r\nDiscussions on\r\ncontributions to action plan\r\nWork on\r\naction plan\r\nWork with external experts\r\nTechnical harmonisation\r\nPrepare publications\r\nand data platform\r\nContributions to \r\naction plan\né é é\nO\n=|Z\nO\nEuropean\nCommission",
+  "channels": {
+    "bm25": {
+      "positive_rank": 271,
+      "positive_raw_score": 11.58600389119631,
+      "top200_cutoff_score": 12.661955399583501,
+      "outside_top200": true
+    },
+    "dense": {
+      "positive_rank": 273,
+      "positive_raw_score": 0.417117178440094,
+      "top200_cutoff_score": 0.42588937282562256,
+      "outside_top200": true,
+      "full_array_matches_score_shard_at_positive": true,
+      "score_shard_sha256": "fe42ab0daa157a36a50f06573b758bd09e3429222766d6b70c6ef1f28085a227"
+    },
+    "visual": {
+      "positive_rank": 769,
+      "positive_raw_score": 14.120915412902832,
+      "top200_cutoff_score": 15.459769248962402,
+      "outside_top200": true,
+      "full_array_matches_score_shard_at_positive": true,
+      "score_shard_sha256": "7c6872d0327d1ca11fe5eae4294fe62ae518a84c84119c2528d6cfdf521e46ce"
+    }
+  },
+  "inference": "The relevant timeline page has little project-specific vocabulary while other pages in the same document supply that context. This is a page retrieval miss under the frozen top-200 settings; no missing-page, namespace, nonfinite-score or shard-alignment fault was found.",
+  "candidate_freeze_sha256": "4ff420008b9ccaa3a4d3afc565c43e2c974b3f95dd39a22a742b47297aead06e",
+  "coverage_report_sha256": "598a68b513112abb4eb98d5b798b4ce60f17476eb8f07390a002434a100b4d62",
+  "scientific_parameters_changed": false,
+  "query_dropped": false,
+  "positive_injected": false,
+  "next_step": "M2.10 reviews this train-only failure and chooses a documented protocol amendment or retains the blocker; any revised retriever/candidate policy requires a new run and evidence revision, never an edit of this freeze."
+}

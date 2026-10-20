@@ -1,0 +1,37 @@
+{
+  "status": "CLOSED_TECHNICAL_CACHE_BLOCKED_COVERAGE",
+  "branch": "feature/m2-8-score-cache",
+  "implementation_commit": "1a0819f",
+  "run": "results/m2.8/RUN-QPAF-M2_8-CACHE-001-20261020T144311Z-A01",
+  "app_id": "ap-HNWFiUPRZS12OoWYOBr138",
+  "call_id": "fc-01M5CWA5A503AXSS1NKZNP0G4Q",
+  "volume": "qpaf-m28-score-cache",
+  "gpu": "NVIDIA A10",
+  "software_tests": 34,
+  "software_status": "PASS",
+  "bm25_dense_full_replay": "PASS",
+  "html_deleted": 10,
+  "templates_preserved": true,
+  "gpu_source_snapshot_sha256": "b085a150a8161e0fd725cf1d5b876747c3912ba9d8f2ef9928290d95bc8b91d7",
+  "remaining": [],
+  "notes": [
+    "User explicitly authorized real-data M2.8 GPU run and HTML deletion confirmed results/m2.3",
+    "GPU source unchanged during execution; fixed closure-only CLI bugs separately and handover records finalizer SHA",
+    "Existing .venv torch DLL broken; base Python supplies pandas/arrow; .venv supplies Modal",
+    "Use existing README commands; no new permission needed, no GitHub push requested",
+    "Terminal observer could not unpickle TorchVersion because of the existing Windows Torch DLL issue; CLI JSON fallback now passes actual status and five new regressions, without another GPU invocation."
+  ],
+  "gpu_execution_status": "COMPLETE",
+  "scientific_handover_status": "BLOCKED_COVERAGE",
+  "learned_pilot_ready": false,
+  "artifact_review_status": "PASS",
+  "full_read_only_verification": "PASS",
+  "cloud_closure_verification": "PASS",
+  "macro_candidate_recall": 0.999124343257443,
+  "uncovered_train_query_ids": [
+    "04450a0f59f81025574451222aa26322ae7ede42_2"
+  ],
+  "downstream_scientific_action": "M2.10/D1 reviews the train miss. Any policy change requires a documented protocol amendment and a new run/revision. Do not edit this freeze.",
+  "measured_report": "docs/superpowers/reports/2026-10-20-m28-score-cache.md",
+  "immutable_evidence": "evidence/revisions/m2.8-001"
+}

@@ -1,0 +1,152 @@
+[
+  {
+    "path": "artifact_review.json",
+    "size_bytes": 21209,
+    "sha256": "d087cba30f5f8c7d7a2db19c108f1227e3017bb69a4a7380de69c3bc9f813070"
+  },
+  {
+    "path": "bundle_hashes.json",
+    "size_bytes": 2349,
+    "sha256": "a31e072022f8b5088bac7f7a477d214301dc191abc4bfb48a5663121cecfb6e4"
+  },
+  {
+    "path": "candidate_freeze.json",
+    "size_bytes": 2937,
+    "sha256": "4ff420008b9ccaa3a4d3afc565c43e2c974b3f95dd39a22a742b47297aead06e"
+  },
+  {
+    "path": "candidate_verification.json",
+    "size_bytes": 1651,
+    "sha256": "8525d22c533f051ea2b7591a6d884987d54b7929d3b4275c561c7678f66830b6"
+  },
+  {
+    "path": "closure_upload_manifest.json",
+    "size_bytes": 5370,
+    "sha256": "1a8266ba6e02f7747940c8d09ce55fe2fc55d044eb706ee35bf5051e1ef26f75"
+  },
+  {
+    "path": "closure_verification.json",
+    "size_bytes": 925,
+    "sha256": "6f44ed5fd373acfaaaf4622174499be84f3cfd15a3b64f643ef6a595e702a2b5"
+  },
+  {
+    "path": "cloud_closure_verification.json",
+    "size_bytes": 5747,
+    "sha256": "06b35e5467ed6dda084053f9d7fc424f0c3afe08ad8784a90639a8f42c5e7210"
+  },
+  {
+    "path": "code_review.json",
+    "size_bytes": 3214,
+    "sha256": "b6f8dea9663709d9ea239f06ea59ffa3585fefadd2de501eaeed46ae823549db"
+  },
+  {
+    "path": "collection.json",
+    "size_bytes": 243,
+    "sha256": "969d5c3630a948e35a196e05d365e21f4ce7370fbf0b3228390b561bd8542d3e"
+  },
+  {
+    "path": "completed_stages_independent_replay.json",
+    "size_bytes": 973,
+    "sha256": "679744b85a649ea0cf627f4f21b5a95e1e8e210c785c685ee4e9ce5266fcd675"
+  },
+  {
+    "path": "coverage_report.json",
+    "size_bytes": 219319,
+    "sha256": "598a68b513112abb4eb98d5b798b4ce60f17476eb8f07390a002434a100b4d62"
+  },
+  {
+    "path": "embedding_index_verification.json",
+    "size_bytes": 998,
+    "sha256": "b1b6f4246cf52612dcdeaee4f806e1b42fb9d7297109ae09b085d8ee1df8a003"
+  },
+  {
+    "path": "environment.json",
+    "size_bytes": 2784,
+    "sha256": "ec9e5cb2afa5a40c64a0d9b61f4c599c690bcb972e3c92fe9fb0b76f5e8179ef"
+  },
+  {
+    "path": "execution.json",
+    "size_bytes": 313,
+    "sha256": "9d3157c0416ae99ea60a206d71008e8bf6281b031bdeadb249e584cfb7ff1f1b"
+  },
+  {
+    "path": "finalizer_source.py",
+    "size_bytes": 18670,
+    "sha256": "7ef8b221bcf23df7aad43cb5a9b043f8e81856c5479d8f694461a83c2ed0ccb5"
+  },
+  {
+    "path": "handover.json",
+    "size_bytes": 2386,
+    "sha256": "8664d01b48720826bf5ceda4dc4f07f9ba0aea29d414ffbd39f8d35ef3ae5b37"
+  },
+  {
+    "path": "input_manifest.json",
+    "size_bytes": 378819,
+    "sha256": "62163846a7ab66136f5445459c66107e0269a42b184b8a9e59434d1220556cbc"
+  },
+  {
+    "path": "ocr_review_html_removal.json",
+    "size_bytes": 2981,
+    "sha256": "87b314d37e8cad402e6b2841ceac99f00fe6bca18daea0743297de682b1c423a"
+  },
+  {
+    "path": "operational_notes.json",
+    "size_bytes": 1509,
+    "sha256": "71988a8bd7b0418e9329eb12faeda566c1d7b71887c3725577cc67a180f5bb63"
+  },
+  {
+    "path": "portable_manifest.json",
+    "size_bytes": 92287,
+    "sha256": "e5c3799a207dabb5456efac81204be4799a1423915e0b84f105e977c99f92cf5"
+  },
+  {
+    "path": "README.md",
+    "size_bytes": 1795,
+    "sha256": "45dd95ed298faea7c8dd6328e4f58e77d1f1407a280f29f8cb578243465622c7"
+  },
+  {
+    "path": "report_snapshot.md",
+    "size_bytes": 10803,
+    "sha256": "dee051562fd81534b574544dac7cf91c3b0e7218983b1015ca927326962b6079"
+  },
+  {
+    "path": "resolved_config.json",
+    "size_bytes": 3078,
+    "sha256": "049b00c2456146f6d39da3b184722b5f6f6e9f97b5c44a52ac86be92d97400c7"
+  },
+  {
+    "path": "resources.json",
+    "size_bytes": 55744,
+    "sha256": "5c37028594996d31c0a2a291334a6fb295b12b99df54fc07c20b261a2d6fc6c1"
+  },
+  {
+    "path": "software_checks.json",
+    "size_bytes": 437,
+    "sha256": "a336d5909cb36ae5a5927bd582a1b328234099ee26d4ab67c4c1966e55c7c2d8"
+  },
+  {
+    "path": "source.json",
+    "size_bytes": 23050,
+    "sha256": "bd66be12da154bded8a253719ab1504eb0170f58cbe938a262175fb2e84904c6"
+  },
+  {
+    "path": "source_snapshot_verification.json",
+    "size_bytes": 448,
+    "sha256": "d7bfcfc45b6fd7d13681ae71b9071c6babffe927f2d4d4d7a367a5542daa505d"
+  },
+  {
+    "path": "status_verification.json",
+    "size_bytes": 309,
+    "sha256": "327bee57b99682b51d37dc7ab0260dd1b5c78f5b29421c5caddf5c32531037cc"
+  },
+  {
+    "path": "summary.json",
+    "size_bytes": 4788,
+    "sha256": "512b7c9caf2542a8064f997852addaf4418aa37c54961c6f328f7e9354adae87"
+  },
+  {
+    "path": "uncovered_diagnosis.json",
+    "size_bytes": 2982,
+    "sha256": "43ef746c1883a541cdd94672a92008eac31d1eca0e5f9fa74c69d82f215cfa1a"
+  }
+]
