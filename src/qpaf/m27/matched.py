@@ -1,10 +1,12 @@
-"""Frozen M2.7 matched-config manifest: strict loading, resolution and semantic diff."""
+"""Frozen M2.7 matched-config manifest: strict loading, resolution, semantic diff and parity checks."""
 import copy
+import hashlib
 import json
 from pathlib import Path
 import re
+import tempfile
 
-from qpaf.m24.config import load_config, validate
+from qpaf.m24.config import METHODS, load_config, validate
 
 PENDING = 'PENDING_M2.8'
 SHA256 = re.compile(r'[0-9a-f]{64}')
@@ -112,3 +114,80 @@ def resolve(manifest, method, seed, root):
     config = copy.deepcopy(load_base(manifest, root, seed))
     config['gate_granularity'] = manifest['methods'][method]['gate_granularity']
     return config
+
+
+def _sha256(path):
+    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+
+def check_parity(manifest, root):
+    """Run the seven fail-closed M2.7 checks; cheap file checks first, torch checks last."""
+    root = Path(root)
+    base_sha = _sha256(root/manifest['base_config']['path'])
+    if base_sha != manifest['base_config']['sha256']:
+        raise ParityError(f'Shared base sha256 {base_sha} differs from the pinned '
+                          f'{manifest["base_config"]["sha256"]}; the frozen base was edited')
+    drift = semantic_diff(load_config(root/'configs/m2.4/pipeline.toml'), load_base(manifest, root))
+    if set(drift) != {'experiment_id'}:
+        raise ParityError(f'Shared base differs from the M2.4 values beyond experiment_id: {drift}')
+    granularities = {method: spec['gate_granularity'] for method, spec in manifest['methods'].items()}
+    if granularities != METHODS:
+        raise ParityError(f'Manifest granularities {granularities} differ from runner METHODS {METHODS}')
+    seeds = manifest['seeds']['robustness']
+    pairs = {}
+    for seed in seeds:
+        diff = semantic_diff(resolve(manifest, 'QARF', seed, root), resolve(manifest, 'QPAF', seed, root))
+        if diff != {'gate_granularity': ['query', 'page']}:
+            raise ParityError(f'QARF/QPAF at seed {seed} differ beyond gate_granularity: {diff}')
+        pairs[str(seed)] = diff
+    shared = {}
+    for name in PINNED_INPUTS:
+        ref = manifest['shared_inputs'][name]
+        actual = _sha256(root/ref['path'])
+        if actual != ref['sha256']:
+            raise ParityError(f'shared_inputs.{name} sha256 {actual} differs from the pinned {ref["sha256"]}')
+        shared[name] = {'path': ref['path'], 'sha256': actual, 'verified': True}
+    pending = sorted(name for name in PENDING_INPUTS if manifest['shared_inputs'][name] == PENDING)
+    if pending != sorted(PENDING_INPUTS):
+        raise ParityError(f'Pending inputs must all be {PENDING}')
+    try:
+        import torch
+        from qpaf.m24 import trainer
+        from qpaf.m24.dataset import build_records
+        from qpaf.m24.synthetic import make_fixture
+    except ImportError as exc:
+        raise ParityError('torch is required for initialization and data-order parity') from exc
+    initialization = {}
+    for seed in seeds:
+        config = load_base(manifest, root, seed)
+        qarf, qpaf = trainer.build_model(config, 'QARF'), trainer.build_model(config, 'QPAF')
+        left, right = qarf.state_dict(), qpaf.state_dict()
+        if list(left) != list(right) or not all(torch.equal(left[k], right[k]) for k in left):
+            raise ParityError(f'QARF/QPAF initialization differs at seed {seed}')
+        count = sum(p.numel() for p in qarf.parameters())
+        if count != sum(p.numel() for p in qpaf.parameters()):
+            raise ParityError(f'QARF/QPAF initialization parameter counts differ at seed {seed}')
+        initialization[str(seed)] = {'identical': True, 'parameter_count': count}
+    # Per-step (valid_queries, pairs) depend only on batch composition, so equal
+    # sequences mean both methods drew the same batch order from the shared seed.
+    config = load_base(manifest, root)
+    config['training']['epochs'] = 1
+    seed = config['training']['seed']
+    rows, queries, qrels, splits = make_fixture(seed)
+    records = build_records(rows, queries, qrels, splits, ('train', 'validation'),
+                            positive_threshold=config['data']['positive_threshold'],
+                            max_candidates=config['data']['max_candidates'])
+    torch.use_deterministic_algorithms(True)
+    orders = {}
+    for method in ('QARF', 'QPAF'):
+        with tempfile.TemporaryDirectory() as directory:
+            result = trainer.train(config, method, records['train'], records['validation'], directory,
+                                   log=lambda message: None)
+        orders[method] = [(step['valid_queries'], step['pairs']) for step in result['steps']]
+    if orders['QARF'] != orders['QPAF'] or not orders['QARF']:
+        raise ParityError('QARF/QPAF data order differs on the synthetic fixture')
+    return {'base_config_sha256': base_sha, 'm24_drift': drift, 'pairs': pairs,
+            'methods_match_runner': True, 'initialization': initialization,
+            'data_order': {'identical': True, 'steps': len(orders['QARF']),
+                           'fixture': f'qpaf.m24.synthetic:{seed}'},
+            'shared_inputs': shared, 'pending_inputs': pending}
