@@ -10,8 +10,11 @@ sys.path.insert(0, str(ROOT/'src'))
 
 from qpaf.m27.matched import ParityError, check_parity, load_manifest
 
-SOURCES = ('src/qpaf/m27/matched.py', 'src/qpaf/m24/config.py', 'src/qpaf/m24/trainer.py',
-           'scripts/verify_m27_matched.py')
+# Every file on the matched training path, so a later method-specific change is visible.
+SOURCES = ('src/qpaf/m27/matched.py', 'src/qpaf/m24/config.py', 'src/qpaf/m24/dataset.py',
+           'src/qpaf/m24/trainer.py', 'src/qpaf/m24/evaluator.py', 'src/qpaf/m24/checkpoint.py',
+           'src/qpaf/m12/model.py', 'src/qpaf/m12/features.py', 'src/qpaf/m12/losses.py',
+           'scripts/run_m24_pipeline.py', 'scripts/verify_m27_matched.py')
 
 
 def from_root(path):

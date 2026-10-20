@@ -16,6 +16,9 @@ FIXED = {
     'schema_version': 1, 'task_id': 'M2.7', 'experiment_id': 'QPAF-M2_7-MTH-001',
     'methods': {'QARF': {'gate_granularity': 'query'}, 'QPAF': {'gate_granularity': 'page'}},
     'allowed_semantic_diff': ['gate_granularity'],
+    # seed_policy.md freezes these exact seeds; changing them needs a protocol amendment.
+    'seeds': {'development_gate': 20260820, 'robustness': [20260820, 20260821, 20260822],
+              'override_path': 'training.seed'},
     'run_order': ['QARF', 'independent_review', 'QPAF'],
     'runtime': {'device': 'cpu', 'dtype': 'float64', 'threads': 1, 'deterministic_algorithms': True,
                 'requirements': 'requirements-learned-local.txt'},
@@ -36,10 +39,6 @@ def _unique_pairs(pairs):
     if len(keys) != len(set(keys)):
         raise ParityError(f'Duplicate key in matched manifest: {sorted(k for k in keys if keys.count(k) > 1)}')
     return dict(pairs)
-
-
-def _is_seed(value):
-    return type(value) is int and 0 <= value < 2**32
 
 
 def _check_file_ref(name, ref):
@@ -63,17 +62,6 @@ def load_manifest(path):
         if json.dumps(manifest[key], sort_keys=True) != json.dumps(expected, sort_keys=True):
             raise ParityError(f'{key} differs from the frozen M2.7 contract')
     _check_file_ref('base_config', manifest['base_config'])
-    seeds = manifest['seeds']
-    if not isinstance(seeds, dict) or set(seeds) != {'development_gate', 'robustness', 'override_path'}:
-        raise ParityError('seeds must have exactly development_gate, robustness and override_path')
-    robustness = seeds['robustness']
-    if (not isinstance(robustness, list) or not robustness or not all(map(_is_seed, robustness))
-            or len(set(robustness)) != len(robustness)):
-        raise ParityError('seeds.robustness must be distinct integers in [0, 2**32)')
-    if not _is_seed(seeds['development_gate']) or seeds['development_gate'] not in robustness:
-        raise ParityError('seeds.development_gate must be one of seeds.robustness')
-    if seeds['override_path'] != 'training.seed':
-        raise ParityError('seeds.override_path must be training.seed')
     inputs = manifest['shared_inputs']
     if not isinstance(inputs, dict) or set(inputs) != {*PINNED_INPUTS, *PENDING_INPUTS}:
         raise ParityError('Missing or unknown shared input')
@@ -130,6 +118,9 @@ def check_parity(manifest, root):
     drift = semantic_diff(load_config(root/'configs/m2.4/pipeline.toml'), load_base(manifest, root))
     if set(drift) != {'experiment_id'}:
         raise ParityError(f'Shared base differs from the M2.4 values beyond experiment_id: {drift}')
+    if drift['experiment_id'][1] != manifest['experiment_id']:
+        raise ParityError(f'Shared base experiment_id {drift["experiment_id"][1]!r} differs from the '
+                          f'manifest {manifest["experiment_id"]!r}')
     granularities = {method: spec['gate_granularity'] for method, spec in manifest['methods'].items()}
     if granularities != METHODS:
         raise ParityError(f'Manifest granularities {granularities} differ from runner METHODS {METHODS}')
@@ -168,26 +159,40 @@ def check_parity(manifest, root):
         if count != sum(p.numel() for p in qpaf.parameters()):
             raise ParityError(f'QARF/QPAF initialization parameter counts differ at seed {seed}')
         initialization[str(seed)] = {'identical': True, 'parameter_count': count}
-    # Per-step (valid_queries, pairs) depend only on batch composition, so equal
-    # sequences mean both methods drew the same batch order from the shared seed.
+    # Record the exact query IDs of every training batch. Batch sizes and pair
+    # counts are permutation-invariant on the fixture, so only IDs prove order.
+    # Two epochs also cover the generator state carried between epochs.
     config = load_base(manifest, root)
-    config['training']['epochs'] = 1
+    config['training']['epochs'] = 2
     seed = config['training']['seed']
     rows, queries, qrels, splits = make_fixture(seed)
     records = build_records(rows, queries, qrels, splits, ('train', 'validation'),
                             positive_threshold=config['data']['positive_threshold'],
                             max_candidates=config['data']['max_candidates'])
-    torch.use_deterministic_algorithms(True)
+    original, recorded = trainer.iter_batches, []
+
+    def recording(batch_records, batch_size, generator=None):
+        for batch in original(batch_records, batch_size, generator):
+            recorded.append(tuple(batch.query_ids))
+            yield batch
     orders = {}
-    for method in ('QARF', 'QPAF'):
-        with tempfile.TemporaryDirectory() as directory:
-            result = trainer.train(config, method, records['train'], records['validation'], directory,
-                                   log=lambda message: None)
-        orders[method] = [(step['valid_queries'], step['pairs']) for step in result['steps']]
+    deterministic = torch.are_deterministic_algorithms_enabled()
+    trainer.iter_batches = recording
+    try:
+        torch.use_deterministic_algorithms(True)
+        for method in ('QARF', 'QPAF'):
+            recorded.clear()
+            with tempfile.TemporaryDirectory() as directory:
+                trainer.train(config, method, records['train'], records['validation'], directory,
+                              log=lambda message: None)
+            orders[method] = list(recorded)
+    finally:
+        trainer.iter_batches = original
+        torch.use_deterministic_algorithms(deterministic)
     if orders['QARF'] != orders['QPAF'] or not orders['QARF']:
-        raise ParityError('QARF/QPAF data order differs on the synthetic fixture')
+        raise ParityError('QARF/QPAF data order differs: training batches hold different query IDs')
     return {'base_config_sha256': base_sha, 'm24_drift': drift, 'pairs': pairs,
             'methods_match_runner': True, 'initialization': initialization,
-            'data_order': {'identical': True, 'steps': len(orders['QARF']),
-                           'fixture': f'qpaf.m24.synthetic:{seed}'},
+            'data_order': {'identical': True, 'epochs': config['training']['epochs'],
+                           'batches': len(orders['QARF']), 'fixture': f'qpaf.m24.synthetic:{seed}'},
             'shared_inputs': shared, 'pending_inputs': pending}

@@ -66,6 +66,7 @@ class ManifestTests(TempDirTest):
             ('negative seed', lambda m: m['seeds']['robustness'].__setitem__(1, -1)),
             ('seed too large', lambda m: m['seeds']['robustness'].__setitem__(1, 2**32)),
             ('dev seed outside robustness', lambda m: m['seeds'].update(development_gate=1)),
+            ('robustness seeds changed', lambda m: m['seeds'].update(robustness=[1, 2, 3], development_gate=1)),
             ('pending replaced by fake hash', lambda m: m['shared_inputs'].update(qrels='0'*64)),
             ('pending input missing', lambda m: m['shared_inputs'].pop('score_cache')),
             ('bad sha format', lambda m: m['base_config'].update(sha256='ABC')),
@@ -141,9 +142,9 @@ class ParityChecksTests(TempDirTest):
         self.assertEqual(set(report['initialization']), {str(s) for s in SEEDS})
         for seed, item in report['initialization'].items():
             self.assertEqual(item, {'identical': True, 'parameter_count': 42}, seed)
-        self.assertTrue(report['data_order']['identical'])
-        self.assertGreater(report['data_order']['steps'], 0)
-        self.assertEqual(report['data_order']['fixture'], 'qpaf.m24.synthetic:20260820')
+        # 24 synthetic train queries in batches of 16 -> 2 batches per epoch, over 2 epochs.
+        self.assertEqual(report['data_order'], {'identical': True, 'epochs': 2, 'batches': 4,
+                                                'fixture': 'qpaf.m24.synthetic:20260820'})
         self.assertEqual(report['pending_inputs'], ['candidate_set', 'qrels', 'score_cache'])
         self.assertTrue(all(item['verified'] for item in report['shared_inputs'].values()))
         self.assertEqual(report['base_config_sha256'],
@@ -158,6 +159,12 @@ class ParityChecksTests(TempDirTest):
         self.edit_base(b'learning_rate = 0.01', b'learning_rate = 0.02')
         rehash(self.root)
         with self.assertRaisesRegex(ParityError, 'M2.4'):
+            check_parity(self.manifest(), self.root)
+
+    def test_base_experiment_id_mismatch_fails(self):
+        self.edit_base(b'QPAF-M2_7-MTH-001', b'QPAF-M2_7-MTH-999')
+        rehash(self.root)
+        with self.assertRaisesRegex(ParityError, 'experiment_id'):
             check_parity(self.manifest(), self.root)
 
     def test_swapped_granularity_fails(self):
@@ -200,15 +207,17 @@ class ParityChecksTests(TempDirTest):
 
     @unittest.skipUnless(HAS_TORCH, 'install requirements-learned-local.txt for parity checks')
     def test_data_order_mismatch_fails(self):
+        # A different batch seed permutes the synthetic queries while every batch
+        # keeps the same size and pair count, so only query-ID order reveals it.
         from qpaf.m24 import trainer
         real = trainer.train
 
-        def reordered(config, method, *args, **kwargs):
-            result = real(config, method, *args, **kwargs)
+        def reseeded(config, method, *args, **kwargs):
             if method == 'QPAF':
-                result['steps'] = list(reversed(result['steps']))
-            return result
-        with mock.patch.object(trainer, 'train', reordered):
+                config = copy.deepcopy(config)
+                config['training']['seed'] += 1
+            return real(config, method, *args, **kwargs)
+        with mock.patch.object(trainer, 'train', reseeded):
             with self.assertRaisesRegex(ParityError, 'data order'):
                 check_parity(self.manifest(), self.root)
 
@@ -235,8 +244,10 @@ class ScriptTests(TempDirTest):
         self.assertEqual(report['experiment_id'], 'QPAF-M2_7-MTH-001')
         self.assertEqual(report['manifest_sha256'], hashlib.sha256(MANIFEST.read_bytes()).hexdigest())
         self.assertEqual(set(report['source_sha256']),
-                         {'src/qpaf/m27/matched.py', 'src/qpaf/m24/config.py',
-                          'src/qpaf/m24/trainer.py', 'scripts/verify_m27_matched.py'})
+                         {'src/qpaf/m27/matched.py', 'src/qpaf/m24/config.py', 'src/qpaf/m24/dataset.py',
+                          'src/qpaf/m24/trainer.py', 'src/qpaf/m24/evaluator.py', 'src/qpaf/m24/checkpoint.py',
+                          'src/qpaf/m12/model.py', 'src/qpaf/m12/features.py', 'src/qpaf/m12/losses.py',
+                          'scripts/run_m24_pipeline.py', 'scripts/verify_m27_matched.py'})
         self.assertEqual(report['pairs'], {str(s): {'gate_granularity': ['query', 'page']} for s in SEEDS})
 
     def test_output_is_create_once(self):
