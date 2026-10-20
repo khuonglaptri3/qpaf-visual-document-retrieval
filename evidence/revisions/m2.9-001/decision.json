@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "task_id": "M2.9",
+  "owner": "Thanh",
+  "record_date": "2026-10-21",
+  "decision": "NOT_RUN_JUSTIFIED",
+  "experiment_class": "governance",
+  "diagnostic": "CARF oracle granularity",
+  "planned_primary_k": 3,
+  "planned_sensitivity_k": [2, 4],
+  "executed_k": [],
+  "metrics": null,
+  "reason_codes": [
+    "DEFERRED_TO_M6_P3_02_BY_PROTOCOL",
+    "M2_8_CANDIDATE_COVERAGE_BLOCKED"
+  ],
+  "evidence": {
+    "m2_8_run_id": "RUN-QPAF-M2_8-CACHE-001-20261020T144311Z-A01",
+    "m2_8_handover": "evidence/revisions/m2.8-001/handover.json",
+    "m2_8_coverage": "evidence/revisions/m2.8-001/coverage_report.json",
+    "m2_8_status": "BLOCKED_COVERAGE",
+    "uncovered_train_queries": 1,
+    "candidate_policy": "frozen_top200_per_channel_union_max600",
+    "protocol": "evidence/M1_FINAL/02_protocol/baseline_policy.md",
+    "deferment_plan": "docs/02_project_plan/QPAF_TEAM_RESEARCH_EXECUTION_PLAN.md"
+  },
+  "claim_boundary": "No CARF result, K sensitivity, learned comparison, or pilot-readiness claim.",
+  "reopen_conditions": [
+    "A valid reviewed candidate cache satisfies the frozen coverage gate, or a documented amendment yields a new verified revision.",
+    "P3-02/M6 authorizes the label-free clustering diagnostic and freezes K=3 with K=2/4 sensitivity before qrels join."
+  ],
+  "independent_human_review": "PENDING"
+}
