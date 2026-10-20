@@ -1,0 +1,86 @@
+{
+  "base_config_sha256": "3e58a867d11cebf72970cf0c141a90822cd7cbbdad65fb1e081cb14fa4889b58",
+  "data_order": {
+    "batches": 4,
+    "epochs": 2,
+    "fixture": "qpaf.m24.synthetic:20260820",
+    "identical": true
+  },
+  "experiment_id": "QPAF-M2_7-MTH-001",
+  "independent_review": "PENDING",
+  "initialization": {
+    "20260820": {
+      "identical": true,
+      "parameter_count": 42
+    },
+    "20260821": {
+      "identical": true,
+      "parameter_count": 42
+    },
+    "20260822": {
+      "identical": true,
+      "parameter_count": 42
+    }
+  },
+  "m24_drift": {
+    "experiment_id": [
+      "QPAF-M2_4-PIPELINE-001",
+      "QPAF-M2_7-MTH-001"
+    ]
+  },
+  "manifest_sha256": "705dd5705a3849239568eebee2542a9f39ccc2f123e334e7e933fde74f55fa6d",
+  "methods_match_runner": true,
+  "pairs": {
+    "20260820": {
+      "gate_granularity": [
+        "query",
+        "page"
+      ]
+    },
+    "20260821": {
+      "gate_granularity": [
+        "query",
+        "page"
+      ]
+    },
+    "20260822": {
+      "gate_granularity": [
+        "query",
+        "page"
+      ]
+    }
+  },
+  "pending_inputs": [
+    "candidate_set",
+    "qrels",
+    "score_cache"
+  ],
+  "shared_inputs": {
+    "m25_freeze": {
+      "path": "configs/m2.5/freeze.json",
+      "sha256": "317b4333968ae4250e0e9bc71846d37f47e5f958872c8cf27949a0c0d8c3579c",
+      "verified": true
+    },
+    "split_manifest": {
+      "path": "evidence/revisions/m2.1-002/data_split_manifest.json",
+      "sha256": "ea5a19f93dce07cce375d6fb6afed630606e00916c5daa10938562aee9cddfad",
+      "verified": true
+    }
+  },
+  "source_sha256": {
+    "scripts/run_m24_pipeline.py": "0a733f1ebaa51d6ce3c859880a4bb1625ca034525a27a16318931e46b3143559",
+    "scripts/verify_m27_matched.py": "8a676eaea71b76937db2f8d03f2619063d7a6a8b7571970dbd200cbdb8fa3123",
+    "src/qpaf/m12/features.py": "86eb5d540d2330c0fec263d587581d2f159b77461df85c57f6ecaa64fafa40b6",
+    "src/qpaf/m12/losses.py": "18debc316b02146c38c36a6b1021f0db5e3ba9be55ffdb4c8be153cd11ce5395",
+    "src/qpaf/m12/model.py": "05c0370343a14b70b1db37e3d2bf6fd852c4ea67f7a967af52fa0ff498adcc3e",
+    "src/qpaf/m24/checkpoint.py": "8e1d3882d1c33d16f68a0895b85f856c5519a07fcfcd38a07be6d32888fbbeb4",
+    "src/qpaf/m24/config.py": "5d730b9cb1ba8971ae972729401013e0bb0ccce81310615e2a9088963eb53841",
+    "src/qpaf/m24/dataset.py": "1b2681b163ce4a88a87eeb71ba31f417ee2a4469a9be49845c47d528eb6c5279",
+    "src/qpaf/m24/evaluator.py": "bfd25f331c5c377c708fd1d05f3e3edb85467488301e9658ea9bb486ef476742",
+    "src/qpaf/m24/trainer.py": "242fbcdc3a1cf44c81d29ef7be19aac256b29e5226f870cdf1cee889ff9df7d4",
+    "src/qpaf/m27/matched.py": "f71bea281d7c61d95ad5edcba5fe3d33689e5de9d5a34a22034edd395e272d38"
+  },
+  "status": "FROZEN_CONFIG_PENDING_M2.8_INPUTS",
+  "task_id": "M2.7",
+  "wall_time_cap_minutes": 60
+}
