@@ -1,0 +1,47 @@
+# Local development and test environment for the whole repository.
+#
+# Verified on Python 3.13.7 / Windows 11: `python -m unittest discover -s tests`
+# ran 333 tests, OK, 2 skipped, on 21/10/2026. The project needs Python >= 3.11.
+#
+# Setup (from the repo root):
+#   python -m venv .venv
+#   .venv/Scripts/Activate.ps1        # Linux/macOS: source .venv/bin/activate
+#   python -m pip install -r requirements/dev-local.txt
+#   python -m unittest discover -s tests -q
+#
+# Direct dependencies only, pinned. Versions marked "pyproject" or "lock" match
+# pyproject.toml extras or the Modal lockfiles; do not change them without a
+# revision, because tests assert the PDFium and OCR package versions.
+# Not installed by pip: the Tesseract 5.3.0 binary. Unit tests do not need it,
+# but real OCR runs (M2.3/M2.6) do; they run in the Modal image.
+# `pytest` is imported by 25 test modules but is not declared in pyproject.toml.
+
+# Core (pyproject [project.dependencies])
+matplotlib==3.11.2
+numpy==2.5.4
+pandas==3.0.6
+pyarrow==26.0.0
+PyYAML==6.0.3
+
+# OCR / PDF verification (pyproject [verification])
+pypdfium2==4.30.0
+Pillow==11.3.0
+pytesseract==0.3.13
+huggingface-hub==0.34.4
+
+# Resource telemetry (pyproject [calibration])
+psutil==7.0.0
+
+# Method core (pyproject [method]). On Windows/macOS the PyPI wheel is CPU-only.
+torch==2.7.1
+
+# Modal launcher (pyproject [modal]); tests import it, no Modal account needed
+modal==1.5.5
+
+# Used by tests (lock: safetensors 0.8.0; threadpoolctl 3.7.0 in Modal locks)
+safetensors==0.8.0
+threadpoolctl==3.7.0
+pytest==9.1.1
+
+# The project itself (editable)
+-e .

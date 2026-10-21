@@ -219,25 +219,28 @@ create-once namespace). Neither D1 nor this plan is that authorization.
 ## 10. Regression receipt for this report
 
 Command: `python -X utf8 -m unittest discover -s tests -q`, run on the source
-snapshot on 21/10/2026 (02:42–02:44 UTC). Environment: local Windows, Python
-3.13.7, PyTorch 2.11.0+cpu. The project `.venv` is absent on this machine.
+snapshot on 21/10/2026. Environment: local Windows, Python 3.13.7, a fresh
+virtual environment built from
+[`requirements/dev-local.txt`](../../../requirements/dev-local.txt) (PyTorch
+2.7.1, pypdfium2 4.30.0, Pillow 11.3.0, pytesseract 0.3.13).
 
 | Result | Count |
 | --- | ---: |
 | Tests run | 333 |
-| Passed | 323 |
-| Skipped | 3 |
-| Errors | 7 |
+| Passed | 331 |
+| Skipped | 2 |
+| Errors | 0 |
 | Failures | 0 |
 
-All 7 errors are `ModuleNotFoundError: No module named 'pytesseract'`. They
-come from five `test_m18_runtime` cases and two `test_m22_smoke` extraction
-cases. `pytesseract==0.3.13` is pinned in `pyproject.toml` but is not
-installed in this interpreter. These errors come from the environment, not
-from a code regression. All M2.4, M2.5, M2.7, M2.8 and M2.10 tests passed in
-this run. A separate run of each group gave 20/6/19/34/3 tests, all OK, the
-same counts the M2.10 audit recorded. The pinned-environment receipts of the original tasks remain the
-acceptance evidence. This local run is not a replacement for them.
+`pip check` reported no broken requirements. Separate runs of the M2.4, M2.5,
+M2.7, M2.8 and M2.10 test groups gave 20/6/19/34/3 tests, all OK, the same
+counts the M2.10 audit recorded. The pinned-environment receipts of the
+original tasks remain the acceptance evidence. This local run does not replace
+them.
+
+An earlier run in an unprepared global Python (333 tests, 7 errors) failed only
+because `pytesseract` was not installed. It was an environment gap, not a code
+regression, and is not the reported result.
 
 ## 11. Evidence index
 
