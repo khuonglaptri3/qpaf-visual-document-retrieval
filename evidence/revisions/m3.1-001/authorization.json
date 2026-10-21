@@ -1,0 +1,27 @@
+{
+  "task_id": "M3.1",
+  "owner": "Khuong",
+  "actor": "Codex at the explicit request of the task owner",
+  "experiment_id": "QPAF-M3_1-SEAL-001",
+  "run_id": "RUN-QPAF-M3_1-SEAL-001-20261021T142631Z-A01",
+  "experiment_class": "data_audit",
+  "evidence_class": "engineering_evidence",
+  "authorization_basis": "The user explicitly requested completing M3.1 using prior accepted tasks and presenting results for review after consolidating the designated authoritative documents.",
+  "source_commit": "2113b043cbcd56b8a18467dd91f52ef95662dac1",
+  "command": [
+    "C:\\Users\\lanph\\.codex\\worktrees\\f1e0\\Artificial_Intelligent_Project\\.venv\\Scripts\\python.exe",
+    "scripts/seal_m31_inputs.py",
+    "--output",
+    "results/m3.1/RUN-QPAF-M3_1-SEAL-001-20261021T142631Z-A01"
+  ],
+  "config_sha256": "db2b14bdc89a1b01b40e3d8c9cd8bf74203f7688f0daede4ccf539ef45529230",
+  "runtime": "matched CPU requirements; float64; one tensor thread; deterministic algorithms",
+  "wall_time_cap_seconds": 1800,
+  "paid_compute_cost_cap": 0,
+  "invocations": 1,
+  "automatic_retries": 0,
+  "namespace_policy": "create_once",
+  "training_authorized": false,
+  "test_label_deserialization_authorized": false,
+  "created_utc": "2026-10-21T14:26:31.449880+00:00"
+}

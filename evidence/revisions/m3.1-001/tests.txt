@@ -1,0 +1,35 @@
+2026-10-21 21:26:46,689 INFO stage started: prepare
+2026-10-21 21:26:46,689 INFO stage completed
+2026-10-21 21:26:46,973 INFO stage started: prepare
+2026-10-21 21:26:46,973 INFO stage completed
+2026-10-21 21:26:47,266 INFO stage started: visual
+2026-10-21 21:26:47,266 ERROR stage failed
+Traceback (most recent call last):
+  File "C:\Users\lanph\.codex\worktrees\f1e0\Artificial_Intelligent_Project\tests\test_m11_artifacts.py", line 135, in test_failure_keeps_log_but_cannot_be_used_as_complete
+    raise RuntimeError('expected')
+RuntimeError: expected
+2026-10-21 21:26:47,476 INFO stage started: visual
+2026-10-21 21:26:47,476 INFO stage completed
+2026-10-21 21:26:47,755 INFO stage started: prepare
+2026-10-21 21:26:47,756 INFO stage completed
+2026-10-21 21:26:48,486 INFO stage started: prepare
+2026-10-21 21:26:48,489 INFO stage completed
+2026-10-21 21:26:48,768 INFO stage started: bm25
+2026-10-21 21:26:48,771 INFO stage completed
+2026-10-21 21:26:49,068 INFO stage started: dense
+2026-10-21 21:26:49,072 INFO stage completed
+2026-10-21 21:26:49,316 INFO stage started: visual
+2026-10-21 21:26:49,320 INFO stage completed
+2026-10-21 21:26:49,710 INFO stage started: oracle
+2026-10-21 21:26:49,716 INFO evaluated 1 queries; independent QA remains pending
+2026-10-21 21:26:49,716 INFO stage completed
+2026-10-21 21:26:51,312 INFO stage started: dense
+2026-10-21 21:26:51,312 INFO stage completed
+Materialized and hash-verified 1 source PDFs
+Partial snapshot: 1/2 terminal records; saved to C:\Users\lanph\AppData\Local\Temp\tmppga9oof3\run\partial-output
+Partial snapshot: 0/1 terminal records; saved to C:\Users\lanph\AppData\Local\Temp\tmpuuvg95pc\partial-output
+cannot open doc.pdf: Failed to load document (PDFium: Data format error).
+----------------------------------------------------------------------
+Ran 375 tests in 82.293s
+
+OK (skipped=2)

@@ -1,0 +1,66 @@
+{
+  "source_revision": "m2.8-001 frozen score matrices",
+  "target_revision": "m2.8-002 accepted A003 payloads",
+  "method": "Reconstructed six Parquet payloads from verified frozen matrices using the existing label-free M2.8 expansion/tables implementation. Copied the original frozen metadata and bound qrels/split/query bytes.",
+  "source_matrices": [
+    {
+      "path": "results/m2.8/RUN-QPAF-M2_8-CACHE-001-20261020T144311Z-A01/remote/bm25/scores.npy",
+      "sha256": "fb481bac6743492def76b696f1ef11a372a4e28afd80229ed445e3d69c1e21e1",
+      "shape": [
+        1142,
+        5385
+      ]
+    },
+    {
+      "path": "results/m2.8/RUN-QPAF-M2_8-CACHE-001-20261020T144311Z-A01/remote/dense/scores.npy",
+      "sha256": "ba5df08df1321db9ed2c3534ed4acfea804584a03ee55f897958f237073e0d4f",
+      "shape": [
+        1142,
+        5385
+      ]
+    },
+    {
+      "path": "results/m2.8/RUN-QPAF-M2_8-CACHE-001-20261020T144311Z-A01/remote/visual/scores.npy",
+      "sha256": "0ba572e0ce379e581ad470b581ccb186eb2844adfbd8bdb970eb574fac6dbe32",
+      "shape": [
+        1142,
+        5385
+      ]
+    }
+  ],
+  "parquet": [
+    {
+      "path": "candidate_expansion_log.parquet",
+      "sha256": "671f98879f182c8984d20d34af0a57f0cbc1541ee51b6c8c55d69b5e84a947dc",
+      "byte_identical_to_accepted_revision": true
+    },
+    {
+      "path": "candidate_expansion_queries.parquet",
+      "sha256": "7b540c86b5302b25506e309785646706185bb4b59ca183198daf42d43fa2cc9b",
+      "byte_identical_to_accepted_revision": true
+    },
+    {
+      "path": "candidate_set.parquet",
+      "sha256": "60c04acaf25126d5f16ff5f69fa394c5f797d960394e87e2f10ffed1237478ef",
+      "byte_identical_to_accepted_revision": true
+    },
+    {
+      "path": "channel_top_lists.parquet",
+      "sha256": "805528ba9e691a0f4e0d38353afd9864137f8fb574ba863af6c5d6b64114fb88",
+      "byte_identical_to_accepted_revision": true
+    },
+    {
+      "path": "normalized_scores.parquet",
+      "sha256": "ca444481f9bf22a34fd1b8f945c6041ab3578a5c0f34c77c93029b1f903de986",
+      "byte_identical_to_accepted_revision": true
+    },
+    {
+      "path": "raw_scores.parquet",
+      "sha256": "56d0c82efda9264c117611ddd7135fe2384b68a3ec60fbdfd80fb964c386622b",
+      "byte_identical_to_accepted_revision": true
+    }
+  ],
+  "gpu_or_reencoding_executed": false,
+  "test_labels_deserialized": false,
+  "historical_revision_modified": false
+}

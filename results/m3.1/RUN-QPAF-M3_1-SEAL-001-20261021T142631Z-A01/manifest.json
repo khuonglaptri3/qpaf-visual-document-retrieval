@@ -1,0 +1,124 @@
+{
+  "authority_config": {
+    "authority": {
+      "path": "docs/GUILDLINE_OVERVIEWS_PROPOSAL/POAI_Milestone_Group01_Hoan_Chinh.xlsx",
+      "sha256": "896bf26657a58f4d921c4b51b0428931a8770ccea3248201f1ce148714383bdc"
+    },
+    "binding": {
+      "path": "configs/m2.7/input_binding.json",
+      "sha256": "cae1aa08dca2e34e570e6b2529c77842cdca4968e05d77b6b66b5b549d269440"
+    },
+    "d1": {
+      "path": "evidence/revisions/m2.11-002/decision.json",
+      "sha256": "6b4726621627b37436230be019856a17e14e34c04c1bf8c0106a56997337e6f2"
+    },
+    "prior_binding_verification": {
+      "path": "evidence/revisions/m2.7-003/verification.json",
+      "sha256": "6f60530f0a538ebf3754fe6be4952a8dbac29fd5391fb856e606aa4d19afb9ba"
+    }
+  },
+  "environment": {
+    "numpy": "2.5.4",
+    "pandas": "3.0.6",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "pyarrow": "26.0.0",
+    "python": "3.13.7",
+    "torch": "2.11.0+cpu"
+  },
+  "inputs": {
+    "candidate_freeze": {
+      "origin_path": "results/m2.8/RUN-QPAF-M2_8-EXPANSION-001-20261021T042029Z-A01/bundle/candidate_freeze.json",
+      "path": "inputs/candidate_freeze.json",
+      "sha256": "2320402ed8f6705e5c220e4120f1975fe1989bf202339e8492167ecdf473764e",
+      "size_bytes": 5012
+    },
+    "candidate_set": {
+      "origin_path": "results/m2.8/RUN-QPAF-M2_8-EXPANSION-001-20261021T042029Z-A01/bundle/candidate_set.parquet",
+      "path": "inputs/candidate_set.parquet",
+      "sha256": "60c04acaf25126d5f16ff5f69fa394c5f797d960394e87e2f10ffed1237478ef",
+      "size_bytes": 1424502
+    },
+    "handover": {
+      "origin_path": "results/m2.8/RUN-QPAF-M2_8-EXPANSION-001-20261021T042029Z-A01/bundle/handover.json",
+      "path": "inputs/handover.json",
+      "sha256": "f67559e8e2e17adabdc446bff25327000c7937efedd0e77d269206dc1bf3b20b",
+      "size_bytes": 2902
+    },
+    "matched_manifest": {
+      "origin_path": "configs/m2.7/matched.json",
+      "path": "inputs/matched.json",
+      "sha256": "705dd5705a3849239568eebee2542a9f39ccc2f123e334e7e933fde74f55fa6d",
+      "size_bytes": 1551
+    },
+    "qrels_development": {
+      "origin_path": "results/m2.8/RUN-QPAF-M2_8-EXPANSION-001-20261021T042029Z-A01/bundle/qrels_development.json",
+      "path": "inputs/qrels_development.json",
+      "sha256": "691b6bc4ada3bc64fe3c408fe32498b04c7f30900eadb39ae09ddbe29aea302c",
+      "size_bytes": 114465
+    },
+    "qrels_test_sealed": {
+      "origin_path": "results/m2.8/RUN-QPAF-M2_8-EXPANSION-001-20261021T042029Z-A01/bundle/qrels_test_sealed.json",
+      "path": "inputs/qrels_test_sealed.json",
+      "sha256": "05eaaa810e47d35d4eb06b3d36a05f03b002ec9d3c5ee6bce5fc27d2e336d154",
+      "size_bytes": 20301
+    },
+    "query_texts": {
+      "origin_path": "results/m2.8/RUN-QPAF-M2_8-EXPANSION-001-20261021T042029Z-A01/bundle/queries.json",
+      "path": "inputs/query_texts.json",
+      "sha256": "e7994373c9fd5157cde0fb0c5a1440c37c275b85fa19b2b0b566f61d584c4ab4",
+      "size_bytes": 211073
+    },
+    "score_cache": {
+      "origin_path": "results/m2.8/RUN-QPAF-M2_8-EXPANSION-001-20261021T042029Z-A01/bundle/raw_scores.parquet",
+      "path": "inputs/score_cache.parquet",
+      "sha256": "56d0c82efda9264c117611ddd7135fe2384b68a3ec60fbdfd80fb964c386622b",
+      "size_bytes": 9423854
+    },
+    "shared_base": {
+      "origin_path": "configs/m2.7/shared_base.toml",
+      "path": "inputs/shared_base.toml",
+      "sha256": "3e58a867d11cebf72970cf0c141a90822cd7cbbdad65fb1e081cb14fa4889b58",
+      "size_bytes": 1004
+    },
+    "split_test": {
+      "origin_path": "results/m2.8/RUN-QPAF-M2_8-EXPANSION-001-20261021T042029Z-A01/bundle/splits/test_ids.txt",
+      "path": "inputs/splits/test_ids.txt",
+      "sha256": "d34210f901759a4f174da0c6c2e9b810616dcb33a71a0bd128a25d5d8d12e6f6",
+      "size_bytes": 7396
+    },
+    "split_train": {
+      "origin_path": "results/m2.8/RUN-QPAF-M2_8-EXPANSION-001-20261021T042029Z-A01/bundle/splits/train_ids.txt",
+      "path": "inputs/splits/train_ids.txt",
+      "sha256": "61dfe867c27b91a0a96594440b0f0e5ecf51501da0fcecdac94badaf16962191",
+      "size_bytes": 34357
+    },
+    "split_validation": {
+      "origin_path": "results/m2.8/RUN-QPAF-M2_8-EXPANSION-001-20261021T042029Z-A01/bundle/splits/val_ids.txt",
+      "path": "inputs/splits/val_ids.txt",
+      "sha256": "46f8af5853942f6697cc3a995347a1832206212e93ff8aa87acb1775b3a060b4",
+      "size_bytes": 7353
+    }
+  },
+  "schema_version": "qpaf_m31_pilot_seal_v1",
+  "source_commit": "2113b043cbcd56b8a18467dd91f52ef95662dac1",
+  "source_sha256": {
+    "requirements-learned-local.txt": "a6e0c06ef446d91f8682e8de743f98274244ccf1c04bc310812c1bb1582b78cf",
+    "scripts/run_m24_pipeline.py": "0a733f1ebaa51d6ce3c859880a4bb1625ca034525a27a16318931e46b3143559",
+    "scripts/seal_m31_inputs.py": "552228772f99a23926fefb7582d8807c73f2b53f2a4eb593d5ba36ebc53a6db8",
+    "src/qpaf/m12/features.py": "86eb5d540d2330c0fec263d587581d2f159b77461df85c57f6ecaa64fafa40b6",
+    "src/qpaf/m12/losses.py": "18debc316b02146c38c36a6b1021f0db5e3ba9be55ffdb4c8be153cd11ce5395",
+    "src/qpaf/m12/model.py": "05c0370343a14b70b1db37e3d2bf6fd852c4ea67f7a967af52fa0ff498adcc3e",
+    "src/qpaf/m24/checkpoint.py": "8e1d3882d1c33d16f68a0895b85f856c5519a07fcfcd38a07be6d32888fbbeb4",
+    "src/qpaf/m24/config.py": "5d730b9cb1ba8971ae972729401013e0bb0ccce81310615e2a9088963eb53841",
+    "src/qpaf/m24/dataset.py": "1b2681b163ce4a88a87eeb71ba31f417ee2a4469a9be49845c47d528eb6c5279",
+    "src/qpaf/m24/evaluator.py": "bfd25f331c5c377c708fd1d05f3e3edb85467488301e9658ea9bb486ef476742",
+    "src/qpaf/m24/trainer.py": "242fbcdc3a1cf44c81d29ef7be19aac256b29e5226f870cdf1cee889ff9df7d4",
+    "src/qpaf/m25/leakage.py": "7a0079242a9a1bbbde194c3f3d5dc4d2858cc2921ac24c323b87475d35195e44",
+    "src/qpaf/m27/binding.py": "ad916cbfe9c066d81d73419860e2a04b3e9537006d9a6d6784e44a8f5e769548",
+    "src/qpaf/m27/matched.py": "f71bea281d7c61d95ad5edcba5fe3d33689e5de9d5a34a22034edd395e272d38",
+    "src/qpaf/m31/parity.py": "a4db0217b361e57144f62462d7142811a6ddf4848cd7d58363f6008d4f1e2b37",
+    "src/qpaf/m31/seal.py": "507e629369708ede3c5f4ea760244adc6617c15ea58bb0722b2fc996e238fbe5"
+  },
+  "task_id": "M3.1",
+  "verification_sha256": "6b7b6c9df6bddcdd98af202de24ff821c7c469aea3b343bef5081b71100e5c1d"
+}

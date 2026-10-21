@@ -1,0 +1,33 @@
+{
+  "command": [
+    "C:\\Users\\lanph\\.codex\\worktrees\\f1e0\\Artificial_Intelligent_Project\\.venv\\Scripts\\python.exe",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests",
+    "-q"
+  ],
+  "exit_code": 0,
+  "tests": 375,
+  "seconds": 88.19644690002315,
+  "log": "tests.txt",
+  "passed": 373,
+  "skipped": 2,
+  "errors": 0,
+  "failures": 0,
+  "m31_regression_tests": 12,
+  "runtime": {
+    "numpy": "2.5.4",
+    "pandas": "3.0.6",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "pyarrow": "26.0.0",
+    "python": "3.13.7",
+    "torch": "2.11.0+cpu"
+  },
+  "dependency_check": {
+    "exit_code": 0,
+    "output": "Checked 68 packages in 8ms\nAll installed packages are compatible\n"
+  },
+  "note": "Expected failure-path fixture messages in the log are not test failures."
+}

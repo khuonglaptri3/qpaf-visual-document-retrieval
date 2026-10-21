@@ -27,3 +27,5 @@ nguồn từng kết quả. Xem [mục lục kỹ thuật](../README.md) và
 [danh mục thay đổi tài liệu](../catalog.json).
 
 Hướng dẫn triển khai và bàn giao M3.1: [M3_1_HANDOFF.md](M3_1_HANDOFF.md).
+
+Kết quả đã thực hiện để review: [M3_1_REVIEW.md](M3_1_REVIEW.md).

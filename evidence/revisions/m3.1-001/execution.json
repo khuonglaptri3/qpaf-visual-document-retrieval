@@ -1,0 +1,12 @@
+{
+  "run_id": "RUN-QPAF-M3_1-SEAL-001-20261021T142631Z-A01",
+  "command": [
+    "C:\\Users\\lanph\\.codex\\worktrees\\f1e0\\Artificial_Intelligent_Project\\.venv\\Scripts\\python.exe",
+    "scripts/seal_m31_inputs.py",
+    "--output",
+    "results/m3.1/RUN-QPAF-M3_1-SEAL-001-20261021T142631Z-A01"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 73.36119180000969,
+  "finished_utc": "2026-10-21T14:27:44.812928+00:00"
+}

@@ -1,0 +1,15 @@
+{
+  "command": [
+    "C:\\Users\\lanph\\.codex\\worktrees\\f1e0\\Artificial_Intelligent_Project\\.venv\\Scripts\\python.exe",
+    "scripts/seal_m31_inputs.py",
+    "--verify",
+    "results/m3.1/RUN-QPAF-M3_1-SEAL-001-20261021T142631Z-A01",
+    "--expected-manifest-sha256",
+    "0832af156b79d0448ecc630ff572a0053d7cb5da98b4dac2dec1c6ee49e27893"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 56.65518400000292,
+  "sealed_files": 16,
+  "no_files_created_deleted_or_changed": true,
+  "manifest_sha256": "0832af156b79d0448ecc630ff572a0053d7cb5da98b4dac2dec1c6ee49e27893"
+}

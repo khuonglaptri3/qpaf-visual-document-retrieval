@@ -2,7 +2,7 @@
   "schema_version": 1,
   "organized_at": "2026-10-04",
   "scope": "documentation_inventory_not_research_acceptance",
-  "source_documents": 66,
+  "source_documents": 67,
   "moved_documents": 48,
   "path_bound_documents": 45,
   "groups": [
@@ -834,7 +834,7 @@
       "current_path": "docs/GUILDLINE_OVERVIEWS_PROPOSAL/README.md",
       "path_bound_evidence": false,
       "legacy_alias": false,
-      "sha256": "7ffa75d3c408fbf32b72037a140a0f218086ea01e1d17c78f4fa1f73f74b7086"
+      "sha256": "6a39015fab905a36f889abab83f2e8c6a67b4019b7e6e8abb3bd725c0aac09a3"
     },
     {
       "title": "M3_1_HANDOFF",
@@ -844,6 +844,15 @@
       "path_bound_evidence": false,
       "legacy_alias": false,
       "sha256": "f40dc7fe56c8e0f7d3838a639039ff133805c05b0494ad7c4c0a6a200ce0982d"
+    },
+    {
+      "title": "M3.1 — kết quả để review",
+      "category": "GUILDLINE_OVERVIEWS_PROPOSAL",
+      "original_path": "docs/GUILDLINE_OVERVIEWS_PROPOSAL/M3_1_REVIEW.md",
+      "current_path": "docs/GUILDLINE_OVERVIEWS_PROPOSAL/M3_1_REVIEW.md",
+      "path_bound_evidence": false,
+      "legacy_alias": false,
+      "sha256": "545ce1c4c3c393c036029f490e9adbe01a4743f03d98b76ed76f9d6b017c053e"
     }
   ],
   "preexisting_missing_local_links": [
