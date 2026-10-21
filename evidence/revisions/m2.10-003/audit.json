@@ -1,0 +1,273 @@
+{
+  "a003_lineage": {
+    "added_page_count": 2075,
+    "amendment_sha256": "0afacbde32d2aa4a31a53c39888f11cd20d03af5febfe28aac074de4d23e514c",
+    "baseline_replay_checks": {
+      "candidate_keys_sha256": true,
+      "counts": true,
+      "page_ids_sha256": true,
+      "query_ids_sha256": true,
+      "score_arrays_sha256": true
+    },
+    "binding_sha256": "cae1aa08dca2e34e570e6b2529c77842cdca4968e05d77b6b66b5b549d269440",
+    "previously_uncovered": {
+      "04450a0f59f81025574451222aa26322ae7ede42_2": "COVERED"
+    },
+    "status": "PASS"
+  },
+  "audit_date": "2026-10-21",
+  "audit_source_sha256": "4b72e9859c4bea20da12d25cd2277e9dd7b7d708a7d9cd3b3d8da3be0f4ae87a",
+  "baseline_run_id": "RUN-QPAF-M2_8-CACHE-001-20261020T144311Z-A01",
+  "coverage_replay": {
+    "by_split": {
+      "test": {
+        "candidate_count": 83119,
+        "captured_relevant": 172,
+        "macro_recall": 1.0,
+        "query_count": 172,
+        "relevant_total": 172,
+        "status": "PASS",
+        "uncovered_query_ids": []
+      },
+      "train": {
+        "candidate_count": 386390,
+        "captured_relevant": 799,
+        "macro_recall": 1.0,
+        "query_count": 799,
+        "relevant_total": 799,
+        "status": "PASS",
+        "uncovered_query_ids": []
+      },
+      "validation": {
+        "candidate_count": 82255,
+        "captured_relevant": 171,
+        "macro_recall": 1.0,
+        "query_count": 171,
+        "relevant_total": 171,
+        "status": "PASS",
+        "uncovered_query_ids": []
+      }
+    },
+    "overall": {
+      "candidate_count": 551764,
+      "captured_relevant": 1142,
+      "macro_recall": 1.0,
+      "query_count": 1142,
+      "relevant_total": 1142,
+      "status": "PASS",
+      "uncovered_query_ids": []
+    },
+    "status": "PASS"
+  },
+  "executed_by": "Codex agent, requested by Thanh; Modal access used only to read frozen score matrices",
+  "execution_context": {
+    "compared_with_m2_10_002": "ALL_REPORT_FIELDS_MATCH_EXCEPT_LOCAL_TEST_LOGS",
+    "m2_10_002_audit_sha256": "3732828b91b2af0f48fa09a18771a7eab3cd7819b958fef201f56ee8673ac998",
+    "original_executor_parquet_files_obtained": false,
+    "parquet_materialization": "REBUILT_FROM_FROZEN_SCORE_MATRICES",
+    "parquet_verification": "SIX_BYTE_SHA256_MATCH_M2.8-002_BUNDLE_HASHES",
+    "source_matrix_origin": "Modal workspace tlcn-group1, volume qpaf-m28-score-cache",
+    "source_matrix_verification": "THREE_SHA256_MATCH_M2.8-001_PORTABLE_MANIFEST"
+  },
+  "frozen_splits": {
+    "query_ids_sha256": "6702a5f81420a2f93c7fed28d8631a05f9252a8022cf6c95982862455d7253d7",
+    "role_counts": {
+      "test": 172,
+      "train": 799,
+      "validation": 171
+    },
+    "role_sha256": {
+      "test": "d34210f901759a4f174da0c6c2e9b810616dcb33a71a0bd128a25d5d8d12e6f6",
+      "train": "61dfe867c27b91a0a96594440b0f0e5ecf51501da0fcecdac94badaf16962191",
+      "validation": "46f8af5853942f6697cc3a995347a1832206212e93ff8aa87acb1775b3a060b4"
+    },
+    "status": "PASS"
+  },
+  "independent_human_review": "PENDING",
+  "label_order": {
+    "development_utc": "2026-10-21T04:21:22.926911+00:00",
+    "freeze_utc": "2026-10-21T04:20:58.711394Z",
+    "status": "PASS"
+  },
+  "local_tests": {
+    "m2.10": {
+      "command": [
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_m210*.py",
+        "-q"
+      ],
+      "exit_code": 0,
+      "output": "----------------------------------------------------------------------\nRan 6 tests in 4.709s\n\nOK"
+    },
+    "m2.4": {
+      "command": [
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_m24*.py",
+        "-q"
+      ],
+      "exit_code": 0,
+      "output": "----------------------------------------------------------------------\nRan 20 tests in 18.142s\n\nOK"
+    },
+    "m2.5": {
+      "command": [
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_m25*.py",
+        "-q"
+      ],
+      "exit_code": 0,
+      "output": "----------------------------------------------------------------------\nRan 6 tests in 0.060s\n\nOK"
+    },
+    "m2.7": {
+      "command": [
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_m27*.py",
+        "-q"
+      ],
+      "exit_code": 0,
+      "output": "----------------------------------------------------------------------\nRan 24 tests in 22.290s\n\nOK"
+    },
+    "m2.8": {
+      "command": [
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_m28*.py",
+        "-q"
+      ],
+      "exit_code": 0,
+      "output": "----------------------------------------------------------------------\nRan 56 tests in 5.526s\n\nOK"
+    }
+  },
+  "matched_config": {
+    "manifest_sha256": "705dd5705a3849239568eebee2542a9f39ccc2f123e334e7e933fde74f55fa6d",
+    "real_cache_binding": "PENDING_M2.8_IN_FROZEN_MANIFEST",
+    "source_files_rehashed": 11,
+    "status": "PASS_STRUCTURAL_AND_SYNTHETIC_PARITY",
+    "synthetic_parity_replay": {
+      "data_order": {
+        "batches": 4,
+        "epochs": 2,
+        "fixture": "qpaf.m24.synthetic:20260820",
+        "identical": true
+      },
+      "initialization": {
+        "20260820": {
+          "identical": true,
+          "parameter_count": 42
+        },
+        "20260821": {
+          "identical": true,
+          "parameter_count": 42
+        },
+        "20260822": {
+          "identical": true,
+          "parameter_count": 42
+        }
+      },
+      "method_diff": {
+        "20260820": {
+          "gate_granularity": [
+            "query",
+            "page"
+          ]
+        },
+        "20260821": {
+          "gate_granularity": [
+            "query",
+            "page"
+          ]
+        },
+        "20260822": {
+          "gate_granularity": [
+            "query",
+            "page"
+          ]
+        }
+      }
+    }
+  },
+  "owner": "Thanh",
+  "owner_confirmation": "PENDING_THANH_REVIEW",
+  "payload_replay": {
+    "binding_replay": "PASS_MATCHES_M2.7-003",
+    "full_array_replay": "PASS_FULL_ARRAY_REPLAY",
+    "parquet": "PASS_REHASHED"
+  },
+  "reload": {
+    "fresh_process_real_checkpoint": "NOT_RUN",
+    "methods": {
+      "QARF": {
+        "max_abs_difference": 0.0,
+        "scope": "in-process fresh model; fresh-environment parity is M6.1",
+        "summary_sha256": "8a1cb6247d111fd2356b44c225b0591baea1e0a2c157d4fcb686c6b37f88ff54"
+      },
+      "QPAF": {
+        "max_abs_difference": 0.0,
+        "scope": "in-process fresh model; fresh-environment parity is M6.1",
+        "summary_sha256": "5c582395f7d852ce0b9d48af82f86a76b18e99199c80f96ee6cc0399e818bd43"
+      }
+    },
+    "status": "ARCHIVED_IN_PROCESS_ONLY"
+  },
+  "remaining_blockers": [
+    "A003_INDEPENDENT_REVIEW_PENDING",
+    "M2.10_OWNER_CONFIRMATION_PENDING",
+    "NAMED_HUMAN_REVIEW_PENDING"
+  ],
+  "resolved_blockers": [
+    "M2.8_ZERO_UNCOVERED_GATE_FAILED",
+    "M2.7_REAL_INPUT_BINDING_NOT_FROZEN"
+  ],
+  "revision_bytes": {
+    "m2.6": {
+      "files_rehashed": 17,
+      "manifest_sha256": "b36ba802914cb212660bf0c3b4fdb814e2a7ec0a882cdf4227e1a5342da871de",
+      "status": "PASS"
+    },
+    "m2.7-003": {
+      "files_rehashed": 2,
+      "manifest_sha256": "a8e1098c37d8f7afae8a227bff5cbb13bd61becddfcb58a9ec26499f33413ddd",
+      "status": "PASS"
+    },
+    "m2.8-001": {
+      "files_rehashed": 30,
+      "manifest_sha256": "c7ab525b393a81e48d02b6f41b969c176f20a9e7ecfa9487005da912b7910d82",
+      "status": "PASS"
+    },
+    "m2.8-002": {
+      "files_rehashed": 13,
+      "manifest_sha256": "21cebb37444872ed76f22bbebfca7b0ac3b57d77c3c046de41d5fd50913e9609",
+      "status": "PASS"
+    }
+  },
+  "schema_version": 1,
+  "scientific_claim": "NONE",
+  "source_run_id": "RUN-QPAF-M2_8-EXPANSION-001-20261021T042029Z-A01",
+  "status": "AUDIT_REPLAY_PREPARED_READINESS_PENDING_REVIEW",
+  "task_id": "M2.10",
+  "technical_replay": "PASS",
+  "test_ranking_metrics_computed": false
+}
