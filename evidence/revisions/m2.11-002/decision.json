@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "task_id": "M2.11",
+  "gate": "D1_DATA_READINESS",
+  "owner": "Thanh",
+  "decision_date": "2026-10-21",
+  "recorded_by": "Codex at Thanh's explicit request and confirmation in the working session",
+  "question": "Is the matched learned-pilot package valid for execution?",
+  "decision": "PASS",
+  "pilot_input_package_ready": true,
+  "pilot_execution_authorized": false,
+  "supersedes_basis_of": {
+    "path": "evidence/revisions/m2.11-001/decision.json",
+    "sha256": "7c9583ad3dbb5a38e4566fe985d22695a73bcc6820db869d9f0a0175aa7f5104",
+    "decision": "BLOCKED"
+  },
+  "resubmission_request": {
+    "path": "evidence/revisions/m2.11-002-request/request.json",
+    "sha256": "c64d061862d60530d43481da01bba88150b3d48b50efc6b04ef0d2a7686f7b33"
+  },
+  "decision_basis": {
+    "a003_amendment": {
+      "path": "evidence/M1_FINAL/02_protocol/amendments/QPAF-M1.5-A003.md",
+      "sha256": "0afacbde32d2aa4a31a53c39888f11cd20d03af5febfe28aac074de4d23e514c",
+      "status": "APPROVED_RESEARCH_LEAD_POST_HOC"
+    },
+    "a003_independent_signoff": {
+      "path": "evidence/M1_FINAL/02_protocol/amendments/QPAF-M1.5-A003.signoff-001.md",
+      "sha256": "22ac0b057c37d37d30dd8936c8e992967f18eb40d560c9ffe6cb882b7f4b4bf9",
+      "reviewer": "Thanh",
+      "status": "ACCEPTED_FOR_D1_READINESS"
+    },
+    "m1_7_governance_event": {
+      "path": "evidence/revisions/m1.7-002/governance_events.jsonl",
+      "sha256": "d147dd10aa29ff8285af7ff9d855a7b5254d6a571c701efdada3a4cc51aea0a3",
+      "event_id": "QPAF-REG-20261021-0015"
+    },
+    "m2_8": {
+      "path": "evidence/revisions/m2.8-002/handover.json",
+      "sha256": "f67559e8e2e17adabdc446bff25327000c7937efedd0e77d269206dc1bf3b20b",
+      "status": "PASS"
+    },
+    "m2_7": {
+      "path": "evidence/revisions/m2.7-003/verification.json",
+      "sha256": "6f60530f0a538ebf3754fe6be4952a8dbac29fd5391fb856e606aa4d19afb9ba",
+      "binding_path": "configs/m2.7/input_binding.json",
+      "binding_sha256": "cae1aa08dca2e34e570e6b2529c77842cdca4968e05d77b6b66b5b549d269440",
+      "status": "PASS"
+    },
+    "m2_9": {
+      "path": "evidence/revisions/m2.9-001/decision.json",
+      "sha256": "e9c74fb0338d96e22e61baa74e1999a7db06f7a57064e3f1f64ea420c529d2fe",
+      "decision": "NOT_RUN_JUSTIFIED"
+    },
+    "m2_10_technical_replay": {
+      "path": "evidence/revisions/m2.10-003/audit.json",
+      "sha256": "cee8cc7e63a11a59b43186e9ac3e9e8e25bbb75ef48dc035350c677e6b4c493e",
+      "technical_replay": "PASS"
+    },
+    "m2_10_owner_confirmation": {
+      "path": "evidence/revisions/m2.10-003/owner_confirmation.json",
+      "sha256": "b2acf0977efe1566b51638a4eb5f6e14c28f29aed7594240c700b99f45132b25",
+      "status": "ACCEPTED_TECHNICAL_REPLAY_FOR_D1"
+    },
+    "d1_review_criteria_revision": {
+      "path": "evidence/revisions/m2.11-002/criteria_revision.md",
+      "sha256": "a8867a70989119e999559681b51d70f7e0510f566f42916804209c0c9de681d4"
+    }
+  },
+  "gate_checks": {
+    "split_hashes_and_counts": "PASS",
+    "m2_6_and_m2_8_revision_hashes": "PASS_PAYLOAD_REHASHED",
+    "matched_config_and_synthetic_parity": "PASS",
+    "candidate_macro_recall_at_least_0_95": "PASS_1_0",
+    "zero_uncovered_queries": "PASS",
+    "real_cache_qrels_candidate_binding": "PASS",
+    "real_row_batch_order_parity": "PASS_NO_TRAINING",
+    "synthetic_checkpoint_reload": "PASS_IN_PROCESS",
+    "real_learned_checkpoint_reload": "NOT_APPLICABLE_BEFORE_PILOT",
+    "a003_independent_review": "PASS_SIGNED_BY_THANH",
+    "m2_10_owner_confirmation": "PASS_CONFIRMED_BY_THANH",
+    "separate_independent_d1_review": "REMOVED_BY_OWNER_CRITERIA_REVISION"
+  },
+  "measured_coverage": {
+    "queries": 1142,
+    "candidates": 551764,
+    "macro_recall": 1.0,
+    "train_captured": 799,
+    "train_total": 799,
+    "validation_captured": 171,
+    "validation_total": 171,
+    "test_captured": 172,
+    "test_total": 172,
+    "uncovered_query_ids": []
+  },
+  "resolved_blocking_reasons": [
+    "M2.8_ZERO_UNCOVERED_GATE_FAILED",
+    "M2.7_REAL_INPUT_BINDING_NOT_FROZEN",
+    "A003_INDEPENDENT_REVIEW_PENDING",
+    "M2.10_OWNER_CONFIRMATION_PENDING"
+  ],
+  "revised_prior_blocker": "NAMED_HUMAN_REVIEW_PENDING",
+  "remaining_d1_blocking_reasons": [],
+  "open_followups_outside_d1": [
+    "Complete independent reviews of other milestone artifacts before claiming those artifacts as accepted scientific results",
+    "Obtain exact per-run M3 authorization before any learned training or evaluation",
+    "Verify real learned checkpoint reload after an authorized pilot produces one"
+  ],
+  "test_ranking_metrics_computed": false,
+  "learned_performance_claim": "NONE",
+  "m2_closure_claim": "NOT_MADE_BY_THIS_DECISION"
+}

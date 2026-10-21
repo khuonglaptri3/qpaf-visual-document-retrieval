@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "task_id": "M2.10",
+  "owner": "Thanh",
+  "confirmation_date": "2026-10-21",
+  "decision": "ACCEPTED_TECHNICAL_REPLAY_FOR_D1",
+  "audit_ref": "evidence/revisions/m2.10-003/audit.json",
+  "audit_sha256": "cee8cc7e63a11a59b43186e9ac3e9e8e25bbb75ef48dc035350c677e6b4c493e",
+  "confirmation_source": "Thanh explicitly confirmed in the working session on 2026-10-21 that his name may be recorded as accepting A003 and M2.10",
+  "execution_attribution": "Codex ran the replay at Thanh's request; Thanh accepted the results and did not personally execute the commands",
+  "scope": "Readiness of the matched learned-pilot package only; no training, test ranking metric or scientific result",
+  "pilot_run_authorized": false
+}
