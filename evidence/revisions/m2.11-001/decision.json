@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "task_id": "M2.11",
+  "gate": "D1_DATA_READINESS",
+  "owner": "Thanh",
+  "decision_date": "2026-10-21",
+  "question": "Is the matched learned-pilot package valid for execution?",
+  "decision": "BLOCKED",
+  "pilot_execution_ready": false,
+  "decision_basis": {
+    "m2_9": {
+      "path": "evidence/revisions/m2.9-001/decision.json",
+      "sha256": "e9c74fb0338d96e22e61baa74e1999a7db06f7a57064e3f1f64ea420c529d2fe",
+      "decision": "NOT_RUN_JUSTIFIED",
+      "effect_on_d1": "Permitted milestone disposition; no CARF result or readiness evidence"
+    },
+    "m2_10": {
+      "path": "evidence/revisions/m2.10-001/audit.json",
+      "sha256": "aeaba024909ba5be6d63d28a45f41518ed752ca4dc1e9fd2f0508e9ef02b36aa",
+      "status": "AUDIT_COMPLETED_READINESS_BLOCKED"
+    },
+    "m2_8": {
+      "path": "evidence/revisions/m2.8-001/handover.json",
+      "sha256": "8664d01b48720826bf5ceda4dc4f07f9ba0aea29d414ffbd39f8d35ef3ae5b37",
+      "status": "BLOCKED_COVERAGE",
+      "run_id": "RUN-QPAF-M2_8-CACHE-001-20261020T144311Z-A01"
+    },
+    "m2_7": {
+      "path": "configs/m2.7/matched.json",
+      "sha256": "705dd5705a3849239568eebee2542a9f39ccc2f123e334e7e933fde74f55fa6d",
+      "status": "FROZEN_CONFIG_PENDING_M2.8_INPUTS"
+    }
+  },
+  "gate_checks": {
+    "split_hashes_and_counts": "PASS",
+    "m2_6_and_m2_8_revision_hashes": "PASS_LOCAL_METADATA",
+    "matched_config_and_synthetic_parity": "PASS",
+    "candidate_macro_recall_at_least_0_95": "PASS",
+    "zero_uncovered_queries": "BLOCKED",
+    "real_cache_qrels_candidate_binding": "PENDING",
+    "synthetic_checkpoint_reload": "PASS_IN_PROCESS",
+    "real_learned_checkpoint_reload": "NOT_APPLICABLE_BEFORE_PILOT",
+    "named_independent_human_review": "PENDING"
+  },
+  "measured_coverage": {
+    "queries": 1142,
+    "candidates": 549689,
+    "macro_recall": 0.999124343257443,
+    "train_captured": 798,
+    "train_total": 799,
+    "validation_captured": 171,
+    "validation_total": 171,
+    "test_captured": 172,
+    "test_total": 172,
+    "uncovered_query_ids": [
+      "04450a0f59f81025574451222aa26322ae7ede42_2"
+    ]
+  },
+  "blocking_reasons": [
+    "M2.8_ZERO_UNCOVERED_GATE_FAILED",
+    "M2.7_REAL_INPUT_BINDING_NOT_FROZEN",
+    "NAMED_HUMAN_REVIEW_PENDING"
+  ],
+  "resolution_conditions": [
+    "Review the uncovered train query against the frozen policy; if policy changes, approve a documented amendment and create a new verified cache revision.",
+    "Bind the accepted real score cache, candidate set and qrels hashes in downstream run manifests and repeat the readiness audit.",
+    "Obtain named independent D1 review before claiming gate PASS; verify real learned checkpoint reload after a valid pilot is run."
+  ],
+  "independent_human_review": "PENDING",
+  "test_ranking_metrics_computed": false,
+  "learned_performance_claim": "NONE"
+}
