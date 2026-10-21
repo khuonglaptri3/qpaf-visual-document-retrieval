@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "task_id": "M2.11",
+  "gate": "D1_DATA_READINESS",
+  "kind": "RESUBMISSION_REQUEST",
+  "requested_by": "Tấn Phát (Research Lead)",
+  "request_date": "2026-10-21",
+  "decision_owner": "Thanh",
+  "question": "Is the matched learned-pilot package valid for execution?",
+  "decision": "NOT_RECORDED_PENDING_D1_OWNER",
+  "supersedes_basis_of": {
+    "path": "evidence/revisions/m2.11-001/decision.json",
+    "sha256": "7c9583ad3dbb5a38e4566fe985d22695a73bcc6820db869d9f0a0175aa7f5104",
+    "decision": "BLOCKED"
+  },
+  "decision_basis": {
+    "a003_amendment": {
+      "path": "evidence/M1_FINAL/02_protocol/amendments/QPAF-M1.5-A003.md",
+      "sha256": "0afacbde32d2aa4a31a53c39888f11cd20d03af5febfe28aac074de4d23e514c",
+      "status": "APPROVED_RESEARCH_LEAD / INDEPENDENT_REVIEW_PENDING"
+    },
+    "m2_8": {
+      "path": "evidence/revisions/m2.8-002/handover.json",
+      "sha256": "f67559e8e2e17adabdc446bff25327000c7937efedd0e77d269206dc1bf3b20b",
+      "status": "PASS",
+      "run_id": "RUN-QPAF-M2_8-EXPANSION-001-20261021T042029Z-A01"
+    },
+    "m2_7": {
+      "path": "evidence/revisions/m2.7-003/verification.json",
+      "sha256": "6f60530f0a538ebf3754fe6be4952a8dbac29fd5391fb856e606aa4d19afb9ba",
+      "binding": {
+        "path": "configs/m2.7/input_binding.json",
+        "sha256": "cae1aa08dca2e34e570e6b2529c77842cdca4968e05d77b6b66b5b549d269440"
+      },
+      "matched_manifest_sha256": "705dd5705a3849239568eebee2542a9f39ccc2f123e334e7e933fde74f55fa6d",
+      "status": "PASS"
+    },
+    "m2_9": {
+      "path": "evidence/revisions/m2.9-001/decision.json",
+      "sha256": "e9c74fb0338d96e22e61baa74e1999a7db06f7a57064e3f1f64ea420c529d2fe",
+      "decision": "NOT_RUN_JUSTIFIED"
+    },
+    "m2_10": {
+      "path": "evidence/revisions/m2.10-002/audit.json",
+      "sha256": "3732828b91b2af0f48fa09a18771a7eab3cd7819b958fef201f56ee8673ac998",
+      "status": "AUDIT_REPLAY_PREPARED_READINESS_PENDING_REVIEW"
+    }
+  },
+  "gate_checks": {
+    "split_hashes_and_counts": "PASS",
+    "m2_6_and_m2_8_revision_hashes": "PASS_PAYLOAD_REHASHED",
+    "matched_config_and_synthetic_parity": "PASS",
+    "candidate_macro_recall_at_least_0_95": "PASS",
+    "zero_uncovered_queries": "PASS",
+    "real_cache_qrels_candidate_binding": "PASS",
+    "real_row_batch_order_parity": "PASS_NO_TRAINING",
+    "synthetic_checkpoint_reload": "PASS_IN_PROCESS",
+    "real_learned_checkpoint_reload": "NOT_APPLICABLE_BEFORE_PILOT",
+    "a003_independent_review": "PENDING",
+    "m2_10_owner_confirmation": "PENDING",
+    "named_independent_human_review": "PENDING"
+  },
+  "measured_coverage": {
+    "queries": 1142,
+    "candidates": 551764,
+    "macro_recall": 1.0,
+    "test_captured": 172,
+    "train_captured": 799,
+    "validation_captured": 171,
+    "test_total": 172,
+    "train_total": 799,
+    "validation_total": 171,
+    "uncovered_query_ids": []
+  },
+  "resolved_blocking_reasons": [
+    "M2.8_ZERO_UNCOVERED_GATE_FAILED",
+    "M2.7_REAL_INPUT_BINDING_NOT_FROZEN"
+  ],
+  "open_before_decision": [
+    "A003 independent review (amendment procedure step 6)",
+    "Thanh reruns scripts/audit_m210_a003_readiness.py and confirms the replay",
+    "Named independent D1 review"
+  ],
+  "test_ranking_metrics_computed": false,
+  "learned_performance_claim": "NONE"
+}
