@@ -318,6 +318,12 @@ python -m unittest discover -s tests -v
 python scripts/verify_m12.py --config configs/m1.2/core.toml --output results/m1.2/member-check-001
 ```
 
+**Môi trường đầy đủ cho M2 (khuyến nghị):** sau khi tạo `.venv`, chạy
+`python -m pip install -r requirements/dev-local.txt` thay cho hai lệnh `pip`
+ở trên. File này pin đủ gói để cả bộ test chạy: 333 test OK, 2 skip, kiểm trên
+Python 3.13.7/Windows ngày 21/10/2026. Binary Tesseract không cài bằng pip; test
+đơn vị không cần nó, còn chạy OCR thật thì chạy trong image Modal.
+
 Để kiểm đủ cả hai phần, tạo môi trường trên bằng **Python 3.11**. Output
 `member-check-001` phải chưa tồn tại; đổi ID cho mỗi lần chạy. Lần kiểm tra
 26/09/2026: **69 test, 68 đạt, 1 skip quyền symlink Windows; cả 25 test M1.2 đạt**.

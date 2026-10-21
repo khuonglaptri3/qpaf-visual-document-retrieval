@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "task_id": "M2.7",
+  "binding_id": "QPAF-M2_7-INPUTS-001",
+  "status": "BOUND_REAL_INPUTS_PENDING_INDEPENDENT_REVIEW",
+  "matched_manifest": {
+    "path": "configs/m2.7/matched.json",
+    "sha256": "705dd5705a3849239568eebee2542a9f39ccc2f123e334e7e933fde74f55fa6d"
+  },
+  "policy_id": "qpaf_m28_top_document_expansion_v1",
+  "source_run_id": "RUN-QPAF-M2_8-EXPANSION-001-20261021T042029Z-A01",
+  "handover": {
+    "path": "results/m2.8/RUN-QPAF-M2_8-EXPANSION-001-20261021T042029Z-A01/bundle/handover.json",
+    "sha256": "f67559e8e2e17adabdc446bff25327000c7937efedd0e77d269206dc1bf3b20b"
+  },
+  "inputs": {
+    "score_cache": {
+      "path": "results/m2.8/RUN-QPAF-M2_8-EXPANSION-001-20261021T042029Z-A01/bundle/raw_scores.parquet",
+      "sha256": "56d0c82efda9264c117611ddd7135fe2384b68a3ec60fbdfd80fb964c386622b"
+    },
+    "candidate_set": {
+      "path": "results/m2.8/RUN-QPAF-M2_8-EXPANSION-001-20261021T042029Z-A01/bundle/candidate_set.parquet",
+      "sha256": "60c04acaf25126d5f16ff5f69fa394c5f797d960394e87e2f10ffed1237478ef"
+    },
+    "candidate_freeze": {
+      "path": "results/m2.8/RUN-QPAF-M2_8-EXPANSION-001-20261021T042029Z-A01/bundle/candidate_freeze.json",
+      "sha256": "2320402ed8f6705e5c220e4120f1975fe1989bf202339e8492167ecdf473764e"
+    },
+    "qrels_development": {
+      "path": "results/m2.8/RUN-QPAF-M2_8-EXPANSION-001-20261021T042029Z-A01/bundle/qrels_development.json",
+      "sha256": "691b6bc4ada3bc64fe3c408fe32498b04c7f30900eadb39ae09ddbe29aea302c"
+    },
+    "qrels_test_sealed": {
+      "path": "results/m2.8/RUN-QPAF-M2_8-EXPANSION-001-20261021T042029Z-A01/bundle/qrels_test_sealed.json",
+      "sha256": "05eaaa810e47d35d4eb06b3d36a05f03b002ec9d3c5ee6bce5fc27d2e336d154"
+    },
+    "query_texts": {
+      "path": "results/m2.8/RUN-QPAF-M2_8-EXPANSION-001-20261021T042029Z-A01/bundle/queries.json",
+      "sha256": "e7994373c9fd5157cde0fb0c5a1440c37c275b85fa19b2b0b566f61d584c4ab4"
+    }
+  },
+  "splits": {
+    "train": {
+      "path": "results/m2.8/RUN-QPAF-M2_8-EXPANSION-001-20261021T042029Z-A01/bundle/splits/train_ids.txt",
+      "sha256": "61dfe867c27b91a0a96594440b0f0e5ecf51501da0fcecdac94badaf16962191"
+    },
+    "validation": {
+      "path": "results/m2.8/RUN-QPAF-M2_8-EXPANSION-001-20261021T042029Z-A01/bundle/splits/val_ids.txt",
+      "sha256": "46f8af5853942f6697cc3a995347a1832206212e93ff8aa87acb1775b3a060b4"
+    },
+    "test": {
+      "path": "results/m2.8/RUN-QPAF-M2_8-EXPANSION-001-20261021T042029Z-A01/bundle/splits/test_ids.txt",
+      "sha256": "d34210f901759a4f174da0c6c2e9b810616dcb33a71a0bd128a25d5d8d12e6f6"
+    }
+  }
+}

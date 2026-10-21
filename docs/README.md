@@ -5,7 +5,7 @@ Thư mục này được phân nhóm theo mục đích đọc. Dùng mục lục
 ## Bắt đầu ở đây
 
 1. [Milestone hoàn chỉnh](GUILDLINE_OVERVIEWS_PROPOSAL/POAI_Milestone_Group01_Hoan_Chinh.xlsx), sheet `Milestones`: nhiệm vụ, người phụ trách, deliverable và gate.
-   Hồ sơ mới: [đóng M1](../evidence/M1_FINAL/07_R1/M1_closure_record.md), [G1 conditional pass](../evidence/M1_FINAL/06_G1/G1_final_decision.md) và [M2.1 split freeze](../evidence/M2_FINAL/01_data_splits/README.md).
+   Hồ sơ mới: [đóng M1](../evidence/M1_FINAL/07_R1/M1_closure_record.md), [G1 conditional pass](../evidence/M1_FINAL/06_G1/G1_final_decision.md), [M2.1 split freeze](../evidence/M2_FINAL/01_data_splits/README.md) và [báo cáo Sprint 2 (R2, D1 `BLOCKED`)](../evidence/M2_FINAL/12_R2/Sprint_2_Progress_Report.md).
 2. [Tổng quan dự án](01_overview/HUONG_DAN_HIEU_DU_AN_QPAF.md): thuật ngữ và ý nghĩa các giai đoạn.
 3. [Checklist bàn giao của Khương](06_handover/khuong-m1-checklist.md) và [báo cáo audit M1.4–M1.6](06_handover/m1.4-m1.5-m1.6-audit-report.md): tiến độ theo bằng chứng.
 4. [Bảng nghiệm thu và runbook M1](06_handover/M1_ACCEPTANCE_SUMMARY_AND_RUNBOOK.md), [hồ sơ G1](../evidence/M1_FINAL/06_G1/README.md) và [registry/QA](../evidence/M1_FINAL/04_experiment_registry/README.md): trạng thái nghiệm thu theo revision.

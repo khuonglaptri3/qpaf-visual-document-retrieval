@@ -1,0 +1,162 @@
+{
+  "binding_id": "QPAF-M2_7-INPUTS-001",
+  "binding_sha256": "cae1aa08dca2e34e570e6b2529c77842cdca4968e05d77b6b66b5b549d269440",
+  "bound_files": {
+    "candidate_freeze": {
+      "path": "results/m2.8/RUN-QPAF-M2_8-EXPANSION-001-20261021T042029Z-A01/bundle/candidate_freeze.json",
+      "sha256": "2320402ed8f6705e5c220e4120f1975fe1989bf202339e8492167ecdf473764e",
+      "verified": true
+    },
+    "candidate_set": {
+      "path": "results/m2.8/RUN-QPAF-M2_8-EXPANSION-001-20261021T042029Z-A01/bundle/candidate_set.parquet",
+      "sha256": "60c04acaf25126d5f16ff5f69fa394c5f797d960394e87e2f10ffed1237478ef",
+      "verified": true
+    },
+    "qrels_development": {
+      "path": "results/m2.8/RUN-QPAF-M2_8-EXPANSION-001-20261021T042029Z-A01/bundle/qrels_development.json",
+      "sha256": "691b6bc4ada3bc64fe3c408fe32498b04c7f30900eadb39ae09ddbe29aea302c",
+      "verified": true
+    },
+    "qrels_test_sealed": {
+      "path": "results/m2.8/RUN-QPAF-M2_8-EXPANSION-001-20261021T042029Z-A01/bundle/qrels_test_sealed.json",
+      "sha256": "05eaaa810e47d35d4eb06b3d36a05f03b002ec9d3c5ee6bce5fc27d2e336d154",
+      "verified": true
+    },
+    "query_texts": {
+      "path": "results/m2.8/RUN-QPAF-M2_8-EXPANSION-001-20261021T042029Z-A01/bundle/queries.json",
+      "sha256": "e7994373c9fd5157cde0fb0c5a1440c37c275b85fa19b2b0b566f61d584c4ab4",
+      "verified": true
+    },
+    "score_cache": {
+      "path": "results/m2.8/RUN-QPAF-M2_8-EXPANSION-001-20261021T042029Z-A01/bundle/raw_scores.parquet",
+      "sha256": "56d0c82efda9264c117611ddd7135fe2384b68a3ec60fbdfd80fb964c386622b",
+      "verified": true
+    },
+    "split_test": {
+      "path": "results/m2.8/RUN-QPAF-M2_8-EXPANSION-001-20261021T042029Z-A01/bundle/splits/test_ids.txt",
+      "sha256": "d34210f901759a4f174da0c6c2e9b810616dcb33a71a0bd128a25d5d8d12e6f6",
+      "verified": true
+    },
+    "split_train": {
+      "path": "results/m2.8/RUN-QPAF-M2_8-EXPANSION-001-20261021T042029Z-A01/bundle/splits/train_ids.txt",
+      "sha256": "61dfe867c27b91a0a96594440b0f0e5ecf51501da0fcecdac94badaf16962191",
+      "verified": true
+    },
+    "split_validation": {
+      "path": "results/m2.8/RUN-QPAF-M2_8-EXPANSION-001-20261021T042029Z-A01/bundle/splits/val_ids.txt",
+      "sha256": "46f8af5853942f6697cc3a995347a1832206212e93ff8aa87acb1775b3a060b4",
+      "verified": true
+    }
+  },
+  "handover_sha256": "f67559e8e2e17adabdc446bff25327000c7937efedd0e77d269206dc1bf3b20b",
+  "independent_review": "PENDING",
+  "matched_manifest_sha256": "705dd5705a3849239568eebee2542a9f39ccc2f123e334e7e933fde74f55fa6d",
+  "policy_id": "qpaf_m28_top_document_expansion_v1",
+  "real_row_parity": {
+    "batches": 3000,
+    "candidate_rows": {
+      "train": 386390,
+      "validation": 82255
+    },
+    "epochs": 20,
+    "identical": true,
+    "max_candidates_per_record": 579,
+    "record_counts": {
+      "train": 799,
+      "validation": 171
+    },
+    "seeds": {
+      "20260820": {
+        "batch_order_sha256": "6e2b932bece1ece071e4766032532a922f4697deb11c0a8fe083c855dd71fab9",
+        "batches": 1000
+      },
+      "20260821": {
+        "batch_order_sha256": "59140421ef0f28e4fce017799fbca6d47bbd7b18c0e2424c3b6b0e924e60cb8e",
+        "batches": 1000
+      },
+      "20260822": {
+        "batch_order_sha256": "f3522630bf03e31727fb27e6a3a5e289ec1f9f01a6a1c8cda728f78ca46a2a45",
+        "batches": 1000
+      }
+    },
+    "training_executed": false
+  },
+  "source_run_id": "RUN-QPAF-M2_8-EXPANSION-001-20261021T042029Z-A01",
+  "source_sha256": {
+    "scripts/verify_m27_binding.py": "d46969d64b719a0e56f76d22dd14265a4b3cd7574a398f11a9da1c7821fe31bc",
+    "src/qpaf/m24/dataset.py": "1b2681b163ce4a88a87eeb71ba31f417ee2a4469a9be49845c47d528eb6c5279",
+    "src/qpaf/m24/trainer.py": "242fbcdc3a1cf44c81d29ef7be19aac256b29e5226f870cdf1cee889ff9df7d4",
+    "src/qpaf/m27/binding.py": "ad916cbfe9c066d81d73419860e2a04b3e9537006d9a6d6784e44a8f5e769548",
+    "src/qpaf/m27/matched.py": "f71bea281d7c61d95ad5edcba5fe3d33689e5de9d5a34a22034edd395e272d38"
+  },
+  "status": "PASS",
+  "synthetic_parity": {
+    "base_config_sha256": "3e58a867d11cebf72970cf0c141a90822cd7cbbdad65fb1e081cb14fa4889b58",
+    "data_order": {
+      "batches": 4,
+      "epochs": 2,
+      "fixture": "qpaf.m24.synthetic:20260820",
+      "identical": true
+    },
+    "initialization": {
+      "20260820": {
+        "identical": true,
+        "parameter_count": 42
+      },
+      "20260821": {
+        "identical": true,
+        "parameter_count": 42
+      },
+      "20260822": {
+        "identical": true,
+        "parameter_count": 42
+      }
+    },
+    "m24_drift": {
+      "experiment_id": [
+        "QPAF-M2_4-PIPELINE-001",
+        "QPAF-M2_7-MTH-001"
+      ]
+    },
+    "methods_match_runner": true,
+    "pairs": {
+      "20260820": {
+        "gate_granularity": [
+          "query",
+          "page"
+        ]
+      },
+      "20260821": {
+        "gate_granularity": [
+          "query",
+          "page"
+        ]
+      },
+      "20260822": {
+        "gate_granularity": [
+          "query",
+          "page"
+        ]
+      }
+    },
+    "pending_inputs": [
+      "candidate_set",
+      "qrels",
+      "score_cache"
+    ],
+    "shared_inputs": {
+      "m25_freeze": {
+        "path": "configs/m2.5/freeze.json",
+        "sha256": "317b4333968ae4250e0e9bc71846d37f47e5f958872c8cf27949a0c0d8c3579c",
+        "verified": true
+      },
+      "split_manifest": {
+        "path": "evidence/revisions/m2.1-002/data_split_manifest.json",
+        "sha256": "ea5a19f93dce07cce375d6fb6afed630606e00916c5daa10938562aee9cddfad",
+        "verified": true
+      }
+    }
+  },
+  "test_labels_opened": false,
+  "training_executed": false
+}

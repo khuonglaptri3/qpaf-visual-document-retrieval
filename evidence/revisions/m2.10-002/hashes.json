@@ -1,0 +1,12 @@
+[
+  {
+    "path": "audit.json",
+    "size_bytes": 7356,
+    "sha256": "3732828b91b2af0f48fa09a18771a7eab3cd7819b958fef201f56ee8673ac998"
+  },
+  {
+    "path": "README.md",
+    "size_bytes": 2134,
+    "sha256": "4d5d6f58ded3e359c2824d1a8f265a9b5faa32bf3b42b5c2658b3aff7a6bdaed"
+  }
+]
