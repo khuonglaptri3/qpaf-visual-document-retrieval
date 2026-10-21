@@ -1,0 +1,95 @@
+{
+  "status": "PASS",
+  "evaluation_unit": "page",
+  "policy_id": "qpaf_m28_top_document_expansion_v1",
+  "counts": {
+    "query_count": 1142,
+    "page_count": 5385,
+    "candidate_count": 551764,
+    "raw_row_count": 551764,
+    "normalized_row_count": 551764,
+    "channel_top_list_count": 685200,
+    "top_k": 200,
+    "effective_top_k": 200,
+    "document_count": 292,
+    "base_candidate_count": 549689,
+    "added_page_count": 2075,
+    "expansion_log_count": 2075,
+    "queries_with_additions": 530,
+    "max_candidates_per_query": 600
+  },
+  "candidate_freeze_sha256": "2320402ed8f6705e5c220e4120f1975fe1989bf202339e8492167ecdf473764e",
+  "artifacts": {
+    "candidate_expansion_log.parquet": {
+      "columns": [
+        "query_id",
+        "page_id",
+        "document_id",
+        "priority",
+        "rrf_score",
+        "reason"
+      ],
+      "row_count": 2075,
+      "sha256": "671f98879f182c8984d20d34af0a57f0cbc1541ee51b6c8c55d69b5e84a947dc",
+      "size_bytes": 35030
+    },
+    "candidate_expansion_queries.parquet": {
+      "columns": [
+        "query_id",
+        "selected_document_id",
+        "selected_document_rrf",
+        "base_count",
+        "added_count",
+        "final_count"
+      ],
+      "row_count": 1142,
+      "sha256": "7b540c86b5302b25506e309785646706185bb4b59ca183198daf42d43fa2cc9b",
+      "size_bytes": 20166
+    },
+    "candidate_set.parquet": {
+      "columns": [
+        "query_id",
+        "page_id"
+      ],
+      "row_count": 551764,
+      "sha256": "60c04acaf25126d5f16ff5f69fa394c5f797d960394e87e2f10ffed1237478ef",
+      "size_bytes": 1424502
+    },
+    "channel_top_lists.parquet": {
+      "columns": [
+        "query_id",
+        "page_id",
+        "channel",
+        "rank",
+        "raw_score"
+      ],
+      "row_count": 685200,
+      "sha256": "805528ba9e691a0f4e0d38353afd9864137f8fb574ba863af6c5d6b64114fb88",
+      "size_bytes": 6607953
+    },
+    "normalized_scores.parquet": {
+      "columns": [
+        "query_id",
+        "page_id",
+        "bm25_score",
+        "dense_score",
+        "visual_score"
+      ],
+      "row_count": 551764,
+      "sha256": "ca444481f9bf22a34fd1b8f945c6041ab3578a5c0f34c77c93029b1f903de986",
+      "size_bytes": 13404589
+    },
+    "raw_scores.parquet": {
+      "columns": [
+        "query_id",
+        "page_id",
+        "bm25_score",
+        "dense_score",
+        "visual_score"
+      ],
+      "row_count": 551764,
+      "sha256": "56d0c82efda9264c117611ddd7135fe2384b68a3ec60fbdfd80fb964c386622b",
+      "size_bytes": 9423854
+    }
+  }
+}

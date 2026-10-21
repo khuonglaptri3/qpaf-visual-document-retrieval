@@ -1,0 +1,35 @@
+{
+  "counts": {
+    "query_count": 1142,
+    "page_count": 5385,
+    "candidate_count": 551764,
+    "raw_row_count": 551764,
+    "normalized_row_count": 551764,
+    "channel_top_list_count": 685200,
+    "top_k": 200,
+    "effective_top_k": 200,
+    "document_count": 292,
+    "base_candidate_count": 549689,
+    "added_page_count": 2075,
+    "expansion_log_count": 2075,
+    "queries_with_additions": 530,
+    "max_candidates_per_query": 600
+  },
+  "final_count": {
+    "min": 388,
+    "mean": 483.1558669001751,
+    "max": 579
+  },
+  "added_count": {
+    "min": 0,
+    "mean": 1.816987740805604,
+    "max": 23
+  },
+  "added_by_split": {
+    "train": 1509,
+    "validation": 273,
+    "test": 293
+  },
+  "selected_document_fully_inside_c0": 612,
+  "c0_at_cap": 0
+}

@@ -1,0 +1,12 @@
+[
+  {
+    "path": "README.md",
+    "size_bytes": 1852,
+    "sha256": "019dd84bed70a226ad6a5718bcc630f44236481d3d96edf33bfa3fab5cae708c"
+  },
+  {
+    "path": "verification.json",
+    "size_bytes": 5648,
+    "sha256": "6f60530f0a538ebf3754fe6be4952a8dbac29fd5391fb856e606aa4d19afb9ba"
+  }
+]
