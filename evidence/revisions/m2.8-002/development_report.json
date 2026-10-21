@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "task_id": "M2.8",
+  "phase": "development",
+  "run_id": "RUN-QPAF-M2_8-EXPANSION-001-20261021T042029Z-A01",
+  "policy_id": "qpaf_m28_top_document_expansion_v1",
+  "amendment_id": "QPAF-M1.5-A003",
+  "status": "PASS",
+  "created_utc": "2026-10-21T04:21:22.926911+00:00",
+  "candidate_freeze_sha256": "2320402ed8f6705e5c220e4120f1975fe1989bf202339e8492167ecdf473764e",
+  "roles": [
+    "train",
+    "validation"
+  ],
+  "test_qrels_opened": false,
+  "test_ranking_metrics_computed": false,
+  "training_executed": false,
+  "coverage": {
+    "train": {
+      "status": "PASS",
+      "query_count": 799,
+      "macro_recall": 1.0,
+      "uncovered_query_ids": [],
+      "candidate_count": 386390,
+      "relevant_total": 799,
+      "captured_relevant": 799
+    },
+    "validation": {
+      "status": "PASS",
+      "query_count": 171,
+      "macro_recall": 1.0,
+      "uncovered_query_ids": [],
+      "candidate_count": 82255,
+      "relevant_total": 171,
+      "captured_relevant": 171
+    }
+  },
+  "development_overall": {
+    "status": "PASS",
+    "query_count": 970,
+    "macro_recall": 1.0,
+    "uncovered_query_ids": [],
+    "candidate_count": 468645
+  },
+  "baseline_development_coverage": {
+    "train": {
+      "status": "BLOCKED",
+      "query_count": 799,
+      "macro_recall": 0.9987484355444305,
+      "uncovered_query_ids": [
+        "04450a0f59f81025574451222aa26322ae7ede42_2"
+      ],
+      "candidate_count": 384881,
+      "relevant_total": 799,
+      "captured_relevant": 798
+    },
+    "validation": {
+      "status": "PASS",
+      "query_count": 171,
+      "macro_recall": 1.0,
+      "uncovered_query_ids": [],
+      "candidate_count": 81982,
+      "relevant_total": 171,
+      "captured_relevant": 171
+    }
+  },
+  "label_free_summary": {
+    "counts": {
+      "query_count": 1142,
+      "page_count": 5385,
+      "candidate_count": 551764,
+      "raw_row_count": 551764,
+      "normalized_row_count": 551764,
+      "channel_top_list_count": 685200,
+      "top_k": 200,
+      "effective_top_k": 200,
+      "document_count": 292,
+      "base_candidate_count": 549689,
+      "added_page_count": 2075,
+      "expansion_log_count": 2075,
+      "queries_with_additions": 530,
+      "max_candidates_per_query": 600
+    },
+    "final_count": {
+      "min": 388,
+      "mean": 483.1558669001751,
+      "max": 579
+    },
+    "added_count": {
+      "min": 0,
+      "mean": 1.816987740805604,
+      "max": 23
+    },
+    "added_by_split": {
+      "train": 1509,
+      "validation": 273,
+      "test": 293
+    },
+    "selected_document_fully_inside_c0": 612,
+    "c0_at_cap": 0
+  },
+  "timings": {
+    "load_and_verify_source_seconds": 0.8288986999541521,
+    "baseline_replay_seconds": 6.907934200018644,
+    "expansion_build_seconds": 11.667952400050126,
+    "independent_replay_seconds": 23.158032699953765
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "status": "PASS",
+  "checks": {
+    "counts": true,
+    "query_ids_sha256": true,
+    "page_ids_sha256": true,
+    "score_arrays_sha256": true,
+    "candidate_keys_sha256": true
+  },
+  "counts": {
+    "query_count": 1142,
+    "page_count": 5385,
+    "candidate_count": 549689,
+    "raw_row_count": 549689,
+    "normalized_row_count": 549689,
+    "channel_top_list_count": 685200,
+    "top_k": 200,
+    "effective_top_k": 200
+  },
+  "candidate_keys_sha256": "b4f9c7e61a973a9285ced37e37124ae9d193649e5ce228f185ca04364c89dc99",
+  "score_arrays_sha256": {
+    "bm25": "2b964342bc100b8ff574668506e0fb6959ae0f9342d8e7738696dc590780864a",
+    "dense": "bfe96ed22554d8562f5c06d8782d777d54c2f19cb33046fa953b64ed52cf15e3",
+    "visual": "b67b785a5e8b7226e0f9e4284619fe402d81305af811a1ccc24fc681627e9d28"
+  }
+}
