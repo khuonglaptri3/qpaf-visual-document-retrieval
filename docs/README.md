@@ -1,43 +1,28 @@
-# Mục lục tài liệu QPAF
+# Tài liệu QPAF
 
-Thư mục này được phân nhóm theo mục đích đọc. Dùng mục lục thay cho việc suy ra trạng thái dự án từ tên file hoặc ngày trong một snapshot cũ.
+Nguồn chính thức thống nhất cho đề xuất, tổng quan, milestone và phân công là
+[`GUILDLINE_OVERVIEWS_PROPOSAL/`](GUILDLINE_OVERVIEWS_PROPOSAL/README.md).
+Đọc workbook `POAI_Milestone_Group01_Hoan_Chinh.xlsx`, sheet `Milestones`, để xác định
+task, owner, deliverable và dependency. Các bản tổng quan/kế hoạch cũ bên ngoài
+thư mục này đã được loại bỏ theo yêu cầu của Khương.
 
-## Bắt đầu ở đây
+Trạng thái thực hiện được xác định bằng evidence của từng revision, không suy ra
+từ cột trạng thái hoặc ngày kế hoạch trong workbook. D1 hiện hành là
+[`m2.11-002`, PASS](../evidence/revisions/m2.11-002/decision.json).
 
-1. [Milestone hoàn chỉnh](GUILDLINE_OVERVIEWS_PROPOSAL/POAI_Milestone_Group01_Hoan_Chinh.xlsx), sheet `Milestones`: nhiệm vụ, người phụ trách, deliverable và gate.
-   Hồ sơ mới: [đóng M1](../evidence/M1_FINAL/07_R1/M1_closure_record.md), [G1 conditional pass](../evidence/M1_FINAL/06_G1/G1_final_decision.md), [M2.1 split freeze](../evidence/M2_FINAL/01_data_splits/README.md) và [báo cáo Sprint 2 (R2, D1 `BLOCKED`)](../evidence/M2_FINAL/12_R2/Sprint_2_Progress_Report.md).
-2. [Tổng quan dự án](01_overview/HUONG_DAN_HIEU_DU_AN_QPAF.md): thuật ngữ và ý nghĩa các giai đoạn.
-3. [Checklist bàn giao của Khương](06_handover/khuong-m1-checklist.md) và [báo cáo audit M1.4–M1.6](06_handover/m1.4-m1.5-m1.6-audit-report.md): tiến độ theo bằng chứng.
-4. [Bảng nghiệm thu và runbook M1](06_handover/M1_ACCEPTANCE_SUMMARY_AND_RUNBOOK.md), [hồ sơ G1](../evidence/M1_FINAL/06_G1/README.md) và [registry/QA](../evidence/M1_FINAL/04_experiment_registry/README.md): trạng thái nghiệm thu theo revision.
+| Vị trí | Mục đích |
+| --- | --- |
+| [Tài liệu chính thức](GUILDLINE_OVERVIEWS_PROPOSAL/README.md) | Đề xuất, workbook, Word, tổng quan và timeline |
+| [Phương pháp](03_method/README.md) | Hợp đồng feature, gate, loss, pipeline và matched config |
+| [Dữ liệu](04_data_protocol/README.md) | Corpus, qrels, OCR và định danh trang |
+| [Oracle lịch sử](05_oracle_experiments/README.md) | Protocol, review và kết quả của từng study |
+| [Bàn giao kỹ thuật](06_handover/README.md) | Audit, runbook và hồ sơ bàn giao |
+| [Evidence](../evidence/) | Manifest, hash, quyết định và revision đã ghi nhận |
 
-## Các nhóm tài liệu
+Các tài liệu kỹ thuật và hồ sơ lịch sử giữ vai trò giải thích implementation hoặc
+truy nguồn evidence; chúng không thay thế workbook chính thức. Manifest, receipt
+và source snapshot đã đóng băng giữ nguyên byte. Liên kết trong snapshot áp dụng
+cho commit nguồn; dùng Git history khi cần đọc tài liệu đã được loại bỏ.
 
-| Thư mục | Nội dung |
-|---|---|
-| [01_overview](01_overview/README.md) | Tổng quan, kiến trúc, hướng dẫn đọc |
-| [02_project_plan](02_project_plan/README.md) | Milestone, timeline, đề xuất và kế hoạch |
-| [03_method](03_method/README.md) | Feature, gate, fusion, loss và method core |
-| [04_data_protocol](04_data_protocol/README.md) | Corpus, qrels, OCR và hợp đồng score |
-| [05_oracle_experiments](05_oracle_experiments/README.md) | Oracle, calibration, execution review và kết quả |
-| [06_handover](06_handover/README.md) | Bàn giao, checklist, audit và quy trình phát triển |
-| [GUILDLINE_OVERVIEWS_PROPOSAL](GUILDLINE_OVERVIEWS_PROPOSAL/overview.md) | Bộ đề xuất, workbook, Word và timeline gốc |
-| [superpowers](06_handover/README.md#superpowers) | Spec và kế hoạch triển khai đã lưu |
-
-## Cách đọc trạng thái
-
-- **Plan / proposal / execution review:** kế hoạch hoặc điều kiện chạy; kiểm tra authorization và artifact trước khi kết luận đã thực hiện.
-- **Results / receipt / integrity review:** kết quả trong phạm vi ghi rõ của từng run; kiểm tra dữ liệu thật hay fixture.
-- **Method-core verification:** chứng minh phần mềm hoạt động trên workload đã kiểm; chưa tự chứng minh chất lượng learned trên corpus.
-- **Sign-off / gate decision:** bằng chứng nghiệm thu; chỉ coi milestone đóng khi quyết định cần thiết đã được ghi.
-
-Workbook và timeline là nguồn kế hoạch. [Tasks.md](../Tasks.md), [PROJECT_TRACKING.md](../PROJECT_TRACKING.md) và evidence giữ lịch sử thực hiện của từng protocol. Khi snapshot khác thời điểm hoặc phạm vi, đối chiếu artifact và amendment đang áp dụng.
-
-## Quy tắc tổ chức và truy nguồn
-
-- Tài liệu mới đặt vào nhóm phù hợp; cập nhật mục lục nhóm và [catalog.json](catalog.json).
-- Gốc `docs` chỉ giữ `README.md` và `catalog.json`; tài liệu và proposal nằm trong folder theo chủ đề.
-- Script/config hiện tại dùng đường dẫn trong folder mới. Catalog ghi vị trí và hash hiện tại; manifest, receipt và source snapshot lịch sử giữ nguyên theo revision của chúng.
-- Mỗi tài liệu có một vị trí đọc chính trong catalog. Các trang chuyển tiếp ở vị trí cũ đã được xóa; liên kết trong tài liệu hiện tại trỏ trực tiếp tới vị trí mới.
-- Bộ workbook/Word/timeline gốc và các spec/plan đã lưu giữ nguyên vị trí.
-- [catalog.json](catalog.json) ghi vị trí cũ/mới, nhóm và SHA-256 của tài liệu đã sắp xếp và nhập từ các branch; đây là inventory tổ chức tài liệu, không phải nghiệm thu nghiên cứu.
-- Liên kết trong hồ sơ ký duyệt và revision lịch sử áp dụng cho checkout nguồn. Tra vị trí hiện tại qua `original_path` → `current_path` trong catalog nếu tài liệu đã chuyển folder.
+[`catalog.json`](catalog.json) là danh mục tài liệu và ghi nhận các đường dẫn cũ
+đã loại bỏ; danh mục này không phải biên bản nghiệm thu nghiên cứu.

@@ -2,19 +2,14 @@
   "schema_version": 1,
   "organized_at": "2026-10-04",
   "scope": "documentation_inventory_not_research_acceptance",
-  "source_documents": 71,
-  "moved_documents": 55,
-  "path_bound_documents": 49,
+  "source_documents": 66,
+  "moved_documents": 48,
+  "path_bound_documents": 45,
   "groups": [
     {
-      "id": "01_overview",
-      "title": "Tổng quan và hướng dẫn đọc",
-      "description": "Giải thích đề tài, kiến trúc và kiến thức nền để thành viên mới bắt đầu."
-    },
-    {
-      "id": "02_project_plan",
-      "title": "Kế hoạch, milestone và đề xuất",
-      "description": "Workbook milestone, đề xuất nghiên cứu, timeline và kế hoạch đánh giá. Ngày kế hoạch không thay thế kết quả nghiệm thu."
+      "id": "GUILDLINE_OVERVIEWS_PROPOSAL",
+      "title": "Tài liệu chính thức thống nhất",
+      "description": "Workbook hoàn chỉnh, đề xuất, tổng quan, Word và timeline do Khương chỉ định."
     },
     {
       "id": "03_method",
@@ -40,7 +35,7 @@
   "files": [
     {
       "title": "ĐỀ XUẤT NGHIÊN CỨU",
-      "category": "02_project_plan",
+      "category": "GUILDLINE_OVERVIEWS_PROPOSAL",
       "original_path": "docs/GUILDLINE_OVERVIEWS_PROPOSAL/DE_XUAT_NGHIEN_CUU_QPAF.md",
       "current_path": "docs/GUILDLINE_OVERVIEWS_PROPOSAL/DE_XUAT_NGHIEN_CUU_QPAF.md",
       "path_bound_evidence": true,
@@ -51,7 +46,7 @@
     },
     {
       "title": "Nghiên Cứu Kỹ Thuật QPAF.docx",
-      "category": "02_project_plan",
+      "category": "GUILDLINE_OVERVIEWS_PROPOSAL",
       "original_path": "docs/GUILDLINE_OVERVIEWS_PROPOSAL/Nghiên Cứu Kỹ Thuật QPAF.docx",
       "current_path": "docs/GUILDLINE_OVERVIEWS_PROPOSAL/Nghiên Cứu Kỹ Thuật QPAF.docx",
       "path_bound_evidence": true,
@@ -61,7 +56,7 @@
     },
     {
       "title": "Tổng quan phối hợp M1",
-      "category": "02_project_plan",
+      "category": "GUILDLINE_OVERVIEWS_PROPOSAL",
       "original_path": "docs/GUILDLINE_OVERVIEWS_PROPOSAL/overview.md",
       "current_path": "docs/GUILDLINE_OVERVIEWS_PROPOSAL/overview.md",
       "path_bound_evidence": true,
@@ -72,7 +67,7 @@
     },
     {
       "title": "POAI_Milestone_Group01_Hoan_Chinh.xlsx",
-      "category": "02_project_plan",
+      "category": "GUILDLINE_OVERVIEWS_PROPOSAL",
       "original_path": "docs/GUILDLINE_OVERVIEWS_PROPOSAL/POAI_Milestone_Group01_Hoan_Chinh.xlsx",
       "current_path": "docs/GUILDLINE_OVERVIEWS_PROPOSAL/POAI_Milestone_Group01_Hoan_Chinh.xlsx",
       "path_bound_evidence": true,
@@ -82,7 +77,7 @@
     },
     {
       "title": "KẾ HOẠCH HOÀN THÀNH TIMELINE 14–27/09 TRONG 5 NGÀY",
-      "category": "02_project_plan",
+      "category": "GUILDLINE_OVERVIEWS_PROPOSAL",
       "original_path": "docs/GUILDLINE_OVERVIEWS_PROPOSAL/TIMELINE_fixed.md",
       "current_path": "docs/GUILDLINE_OVERVIEWS_PROPOSAL/TIMELINE_fixed.md",
       "path_bound_evidence": true,
@@ -102,18 +97,6 @@
       "previous_path": "docs/heaven_export_contract.md",
       "original_path_removed": true,
       "relocated_at": "2026-10-04"
-    },
-    {
-      "title": "Hướng dẫn hiểu dự án QPAF và các giai đoạn thực nghiệm",
-      "category": "01_overview",
-      "original_path": "docs/HUONG_DAN_HIEU_DU_AN_QPAF.md",
-      "current_path": "docs/01_overview/HUONG_DAN_HIEU_DU_AN_QPAF.md",
-      "path_bound_evidence": false,
-      "legacy_alias": false,
-      "source_sha256": "33e864900cf7f7ace909da5d9f91785491d24bdc48913805b9ab6af9037fa17d",
-      "sha256": "9e98d3d38856dccb3acb5eef3c1d1b9055290df0fba083b6a52924507cbe0321",
-      "original_path_removed": true,
-      "navigation_links_updated": true
     },
     {
       "title": "Repository bootstrap decisions and verification",
@@ -222,30 +205,6 @@
       "legacy_alias": false,
       "source_sha256": "6cb002c03262a74fd7fe7bb43ae0965124f72922baec72e27eeb770299f580f7",
       "sha256": "6cb002c03262a74fd7fe7bb43ae0965124f72922baec72e27eeb770299f580f7",
-      "original_path_removed": true
-    },
-    {
-      "title": "Kế hoạch Oracle Study cho QPAF và Budget-Aware Adaptive HEAVEN",
-      "category": "02_project_plan",
-      "original_path": "docs/oracle_study_plan_vi.md",
-      "current_path": "docs/02_project_plan/oracle_study_plan_vi.md",
-      "path_bound_evidence": true,
-      "legacy_alias": false,
-      "source_sha256": "07f84511fa082b8063db663f88c7cd83ced60bda6d468be2a531d1dfcdedb5b2",
-      "sha256": "07f84511fa082b8063db663f88c7cd83ced60bda6d468be2a531d1dfcdedb5b2",
-      "previous_path": "docs/oracle_study_plan_vi.md",
-      "original_path_removed": true,
-      "relocated_at": "2026-10-04"
-    },
-    {
-      "title": "Comprehensive Review and Technical Summary: Query-Page-Adaptive Fusion (QPAF)",
-      "category": "01_overview",
-      "original_path": "docs/PROJECT_REVIEW_AND_KNOWLEDGE_GUIDE.md",
-      "current_path": "docs/01_overview/PROJECT_REVIEW_AND_KNOWLEDGE_GUIDE.md",
-      "path_bound_evidence": false,
-      "legacy_alias": false,
-      "source_sha256": "090f1a650cb48f2e105a6d8b6e9d7b16531ab4def013f59baf3cc04e4a2cf537",
-      "sha256": "fa8baf32a9017da40b24024a6479cf4155646d1c9e812f2f4869ca57f5be3418",
       "original_path_removed": true
     },
     {
@@ -395,20 +354,6 @@
       "original_path_removed": true
     },
     {
-      "title": "Next evaluation after exploratory-12",
-      "category": "02_project_plan",
-      "original_path": "docs/QPAF_NEXT_EVALUATION_PROPOSAL.md",
-      "current_path": "docs/02_project_plan/QPAF_NEXT_EVALUATION_PROPOSAL.md",
-      "path_bound_evidence": true,
-      "legacy_alias": false,
-      "source_sha256": "9fd411020e91efd7c7338042bd2adb32f3bcc2663117a799d82224e1554b25d7",
-      "sha256": "3235debb15a873d0c475898928613db2fad706d6f6bc62b71128f65c09ee09f4",
-      "navigation_links_updated": true,
-      "previous_path": "docs/QPAF_NEXT_EVALUATION_PROPOSAL.md",
-      "original_path_removed": true,
-      "relocated_at": "2026-10-04"
-    },
-    {
       "title": "QPAF P2 local method-core verification",
       "category": "03_method",
       "original_path": "docs/QPAF_P2_METHOD_CORE_VERIFICATION.md",
@@ -443,18 +388,6 @@
       "previous_path": "docs/QPAF_QUERY797_CASE_STUDY.md",
       "original_path_removed": true,
       "relocated_at": "2026-10-04"
-    },
-    {
-      "title": "QPAF Team Research Execution Plan",
-      "category": "02_project_plan",
-      "original_path": "docs/QPAF_TEAM_RESEARCH_EXECUTION_PLAN.md",
-      "current_path": "docs/02_project_plan/QPAF_TEAM_RESEARCH_EXECUTION_PLAN.md",
-      "path_bound_evidence": false,
-      "legacy_alias": false,
-      "source_sha256": "94bca723e1c46e2ec20f4e36bcf74e4d985a8131c2bf456bb6b18122229e2718",
-      "sha256": "07ce94c345ee3e7666b17c41721b5247f2089dfc41ca54be2dc917f980f6290b",
-      "original_path_removed": true,
-      "navigation_links_updated": true
     },
     {
       "title": "Exploratory-24 W66 sensitivity: preparation and execution review",
@@ -676,19 +609,6 @@
       "navigation_links_updated": true
     },
     {
-      "title": "Tóm tắt định hướng đề tài QPAF",
-      "category": "01_overview",
-      "original_path": "docs/Tom_tat_dinh_huong_QPAF.md",
-      "current_path": "docs/01_overview/Tom_tat_dinh_huong_QPAF.md",
-      "path_bound_evidence": true,
-      "legacy_alias": false,
-      "source_sha256": "a98a6f7e0454657dd8a93dbcfd0caee44e9491f1dc99c3d0c63fda17e67e3484",
-      "sha256": "a98a6f7e0454657dd8a93dbcfd0caee44e9491f1dc99c3d0c63fda17e67e3484",
-      "previous_path": "docs/Tom_tat_dinh_huong_QPAF.md",
-      "original_path_removed": true,
-      "relocated_at": "2026-10-04"
-    },
-    {
       "title": "vidoseek_w66_exploratory24_optimized_proposal.json",
       "category": "05_oracle_experiments",
       "original_path": "docs/vidoseek_w66_exploratory24_optimized_proposal.json",
@@ -894,20 +814,6 @@
       "navigation_links_updated": false
     },
     {
-      "title": "QPAF — Query-Page Adaptive Fusion for Visual Document Retrieval",
-      "category": "01_overview",
-      "original_path": "README.md",
-      "current_path": "docs/01_overview/QPAF_PROJECT_SYNTHESIS_SOURCE.md",
-      "path_bound_evidence": true,
-      "legacy_alias": false,
-      "source_sha256": "6b9bd1b4e8d2538e9be3aa2ec36417cd3fd36db4cfaf9bac70c3a37ff42b41fe",
-      "sha256": "3d39fd38fab009b24fb141b48d6647b67164e0ca0e8b30332fd66b3a7c0ce233",
-      "imported_from": "khuong/develop",
-      "imported_commit": "f03947b64f8faceb3d8d4bc65b398cd8e0806f37",
-      "original_path_removed": false,
-      "navigation_links_updated": true
-    },
-    {
       "title": "M1.1–M1.8 readiness remediation plan — 2026-09-28",
       "category": "06_handover",
       "original_path": "docs/superpowers/plans/2026-09-28-readiness-remediation.md",
@@ -920,6 +826,24 @@
       "imported_commit": "f03947b64f8faceb3d8d4bc65b398cd8e0806f37",
       "original_path_removed": false,
       "navigation_links_updated": false
+    },
+    {
+      "title": "README",
+      "category": "GUILDLINE_OVERVIEWS_PROPOSAL",
+      "original_path": "docs/GUILDLINE_OVERVIEWS_PROPOSAL/README.md",
+      "current_path": "docs/GUILDLINE_OVERVIEWS_PROPOSAL/README.md",
+      "path_bound_evidence": false,
+      "legacy_alias": false,
+      "sha256": "7ffa75d3c408fbf32b72037a140a0f218086ea01e1d17c78f4fa1f73f74b7086"
+    },
+    {
+      "title": "M3_1_HANDOFF",
+      "category": "GUILDLINE_OVERVIEWS_PROPOSAL",
+      "original_path": "docs/GUILDLINE_OVERVIEWS_PROPOSAL/M3_1_HANDOFF.md",
+      "current_path": "docs/GUILDLINE_OVERVIEWS_PROPOSAL/M3_1_HANDOFF.md",
+      "path_bound_evidence": false,
+      "legacy_alias": false,
+      "sha256": "f40dc7fe56c8e0f7d3838a639039ff133805c05b0494ad7c4c0a6a200ce0982d"
     }
   ],
   "preexisting_missing_local_links": [
@@ -1063,5 +987,105 @@
     "commits_integrated": 24,
     "remote_branches_covered": 17,
     "historical_revision_links_resolve_against_source_commit": true
-  }
+  },
+  "authoritative_directory": "docs/GUILDLINE_OVERVIEWS_PROPOSAL",
+  "authoritative_workbook": "docs/GUILDLINE_OVERVIEWS_PROPOSAL/POAI_Milestone_Group01_Hoan_Chinh.xlsx",
+  "removed_superseded_documents": [
+    {
+      "path": "Agent_System_Prompt.md",
+      "sha256_before_removal": "2cdfd4caa824b02141c0cb4f0cbb2ebb4d7e7930dd88ab85bd1fba1494436840",
+      "reason": "Superseded by the user-designated GUILDLINE_OVERVIEWS_PROPOSAL authority; history remains in Git"
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "sha256_before_removal": "4e696631b23777b5a6cf3a20189a469fac85eec931db28619895141a22c3044f",
+      "reason": "Superseded by the user-designated GUILDLINE_OVERVIEWS_PROPOSAL authority; history remains in Git"
+    },
+    {
+      "path": "Context.md",
+      "sha256_before_removal": "9c7e2d749ff31ced7509283a62b1807e953fefa4ec60eaf0e7079bb49db700c4",
+      "reason": "Superseded by the user-designated GUILDLINE_OVERVIEWS_PROPOSAL authority; history remains in Git"
+    },
+    {
+      "path": "DE_XUAT_NGHIEN_CUU_QPAF.md",
+      "sha256_before_removal": "80ea27457726de78069469b5da1617d4f1a69d7dff2494606e8452fd86f5ea18",
+      "reason": "Superseded by the user-designated GUILDLINE_OVERVIEWS_PROPOSAL authority; history remains in Git"
+    },
+    {
+      "path": "DINH_HUONG_DU_AN_TRAO_DOI_GIANG_VIEN.md",
+      "sha256_before_removal": "5d063c03d591e686f319a76cd0694eac5ea08cb66fa20b562d2614df4f4046ee",
+      "reason": "Superseded by the user-designated GUILDLINE_OVERVIEWS_PROPOSAL authority; history remains in Git"
+    },
+    {
+      "path": "POAI_Milestone_Group01.xlsx",
+      "sha256_before_removal": "f10741261d92c3a94809147fa8619dd091709238f673dd727e57fb85808d0ced",
+      "reason": "Superseded by the user-designated GUILDLINE_OVERVIEWS_PROPOSAL authority; history remains in Git"
+    },
+    {
+      "path": "PROJECT_OVERVIEW.md",
+      "sha256_before_removal": "220854f899e4c302c56d4722dab5fafb9f65557928c08487e4c9c53d26236967",
+      "reason": "Superseded by the user-designated GUILDLINE_OVERVIEWS_PROPOSAL authority; history remains in Git"
+    },
+    {
+      "path": "PROJECT_TRACKING.md",
+      "sha256_before_removal": "1098bf01682720c74146bb66eaf8dabb0e1590ae78773f5d973ec9fda5ae08f6",
+      "reason": "Superseded by the user-designated GUILDLINE_OVERVIEWS_PROPOSAL authority; history remains in Git"
+    },
+    {
+      "path": "Tasks.md",
+      "sha256_before_removal": "3634625bf98f05c14867e57734c803486bc18de8bc507e02262ae2e5722a7d2a",
+      "reason": "Superseded by the user-designated GUILDLINE_OVERVIEWS_PROPOSAL authority; history remains in Git"
+    },
+    {
+      "path": "Tom_tat_dinh_huong_QPAF.md",
+      "sha256_before_removal": "a98a6f7e0454657dd8a93dbcfd0caee44e9491f1dc99c3d0c63fda17e67e3484",
+      "reason": "Superseded by the user-designated GUILDLINE_OVERVIEWS_PROPOSAL authority; history remains in Git"
+    },
+    {
+      "path": "docs/01_overview/HUONG_DAN_HIEU_DU_AN_QPAF.md",
+      "sha256_before_removal": "9e98d3d38856dccb3acb5eef3c1d1b9055290df0fba083b6a52924507cbe0321",
+      "reason": "Superseded by the user-designated GUILDLINE_OVERVIEWS_PROPOSAL authority; history remains in Git"
+    },
+    {
+      "path": "docs/01_overview/PROJECT_REVIEW_AND_KNOWLEDGE_GUIDE.md",
+      "sha256_before_removal": "fa8baf32a9017da40b24024a6479cf4155646d1c9e812f2f4869ca57f5be3418",
+      "reason": "Superseded by the user-designated GUILDLINE_OVERVIEWS_PROPOSAL authority; history remains in Git"
+    },
+    {
+      "path": "docs/01_overview/QPAF_PROJECT_SYNTHESIS_SOURCE.md",
+      "sha256_before_removal": "3d39fd38fab009b24fb141b48d6647b67164e0ca0e8b30332fd66b3a7c0ce233",
+      "reason": "Superseded by the user-designated GUILDLINE_OVERVIEWS_PROPOSAL authority; history remains in Git"
+    },
+    {
+      "path": "docs/01_overview/README.md",
+      "sha256_before_removal": "2700f13d4441b1a7aa015312a1a0f95b6f6450d8b8246c9ef120051f07fd1765",
+      "reason": "Superseded by the user-designated GUILDLINE_OVERVIEWS_PROPOSAL authority; history remains in Git"
+    },
+    {
+      "path": "docs/01_overview/Tom_tat_dinh_huong_QPAF.md",
+      "sha256_before_removal": "a98a6f7e0454657dd8a93dbcfd0caee44e9491f1dc99c3d0c63fda17e67e3484",
+      "reason": "Superseded by the user-designated GUILDLINE_OVERVIEWS_PROPOSAL authority; history remains in Git"
+    },
+    {
+      "path": "docs/02_project_plan/oracle_study_plan_vi.md",
+      "sha256_before_removal": "07f84511fa082b8063db663f88c7cd83ced60bda6d468be2a531d1dfcdedb5b2",
+      "reason": "Superseded by the user-designated GUILDLINE_OVERVIEWS_PROPOSAL authority; history remains in Git"
+    },
+    {
+      "path": "docs/02_project_plan/QPAF_NEXT_EVALUATION_PROPOSAL.md",
+      "sha256_before_removal": "3235debb15a873d0c475898928613db2fad706d6f6bc62b71128f65c09ee09f4",
+      "reason": "Superseded by the user-designated GUILDLINE_OVERVIEWS_PROPOSAL authority; history remains in Git"
+    },
+    {
+      "path": "docs/02_project_plan/QPAF_TEAM_RESEARCH_EXECUTION_PLAN.md",
+      "sha256_before_removal": "07ce94c345ee3e7666b17c41721b5247f2089dfc41ca54be2dc917f980f6290b",
+      "reason": "Superseded by the user-designated GUILDLINE_OVERVIEWS_PROPOSAL authority; history remains in Git"
+    },
+    {
+      "path": "docs/02_project_plan/README.md",
+      "sha256_before_removal": "17e84702bc24f4046f6ef60c941554da761a30edcc1cc42d973116f4e9f87c44",
+      "reason": "Superseded by the user-designated GUILDLINE_OVERVIEWS_PROPOSAL authority; history remains in Git"
+    }
+  ],
+  "authority_consolidated_at": "2026-10-21"
 }

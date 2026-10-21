@@ -3,6 +3,8 @@
 M2.6 full OCR: [execution report](docs/superpowers/reports/2026-10-19-m26-full-ocr.md)
 and [saved-file index / reproduction commands](results/m2.6/README.md).
 
+Tài liệu chính thức thống nhất: [GUILDLINE_OVERVIEWS_PROPOSAL](docs/GUILDLINE_OVERVIEWS_PROPOSAL/README.md). Các tài liệu kỹ thuật và evidence bên ngoài giữ vai trò truy nguồn implementation và kết quả.
+
 Repository này gom công cụ oracle trong `src/oracle_study` và các module nghiên cứu M1–M2.1 trong `src/qpaf`.
 
 ## Trạng thái sau khi tích hợp các branch
@@ -10,7 +12,7 @@ Repository này gom công cụ oracle trong `src/oracle_study` và các module n
 - Hồ sơ M1 đã có [biên bản đóng milestone](evidence/M1_FINAL/07_R1/M1_closure_record.md) và [quyết định G1 `CONDITIONAL_PASS`](evidence/M1_FINAL/06_G1/G1_final_decision.md), ban hành ngày 29/09/2026.
 - M2.1 chọn [revision `m2.1-002`](evidence/revisions/m2.1-002/README.md), với train/validation/test **799/171/172 query** và kiểm chứng được ghi ngày 04/10/2026. Raw corpus cần được tái tạo riêng trên máy chạy.
 - Các hồ sơ trên được nhập từ `khuong/develop`; việc merge không chạy lại corpus audit, huấn luyện hoặc suy luận.
-- Đọc [bảng nghiệm thu và runbook M1](docs/06_handover/M1_ACCEPTANCE_SUMMARY_AND_RUNBOOK.md), [bản rà soát readiness](docs/06_handover/m1.1-m1.8-readiness-audit-2026-09-28.md) và [bản tổng quan từ repo nguồn](docs/01_overview/QPAF_PROJECT_SYNTHESIS_SOURCE.md).
+- Đọc [bảng nghiệm thu và runbook M1](docs/06_handover/M1_ACCEPTANCE_SUMMARY_AND_RUNBOOK.md), [bản rà soát readiness](docs/06_handover/m1.1-m1.8-readiness-audit-2026-09-28.md).
 
 Các đoạn oracle và run lịch sử bên dưới giữ phạm vi, kết quả và ranh giới của từng study. Đặc tả M1.2 hiện tại nằm ở [method core](docs/03_method/m1.2-method-core.md); phần tổng quan từ repo nguồn có ghi chú khi mô tả khác code.
 
@@ -241,14 +243,14 @@ config và bằng chứng vào inventory.
 1. [Trạng thái và đầu vào bàn giao M1](docs/06_handover/m1-restart-handoff.md): phần đã
    có, phần còn thiếu, người phụ trách và các quyết định cần chốt.
 2. [Đề xuất nghiên cứu](docs/GUILDLINE_OVERVIEWS_PROPOSAL/DE_XUAT_NGHIEN_CUU_QPAF.md) và
-   [tóm tắt định hướng](docs/01_overview/Tom_tat_dinh_huong_QPAF.md): phương pháp,
+   [tóm tắt định hướng](docs/GUILDLINE_OVERVIEWS_PROPOSAL/README.md): phương pháp,
    giả thuyết và phạm vi dataset.
 3. [Báo cáo Oracle đã nhận](results/m1.1/README.md): số liệu được cung cấp,
    file Word gốc và giới hạn kiểm chứng hiện tại.
 4. [Milestone gốc](docs/GUILDLINE_OVERVIEWS_PROPOSAL/POAI_Milestone_Group01_Hoan_Chinh.xlsx), sheet
    `Milestones`: phân công và deliverable. Các chữ `Done` trong snapshot
    cũ **không phải trạng thái đã được xác minh ở checkout này**.
-5. [Quy trình Gitflow và PR](CONTRIBUTING.md).
+5. [Nguồn tài liệu chính thức và quy tắc đọc evidence](docs/GUILDLINE_OVERVIEWS_PROPOSAL/README.md).
 
 [TIMELINE_fixed.md](docs/GUILDLINE_OVERVIEWS_PROPOSAL/TIMELINE_fixed.md) là lịch tham chiếu cũ cho M1.4–M1.10.
 Lịch đó chưa phân công lại việc thực hiện M1.1/M1.2. Không dùng ngày kế

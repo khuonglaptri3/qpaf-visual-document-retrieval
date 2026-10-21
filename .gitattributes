@@ -78,3 +78,7 @@ vimdoc_archive_audit_modal.py -text
 /configs/m2.8/** -text -eol -whitespace
 /results/m2.8/RUN-*/** -text -eol -whitespace
 /results/m2.8/verification/** -text -eol -whitespace
+
+# M3.1 seals and their pinned configuration bind exact bytes.
+/configs/m3.1/** -text -eol
+/results/m3.1/** -text -eol -whitespace

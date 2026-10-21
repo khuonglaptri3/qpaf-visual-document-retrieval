@@ -1,0 +1,18 @@
+{
+  "authority": {
+    "path": "docs/GUILDLINE_OVERVIEWS_PROPOSAL/POAI_Milestone_Group01_Hoan_Chinh.xlsx",
+    "sha256": "896bf26657a58f4d921c4b51b0428931a8770ccea3248201f1ce148714383bdc"
+  },
+  "binding": {
+    "path": "configs/m2.7/input_binding.json",
+    "sha256": "cae1aa08dca2e34e570e6b2529c77842cdca4968e05d77b6b66b5b549d269440"
+  },
+  "d1": {
+    "path": "evidence/revisions/m2.11-002/decision.json",
+    "sha256": "6b4726621627b37436230be019856a17e14e34c04c1bf8c0106a56997337e6f2"
+  },
+  "prior_binding_verification": {
+    "path": "evidence/revisions/m2.7-003/verification.json",
+    "sha256": "6f60530f0a538ebf3754fe6be4952a8dbac29fd5391fb856e606aa4d19afb9ba"
+  }
+}
