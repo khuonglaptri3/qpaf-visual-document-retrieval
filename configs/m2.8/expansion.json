@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "task_id": "M2.8",
+  "experiment_id": "QPAF-M2_8-EXPANSION-001",
+  "output_directory": "results/m2.8",
+  "amendment": {
+    "id": "QPAF-M1.5-A003",
+    "path": "evidence/M1_FINAL/02_protocol/amendments/QPAF-M1.5-A003.md",
+    "sha256": "0afacbde32d2aa4a31a53c39888f11cd20d03af5febfe28aac074de4d23e514c"
+  },
+  "policy": {
+    "policy_id": "qpaf_m28_top_document_expansion_v1",
+    "top_k": 200,
+    "rrf_k": 60,
+    "expansion_documents": 1,
+    "max_candidates_per_query": 600
+  },
+  "source_run": {
+    "run_id": "RUN-QPAF-M2_8-CACHE-001-20261020T144311Z-A01",
+    "path": "results/m2.8/RUN-QPAF-M2_8-CACHE-001-20261020T144311Z-A01",
+    "portable_manifest_sha256": "e5c3799a207dabb5456efac81204be4799a1423915e0b84f105e977c99f92cf5",
+    "candidate_freeze_sha256": "4ff420008b9ccaa3a4d3afc565c43e2c974b3f95dd39a22a742b47297aead06e",
+    "handover_sha256": "8664d01b48720826bf5ceda4dc4f07f9ba0aea29d414ffbd39f8d35ef3ae5b37",
+    "coverage_report_sha256": "598a68b513112abb4eb98d5b798b4ce60f17476eb8f07390a002434a100b4d62",
+    "split_ids_sha256": "5e0291b196f167aafa3122b4dc774a9aa71517b57ad78889580ea8ffb70b0487",
+    "query_texts_sha256": "e7994373c9fd5157cde0fb0c5a1440c37c275b85fa19b2b0b566f61d584c4ab4",
+    "qrels_development_sha256": "691b6bc4ada3bc64fe3c408fe32498b04c7f30900eadb39ae09ddbe29aea302c",
+    "qrels_test_sha256": "05eaaa810e47d35d4eb06b3d36a05f03b002ec9d3c5ee6bce5fc27d2e336d154"
+  }
+}
