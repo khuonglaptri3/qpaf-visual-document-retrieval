@@ -1,0 +1,243 @@
+{
+  "run_id": "RUN-QPAF-M3_4-MTH-001-20261022T112102Z-A01",
+  "authorization_sha256": "4be026b852574e7687fdc4b9337f716aa96a64ac39556ae288193bdba99e5365",
+  "checked_utc": "2026-10-22T11:28:26Z",
+  "checker": "executor first-pass check (AI-assisted); not independent validation, which is M3.5/M3.6",
+  "verdict": "ALL CHECKS PASS",
+  "failed": [],
+  "counts": {
+    "PASS": 39,
+    "FAIL": 0,
+    "SKIPPED": 0
+  },
+  "checks": [
+    {
+      "check": "exactly one attempt directory",
+      "status": "PASS",
+      "detail": "['20261022T112355-77b54aa0']"
+    },
+    {
+      "check": "_ATTEMPTED and _SUCCESS bind the authorization file hash",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "exactly one final marker and it is _SUCCESS",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "namespace holds only the expected entries",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "finished within the authorized wall limit",
+      "status": "PASS",
+      "detail": "75.978 s"
+    },
+    {
+      "check": "_SUCCESS receipt/summary hashes match the files",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "complete.json points at the attempt and its receipt",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "every receipt output that is present re-hashes identically",
+      "status": "PASS",
+      "detail": "[]"
+    },
+    {
+      "check": "no file in the attempt is missing from the receipt (receipt.json cannot list itself)",
+      "status": "PASS",
+      "detail": "[]"
+    },
+    {
+      "check": "best checkpoint hash in summary matches the file",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "last checkpoint hash in summary matches the file",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "resolved_config.json equals the authorized expectation",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "provenance config hash equals the authorized expectation",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "provenance git commit equals the supervised HEAD",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "the run consumed the sealed scores",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "the run consumed the sealed queries",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "the run consumed the sealed development qrels",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "the run consumed the sealed train ids",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "the run consumed the sealed validation ids",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "the run consumed the sealed test ids",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "the sealed test qrels were not a run input",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "method, granularity and torch match the authorization",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "test split was not opened",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "train/validation sizes and candidate recall as sealed",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "checkpoint reload parity passed within tolerance",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "20 epochs, 50 steps each, no skipped queries",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "all epoch losses and metrics are finite",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "selected epoch is the earliest maximum of validation nDCG@10",
+      "status": "PASS",
+      "detail": "epoch 19"
+    },
+    {
+      "check": "per-query file has one row per validation query",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "predictions cover 171 queries with finite scores",
+      "status": "PASS",
+      "detail": "82255 scores"
+    },
+    {
+      "check": "QARF comparator carries its M3.3 ACCEPTANCE_RECORDED/PASS event",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "resolved_config.json is byte-identical to the QARF run",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "data_manifest.json is byte-identical to the QARF run (rows, order, counts)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "provenance inputs equal the QARF run inputs",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "same seed, epochs and parameter count as QARF",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "per-query rows list the same validation queries in the same order as QARF",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "predictions rank exactly the QARF candidate pages per query",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "QPAF fusion weights vary across pages within a query (page-level gate)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "QARF fusion weights are constant within every query (query-level gate)",
+      "status": "PASS",
+      "detail": ""
+    }
+  ],
+  "observations": {
+    "validation_ndcg_at_10_by_epoch": [
+      0.8608277476409817,
+      0.8579278164326347,
+      0.8571216388922129,
+      0.8604816112121367,
+      0.8643956024634801,
+      0.8656806397991017,
+      0.8657506115496637,
+      0.8657506115496637,
+      0.8659962200919544,
+      0.8659962200919544,
+      0.8652305490184371,
+      0.8652305490184371,
+      0.8654868282631087,
+      0.8654868282631087,
+      0.865307614110322,
+      0.865307614110322,
+      0.8654000349759676,
+      0.8649946347307829,
+      0.8662796720664044,
+      0.8662796720664044
+    ],
+    "selected_epoch": 19,
+    "qarf_selected_epoch": 1,
+    "first_epoch_value": 0.8608277476409817,
+    "last_epoch_value": 0.8662796720664044,
+    "train_loss_first_to_last": [
+      0.42289271134367695,
+      0.3820004404510099
+    ],
+    "note": "Facts read from epochs.csv; no interpretation is recorded here."
+  }
+}
