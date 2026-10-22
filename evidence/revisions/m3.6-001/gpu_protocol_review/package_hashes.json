@@ -1,0 +1,8 @@
+{
+  "status": "PREPARED_FOR_PROTOCOL_REVIEW_NOT_EXECUTION",
+  "files": {
+    "gpu_workload.json": "3356630bfbf84aa7d984dccf22c1c81ca22bb8a65dc5cfe904896a43ae00ddf7",
+    "gpu_review_plan.json": "7d46b9abe8633dba6236f7e6b9e4026d43f60e4b13a36e756c9ad96ff1dd99f5"
+  },
+  "preparation_source_sha256": "e68f76b6f75cff46014bb0b97347500d6edb859cde2bea2b64d22c27b2af203e"
+}
