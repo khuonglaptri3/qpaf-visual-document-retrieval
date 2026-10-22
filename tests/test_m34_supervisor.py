@@ -344,7 +344,27 @@ class RepositoryTests(unittest.TestCase):
     def test_the_committed_authorization_is_matched_to_the_accepted_qarf_run(self):
         api = importlib.import_module('qpaf.m34.supervisor')
         auth = json.loads(TEMPLATE.read_text(encoding='utf-8'))
-        self.assertEqual(api.check_comparator(ROOT, auth), ROOT/auth['comparator']['attempt_path'])
+        # The large M3.1 seal stays local. Reconstruct only the comparator's
+        # required inputs from committed, hash-bound bytes in an isolated root.
+        # This exercises the real check on a clean checkout, without weakening
+        # the supervisor or requiring private run payloads in CI.
+        matched = (ROOT/'configs/m2.7/matched.json').read_bytes()
+        self.assertEqual(sha(matched),
+                         auth['sealed_inputs']['files_relative_to_run_path']['inputs/matched.json'])
+        pinned = auth['comparator']
+        with tempfile.TemporaryDirectory() as folder:
+            review_root = Path(folder)
+            for rel in (pinned['authorization_path'], pinned['acceptance']['events_path'],
+                        pinned['acceptance']['review_ref'],
+                        pinned['attempt_path']+'/data_manifest.json',
+                        pinned['attempt_path']+'/provenance.json'):
+                target = review_root/rel
+                target.parent.mkdir(parents=True, exist_ok=True)
+                target.write_bytes((ROOT/rel).read_bytes())
+            target = review_root/auth['sealed_inputs']['run_path']/'inputs/matched.json'
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes(matched)
+            self.assertEqual(api.check_comparator(review_root, auth), review_root/pinned['attempt_path'])
 
     def test_a_refused_run_exits_with_status_3_and_creates_nothing(self):
         with tempfile.TemporaryDirectory() as folder:
