@@ -1,0 +1,129 @@
+{
+  "authoritative_directory": "docs/GUILDLINE_OVERVIEWS_PROPOSAL",
+  "removed_count": 19,
+  "removed_documents": [
+    {
+      "path": "Agent_System_Prompt.md",
+      "sha256_before_removal": "2cdfd4caa824b02141c0cb4f0cbb2ebb4d7e7930dd88ab85bd1fba1494436840",
+      "reason": "Superseded by the user-designated GUILDLINE_OVERVIEWS_PROPOSAL authority; history remains in Git"
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "sha256_before_removal": "4e696631b23777b5a6cf3a20189a469fac85eec931db28619895141a22c3044f",
+      "reason": "Superseded by the user-designated GUILDLINE_OVERVIEWS_PROPOSAL authority; history remains in Git"
+    },
+    {
+      "path": "Context.md",
+      "sha256_before_removal": "9c7e2d749ff31ced7509283a62b1807e953fefa4ec60eaf0e7079bb49db700c4",
+      "reason": "Superseded by the user-designated GUILDLINE_OVERVIEWS_PROPOSAL authority; history remains in Git"
+    },
+    {
+      "path": "DE_XUAT_NGHIEN_CUU_QPAF.md",
+      "sha256_before_removal": "80ea27457726de78069469b5da1617d4f1a69d7dff2494606e8452fd86f5ea18",
+      "reason": "Superseded by the user-designated GUILDLINE_OVERVIEWS_PROPOSAL authority; history remains in Git"
+    },
+    {
+      "path": "DINH_HUONG_DU_AN_TRAO_DOI_GIANG_VIEN.md",
+      "sha256_before_removal": "5d063c03d591e686f319a76cd0694eac5ea08cb66fa20b562d2614df4f4046ee",
+      "reason": "Superseded by the user-designated GUILDLINE_OVERVIEWS_PROPOSAL authority; history remains in Git"
+    },
+    {
+      "path": "POAI_Milestone_Group01.xlsx",
+      "sha256_before_removal": "f10741261d92c3a94809147fa8619dd091709238f673dd727e57fb85808d0ced",
+      "reason": "Superseded by the user-designated GUILDLINE_OVERVIEWS_PROPOSAL authority; history remains in Git"
+    },
+    {
+      "path": "PROJECT_OVERVIEW.md",
+      "sha256_before_removal": "220854f899e4c302c56d4722dab5fafb9f65557928c08487e4c9c53d26236967",
+      "reason": "Superseded by the user-designated GUILDLINE_OVERVIEWS_PROPOSAL authority; history remains in Git"
+    },
+    {
+      "path": "PROJECT_TRACKING.md",
+      "sha256_before_removal": "1098bf01682720c74146bb66eaf8dabb0e1590ae78773f5d973ec9fda5ae08f6",
+      "reason": "Superseded by the user-designated GUILDLINE_OVERVIEWS_PROPOSAL authority; history remains in Git"
+    },
+    {
+      "path": "Tasks.md",
+      "sha256_before_removal": "3634625bf98f05c14867e57734c803486bc18de8bc507e02262ae2e5722a7d2a",
+      "reason": "Superseded by the user-designated GUILDLINE_OVERVIEWS_PROPOSAL authority; history remains in Git"
+    },
+    {
+      "path": "Tom_tat_dinh_huong_QPAF.md",
+      "sha256_before_removal": "a98a6f7e0454657dd8a93dbcfd0caee44e9491f1dc99c3d0c63fda17e67e3484",
+      "reason": "Superseded by the user-designated GUILDLINE_OVERVIEWS_PROPOSAL authority; history remains in Git"
+    },
+    {
+      "path": "docs/01_overview/HUONG_DAN_HIEU_DU_AN_QPAF.md",
+      "sha256_before_removal": "9e98d3d38856dccb3acb5eef3c1d1b9055290df0fba083b6a52924507cbe0321",
+      "reason": "Superseded by the user-designated GUILDLINE_OVERVIEWS_PROPOSAL authority; history remains in Git"
+    },
+    {
+      "path": "docs/01_overview/PROJECT_REVIEW_AND_KNOWLEDGE_GUIDE.md",
+      "sha256_before_removal": "fa8baf32a9017da40b24024a6479cf4155646d1c9e812f2f4869ca57f5be3418",
+      "reason": "Superseded by the user-designated GUILDLINE_OVERVIEWS_PROPOSAL authority; history remains in Git"
+    },
+    {
+      "path": "docs/01_overview/QPAF_PROJECT_SYNTHESIS_SOURCE.md",
+      "sha256_before_removal": "3d39fd38fab009b24fb141b48d6647b67164e0ca0e8b30332fd66b3a7c0ce233",
+      "reason": "Superseded by the user-designated GUILDLINE_OVERVIEWS_PROPOSAL authority; history remains in Git"
+    },
+    {
+      "path": "docs/01_overview/README.md",
+      "sha256_before_removal": "2700f13d4441b1a7aa015312a1a0f95b6f6450d8b8246c9ef120051f07fd1765",
+      "reason": "Superseded by the user-designated GUILDLINE_OVERVIEWS_PROPOSAL authority; history remains in Git"
+    },
+    {
+      "path": "docs/01_overview/Tom_tat_dinh_huong_QPAF.md",
+      "sha256_before_removal": "a98a6f7e0454657dd8a93dbcfd0caee44e9491f1dc99c3d0c63fda17e67e3484",
+      "reason": "Superseded by the user-designated GUILDLINE_OVERVIEWS_PROPOSAL authority; history remains in Git"
+    },
+    {
+      "path": "docs/02_project_plan/oracle_study_plan_vi.md",
+      "sha256_before_removal": "07f84511fa082b8063db663f88c7cd83ced60bda6d468be2a531d1dfcdedb5b2",
+      "reason": "Superseded by the user-designated GUILDLINE_OVERVIEWS_PROPOSAL authority; history remains in Git"
+    },
+    {
+      "path": "docs/02_project_plan/QPAF_NEXT_EVALUATION_PROPOSAL.md",
+      "sha256_before_removal": "3235debb15a873d0c475898928613db2fad706d6f6bc62b71128f65c09ee09f4",
+      "reason": "Superseded by the user-designated GUILDLINE_OVERVIEWS_PROPOSAL authority; history remains in Git"
+    },
+    {
+      "path": "docs/02_project_plan/QPAF_TEAM_RESEARCH_EXECUTION_PLAN.md",
+      "sha256_before_removal": "07ce94c345ee3e7666b17c41721b5247f2089dfc41ca54be2dc917f980f6290b",
+      "reason": "Superseded by the user-designated GUILDLINE_OVERVIEWS_PROPOSAL authority; history remains in Git"
+    },
+    {
+      "path": "docs/02_project_plan/README.md",
+      "sha256_before_removal": "17e84702bc24f4046f6ef60c941554da761a30edcc1cc42d973116f4e9f87c44",
+      "reason": "Superseded by the user-designated GUILDLINE_OVERVIEWS_PROPOSAL authority; history remains in Git"
+    }
+  ],
+  "canonical_originals": [
+    {
+      "path": "docs/GUILDLINE_OVERVIEWS_PROPOSAL/DE_XUAT_NGHIEN_CUU_QPAF.md",
+      "sha256": "7e5c90b4f749bcf29cff52322bb66f4723e078af74293d7b486fc6063f203b44",
+      "unchanged": true
+    },
+    {
+      "path": "docs/GUILDLINE_OVERVIEWS_PROPOSAL/Nghiên Cứu Kỹ Thuật QPAF.docx",
+      "sha256": "3330a2fe962be879705e4b25477eabc6f375acfddc2eb31351893d5236831e63",
+      "unchanged": true
+    },
+    {
+      "path": "docs/GUILDLINE_OVERVIEWS_PROPOSAL/overview.md",
+      "sha256": "f8224e7c712c2bce77e5f58aed8bc3c5d13ff98ed8f382f722238fa831eb4d71",
+      "unchanged": true
+    },
+    {
+      "path": "docs/GUILDLINE_OVERVIEWS_PROPOSAL/POAI_Milestone_Group01_Hoan_Chinh.xlsx",
+      "sha256": "896bf26657a58f4d921c4b51b0428931a8770ccea3248201f1ce148714383bdc",
+      "unchanged": true
+    },
+    {
+      "path": "docs/GUILDLINE_OVERVIEWS_PROPOSAL/TIMELINE_fixed.md",
+      "sha256": "4498e32cd260db9f8101a23194b92f7db264cc821b25d4b7efe9b94c6168f362",
+      "unchanged": true
+    }
+  ],
+  "historical_m1_m2_evidence_modified": false
+}

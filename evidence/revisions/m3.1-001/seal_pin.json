@@ -1,0 +1,8 @@
+{
+  "task_id": "M3.1",
+  "run_id": "RUN-QPAF-M3_1-SEAL-001-20261021T142631Z-A01",
+  "run_path": "results/m3.1/RUN-QPAF-M3_1-SEAL-001-20261021T142631Z-A01",
+  "manifest_sha256": "0832af156b79d0448ecc630ff572a0053d7cb5da98b4dac2dec1c6ee49e27893",
+  "verification_sha256": "6b7b6c9df6bddcdd98af202de24ff821c7c469aea3b343bef5081b71100e5c1d",
+  "success_marker_sha256": "e3289b786c64f8ff7c9b22c7c81876f92a847ec1db23cb457407ec09e6d86818"
+}

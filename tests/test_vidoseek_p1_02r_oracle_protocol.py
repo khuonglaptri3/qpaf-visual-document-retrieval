@@ -191,13 +191,6 @@ class VidoseekP102ROracleProtocolTest(unittest.TestCase):
         self.assertFalse(self.protocol["decision_gates"]["w7_alone_can_unblock_p1_03"])
         self.assertFalse(self.protocol["decision_gates"]["w7_alone_can_enter_phase_2"])
 
-        tasks = (ROOT / "Tasks.md").read_text(encoding="utf-8")
-        self.assertIn("### TASK-ID: P1-02R-O1", tasks)
-        p1_02 = tasks.split("### TASK-ID: P1-02\n", 1)[1].split("### TASK-ID:", 1)[0]
-        p1_03 = tasks.split("### TASK-ID: P1-03\n", 1)[1].split("### TASK-ID:", 1)[0]
-        self.assertIn("**STATUS:** BLOCKED", p1_02)
-        self.assertIn("**DEPENDENCIES:** P1-02", p1_03)
-        self.assertIn("**STATUS:** BLOCKED", p1_03)
 
     def test_pins_the_verified_recovery_bundle_without_requiring_local_payload(
         self,

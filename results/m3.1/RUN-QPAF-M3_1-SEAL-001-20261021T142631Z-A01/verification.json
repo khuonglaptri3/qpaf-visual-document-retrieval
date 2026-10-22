@@ -1,0 +1,154 @@
+{
+  "independent_human_review": "PENDING",
+  "owner": "Khương",
+  "parity": {
+    "candidate_rows": {
+      "train": 386390,
+      "validation": 82255
+    },
+    "development_coverage": {
+      "train": {
+        "captured_relevant": 799,
+        "macro_candidate_recall": 1.0,
+        "relevant_total": 799,
+        "uncovered_queries": 0
+      },
+      "validation": {
+        "captured_relevant": 171,
+        "macro_candidate_recall": 1.0,
+        "relevant_total": 171,
+        "uncovered_queries": 0
+      }
+    },
+    "feature_count": 13,
+    "feature_names": [
+      "score_bm25",
+      "score_dense",
+      "score_visual",
+      "rr_bm25",
+      "rr_dense",
+      "rr_visual",
+      "gap_bm25",
+      "gap_dense",
+      "gap_visual",
+      "disagreement_bm25_dense",
+      "disagreement_bm25_visual",
+      "disagreement_dense_visual",
+      "query_length"
+    ],
+    "identical": true,
+    "methods": {
+      "QARF": {
+        "train": {
+          "active_candidate_rows_seen": 7727800,
+          "batch_order_sha256": "6e2b932bece1ece071e4766032532a922f4697deb11c0a8fe083c855dd71fab9",
+          "batches": 1000,
+          "candidate_rows": 386390,
+          "components": {
+            "features": "36238f43d3d68bf7f3fcacd4bf6631af30bb571bc7b6c878472ea7966ca4e6a1",
+            "labels": "b76c2b20d7edf3f4ffd44373afdeac89057e04a9ccff2ee645c9bde756f03847",
+            "mask": "81472cc093b1cb1a272866215d38067b18579a2840d851b9131c462bf7776a87",
+            "normalized_scores": "3a987fc8d2c8f8e17709685c05d7c3e20a3b1a24741ff3cf9dc024fa3bee3cec",
+            "page_ids": "35d742d2bc16f76f211f696d7a56f304151f8b7a28c58d48f2894b2568642e46",
+            "query_ids": "b5576a7cb9795ed32add2245fb593f94569870f84db9a448af63eeb90386a699",
+            "query_texts": "82c1e7be8b427a35d805181cd572d4afcbc02e78a189bde8129d556fc7829aa5",
+            "raw_scores": "9d056c84151c689bc198d8393bbef831389ad15066022fee75911af0fa0efc5b",
+            "relevant_total": "bddce443a78f43b903816711c5b3a2aaf03045301bbde2a81f821038c5497b65"
+          },
+          "epochs": 20,
+          "queries": 799
+        },
+        "validation": {
+          "active_candidate_rows_seen": 82255,
+          "batch_order_sha256": "585c611b37fdae4372c905a87eaa0e1f265a741549b60a35d62e931539882a9a",
+          "batches": 11,
+          "candidate_rows": 82255,
+          "components": {
+            "features": "4bfebda48aa5283722105f8bdd354ca1f464576b87d33b9bd4860938232878d2",
+            "labels": "7e433c392c6918035bd53d0a2d51eee5cd6c24fc1f15ecccc6dd0d5e89211a1f",
+            "mask": "ddfc4764ebcd74a0ef4f19339ce5a763710430fefb6bba95613c97e80caa5099",
+            "normalized_scores": "0562d67db90f74179650d9d78ea6149ad857401384d32ac29427f5f43ac42ef3",
+            "page_ids": "e98a5f7d52edbf7934acf23c2962f39fadf2952ef62de47cc1d8077a5ba3492c",
+            "query_ids": "d52a4d6d8658d01c49c9ddc8ec2d703b17aa8178310fc2a4b753a7c2263a099f",
+            "query_texts": "dc6e42f96a77232e708ef25b91120f70c4fa90e9e704a93a274bda823ffa1c5e",
+            "raw_scores": "8056e21d2101319190ec2814ffa33ee8b02912bdc4c63c88cc5a402d41d704c7",
+            "relevant_total": "cd2e73c3ddce0c63f3ed0af53d8e4e58955f35bf7f420714aa92f7457e37fa2f"
+          },
+          "epochs": 1,
+          "queries": 171
+        }
+      },
+      "QPAF": {
+        "train": {
+          "active_candidate_rows_seen": 7727800,
+          "batch_order_sha256": "6e2b932bece1ece071e4766032532a922f4697deb11c0a8fe083c855dd71fab9",
+          "batches": 1000,
+          "candidate_rows": 386390,
+          "components": {
+            "features": "36238f43d3d68bf7f3fcacd4bf6631af30bb571bc7b6c878472ea7966ca4e6a1",
+            "labels": "b76c2b20d7edf3f4ffd44373afdeac89057e04a9ccff2ee645c9bde756f03847",
+            "mask": "81472cc093b1cb1a272866215d38067b18579a2840d851b9131c462bf7776a87",
+            "normalized_scores": "3a987fc8d2c8f8e17709685c05d7c3e20a3b1a24741ff3cf9dc024fa3bee3cec",
+            "page_ids": "35d742d2bc16f76f211f696d7a56f304151f8b7a28c58d48f2894b2568642e46",
+            "query_ids": "b5576a7cb9795ed32add2245fb593f94569870f84db9a448af63eeb90386a699",
+            "query_texts": "82c1e7be8b427a35d805181cd572d4afcbc02e78a189bde8129d556fc7829aa5",
+            "raw_scores": "9d056c84151c689bc198d8393bbef831389ad15066022fee75911af0fa0efc5b",
+            "relevant_total": "bddce443a78f43b903816711c5b3a2aaf03045301bbde2a81f821038c5497b65"
+          },
+          "epochs": 20,
+          "queries": 799
+        },
+        "validation": {
+          "active_candidate_rows_seen": 82255,
+          "batch_order_sha256": "585c611b37fdae4372c905a87eaa0e1f265a741549b60a35d62e931539882a9a",
+          "batches": 11,
+          "candidate_rows": 82255,
+          "components": {
+            "features": "4bfebda48aa5283722105f8bdd354ca1f464576b87d33b9bd4860938232878d2",
+            "labels": "7e433c392c6918035bd53d0a2d51eee5cd6c24fc1f15ecccc6dd0d5e89211a1f",
+            "mask": "ddfc4764ebcd74a0ef4f19339ce5a763710430fefb6bba95613c97e80caa5099",
+            "normalized_scores": "0562d67db90f74179650d9d78ea6149ad857401384d32ac29427f5f43ac42ef3",
+            "page_ids": "e98a5f7d52edbf7934acf23c2962f39fadf2952ef62de47cc1d8077a5ba3492c",
+            "query_ids": "d52a4d6d8658d01c49c9ddc8ec2d703b17aa8178310fc2a4b753a7c2263a099f",
+            "query_texts": "dc6e42f96a77232e708ef25b91120f70c4fa90e9e704a93a274bda823ffa1c5e",
+            "raw_scores": "8056e21d2101319190ec2814ffa33ee8b02912bdc4c63c88cc5a402d41d704c7",
+            "relevant_total": "cd2e73c3ddce0c63f3ed0af53d8e4e58955f35bf7f420714aa92f7457e37fa2f"
+          },
+          "epochs": 1,
+          "queries": 171
+        }
+      }
+    },
+    "model_forward_executed": false,
+    "record_counts": {
+      "train": 799,
+      "validation": 171
+    },
+    "seed": 20260820,
+    "test_labels_opened": false,
+    "training_executed": false
+  },
+  "pilot_execution_authorized": false,
+  "policy_id": "qpaf_m28_top_document_expansion_v1",
+  "row_audit": {
+    "candidate_count": 551764,
+    "candidate_keys_sha256": "8926ad10530ee21e4181d08e947a6058fdee672c1bdc99c1ac122c3b8ed96438",
+    "query_count": 1142,
+    "status": "PASS"
+  },
+  "schema_version": 1,
+  "source_run_id": "RUN-QPAF-M2_8-EXPANSION-001-20261021T042029Z-A01",
+  "status": "PASS",
+  "task_id": "M3.1",
+  "test_labels_opened": false,
+  "test_ranking_metrics_computed": false,
+  "training_executed": false,
+  "workbook_task": {
+    "deliverable": "Immutable cache/splits with identical rows, order, features and qrels\nDependency: D1",
+    "owner": "Khương",
+    "row": 39,
+    "sheet": "Milestones",
+    "task_id": "M3.1",
+    "title": "Seal pilot inputs and verify row parity"
+  }
+}

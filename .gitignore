@@ -106,3 +106,6 @@ results/m2.3/review/previews/
 results/m2.6/RUN-*/output/pages/
 results/m2.6/RUN-*/output/archives/
 results/m2.6/RUN-*/source_snapshot.zip
+
+# M3.1 sealed payload copies remain local; portable manifests are committed.
+/results/m3.1/**/inputs/
