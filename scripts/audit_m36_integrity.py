@@ -348,7 +348,9 @@ def main(argv=None):
     require(not (args.output and args.replay_method), 'worker cannot create review output')
     report = replay_worker(args.replay_method) if args.replay_method else audit()
     if args.output is None:
-        print(json.dumps(report, ensure_ascii=False, indent=2, allow_nan=False))
+        # ASCII JSON also works with legacy Windows console encodings; JSON
+        # readers recover the original Unicode owner names without loss.
+        print(json.dumps(report, ensure_ascii=True, indent=2, allow_nan=False))
     else:
         args.output.parent.mkdir(parents=True, exist_ok=True)
         with args.output.open('x', encoding='utf-8', newline='\n') as stream:
