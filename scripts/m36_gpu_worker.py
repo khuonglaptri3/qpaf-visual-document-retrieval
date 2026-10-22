@@ -103,8 +103,7 @@ def summarize(rows, measured_ids, peak_allocated_bytes):
 
 def verify_bundle(root):
     manifest = read(root/'bundle_manifest.json')
-    actual = {p.relative_to(root).as_posix() for p in root.rglob('*')
-              if p.is_file() and '__pycache__' not in p.parts and p.suffix != '.pyc'}
+    actual = {p.relative_to(root).as_posix() for p in root.rglob('*') if p.is_file()}
     if actual != set(manifest['files']) | {'bundle_manifest.json'}:
         raise ValueError('bundle file allowlist mismatch')
     for name, expected in manifest['files'].items():

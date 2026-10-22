@@ -96,6 +96,15 @@ class GPUContractTests(unittest.TestCase):
             self.assertIn('partial-pass', result['log']['stdout'])
             self.assertIsNone(result['output'])
 
+    def test_bytecode_named_directory_cannot_hide_unlisted_labels(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            self.api.write_new(root/'bundle_manifest.json', {'files': {}})
+            (root/'__pycache__').mkdir()
+            (root/'__pycache__/qrels_test.json').write_text('{}', encoding='utf-8')
+            with self.assertRaisesRegex(ValueError, 'allowlist'):
+                self.api.verify_bundle(root)
+
 
 if __name__ == '__main__':
     unittest.main()
