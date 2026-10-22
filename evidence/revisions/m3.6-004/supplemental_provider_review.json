@@ -1,0 +1,17 @@
+{
+  "recorded_utc": "2026-10-22T17:07:53.713310+00:00",
+  "reviewer": "same separate read-only code/result reviewer agent",
+  "blocking_findings": 0,
+  "scope": "README, technical/issue/provider/independent receipts, six provider JSON exports, source bindings, owner-role references and hashes",
+  "provider_bindings": "A02/A03 app/function and A03 container membership match",
+  "provider_statistic_semantics": "60-second averages and container sample p50/p90/p99; no exact/lifetime peak",
+  "provider_values_and_counts": "MATCH_RAW_EXPORTS",
+  "source_input_preservation": "103 core source/seven input manifest entries unchanged",
+  "result_verification_and_suite_log_hashes": "MATCH_TECHNICAL_REVIEW",
+  "technical_acceptance": "BLOCKED_PENDING_OWNER_QA_AND_MEMORY_PEAK_RECONCILIATION",
+  "exact_original_discrepancy_cause": "UNVERIFIED",
+  "tests_rerun": 0,
+  "observer_commands_replayed": 0,
+  "gpu_invocations": 0,
+  "file_mutations": 0
+}

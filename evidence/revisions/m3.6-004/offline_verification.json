@@ -1,0 +1,48 @@
+{
+  "schema_version": 1,
+  "checked_utc": "2026-10-22T16:58:37.628522+00:00",
+  "offline_verification": "PASS",
+  "operational_latency_cuda_parity_verdict": "PASS",
+  "result_sha256": "e829b47b05734e1557d0591ce1f117ed7a2ac6ffecbd9d8cf060a902b6f57cf6",
+  "authorization_sha256": "4b6528f2185f755c201185f5114f7dbd0a31eda366eb05142c87757d73c56bf5",
+  "source_commit": "ade1a7122d9f64c82e2493c0c7955fe2b0a74ec2",
+  "image_id": "im-bFFCtQsQCpEMjFhsQV5QkJ",
+  "app_id": "ap-8f30Xc6tkHWkwJSpGnRm8U",
+  "methods": {
+    "QARF": {
+      "median_online_ms": 2.4863105,
+      "p95_query_medians_ms": 2.5824954,
+      "peak_cuda_allocated_gib": 0.032440185546875,
+      "reported_ru_maxrss_gib": 4.885990142822266,
+      "final_memory_assessment": {
+        "configured_limit_bytes": 5368709120,
+        "process_high_water_verdict": "PASS",
+        "container_peak_verdict": "UNAVAILABLE",
+        "reported_container_peak_verified": false,
+        "physical_container_peak_verified": false,
+        "scope": "In-container process/cgroup interfaces; no independent host/provider metric. Current samples are not peaks; process RSS is not container usage."
+      },
+      "timed_rows": 3366
+    },
+    "QPAF": {
+      "median_online_ms": 2.4471775,
+      "p95_query_medians_ms": 2.5498479,
+      "peak_cuda_allocated_gib": 0.03245258331298828,
+      "reported_ru_maxrss_gib": 4.841655731201172,
+      "final_memory_assessment": {
+        "configured_limit_bytes": 5368709120,
+        "process_high_water_verdict": "PASS",
+        "container_peak_verdict": "UNAVAILABLE",
+        "reported_container_peak_verified": false,
+        "physical_container_peak_verified": false,
+        "scope": "In-container process/cgroup interfaces; no independent host/provider metric. Current samples are not peaks; process RSS is not container usage."
+      },
+      "timed_rows": 3366
+    }
+  },
+  "all_frozen_inputs_and_core_source_match_original_bundle": true,
+  "original_4gib_result_preserved": true,
+  "summary_arithmetic": "NumPy independent median/linear p95",
+  "human_owner_acceptance": "PENDING",
+  "g2_decision_made": false
+}

@@ -1,0 +1,95 @@
+{
+  "recorded_utc": "2026-10-22T17:03:40.170224+00:00",
+  "observer_runtime": {
+    "modal": "1.6.2",
+    "local_environment": ".cache/modal-observer-1.6.2",
+    "benchmark_modal_version_unchanged": "1.5.5"
+  },
+  "read_only": true,
+  "new_gpu_invocations_for_telemetry": 0,
+  "official_sources": [
+    "https://modal.com/docs/sdk/py/releases",
+    "https://modal.com/docs/cli/latest/function"
+  ],
+  "app_id": "ap-8f30Xc6tkHWkwJSpGnRm8U",
+  "function_id": "fu-LBHrGsmOpKMdauupwahkeL",
+  "container_id": "ta-01M5J8RE5GCY9N6G87V39VYQ5R",
+  "function_binding_ref": "provider_app_info.json",
+  "metrics_ref": "provider_metrics_5gib.json",
+  "stats_ref": "provider_stats_5gib.json",
+  "original_app_ref": "provider_app_info_original_4gib.json",
+  "original_metrics_ref": "provider_metrics_original_4gib.json",
+  "query_windows": {
+    "original_4gib": {
+      "since": "2026-10-22T15:43:00+00:00",
+      "until": "2026-10-22T15:49:00+00:00"
+    },
+    "new_5gib": {
+      "since": "2026-10-22T16:56:00+00:00",
+      "until": "2026-10-22T17:00:00+00:00"
+    }
+  },
+  "metrics_bucket_seconds": 60,
+  "memory_metrics_available": [
+    "memory_requested_avg",
+    "memory_usage_avg"
+  ],
+  "provider_sample_memory_percentiles_gib": {
+    "p50": 0.8676185607910156,
+    "p90": 0.894915771484375,
+    "p99": 0.8949203491210938
+  },
+  "provider_input_success_count": 1,
+  "provider_input_failure_count": 0,
+  "provider_container_total_count": 1,
+  "provider_container_error_count": 0,
+  "physical_container_peak_verified": false,
+  "exact_or_lifetime_peak_available": false,
+  "interpretation": "Provider averages and sample percentiles differ from gVisor process RSS. These are not exact continuous/lifetime peaks and do not prove CPU RAM <5 GiB throughout. Do not relabel p99 or the maximum of bucket averages as a peak.",
+  "legacy_lookup_attempt": "SDK1.5.5 AppGetObjects returned UnimplementedError; SDK1.6.2 app info and function metrics/stats succeeded in separate observer environment.",
+  "commands": [
+    [
+      "python",
+      "-m",
+      "modal",
+      "app",
+      "info",
+      "ap-8f30Xc6tkHWkwJSpGnRm8U",
+      "--json"
+    ],
+    [
+      "python",
+      "-m",
+      "modal",
+      "function",
+      "metrics",
+      "fu-LBHrGsmOpKMdauupwahkeL",
+      "--group",
+      "memory",
+      "--group",
+      "calls",
+      "--since",
+      "2026-10-22T16:56:00+00:00",
+      "--until",
+      "2026-10-22T17:00:00+00:00",
+      "--bucket-size",
+      "1m",
+      "--json"
+    ],
+    [
+      "python",
+      "-m",
+      "modal",
+      "function",
+      "stats",
+      "fu-LBHrGsmOpKMdauupwahkeL",
+      "--since",
+      "2026-10-22T16:56:00+00:00",
+      "--until",
+      "2026-10-22T17:00:00+00:00",
+      "--container",
+      "ta-01M5J8RE5GCY9N6G87V39VYQ5R",
+      "--json"
+    ]
+  ]
+}
