@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "status": "DRAFT_NOT_APPROVED",
+  "status": "APPROVED",
   "drafted_on": "2026-10-22",
   "note": "Draft authorization manifest per evidence/M1_FINAL/02_protocol/run_policy.md section 3 and 04_experiment_registry/append_only_policy.md. It grants NOTHING until the approval block is filled with the Research Lead's exact approval text and timestamp, the file is committed, and its SHA-256 is recorded in an AUTHORIZATION_RECORDED event. Nothing may be executed from this draft.",
   "task_id": "M3.2",
@@ -15,7 +15,7 @@
   },
   "experiment_id": "QPAF-M3_2-MTH-001",
   "registry_event_id": "PENDING",
-  "run_id": "PENDING_AT_APPROVAL",
+  "run_id": "RUN-QPAF-M3_2-MTH-001-20261022T035229Z-A01",
   "run_id_format": "RUN-QPAF-M3_2-MTH-001-<UTC YYYYMMDDTHHMMSSZ at approval>-A01",
   "purpose": "Train the matched learned QARF pilot (query-level gate) on the sealed M3.1 inputs, select the checkpoint on validation, and retain checkpoints, predictions, metrics, telemetry and provenance for independent validation in M3.3.",
   "experiment_class": "learned_training",
@@ -107,7 +107,7 @@
     "split_scope": "validation",
     "evaluator_source_sha256": "bfd25f331c5c377c708fd1d05f3e3edb85467488301e9658ea9bb486ef476742"
   },
-  "actor": "PENDING_CONFIRM (Tấn Phát directly, or an AI agent acting at Tấn Phát's explicit request)",
+  "actor": "Tấn Phát",
   "command": {
     "interpreter": ".venv/Scripts/python.exe",
     "script": "scripts/run_m24_pipeline.py",
@@ -187,10 +187,10 @@
       "--run-id",
       "<run_id>",
       "--actor",
-      "<actor>"
+      "Tấn Phát"
     ],
     "source_files_sha256": {
-      "src/qpaf/m32/supervisor.py": "f7a65a3c475e7afdc8593ce6753184f1100d8c275aa5d227a5993a628a48e170",
+      "src/qpaf/m32/supervisor.py": "8de310b80226ce45061ceb2a59bb95d25377dcb933f694e4f195a9ab2a10c63d",
       "scripts/run_m32_authorized.py": "b5fb3c1380d09162b009e8f158fa9a624581ddb688ecf5e7616a49a9eb9ebfd0"
     },
     "test_file": "tests/test_m32_supervisor.py",
@@ -200,7 +200,8 @@
       "3": "refused before starting; nothing created"
     },
     "validity_rule": "A run is valid evidence only if its namespace holds _ATTEMPTED.json, supervisor.log and exactly one of _SUCCESS.json/_FAILED.json written by this supervisor. The runner can be launched without the supervisor, so M3.3 must reject any run that lacks them.",
-    "must_be_committed_before_approval": true
+    "must_be_committed_before_approval": true,
+    "actor_rule": "The --actor value must equal the actor field above; the supervisor refuses on any mismatch and when this field is still PENDING."
   },
   "stop_conditions": [
     "source, config, data or hash drift from this manifest",
@@ -233,8 +234,8 @@
   },
   "approval": {
     "approver": "Tấn Phát (Research Lead)",
-    "approval_text": "PENDING_EXACT_TEXT_FROM_APPROVER",
-    "approved_utc": "PENDING"
+    "approval_text": "I approved M3.2 QARF pilot run on 2026-10-22 (seed 20260820). Exactly as written, 60min limit, a single invocation, no retry.",
+    "approved_utc": "2026-10-22T03:52:29Z"
   },
   "independent_review": {
     "reviewer": "Thanh (M3.3)",
@@ -242,9 +243,8 @@
   },
   "open_items": [
     "Confirm evidence_class: the classification table has no explicit mapping for learned_training; engineering_evidence is proposed, mirroring M3.1.",
-    "Confirm who executes the run (actor).",
     "Confirm the commit-binding approach: code is bound to code_base_commit and only the allowed_diff_from_base paths may differ, because a manifest cannot contain the hash of the commit that adds it.",
     "The 60-minute limit has never been measured; a valid run that exceeds it is killed and needs a new authorization to retry.",
-    "Commit the supervisor, its tests and this file, then re-check supervisor.source_files_sha256 before filling the approval block."
+    "Commit the supervisor, its tests and this file, then re-check supervisor.source_files_sha256 against the committed blobs before filling the approval block."
   ]
 }
