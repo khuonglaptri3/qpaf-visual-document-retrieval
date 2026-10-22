@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "task_id": "M3.6",
+  "status": "CPU_INTEGRITY_PASS_RESOURCE_BLOCKED",
+  "files": {
+    "scripts/audit_m36_integrity.py": {
+      "sha256": "2cc9925821ca6deee7e667fd5f6e2e617c88a828c15853c9340ba860ee71b2db",
+      "bytes": 23083
+    },
+    "scripts/prepare_m36_gpu_review.py": {
+      "sha256": "e68f76b6f75cff46014bb0b97347500d6edb859cde2bea2b64d22c27b2af203e",
+      "bytes": 10124
+    },
+    "tests/test_m36_integrity.py": {
+      "sha256": "93d45edd206a784f1166df8ac165e613993e76a9821fa5c7606391aa64a5a3b6",
+      "bytes": 8284
+    },
+    "tests/test_m36_workload.py": {
+      "sha256": "877c23e8cfc4622bdd733d82becd55e424f379a5cf64fefd94f0f2d165be358e",
+      "bytes": 2039
+    },
+    "evidence/revisions/m3.4-001/governance_events.jsonl": {
+      "sha256": "b3e6ee829191bb7a6b721cbfc7e4d2799d895b75a1c833d114e10aef5a41e80f",
+      "bytes": 7966
+    },
+    "evidence/revisions/m3.6-001/gpu_protocol_review/gpu_review_plan.json": {
+      "sha256": "7d46b9abe8633dba6236f7e6b9e4026d43f60e4b13a36e756c9ad96ff1dd99f5",
+      "bytes": 6275
+    },
+    "evidence/revisions/m3.6-001/gpu_protocol_review/gpu_workload.json": {
+      "sha256": "3356630bfbf84aa7d984dccf22c1c81ca22bb8a65dc5cfe904896a43ae00ddf7",
+      "bytes": 123616
+    },
+    "evidence/revisions/m3.6-001/gpu_protocol_review/package_hashes.json": {
+      "sha256": "d6e5a1e7589da93028d5c411db0eaae7f74ad5b11a92a030e4982c68263d39e6",
+      "bytes": 366
+    },
+    "evidence/revisions/m3.6-001/gpu_protocol_review/REVIEW.md": {
+      "sha256": "8e0f5cca224248ce3deb14eb7fa1d2188962f53136337e09cecb4c137b67a0b2",
+      "bytes": 4427
+    },
+    "evidence/revisions/m3.6-001/integrity_review.json": {
+      "sha256": "497b934ce6222e6e4e70363ef374e88236b7592bb549b0c81bbb89b45291e66f",
+      "bytes": 7189
+    },
+    "evidence/revisions/m3.6-001/literature_and_methodology_vi.md": {
+      "sha256": "43e88f79cb2c5d7d95063510ea134db129e355478161173a8e2e6044fbb2daea",
+      "bytes": 11029
+    },
+    "evidence/revisions/m3.6-001/README.md": {
+      "sha256": "c2967425ac73f6d7419c91a18c7a2a07462379d5634f6646c8d3303656b0e27e",
+      "bytes": 5162
+    },
+    "evidence/revisions/m3.6-001/validation_receipt.json": {
+      "sha256": "b687d6ba91e916aeb48169f7188c893b2dc8ce143e3073bd5fc734d67488e3c2",
+      "bytes": 2378
+    }
+  },
+  "gpu_execution_performed": false,
+  "owner_acceptance": "PENDING_KHUONG_REVIEW"
+}

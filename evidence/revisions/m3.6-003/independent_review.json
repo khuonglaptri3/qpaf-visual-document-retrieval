@@ -1,0 +1,14 @@
+{
+  "recorded_utc": "2026-10-22T15:56:01.509357+00:00",
+  "reviewer": "separate read-only code/result reviewer agent",
+  "code_review": "NO_REMAINING_CRITICAL_OR_IMPORTANT",
+  "independent_focused_tests": 10,
+  "results": "OPERATIONAL_GATES_AND_PROVENANCE_PASS",
+  "bundle_files_rehashed": 111,
+  "summary_arithmetic_recomputed": true,
+  "checked": "20+1122 distinct/disjoint query coverage;3366 rows/method;all stage median/p95;171/82255 parity;original checkpoints/predictions;source commit;authorization/attempt/bundle/image/result/success hash chain",
+  "remaining_important_finding": "M3_6_CPU_RSS_ACCOUNTING_001",
+  "provider_peak_obtained": false,
+  "remote_execution_performed_by_reviewer": false,
+  "human_owner_acceptance": "PENDING_NOT_FABRICATED"
+}

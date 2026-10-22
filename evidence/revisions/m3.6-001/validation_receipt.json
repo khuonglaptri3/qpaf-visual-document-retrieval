@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "task_id": "M3.6",
+  "recorded_utc": "2026-10-22T14:55:24.660985+00:00",
+  "base_develop_commit": "cd6b838566fbb8adb0d7ad9bf096ac1d8bce4da3",
+  "audit_source_sha256": "2cc9925821ca6deee7e667fd5f6e2e617c88a828c15853c9340ba860ee71b2db",
+  "runtime": {
+    "python": "3.13.7",
+    "torch": "2.11.0+cpu",
+    "numpy": "2.5.4",
+    "pandas": "3.0.6",
+    "pyarrow": "26.0.0"
+  },
+  "full_suite": {
+    "command": "python -m unittest discover -s tests -q",
+    "tests_run": 429,
+    "result": "OK",
+    "skipped": 2,
+    "failures": 0,
+    "errors": 0,
+    "seconds": 206.201,
+    "environment": "approved Python3.13.7/Torch2.11.0+cpu interpreter; checkout/src on PYTHONPATH"
+  },
+  "focused_m36_tests": {
+    "count": 12,
+    "result": "PASS",
+    "included_in_full_suite": true
+  },
+  "independent_code_review": {
+    "status": "NO_REMAINING_FINDINGS",
+    "reviewer": "separate read-only reviewer agent",
+    "scope": "auditor, regression tests, workload preparation and source/claim boundaries",
+    "human_owner_acceptance": "PENDING_NOT_FABRICATED"
+  },
+  "real_audit_command": "python -X utf8 scripts/audit_m36_integrity.py --output evidence/revisions/m3.6-001/integrity_review.json",
+  "real_audit_result": {
+    "integrity": "PASS",
+    "resources": "BLOCKED",
+    "report_sha256": "497b934ce6222e6e4e70363ef374e88236b7592bb549b0c81bbb89b45291e66f"
+  },
+  "diagnostic_corrections": [
+    "A direct-parent PID assumption refused a real Windows venv-shim worker; live ancestry proof and regression tests replaced it.",
+    "A read-only stdout export failed in the legacy Windows console after audit computation; default JSON now escapes Unicode, and the accepted report is a UTF8 file.",
+    "A diagnostic -X utf8 full-suite invocation emitted legacy child-process decoding-thread warnings; acceptance uses the normal Windows suite invocation above, which completed without those warnings."
+  ],
+  "preservation": {
+    "old_run_artifacts_modified": false,
+    "test_labels_deserialized": false,
+    "training_executed_by_review": false,
+    "gpu_invocations": 0,
+    "historical_ledger_bytes_preserved": 6016,
+    "historical_ledger_prefix_sha256": "3acd0cc16238f70ea82925f90b7daef23fcc2f6522d58230a1d1202e2f437ab0",
+    "new_registry_event_id": "QPAF-REG-20261022-0027"
+  },
+  "gpu_protocol_package": "PREPARED_FOR_PROTOCOL_REVIEW_NOT_EXECUTION"
+}

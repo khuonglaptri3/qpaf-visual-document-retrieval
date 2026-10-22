@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "task_id": "M3.6",
+  "status": "DRAFT_NOT_AUTHORIZED",
+  "execution_ready": false,
+  "preparation_only": true,
+  "seal_manifest_sha256": "0832af156b79d0448ecc630ff572a0053d7cb5da98b4dac2dec1c6ee49e27893",
+  "workload_path": "gpu_workload.json",
+  "source_inputs": {
+    "inputs/shared_base.toml": "3e58a867d11cebf72970cf0c141a90822cd7cbbdad65fb1e081cb14fa4889b58",
+    "inputs/score_cache.parquet": "56d0c82efda9264c117611ddd7135fe2384b68a3ec60fbdfd80fb964c386622b",
+    "inputs/candidate_set.parquet": "60c04acaf25126d5f16ff5f69fa394c5f797d960394e87e2f10ffed1237478ef",
+    "inputs/candidate_freeze.json": "2320402ed8f6705e5c220e4120f1975fe1989bf202339e8492167ecdf473764e",
+    "inputs/query_texts.json": "e7994373c9fd5157cde0fb0c5a1440c37c275b85fa19b2b0b566f61d584c4ab4",
+    "inputs/qrels_development.json": "691b6bc4ada3bc64fe3c408fe32498b04c7f30900eadb39ae09ddbe29aea302c",
+    "inputs/splits/train_ids.txt": "61dfe867c27b91a0a96594440b0f0e5ecf51501da0fcecdac94badaf16962191",
+    "inputs/splits/val_ids.txt": "46f8af5853942f6697cc3a995347a1832206212e93ff8aa87acb1775b3a060b4",
+    "inputs/splits/test_ids.txt": "d34210f901759a4f174da0c6c2e9b810616dcb33a71a0bd128a25d5d8d12e6f6",
+    "inputs/handover.json": "f67559e8e2e17adabdc446bff25327000c7937efedd0e77d269206dc1bf3b20b",
+    "inputs/matched.json": "705dd5705a3849239568eebee2542a9f39ccc2f123e334e7e933fde74f55fa6d"
+  },
+  "excluded_payloads": [
+    "qrels_development.json",
+    "qrels_test_sealed.json"
+  ],
+  "checkpoint_payload_note": "Original best.pt contains optimizer metadata; it may be loaded safely but must never be used for optimization, resumption or selection.",
+  "checkpoint_inputs": {
+    "QARF": {
+      "authorization": "evidence/revisions/m3.2-001/authorization.json",
+      "authorization_sha256": "ae51a3a5601d43b0a758d5feb69b74b4ba24b0413965e5fee96ed7015ede9b4b",
+      "predictions_sha256": "658c8162b690bff751609298aa8e77bf80cdf035cdbb45711ca5f1050407ab1e",
+      "path": "results/m3.2/RUN-QPAF-M3_2-MTH-001-20261022T035229Z-A01/QARF/20261022T040759-ff3934df/checkpoints/best.pt",
+      "sha256": "e44ac1a4f3887700a70914fdba8a3e7b35330244e746253d1cd828508be30914"
+    },
+    "QPAF": {
+      "authorization": "evidence/revisions/m3.4-001/authorization.json",
+      "authorization_sha256": "4be026b852574e7687fdc4b9337f716aa96a64ac39556ae288193bdba99e5365",
+      "predictions_sha256": "95ba3ed8e4a395bf0f888866a0e33abec43375d381f37dfa66195e65b7d9db5b",
+      "path": "results/m3.4/RUN-QPAF-M3_4-MTH-001-20261022T112102Z-A01/QPAF/20261022T112355-77b54aa0/checkpoints/best.pt",
+      "sha256": "e4b00ab49e186fffe8b369e26491873304b61177c11fd2ce0f455158e30e5c8e"
+    }
+  },
+  "policy": {
+    "path": "evidence/M1_FINAL/02_protocol/metric_policy.md",
+    "sha256": "4ce926201bb38b975c3eb43b83b0c719dea48267ff20e8fffa7e7329c0b5579a",
+    "section": 5
+  },
+  "gates": {
+    "warmup_queries": 20,
+    "minimum_distinct_measured_queries": 1000,
+    "median_added_fusion_latency_ms_max_inclusive": 10.0,
+    "peak_learned_fusion_cuda_gib_max_exclusive": 1.5,
+    "checkpoint_score_abs_tolerance": 1e-07
+  },
+  "proposed_execution": {
+    "platform": "Modal",
+    "gpu": "A10",
+    "gpu_count": 1,
+    "cpu_physical_cores": 2,
+    "memory_mib": 4096,
+    "timeout_seconds": 900,
+    "invocations": 1,
+    "automatic_retries": 0,
+    "paid_budget_usd_requested": 0.5,
+    "gpu_hourly_rate_source": "https://modal.com/pricing",
+    "pricing_checked_on": "2026-10-22",
+    "estimated_allocated_compute_at_timeout_usd": 0.306972,
+    "cost_limit_note": "Estimate covers allocated GPU/CPU/RAM at listed rates; image-build and lifecycle charges need a separate bound before approval."
+  },
+  "proposed_runtime": {
+    "python": "3.13.7",
+    "torch": "2.11.0+cu126",
+    "wheel_index": "https://download.pytorch.org/whl/cu126",
+    "numpy": "2.5.4",
+    "pandas": "3.0.6",
+    "pyarrow": "26.0.0",
+    "modal": "1.5.5",
+    "dtype": "float64",
+    "threads": 1,
+    "immutable_image_identity": "PENDING_IMAGE_PREPARATION_AFTER_PROTOCOL_REVIEW"
+  },
+  "measurement_proposal": {
+    "batch_size": 1,
+    "repeated_passes": 3,
+    "repetition_count_authority": "PROPOSED_ENGINEERING_CHOICE_NOT_A_PAPER_REQUIREMENT",
+    "query_order": "same frozen measured order for both methods and all passes",
+    "cold_start": "separate record; excluded from warm per-query gate",
+    "separate_stages": [
+      "CPU tensor construction and existing 13-feature preprocessing",
+      "host-to-device transfer",
+      "CUDA gate and fusion",
+      "device-to-host transfer",
+      "CPU deterministic page ranking"
+    ],
+    "primary_latency_proposal": "synchronized per-query wall time for the entire online fusion path after retriever scores are in RAM; no file I/O or retriever extraction",
+    "primary_latency_statistic": "median across unique measured queries of each query median across 3 passes",
+    "secondary_latency": "p95 across per-query medians, raw per-pass p50/p95, paired QPAF-minus-QARF",
+    "cuda_timing": "CUDA events, synchronize before wall start and after the timed CUDA work",
+    "memory": "reset CUDA peak stats per isolated method process; report allocated/reserved peaks and CPU RSS separately, include model and live fusion tensors, exclude retrievers",
+    "page_vs_document_scope": "active ViDoSeek pilot is page-level; document aggregation is not silently added",
+    "model_compatibility": "verify frozen weights and GPU-vs-pinned-CPU validation scores <=1e-7 before timing",
+    "quality_labels_used": false,
+    "checkpoint_or_hyperparameter_selection_allowed": false
+  },
+  "review_decisions_required": [
+    "Allow label-free text/score access for 172 held-out query IDs, without labels, fitting or selection.",
+    "Confirm the full online fusion latency interpretation and page-level ranking scope.",
+    "Review the proposed 3 passes, Modal A10 runtime and bounded resource budget."
+  ],
+  "before_execution_required": [
+    "accepted protocol/workload review",
+    "implemented and reviewed GPU executor",
+    "immutable runtime image and exact source commit",
+    "exact command and create-once namespace",
+    "Research Lead authorization with external manifest SHA256 pin"
+  ],
+  "gpu_execution_performed": false,
+  "test_labels_deserialized": false
+}

@@ -1,0 +1,24 @@
+{
+  "recorded_utc": "2026-10-22T16:57:18.726935+00:00",
+  "source_commit": "ade1a7122d9f64c82e2493c0c7955fe2b0a74ec2",
+  "authorization_sha256": "4b6528f2185f755c201185f5114f7dbd0a31eda366eb05142c87757d73c56bf5",
+  "bundle_manifest_sha256": "8b3c2826822ad33208ac39f01e2ba180b1f3d7b9b04d1404cba5245351be31be",
+  "bundle_files_verified": 112,
+  "primary_source_review_sha256": "5aa05a327ec8a591efcb6fa77edf7dc7aa3c36476e4210d186d7c9a71f2ad838",
+  "full_suite": {
+    "tests_run": 446,
+    "passed": 444,
+    "skipped": 2,
+    "verdict": "OK",
+    "seconds": 203.208,
+    "log_sha256": "133b28cbec6eb279d98aa20b47d7971f004cdecfc281d8ed91668884e1f5ad2a"
+  },
+  "independent_code_review": {
+    "reviewer": "read-only reviewer agent",
+    "blocking_findings": 0,
+    "focused_tests_passed": 26
+  },
+  "gpu_invocations_before_this_receipt": 0,
+  "new_invocation_limit": 1,
+  "automatic_retries": 0
+}

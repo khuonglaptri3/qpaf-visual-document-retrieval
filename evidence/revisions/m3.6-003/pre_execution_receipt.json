@@ -1,0 +1,20 @@
+{
+  "source_commit": "6e2b93e3f3de93d9d9161ae556996f5289029737",
+  "focused_tests": 22,
+  "result": "PASS",
+  "independent_reviewer_focused_tests": 10,
+  "review": "NO_REMAINING_FINDINGS",
+  "prior_full_suite": {
+    "count": 438,
+    "skipped": 2,
+    "result": "PASS",
+    "seconds": 198.953,
+    "console_fix_verified_by_separate_regression": true
+  },
+  "bundle_manifest_sha256": "2cb1fa7a3925d77d2df4732d5f2456505273fa690547db7aca1c487a71be68c9",
+  "bundle_query_count": 1142,
+  "bundle_candidate_count": 551764,
+  "bundle_file_count": 111,
+  "test_labels_deserialized": false,
+  "deep_research_ref": "evidence/revisions/m3.6-002/pre_execution_methodology_vi.md"
+}

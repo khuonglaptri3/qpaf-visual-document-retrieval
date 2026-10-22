@@ -1,0 +1,28 @@
+{
+  "description": "qpaf-m36-resource",
+  "app_id": "ap-8f30Xc6tkHWkwJSpGnRm8U",
+  "lifecycle": {
+    "state": "stopped",
+    "created_at": "2026-10-22 23:57:36+07:00",
+    "created_by": "khuonglaptri3",
+    "deployed_at": null,
+    "deployed_by": null,
+    "version": null,
+    "stopped_at": "2026-10-22 23:58:31+07:00",
+    "stopped_by": null
+  },
+  "functions": {
+    "build_app.<locals>.benchmark_pair": {
+      "id": "fu-LBHrGsmOpKMdauupwahkeL",
+      "summary": {
+        "gpu_config": [
+          {
+            "count": 1,
+            "gpu_type": "A10G"
+          }
+        ]
+      }
+    }
+  },
+  "servers": {}
+}

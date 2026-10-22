@@ -1,0 +1,284 @@
+{
+  "object_id": "fu-LBHrGsmOpKMdauupwahkeL",
+  "since": "2026-10-22T16:56:00+00:00",
+  "until": "2026-10-22T17:00:00+00:00",
+  "bucket_secs": 60,
+  "series": [
+    {
+      "name": "end_to_end_time_p50",
+      "unit": "seconds",
+      "description": "p50 elapsed time from original input enqueue to final completion, grouped by when the final attempt finishes.",
+      "points": [
+        {
+          "timestamp": "2026-10-22T16:56:00+00:00",
+          "value": null
+        },
+        {
+          "timestamp": "2026-10-22T16:57:00+00:00",
+          "value": null
+        },
+        {
+          "timestamp": "2026-10-22T16:58:00+00:00",
+          "value": 36.55848
+        },
+        {
+          "timestamp": "2026-10-22T16:59:00+00:00",
+          "value": null
+        }
+      ]
+    },
+    {
+      "name": "end_to_end_time_p90",
+      "unit": "seconds",
+      "description": "p90 elapsed time from original input enqueue to final completion, grouped by when the final attempt finishes.",
+      "points": [
+        {
+          "timestamp": "2026-10-22T16:56:00+00:00",
+          "value": null
+        },
+        {
+          "timestamp": "2026-10-22T16:57:00+00:00",
+          "value": null
+        },
+        {
+          "timestamp": "2026-10-22T16:58:00+00:00",
+          "value": 36.55848
+        },
+        {
+          "timestamp": "2026-10-22T16:59:00+00:00",
+          "value": null
+        }
+      ]
+    },
+    {
+      "name": "end_to_end_time_p99",
+      "unit": "seconds",
+      "description": "p99 elapsed time from original input enqueue to final completion, grouped by when the final attempt finishes.",
+      "points": [
+        {
+          "timestamp": "2026-10-22T16:56:00+00:00",
+          "value": null
+        },
+        {
+          "timestamp": "2026-10-22T16:57:00+00:00",
+          "value": null
+        },
+        {
+          "timestamp": "2026-10-22T16:58:00+00:00",
+          "value": 36.55848
+        },
+        {
+          "timestamp": "2026-10-22T16:59:00+00:00",
+          "value": null
+        }
+      ]
+    },
+    {
+      "name": "execution_time_p50",
+      "unit": "seconds",
+      "description": "p50 final-attempt input execution duration, grouped by when the final attempt finishes.",
+      "points": [
+        {
+          "timestamp": "2026-10-22T16:56:00+00:00",
+          "value": null
+        },
+        {
+          "timestamp": "2026-10-22T16:57:00+00:00",
+          "value": null
+        },
+        {
+          "timestamp": "2026-10-22T16:58:00+00:00",
+          "value": 32.559988000000004
+        },
+        {
+          "timestamp": "2026-10-22T16:59:00+00:00",
+          "value": null
+        }
+      ]
+    },
+    {
+      "name": "execution_time_p90",
+      "unit": "seconds",
+      "description": "p90 final-attempt input execution duration, grouped by when the final attempt finishes.",
+      "points": [
+        {
+          "timestamp": "2026-10-22T16:56:00+00:00",
+          "value": null
+        },
+        {
+          "timestamp": "2026-10-22T16:57:00+00:00",
+          "value": null
+        },
+        {
+          "timestamp": "2026-10-22T16:58:00+00:00",
+          "value": 32.559988000000004
+        },
+        {
+          "timestamp": "2026-10-22T16:59:00+00:00",
+          "value": null
+        }
+      ]
+    },
+    {
+      "name": "execution_time_p99",
+      "unit": "seconds",
+      "description": "p99 final-attempt input execution duration, grouped by when the final attempt finishes.",
+      "points": [
+        {
+          "timestamp": "2026-10-22T16:56:00+00:00",
+          "value": null
+        },
+        {
+          "timestamp": "2026-10-22T16:57:00+00:00",
+          "value": null
+        },
+        {
+          "timestamp": "2026-10-22T16:58:00+00:00",
+          "value": 32.559988000000004
+        },
+        {
+          "timestamp": "2026-10-22T16:59:00+00:00",
+          "value": null
+        }
+      ]
+    },
+    {
+      "name": "failed_calls_count",
+      "unit": "calls",
+      "description": "Failed final input completions in the bucket, including timeouts and HTTP errors.",
+      "points": [
+        {
+          "timestamp": "2026-10-22T16:56:00+00:00",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-10-22T16:57:00+00:00",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-10-22T16:58:00+00:00",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-10-22T16:59:00+00:00",
+          "value": 0.0
+        }
+      ]
+    },
+    {
+      "name": "memory_requested_avg",
+      "unit": "GiB",
+      "description": "Average total requested memory across all containers.",
+      "points": [
+        {
+          "timestamp": "2026-10-22T16:56:00+00:00",
+          "value": null
+        },
+        {
+          "timestamp": "2026-10-22T16:57:00+00:00",
+          "value": 0.3333786328633626
+        },
+        {
+          "timestamp": "2026-10-22T16:58:00+00:00",
+          "value": 2.3333532412846885
+        },
+        {
+          "timestamp": "2026-10-22T16:59:00+00:00",
+          "value": null
+        }
+      ]
+    },
+    {
+      "name": "memory_usage_avg",
+      "unit": "GiB",
+      "description": "Average total memory consumed across all containers.",
+      "points": [
+        {
+          "timestamp": "2026-10-22T16:56:00+00:00",
+          "value": null
+        },
+        {
+          "timestamp": "2026-10-22T16:57:00+00:00",
+          "value": 0.01735609744185543
+        },
+        {
+          "timestamp": "2026-10-22T16:58:00+00:00",
+          "value": 0.3501666465334893
+        },
+        {
+          "timestamp": "2026-10-22T16:59:00+00:00",
+          "value": null
+        }
+      ]
+    },
+    {
+      "name": "pending_calls_avg",
+      "unit": "calls",
+      "description": "Average number of pending inputs during the bucket, summed across the selected Function and its variants.",
+      "points": [
+        {
+          "timestamp": "2026-10-22T16:56:00+00:00",
+          "value": null
+        },
+        {
+          "timestamp": "2026-10-22T16:57:00+00:00",
+          "value": 0.6666666666666666
+        },
+        {
+          "timestamp": "2026-10-22T16:58:00+00:00",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-10-22T16:59:00+00:00",
+          "value": 0.0
+        }
+      ]
+    },
+    {
+      "name": "running_calls_avg",
+      "unit": "calls",
+      "description": "Average number of running inputs during the bucket, summed across the selected Function and its variants.",
+      "points": [
+        {
+          "timestamp": "2026-10-22T16:56:00+00:00",
+          "value": null
+        },
+        {
+          "timestamp": "2026-10-22T16:57:00+00:00",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-10-22T16:58:00+00:00",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-10-22T16:59:00+00:00",
+          "value": 0.0
+        }
+      ]
+    },
+    {
+      "name": "successful_calls_count",
+      "unit": "calls",
+      "description": "Successful final input completions in the bucket; including map items.",
+      "points": [
+        {
+          "timestamp": "2026-10-22T16:56:00+00:00",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-10-22T16:57:00+00:00",
+          "value": 0.0
+        },
+        {
+          "timestamp": "2026-10-22T16:58:00+00:00",
+          "value": 1.0
+        },
+        {
+          "timestamp": "2026-10-22T16:59:00+00:00",
+          "value": 0.0
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "error_type": "UnicodeEncodeError",
+  "message": "'charmap' codec can't encode character '\\u2713' in position 0: character maps to <undefined>",
+  "elapsed_seconds": 3.4487996999523602,
+  "app_id": "ap-xQNdDlz2s9sTHNo5biO960",
+  "automatic_retry_performed": false
+}

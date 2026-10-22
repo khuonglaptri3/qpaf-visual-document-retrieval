@@ -1,0 +1,27 @@
+{
+  "issue_id": "M3_6_CPU_RSS_ACCOUNTING_001",
+  "status": "OPEN_BLOCKS_OVERALL_TECHNICAL_ACCEPTANCE",
+  "original_issue_ref": "evidence/revisions/m3.6-003/telemetry_issue.json",
+  "new_run_id": "RUN-QPAF-M3_6-SYS-001-20261022T165637Z-A03",
+  "configured_memory_request_and_limit_mib": 5120,
+  "reported_process_high_water_under_new_limit": true,
+  "backend_evidence": "Kernel identifies itself as 4.19.0-gvisor; cgroup v1 memory limit 5368709120 bytes.",
+  "new_evidence": "23 snapshots and separate provider exports identify process/sandbox versus provider accounting differences. Largest sampled cgroup current was 4.738094 GiB, not a peak.",
+  "missing_interfaces": [
+    "memory.max_usage_in_bytes",
+    "memory.oom_control",
+    "VmHWM",
+    "smaps_rollup"
+  ],
+  "provider_available": "one-minute memory averages and container sample p50/p90/p99; one success, zero container errors",
+  "exact_container_or_host_peak": "UNAVAILABLE",
+  "cause_scope": "gVisor approximation is now supported by observed backend and different provider figures; exact cause/magnitude of original RSS-to-hard-limit discrepancy remains unverified.",
+  "original_4gib_raw_evidence_unchanged": true,
+  "new_user_authorized_resource_configuration": true,
+  "scientific_thresholds_changed": false,
+  "automatic_acceptance_from_ram_increase": false,
+  "next_owner": "Kh\u01b0\u01a1ng",
+  "qa_reviewer": "Thanh",
+  "protocol_decision_owner": "T\u1ea5n Ph\u00e1t",
+  "recorded_utc": "2026-10-22T17:03:40.170224+00:00"
+}

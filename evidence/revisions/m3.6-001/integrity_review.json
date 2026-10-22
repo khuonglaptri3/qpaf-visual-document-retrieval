@@ -1,0 +1,190 @@
+{
+  "schema_version": 1,
+  "task_id": "M3.6",
+  "owner": "Khương",
+  "executed_by": "Codex at Khương request; independent of the M3.2/M3.4 run operators",
+  "checked_utc": "2026-10-22T14:49:34.498310+00:00",
+  "integrity_verdict": "PASS",
+  "resource_verdict": "BLOCKED",
+  "technical_verdict": "BLOCKED",
+  "owner_acceptance": "PENDING_KHUONG_REVIEW",
+  "seal_manifest_sha256": "0832af156b79d0448ecc630ff572a0053d7cb5da98b4dac2dec1c6ee49e27893",
+  "m3_1_seal_replay": {
+    "task_id": "M3.1",
+    "status": "PASS",
+    "record_counts": {
+      "train": 799,
+      "validation": 171
+    },
+    "candidate_rows": {
+      "train": 386390,
+      "validation": 82255
+    },
+    "parity_identical": true,
+    "training_executed": false,
+    "test_labels_opened": false
+  },
+  "m3_5_acceptance_event": "QPAF-REG-20261022-0026",
+  "operational_policy": {
+    "path": "evidence/M1_FINAL/02_protocol/metric_policy.md",
+    "sha256": "4ce926201bb38b975c3eb43b83b0c719dea48267ff20e8fffa7e7329c0b5579a"
+  },
+  "audit_source_sha256": "2cc9925821ca6deee7e667fd5f6e2e617c88a828c15853c9340ba860ee71b2db",
+  "runtime": {
+    "python": "3.13.7",
+    "torch": "2.11.0+cpu",
+    "numpy": "2.5.4",
+    "pandas": "3.0.6",
+    "pyarrow": "26.0.0"
+  },
+  "runs": {
+    "QARF": {
+      "run_id": "RUN-QPAF-M3_2-MTH-001-20261022T035229Z-A01",
+      "attempt": "results/m3.2/RUN-QPAF-M3_2-MTH-001-20261022T035229Z-A01/QARF/20261022T040759-ff3934df",
+      "authorization_sha256": "ae51a3a5601d43b0a758d5feb69b74b4ba24b0413965e5fee96ed7015ede9b4b",
+      "receipt_outputs_rehashed": 16,
+      "first_pass_checks": 30,
+      "persisted_step_telemetry": {
+        "step_count": 1000,
+        "epoch_count": 20,
+        "loss_min": 0.3688584090011362,
+        "loss_max": 0.5030160841914422,
+        "grad_norm_min": 9.944834808277354e-06,
+        "grad_norm_max": 0.022333576328856394
+      },
+      "fresh_checkpoint_reload": {
+        "method": "QARF",
+        "status": "PASS_FRESH_PROCESS",
+        "worker_pid": 41688,
+        "parent_pid": 41260,
+        "ancestor_pids": [
+          41260,
+          32368,
+          4048,
+          47920,
+          31904
+        ],
+        "runtime": {
+          "python": "3.13.7",
+          "torch": "2.11.0+cpu",
+          "numpy": "2.5.4",
+          "pandas": "3.0.6",
+          "pyarrow": "26.0.0"
+        },
+        "loaded_source_sha256": {
+          "src/qpaf/m24/evaluator.py": "bfd25f331c5c377c708fd1d05f3e3edb85467488301e9658ea9bb486ef476742",
+          "src/qpaf/m12/model.py": "05c0370343a14b70b1db37e3d2bf6fd852c4ea67f7a967af52fa0ff498adcc3e"
+        },
+        "query_count": 171,
+        "candidate_count": 82255,
+        "score_max_abs_difference": 0.0,
+        "weight_max_abs_difference": 0.0,
+        "tolerance": 1e-07,
+        "ranking_disagreements": 0,
+        "checkpoint_numeric_values_checked": 10598,
+        "validation_metrics_recomputed": {
+          "query_count": 171,
+          "ndcg_at_10": 0.7521473770883798,
+          "recall_at_1": 0.5847953216374269,
+          "recall_at_3": 0.783625730994152,
+          "mrr_at_10": 0.6968880534670009
+        },
+        "metric_max_abs_difference": 0.0
+      },
+      "resources": {
+        "verdict": "BLOCKED",
+        "authorized_cpu_runtime_limits": "PASS",
+        "recorded_wall_seconds": 75.413,
+        "recorded_peak_rss_mb": 756.7890625,
+        "telemetry_scope": "historical CPU phase timings and process RSS, not per-query GPU measurements",
+        "development_unique_queries": 970,
+        "latency_gate": "NOT_MEASURED",
+        "cuda_gate": "NOT_MEASURED",
+        "required_warmup_queries": 20,
+        "required_measured_label_free_queries": 1000,
+        "maximum_median_added_fusion_latency_ms": 10.0,
+        "maximum_peak_learned_fusion_cuda_gib_exclusive": 1.5,
+        "reason": "CPU phase telemetry cannot certify per-query latency or learned-fusion CUDA allocation."
+      }
+    },
+    "QPAF": {
+      "run_id": "RUN-QPAF-M3_4-MTH-001-20261022T112102Z-A01",
+      "attempt": "results/m3.4/RUN-QPAF-M3_4-MTH-001-20261022T112102Z-A01/QPAF/20261022T112355-77b54aa0",
+      "authorization_sha256": "4be026b852574e7687fdc4b9337f716aa96a64ac39556ae288193bdba99e5365",
+      "receipt_outputs_rehashed": 16,
+      "first_pass_checks": 39,
+      "persisted_step_telemetry": {
+        "step_count": 1000,
+        "epoch_count": 20,
+        "loss_min": 0.35964450060790704,
+        "loss_max": 0.46550384298635406,
+        "grad_norm_min": 0.000527439145241894,
+        "grad_norm_max": 0.030316582251945022
+      },
+      "fresh_checkpoint_reload": {
+        "method": "QPAF",
+        "status": "PASS_FRESH_PROCESS",
+        "worker_pid": 47512,
+        "parent_pid": 45764,
+        "ancestor_pids": [
+          45764,
+          32368,
+          4048,
+          47920,
+          31904
+        ],
+        "runtime": {
+          "python": "3.13.7",
+          "torch": "2.11.0+cpu",
+          "numpy": "2.5.4",
+          "pandas": "3.0.6",
+          "pyarrow": "26.0.0"
+        },
+        "loaded_source_sha256": {
+          "src/qpaf/m24/evaluator.py": "bfd25f331c5c377c708fd1d05f3e3edb85467488301e9658ea9bb486ef476742",
+          "src/qpaf/m12/model.py": "05c0370343a14b70b1db37e3d2bf6fd852c4ea67f7a967af52fa0ff498adcc3e"
+        },
+        "query_count": 171,
+        "candidate_count": 82255,
+        "score_max_abs_difference": 0.0,
+        "weight_max_abs_difference": 0.0,
+        "tolerance": 1e-07,
+        "ranking_disagreements": 0,
+        "checkpoint_numeric_values_checked": 10778,
+        "validation_metrics_recomputed": {
+          "query_count": 171,
+          "ndcg_at_10": 0.8662796720664044,
+          "recall_at_1": 0.7368421052631579,
+          "recall_at_3": 0.9064327485380117,
+          "mrr_at_10": 0.8282790309106097
+        },
+        "metric_max_abs_difference": 0.0
+      },
+      "resources": {
+        "verdict": "BLOCKED",
+        "authorized_cpu_runtime_limits": "PASS",
+        "recorded_wall_seconds": 75.978,
+        "recorded_peak_rss_mb": 753.76953125,
+        "telemetry_scope": "historical CPU phase timings and process RSS, not per-query GPU measurements",
+        "development_unique_queries": 970,
+        "latency_gate": "NOT_MEASURED",
+        "cuda_gate": "NOT_MEASURED",
+        "required_warmup_queries": 20,
+        "required_measured_label_free_queries": 1000,
+        "maximum_median_added_fusion_latency_ms": 10.0,
+        "maximum_peak_learned_fusion_cuda_gib_exclusive": 1.5,
+        "reason": "CPU phase telemetry cannot certify per-query latency or learned-fusion CUDA allocation."
+      }
+    }
+  },
+  "limitations": [
+    "Historical gradients were not individually persisted; the training source has fail-fast finite checks. Persisted optimizer/model state and epoch telemetry are rechecked.",
+    "CPU RSS and whole-phase times do not establish the CUDA or per-query latency gates.",
+    "One selected development seed does not establish confirmation or robustness."
+  ],
+  "test_labels_deserialized": false,
+  "training_executed_by_audit": false,
+  "gpu_execution_performed": false,
+  "g2_decision_made": false,
+  "next_action": "Review the separate label-free GPU workload and execution package before any GPU run."
+}

@@ -1,0 +1,12 @@
+{
+  "source_commit": "5d3e6c32b1104941d6b9054c12921bab40430dd9",
+  "focused_tests": 21,
+  "result": "PASS",
+  "independent_reviewer_focused_tests": 9,
+  "review": "NO_REMAINING_CRITICAL_OR_IMPORTANT",
+  "bundle_manifest_sha256": "3384307c4c7b5feb12fd2243e3e283f61027b272ae0fb4a4a5061b729ae1a39b",
+  "bundle_query_count": 1142,
+  "bundle_candidate_count": 551764,
+  "bundle_file_count": 111,
+  "test_labels_deserialized": false
+}

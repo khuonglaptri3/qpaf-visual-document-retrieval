@@ -1,0 +1,15 @@
+{
+  "status": "FAILED_BEFORE_IMAGE_BUILD_OR_GPU_INVOCATION",
+  "source_commit": "5d3e6c32b1104941d6b9054c12921bab40430dd9",
+  "failure_sha256": "a2bb0bfb187835d50bda365e8fde2626e18cb46ca9d02a1aaf30cd531dcb078f",
+  "initialization_log_sha256": "52879cf7265a6e3e9b14b1a6316cf6bbd11e8b665018ab0dea46363fee6a87dd",
+  "root_cause": "Modal Rich Unicode checkmark cannot be encoded by Windows cp1252 redirected stdout",
+  "gpu_invocations": 0,
+  "app_id": "ap-xQNdDlz2s9sTHNo5biO960",
+  "app_list_observed_tasks": 0,
+  "exact_owned_app_explicitly_stopped": true,
+  "elapsed_seconds": 3.4487996999523602,
+  "automatic_retry_performed": false,
+  "manual_continuation": "Same user instruction; preserve A01; new reviewed source, bundle, authorization and A02 namespace; total result-bearing GPU allowance remains one",
+  "console_regression": "Legacy cp1252 child process now exports UTF8 checkmark; focused suite22 PASS"
+}

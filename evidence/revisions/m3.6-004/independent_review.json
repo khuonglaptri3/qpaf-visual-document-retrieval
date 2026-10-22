@@ -1,0 +1,20 @@
+{
+  "recorded_utc": "2026-10-22T17:03:40.170224+00:00",
+  "reviewer": "separate read-only code/result reviewer agent",
+  "code_review": "NO_BLOCKING_FINDINGS",
+  "independent_focused_tests_passed": 26,
+  "post_run_verifier": "PASS (without --output)",
+  "timing_rows_checked": 6732,
+  "memory_snapshots_checked": 23,
+  "bundle_files_checked": 112,
+  "unchanged_core_source_files": 103,
+  "unchanged_input_files_including_both_checkpoints": 7,
+  "original_4gib_run_files_unchanged": 5,
+  "result_sha256": "e829b47b05734e1557d0591ce1f117ed7a2ac6ffecbd9d8cf060a902b6f57cf6",
+  "conclusion": "Requested rerun completed; operational gates pass; overall technical acceptance remains BLOCKED by unavailable container/host peak.",
+  "provider_metrics_reviewed_by_agent": false,
+  "provider_note": "Provider exports were collected after the independent raw-result review. Their averages and p99 are not peak measurements.",
+  "full_suite_independently_rerun": false,
+  "files_mutated_by_reviewer": false,
+  "remote_execution_by_reviewer": false
+}

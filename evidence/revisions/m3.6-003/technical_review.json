@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "task_id": "M3.6",
+  "checked_utc": "2026-10-22T15:56:01.509357+00:00",
+  "run_id": "RUN-QPAF-M3_6-SYS-001-20261022T154348Z-A02",
+  "source_commit": "6e2b93e3f3de93d9d9161ae556996f5289029737",
+  "cpu_integrity_report_ref": "evidence/revisions/m3.6-001/integrity_review.json",
+  "cpu_integrity_report_sha256": "497b934ce6222e6e4e70363ef374e88236b7592bb549b0c81bbb89b45291e66f",
+  "integrity_verdict": "PASS",
+  "operational_latency_cuda_parity_verdict": "PASS",
+  "execution_completed": true,
+  "technical_verdict": "BLOCKED",
+  "blocking_issue": "M3_6_CPU_RSS_ACCOUNTING_001",
+  "owner_acceptance": "PENDING_KHUONG_REVIEW",
+  "g2_decision_made": false,
+  "hardware_requested": "Modal A10",
+  "hardware_observed": "NVIDIA A10G",
+  "image_id": "im-XOLHqxG4nHp2fmqZ5DDCpy",
+  "gpu_invocations_total": 1,
+  "failed_initializations_before_gpu": 1,
+  "automatic_retries": 0,
+  "methods": {
+    "QARF": {
+      "median_online_ms": 3.0438150000000004,
+      "p95_query_medians_ms": 3.1220565000000002,
+      "peak_cuda_allocated_gib": 0.032440185546875,
+      "reported_ru_maxrss_kib": 5111088,
+      "reported_ru_maxrss_gib": 4.8743133544921875,
+      "timed_rows": 3366
+    },
+    "QPAF": {
+      "median_online_ms": 2.9618795,
+      "p95_query_medians_ms": 3.0366020000000002,
+      "peak_cuda_allocated_gib": 0.03245258331298828,
+      "reported_ru_maxrss_kib": 5092192,
+      "reported_ru_maxrss_gib": 4.856292724609375,
+      "timed_rows": 3366
+    }
+  },
+  "paired_median_QPAF_minus_QARF_ms": -0.08283649999999998,
+  "quality_or_general_speedup_claim_authorized": false,
+  "result_ref": "results/m3.6/RUN-QPAF-M3_6-SYS-001-20261022T154348Z-A02/gpu_result.json",
+  "result_sha256": "76ed5466b4c4202c551c31c55fd24a580d8d6273e65c1221a19d56134dd66943",
+  "verification_ref": "evidence/revisions/m3.6-003/offline_verification.json",
+  "verification_sha256": "2ae0b902c9d7709f5228f39edbd313cd3ddf5c6c001987678f52dd05c277f6b7",
+  "deep_research_run_id": "01a16430-2260-7736-a7b0-ce923d0b5f8c",
+  "full_suite": {
+    "tests_run": 439,
+    "skipped": 2,
+    "result": "OK",
+    "seconds": 215.907
+  },
+  "test_labels_deserialized": false,
+  "training_executed": false,
+  "all_apps_observed_stopped": true,
+  "cost_evidence": {
+    "remote_function_seconds": 45.6474707,
+    "app_seconds_including_build": 201.52152819995536,
+    "allocated_rate_function_only_estimate_usd": 0.015569439306356,
+    "estimate_excludes": "startup/build/lifecycle and actual provider usage accounting",
+    "billed_total_usd": "NOT_RECORDED_PROVIDER_USAGE_PENDING",
+    "budget_target_usd": 0.5,
+    "provider_hard_per_run_dollar_cap": false
+  }
+}

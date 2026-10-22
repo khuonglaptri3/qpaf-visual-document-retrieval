@@ -1,0 +1,17 @@
+{
+  "authorization_sha256": "72fc24e4eaa17fe277bcd746928919491aca45cd4c1939b2bcf21b3b7853cc86",
+  "source_commit": "5d3e6c32b1104941d6b9054c12921bab40430dd9",
+  "argv": [
+    "C:\\Users\\lanph\\.codex\\worktrees\\f1e0\\Artificial_Intelligent_Project\\.venv\\Scripts\\python.exe",
+    "scripts/run_m36_gpu.py",
+    "--bundle",
+    ".cache/m36-gpu-bundle-001",
+    "--authorization",
+    "evidence/revisions/m3.6-002/authorization.json",
+    "--expected-authorization-sha256",
+    "72fc24e4eaa17fe277bcd746928919491aca45cd4c1939b2bcf21b3b7853cc86",
+    "--output",
+    "results/m3.6/RUN-QPAF-M3_6-SYS-001-20261022T153759Z-A01"
+  ],
+  "recorded_utc": "2026-10-22T15:37:59.909573+00:00"
+}

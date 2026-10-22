@@ -1,0 +1,124 @@
+{
+  "schema_version": 1,
+  "recorded_utc": "2026-10-22T15:56:01.509357+00:00",
+  "scope": "New M3.6 GPU preparation, failed initialization, completed run and blocked overall review; immutable prior M3.6-001 is referenced by its own manifest",
+  "self_hash_excluded": true,
+  "files": {
+    ".gitattributes": {
+      "sha256": "6dc5d5709cfa8b9eb0a01eec4e6d0cc54cc03f8cd1def93018f0b814609184cb",
+      "size_bytes": 4465
+    },
+    "evidence/revisions/m3.6-002/authorization.json": {
+      "sha256": "72fc24e4eaa17fe277bcd746928919491aca45cd4c1939b2bcf21b3b7853cc86",
+      "size_bytes": 6214
+    },
+    "evidence/revisions/m3.6-002/bundle_manifest.json": {
+      "sha256": "3384307c4c7b5feb12fd2243e3e283f61027b272ae0fb4a4a5061b729ae1a39b",
+      "size_bytes": 11701
+    },
+    "evidence/revisions/m3.6-002/execution_request.json": {
+      "sha256": "2df25d07a3da6d973b8c744463bfa859080b461f28976f948b8c932a652489eb",
+      "size_bytes": 685
+    },
+    "evidence/revisions/m3.6-002/governance_events.jsonl": {
+      "sha256": "7d5cefe67b4fb423211e691893e9356755ce4fad8fbd065e2fecc8f235dec23d",
+      "size_bytes": 1463
+    },
+    "evidence/revisions/m3.6-002/initialization_failure_review.json": {
+      "sha256": "770a8e24330074253f41dcfe640b50ff06417deee25418d9eb96bdefa974b9d1",
+      "size_bytes": 929
+    },
+    "evidence/revisions/m3.6-002/pre_execution_methodology_vi.md": {
+      "sha256": "1b22cf4372bf6a3eff81d33e249c14a3f0d5abc41c781e9bab9634f0b22ccb05",
+      "size_bytes": 6445
+    },
+    "evidence/revisions/m3.6-002/pre_execution_receipt.json": {
+      "sha256": "75804757604ab6074d5e3e41acad282ff84cbd90afc54444e706cfe328d02094",
+      "size_bytes": 429
+    },
+    "evidence/revisions/m3.6-003/authorization.json": {
+      "sha256": "effc1c5ddd4bcd96157a12c4e9c49a78f3e180e627da1b6bbdc92ecda72bd73b",
+      "size_bytes": 6811
+    },
+    "evidence/revisions/m3.6-003/bundle_manifest.json": {
+      "sha256": "2cb1fa7a3925d77d2df4732d5f2456505273fa690547db7aca1c487a71be68c9",
+      "size_bytes": 11701
+    },
+    "evidence/revisions/m3.6-003/execution_request.json": {
+      "sha256": "44f07232d380865a03d3a5cc03db82583b0bdeb72f9c28d99a09ee3f5a2b6574",
+      "size_bytes": 707
+    },
+    "evidence/revisions/m3.6-003/governance_events.jsonl": {
+      "sha256": "c8889a3bfd4988b29365a59d4a9ac8b382213e021ac435e3d1c89d5df92ae24c",
+      "size_bytes": 2810
+    },
+    "evidence/revisions/m3.6-003/independent_review.json": {
+      "sha256": "64fe4d7500a3d321931ef3cbaae2279116b158f0ae600c4cf1fcf483a59454f0",
+      "size_bytes": 761
+    },
+    "evidence/revisions/m3.6-003/offline_verification.json": {
+      "sha256": "2ae0b902c9d7709f5228f39edbd313cd3ddf5c6c001987678f52dd05c277f6b7",
+      "size_bytes": 2121
+    },
+    "evidence/revisions/m3.6-003/pre_execution_receipt.json": {
+      "sha256": "8eabac5c6bdb491b246f51a940b486bc66a1d7d22d760fb36fe73fb5832d2052",
+      "size_bytes": 670
+    },
+    "evidence/revisions/m3.6-003/README.md": {
+      "sha256": "ae7fe655f33d76cef2285ef36b5fd205af63e9a2763f93ce43e3751f62a115f6",
+      "size_bytes": 7332
+    },
+    "evidence/revisions/m3.6-003/technical_review.json": {
+      "sha256": "e14cae6884b54069b29c9f62edb09dd8ff4e73d798f30d0b573cc4d7dc09e2a0",
+      "size_bytes": 2644
+    },
+    "evidence/revisions/m3.6-003/telemetry_issue.json": {
+      "sha256": "7f582a2b22180782b8bb4474b5a28895e39932ac2e7c57b9e39474ae62b1298d",
+      "size_bytes": 1409
+    },
+    "results/m3.6/RUN-QPAF-M3_6-SYS-001-20261022T153759Z-A01/_ATTEMPTED.json": {
+      "sha256": "ca27f9597c41b18a3640f60e835f80fbb0bb17b511d507f751512d1e8b785ad0",
+      "size_bytes": 201
+    },
+    "results/m3.6/RUN-QPAF-M3_6-SYS-001-20261022T153759Z-A01/_FAILURE.json": {
+      "sha256": "a2bb0bfb187835d50bda365e8fde2626e18cb46ca9d02a1aaf30cd531dcb078f",
+      "size_bytes": 271
+    },
+    "results/m3.6/RUN-QPAF-M3_6-SYS-001-20261022T153759Z-A01/initialization.txt": {
+      "sha256": "52879cf7265a6e3e9b14b1a6316cf6bbd11e8b665018ab0dea46363fee6a87dd",
+      "size_bytes": 7683
+    },
+    "results/m3.6/RUN-QPAF-M3_6-SYS-001-20261022T154348Z-A02/_ATTEMPTED.json": {
+      "sha256": "5799132486d816ccf6ecf1f76d23a12fc779d36b74b5da80736bce0c4a4d82a9",
+      "size_bytes": 201
+    },
+    "results/m3.6/RUN-QPAF-M3_6-SYS-001-20261022T154348Z-A02/_SUCCESS.json": {
+      "sha256": "12504f08cafdb2d43fe2d9454cf89795c2626438751e0cf413aeec59db4abb59",
+      "size_bytes": 6809
+    },
+    "results/m3.6/RUN-QPAF-M3_6-SYS-001-20261022T154348Z-A02/execution.txt": {
+      "sha256": "bb271091deaa942acca08772cfe40e1a3dcf8ab525daf9dad436eedfd6a4fefc",
+      "size_bytes": 18127
+    },
+    "results/m3.6/RUN-QPAF-M3_6-SYS-001-20261022T154348Z-A02/gpu_result.json": {
+      "sha256": "76ed5466b4c4202c551c31c55fd24a580d8d6273e65c1221a19d56134dd66943",
+      "size_bytes": 2816356
+    },
+    "results/m3.6/RUN-QPAF-M3_6-SYS-001-20261022T154348Z-A02/runtime_binding.json": {
+      "sha256": "090d1cd23952b9a51c286c092184d9b050a480ae4890699fee056bbe7828f9ac",
+      "size_bytes": 549
+    },
+    "scripts/m36_gpu_worker.py": {
+      "sha256": "352be76086a0c8f6f322d0e82b32139472fc97b42637ba0bde01d2d3d067058c",
+      "size_bytes": 14369
+    },
+    "scripts/run_m36_gpu.py": {
+      "sha256": "90f2c03eb2e8422d68613449af354b010d47ba3d3cfc1c34a5c29ce1072d0ad6",
+      "size_bytes": 12859
+    },
+    "tests/test_m36_gpu.py": {
+      "sha256": "ff2bb3ec6cc82a5288f23ea879c83c3234b69ff08c22a78ceb6bbfc6dedde39c",
+      "size_bytes": 6437
+    }
+  }
+}
