@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "task_id": "M3.3",
+  "owner": "Thanh",
+  "executed_by": "Codex at Thanh's request",
+  "checked_utc": "2026-10-22T07:55:17Z",
+  "run_id": "RUN-QPAF-M3_2-MTH-001-20261022T035229Z-A01",
+  "technical_verdict": "PASS",
+  "owner_acceptance": "PENDING_THANH_CONFIRMATION",
+  "authorization_sha256": "ae51a3a5601d43b0a758d5feb69b74b4ba24b0413965e5fee96ed7015ede9b4b",
+  "seal_manifest_sha256": "0832af156b79d0448ecc630ff572a0053d7cb5da98b4dac2dec1c6ee49e27893",
+  "prediction_sha256": "658c8162b690bff751609298aa8e77bf80cdf035cdbb45711ca5f1050407ab1e",
+  "runtime": {
+    "python": "3.13.7",
+    "torch": "2.11.0+cpu",
+    "numpy": "2.5.4",
+    "pandas": "3.0.6",
+    "pyarrow": "26.0.0"
+  },
+  "m3_1_seal_replay": {
+    "task_id": "M3.1",
+    "status": "PASS",
+    "record_counts": {
+      "train": 799,
+      "validation": 171
+    },
+    "candidate_rows": {
+      "train": 386390,
+      "validation": 82255
+    },
+    "parity_identical": true,
+    "training_executed": false,
+    "test_labels_opened": false
+  },
+  "m3_2_first_pass": {
+    "pass": 30,
+    "fail": 0,
+    "skipped": 0
+  },
+  "receipt_outputs_rehashed": 16,
+  "validation_metrics_recomputed": {
+    "query_count": 171,
+    "ndcg_at_10": 0.7521473770883798,
+    "recall_at_1": 0.5847953216374269,
+    "recall_at_3": 0.783625730994152,
+    "mrr_at_10": 0.6968880534670009
+  },
+  "validation_queries": 171,
+  "validation_candidates": 82255,
+  "metric_max_abs_difference": 0.0,
+  "fresh_checkpoint_reload": {
+    "best_epoch": 1,
+    "last_epoch": 20,
+    "score_max_abs_difference": 3.3306690738754696e-16,
+    "weight_max_abs_difference": 3.3306690738754696e-16,
+    "tolerance": 1e-07,
+    "status": "PASS_FRESH_PROCESS"
+  },
+  "provenance_note": "The frozen M2.7 config and summary retain QPAF-M2_7-MTH-001; authorization, supervised markers and registry bind the actual M3.2 run as QPAF-M3_2-MTH-001. Historical bytes are unchanged.",
+  "development_interpretation": "Selected validation nDCG@10 peaks at epoch 1 and then falls; the selected maximum is optimistic for that same validation split. No cause is inferred and no baseline comparison is claimed.",
+  "test_labels_opened": false,
+  "training_executed_by_audit": false,
+  "m3_4_execution_authorized": false
+}

@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "task_id": "M3.3",
+  "reviewer": "Thanh (@xThanhSaDec)",
+  "recorded_by": "Codex at Thanh's request",
+  "recorded_at_utc": "2026-10-22T08:01:01Z",
+  "decision": "ACCEPTED",
+  "source": "Thanh's explicit confirmation in the working session on 2026-10-22",
+  "confirmation_text": "Có, ghi Thanh chấp nhận M3.3",
+  "technical_report_ref": "evidence/revisions/m3.3-001/validation.json",
+  "technical_report_sha256": "ac689d5c32e02c95e2897f95bab6fadbfd2d90cba8a7c02a0cf3b5a835e89b02",
+  "accepted_scope": "Independent engineering validation of the authorized M3.2 QARF development run; M3.4 prerequisite review",
+  "known_provenance_note": "Frozen config and summary retain QPAF-M2_7-MTH-001 although authorization and registry bind the M3.2 run to QPAF-M3_2-MTH-001; the M3.2 evidence remains unchanged.",
+  "test_labels_opened": false,
+  "m3_4_execution_authorized": false
+}
