@@ -109,3 +109,8 @@ results/m2.6/RUN-*/source_snapshot.zip
 
 # M3.1 sealed payload copies remain local; portable manifests are committed.
 /results/m3.1/**/inputs/
+
+# The M3.2 checkpoints (42 parameters, ~15 KB) and logs are part of the run evidence.
+!/results/m3.2/**/checkpoints/
+!/results/m3.2/**/*.log
+!/results/m3.2/**/*.pt
