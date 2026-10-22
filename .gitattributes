@@ -82,3 +82,6 @@ vimdoc_archive_audit_modal.py -text
 # M3.1 seals and their pinned configuration bind exact bytes.
 /configs/m3.1/** -text -eol
 /results/m3.1/** -text -eol -whitespace
+
+# M3.2 run evidence is hashed by its receipt, so keep every byte exactly as written.
+/results/m3.2/** -text -eol -whitespace
