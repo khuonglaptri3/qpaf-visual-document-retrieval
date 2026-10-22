@@ -86,19 +86,30 @@ class IntegrityTests(unittest.TestCase):
                 self.api.main(['--output', str(path)])
             self.assertEqual(path.read_bytes(), b'preserve me')
 
+    def test_fresh_worker_accepts_a_windows_venv_launcher_but_not_an_unrelated_process(self):
+        self.assertTrue(hasattr(self.api, 'check_fresh_process'), 'launcher ancestry is not checked')
+        self.api.check_fresh_process({'worker_pid': 40, 'parent_pid': 10, 'ancestor_pids': [10, 2]}, 10)
+        self.api.check_fresh_process({'worker_pid': 40, 'parent_pid': 30, 'ancestor_pids': [30, 10, 2]}, 10)
+        for worker in ({'worker_pid': 10, 'parent_pid': 2, 'ancestor_pids': [2]},
+                       {'worker_pid': 40, 'parent_pid': 30, 'ancestor_pids': [30, 2]}):
+            with self.assertRaises(self.api.AuditError):
+                self.api.check_fresh_process(worker, 10)
+
     def test_persisted_step_losses_norms_and_coverage_are_verified(self):
         self.assertTrue(hasattr(self.api, 'check_step_telemetry'), 'step telemetry is not audited')
         epochs = [{'epoch': '1', 'train_steps': '2'}]
         steps = [{'epoch': '1', 'step': str(i), 'loss': '0.5', 'grad_norm': '0.1',
                   'valid_queries': '2', 'skipped_queries': '0', 'pairs': '2'} for i in range(2)]
         self.assertEqual(self.api.check_step_telemetry(epochs, steps)['step_count'], 2)
-        for change in ('loss', 'grad_norm', 'missing', 'duplicate'):
+        for change in ('loss', 'grad_norm', 'missing', 'duplicate', 'jump'):
             with self.subTest(change=change):
                 broken = copy.deepcopy(steps)
                 if change in ('loss', 'grad_norm'):
                     broken[0][change] = 'nan'
                 elif change == 'missing':
                     broken.pop()
+                elif change == 'jump':
+                    broken[1]['step'] = '999'
                 else:
                     broken[1]['step'] = '0'
                 with self.assertRaises(self.api.AuditError):
@@ -116,6 +127,11 @@ class IntegrityTests(unittest.TestCase):
         signoff = {'task_id': 'M3.5', 'decision': 'ACCEPTED', 'reviewer': 'Thanh',
                    'technical_report_ref': 'comparison.json', 'technical_report_sha256': 'c'*64}
         self.api.check_comparison_acceptance(event, comparison, signoff, run_ids, pins)
+        missing_event, missing_signoff = copy.deepcopy(event), copy.deepcopy(signoff)
+        del missing_event['independent_reviewer']
+        del missing_signoff['reviewer']
+        with self.assertRaises(self.api.AuditError):
+            self.api.check_comparison_acceptance(missing_event, comparison, missing_signoff, run_ids, pins)
         for target, key, value in [('event', 'run_id', 'other-run'),
                                    ('event', 'authorization_manifest_sha256', 'd'*64),
                                    ('report', 'technical_verdict', 'FAIL'),

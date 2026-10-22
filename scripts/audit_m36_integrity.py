@@ -134,6 +134,11 @@ def check_step_telemetry(epochs, steps):
         losses.append(loss)
         norms.append(norm)
     require(dict(counts) == expected, 'persisted step coverage differs from epoch train_steps')
+    for epoch, count in expected.items():
+        # Both pinned pilots have zero skipped batches. Their recorded step
+        # indices must therefore cover the complete, contiguous epoch range.
+        require({step for recorded_epoch, step in seen if recorded_epoch == epoch} == set(range(count)),
+                'persisted training step index range differs')
     return {'step_count': len(steps), 'epoch_count': len(epochs), 'loss_min': min(losses),
             'loss_max': max(losses), 'grad_norm_min': min(norms), 'grad_norm_max': max(norms)}
 
@@ -146,11 +151,21 @@ def check_comparison_acceptance(event, comparison, signoff, run_ids, pins):
     require(comparison.get('task_id') == 'M3.5' and comparison.get('technical_verdict') == 'PASS' and
             comparison.get('run_ids') == run_ids and comparison.get('pins_sha256') == pins,
             'M3.5 comparison verdict/pair/pins differ')
+    reviewer = event.get('independent_reviewer')
+    require(isinstance(reviewer, str) and bool(reviewer.strip()), 'M3.5 named reviewer is missing')
     require(signoff.get('task_id') == 'M3.5' and signoff.get('decision') == 'ACCEPTED' and
             signoff.get('reviewer') == event.get('independent_reviewer') and
             signoff.get('technical_report_ref') == event.get('verification_ref') and
             signoff.get('technical_report_sha256') == event.get('verification_sha256'),
             'M3.5 owner acceptance does not bind this comparison report')
+
+
+def check_fresh_process(worker, audit_pid):
+    """Windows venv launchers may sit between the audit and real Python worker."""
+    ancestors = worker.get('ancestor_pids', [])
+    require(worker.get('worker_pid') != audit_pid and ancestors and audit_pid in ancestors and
+            ancestors[0] == worker.get('parent_pid'),
+            'replay was not performed in a fresh descendant Python process')
 
 
 def checked_run(method):
@@ -208,6 +223,7 @@ def checked_run(method):
 def replay_worker(method):
     """Executed only in a separate child interpreter; reconstruct validation predictions."""
     import torch
+    import psutil
     from qpaf.m24.checkpoint import load_checkpoint
     from qpaf.m24.config import load_config
     from qpaf.m24.dataset import build_records, read_score_rows, read_split_ids
@@ -252,7 +268,8 @@ def replay_worker(method):
                                                    threshold=config['data']['positive_threshold'])
     metric_difference = prior.compare_reported_metrics(metrics, per_query, attempt)
     return {'method': method, 'status': 'PASS_FRESH_PROCESS', 'worker_pid': os.getpid(),
-            'parent_pid': os.getppid(), 'runtime': runtime_versions(),
+            'parent_pid': os.getppid(), 'ancestor_pids': [p.pid for p in psutil.Process().parents()],
+            'runtime': runtime_versions(),
             'loaded_source_sha256': {Path(module.__file__).resolve().relative_to(ROOT).as_posix():
                                       prior.sha(module.__file__) for module in (evaluator_source, model_source)},
             **comparison,
@@ -296,8 +313,7 @@ def audit():
                 f'{method}: first-pass audit no longer reproduces')
         worker = json.loads(prior.run_read_only([sys.executable, str(Path(__file__).resolve()),
                                                '--replay-method', method]))
-        require(worker['parent_pid'] == os.getpid() and worker['worker_pid'] != os.getpid(),
-                'replay was not performed in a fresh child process')
+        check_fresh_process(worker, os.getpid())
         runs[method] = {'run_id': run_auth['run_id'], 'attempt': attempt.relative_to(ROOT).as_posix(),
                         'authorization_sha256': paired.PINS[method.lower()+'_authorization'][1],
                         'receipt_outputs_rehashed': receipt_count, 'first_pass_checks': first_pass_count,
