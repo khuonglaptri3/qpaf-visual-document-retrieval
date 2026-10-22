@@ -26,8 +26,10 @@ OOM_PATTERN = re.compile(r'\boom(?:[-_ ]?kill(?:ed)?)?\b|out of memory|memory li
 COUNT_KEYS = ('input_success_count', 'input_failure_count', 'container_total_count',
               'container_error_count')
 REFERENCE_LIMITS_MIB = {'A02': 4096, 'A03': 5120}
-# Khương's verbatim approval; empty until recorded, so --execute refuses.
+# The approver's verbatim words; empty until recorded, so --execute refuses.
 APPROVAL_TEXT = ''
+# M3.6 owner, or the Research Lead authorizing in their place (M3.2/M3.4 precedent).
+AUTHORIZED_STATUSES = ('AUTHORIZED_BY_KHUONG_WORKING_SESSION', 'AUTHORIZED_BY_RESEARCH_LEAD_WORKING_SESSION')
 DEMONSTRATED = 'ENFORCEMENT_DEMONSTRATED'
 NOT_DEMONSTRATED = 'ENFORCEMENT_NOT_DEMONSTRATED'
 INCONCLUSIVE = 'INCONCLUSIVE'
@@ -162,16 +164,28 @@ def build_app():
     return app, image, probe
 
 
+def contract_errors(auth, *, head, dirty, output_rel, profile, approval_text):
+    """Names every authorization field that does not match this exact invocation."""
+    checks = {
+        'status': auth.get('status') in AUTHORIZED_STATUSES,
+        'source_commit': auth.get('source_commit') == head,
+        'dirty_tree': not dirty,
+        'invocations': auth.get('invocations') == 2 and auth.get('automatic_retries') == 0,
+        'output_path': auth.get('output_path') == output_rel,
+        'approval': bool(approval_text) and auth.get('approval', {}).get('text') == approval_text,
+        'memory_limit_mib': auth.get('memory_limit_mib') == PROBE_LIMIT_MIB,
+        'modal_profile': profile is not None and auth.get('modal_profile') == profile,
+    }
+    return [name for name, ok in checks.items() if not ok]
+
+
 def check_authorization(auth, output):
-    if (not APPROVAL_TEXT or
-            auth['status'] != 'AUTHORIZED_BY_KHUONG_WORKING_SESSION' or
-            auth['source_commit'] != git('rev-parse', 'HEAD') or
-            git('status', '--porcelain', '--untracked-files=no') or
-            auth['invocations'] != 2 or auth['automatic_retries'] != 0 or
-            auth['output_path'] != output.relative_to(ROOT).as_posix() or
-            auth['approval']['text'] != APPROVAL_TEXT or
-            auth['memory_limit_mib'] != PROBE_LIMIT_MIB):
-        raise ValueError('source, authorization, namespace or invocation contract differs')
+    errors = contract_errors(auth, head=git('rev-parse', 'HEAD'),
+                             dirty=git('status', '--porcelain', '--untracked-files=no'),
+                             output_rel=output.relative_to(ROOT).as_posix(),
+                             profile=os.environ.get('MODAL_PROFILE'), approval_text=APPROVAL_TEXT)
+    if errors:
+        raise ValueError('authorization contract differs: ' + ', '.join(errors))
 
 
 def execute(authorization, expected_authorization_sha256, output):

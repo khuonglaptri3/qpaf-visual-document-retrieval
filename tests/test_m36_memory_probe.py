@@ -131,6 +131,21 @@ class MemoryProbeTests(unittest.TestCase):
     def test_watchdog_covers_two_worst_case_calls(self):
         self.assertGreaterEqual(self.api.WATCHDOG_SECONDS, 900)
 
+    def test_contract_accepts_research_lead_status_and_pins_modal_profile(self):
+        auth = {'status': 'AUTHORIZED_BY_RESEARCH_LEAD_WORKING_SESSION', 'source_commit': 'abc',
+                'invocations': 2, 'automatic_retries': 0, 'output_path': 'results/m3.6/RUN-X',
+                'approval': {'text': 'ok'}, 'memory_limit_mib': 4096, 'modal_profile': 'buiphat251399'}
+        ok = dict(head='abc', dirty='', output_rel='results/m3.6/RUN-X', profile='buiphat251399',
+                  approval_text='ok')
+        self.assertEqual(self.api.contract_errors(auth, **ok), [])
+        self.assertEqual(self.api.contract_errors({**auth, 'status': 'AUTHORIZED_BY_KHUONG_WORKING_SESSION'},
+                                                  **ok), [])
+        self.assertIn('modal_profile', self.api.contract_errors(auth, **{**ok, 'profile': 'tranthanhzt123321'}))
+        self.assertIn('modal_profile', self.api.contract_errors(auth, **{**ok, 'profile': None}))
+        self.assertIn('status', self.api.contract_errors({**auth, 'status': 'PENDING_KHUONG_APPROVAL'}, **ok))
+        self.assertIn('approval', self.api.contract_errors(auth, **{**ok, 'approval_text': ''}))
+        self.assertIn('dirty_tree', self.api.contract_errors(auth, **{**ok, 'dirty': ' M scripts/x.py'}))
+
 
 if __name__ == '__main__':
     unittest.main()
