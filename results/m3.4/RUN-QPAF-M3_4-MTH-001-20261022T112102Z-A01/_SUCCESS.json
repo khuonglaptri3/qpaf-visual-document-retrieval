@@ -1,0 +1,11 @@
+{
+  "actor": "Tấn Phát",
+  "attempt": "20261022T112355-77b54aa0",
+  "authorization_sha256": "4be026b852574e7687fdc4b9337f716aa96a64ac39556ae288193bdba99e5365",
+  "exit_code": 0,
+  "finished_utc": "2026-10-22T11:25:06.242551+00:00",
+  "receipt_sha256": "22b766c12ab38c15a13426c0313b1ab6ad845a32d349977a993319e40addda72",
+  "run_id": "RUN-QPAF-M3_4-MTH-001-20261022T112102Z-A01",
+  "summary_sha256": "c932709e43f1ac5b1d6f5f3f0a088be6f6e4931b5e81ce8ce2757f8775eaa556",
+  "wall_seconds": 75.978
+}
