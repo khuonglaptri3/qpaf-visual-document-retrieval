@@ -1,0 +1,191 @@
+{
+  "schema_version": 1,
+  "task_id": "M3.5",
+  "owner": "Thanh",
+  "executed_by": "Codex at Thanh's request",
+  "checked_utc": "2026-10-22T12:14:53Z",
+  "technical_verdict": "PASS",
+  "owner_acceptance": "PENDING_THANH_CONFIRMATION",
+  "scope": "single-seed development validation paired comparison; G2 and M3.6 pending",
+  "run_ids": {
+    "QARF": "RUN-QPAF-M3_2-MTH-001-20261022T035229Z-A01",
+    "QPAF": "RUN-QPAF-M3_4-MTH-001-20261022T112102Z-A01"
+  },
+  "pins_sha256": {
+    "qarf_authorization": "ae51a3a5601d43b0a758d5feb69b74b4ba24b0413965e5fee96ed7015ede9b4b",
+    "qpaf_authorization": "4be026b852574e7687fdc4b9337f716aa96a64ac39556ae288193bdba99e5365",
+    "qarf_predictions": "658c8162b690bff751609298aa8e77bf80cdf035cdbb45711ca5f1050407ab1e",
+    "qpaf_predictions": "95ba3ed8e4a395bf0f888866a0e33abec43375d381f37dfa66195e65b7d9db5b"
+  },
+  "sealed_qrels_sha256": "691b6bc4ada3bc64fe3c408fe32498b04c7f30900eadb39ae09ddbe29aea302c",
+  "validation_ids_sha256": "46f8af5853942f6697cc3a995347a1832206212e93ff8aa87acb1775b3a060b4",
+  "validation_query_count": 171,
+  "candidate_rows": 82255,
+  "metric_replay_max_abs_difference": 0.0,
+  "bootstrap": {
+    "unit": "paired query",
+    "resamples": 10000,
+    "seed": 20260820,
+    "ci": "linear percentile 2.5/97.5",
+    "wtl_tolerance": 1e-12
+  },
+  "metrics": {
+    "ndcg_at_10": {
+      "mean_delta": 0.11413229497802459,
+      "median_delta": 0.0,
+      "ci95": [
+        0.07750099280867938,
+        0.1520403030626619
+      ],
+      "wtl": {
+        "wins": 57,
+        "ties": 101,
+        "losses": 13
+      },
+      "sample_std_delta": 0.2488681628482265,
+      "paired_standardized_effect": 0.45860544664215946,
+      "top_5pct_positive_gain_query_count": 9,
+      "top_5pct_positive_gain_share": 0.2809171963163589
+    },
+    "recall_at_1": {
+      "mean_delta": 0.15204678362573099,
+      "median_delta": 0.0,
+      "ci95": [
+        0.08187134502923976,
+        0.2222222222222222
+      ],
+      "wtl": {
+        "wins": 33,
+        "ties": 131,
+        "losses": 7
+      },
+      "sample_std_delta": 0.46047790791825244,
+      "paired_standardized_effect": 0.3301934381892725,
+      "top_5pct_positive_gain_query_count": 9,
+      "top_5pct_positive_gain_share": 0.2727272727272727
+    },
+    "recall_at_3": {
+      "mean_delta": 0.12280701754385964,
+      "median_delta": 0.0,
+      "ci95": [
+        0.06432748538011696,
+        0.18128654970760233
+      ],
+      "wtl": {
+        "wins": 25,
+        "ties": 142,
+        "losses": 4
+      },
+      "sample_std_delta": 0.3942308418380617,
+      "paired_standardized_effect": 0.31151042615358115,
+      "top_5pct_positive_gain_query_count": 9,
+      "top_5pct_positive_gain_share": 0.36
+    },
+    "mrr_at_10": {
+      "mean_delta": 0.13139097744360903,
+      "median_delta": 0.0,
+      "ci95": [
+        0.08694514062935116,
+        0.17760460178223336
+      ],
+      "wtl": {
+        "wins": 57,
+        "ties": 101,
+        "losses": 13
+      },
+      "sample_std_delta": 0.303137133589709,
+      "paired_standardized_effect": 0.4334374211687457,
+      "top_5pct_positive_gain_query_count": 9,
+      "top_5pct_positive_gain_share": 0.28219671986985007
+    }
+  },
+  "ndcg_loss_queries": 13,
+  "worst_ndcg_queries": [
+    {
+      "query_id": "008179ae43fe6605078e2dfbc1e02a2bfb1f3f48_0",
+      "delta_ndcg_at_10": -0.5,
+      "qpaf_ndcg_at_10": 0.5,
+      "qarf_ndcg_at_10": 1.0,
+      "qpaf_first_relevant_rank_at_10": 3,
+      "qarf_first_relevant_rank_at_10": 1
+    },
+    {
+      "query_id": "007b9c939a070ebea56e27391ecb1cf9550909df_1",
+      "delta_ndcg_at_10": -0.36907024642854247,
+      "qpaf_ndcg_at_10": 0.6309297535714575,
+      "qarf_ndcg_at_10": 1.0,
+      "qpaf_first_relevant_rank_at_10": 2,
+      "qarf_first_relevant_rank_at_10": 1
+    },
+    {
+      "query_id": "008179ae43fe6605078e2dfbc1e02a2bfb1f3f48_1",
+      "delta_ndcg_at_10": -0.36907024642854247,
+      "qpaf_ndcg_at_10": 0.6309297535714575,
+      "qarf_ndcg_at_10": 1.0,
+      "qpaf_first_relevant_rank_at_10": 2,
+      "qarf_first_relevant_rank_at_10": 1
+    },
+    {
+      "query_id": "0389183e3fe45615b4d7002823fac7fba892c63c_0",
+      "delta_ndcg_at_10": -0.36907024642854247,
+      "qpaf_ndcg_at_10": 0.6309297535714575,
+      "qarf_ndcg_at_10": 1.0,
+      "qpaf_first_relevant_rank_at_10": 2,
+      "qarf_first_relevant_rank_at_10": 1
+    },
+    {
+      "query_id": "038c7d9e4cc19a5b729d9d2a7ca5b304e6756ea1_2",
+      "delta_ndcg_at_10": -0.36907024642854247,
+      "qpaf_ndcg_at_10": 0.6309297535714575,
+      "qarf_ndcg_at_10": 1.0,
+      "qpaf_first_relevant_rank_at_10": 2,
+      "qarf_first_relevant_rank_at_10": 1
+    },
+    {
+      "query_id": "050ae6cc2a1218270b2ce855179862b0201d4683_3",
+      "delta_ndcg_at_10": -0.36907024642854247,
+      "qpaf_ndcg_at_10": 0.6309297535714575,
+      "qarf_ndcg_at_10": 1.0,
+      "qpaf_first_relevant_rank_at_10": 2,
+      "qarf_first_relevant_rank_at_10": 1
+    },
+    {
+      "query_id": "050dee157a41140f7fa4f5be94591267c1bc95b8_4",
+      "delta_ndcg_at_10": -0.36907024642854247,
+      "qpaf_ndcg_at_10": 0.6309297535714575,
+      "qarf_ndcg_at_10": 1.0,
+      "qpaf_first_relevant_rank_at_10": 2,
+      "qarf_first_relevant_rank_at_10": 1
+    },
+    {
+      "query_id": "05b1e568abe5fffd0959b936848d24d0f52e9b8a_3",
+      "delta_ndcg_at_10": -0.2440769463369159,
+      "qpaf_ndcg_at_10": 0.38685280723454163,
+      "qarf_ndcg_at_10": 0.6309297535714575,
+      "qpaf_first_relevant_rank_at_10": 5,
+      "qarf_first_relevant_rank_at_10": 2
+    },
+    {
+      "query_id": "046ab04bd04d4671ad4a37f44281444f3882b714_0",
+      "delta_ndcg_at_10": -0.20025319549806447,
+      "qpaf_ndcg_at_10": 0.43067655807339306,
+      "qarf_ndcg_at_10": 0.6309297535714575,
+      "qpaf_first_relevant_rank_at_10": 4,
+      "qarf_first_relevant_rank_at_10": 2
+    },
+    {
+      "query_id": "0039d8dff6883e560db3de8ce33e756124864c72_3",
+      "delta_ndcg_at_10": -0.14379281289197782,
+      "qpaf_ndcg_at_10": 0.3562071871080222,
+      "qarf_ndcg_at_10": 0.5,
+      "qpaf_first_relevant_rank_at_10": 6,
+      "qarf_first_relevant_rank_at_10": 3
+    }
+  ],
+  "test_labels_opened": false,
+  "training_executed_by_audit": false,
+  "multi_seed_claim": false,
+  "baseline_comparison_done": false,
+  "m3_6_integrity_review_complete": false,
+  "g2_decision_made": false
+}
