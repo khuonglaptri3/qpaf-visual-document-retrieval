@@ -110,9 +110,6 @@ results/m2.6/RUN-*/source_snapshot.zip
 # M3.1 sealed payload copies remain local; portable manifests are committed.
 /results/m3.1/**/inputs/
 
-# M3.2 validation predictions (16 MB) stay local; the receipt keeps their SHA-256.
-/results/m3.2/**/validation_predictions.json
-
 # The M3.2 checkpoints (42 parameters, ~15 KB) and logs are part of the run evidence.
 !/results/m3.2/**/checkpoints/
 !/results/m3.2/**/*.log
