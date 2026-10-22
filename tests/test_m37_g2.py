@@ -5,7 +5,8 @@ import tempfile
 import unittest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from scripts.decide_g2 import collect_evidence, g2_outcome  # noqa: E402
+from scripts.decide_g2 import acceptance_state, collect_evidence, g2_outcome  # noqa: E402
+from scripts.m36_gpu_worker import sha  # noqa: E402
 
 CRITERIA = {'mean_delta_min_inclusive': 0.01, 'ci95_lower_min_exclusive': 0.0,
             'top5_share_max_exclusive': 0.90, 'latency_ms_max_inclusive': 10.0,
@@ -70,6 +71,21 @@ class CollectEvidenceTests(unittest.TestCase):
             (root / 'a.json').write_text('{}', encoding='utf-8')
             with self.assertRaisesRegex(ValueError, 'pin drift: a.json'):
                 collect_evidence(root, {'files': {'a.json': '0' * 64}})
+
+
+class AcceptanceStateTests(unittest.TestCase):
+    def test_acceptance_counts_only_for_the_pinned_report_and_task(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / 'review.json').write_text('{"technical_verdict": "PASS"}', encoding='utf-8')
+            good = {'task_id': 'M3.6', 'decision': 'ACCEPTED', 'technical_report_ref': 'review.json',
+                    'technical_report_sha256': sha(root / 'review.json')}
+            self.assertEqual(acceptance_state(good, root, 'M3.6'), 'ACCEPTED')
+            self.assertEqual(acceptance_state({**good, 'technical_report_sha256': '0' * 64}, root, 'M3.6'),
+                             'REPORT_MISMATCH')
+            self.assertEqual(acceptance_state({**good, 'task_id': 'M3.5'}, root, 'M3.6'), 'WRONG_TASK')
+            self.assertEqual(acceptance_state({**good, 'decision': 'DECLINED'}, root, 'M3.6'), 'DECLINED')
+            self.assertEqual(acceptance_state(None, root, 'M3.6'), 'MISSING')
 
 
 if __name__ == '__main__':

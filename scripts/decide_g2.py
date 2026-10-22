@@ -88,6 +88,20 @@ def g2_outcome(evidence, criteria):
     return {'decision': decision, 'm4_branch': M4_BRANCH[decision], 'checks': checks, 'reasons': reasons}
 
 
+def acceptance_state(confirmation, root, task_id):
+    """An acceptance counts only for its task and the exact report bytes it names."""
+    if confirmation is None:
+        return 'MISSING'
+    if confirmation.get('task_id') != task_id:
+        return 'WRONG_TASK'
+    if confirmation.get('decision') != 'ACCEPTED':
+        return confirmation.get('decision') or 'MISSING'
+    report = root / confirmation.get('technical_report_ref', '')
+    if not report.is_file() or sha(report) != confirmation.get('technical_report_sha256'):
+        return 'REPORT_MISMATCH'
+    return 'ACCEPTED'
+
+
 def replay_m35(comparison):
     from scripts.audit_m35_paired import audit
     report, _ = audit()
@@ -105,16 +119,16 @@ def collect_evidence(root, inputs):
             if rel not in pins:
                 raise ValueError('unpinned evidence: ' + rel)
             loaded[name] = read(root / rel)
-    decision = lambda name: loaded[name].get('decision', 'MISSING') if name in loaded else 'MISSING'  # noqa: E731
+    decision = lambda name, task: acceptance_state(loaded.get(name), root, task)  # noqa: E731
     comparison = loaded.get('m3_5_comparison', {})
     ndcg = comparison.get('metrics', {}).get('ndcg_at_10', {})
     resources = loaded.get('m3_6_resources', {}).get('methods', {}).get('QPAF', {})
     integrity = loaded.get('m3_6_integrity', {})
     reload_run = integrity.get('runs', {}).get('QPAF', {}).get('fresh_checkpoint_reload', {})
     return {
-        'prerequisites': {'M3.3': decision('m3_3_acceptance'), 'M3.5': decision('m3_5_acceptance'),
+        'prerequisites': {'M3.3': decision('m3_3_acceptance', 'M3.3'), 'M3.5': decision('m3_5_acceptance', 'M3.5'),
                           'M3.6_technical': loaded.get('m3_6_memory', {}).get('technical_verdict', 'MISSING'),
-                          'M3.6_owner': decision('m3_6_owner'), 'M3.6_qa': decision('m3_6_qa')},
+                          'M3.6_owner': decision('m3_6_owner', 'M3.6'), 'M3.6_qa': decision('m3_6_qa', 'M3.6')},
         'pairing': {'query_count': comparison.get('validation_query_count'),
                     'wtl_total': sum(ndcg['wtl'].values()) if 'wtl' in ndcg else None,
                     'test_labels_opened': comparison.get('test_labels_opened'),
