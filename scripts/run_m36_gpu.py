@@ -24,6 +24,14 @@ ENV.update({'PYTHONPATH': '/workspace/src:/workspace', 'PYTHONDONTWRITEBYTECODE'
             'CUBLAS_WORKSPACE_CONFIG': ':4096:8'})
 
 
+def configure_console():
+    """Modal/Rich emits Unicode symbols even when Windows defaults to cp1252."""
+    for stream in (sys.stdout, sys.stderr):
+        if hasattr(stream, 'reconfigure'):
+            stream.reconfigure(encoding='utf-8')
+    os.environ['PYTHONIOENCODING'] = 'utf-8'
+
+
 def git(*args):
     return subprocess.check_output(['git', *args], cwd=ROOT, text=True).strip()
 
@@ -211,6 +219,7 @@ def execute(bundle, authorization, expected_authorization_sha256, output):
 
 
 def main():
+    configure_console()
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--bundle', type=Path, required=True)
     parser.add_argument('--prepare', action='store_true')

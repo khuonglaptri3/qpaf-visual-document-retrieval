@@ -1,6 +1,8 @@
 """Resource evidence must reject leakage, fabricated counts and incomplete timing."""
 import importlib
+import os
 from pathlib import Path
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -104,6 +106,15 @@ class GPUContractTests(unittest.TestCase):
             (root/'__pycache__/qrels_test.json').write_text('{}', encoding='utf-8')
             with self.assertRaisesRegex(ValueError, 'allowlist'):
                 self.api.verify_bundle(root)
+
+    def test_modal_log_symbols_work_with_legacy_windows_output_encoding(self):
+        process = subprocess.run([sys.executable, '-c',
+                                  'from scripts.run_m36_gpu import configure_console; '
+                                  "configure_console(); print('\\u2713 Modal ready')"],
+                                 cwd=Path(__file__).resolve().parents[1],
+                                 env={**os.environ, 'PYTHONIOENCODING': 'cp1252'}, capture_output=True)
+        self.assertEqual(process.returncode, 0, process.stderr)
+        self.assertIn('\u2713 Modal ready'.encode('utf-8'), process.stdout)
 
 
 if __name__ == '__main__':
