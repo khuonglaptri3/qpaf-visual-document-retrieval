@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "status": "DRAFT_NOT_APPROVED",
+  "status": "APPROVED",
   "drafted_on": "2026-10-22",
   "note": "Draft authorization manifest per evidence/M1_FINAL/02_protocol/run_policy.md section 3 and 04_experiment_registry/append_only_policy.md. It grants NOTHING until the approval block is filled with the Research Lead's exact approval text and timestamp, the file is committed, and its SHA-256 is recorded in an AUTHORIZATION_RECORDED event. Nothing may be executed from this draft.",
   "task_id": "M3.4",
@@ -14,8 +14,8 @@
     "dependency": "D1"
   },
   "experiment_id": "QPAF-M3_4-MTH-001",
-  "registry_event_id": "PENDING",
-  "run_id": "PENDING_SET_AT_APPROVAL",
+  "registry_event_id": "QPAF-REG-20261022-0023",
+  "run_id": "RUN-QPAF-M3_4-MTH-001-20261022T112102Z-A01",
   "run_id_format": "RUN-QPAF-M3_4-MTH-001-<UTC YYYYMMDDTHHMMSSZ at approval>-A01",
   "purpose": "Train the matched learned QPAF pilot (query-page gate) on the same sealed M3.1 inputs, frozen config and seed as the accepted M3.2 QARF run, select the checkpoint on validation, and retain checkpoints, predictions, metrics, telemetry and provenance for the M3.5 per-query comparison and the M3.6 integrity review.",
   "experiment_class": "learned_training",
@@ -263,8 +263,10 @@
   },
   "approval": {
     "approver": "Tấn Phát (Research Lead)",
-    "approval_text": "PENDING_EXACT_TEXT_FROM_APPROVER",
-    "approved_utc": "PENDING"
+    "approval_text": "Help me to write my approvement down, cause I am busy at the moment, then continue to push to remote. Then I will PR",
+    "approved_utc": "2026-10-22T11:21:02Z",
+    "approval_context": "The Research Lead's verbatim reply in the working session to the request to approve this exact manifest (QPAF, seed 20260820, frozen shared_base.toml, sealed M3.1 inputs, 60-minute limit, one invocation, no retry, test split not opened, no QPAF-versus-QARF claim).",
+    "recorded_by": "Claude Code at the Research Lead's explicit request; the text above is quoted, not composed"
   },
   "independent_review": {
     "reviewer": "Thanh (M3.5 comparison) and Khương (M3.6 integrity)",
@@ -272,6 +274,6 @@
   },
   "open_items": [
     "The frozen shared_base.toml names experiment_id QPAF-M2_7-MTH-001, so summary.json will repeat it, as in M3.2. It is left unchanged on purpose: editing it would break the byte-identical matched config.",
-    "Commit the supervisor, its tests and this file, then re-check supervisor.source_files_sha256 against the committed blobs before filling the approval block."
+    "Supervisor source hashes were re-checked against the committed blobs of f15676a before approval was recorded."
   ]
 }
