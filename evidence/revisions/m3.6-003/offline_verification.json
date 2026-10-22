@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "checked_utc": "2026-10-22T15:52:00.348778+00:00",
+  "offline_verification": "PASS",
+  "resource_gates": "PASS",
+  "summary_recomputed_with": "NumPy per-query median and linear percentile independent of worker summarizer",
+  "authorization_sha256": "effc1c5ddd4bcd96157a12c4e9c49a78f3e180e627da1b6bbdc92ecda72bd73b",
+  "result_sha256": "76ed5466b4c4202c551c31c55fd24a580d8d6273e65c1221a19d56134dd66943",
+  "image_id": "im-XOLHqxG4nHp2fmqZ5DDCpy",
+  "source_commit": "6e2b93e3f3de93d9d9161ae556996f5289029737",
+  "checks": [
+    "external authorization pin",
+    "attempt/bundle/image/source binding",
+    "1122 unique queries plus20 disjoint warmup",
+    "3366 raw rows per method exact ordered coverage",
+    "all timing stages finite/nonnegative",
+    "independent median/p95 arithmetic",
+    "score/weight parity and ranking agreement",
+    "separate worker PIDs",
+    "loaded core source equal accepted CPU replay source",
+    "old CPU report/run/source preservation"
+  ],
+  "methods": {
+    "QARF": {
+      "median_online_ms": 3.0438150000000004,
+      "p95_query_medians_ms": 3.1220565000000002,
+      "peak_cuda_allocated_gib": 0.032440185546875,
+      "reported_ru_maxrss_kib": 5111088,
+      "reported_ru_maxrss_gib": 4.8743133544921875,
+      "timed_rows": 3366
+    },
+    "QPAF": {
+      "median_online_ms": 2.9618795,
+      "p95_query_medians_ms": 3.0366020000000002,
+      "peak_cuda_allocated_gib": 0.03245258331298828,
+      "reported_ru_maxrss_kib": 5092192,
+      "reported_ru_maxrss_gib": 4.856292724609375,
+      "timed_rows": 3366
+    }
+  },
+  "paired_median_QPAF_minus_QARF_ms": -0.08283649999999998,
+  "median_difference_QPAF_minus_QARF_ms": -0.08193550000000016,
+  "full_suite": {
+    "tests_run": 439,
+    "skipped": 2,
+    "result": "OK",
+    "seconds": 215.907
+  },
+  "gpu_invocations": 1,
+  "all_apps_observed_stopped": true,
+  "test_labels_deserialized": false,
+  "training_executed": false,
+  "owner_acceptance": "PENDING_KHUONG_REVIEW",
+  "cpu_memory_telemetry_status": "REVIEW_REQUIRED_RU_MAXRSS_EXCEEDS_CONFIGURED_CONTAINER_LIMIT",
+  "g2_decision_made": false
+}

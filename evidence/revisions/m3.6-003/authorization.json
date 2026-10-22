@@ -1,0 +1,131 @@
+{
+  "schema_version": 1,
+  "status": "AUTHORIZED_BY_KHUONG_WORKING_SESSION",
+  "task_id": "M3.6",
+  "experiment_id": "QPAF-M3_6-SYS-001",
+  "run_id": "RUN-QPAF-M3_6-SYS-001-20261022T154348Z-A02",
+  "owner": "Kh\u01b0\u01a1ng",
+  "actor": "Codex at user request",
+  "experiment_class": "system_test",
+  "evidence_class": "engineering_evidence",
+  "purpose": "Frozen label-free learned-fusion resource measurement; no training, labels or quality/model selection",
+  "source_commit": "6e2b93e3f3de93d9d9161ae556996f5289029737",
+  "allowed_tracked_dirty_state": [],
+  "allowed_untracked_state": [
+    ".cache/m36-gpu-bundle-002",
+    "evidence/revisions/m3.6-003/*",
+    "results/m3.6/RUN-QPAF-M3_6-SYS-001-20261022T154348Z-A02/*"
+  ],
+  "bundle_manifest_sha256": "2cb1fa7a3925d77d2df4732d5f2456505273fa690547db7aca1c487a71be68c9",
+  "seal_manifest_sha256": "0832af156b79d0448ecc630ff572a0053d7cb5da98b4dac2dec1c6ee49e27893",
+  "input_hashes": {
+    "inputs/shared_base.toml": "3e58a867d11cebf72970cf0c141a90822cd7cbbdad65fb1e081cb14fa4889b58",
+    "inputs/score_cache.parquet": "56d0c82efda9264c117611ddd7135fe2384b68a3ec60fbdfd80fb964c386622b",
+    "inputs/candidate_set.parquet": "60c04acaf25126d5f16ff5f69fa394c5f797d960394e87e2f10ffed1237478ef",
+    "inputs/candidate_freeze.json": "2320402ed8f6705e5c220e4120f1975fe1989bf202339e8492167ecdf473764e",
+    "inputs/query_texts.json": "e7994373c9fd5157cde0fb0c5a1440c37c275b85fa19b2b0b566f61d584c4ab4",
+    "inputs/qrels_development.json": "691b6bc4ada3bc64fe3c408fe32498b04c7f30900eadb39ae09ddbe29aea302c",
+    "inputs/splits/train_ids.txt": "61dfe867c27b91a0a96594440b0f0e5ecf51501da0fcecdac94badaf16962191",
+    "inputs/splits/val_ids.txt": "46f8af5853942f6697cc3a995347a1832206212e93ff8aa87acb1775b3a060b4",
+    "inputs/splits/test_ids.txt": "d34210f901759a4f174da0c6c2e9b810616dcb33a71a0bd128a25d5d8d12e6f6",
+    "inputs/handover.json": "f67559e8e2e17adabdc446bff25327000c7937efedd0e77d269206dc1bf3b20b",
+    "inputs/matched.json": "705dd5705a3849239568eebee2542a9f39ccc2f123e334e7e933fde74f55fa6d"
+  },
+  "checkpoint_inputs": {
+    "QARF": {
+      "authorization": "evidence/revisions/m3.2-001/authorization.json",
+      "authorization_sha256": "ae51a3a5601d43b0a758d5feb69b74b4ba24b0413965e5fee96ed7015ede9b4b",
+      "predictions_sha256": "658c8162b690bff751609298aa8e77bf80cdf035cdbb45711ca5f1050407ab1e",
+      "path": "results/m3.2/RUN-QPAF-M3_2-MTH-001-20261022T035229Z-A01/QARF/20261022T040759-ff3934df/checkpoints/best.pt",
+      "sha256": "e44ac1a4f3887700a70914fdba8a3e7b35330244e746253d1cd828508be30914"
+    },
+    "QPAF": {
+      "authorization": "evidence/revisions/m3.4-001/authorization.json",
+      "authorization_sha256": "4be026b852574e7687fdc4b9337f716aa96a64ac39556ae288193bdba99e5365",
+      "predictions_sha256": "95ba3ed8e4a395bf0f888866a0e33abec43375d381f37dfa66195e65b7d9db5b",
+      "path": "results/m3.4/RUN-QPAF-M3_4-MTH-001-20261022T112102Z-A01/QPAF/20261022T112355-77b54aa0/checkpoints/best.pt",
+      "sha256": "e4b00ab49e186fffe8b369e26491873304b61177c11fd2ce0f455158e30e5c8e"
+    }
+  },
+  "test_label_access": false,
+  "development_label_access": false,
+  "held_out_text_cached_score_access": true,
+  "workload_sha256": "3356630bfbf84aa7d984dccf22c1c81ca22bb8a65dc5cfe904896a43ae00ddf7",
+  "methods": [
+    "QARF",
+    "QPAF"
+  ],
+  "seed": 20260820,
+  "candidate_contract": "Frozen ViDoSeek page candidate union, <=600; sorted page IDs; original 13-feature build and eager gate",
+  "evaluation_unit": "page",
+  "metric_policy_sha256": "4ce926201bb38b975c3eb43b83b0c719dea48267ff20e8fffa7e7329c0b5579a",
+  "resource_gates": {
+    "warmup_queries": 20,
+    "minimum_distinct_measured_queries": 1000,
+    "median_added_fusion_latency_ms_max_inclusive": 10.0,
+    "peak_learned_fusion_cuda_gib_max_exclusive": 1.5,
+    "checkpoint_score_abs_tolerance": 1e-07
+  },
+  "batch_size": 1,
+  "passes": 3,
+  "dtype": "float64",
+  "threads": 1,
+  "gpu": "A10",
+  "gpu_count": 1,
+  "cpu_limit_cores": 2,
+  "memory_limit_mib": 4096,
+  "function_timeout_seconds": 900,
+  "startup_timeout_seconds": 120,
+  "whole_app_watchdog_seconds": 900,
+  "worker_timeout_seconds": 410,
+  "invocations": 1,
+  "automatic_retries": 0,
+  "runtime": {
+    "python": "3.13.7",
+    "torch": "2.11.0+cu126",
+    "wheel_index": "https://download.pytorch.org/whl/cu126",
+    "numpy": "2.5.4",
+    "pandas": "3.0.6",
+    "pyarrow": "26.0.0",
+    "modal": "1.5.5",
+    "dtype": "float64",
+    "threads": 1,
+    "immutable_image_identity": "PENDING_IMAGE_PREPARATION_AFTER_PROTOCOL_REVIEW"
+  },
+  "base_oci_image": "python:3.13.7-slim-bookworm@sha256:adafcc17694d715c905b4c7bebd96907a1fd5cf183395f0ebc4d3428bd22d92d",
+  "resolved_image_binding": "runtime_binding.json captured before the sole .remote() call",
+  "budget_usd": 0.5,
+  "allocated_compute_900s_estimate_usd": 0.306972,
+  "cost_enforcement": "One limited container; build command timeouts; whole-app900s watchdog and app stop; no provider per-run hard dollar cap. Budget is an operational target, final invoice may differ.",
+  "output_path": "results/m3.6/RUN-QPAF-M3_6-SYS-001-20261022T154348Z-A02",
+  "namespace_policy": "create-once, preserve failure; no rerun authorized by this record",
+  "stop_conditions": [
+    "source/input/auth/image drift",
+    "wrong GPU/runtime",
+    "parity >1e-7",
+    "missing/duplicate coverage",
+    "NaN/Inf or invalid weights",
+    "timeout/resource integrity failure"
+  ],
+  "markers": [
+    "_ATTEMPTED.json",
+    "runtime_binding.json",
+    "gpu_result.json",
+    "_SUCCESS.json or _FAILURE.json or _WATCHDOG.json"
+  ],
+  "deep_research_run_id": "01a16430-2260-7736-a7b0-ce923d0b5f8c",
+  "deep_research_completed_before_execution": true,
+  "independent_code_review": "Console delta no findings;10 focused tests pass; previous executor no Critical/Important findings",
+  "approval": {
+    "approver": "Kh\u01b0\u01a1ng via current user message",
+    "text": "Ch\u1ea1y \u0111i  r\u1ed3i b\u00e1o c\u00e1o k\u1ebft qu\u1ea3 v\u1ec1 \u0111\u00e2y nh\u1edb deepsearch tr\u01b0\u1edbc khi l\u00e0m",
+    "recorded_utc": "2026-10-22T15:43:48.714934+00:00",
+    "timestamp_scope": "Authorization recorded now; user message did not expose a server timestamp",
+    "continuation_authority": "Original user request to run; no new user message fabricated; A01 did not call GPU function"
+  },
+  "g2_decision_made": false,
+  "retry_of": "RUN-QPAF-M3_6-SYS-001-20261022T153759Z-A01",
+  "manual_continuation_reason": "A01 failed solely in local Modal Rich logging before image build or function.remote; tasks0 observed and exact app explicitly stopped; source console fix independently reviewed; same standing user instruction, no extra GPU invocation allowance.",
+  "previous_result_bearing_gpu_invocations": 0,
+  "total_result_bearing_gpu_invocation_limit_across_A01_A02": 1
+}

@@ -1,0 +1,27 @@
+{
+  "issue_id": "M3_6_CPU_RSS_ACCOUNTING_001",
+  "status": "OPEN_BLOCKS_OVERALL_TECHNICAL_ACCEPTANCE",
+  "configured_request_and_limit_mib": 4096,
+  "reported_ru_maxrss_kib": {
+    "QARF": 5111088,
+    "QPAF": 5092192
+  },
+  "observed_effect": "Run completed with no OOM despite reported RSS above configured hard limit",
+  "latency_cuda_parity_gates": "PASS",
+  "physical_or_cgroup_peak": "NOT_RECORDED",
+  "cause": "UNRESOLVED",
+  "evidence_sources": [
+    "https://modal.com/docs/guide/resources",
+    "https://gvisor.dev/docs/architecture_guide/resources/"
+  ],
+  "inference_limit": "Sandbox accounting approximation is a plausible explanation, not confirmed deployment backend or cause. No proof of physical CPU RAM below4GiB.",
+  "retrospective_investigation": "Supported installed SDK1.5.5 app logs contain no CPU/cgroup peak; metadata lookup UnimplementedError; no package changes or compute performed",
+  "resolution_options": [
+    "Obtain host/cgroup/provider peak from the completed app dashboard or exported telemetry",
+    "If unavailable, prepare a separately reviewed diagnostic collecting backend/version, process RSS and cgroup current/peak/events; no diagnostic execution granted by this artifact"
+  ],
+  "new_gpu_calls_performed_for_issue": 0,
+  "threshold_or_memory_limit_changed_after_result": false,
+  "owner": "Kh\u01b0\u01a1ng",
+  "recorded_utc": "2026-10-22T15:56:01.509357+00:00"
+}

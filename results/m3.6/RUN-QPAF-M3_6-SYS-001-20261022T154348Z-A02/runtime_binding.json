@@ -1,0 +1,10 @@
+{
+  "app_id": "ap-8PpAIo6k3BjeodZjRvdCTD",
+  "image_id": "im-XOLHqxG4nHp2fmqZ5DDCpy",
+  "authorization_sha256": "effc1c5ddd4bcd96157a12c4e9c49a78f3e180e627da1b6bbdc92ecda72bd73b",
+  "base_image": "python:3.13.7-slim-bookworm@sha256:adafcc17694d715c905b4c7bebd96907a1fd5cf183395f0ebc4d3428bd22d92d",
+  "source_commit": "6e2b93e3f3de93d9d9161ae556996f5289029737",
+  "bundle_manifest_sha256": "2cb1fa7a3925d77d2df4732d5f2456505273fa690547db7aca1c487a71be68c9",
+  "bound_utc": "2026-10-22T15:46:21.624347+00:00",
+  "gpu_invocations_before_binding": 0
+}
