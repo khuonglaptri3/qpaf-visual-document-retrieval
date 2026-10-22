@@ -16,6 +16,10 @@ sys.path.insert(0, str(ROOT/'src'))
 from scripts.m36_gpu_worker import label_free_records, read, sha, verify_bundle, write_new
 
 REVIEW = ROOT/'evidence/revisions/m3.6-001/gpu_protocol_review'
+MEMORY_MIB = 5120
+RERUN_APPROVAL = ('Thế giờ t tăng lên 5gb thì có thể hoàn thành task này chưa nếu hoàn thành rồi '
+                  'thì tạo pr mô tả chi tiết công việc t đã làm kết quả ra sao mã nguồn chỗ nào '
+                  'và nhiệm vụ tiếp theo cho ai bằng tiếng anh')
 BASE_IMAGE = ('python:3.13.7-slim-bookworm@sha256:'
               'adafcc17694d715c905b4c7bebd96907a1fd5cf183395f0ebc4d3428bd22d92d')
 ENV = {key: '1' for key in ('OMP_NUM_THREADS', 'MKL_NUM_THREADS', 'OPENBLAS_NUM_THREADS',
@@ -46,7 +50,8 @@ def prepare_bundle(destination):
         raise ValueError('reviewed workload drift')
     if git('status', '--porcelain', '--untracked-files=no'):
         raise ValueError('tracked source must be committed before preparation')
-    git('ls-files', '--error-unmatch', 'scripts/m36_gpu_worker.py', 'scripts/run_m36_gpu.py')
+    git('ls-files', '--error-unmatch', 'scripts/m36_gpu_worker.py', 'scripts/run_m36_gpu.py',
+        'scripts/m36_memory_telemetry.py')
     auth = read(ROOT/plan['checkpoint_inputs']['QPAF']['authorization'])
     seal = ROOT/auth['sealed_inputs']['run_path']
     for rel, expected in plan['source_inputs'].items():
@@ -79,7 +84,7 @@ def prepare_bundle(destination):
         target = destination/path.relative_to(ROOT)
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(path, target)
-    for name in ('m36_gpu_worker.py',):
+    for name in ('m36_gpu_worker.py', 'm36_memory_telemetry.py'):
         shutil.copyfile(ROOT/'scripts'/name, destination/'scripts'/name)
     shutil.copyfile(seal/'inputs/shared_base.toml', destination/'input/shared_base.toml')
     shutil.copyfile(REVIEW/'gpu_workload.json', destination/'input/workload.json')
@@ -120,7 +125,7 @@ def build_app(bundle):
              .add_local_dir(bundle, '/workspace', copy=True))
     app = modal.App('qpaf-m36-resource', include_source=False)
 
-    @app.function(image=image, gpu='A10', cpu=(2., 2.), memory=(4096, 4096),
+    @app.function(image=image, gpu='A10', cpu=(2., 2.), memory=(MEMORY_MIB, MEMORY_MIB),
                   timeout=900, startup_timeout=120, retries=0, max_containers=1,
                   min_containers=0, buffer_containers=0, scaledown_window=2,
                   single_use_containers=True, serialized=True,
@@ -132,20 +137,24 @@ def build_app(bundle):
         import time
         from pathlib import Path
         from scripts.m36_gpu_worker import run_method, verify_bundle
+        from scripts.m36_memory_telemetry import snapshot
         started = time.perf_counter()
         verify_bundle(Path('/workspace'))
         outputs, logs = {}, {}
+        container_memory = [snapshot('container_before_workers')]
         with tempfile.TemporaryDirectory(prefix='m36-output-') as output:
             for method in ('QARF', 'QPAF'):
                 path = Path(output)/f'{method}.json'
                 worker = run_method(method, Path('/workspace'), path)
+                container_memory.append(snapshot('container_after_'+method))
                 logs[method] = worker['log']
                 if worker['status'] != 'COMPLETED':
                     return {'status': 'FAILED', 'outputs': outputs, 'logs': logs,
                             'failed_method': method, 'reason': worker['reason'],
-                            'seconds': time.perf_counter()-started}
+                            'seconds': time.perf_counter()-started, 'container_memory': container_memory}
                 outputs[method] = worker['output']
         return {'status': 'COMPLETED', 'outputs': outputs, 'logs': logs,
+                'memory_request_and_limit_mib': MEMORY_MIB, 'container_memory': container_memory,
                 'seconds': time.perf_counter()-started,
                 'packages': {p: importlib.metadata.version(p) for p in ('torch', 'numpy', 'pandas', 'pyarrow')},
                 'pip_freeze': subprocess.check_output(['python', '-m', 'pip', 'freeze'], text=True),
@@ -166,7 +175,8 @@ def execute(bundle, authorization, expected_authorization_sha256, output):
             manifest['source_commit'] != auth['source_commit'] or
             auth['invocations'] != 1 or auth['automatic_retries'] != 0 or
             auth['output_path'] != output.relative_to(ROOT).as_posix() or
-            auth['approval']['text'] != 'Chạy đi  rồi báo cáo kết quả về đây nhớ deepsearch trước khi làm'):
+            auth['approval']['text'] != RERUN_APPROVAL or
+            auth['memory_limit_mib'] != MEMORY_MIB):
         raise ValueError('source, authorization, namespace or invocation contract differs')
     import modal
     app, image, function = build_app(bundle)
@@ -194,6 +204,7 @@ def execute(bundle, authorization, expected_authorization_sha256, output):
                        'authorization_sha256': expected_authorization_sha256,
                        'base_image': BASE_IMAGE, 'source_commit': auth['source_commit'],
                        'bundle_manifest_sha256': sha(bundle/'bundle_manifest.json'),
+                       'memory_request_and_limit_mib': MEMORY_MIB,
                        'bound_utc': datetime.now(timezone.utc).isoformat(),
                        'gpu_invocations_before_binding': 0})
             result = function.remote()

@@ -132,6 +132,8 @@ def run_method(method, root, output, timeout=410):
 
 
 def measure(method, root):
+    from scripts.m36_memory_telemetry import snapshot
+    memory_snapshots = [snapshot('worker_before_torch_import')]
     manifest = verify_bundle(root)
     sys.path.insert(0, str(root/'src'))
     import torch
@@ -142,6 +144,7 @@ def measure(method, root):
     from qpaf.m24.trainer import build_model
     import qpaf.m12.model as model_module
     import qpaf.m12.features as feature_module
+    memory_snapshots.append(snapshot('worker_after_torch_import'))
 
     for module in (model_module, feature_module):
         if not Path(module.__file__).resolve().is_relative_to((root/'src').resolve()):
@@ -166,7 +169,9 @@ def measure(method, root):
     if any(set(r) != {'query_id', 'text', 'page_ids', 'raw_scores'} for r in records_list):
         raise ValueError('unexpected payload fields')
     records = {r['query_id']: r for r in records_list}
+    memory_snapshots.append(snapshot('worker_after_payload'))
     torch.cuda.init()
+    memory_snapshots.append(snapshot('worker_after_cuda_init'))
     baseline = {'allocated': torch.cuda.memory_allocated(), 'reserved': torch.cuda.memory_reserved()}
     torch.cuda.reset_peak_memory_stats()
     cold_start = time.perf_counter()
@@ -177,6 +182,7 @@ def measure(method, root):
     model = model.to('cuda').eval()
     torch.cuda.synchronize()
     load_seconds = time.perf_counter()-cold_start
+    memory_snapshots.append(snapshot('worker_after_checkpoint_load'))
     event_start, event_end = torch.cuda.Event(enable_timing=True), torch.cuda.Event(enable_timing=True)
     # Initialize event handles outside the query wall clock.
     event_start.record()
@@ -239,14 +245,17 @@ def measure(method, root):
         if parity['query_count'] != 171 or parity['candidate_count'] != 82255:
             raise ValueError('validation parity coverage differs')
         parity['seconds'] = time.perf_counter()-start
+        memory_snapshots.append(snapshot('worker_after_parity'))
         for query_id in warmup:
             infer_one(records[query_id])
+        memory_snapshots.append(snapshot('worker_after_warmup'))
         for p in range(3):
             for query_id in measured:
                 _, _, _, times = infer_one(records[query_id])
                 timings.append({'query_id': query_id, 'pass_index': p,
                                 'candidate_count': len(records[query_id]['page_ids']), **times})
             print(f'{method}: measured pass {p+1}/3 ({len(measured)} queries)', flush=True)
+            memory_snapshots.append(snapshot(f'worker_after_pass_{p+1}'))
     peak = torch.cuda.max_memory_allocated()
     result = {'schema_version': 1, 'method': method, 'worker_pid': os.getpid(),
               'checked_utc': datetime.now(timezone.utc).isoformat(),
@@ -258,6 +267,7 @@ def measure(method, root):
               'warmup_queries': len(warmup), 'parity': parity, 'cold_checkpoint_load_seconds': load_seconds,
               'cuda_baseline_bytes': baseline, 'peak_cuda_reserved_bytes': torch.cuda.max_memory_reserved(),
               'cpu_peak_rss_kib': __import__('resource').getrusage(__import__('resource').RUSAGE_SELF).ru_maxrss,
+              'memory_telemetry': memory_snapshots,
               'summary': summarize(timings, measured, peak), 'timings': timings,
               'test_labels_deserialized': False, 'training_executed': False,
               'measurement_scope': 'FP64 eager batch1; full online features/H2D/gate/D2H/page ranking; '
