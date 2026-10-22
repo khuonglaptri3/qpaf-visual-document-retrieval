@@ -1,0 +1,25 @@
+{
+  "actor": "Tấn Phát",
+  "authorization_sha256": "ae51a3a5601d43b0a758d5feb69b74b4ba24b0413965e5fee96ed7015ede9b4b",
+  "command": [
+    "C:\\Users\\HP\\OneDrive\\qpaf-visual-document-retrieval\\.venv\\Scripts\\python.exe",
+    "scripts/run_m24_pipeline.py",
+    "--config",
+    "results/m3.1/RUN-QPAF-M3_1-SEAL-001-20261021T142631Z-A01/inputs/shared_base.toml",
+    "--method",
+    "QARF",
+    "--scores",
+    "results/m3.1/RUN-QPAF-M3_1-SEAL-001-20261021T142631Z-A01/inputs/score_cache.parquet",
+    "--queries",
+    "results/m3.1/RUN-QPAF-M3_1-SEAL-001-20261021T142631Z-A01/inputs/query_texts.json",
+    "--qrels",
+    "results/m3.1/RUN-QPAF-M3_1-SEAL-001-20261021T142631Z-A01/inputs/qrels_development.json",
+    "--splits",
+    "results/m3.1/RUN-QPAF-M3_1-SEAL-001-20261021T142631Z-A01/inputs/splits",
+    "--output",
+    "results/m3.2/RUN-QPAF-M3_2-MTH-001-20261022T035229Z-A01"
+  ],
+  "git_head": "23277900686b65657a46a21440faecf7d0518a21",
+  "run_id": "RUN-QPAF-M3_2-MTH-001-20261022T035229Z-A01",
+  "started_utc": "2026-10-22T04:07:53.162139+00:00"
+}
