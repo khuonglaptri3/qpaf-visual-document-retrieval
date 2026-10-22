@@ -1,0 +1,22 @@
+✓ Initialized. View run at 
+https://modal.com/apps/tlcn-group1/main/ap-8f30Xc6tkHWkwJSpGnRm8U
+Building image im-bFFCtQsQCpEMjFhsQV5QkJ
+
+=> Step 0: FROM base
+
+=> Step 1: COPY . /
+Saving image...
+Image saved, took 1.60s
+
+Built image im-bFFCtQsQCpEMjFhsQV5QkJ in 4.63s
+
+
+✓ Created objects.
+├── 🔨 Created mount 
+│   C:\Users\lanph\.codex\worktrees\8e65\Artificial_Intelligent_Project\.cache\
+│   m36-gpu-bundle-003
+└── 🔨 Created function build_app.<locals>.benchmark_pair.
+Stopping app - local entrypoint completed.
+✓ App completed. View run at 
+https://modal.com/apps/tlcn-group1/main/ap-8f30Xc6tkHWkwJSpGnRm8U
+GPU resource verdict: PASS
