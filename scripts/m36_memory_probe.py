@@ -10,6 +10,7 @@ from datetime import datetime, timezone
 import json
 import os
 from pathlib import Path
+import re
 import subprocess
 import sys
 import threading
@@ -20,8 +21,11 @@ PROBE_LIMIT_MIB = 4096
 BELOW_TARGET_MIB = 2048
 ABOVE_TARGET_MIB = 4608
 HOLD_SECONDS = 5
-WATCHDOG_SECONDS = 600
-OOM_MARKERS = ('oom', 'out of memory', 'memory limit', 'exit code 137')
+WATCHDOG_SECONDS = 900  # covers two calls x (120 s startup + 300 s timeout) plus image start
+OOM_PATTERN = re.compile(r'\boom(?:[-_ ]?kill(?:ed)?)?\b|out of memory|memory limit|exit ?code[:= ]*137')
+COUNT_KEYS = ('input_success_count', 'input_failure_count', 'container_total_count',
+              'container_error_count')
+REFERENCE_LIMITS_MIB = {'A02': 4096, 'A03': 5120}
 # Khương's verbatim approval; empty until recorded, so --execute refuses.
 APPROVAL_TEXT = ''
 DEMONSTRATED = 'ENFORCEMENT_DEMONSTRATED'
@@ -45,15 +49,24 @@ def oom_attributed(error_text, provider_stats):
     reasons = [error_text or '']
     if provider_stats:
         reasons += [str(r) for r in provider_stats.get('exit_reasons', [])]
-    text = ' '.join(reasons).lower()
-    return any(marker in text for marker in OOM_MARKERS)
+    return OOM_PATTERN.search(' '.join(reasons).lower()) is not None
 
 
 def classify_controls(below, above, provider_stats):
     # A completed above-limit attempt, including a provider retry, defeats the claim.
-    if above['status'] == 'COMPLETED' or provider_stats.get('input_success_count', 0) > 1:
+    successes = provider_stats.get('input_success_count')
+    if above['status'] == 'COMPLETED' or (type(successes) is int and successes > 1):
         return NOT_DEMONSTRATED
-    if below['status'] != 'COMPLETED' or not oom_attributed(above.get('error_text') or '', provider_stats):
+    counts = [provider_stats.get(key) for key in COUNT_KEYS]
+    if any(type(count) is not int for count in counts):
+        return INCONCLUSIVE
+    successes, failures, containers, errors = counts
+    # One input succeeded (below) and one failed (above). Every container beyond the
+    # below one must have errored, so provider retries can only be above attempts.
+    if (below['status'] != 'COMPLETED' or successes != 1 or failures != 1 or containers < 2 or
+            errors != containers - 1):
+        return INCONCLUSIVE
+    if not oom_attributed(above.get('error_text') or '', provider_stats):
         return INCONCLUSIVE
     return DEMONSTRATED
 
@@ -61,13 +74,45 @@ def classify_controls(below, above, provider_stats):
 def memory_bound_verdict(classification, runs):
     bounded = {}
     for name, run in runs.items():
-        ok = classification == DEMONSTRATED and run['success_marker'] and run['failed_calls'] == 0
-        bounded[name] = {'bound': 'BELOW_LIMIT' if ok else 'UNBOUNDED', 'limit_mib': run['limit_mib']}
-    resolved = classification == DEMONSTRATED and all(r['bound'] == 'BELOW_LIMIT' for r in bounded.values())
+        ok = (classification == DEMONSTRATED and run.get('limit_mib') == REFERENCE_LIMITS_MIB.get(name) and
+              run.get('success_marker') is True and type(run.get('failed_calls')) is int and
+              run['failed_calls'] == 0)
+        bounded[name] = {'bound': 'BELOW_LIMIT' if ok else 'UNBOUNDED', 'limit_mib': run.get('limit_mib')}
+    resolved = (classification == DEMONSTRATED and set(bounded) == set(REFERENCE_LIMITS_MIB) and
+                all(r['bound'] == 'BELOW_LIMIT' for r in bounded.values()))
     return {'classification': classification,
             'issue_status': 'RESOLVED_BY_ENFORCED_BOUND' if resolved else 'OPEN',
             'runs': bounded, 'exact_peak_available': False,
             'claim_scope': 'Provider-enforced upper bound under Modal hard memory limit; not a peak'}
+
+
+def failed_record(target_mib, error_type, error_text):
+    return {'status': 'FAILED', 'target_mib': target_mib, 'error_type': error_type,
+            'error_text': error_text, 'in_sandbox': None}
+
+
+def run_controls(call, write):
+    """Below first; if it fails, stop before spending the above-limit invocation."""
+    try:
+        below = call(BELOW_TARGET_MIB)
+    except Exception as exc:
+        write('below', failed_record(BELOW_TARGET_MIB, type(exc).__name__, str(exc)))
+        raise
+    write('below', below)
+    try:
+        above = call(ABOVE_TARGET_MIB)
+    except Exception as exc:  # the above-limit control is expected to land here
+        above = failed_record(ABOVE_TARGET_MIB, type(exc).__name__, str(exc))
+    write('above', above)
+
+
+def load_controls(output):
+    """A record lost to the watchdog or a crash reads as a failed, unattributed control."""
+    from scripts.m36_gpu_worker import read
+    note = 'watchdog stopped app' if (output/'_WATCHDOG.json').exists() else 'record not written'
+    return tuple(read(output/f'{name}.json') if (output/f'{name}.json').exists()
+                 else failed_record(target, 'MISSING_RECORD', note)
+                 for name, target in (('below', BELOW_TARGET_MIB), ('above', ABOVE_TARGET_MIB)))
 
 
 def probe_body(target_mib):
@@ -162,14 +207,8 @@ def execute(authorization, expected_authorization_sha256, output):
                 'source_commit': git('rev-parse', 'HEAD'),
                 'memory_request_and_limit_mib': PROBE_LIMIT_MIB,
                 'bound_utc': datetime.now(timezone.utc).isoformat(), 'gpu_invocations_before_binding': 0})
-            for name, target in (('below', BELOW_TARGET_MIB), ('above', ABOVE_TARGET_MIB)):
-                try:
-                    record = probe.remote(target)
-                except Exception as exc:  # the above-limit control is expected to land here
-                    record = {'status': 'FAILED', 'target_mib': target, 'error_type': type(exc).__name__,
-                              'error_text': str(exc), 'in_sandbox': None}
-                record['finished_utc'] = datetime.now(timezone.utc).isoformat()
-                write_new(output/f'{name}.json', record)
+            run_controls(probe.remote, lambda name, record: write_new(
+                output/f'{name}.json', {**record, 'finished_utc': datetime.now(timezone.utc).isoformat()}))
         write_new(output/'_SUCCESS.json', {'status': 'EXECUTION_COMPLETE',
                   'below_sha256': sha(output/'below.json'), 'above_sha256': sha(output/'above.json'),
                   'elapsed_seconds_including_build': time.monotonic()-started,
@@ -185,7 +224,11 @@ def execute(authorization, expected_authorization_sha256, output):
 
 def classify(output, provider_stats_path, runs_path, review_output):
     from scripts.m36_gpu_worker import read, sha, write_new
-    below, above = read(output/'below.json'), read(output/'above.json')
+    below, above = load_controls(output)
+    if (output/'_SUCCESS.json').exists():
+        marker = read(output/'_SUCCESS.json')
+        if marker['below_sha256'] != sha(output/'below.json') or marker['above_sha256'] != sha(output/'above.json'):
+            raise ValueError('control records differ from _SUCCESS.json hashes')
     provider_stats, runs = read(provider_stats_path), read(runs_path)
     verdict = memory_bound_verdict(classify_controls(below, above, provider_stats), runs)
     prior = read(ROOT/'evidence/revisions/m3.6-004/technical_review.json')
@@ -206,7 +249,9 @@ def classify(output, provider_stats_path, runs_path, review_output):
                   'input_success_count', 'input_failure_count', 'container_total_count',
                   'container_error_count')},
               'prior_m3_6_004_verdicts_pass': prior_pass,
-              'inputs_sha256': {'below': sha(output/'below.json'), 'above': sha(output/'above.json'),
+              'provider_retries_of_above_control': max(0, (provider_stats.get('container_total_count') or 0) - 2),
+              'inputs_sha256': {**{name: sha(output/f'{name}.json') for name in ('below', 'above')
+                                   if (output/f'{name}.json').exists()},
                                 'provider_stats': sha(provider_stats_path), 'runs': sha(runs_path)},
               'g2_decision_made': False, 'labels_deserialized': False, 'training_executed': False}
     write_new(review_output, review)
