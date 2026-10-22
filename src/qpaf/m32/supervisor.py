@@ -51,7 +51,7 @@ def _git(root, *args, check=True):
     return done
 
 
-def load_authorization(path, expected_sha256, run_id):
+def load_authorization(path, expected_sha256, run_id, actor):
     """Accept only the exact, approved authorization whose hash was pinned outside the file."""
     if not isinstance(expected_sha256, str) or not re.fullmatch('[0-9a-f]{64}', expected_sha256):
         raise Refused('An external 64-character authorization SHA-256 pin is required')
@@ -65,6 +65,8 @@ def load_authorization(path, expected_sha256, run_id):
         raise Refused('Authorization is not approved by its approver')
     if auth.get('run_id') != run_id or not RUN_ID.fullmatch(run_id):
         raise Refused('Run ID differs from the approved authorization')
+    if str(auth.get('actor', 'PENDING')).startswith('PENDING') or auth['actor'] != actor:
+        raise Refused('Actor differs from the one named in the approved authorization')
     return auth
 
 
@@ -176,7 +178,7 @@ def check_attempt(namespace, auth, head):
 def supervise(root, authorization_path, expected_sha256, run_id, *, actor):
     """Run the approved command exactly once. Refusals leave nothing behind; later outcomes leave a marker."""
     root = Path(root).resolve()
-    auth = load_authorization(authorization_path, expected_sha256, run_id)
+    auth = load_authorization(authorization_path, expected_sha256, run_id, actor)
     command, interpreter = build_command(root, auth, run_id)
     namespace = _namespace(root, auth, run_id)
     head = check_git(root, auth['git'])

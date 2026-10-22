@@ -102,6 +102,7 @@ class SupervisorTests(unittest.TestCase):
         auth = json.loads(TEMPLATE.read_text(encoding='utf-8'))
         auth['status'] = 'APPROVED'
         auth['run_id'] = RUN_ID
+        auth['actor'] = 'tester'
         auth['approval'] = {'approver': 'Tấn Phát (Research Lead)', 'approved_utc': '2026-10-22T09:00:00Z',
                             'approval_text': 'Approved for this test fixture only'}
         auth['git']['code_base_commit'] = self.base
@@ -167,6 +168,18 @@ class SupervisorTests(unittest.TestCase):
     def test_a_run_id_other_than_the_approved_one_is_refused(self):
         with self.assertRaises(self.api.Refused):
             self.supervise(run_id='RUN-QPAF-M3_2-MTH-001-20261022T100000Z-A01')
+        self.assertFalse(self.namespace.exists())
+
+    def test_an_actor_other_than_the_authorized_one_is_refused(self):
+        with self.assertRaises(self.api.Refused):
+            self.api.supervise(self.root, self.auth_path, self.pin, RUN_ID, actor='someone else')
+        self.assertFalse(self.namespace.exists())
+
+    def test_an_authorization_that_names_no_confirmed_actor_is_refused(self):
+        pending = 'PENDING_CONFIRM (to be named at approval)'
+        self.authorize(lambda a: a.update(actor=pending))
+        with self.assertRaises(self.api.Refused):
+            self.api.supervise(self.root, self.auth_path, self.pin, RUN_ID, actor=pending)
         self.assertFalse(self.namespace.exists())
 
     def test_forbidden_arguments_are_refused(self):
