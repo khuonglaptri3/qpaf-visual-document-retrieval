@@ -95,3 +95,6 @@ vimdoc_archive_audit_modal.py -text
 /results/m4.2/verification/** -text -eol -whitespace
 # Shared baseline inputs retain their original sealed bytes on every checkout.
 /results/m4.2/RUN-*/** -text -eol -whitespace
+
+# M4.4 run receipts hash exact bytes, including compressed predictions.
+/results/m4.4/** -text -eol -whitespace
