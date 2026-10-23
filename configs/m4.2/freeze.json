@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "task_id": "M4.2",
+  "owner": "Khương",
+  "status": "PREPARED_SETTINGS_REAL_INPUTS_PENDING",
+  "parent_commit": "5bbb2de",
+  "m41_manifest": "evidence/revisions/m4.1-001/manifest.json",
+  "dataset": "kaistdata/ViMDoc",
+  "dataset_revision": "25657f1fe0358f49147148ca89e231291ba42788",
+  "required_deployable_baselines": [
+    "bm25", "bge_m3", "colqwen25", "uniform_combsum", "rrf_k60",
+    "train_fitted_static", "learned_qarf"
+  ],
+  "score_columns": ["query_id", "page_id", "bm25_score", "dense_score", "visual_score"],
+  "shared_candidates": {
+    "top_k_per_channel": 200,
+    "union_cap": 600,
+    "candidate_order": "ascending_page_id",
+    "rescore_all_three_channels": true,
+    "candidate_generation_label_access": false,
+    "vimdoc_expansion_amendment_adopted": false
+  },
+  "normalization": {
+    "method": "per_query_per_channel_minmax_on_common_union",
+    "range_epsilon": 1e-15,
+    "degenerate_value": 0.0,
+    "score_dtype": "float64",
+    "population_statistics_fitted": false
+  },
+  "uniform_weights": [0.3333333333333333, 0.3333333333333333, 0.3333333333333333],
+  "rrf": {
+    "k": 60,
+    "rank_start": 1,
+    "rank_scope": "all_rescored_common_union_pages",
+    "rank_tie_break": "ascending_page_id",
+    "parameter_fitting": false
+  },
+  "static_fit": {
+    "partition": "exact_m41_train_ids_only",
+    "grid_denominator": 10,
+    "grid_candidates": 66,
+    "objective": "mean_train_document_ndcg_at_10",
+    "tie_tolerance": 1e-12,
+    "tie_rule": "lexicographically_first_weight_tuple_within_1e-12_of_global_best",
+    "source": "configs/m2.5/freeze.json",
+    "vimdoc_adoption": "PENDING_REVIEWED_REAL_INPUT_EXECUTION",
+    "real_fitted_weights": null
+  },
+  "evaluation": {
+    "unit": "document",
+    "page_to_document": "remove_final_underscore_segment",
+    "document_score": "max_fused_page_score",
+    "rank_tie_break": "ascending_document_id",
+    "primary_metric": "mean_per_query_document_ndcg_at_10",
+    "idcg": "all_relevant_documents"
+  },
+  "strongest_selection": {
+    "partition": "validation_only",
+    "tie_tolerance": 1e-12,
+    "rule": "retain_all_co_strongest_from_all_seven_baselines",
+    "selected_baseline_ids": null,
+    "status": "PENDING_M4_4"
+  },
+  "real_inputs": {
+    "raw_score_cache_sha256": null,
+    "normalized_score_cache_sha256": null,
+    "candidate_table_sha256": null,
+    "channel_top_lists_sha256": null,
+    "development_document_qrels_sha256": null,
+    "ocr_manifest_sha256": null,
+    "page_identity_audit_sha256": null,
+    "coverage_report_sha256": null,
+    "retriever_runtime_parity_sha256": null,
+    "learned_qarf_vimdoc_checkpoint_hashes": null
+  },
+  "access": {
+    "confirmation_labels_opened": false,
+    "validation_labels_opened": false,
+    "real_train_labels_opened": false,
+    "gpu_execution": false,
+    "remote_score_extraction": false,
+    "learned_training": false,
+    "real_static_fit_executed": false,
+    "owner_acceptance": "PENDING"
+  }
+}

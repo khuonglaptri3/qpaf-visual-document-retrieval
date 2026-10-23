@@ -90,3 +90,6 @@ vimdoc_archive_audit_modal.py -text
 
 # M3.4 run evidence is hashed by its receipt, so keep every byte exactly as written.
 /results/m3.4/** -text -eol -whitespace
+
+# M4.2 verification captures preserve console bytes and traceback whitespace.
+/results/m4.2/verification/** -text -eol -whitespace

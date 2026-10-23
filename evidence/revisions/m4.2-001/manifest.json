@@ -1,0 +1,154 @@
+{
+  "base_commit": "5bbb2ded966ac53328109358420c9bc9f731eb58",
+  "confirmation_labels_opened": false,
+  "files": [
+    {
+      "path": "configs/m4.2/freeze.json",
+      "sha256": "b100cb62103e25bab6d7273573d4b568592cd10ba97db4865f7d8ffffde90f64"
+    },
+    {
+      "path": "evidence/revisions/m4.1-001/manifest.json",
+      "sha256": "03673b16ef666c6d8756939efebdbcc73ff1c61a5abcff6c743400e5da6c4668"
+    },
+    {
+      "path": "evidence/revisions/m4.1-001/train_ids.txt",
+      "sha256": "970a9f9c71d9e307c6ecc9c12f1620816de0b568aeaf016964f0aa48176ae26e"
+    },
+    {
+      "path": "evidence/revisions/m4.1-001/validation_ids.txt",
+      "sha256": "cd31064b91d1c977d09d61b98ff3d3e886ba7a338b03b76e8490b331b90ba330"
+    },
+    {
+      "path": "evidence/revisions/m4.1-001/confirmation_ids.txt",
+      "sha256": "4dd15fb9996eee00439633f07cb3fb0fa87a1a2b217468e532d605fc0e7520ac"
+    },
+    {
+      "path": "evidence/revisions/m3.7-001/decision.json",
+      "sha256": "888c51d5c1f5309d80ec9f1218d935d4659512a5867b42b031f275196edad621"
+    },
+    {
+      "path": "evidence/revisions/m3.7-001/owner_confirmation.json",
+      "sha256": "20e7fdde52b9ea995e83333ffb7d53606353f3714b6f00d2386e4789e4aa298c"
+    },
+    {
+      "path": "artifacts/dataset_materialization_vimdoc.json",
+      "sha256": "fb26458905dfaa57fbdc5343f305c5ff8340ca62c5d75434345256932417dd05"
+    },
+    {
+      "path": "artifacts/score_input_probe_vimdoc.json",
+      "sha256": "a5eff33adfa0fe9c69cc0b6f016ea3f1b44d36f77d9cd882c1747ab9d7d21d2a"
+    },
+    {
+      "path": "configs/m2.5/freeze.json",
+      "sha256": "317b4333968ae4250e0e9bc71846d37f47e5f958872c8cf27949a0c0d8c3579c"
+    },
+    {
+      "path": "configs/environment.yaml",
+      "sha256": "ce219b3b679fed85d6e5343c8cb155b5c4626b137482664771806e18adcd78ac"
+    },
+    {
+      "path": "configs/vimdoc_m3_local_v1.json",
+      "sha256": "0a68c19688519822e4ac58afa51e08ca43ad6350d849f642bac23115bc64be9d"
+    },
+    {
+      "path": "docs/GUILDLINE_OVERVIEWS_PROPOSAL/POAI_Milestone_Group01_Hoan_Chinh.xlsx",
+      "sha256": "896bf26657a58f4d921c4b51b0428931a8770ccea3248201f1ce148714383bdc"
+    },
+    {
+      "path": "src/qpaf/m42/__init__.py",
+      "sha256": "a9451399f4a6b1159ab8462f6cd57c6954319da7fef8a2b6884e4ec3e23e0f23"
+    },
+    {
+      "path": "src/qpaf/m42/baselines.py",
+      "sha256": "93d4a5ff31dd358cff02b05f1b4c24c7be304b6479b8cc51c38c04eaff4ec6e3"
+    },
+    {
+      "path": "scripts/freeze_m42_baselines.py",
+      "sha256": "41a8f59d541e445085da69d269f98af3f40808c595c6580fd468beb133bdcadd"
+    },
+    {
+      "path": "tests/test_m42_baselines.py",
+      "sha256": "5586fb69198bf9069e4759bbc32132537ac7d1aa5cdd75dcc2a0edb8ba0edc75"
+    },
+    {
+      "path": "tests/test_m42_freeze.py",
+      "sha256": "79357b733d9cecba505997895c7aa12729914a93ea412c644ad0ba068590733a"
+    },
+    {
+      "path": "docs/03_method/m4.2-baseline-research.md",
+      "sha256": "639479d94217534bb991ad7495bacb19972e13bdf927531717a8cd613fa7ddf0"
+    },
+    {
+      "path": "evidence/M1_FINAL/02_protocol/frozen_protocol.md",
+      "sha256": "d29061fe4b6f3f9ed9844beab703909fa899c310637cbeef4bd3a9903478d08b"
+    },
+    {
+      "path": "evidence/M1_FINAL/02_protocol/dataset_split_policy.md",
+      "sha256": "0d74e1c37ce59698b20e8f043ab8e2293a8ddea947e14274d8bdf79f912e8b0f"
+    },
+    {
+      "path": "evidence/M1_FINAL/02_protocol/metric_policy.md",
+      "sha256": "4ce926201bb38b975c3eb43b83b0c719dea48267ff20e8fffa7e7329c0b5579a"
+    },
+    {
+      "path": "evidence/M1_FINAL/02_protocol/statistical_policy.md",
+      "sha256": "57827b2ba7e3cb73ef142c0521a17747cbe8bddc510e7ec4e181f3edd4dd3ecd"
+    },
+    {
+      "path": "evidence/M1_FINAL/02_protocol/baseline_policy.md",
+      "sha256": "3016ad8581c7d79966c84a0fda578575c98cb2672849f447eb7075001bd171df"
+    },
+    {
+      "path": "evidence/M1_FINAL/02_protocol/candidate_policy.md",
+      "sha256": "4a85a2e17cd8adfcc5f301d5393e9e6762221383d3601e0407642bad915d0562"
+    },
+    {
+      "path": "evidence/M1_FINAL/02_protocol/seed_policy.md",
+      "sha256": "e5fce4c247c3f7a13fcc8cfd4106aa5c1e2b00c1c58b8709fff9b056e4794049"
+    },
+    {
+      "path": "evidence/M1_FINAL/02_protocol/run_policy.md",
+      "sha256": "1a09fbb48bb927d37366d7c8aa98877b1edea02d128aeb5c668144293b48c147"
+    }
+  ],
+  "historical_probe_is_live_verification": false,
+  "m41_manifest_sha256": "03673b16ef666c6d8756939efebdbcc73ff1c61a5abcff6c743400e5da6c4668",
+  "m42_accepted": false,
+  "missing_real_inputs": [
+    "candidate_table_sha256",
+    "channel_top_lists_sha256",
+    "coverage_report_sha256",
+    "development_document_qrels_sha256",
+    "learned_qarf_vimdoc_checkpoint_hashes",
+    "normalized_score_cache_sha256",
+    "ocr_manifest_sha256",
+    "page_identity_audit_sha256",
+    "raw_score_cache_sha256",
+    "retriever_runtime_parity_sha256"
+  ],
+  "owner": "Khương",
+  "real_fitted_weights": null,
+  "real_input_readiness": "BLOCKED",
+  "real_training_or_static_fit_executed": false,
+  "schema_version": 1,
+  "settings_check": "PASS",
+  "software_fixture": {
+    "document_aggregation": "PASS",
+    "real_metrics_computed": false,
+    "scope": "synthetic_software_only",
+    "static_grid_points": 66,
+    "train_only_barrier": "PASS"
+  },
+  "splits": {
+    "counts": {
+      "confirmation": 8904,
+      "train": 1600,
+      "validation": 400
+    },
+    "query_overlap": 0,
+    "union_count": 10904
+  },
+  "status": "PREPARED_SETTINGS_REAL_INPUTS_PENDING",
+  "strongest_baseline_selection": null,
+  "task_id": "M4.2"
+}

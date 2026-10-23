@@ -1,0 +1,37 @@
+{
+  "focused": {
+    "command": "python -m unittest tests.test_m42_baselines tests.test_m42_freeze tests.test_m41_confirmation_seal -v",
+    "passed": 25,
+    "failed": 0,
+    "python": "3.14.6",
+    "log": "focused-tests.txt"
+  },
+  "full_suite": {
+    "command": ".venv/Scripts/python.exe -m pytest -q --disable-warnings --tb=short",
+    "python": "3.13.7",
+    "torch": "2.11.0+cpu",
+    "passed": 878,
+    "failed": 30,
+    "skipped": 3,
+    "subtests_passed": 303,
+    "seconds": 318.0,
+    "missing_huggingface_hub_failures": 7,
+    "historical_hash_or_environment_drift_failures": 23,
+    "log": "full-pytest.txt",
+    "status": "FAILED"
+  },
+  "base_comparison": {
+    "base_commit": "5bbb2ded966ac53328109358420c9bc9f731eb58",
+    "base_checkout": "C:\\Users\\lanph\\OneDrive\\Desktop\\Artificial_Intelligent_Project\\.worktrees\\m42-base-check",
+    "selected_nodes": 29,
+    "reproduced_failed_nodes": 29,
+    "same_failed_nodes": true,
+    "exit_code": 1,
+    "python": "C:\\Users\\lanph\\OneDrive\\Desktop\\Artificial_Intelligent_Project\\.worktrees\\m4-2-baseline-freeze\\.venv\\Scripts\\python.exe",
+    "scope": "replay all failing nodes from full suite on unmodified base with same environment"
+  },
+  "m42_status": "PREPARED_SETTINGS_REAL_INPUTS_PENDING",
+  "real_input_readiness": "BLOCKED",
+  "confirmation_labels_opened": false,
+  "owner_acceptance": "PENDING"
+}
