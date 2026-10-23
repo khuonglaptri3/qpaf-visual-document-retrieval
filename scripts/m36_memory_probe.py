@@ -27,7 +27,8 @@ COUNT_KEYS = ('input_success_count', 'input_failure_count', 'container_total_cou
               'container_error_count')
 REFERENCE_LIMITS_MIB = {'A02': 4096, 'A03': 5120}
 # The approver's verbatim words; empty until recorded, so --execute refuses.
-APPROVAL_TEXT = ''
+APPROVAL_TEXT = ('I approved as Tấn Phát, confirm for m3.6-005 and approved probe run plan. Finally, '
+                 'I confirm the m3.7 criteria (frozen threshold-seed20260820)')
 # M3.6 owner, or the Research Lead authorizing in their place (M3.2/M3.4 precedent).
 AUTHORIZED_STATUSES = ('AUTHORIZED_BY_KHUONG_WORKING_SESSION', 'AUTHORIZED_BY_RESEARCH_LEAD_WORKING_SESSION')
 DEMONSTRATED = 'ENFORCEMENT_DEMONSTRATED'
