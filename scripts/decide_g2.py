@@ -23,9 +23,9 @@ FILES = {
     'm3_5_acceptance': 'evidence/revisions/m3.5-001/owner_confirmation.json',
     'm3_6_integrity': 'evidence/revisions/m3.6-001/integrity_review.json',
     'm3_6_resources': 'evidence/revisions/m3.6-004/technical_review.json',
-    'm3_6_memory': 'evidence/revisions/m3.6-005/technical_review.json',
-    'm3_6_owner': 'evidence/revisions/m3.6-005/owner_confirmation.json',
-    'm3_6_qa': 'evidence/revisions/m3.6-005/qa_confirmation.json',
+    'm3_6_memory': 'evidence/revisions/m3.6-006/technical_review.json',
+    'm3_6_owner': 'evidence/revisions/m3.6-006/owner_confirmation.json',
+    'm3_6_qa': 'evidence/revisions/m3.6-006/qa_confirmation.json',
 }
 ACCEPTED = {'M3.3': 'ACCEPTED', 'M3.5': 'ACCEPTED', 'M3.6_technical': 'PASS',
             'M3.6_owner': 'ACCEPTED', 'M3.6_qa': 'ACCEPTED'}
