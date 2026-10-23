@@ -1,0 +1,10 @@
+{
+  "development_qrels_deserialized_for_role_audit": true,
+  "fit_partition": "train_only",
+  "fit_query_count": 799,
+  "new_learned_training_executed": false,
+  "strongest_baseline_selection": "PENDING_M4.4",
+  "test_labels_deserialized": false,
+  "validation_metrics_computed": false,
+  "vimdoc_confirmation_accessed": false
+}

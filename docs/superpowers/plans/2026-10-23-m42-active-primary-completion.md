@@ -53,12 +53,12 @@ configs/m4.2/active_primary.json.
 
 - [x] Recover 16 accepted inputs from the M3.1 worktree; all original hashes match.
 - [x] Recover accepted QARF best.pt (11,512 bytes), exact receipt hash matches.
-- [ ] Record user's M4.2 instruction as one CPU calibration invocation.
-- [ ] Execute real train-only fit and create source/input/output manifests.
-- [ ] Verify selected weights/metrics and complete shared baseline contracts.
-- [ ] Write m4.2-002 evidence and corrected report with source citations.
-- [ ] Run relevant checks and repository suite; preserve unrelated failures.
-- [ ] Commit reviewable result and report actual weights, train objective,
+- [x] Record user's M4.2 instruction as one CPU calibration invocation.
+- [x] Execute real train-only fit and create source/input/output manifests.
+- [x] Verify selected weights/metrics and complete shared baseline contracts.
+- [x] Write m4.2-002 evidence and corrected report with source citations.
+- [x] Run relevant checks and repository suite; preserve unrelated failures.
+- [x] Commit reviewable result and report actual weights, train objective,
   identity/coverage, tests and downstream claim limits to the user.
 
 ## Ledger
@@ -80,3 +80,19 @@ configs/m4.2/active_primary.json.
 - Read-only real-data preflight before fitting: 551,764 shared candidate rows,
   1,142 queries, 2,075 expansion rows, maximum 579 candidates/query, exact
   normalization replay (max absolute difference 0.0). No labels read by audit.
+- Actual run source commit 363db3f: 799 train queries / 386,390 candidates;
+  selected weights [0.0,0.1,0.9], train nDCG@10 0.8642244283102866, coverage 1.0,
+  zero uncovered queries. All seven baseline contracts bind one shared input hash.
+- Ruling: calibration completed and persisted _SUCCESS, but the final CLI JSON
+  print exited 1 because Windows default charmap cannot encode the owner's name.
+  Preserve original attempt; verify with Python -X utf8, without a new fit attempt.
+  This reporting issue and original exit code are retained in execution_receipt.
+- Read-only selected-objective verification PASS. Independent NumPy audit of
+  the same 66-grid selected identical weights, objective difference 3.33e-16.
+  The immutable calibration outputs were not changed by verification.
+- 45/45 related checks PASS. Full suite: 894 passed, 29 failed, 2 skipped,
+  310 subtests passed. Replayed every failing node on clean base with same
+  environment: same 28 failing nodes, 29 failures. Six failures are PDFium
+  version mismatch; 23 are historical source/environment drift.
+- Complete delivery ZIP: 31,333,271 bytes / 24 files including ignored payloads;
+  CRC checked, SHA-256 in m4.2-002/delivery.json. No sealed test qrels included.

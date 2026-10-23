@@ -1,0 +1,11 @@
+{
+  "local_archive": ".cache/m42-delivery/RUN-QPAF-M4_2-CAL-001-20261023T150631Z-A01.zip",
+  "sha256": "45e764f6bfe081063ea2488dbf5e26ffcaacf2e6f43ea3ad47f56a10c331d2d8",
+  "size_bytes": 31333271,
+  "files": 24,
+  "run_manifest_sha256": "4752eef37d7c6cf73eb36717bd352e21192d112b1464a3f5a61dab86bcc76b86",
+  "includes_raw_normalized_candidates_top_lists": true,
+  "includes_accepted_qarf_checkpoint": true,
+  "includes_test_qrels": false,
+  "uploaded": false
+}

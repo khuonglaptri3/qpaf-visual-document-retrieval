@@ -1,0 +1,33 @@
+{
+  "task_id": "M4.2",
+  "technical_deliverable": "COMPLETE_ACTIVE_PRIMARY",
+  "owner_acceptance": "PENDING_USER_REVIEW",
+  "focused_tests": {
+    "passed": 45,
+    "failed": 0
+  },
+  "full_suite": {
+    "passed": 894,
+    "failed": 29,
+    "skipped": 2,
+    "subtests_passed": 310,
+    "scope": "all failed nodes reproduced on clean base under the same environment"
+  },
+  "base_comparison": {
+    "base_commit": "5bbb2ded966ac53328109358420c9bc9f731eb58",
+    "selected_failed_nodes": 28,
+    "reproduced_failed_nodes": 28,
+    "same_failed_nodes": true,
+    "same_interpreter_and_dependencies": true,
+    "base_exit_code": 1,
+    "base_summary": "29 failed, 1 passed in 17.91s"
+  },
+  "run_manifest_sha256": "4752eef37d7c6cf73eb36717bd352e21192d112b1464a3f5a61dab86bcc76b86",
+  "static_weights": [
+    0.0,
+    0.1,
+    0.9
+  ],
+  "train_ndcg_at_10": 0.8642244283102866,
+  "independent_grid_difference": 3.3306690738754696e-16
+}

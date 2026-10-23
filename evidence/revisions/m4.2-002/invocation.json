@@ -1,0 +1,16 @@
+{
+  "command": [
+    "C:\\Users\\lanph\\OneDrive\\Desktop\\Artificial_Intelligent_Project\\.worktrees\\m4-2-baseline-freeze\\.venv\\Scripts\\python.exe",
+    "scripts/run_m42_active_primary.py",
+    "--output",
+    "results\\m4.2\\RUN-QPAF-M4_2-CAL-001-20261023T150631Z-A01",
+    "--authorization",
+    "evidence\\revisions\\m4.2-002\\authorization.json",
+    "--expected-authorization-sha256",
+    "f6492db6e79ff5c679427ab8a4cd3d23e93c08a7f573bdba959fde3cb8bfebf0"
+  ],
+  "authorization_sha256": "f6492db6e79ff5c679427ab8a4cd3d23e93c08a7f573bdba959fde3cb8bfebf0",
+  "source_commit": "363db3f18252a794c5edd9cec4803e1fecccbf83",
+  "output_directory": "results/m4.2/RUN-QPAF-M4_2-CAL-001-20261023T150631Z-A01",
+  "run_id": "RUN-QPAF-M4_2-CAL-001-20261023T150631Z-A01"
+}

@@ -1,0 +1,10 @@
+{
+  "candidates": 66,
+  "grid_denominator": 10,
+  "train_ndcg_at_10": 0.8642244283102866,
+  "weights": [
+    0.0,
+    0.1,
+    0.9
+  ]
+}

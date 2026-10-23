@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "task_id": "M2.7",
+  "experiment_id": "QPAF-M2_7-MTH-001",
+  "base_config": {
+    "path": "configs/m2.7/shared_base.toml",
+    "sha256": "3e58a867d11cebf72970cf0c141a90822cd7cbbdad65fb1e081cb14fa4889b58"
+  },
+  "methods": {
+    "QARF": {
+      "gate_granularity": "query"
+    },
+    "QPAF": {
+      "gate_granularity": "page"
+    }
+  },
+  "allowed_semantic_diff": [
+    "gate_granularity"
+  ],
+  "seeds": {
+    "development_gate": 20260820,
+    "robustness": [
+      20260820,
+      20260821,
+      20260822
+    ],
+    "override_path": "training.seed"
+  },
+  "run_order": [
+    "QARF",
+    "independent_review",
+    "QPAF"
+  ],
+  "shared_inputs": {
+    "split_manifest": {
+      "path": "evidence/revisions/m2.1-002/data_split_manifest.json",
+      "sha256": "ea5a19f93dce07cce375d6fb6afed630606e00916c5daa10938562aee9cddfad"
+    },
+    "m25_freeze": {
+      "path": "configs/m2.5/freeze.json",
+      "sha256": "317b4333968ae4250e0e9bc71846d37f47e5f958872c8cf27949a0c0d8c3579c"
+    },
+    "score_cache": "PENDING_M2.8",
+    "qrels": "PENDING_M2.8",
+    "candidate_set": "PENDING_M2.8"
+  },
+  "runtime": {
+    "device": "cpu",
+    "dtype": "float64",
+    "threads": 1,
+    "deterministic_algorithms": true,
+    "requirements": "requirements-learned-local.txt"
+  },
+  "budget": {
+    "wall_time_minutes_per_run": 60,
+    "invocations_per_method_per_seed": 1,
+    "retries_without_new_authorization": 0,
+    "shared_by_methods": true
+  },
+  "loss_authority": "QPAF-M1.5-A001",
+  "status": "FROZEN_CONFIG_PENDING_M2.8_INPUTS"
+}

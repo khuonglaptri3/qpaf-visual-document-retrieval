@@ -1,0 +1,17 @@
+{
+  "common_inputs": {
+    "candidate_rows": 551764,
+    "expanded_rows": 2075,
+    "label_access": false,
+    "max_candidates_per_query": 579,
+    "normalization_max_abs_difference": 0.0,
+    "query_count": 1142,
+    "status": "PASS"
+  },
+  "train_coverage": {
+    "candidate_rows": 386390,
+    "macro_relevant_page_recall": 1.0,
+    "query_count": 799,
+    "uncovered_queries": 0
+  }
+}

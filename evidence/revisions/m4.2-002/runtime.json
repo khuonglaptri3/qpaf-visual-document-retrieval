@@ -1,0 +1,15 @@
+{
+  "python": "3.13.7 (main, Sep 18 2025, 19:43:45) [MSC v.1944 64 bit (AMD64)]",
+  "executable": "C:\\Users\\lanph\\OneDrive\\Desktop\\Artificial_Intelligent_Project\\.worktrees\\m4-2-baseline-freeze\\.venv\\Scripts\\python.exe",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "packages": {
+    "torch": "2.11.0+cpu",
+    "numpy": "2.5.4",
+    "pandas": "3.0.6",
+    "pyarrow": "26.0.0",
+    "pytest": "9.1.1",
+    "huggingface-hub": "0.34.4",
+    "pypdfium2": "5.14.0"
+  },
+  "new_gpu_or_cloud_execution": false
+}
