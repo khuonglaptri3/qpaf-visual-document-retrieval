@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "task_id": "M3.6",
+  "reviewer": "Khương (@khuonglaptri3)",
+  "role": "M3.6 owner (Technical / Data Owner)",
+  "recorded_by": "Claude at the Research Lead's request",
+  "recorded_at_utc": "2026-10-23T04:25:23Z",
+  "decision": "ACCEPTED",
+  "source": "GitHub PR #30 comment by khuonglaptri3",
+  "source_url": "https://github.com/khuonglaptri3/qpaf-visual-document-retrieval/pull/30#issuecomment-6357339379",
+  "comment_created_utc": "2026-10-23T04:24:18Z",
+  "confirmation_text": "owner ACCEPTED",
+  "superseded_comment": "An earlier comment by the same account (id 6357274391, 2026-10-23T04:18:51Z) read only \".\"; it was not treated as an acceptance and was later deleted.",
+  "pr_head_commit": "56ac8c023900b77c9961dd2e36a5b1301cedbd50",
+  "technical_report_ref": "evidence/revisions/m3.6-006/technical_review.json",
+  "technical_report_sha256": "2265167ec550bf6060d76afef55dfc4a8a37c8244bd41d602962c847ccf3b146",
+  "accepted_scope": "M3.6 technical review under m3.6-006: Modal-enforced memory upper bound (A02 below 4,096 MiB, A03 below 5,120 MiB, exact peak unavailable), with the m3.6-004 latency, CUDA and parity verdicts",
+  "g2_decision_made": false,
+  "test_labels_opened": false
+}

@@ -1,0 +1,10 @@
+{
+  "app_id": "ap-6dVacK0O5OPY9CIhWdjYK7",
+  "image_id": "im-ap1iNcG910dG09a7xd2JQU",
+  "function_id": "fu-zx1wCGj0GHAuZbHGXDiI9D",
+  "authorization_sha256": "936d8728f9506a0a73b8958b65ca8c6c2b3912671189015ef0ce5cd70b45d187",
+  "source_commit": "959f5122106403a50db06af84a2a0388ece0a809",
+  "memory_request_and_limit_mib": 4096,
+  "bound_utc": "2026-10-23T03:02:18.876968+00:00",
+  "gpu_invocations_before_binding": 0
+}

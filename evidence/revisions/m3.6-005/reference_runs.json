@@ -1,0 +1,22 @@
+{
+  "A02": {
+    "run_id": "RUN-QPAF-M3_6-SYS-001-20261022T154348Z-A02",
+    "limit_mib": 4096,
+    "limit_source": "evidence/revisions/m3.6-003/authorization.json memory_limit_mib",
+    "success_marker": true,
+    "success_marker_ref": "results/m3.6/RUN-QPAF-M3_6-SYS-001-20261022T154348Z-A02/_SUCCESS.json",
+    "success_marker_sha256": "12504f08cafdb2d43fe2d9454cf89795c2626438751e0cf413aeec59db4abb59",
+    "failed_calls": 0,
+    "failed_calls_source": "evidence/revisions/m3.6-005/provider_stats_a02.json input_failure_count"
+  },
+  "A03": {
+    "run_id": "RUN-QPAF-M3_6-SYS-001-20261022T165637Z-A03",
+    "limit_mib": 5120,
+    "limit_source": "results/m3.6/RUN-QPAF-M3_6-SYS-001-20261022T165637Z-A03/runtime_binding.json memory_request_and_limit_mib",
+    "success_marker": true,
+    "success_marker_ref": "results/m3.6/RUN-QPAF-M3_6-SYS-001-20261022T165637Z-A03/_SUCCESS.json",
+    "success_marker_sha256": "e8895fd997e2ce26437566a7ed3097220a5c7d153d6b7cef3d709bacdc3e3c7f",
+    "failed_calls": 0,
+    "failed_calls_source": "evidence/revisions/m3.6-004/provider_stats_5gib.json input_failure_count"
+  }
+}
