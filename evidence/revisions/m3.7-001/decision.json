@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "task_id": "M3.7",
+  "gate": "G2_LEARNED_VIABILITY",
+  "question": "Does learned QPAF outperform matched learned QARF?",
+  "decision": "GO",
+  "m4_branch": "continue_qpaf",
+  "checks": {
+    "prerequisite_M3.3": "PASS",
+    "prerequisite_M3.5": "PASS",
+    "prerequisite_M3.6_technical": "PASS",
+    "prerequisite_M3.6_owner": "PASS",
+    "prerequisite_M3.6_qa": "PASS",
+    "pairing": "PASS",
+    "mean_delta_min_inclusive": "PASS",
+    "ci95_lower_min_exclusive": "PASS",
+    "top5_share_max_exclusive": "PASS",
+    "latency_ms_max_inclusive": "PASS",
+    "cuda_gib_max_exclusive": "PASS",
+    "reload_abs_tolerance": "PASS",
+    "finite_outputs": "PASS"
+  },
+  "reasons": [],
+  "evidence": {
+    "prerequisites": {
+      "M3.3": "ACCEPTED",
+      "M3.5": "ACCEPTED",
+      "M3.6_technical": "PASS",
+      "M3.6_owner": "ACCEPTED",
+      "M3.6_qa": "ACCEPTED"
+    },
+    "pairing": {
+      "query_count": 171,
+      "wtl_total": 171,
+      "test_labels_opened": false,
+      "metric_replay_max_abs_difference": 0.0,
+      "m35_replay_equal": true
+    },
+    "quality": {
+      "mean_delta": 0.11413229497802459,
+      "ci95_lower": 0.07750099280867938,
+      "top5_share": 0.2809171963163589
+    },
+    "operational": {
+      "median_latency_ms": 2.4471775,
+      "peak_cuda_gib": 0.03245258331298828,
+      "reload_max_abs_diff": 0.0,
+      "finite_outputs": true
+    }
+  },
+  "run_ids": {
+    "QARF": "RUN-QPAF-M3_2-MTH-001-20261022T035229Z-A01",
+    "QPAF": "RUN-QPAF-M3_4-MTH-001-20261022T112102Z-A01",
+    "M3.6_resources": "RUN-QPAF-M3_6-SYS-001-20261022T165637Z-A03",
+    "M3.6_memory_probe": "RUN-QPAF-M3_6-SYS-002-20261023T025923Z-A01"
+  },
+  "criteria_sha256": "6dac26ab7b8b54f8c3d7f7cddce598982df789f4691b0a30ea27ad8822d1128a",
+  "inputs_sha256": "42074ad0a7766923269f736b879401b96d1ad9a24bcc3621c42727bf7cb0dde6",
+  "owner_confirmation": "PENDING_RESEARCH_LEAD",
+  "seed": 20260820,
+  "multi_seed_claim": false,
+  "baseline_comparison_done": false,
+  "test_labels_opened": false,
+  "authorizes_execution": false
+}
