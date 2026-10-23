@@ -1,0 +1,65 @@
+{
+  "task_id": "M4.2",
+  "checked_utc": "2026-10-23T16:09:45.500330+00:00",
+  "source_head_at_upload": "9d96e4bea8328f69c0b89be9da6f88b57052986b",
+  "actual_calibration_source_commit": "363db3f18252a794c5edd9cec4803e1fecccbf83",
+  "artifact_storage": "GitHub draft release; not published",
+  "release": {
+    "id": 422045379,
+    "tag_name": "m4.2-baseline-bundle-20261023",
+    "html_url": "https://github.com/khuonglaptri3/qpaf-visual-document-retrieval/releases/tag/untagged-cc229cf9bbae436de617",
+    "draft": true,
+    "target_commitish": "9d96e4bea8328f69c0b89be9da6f88b57052986b"
+  },
+  "asset": {
+    "id": 669652087,
+    "name": "RUN-QPAF-M4_2-CAL-001-20261023T150631Z-A01.zip",
+    "size": 31333271,
+    "digest": "sha256:45e764f6bfe081063ea2488dbf5e26ffcaacf2e6f43ea3ad47f56a10c331d2d8",
+    "url": "https://api.github.com/repos/khuonglaptri3/qpaf-visual-document-retrieval/releases/assets/669652087",
+    "browser_download_url": "https://github.com/khuonglaptri3/qpaf-visual-document-retrieval/releases/download/untagged-cc229cf9bbae436de617/RUN-QPAF-M4_2-CAL-001-20261023T150631Z-A01.zip",
+    "state": "uploaded"
+  },
+  "download_and_integrity": {
+    "downloaded_using_documented_gh_release_download": true,
+    "sha256": "45e764f6bfe081063ea2488dbf5e26ffcaacf2e6f43ea3ad47f56a10c331d2d8",
+    "crc_pass": true,
+    "files": 24,
+    "all_manifest_file_hashes_match": true,
+    "git_tracked_run_files_byte_identical": 17,
+    "run_manifest_sha256": "4752eef37d7c6cf73eb36717bd352e21192d112b1464a3f5a61dab86bcc76b86"
+  },
+  "recipient_replay": {
+    "source": "Git HEAD blobs for package, script, inventoried configuration and authority files",
+    "data": "ZIP downloaded back from GitHub; no original-worktree cache dependency",
+    "exit_code": 0,
+    "output": {
+      "status": "PASS",
+      "scope": "A002_active_primary_shared_baseline_inputs_and_train_only_settings",
+      "train_queries": 799,
+      "train_ndcg_at_10": 0.8642244283102866,
+      "weights": [
+        0.0,
+        0.1,
+        0.9
+      ],
+      "full_fit_replayed": false,
+      "test_labels_deserialized": false,
+      "vimdoc_confirmation_accessed": false
+    }
+  },
+  "handoff": {
+    "producer": "Khương - M4.2",
+    "next_execution_owner": "Tấn Phát - M4.3/M4.4",
+    "fairness_uncertainty_owner": "Thanh - M4.5",
+    "recipient_access": "Repository write collaborators; authenticated gh required for draft release assets",
+    "human_receipt_and_review": "PENDING"
+  },
+  "historical_receipts_unchanged": [
+    "delivery.json",
+    "execution_receipt.json",
+    "verification.json",
+    "run manifest and sealed payloads"
+  ],
+  "no_new_fit_or_learned_training": true
+}
