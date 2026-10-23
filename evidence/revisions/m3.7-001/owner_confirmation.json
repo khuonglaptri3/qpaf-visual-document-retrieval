@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "task_id": "M3.7",
+  "gate": "G2_LEARNED_VIABILITY",
+  "confirmer": "Tấn Phát (Research Lead / Gate Owner)",
+  "recorded_by": "Claude at the Research Lead's request",
+  "recorded_at_utc": "2026-10-23T05:15:08Z",
+  "decision": "CONFIRMED",
+  "confirmed_g2_decision": "GO",
+  "confirmed_m4_branch": "continue_qpaf",
+  "source": "Research Lead's reply in the Claude Code working session",
+  "confirmation_text": "I confirmed",
+  "context": "The reply answered Claude's request to confirm, or not, the M3.7 G2 decision GO recorded in decision.json, after Claude had listed every check and stated that GO authorizes no run.",
+  "decision_ref": "evidence/revisions/m3.7-001/decision.json",
+  "decision_sha256": "888c51d5c1f5309d80ec9f1218d935d4659512a5867b42b031f275196edad621",
+  "scope": "Confirms the one-seed (20260820) development gate only. Seeds 20260821/20260822 and M4 tasks still require their own authorizations; this is not the final three-seed claim.",
+  "authorizes_execution": false,
+  "test_labels_opened": false
+}
