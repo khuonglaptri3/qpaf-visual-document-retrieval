@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "task_id": "M3.7",
+  "gate": "G2_LEARNED_VIABILITY",
+  "status": "CONFIRMED_BY_RESEARCH_LEAD",
+  "confirmation": {
+    "confirmer": "Tấn Phát (Research Lead / Gate Owner)",
+    "text": "I approved as Tấn Phát, confirm for m3.6-005 and approved probe run plan. Finally, I confirm the m3.7 criteria (frozen threshold-seed20260820)",
+    "recorded_utc": "2026-10-23T02:58:43Z",
+    "recorded_by": "Claude at the Research Lead's request"
+  },
+  "mean_delta_min_inclusive": 0.01,
+  "ci95_lower_min_exclusive": 0.0,
+  "top5_share_max_exclusive": 0.9,
+  "latency_ms_max_inclusive": 10.0,
+  "cuda_gib_max_exclusive": 1.5,
+  "reload_abs_tolerance": 1e-07,
+  "primary_metric": "ndcg_at_10 (page unit, configs/m2.5/freeze.json)",
+  "decisions": [
+    "GO",
+    "PARTIAL-INVESTIGATE",
+    "NO-GO-PIVOT",
+    "BLOCKED"
+  ],
+  "m4_branch": {
+    "GO": "continue_qpaf",
+    "PARTIAL-INVESTIGATE": "revise_once",
+    "NO-GO-PIVOT": "negative_qpaf_result",
+    "BLOCKED": null
+  },
+  "precedence": [
+    "BLOCKED: a prerequisite (M3.3, M3.5, M3.6 technical, M3.6 owner, M3.6 QA) is not accepted; pairing/replay invalid; test labels opened; any required field missing or non-finite",
+    "NO-GO-PIVOT: mean delta < 0.01 or CI95 lower <= 0",
+    "PARTIAL-INVESTIGATE: top-5% share >= 0.90 or any operational gate fails",
+    "GO: otherwise"
+  ],
+  "seed": 20260820,
+  "post_hoc": true,
+  "sources": [
+    "evidence/M1_FINAL/02_protocol/frozen_protocol.md#5",
+    "evidence/M1_FINAL/02_protocol/statistical_policy.md#6"
+  ]
+}
