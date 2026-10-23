@@ -1,0 +1,1488 @@
+.............s.................................F........................ [  7%]
+...F.....................................................................................................................FF.F.......................s.................... [ 26%]
+........................................................ [ 32%]
+..................................... [ 36%]
+.............................................................................................................................. [ 49%]
+............................................................................................ [ 59%]
+........................................................................ [ 67%]
+................F........F..........F.......F............F.F.......F.... [ 75%]
+............F.F.................F..............................F........ [ 83%]
+..FF...........................................F.......................F [ 91%]
+....................F.............F....................F.FFFF........... [ 98%]
+...........                                                              [100%]
+================================== FAILURES ===================================
+_______ test_live_recovery_pins_match_and_approved_attempt_is_consumed ________
+
+    def test_live_recovery_pins_match_and_approved_attempt_is_consumed():
+        config = recovery.read_json(ROOT / recovery.CONFIG_PATH)
+>       review = recovery.validate_config(ROOT, config)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_exploratory12_recovery.py:23: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+root = WindowsPath('C:/Users/lanph/OneDrive/Desktop/Artificial_Intelligent_Project/.worktrees/m4-2-baseline-freeze')
+config = {'recovery_id': 'vidoseek_exploratory12_recovery_v1', 'parent_output_path': 'runs/vidoseek_w7_exploratory12_v1', 'outp..., 'review_path': 'artifacts/vidoseek_exploratory12_interruption_review_20260907/checkpoint_integrity_review.json', ...}
+
+    def validate_config(root: Path, config: dict[str, Any]) -> dict[str, Any]:
+        expected = {
+            "recovery_id": RECOVERY_ID,
+            "parent_output_path": pilot.OUTPUT_PATH,
+            "output_path": OUTPUT_PATH,
+            "review_path": REVIEW_PATH,
+            "total_wall_timeout_seconds": TIMEOUT_SECONDS,
+            "workers": 1,
+            "threads_per_library": 1,
+            "invocations": 1,
+            "automatic_retries": 0,
+            "inherited_queries": INHERITED_QUERIES,
+            "new_queries": pilot.QUERY_COUNT - INHERITED_QUERIES,
+        }
+        for key, value in expected.items():
+            if config.get(key) != value or type(config.get(key)) is not type(value):
+                raise ValueError(f"Recovery scope drift: {key}")
+        if sha256(root / SCRIPT_PATH) != config["runner_sha256"]:
+            raise ValueError("Recovery runner source drift")
+        if sha256(root / REVIEW_PATH) != config["review_sha256"]:
+            raise ValueError("Interruption review drift")
+        review = read_json(root / REVIEW_PATH)
+        if (
+            review["audit_status"] != "PASS_SAVED_CHECKPOINTS_ONLY"
+            or review["verified_query_checkpoints"] != INHERITED_QUERIES
+            or review["verified_global_checkpoints"] != pilot.QUERY_COUNT
+            or not all(value is True for value in review["checks"].values())
+        ):
+            raise ValueError("Parent checkpoint review is not valid")
+        parent = root / pilot.OUTPUT_PATH
+        if inventory(parent) != review["artifact_sha256"]:
+>           raise ValueError("Parent artifact inventory/hash drift")
+E           ValueError: Parent artifact inventory/hash drift
+
+scripts\recover_vidoseek_exploratory12.py:84: ValueError
+_ DatasetTests.test_real_pdf_rendering_preserves_empty_pages_and_one_based_labels _
+
+self = <test_m11_artifacts.DatasetTests testMethod=test_real_pdf_rendering_preserves_empty_pages_and_one_based_labels>
+
+    @unittest.skipUnless(all(importlib.util.find_spec(name) for name in
+        ('pypdfium2', 'PIL', 'pytesseract', 'huggingface_hub')), 'optional PDF verification dependencies')
+    def test_real_pdf_rendering_preserves_empty_pages_and_one_based_labels(self):
+        import pypdfium2 as pdfium
+        import logging
+        from qpaf.m11.config import load_config
+        from qpaf.m11.dataset import prepare
+        from qpaf.m11.artifacts import read_json, write_json
+        root_repo = Path(__file__).resolve().parents[1]
+        cfg = load_config(root_repo/'configs/m1.1/vidoseek.toml', ['text.mode=native', 'text.max_failure_fraction=1'])
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            document = pdfium.PdfDocument.new()
+            for _ in range(2):
+                page = document.new_page(72, 72)
+                page.close()
+            document.save(root/'doc.pdf')
+            document.close()
+            with zipfile.ZipFile(root/'corpus.zip', 'w') as archive:
+                archive.write(root/'doc.pdf', 'pdf/doc.pdf')
+            write_json(root/'annotations.json', {'examples': [self.example(2)]})
+            output = root/'prepared'
+            output.mkdir()
+            def download(repo, filename, **kwargs):
+                return str(root/('annotations.json' if filename == cfg['dataset']['annotation_file'] else 'corpus.zip'))
+            with patch('huggingface_hub.hf_hub_download', side_effect=download):
+>               prepare(cfg, output, logging.getLogger('pdf-test'), root/'cache')
+
+tests\test_m11_artifacts.py:78: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+config = {'schema_version': 1, 'dataset': {'adapter': 'vidoseek', 'repo_id': 'Qiuchen-Wang/ViDoSeek', 'revision': 'e91a92ba5f38... {'count': 0, 'seed': 2026}, 'execution': {'seed': 2026, 'experiment_id': 'QPAF-M1_1-ORACLE-001', 'retry_of': ''}, ...}
+output = WindowsPath('C:/Users/lanph/AppData/Local/Temp/tmpi189hb0d/prepared')
+logger = <Logger pdf-test (WARNING)>
+cache_dir = WindowsPath('C:/Users/lanph/AppData/Local/Temp/tmpi189hb0d/cache')
+
+    def prepare(config, output, logger, cache_dir):
+        import pypdfium2 as pdfium
+        import pytesseract
+        from huggingface_hub import hf_hub_download
+    
+        dataset = config['dataset']
+        parser_version = importlib.metadata.version('pypdfium2')
+        if parser_version != config['text']['parser_version']:
+>           raise ValueError(f'PDFium parser version {parser_version} does not match configured {config["text"]["parser_version"]}')
+E           ValueError: PDFium parser version 5.14.0 does not match configured 4.30.0
+
+src\qpaf\m11\dataset.py:74: ValueError
+_ PrepareOCRRuntimeTests.test_corrupt_pdf_leaves_failure_evidence_and_cannot_pass _
+
+self = <test_m18_runtime.PrepareOCRRuntimeTests testMethod=test_corrupt_pdf_leaves_failure_evidence_and_cannot_pass>
+
+    def test_corrupt_pdf_leaves_failure_evidence_and_cannot_pass(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            with self.assertRaises(ValueError):
+                self.run_prepare(root, {}, corrupt=True)
+>           failures = list(csv.DictReader((root/'prepared/failures.csv').read_text().splitlines()))
+                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_m18_runtime.py:182: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Users\lanph\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\pathlib\_local.py:546: in read_text
+    return PathBase.read_text(self, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\lanph\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\pathlib\_abc.py:632: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/lanph/AppData/Local/Temp/tmp725w1gt1/prepared/failures.csv')
+mode = 'r', buffering = -1, encoding = 'utf-8', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Users\\lanph\\AppData\\Local\\Temp\\tmp725w1gt1\\prepared\\failures.csv'
+
+C:\Users\lanph\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\pathlib\_local.py:537: FileNotFoundError
+_ PrepareOCRRuntimeTests.test_engine_version_mismatch_is_logged_and_stops_extraction _
+ValueError: PDFium parser version 5.14.0 does not match configured 4.30.0
+
+During handling of the above exception, another exception occurred:
+
+self = <test_m18_runtime.PrepareOCRRuntimeTests testMethod=test_engine_version_mismatch_is_logged_and_stops_extraction>
+
+    def test_engine_version_mismatch_is_logged_and_stops_extraction(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+>           with self.assertRaisesRegex(ValueError, 'failure fraction'):
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AssertionError: "failure fraction" does not match "PDFium parser version 5.14.0 does not match configured 4.30.0"
+
+tests\test_m18_runtime.py:172: AssertionError
+_ PrepareOCRRuntimeTests.test_failures_persist_pages_and_images_before_fraction_stops_run (result=RuntimeError('Tesseract process timeout')) _
+ValueError: PDFium parser version 5.14.0 does not match configured 4.30.0
+
+During handling of the above exception, another exception occurred:
+
+self = <test_m18_runtime.PrepareOCRRuntimeTests testMethod=test_failures_persist_pages_and_images_before_fraction_stops_run>
+
+    def test_failures_persist_pages_and_images_before_fraction_stops_run(self):
+        for result in (RuntimeError('Tesseract process timeout'),
+                       {'text': ['long text ' * 20], 'conf': [20]}):
+            with self.subTest(result=result), tempfile.TemporaryDirectory() as tmp:
+                root = Path(tmp)
+>               with self.assertRaisesRegex(ValueError, 'failure fraction'):
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E               AssertionError: "failure fraction" does not match "PDFium parser version 5.14.0 does not match configured 4.30.0"
+
+tests\test_m18_runtime.py:157: AssertionError
+_ PrepareOCRRuntimeTests.test_failures_persist_pages_and_images_before_fraction_stops_run (result={'text': ['long text long text long text long text long text long text long text long text long text long text long text long text long text long text long text long text long text long text long text long text '], 'conf': [20]}) _
+ValueError: PDFium parser version 5.14.0 does not match configured 4.30.0
+
+During handling of the above exception, another exception occurred:
+
+self = <test_m18_runtime.PrepareOCRRuntimeTests testMethod=test_failures_persist_pages_and_images_before_fraction_stops_run>
+
+    def test_failures_persist_pages_and_images_before_fraction_stops_run(self):
+        for result in (RuntimeError('Tesseract process timeout'),
+                       {'text': ['long text ' * 20], 'conf': [20]}):
+            with self.subTest(result=result), tempfile.TemporaryDirectory() as tmp:
+                root = Path(tmp)
+>               with self.assertRaisesRegex(ValueError, 'failure fraction'):
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E               AssertionError: "failure fraction" does not match "PDFium parser version 5.14.0 does not match configured 4.30.0"
+
+tests\test_m18_runtime.py:157: AssertionError
+_ PrepareOCRRuntimeTests.test_scan_fallback_uses_word_confidence_and_canonical_page_ids _
+
+self = <test_m18_runtime.PrepareOCRRuntimeTests testMethod=test_scan_fallback_uses_word_confidence_and_canonical_page_ids>
+
+    def test_scan_fallback_uses_word_confidence_and_canonical_page_ids(self):
+        with tempfile.TemporaryDirectory() as tmp:
+>           output = self.run_prepare(Path(tmp), {'text': ['', 'Quality text ' * 6, 'ending'], 'conf': [-1, 80, 100]})
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_m18_runtime.py:144: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_m18_runtime.py:139: in run_prepare
+    prepare(cfg, output, logging.getLogger('ocr-runtime-test'), root/'cache')
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+config = {'schema_version': 1, 'dataset': {'adapter': 'vidoseek', 'repo_id': 'Qiuchen-Wang/ViDoSeek', 'revision': 'e91a92ba5f38... {'count': 0, 'seed': 2026}, 'execution': {'seed': 2026, 'experiment_id': 'QPAF-M1_1-ORACLE-001', 'retry_of': ''}, ...}
+output = WindowsPath('C:/Users/lanph/AppData/Local/Temp/tmpc5pnmtx8/prepared')
+logger = <Logger ocr-runtime-test (WARNING)>
+cache_dir = WindowsPath('C:/Users/lanph/AppData/Local/Temp/tmpc5pnmtx8/cache')
+
+    def prepare(config, output, logger, cache_dir):
+        import pypdfium2 as pdfium
+        import pytesseract
+        from huggingface_hub import hf_hub_download
+    
+        dataset = config['dataset']
+        parser_version = importlib.metadata.version('pypdfium2')
+        if parser_version != config['text']['parser_version']:
+>           raise ValueError(f'PDFium parser version {parser_version} does not match configured {config["text"]["parser_version"]}')
+E           ValueError: PDFium parser version 5.14.0 does not match configured 4.30.0
+
+src\qpaf\m11\dataset.py:74: ValueError
+_________ test_live_config_source_hashes_and_consumed_approval_match __________
+
+    def test_live_config_source_hashes_and_consumed_approval_match() -> None:
+        config = pilot.read_json(ROOT / pilot.CONFIG_PATH)
+>       proposal = pilot.validate_config(ROOT, config)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_vidoseek_exploratory12.py:85: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+root = WindowsPath('C:/Users/lanph/OneDrive/Desktop/Artificial_Intelligent_Project/.worktrees/m4-2-baseline-freeze')
+config = {'protocol_id': 'vidoseek_p1_02r_w7_exploratory12_v1', 'classification': 'exploratory_subset_oracle_not_full_w7_or_pha...ory12/vidoseek_w7_exploratory12_proposal.json', 'base_protocol_path': 'configs/vidoseek_p1_02r_oracle_w7_v1.yaml', ...}
+
+    def validate_config(root: Path, config: dict[str, Any]) -> dict[str, Any]:
+        expected = {
+            "protocol_id": PROTOCOL_ID,
+            "classification": CLASSIFICATION,
+            "proposal_path": PROPOSAL_PATH,
+            "base_protocol_path": BASE_PROTOCOL_PATH,
+            "output_path": OUTPUT_PATH,
+            "total_wall_timeout_seconds": TIMEOUT_SECONDS,
+            "bootstrap_resamples": BOOTSTRAP_RESAMPLES,
+            "seed": SEED,
+            "queries": QUERY_COUNT,
+            "pages_per_query": PAGES_PER_QUERY,
+            "workers": 1,
+            "threads_per_library": 1,
+            "invocations": 1,
+            "automatic_retries": 0,
+        }
+        for key, value in expected.items():
+            if config.get(key) != value or type(config.get(key)) is not type(value):
+                raise ValueError(f"Exploratory protocol drift: {key}")
+        if git_head(root) != config["base_git_commit"]:
+            raise ValueError("Exploratory base Git commit drift")
+        hashes = config["source_sha256"]
+        if sorted(hashes) != source_paths(root):
+            raise ValueError("Exploratory source inventory drift")
+        for relative, expected_hash in hashes.items():
+            if safeguards.file_sha256(root / relative) != expected_hash:
+                raise ValueError(f"Exploratory source hash drift: {relative}")
+        actual_environment = {
+            "python": platform.python_version(),
+            "packages": {name: version(name) for name in PACKAGES},
+        }
+        if config["environment"] != actual_environment:
+>           raise ValueError("Exploratory Python/package environment drift")
+E           ValueError: Exploratory Python/package environment drift
+
+src\oracle_study\vidoseek_exploratory12.py:99: ValueError
+_______ test_live_config_records_consumed_authorization_and_source_pins _______
+
+    def test_live_config_records_consumed_authorization_and_source_pins():
+        config = study.read_json(ROOT / study.CONFIG_PATH)
+>       proposal = study.validate_config(ROOT, config)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_vidoseek_exploratory24.py:73: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+root = WindowsPath('C:/Users/lanph/OneDrive/Desktop/Artificial_Intelligent_Project/.worktrees/m4-2-baseline-freeze')
+config = {'protocol_id': 'vidoseek_p1_02r_w7_exploratory24_v1', 'classification': 'exploratory24_subset_oracle_not_full_w7_or_p...ory24/vidoseek_w7_exploratory24_proposal.json', 'base_protocol_path': 'configs/vidoseek_p1_02r_oracle_w7_v1.yaml', ...}
+
+    def validate_config(root: Path, config: dict[str, Any]) -> dict[str, Any]:
+        expected = {
+            "protocol_id": PROTOCOL_ID,
+            "classification": CLASSIFICATION,
+            "proposal_path": PROPOSAL_PATH,
+            "base_protocol_path": BASE_PROTOCOL_PATH,
+            "output_path": OUTPUT_PATH,
+            "total_wall_timeout_seconds": TIMEOUT_SECONDS,
+            "bootstrap_resamples": BOOTSTRAP_RESAMPLES,
+            "seed": SEED,
+            "queries": QUERY_COUNT,
+            "pages_per_query": PAGES_PER_QUERY,
+            "workers": 1,
+            "threads_per_library": 1,
+            "invocations": 1,
+            "automatic_retries": 0,
+        }
+        if set(config) != set(expected) | {
+            "base_git_commit",
+            "source_sha256",
+            "environment",
+            "authorization",
+        }:
+            raise ValueError("Exploratory-24 config fields drift")
+        for key, value in expected.items():
+            if config.get(key) != value or type(config.get(key)) is not type(value):
+                raise ValueError(f"Exploratory-24 scope drift: {key}")
+        if git_head(root) != config["base_git_commit"]:
+            raise ValueError("Exploratory-24 Git HEAD drift")
+        if sorted(config["source_sha256"]) != source_paths(root):
+            raise ValueError("Exploratory-24 source inventory drift")
+        for relative, expected_hash in config["source_sha256"].items():
+            if pilot.safeguards.file_sha256(root / relative) != expected_hash:
+>               raise ValueError(f"Exploratory-24 source hash drift: {relative}")
+E               ValueError: Exploratory-24 source hash drift: artifacts/vidoseek_fixed_profile_audit_review/result_integrity_review.json
+
+scripts\run_vidoseek_exploratory24.py:140: ValueError
+_________________ test_source_and_environment_drift_rejected __________________
+
+    def test_source_and_environment_drift_rejected():
+        config = study.read_json(ROOT / study.CONFIG_PATH)
+        config["source_sha256"][study.SCRIPT_PATH] = "0" * 64
+        with pytest.raises(ValueError, match="source hash drift"):
+            study.validate_config(ROOT, config)
+        config = study.read_json(ROOT / study.CONFIG_PATH)
+        config["environment"]["python"] = "0.0.0"
+>       with pytest.raises(ValueError, match="environment drift"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'environment drift'
+E         Actual message: 'Exploratory-24 source hash drift: artifacts/vidoseek_fixed_profile_audit_review/result_integrity_review.json'
+
+tests\test_vidoseek_exploratory24.py:127: AssertionError
+_________________ test_live_config_is_closed_and_hash_pinned __________________
+
+    def test_live_config_is_closed_and_hash_pinned():
+        config = study.read_json(ROOT / study.CONFIG_PATH)
+>       proposal = study.validate_config(ROOT, config)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_vidoseek_exploratory24_w66.py:61: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+root = WindowsPath('C:/Users/lanph/OneDrive/Desktop/Artificial_Intelligent_Project/.worktrees/m4-2-baseline-freeze')
+config = {'protocol_id': 'vidoseek_p1_02r_w66_exploratory24_v1', 'classification': 'w66_sensitivity_on_frozen_exploratory24_sub...n', 'parent_w7_proposal_path': 'docs/05_oracle_experiments/exploratory24/vidoseek_w7_exploratory24_proposal.json', ...}
+
+    def validate_config(root: Path, config: dict[str, Any]) -> dict[str, Any]:
+        expected = {
+            "protocol_id": PROTOCOL_ID,
+            "classification": CLASSIFICATION,
+            "proposal_path": PROPOSAL_PATH,
+            "parent_w7_proposal_path": PARENT_W7_PROPOSAL_PATH,
+            "parent_w7_result_review_path": PARENT_W7_REVIEW_PATH,
+            "base_protocol_path": BASE_PROTOCOL_PATH,
+            "output_path": OUTPUT_PATH,
+            "grid": GRID_NAME,
+            "profile_count": PROFILE_COUNT,
+            "profiles_canonical_sha256": PROFILES_SHA256,
+            "bootstrap_resamples": BOOTSTRAP_RESAMPLES,
+            "seed": SEED,
+            "queries": QUERY_COUNT,
+            "pages_per_query": PAGES_PER_QUERY,
+            "workers": 1,
+            "threads_per_library": 1,
+            "automatic_retries": 0,
+        }
+        if set(config) != set(expected) | {
+            "preparation_git",
+            "source_sha256",
+            "environment",
+            "authorization",
+            "resource_budget_status",
+            "total_wall_timeout_seconds",
+            "invocations",
+        }:
+            raise ValueError("Exploratory-24 W66 config fields drift")
+        for key, value in expected.items():
+            if config.get(key) != value or type(config.get(key)) is not type(value):
+                raise ValueError(f"Exploratory-24 W66 scope drift: {key}")
+    
+        approval = config["authorization"]
+        expected_approval_fields = {
+            "protocol_adopted",
+            "resource_budget_approved",
+            "execution_authorized",
+            "approved_by",
+            "execution_actor",
+            "approval_text",
+            "approved_at",
+        }
+        if not isinstance(approval, dict) or set(approval) != expected_approval_fields:
+            raise ValueError("Exploratory-24 W66 authorization fields drift")
+        closed_state = (
+            config.get("resource_budget_status") == RESOURCE_BUDGET_STATUS
+            and config.get("total_wall_timeout_seconds") == 0
+            and config.get("invocations") == 0
+            and approval
+            == {
+                "protocol_adopted": False,
+                "resource_budget_approved": False,
+                "execution_authorized": False,
+                "approved_by": None,
+                "execution_actor": None,
+                "approval_text": None,
+                "approved_at": None,
+            }
+        )
+        approved_state = (
+            config.get("resource_budget_status") == "APPROVED_FOR_ONE_INVOCATION"
+            and type(config.get("total_wall_timeout_seconds")) is int
+            and config["total_wall_timeout_seconds"] > 0
+            and config.get("invocations") == 1
+            and approval.get("protocol_adopted") is True
+            and approval.get("resource_budget_approved") is True
+            and approval.get("execution_authorized") is True
+            and approval.get("approved_by") == "user"
+            and approval.get("execution_actor") in {"human", "codex"}
+            and bool(approval.get("approval_text"))
+            and bool(approval.get("approved_at"))
+        )
+        if not (closed_state or approved_state):
+            raise ValueError("Exploratory-24 W66 authorization/resource state drift")
+    
+        preparation = config["preparation_git"]
+        if set(preparation) != {
+            "prepared_parent_commit",
+            "preparation_commit_rule",
+            "preparation_commit_changed_paths",
+        }:
+            raise ValueError("Exploratory-24 W66 preparation provenance drift")
+        if preparation["preparation_commit_rule"] != pilot.safeguards.EXECUTION_COMMIT_RULE:
+            raise ValueError("Exploratory-24 W66 preparation commit rule drift")
+        pilot.safeguards.require_exact_git_execution_checkout(
+            root,
+            approved_parent_commit=preparation["prepared_parent_commit"],
+            approval_commit_changed_paths=preparation["preparation_commit_changed_paths"],
+            execution_label="Exploratory-24 W66 preparation",
+        )
+    
+        if sorted(config["source_sha256"]) != source_paths(root):
+            raise ValueError("Exploratory-24 W66 source inventory drift")
+        for relative, expected_hash in config["source_sha256"].items():
+            if pilot.safeguards.file_sha256(root / relative) != expected_hash:
+>               raise ValueError(f"Exploratory-24 W66 source hash drift: {relative}")
+E               ValueError: Exploratory-24 W66 source hash drift: artifacts/vidoseek_exploratory24_review/result_integrity_review.json
+
+scripts\run_vidoseek_exploratory24_w66.py:212: ValueError
+_______________ test_source_and_environment_drift_are_rejected ________________
+
+    def test_source_and_environment_drift_are_rejected():
+        config = study.read_json(ROOT / study.CONFIG_PATH)
+        config["source_sha256"][study.SCRIPT_PATH] = "0" * 64
+        with pytest.raises(ValueError, match="source hash drift"):
+            study.validate_config(ROOT, config)
+        config = study.read_json(ROOT / study.CONFIG_PATH)
+        config["environment"]["python"] = "0.0.0"
+>       with pytest.raises(ValueError, match="environment drift"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'environment drift'
+E         Actual message: 'Exploratory-24 W66 source hash drift: artifacts/vidoseek_exploratory24_review/result_integrity_review.json'
+
+tests\test_vidoseek_exploratory24_w66.py:131: AssertionError
+______________ test_live_preflight_is_read_only_and_not_a_result ______________
+
+    def test_live_preflight_is_read_only_and_not_a_result():
+        config = study.read_json(ROOT / study.CONFIG_PATH)
+>       evidence = study.preflight(ROOT, config)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_vidoseek_exploratory24_w66.py:150: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+scripts\run_vidoseek_exploratory24_w66.py:273: in preflight
+    proposal = validate_config(root, config)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+root = WindowsPath('C:/Users/lanph/OneDrive/Desktop/Artificial_Intelligent_Project/.worktrees/m4-2-baseline-freeze')
+config = {'protocol_id': 'vidoseek_p1_02r_w66_exploratory24_v1', 'classification': 'w66_sensitivity_on_frozen_exploratory24_sub...n', 'parent_w7_proposal_path': 'docs/05_oracle_experiments/exploratory24/vidoseek_w7_exploratory24_proposal.json', ...}
+
+    def validate_config(root: Path, config: dict[str, Any]) -> dict[str, Any]:
+        expected = {
+            "protocol_id": PROTOCOL_ID,
+            "classification": CLASSIFICATION,
+            "proposal_path": PROPOSAL_PATH,
+            "parent_w7_proposal_path": PARENT_W7_PROPOSAL_PATH,
+            "parent_w7_result_review_path": PARENT_W7_REVIEW_PATH,
+            "base_protocol_path": BASE_PROTOCOL_PATH,
+            "output_path": OUTPUT_PATH,
+            "grid": GRID_NAME,
+            "profile_count": PROFILE_COUNT,
+            "profiles_canonical_sha256": PROFILES_SHA256,
+            "bootstrap_resamples": BOOTSTRAP_RESAMPLES,
+            "seed": SEED,
+            "queries": QUERY_COUNT,
+            "pages_per_query": PAGES_PER_QUERY,
+            "workers": 1,
+            "threads_per_library": 1,
+            "automatic_retries": 0,
+        }
+        if set(config) != set(expected) | {
+            "preparation_git",
+            "source_sha256",
+            "environment",
+            "authorization",
+            "resource_budget_status",
+            "total_wall_timeout_seconds",
+            "invocations",
+        }:
+            raise ValueError("Exploratory-24 W66 config fields drift")
+        for key, value in expected.items():
+            if config.get(key) != value or type(config.get(key)) is not type(value):
+                raise ValueError(f"Exploratory-24 W66 scope drift: {key}")
+    
+        approval = config["authorization"]
+        expected_approval_fields = {
+            "protocol_adopted",
+            "resource_budget_approved",
+            "execution_authorized",
+            "approved_by",
+            "execution_actor",
+            "approval_text",
+            "approved_at",
+        }
+        if not isinstance(approval, dict) or set(approval) != expected_approval_fields:
+            raise ValueError("Exploratory-24 W66 authorization fields drift")
+        closed_state = (
+            config.get("resource_budget_status") == RESOURCE_BUDGET_STATUS
+            and config.get("total_wall_timeout_seconds") == 0
+            and config.get("invocations") == 0
+            and approval
+            == {
+                "protocol_adopted": False,
+                "resource_budget_approved": False,
+                "execution_authorized": False,
+                "approved_by": None,
+                "execution_actor": None,
+                "approval_text": None,
+                "approved_at": None,
+            }
+        )
+        approved_state = (
+            config.get("resource_budget_status") == "APPROVED_FOR_ONE_INVOCATION"
+            and type(config.get("total_wall_timeout_seconds")) is int
+            and config["total_wall_timeout_seconds"] > 0
+            and config.get("invocations") == 1
+            and approval.get("protocol_adopted") is True
+            and approval.get("resource_budget_approved") is True
+            and approval.get("execution_authorized") is True
+            and approval.get("approved_by") == "user"
+            and approval.get("execution_actor") in {"human", "codex"}
+            and bool(approval.get("approval_text"))
+            and bool(approval.get("approved_at"))
+        )
+        if not (closed_state or approved_state):
+            raise ValueError("Exploratory-24 W66 authorization/resource state drift")
+    
+        preparation = config["preparation_git"]
+        if set(preparation) != {
+            "prepared_parent_commit",
+            "preparation_commit_rule",
+            "preparation_commit_changed_paths",
+        }:
+            raise ValueError("Exploratory-24 W66 preparation provenance drift")
+        if preparation["preparation_commit_rule"] != pilot.safeguards.EXECUTION_COMMIT_RULE:
+            raise ValueError("Exploratory-24 W66 preparation commit rule drift")
+        pilot.safeguards.require_exact_git_execution_checkout(
+            root,
+            approved_parent_commit=preparation["prepared_parent_commit"],
+            approval_commit_changed_paths=preparation["preparation_commit_changed_paths"],
+            execution_label="Exploratory-24 W66 preparation",
+        )
+    
+        if sorted(config["source_sha256"]) != source_paths(root):
+            raise ValueError("Exploratory-24 W66 source inventory drift")
+        for relative, expected_hash in config["source_sha256"].items():
+            if pilot.safeguards.file_sha256(root / relative) != expected_hash:
+>               raise ValueError(f"Exploratory-24 W66 source hash drift: {relative}")
+E               ValueError: Exploratory-24 W66 source hash drift: artifacts/vidoseek_exploratory24_review/result_integrity_review.json
+
+scripts\run_vidoseek_exploratory24_w66.py:212: ValueError
+______________ test_live_config_is_approved_once_and_hash_pinned ______________
+
+    def test_live_config_is_approved_once_and_hash_pinned():
+        config = study.read_json(ROOT / study.CONFIG_PATH)
+>       validated = study.validate_config(ROOT, config)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_vidoseek_exploratory24_w66_optimized.py:95: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+root = WindowsPath('C:/Users/lanph/OneDrive/Desktop/Artificial_Intelligent_Project/.worktrees/m4-2-baseline-freeze')
+config = {'protocol_id': 'vidoseek_p1_02r_w66_exploratory24_optimized_v1', 'classification': 'exact_output_optimized_w66_sensit...', 'execution_review_path': 'docs/05_oracle_experiments/w66/QPAF_W66_EXPLORATORY24_OPTIMIZED_EXECUTION_REVIEW.md', ...}
+
+    def validate_config(root: Path, config: dict[str, Any]) -> dict[str, Any]:
+        expected = {
+            "protocol_id": PROTOCOL_ID,
+            "classification": CLASSIFICATION,
+            "proposal_path": PROPOSAL_PATH,
+            "execution_review_path": EXECUTION_REVIEW_PATH,
+            "calibration_review_path": CALIBRATION_REVIEW_PATH,
+            "calibration_review_sha256": CALIBRATION_REVIEW_SHA256,
+            "parent_w7_proposal_path": PARENT_W7_PROPOSAL_PATH,
+            "parent_w7_result_review_path": PARENT_W7_REVIEW_PATH,
+            "base_protocol_path": BASE_PROTOCOL_PATH,
+            "frozen_w66_runner_path": FROZEN_W66_SCRIPT_PATH,
+            "optimized_candidate_oracle_path": OPTIMIZED_PATH,
+            "optimized_candidate_oracle_sha256": OPTIMIZED_SHA256,
+            "output_path": OUTPUT_PATH,
+            "grid": GRID_NAME,
+            "profile_count": PROFILE_COUNT,
+            "profiles_canonical_sha256": PROFILES_SHA256,
+            "query_list_sha256": QUERY_LIST_SHA256,
+            "bootstrap_resamples": BOOTSTRAP_RESAMPLES,
+            "seed": SEED,
+            "queries": QUERY_COUNT,
+            "pages_per_query": PAGES_PER_QUERY,
+            "load_columns": list(LOAD_COLUMNS),
+            "proposed_wall_timeout_seconds": PROPOSED_TIMEOUT_SECONDS,
+            "workers": 1,
+            "threads_per_library": 1,
+            "arrow_cpu_threads": 1,
+            "arrow_io_threads": 1,
+            "automatic_retries": 0,
+            "process_tree_private_bytes_limit": PROCESS_TREE_PRIVATE_BYTES_LIMIT,
+            "prestart_free_physical_bytes_min": PRESTART_FREE_PHYSICAL_BYTES_MIN,
+            "abort_free_physical_bytes_below": ABORT_FREE_PHYSICAL_BYTES_BELOW,
+            "prestart_disk_free_bytes_min": PRESTART_DISK_FREE_BYTES_MIN,
+            "output_byte_limit": OUTPUT_BYTE_LIMIT,
+            "sample_interval_seconds": SAMPLE_INTERVAL_SECONDS,
+            "maximum_telemetry_gap_seconds": MAX_TELEMETRY_GAP_SECONDS,
+            "previous_checkpoint_reuse_allowed": False,
+            "actual_relevance_allowed_after_attempt": True,
+            "formal_p1_03_allowed": False,
+            "training_allowed": False,
+            "modal_gpu_allowed": False,
+        }
+        variable = {
+            "resource_budget_status",
+            "approved_wall_timeout_seconds",
+            "invocations",
+            "preparation_git",
+            "approval_git",
+            "source_sha256",
+            "environment",
+            "authorization",
+        }
+        if set(config) != set(expected) | variable:
+            raise ValueError("Optimized exploratory-24 W66 config fields drift")
+        for key, expected_value in expected.items():
+            if config.get(key) != expected_value or type(config.get(key)) is not type(
+                expected_value
+            ):
+                raise ValueError(f"Optimized exploratory-24 W66 scope drift: {key}")
+        if set(config["authorization"]) != {
+            "protocol_adopted",
+            "resource_budget_approved",
+            "execution_authorized",
+            "approved_by",
+            "execution_actor",
+            "approval_text",
+            "approved_at",
+        }:
+            raise ValueError("Optimized W66 authorization fields drift")
+        state = _approval_state(config)
+        live_commit = require_git_provenance(root, config, state)
+    
+        if state == "closed" and config["approval_git"] != {
+            "approved_parent_commit": None,
+            "approval_commit_rule": GIT_RULE,
+            "approval_commit_changed_paths": [
+                CONFIG_PATH,
+                EXECUTION_REVIEW_PATH,
+                TEST_PATH,
+            ],
+        }:
+            raise ValueError("Closed optimized W66 approval Git state drift")
+        if sorted(config["source_sha256"]) != source_paths(root):
+            raise ValueError("Optimized W66 source inventory drift")
+        for relative, expected_hash in config["source_sha256"].items():
+            if file_sha256(root / relative) != expected_hash:
+>               raise ValueError(f"Optimized W66 source hash drift: {relative}")
+E               ValueError: Optimized W66 source hash drift: artifacts/vidoseek_exploratory24_review/result_integrity_review.json
+
+scripts\run_vidoseek_exploratory24_w66_optimized.py:311: ValueError
+_________ test_source_environment_and_calibration_drift_are_rejected __________
+
+    def test_source_environment_and_calibration_drift_are_rejected():
+        config = study.read_json(ROOT / study.CONFIG_PATH)
+        config["source_sha256"][study.SCRIPT_PATH] = "0" * 64
+        with pytest.raises(ValueError, match="source hash drift"):
+            study.validate_config(ROOT, config)
+        config = study.read_json(ROOT / study.CONFIG_PATH)
+        config["environment"]["python"] = "0.0.0"
+>       with pytest.raises(ValueError, match="environment drift"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'environment drift'
+E         Actual message: 'Optimized W66 source hash drift: artifacts/vidoseek_exploratory24_review/result_integrity_review.json'
+
+tests\test_vidoseek_exploratory24_w66_optimized.py:182: AssertionError
+____ test_live_preflight_is_approved_read_only_and_does_not_create_attempt ____
+
+    def test_live_preflight_is_approved_read_only_and_does_not_create_attempt():
+        config = study.read_json(ROOT / study.CONFIG_PATH)
+>       evidence = study.preflight(ROOT, config)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_vidoseek_exploratory24_w66_optimized.py:205: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+scripts\run_vidoseek_exploratory24_w66_optimized.py:416: in preflight
+    validated = validate_config(root, config)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+root = WindowsPath('C:/Users/lanph/OneDrive/Desktop/Artificial_Intelligent_Project/.worktrees/m4-2-baseline-freeze')
+config = {'protocol_id': 'vidoseek_p1_02r_w66_exploratory24_optimized_v1', 'classification': 'exact_output_optimized_w66_sensit...', 'execution_review_path': 'docs/05_oracle_experiments/w66/QPAF_W66_EXPLORATORY24_OPTIMIZED_EXECUTION_REVIEW.md', ...}
+
+    def validate_config(root: Path, config: dict[str, Any]) -> dict[str, Any]:
+        expected = {
+            "protocol_id": PROTOCOL_ID,
+            "classification": CLASSIFICATION,
+            "proposal_path": PROPOSAL_PATH,
+            "execution_review_path": EXECUTION_REVIEW_PATH,
+            "calibration_review_path": CALIBRATION_REVIEW_PATH,
+            "calibration_review_sha256": CALIBRATION_REVIEW_SHA256,
+            "parent_w7_proposal_path": PARENT_W7_PROPOSAL_PATH,
+            "parent_w7_result_review_path": PARENT_W7_REVIEW_PATH,
+            "base_protocol_path": BASE_PROTOCOL_PATH,
+            "frozen_w66_runner_path": FROZEN_W66_SCRIPT_PATH,
+            "optimized_candidate_oracle_path": OPTIMIZED_PATH,
+            "optimized_candidate_oracle_sha256": OPTIMIZED_SHA256,
+            "output_path": OUTPUT_PATH,
+            "grid": GRID_NAME,
+            "profile_count": PROFILE_COUNT,
+            "profiles_canonical_sha256": PROFILES_SHA256,
+            "query_list_sha256": QUERY_LIST_SHA256,
+            "bootstrap_resamples": BOOTSTRAP_RESAMPLES,
+            "seed": SEED,
+            "queries": QUERY_COUNT,
+            "pages_per_query": PAGES_PER_QUERY,
+            "load_columns": list(LOAD_COLUMNS),
+            "proposed_wall_timeout_seconds": PROPOSED_TIMEOUT_SECONDS,
+            "workers": 1,
+            "threads_per_library": 1,
+            "arrow_cpu_threads": 1,
+            "arrow_io_threads": 1,
+            "automatic_retries": 0,
+            "process_tree_private_bytes_limit": PROCESS_TREE_PRIVATE_BYTES_LIMIT,
+            "prestart_free_physical_bytes_min": PRESTART_FREE_PHYSICAL_BYTES_MIN,
+            "abort_free_physical_bytes_below": ABORT_FREE_PHYSICAL_BYTES_BELOW,
+            "prestart_disk_free_bytes_min": PRESTART_DISK_FREE_BYTES_MIN,
+            "output_byte_limit": OUTPUT_BYTE_LIMIT,
+            "sample_interval_seconds": SAMPLE_INTERVAL_SECONDS,
+            "maximum_telemetry_gap_seconds": MAX_TELEMETRY_GAP_SECONDS,
+            "previous_checkpoint_reuse_allowed": False,
+            "actual_relevance_allowed_after_attempt": True,
+            "formal_p1_03_allowed": False,
+            "training_allowed": False,
+            "modal_gpu_allowed": False,
+        }
+        variable = {
+            "resource_budget_status",
+            "approved_wall_timeout_seconds",
+            "invocations",
+            "preparation_git",
+            "approval_git",
+            "source_sha256",
+            "environment",
+            "authorization",
+        }
+        if set(config) != set(expected) | variable:
+            raise ValueError("Optimized exploratory-24 W66 config fields drift")
+        for key, expected_value in expected.items():
+            if config.get(key) != expected_value or type(config.get(key)) is not type(
+                expected_value
+            ):
+                raise ValueError(f"Optimized exploratory-24 W66 scope drift: {key}")
+        if set(config["authorization"]) != {
+            "protocol_adopted",
+            "resource_budget_approved",
+            "execution_authorized",
+            "approved_by",
+            "execution_actor",
+            "approval_text",
+            "approved_at",
+        }:
+            raise ValueError("Optimized W66 authorization fields drift")
+        state = _approval_state(config)
+        live_commit = require_git_provenance(root, config, state)
+    
+        if state == "closed" and config["approval_git"] != {
+            "approved_parent_commit": None,
+            "approval_commit_rule": GIT_RULE,
+            "approval_commit_changed_paths": [
+                CONFIG_PATH,
+                EXECUTION_REVIEW_PATH,
+                TEST_PATH,
+            ],
+        }:
+            raise ValueError("Closed optimized W66 approval Git state drift")
+        if sorted(config["source_sha256"]) != source_paths(root):
+            raise ValueError("Optimized W66 source inventory drift")
+        for relative, expected_hash in config["source_sha256"].items():
+            if file_sha256(root / relative) != expected_hash:
+>               raise ValueError(f"Optimized W66 source hash drift: {relative}")
+E               ValueError: Optimized W66 source hash drift: artifacts/vidoseek_exploratory24_review/result_integrity_review.json
+
+scripts\run_vidoseek_exploratory24_w66_optimized.py:311: ValueError
+__________ test_live_config_source_pins_and_consumed_approval_match ___________
+
+    def test_live_config_source_pins_and_consumed_approval_match():
+        config = audit.read_json(ROOT / audit.CONFIG_PATH)
+>       bundle = audit.validate_config(ROOT, config)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_vidoseek_fixed_profile_audit.py:52: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+root = WindowsPath('C:/Users/lanph/OneDrive/Desktop/Artificial_Intelligent_Project/.worktrees/m4-2-baseline-freeze')
+config = {'protocol_id': 'vidoseek_fixed_profile_audit_v1', 'classification': 'post_hoc_fixed_profile_discovery_headroom_not_qp...rotocol_path': 'configs/vidoseek_p1_02r_oracle_w7_v1.yaml', 'output_path': 'runs/vidoseek_fixed_profile_audit_v1', ...}
+
+    def validate_config(root: Path, config: dict[str, Any]) -> dict[str, Any]:
+        expected = {
+            "protocol_id": "vidoseek_fixed_profile_audit_v1",
+            "classification": CLASSIFICATION,
+            "base_protocol_path": BASE_PROTOCOL,
+            "output_path": OUTPUT_PATH,
+            "queries": QUERY_COUNT,
+            "pages_per_query": PAGES_PER_QUERY,
+            "total_wall_timeout_seconds": TIMEOUT_SECONDS,
+            "workers": 1,
+            "threads_per_library": 1,
+            "invocations": 1,
+            "automatic_retries": 0,
+            "grid": "w7",
+            "profiles": get_profiles("w7").tolist(),
+            "channel_order": ["bm25_score", "dense_score", "visual_score"],
+            "seed": 20260820,
+            "headroom_review_threshold": 0.03,
+            "qpaf_search_allowed": False,
+            "w66_allowed": False,
+            "training_allowed": False,
+            "modal_gpu_allowed": False,
+        }
+        if set(config) != set(expected) | {
+            "base_git_commit",
+            "source_sha256",
+            "environment",
+            "authorization",
+        }:
+            raise ValueError("Audit config fields drift")
+        for key, value in expected.items():
+            if config.get(key) != value or type(config.get(key)) is not type(value):
+                raise ValueError(f"Audit scope drift: {key}")
+        if git_head(root) != config["base_git_commit"]:
+            raise ValueError("Audit Git HEAD drift")
+        if sorted(config["source_sha256"]) != source_paths(root):
+            raise ValueError("Audit source inventory drift")
+        for relative, expected_hash in config["source_sha256"].items():
+            if sha256(root / relative) != expected_hash:
+                raise ValueError(f"Audit source hash drift: {relative}")
+        environment = {
+            "python": platform.python_version(),
+            "packages": {
+                name: version(name) for name in ("numpy", "pandas", "pyarrow", "PyYAML")
+            },
+        }
+        if environment != config["environment"]:
+>           raise ValueError("Audit environment drift")
+E           ValueError: Audit environment drift
+
+scripts\audit_vidoseek_fixed_profiles.py:114: ValueError
+________ test_protocol_records_consumed_human_run_and_closes_execution ________
+
+    def test_protocol_records_consumed_human_run_and_closes_execution() -> None:
+        protocol = vidoseek_p1_02r.load_protocol(PROTOCOL_PATH)
+    
+        assert protocol["classification"] == "post_hoc"
+        assert protocol["status"] == "full_extraction_integrity_verified"
+        assert protocol["authorization"]["local_integration"] == {
+            "scope": "local_integration_and_cpu_audit_preparation_only",
+            "approved_by": "user",
+            "approved_on": "2026-08-30",
+            "approval_text": (
+                "Approve P1-02R all-corpus protocol for local integration and CPU-audit "
+                "preparation only. Do not execute Modal"
+            ),
+        }
+        assert protocol["authorization"]["cpu_audit_execution"] == {
+            "scope": "p1_02r_cpu_coverage_audit_only",
+            "approved_by": "user",
+            "approved_on": "2026-08-30",
+            "approval_text": (
+                "Approve execution of the P1-02R CPU-only coverage audit on Modal. "
+                "Do not run GPU"
+            ),
+        }
+        assert protocol["authorization"]["cost_calibration_preparation"] == {
+            "scope": "local_code_tests_and_command_only",
+            "approved_by": "user",
+            "approved_on": "2026-08-30",
+            "approval_text": (
+                "Record the P1-02R CPU-audit PASS and prepare a bounded L4 "
+                "cost-calibration command locally. Do not execute Modal or GPU"
+            ),
+        }
+        assert protocol["authorization"]["cost_calibration_execution"] == {
+            "scope": "p1_02r_bounded_l4_cost_calibration_only",
+            "approved_by": "user",
+            "approved_on": "2026-08-30",
+            "approval_text": (
+                "Approve execution of the bounded P1-02R L4 cost calibration on Modal. "
+                "Do not run full extraction."
+            ),
+        }
+        assert protocol["authorization"]["full_extraction_preparation"] == {
+            "scope": "record_calibration_and_prepare_chunked_full_extraction_locally_only",
+            "approved_by": "user",
+            "approved_on": "2026-08-30",
+            "approval_text": (
+                "Record the P1-02R L4 calibration result and prepare a memory-safe chunked "
+                "full-extraction implementation locally. Do not execute Modal or GPU."
+            ),
+        }
+        assert protocol["authorization"]["full_extraction_execution"] == {
+            "scope": "one_human_run_p1_02r_chunked_l4_full_extraction",
+            "approved_by": "user",
+            "approved_on": "2026-08-30",
+            "prepared_source_commit": "09aa4bad08fd5362a64537b506e48dca640cfb4e",
+            "prepared_protocol_sha256": (
+                "49e63f2b017fa66a43a3af4d6189a2ab218b61fff838270ebfab954f4933b421"
+            ),
+            "authorized_invocations": 1,
+            "execution_actor": "human",
+            "automatic_retry_allowed": False,
+            "approval_text": (
+                "Approve one human-run P1-02R chunked full-extraction invocation on "
+                "Modal L4 using frozen limits query=8, page=512, visual batch=128. "
+                "Update and commit only the execution guards and provenance. Do not "
+                "execute Modal yourself, run P1-03, or relabel frozen P1-02"
+            ),
+        }
+        assert protocol["retrievers"]["changed"] is False
+        environment = yaml.safe_load((ROOT / "configs" / "environment.yaml").read_text(encoding="utf-8"))
+        retriever_contract = {name: environment[name] for name in ["bm25", "models"]}
+        expected_hash = hashlib.sha256(
+            json.dumps(retriever_contract, sort_keys=True, separators=(",", ":")).encode("utf-8")
+        ).hexdigest()
+        assert protocol["retrievers"]["contract_fields"] == ["bm25", "models"]
+        assert protocol["retrievers"]["contract_sha256"] == expected_hash
+        assert protocol["coverage_audit_result"]["status"] == "PASS"
+>       assert protocol["coverage_audit_result"]["artifact_sha256"] == hashlib.sha256(
+            AUDIT_PATH.read_bytes()
+        ).hexdigest()
+E       AssertionError: assert 'bbb947ca9b04...67fac413beca0' == '1d5b74166060...d397ae8aeff07'
+E         
+E         - 1d5b741660602693d88f0898a372571389a8f5f13b056a7a2a1d397ae8aeff07
+E         + bbb947ca9b04bf291e94298516d8529888b677eee92e212dd8967fac413beca0
+
+tests\test_vidoseek_p1_02r.py:108: AssertionError
+_________ test_recorded_cpu_audit_artifact_matches_every_frozen_gate __________
+
+    def test_recorded_cpu_audit_artifact_matches_every_frozen_gate() -> None:
+        protocol = vidoseek_p1_02r.load_protocol(PROTOCOL_PATH)
+    
+>       artifact = vidoseek_p1_02r.validate_recorded_cpu_audit(protocol, AUDIT_PATH)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_vidoseek_p1_02r.py:420: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+protocol = {'schema_version': 1, 'protocol_id': 'vidoseek_p1_02r_all_corpus_v1', 'status': 'full_extraction_integrity_verified', 'classification': 'post_hoc', ...}
+artifact_path = WindowsPath('C:/Users/lanph/OneDrive/Desktop/Artificial_Intelligent_Project/.worktrees/m4-2-baseline-freeze/artifacts/vidoseek_p1_02r_coverage_audit.json')
+
+    def validate_recorded_cpu_audit(
+        protocol: dict[str, Any],
+        artifact_path: Path,
+    ) -> dict[str, Any]:
+        """Verify that the checked-in artifact is the exact approved CPU-audit PASS."""
+        validate_protocol(protocol)
+        evidence = protocol["coverage_audit_result"]
+        if not artifact_path.is_file():
+            raise FileNotFoundError(f"Missing P1-02R CPU-audit artifact: {artifact_path}")
+        if _file_sha256(artifact_path) != evidence["artifact_sha256"]:
+>           raise RuntimeError("P1-02R CPU-audit artifact hash does not match the protocol")
+E           RuntimeError: P1-02R CPU-audit artifact hash does not match the protocol
+
+scripts\vidoseek_p1_02r.py:539: RuntimeError
+____ test_recorded_l4_calibration_is_exact_and_remains_non_result_evidence ____
+
+    def test_recorded_l4_calibration_is_exact_and_remains_non_result_evidence() -> None:
+        protocol = vidoseek_p1_02r.load_protocol(PROTOCOL_PATH)
+    
+>       artifact = vidoseek_p1_02r.validate_recorded_cost_calibration(
+            protocol, CALIBRATION_PATH
+        )
+
+tests\test_vidoseek_p1_02r.py:433: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+protocol = {'schema_version': 1, 'protocol_id': 'vidoseek_p1_02r_all_corpus_v1', 'status': 'full_extraction_integrity_verified', 'classification': 'post_hoc', ...}
+artifact_path = WindowsPath('C:/Users/lanph/OneDrive/Desktop/Artificial_Intelligent_Project/.worktrees/m4-2-baseline-freeze/artifacts/vidoseek_p1_02r_l4_cost_calibration.json')
+
+    def validate_recorded_cost_calibration(
+        protocol: dict[str, Any],
+        artifact_path: Path,
+    ) -> dict[str, Any]:
+        """Verify the exact returned L4 calibration manifest without claiming a full run."""
+        validate_protocol(protocol)
+        evidence = protocol["cost_calibration_result"]
+        if not artifact_path.is_file():
+            raise FileNotFoundError(f"Missing P1-02R cost-calibration artifact: {artifact_path}")
+        if _file_sha256(artifact_path) != evidence["artifact_sha256"]:
+>           raise RuntimeError("P1-02R cost-calibration artifact hash does not match the protocol")
+E           RuntimeError: P1-02R cost-calibration artifact hash does not match the protocol
+
+scripts\vidoseek_p1_02r.py:582: RuntimeError
+______ test_live_config_records_exact_approved_scope_and_matches_review _______
+
+    def test_live_config_records_exact_approved_scope_and_matches_review():
+        config = live_config()
+>       validated = study.validate_config(ROOT, config)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_vidoseek_w66_resource_calibration.py:117: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+root = WindowsPath('C:/Users/lanph/OneDrive/Desktop/Artificial_Intelligent_Project/.worktrees/m4-2-baseline-freeze')
+config = {'protocol_id': 'vidoseek_w66_resource_calibration_v1', 'classification': 'synthetic_w66_engineering_calibration_not_r...roposal.json', 'resource_review_json_path': 'docs/05_oracle_experiments/w66/QPAF_W66_RESOURCE_BUDGET_REVIEW.json', ...}
+
+    def validate_config(root: Path, config: dict[str, Any]) -> dict[str, Any]:
+        expected = {
+            "protocol_id": PROTOCOL_ID,
+            "classification": CLASSIFICATION,
+            "proposal_path": PROPOSAL_PATH,
+            "resource_review_json_path": RESOURCE_REVIEW_JSON,
+            "resource_review_markdown_path": RESOURCE_REVIEW_MD,
+            "execution_review_path": EXECUTION_REVIEW_PATH,
+            "parent_w7_proposal_path": PARENT_W7_PROPOSAL_PATH,
+            "parent_w7_result_review_path": PARENT_W7_REVIEW_PATH,
+            "base_protocol_path": BASE_PROTOCOL_PATH,
+            "w66_runner_path": W66_SCRIPT_PATH,
+            "output_path": OUTPUT_PATH,
+            "grid": GRID_NAME,
+            "profile_count": PROFILE_COUNT,
+            "profiles_canonical_sha256": PROFILES_SHA256,
+            "query_list_sha256": QUERY_LIST_SHA256,
+            "calibration_audit_index": CALIBRATION_AUDIT_INDEX,
+            "calibration_query_id": CALIBRATION_QUERY_ID,
+            "pages_per_query": PAGES_PER_QUERY,
+            "synthetic_relevant_page_sorted_index": SYNTHETIC_RELEVANT_INDEX,
+            "load_query_count": LOAD_QUERY_COUNT,
+            "load_pair_count": LOAD_PAIR_COUNT,
+            "load_columns": list(LOAD_COLUMNS),
+            "bootstrap_sample_size": BOOTSTRAP_SAMPLE_SIZE,
+            "bootstrap_resamples": BOOTSTRAP_RESAMPLES,
+            "seed": SEED,
+            "proposed_wall_timeout_seconds": PROPOSED_TIMEOUT_SECONDS,
+            "workers": 1,
+            "threads_per_library": 1,
+            "arrow_cpu_threads": 1,
+            "arrow_io_threads": 1,
+            "automatic_retries": 0,
+            "process_tree_private_bytes_limit": PROCESS_TREE_PRIVATE_BYTES_LIMIT,
+            "prestart_free_physical_bytes_min": PRESTART_FREE_PHYSICAL_BYTES_MIN,
+            "abort_free_physical_bytes_below": ABORT_FREE_PHYSICAL_BYTES_BELOW,
+            "prestart_disk_free_bytes_min": PRESTART_DISK_FREE_BYTES_MIN,
+            "output_byte_limit": OUTPUT_BYTE_LIMIT,
+            "sample_interval_seconds": SAMPLE_INTERVAL_SECONDS,
+            "actual_relevance_column_allowed": False,
+            "checkpoint_reuse_into_scientific_run_allowed": False,
+            "formal_p1_03_allowed": False,
+            "training_allowed": False,
+            "modal_gpu_allowed": False,
+        }
+        variable = {
+            "resource_budget_status",
+            "approved_wall_timeout_seconds",
+            "invocations",
+            "preparation_git",
+            "approval_git",
+            "source_sha256",
+            "environment",
+            "authorization",
+        }
+        if set(config) != set(expected) | variable:
+            raise ValueError("Calibration config fields drift")
+        for key, value in expected.items():
+            if config.get(key) != value or type(config.get(key)) is not type(value):
+                raise ValueError(f"Calibration scope drift: {key}")
+        if set(config["authorization"]) != {
+            "protocol_adopted",
+            "resource_budget_approved",
+            "execution_authorized",
+            "approved_by",
+            "execution_actor",
+            "approval_text",
+            "approved_at",
+        }:
+            raise ValueError("Calibration authorization fields drift")
+        state = _approval_state(config)
+        live_commit = require_git_provenance(root, config, state)
+    
+        approval_git = config["approval_git"]
+        if state == "closed" and approval_git != {
+            "approved_parent_commit": None,
+            "approval_commit_rule": GIT_RULE,
+            "approval_commit_changed_paths": [
+                CONFIG_PATH,
+                EXECUTION_REVIEW_PATH,
+            ],
+        }:
+            raise ValueError("Closed calibration approval Git state drift")
+    
+        if sorted(config["source_sha256"]) != source_paths(root):
+            raise ValueError("Calibration source inventory drift")
+        for relative, expected_hash in config["source_sha256"].items():
+            if file_sha256(root / relative) != expected_hash:
+>               raise ValueError(f"Calibration source hash drift: {relative}")
+E               ValueError: Calibration source hash drift: artifacts/vidoseek_exploratory24_review/result_integrity_review.json
+
+scripts\calibrate_vidoseek_w66_resources.py:327: ValueError
+________ test_live_config_is_approved_once_and_matches_prepared_scope _________
+
+    def test_live_config_is_approved_once_and_matches_prepared_scope():
+        config = live_config()
+>       validated = recovery.validate_config(ROOT, config)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_vidoseek_w66_resource_calibration_recovery.py:97: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+root = WindowsPath('C:/Users/lanph/OneDrive/Desktop/Artificial_Intelligent_Project/.worktrees/m4-2-baseline-freeze')
+config = {'protocol_id': 'vidoseek_w66_resource_calibration_recovery_v1', 'classification': 'synthetic_w66_engineering_recovery...ecution_review_path': 'docs/05_oracle_experiments/w66/QPAF_W66_RESOURCE_CALIBRATION_RECOVERY_EXECUTION_REVIEW.md', ...}
+
+    def validate_config(root: Path, config: dict[str, Any]) -> dict[str, Any]:
+        expected = {
+            "protocol_id": PROTOCOL_ID,
+            "classification": CLASSIFICATION,
+            "proposal_path": PROPOSAL_PATH,
+            "execution_review_path": EXECUTION_REVIEW_PATH,
+            "interruption_review_path": INTERRUPTION_REVIEW_PATH,
+            "benchmark_path": BENCHMARK_PATH,
+            "base_calibration_protocol_id": base.PROTOCOL_ID,
+            "base_protocol_path": base.BASE_PROTOCOL_PATH,
+            "parent_w7_proposal_path": base.PARENT_W7_PROPOSAL_PATH,
+            "parent_w7_result_review_path": base.PARENT_W7_REVIEW_PATH,
+            "w66_runner_path": base.W66_SCRIPT_PATH,
+            "base_calibration_runner_path": base.SCRIPT_PATH,
+            "optimized_candidate_oracle_path": OPTIMIZED_PATH,
+            "output_path": OUTPUT_PATH,
+            "grid": GRID_NAME,
+            "profile_count": PROFILE_COUNT,
+            "profiles_canonical_sha256": PROFILES_SHA256,
+            "query_list_sha256": QUERY_LIST_SHA256,
+            "calibration_audit_index": CALIBRATION_AUDIT_INDEX,
+            "calibration_query_id": CALIBRATION_QUERY_ID,
+            "pages_per_query": PAGES_PER_QUERY,
+            "synthetic_relevant_page_sorted_index": SYNTHETIC_RELEVANT_INDEX,
+            "load_query_count": LOAD_QUERY_COUNT,
+            "load_pair_count": LOAD_PAIR_COUNT,
+            "load_columns": list(LOAD_COLUMNS),
+            "bootstrap_sample_size": BOOTSTRAP_SAMPLE_SIZE,
+            "bootstrap_resamples": BOOTSTRAP_RESAMPLES,
+            "seed": SEED,
+            "proposed_wall_timeout_seconds": PROPOSED_TIMEOUT_SECONDS,
+            "workers": 1,
+            "threads_per_library": 1,
+            "arrow_cpu_threads": 1,
+            "arrow_io_threads": 1,
+            "automatic_retries": 0,
+            "process_tree_private_bytes_limit": PROCESS_TREE_PRIVATE_BYTES_LIMIT,
+            "prestart_free_physical_bytes_min": PRESTART_FREE_PHYSICAL_BYTES_MIN,
+            "abort_free_physical_bytes_below": ABORT_FREE_PHYSICAL_BYTES_BELOW,
+            "prestart_disk_free_bytes_min": PRESTART_DISK_FREE_BYTES_MIN,
+            "output_byte_limit": OUTPUT_BYTE_LIMIT,
+            "sample_interval_seconds": SAMPLE_INTERVAL_SECONDS,
+            "maximum_telemetry_gap_seconds": MAX_TELEMETRY_GAP_SECONDS,
+            "previous_checkpoint_reuse_allowed": False,
+            "actual_relevance_column_allowed": False,
+            "checkpoint_reuse_into_scientific_run_allowed": False,
+            "formal_p1_03_allowed": False,
+            "training_allowed": False,
+            "modal_gpu_allowed": False,
+        }
+        variable = {
+            "resource_budget_status",
+            "approved_wall_timeout_seconds",
+            "invocations",
+            "preparation_git",
+            "approval_git",
+            "source_sha256",
+            "environment",
+            "authorization",
+        }
+        if set(config) != set(expected) | variable:
+            raise ValueError("Recovery config fields drift")
+        for key, expected_value in expected.items():
+            if config.get(key) != expected_value or type(config.get(key)) is not type(
+                expected_value
+            ):
+                raise ValueError(f"Recovery scope drift: {key}")
+        if set(config["authorization"]) != {
+            "protocol_adopted",
+            "resource_budget_approved",
+            "execution_authorized",
+            "approved_by",
+            "execution_actor",
+            "approval_text",
+            "approved_at",
+        }:
+            raise ValueError("Recovery authorization fields drift")
+        state = _approval_state(config)
+        live_commit = require_git_provenance(root, config, state)
+    
+        if state == "closed" and config["approval_git"] != {
+            "approved_parent_commit": None,
+            "approval_commit_rule": GIT_RULE,
+            "approval_commit_changed_paths": [
+                CONFIG_PATH,
+                EXECUTION_REVIEW_PATH,
+                TEST_PATH,
+            ],
+        }:
+            raise ValueError("Closed recovery approval Git state drift")
+        if sorted(config["source_sha256"]) != source_paths(root):
+            raise ValueError("Recovery source inventory drift")
+        for relative, expected_hash in config["source_sha256"].items():
+            if file_sha256(root / relative) != expected_hash:
+>               raise ValueError(f"Recovery source hash drift: {relative}")
+E               ValueError: Recovery source hash drift: artifacts/vidoseek_exploratory24_review/result_integrity_review.json
+
+scripts\recover_vidoseek_w66_resource_calibration.py:294: ValueError
+_________ test_closed_local_package_preflight_is_read_only_and_exact __________
+
+    def test_closed_local_package_preflight_is_read_only_and_exact():
+        before = {path: audit.file_sha256(ROOT / path)
+                  for path in json.loads(CONFIG_PATH.read_text())["source_files"]}
+>       result = audit.package_preflight(ROOT, CONFIG_PATH)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_vimdoc_archive_content_audit.py:92: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+scripts\run_vimdoc_archive_content_audit.py:95: in package_preflight
+    validate_sources(project_root, config)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+project_root = WindowsPath('C:/Users/lanph/OneDrive/Desktop/Artificial_Intelligent_Project/.worktrees/m4-2-baseline-freeze')
+config = {'schema_version': 1, 'package_id': 'vimdoc_archive_content_audit_v1', 'status': 'PREPARED_LOCAL_REVIEW_EXECUTION_CLOSED', 'prepared_at_utc': '2026-09-11T05:08:50.5799378Z', ...}
+
+    def validate_sources(project_root: Path, config: dict) -> None:
+        declared = config.get("source_files")
+        if not isinstance(declared, dict) or not declared:
+            raise ValueError("Source-file hashes are required")
+        for relative, expected in declared.items():
+            path = safe_relative(project_root, relative)
+            if not path.is_file() or file_sha256(path) != expected:
+>               raise ValueError(f"Source/input hash drift: {relative}")
+E               ValueError: Source/input hash drift: artifacts/dataset_materialization_vimdoc.json
+
+scripts\run_vimdoc_archive_content_audit.py:63: ValueError
+_________ test_preparation_cli_passes_without_modal_or_archive_access _________
+
+    def test_preparation_cli_passes_without_modal_or_archive_access():
+        result = subprocess.run(
+            [sys.executable, str(ROOT / "scripts/prepare_vimdoc_archive_content_audit.py")],
+            cwd=ROOT, capture_output=True, text=True, timeout=10
+        )
+>       assert result.returncode == 0
+E       AssertionError: assert 2 == 0
+E        +  where 2 = CompletedProcess(args=['C:\\Users\\lanph\\OneDrive\\Desktop\\Artificial_Intelligent_Project\\.worktrees\\m4-2-baseline...RCHIVE_AUDIT_PREPARATION_REFUSED: Source/input hash drift: artifacts/dataset_materialization_vimdoc.json\n', stderr='').returncode
+
+tests\test_vimdoc_archive_content_audit.py:258: AssertionError
+______ test_live_local_preflight_is_read_only_and_never_execution_ready _______
+
+    def test_live_local_preflight_is_read_only_and_never_execution_ready():
+        before = {p: prep.sha256_file(ROOT / p) for p in (*prep.INVENTORY, prep.MANIFEST)}
+>       result = prep.preflight(ROOT, include_ids=True)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_vimdoc_m3_preparation.py:120: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+root = WindowsPath('C:/Users/lanph/OneDrive/Desktop/Artificial_Intelligent_Project/.worktrees/m4-2-baseline-freeze')
+include_ids = True
+
+    def preflight(root: Path, include_ids: bool = False) -> dict:
+        root = root.resolve()
+        manifest = json.loads((root / MANIFEST).read_text(encoding="utf-8"))
+        entries = manifest["files"]
+        if len(entries) != len(INVENTORY) or {e["path"] for e in entries} != set(INVENTORY):
+            raise ValueError("Manifest inventory differs from the exact local package")
+        for entry in entries:
+            path = (root / entry["path"]).resolve()
+            if not path.is_relative_to(root) or sha256_file(path) != entry["sha256"]:
+>               raise ValueError(f"Source/input hash drift: {entry['path']}")
+E               ValueError: Source/input hash drift: configs/datasets.yaml
+
+scripts\prepare_vimdoc_m3.py:181: ValueError
+__ test_even_rehashed_config_cannot_enable_execution[training_approved-True] __
+
+package_copy = WindowsPath('C:/Users/lanph/AppData/Local/Temp/pytest-of-lanph/pytest-47/test_even_rehashed_config_cann0')
+key = 'training_approved', value = True
+
+    @pytest.mark.parametrize("key,value", [("training_approved", True), ("approved_invocations", 1),
+                                          ("modal_execution_approved", True), ("gpu_execution_approved", 0)])
+    def test_even_rehashed_config_cannot_enable_execution(package_copy, key, value):
+        path = package_copy / prep.CONFIG
+        config = json.loads(path.read_text())
+        config["authorization"][key] = value
+        path.write_text(json.dumps(config))
+        manifest = package_copy / prep.MANIFEST
+        data = json.loads(manifest.read_text())
+        for entry in data["files"]:
+            if entry["path"] == prep.CONFIG:
+                entry["sha256"] = prep.sha256_file(path)
+        manifest.write_text(json.dumps(data))
+>       with pytest.raises(ValueError, match="preparation ONLY"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'preparation ONLY'
+E         Actual message: 'Source/input hash drift: configs/datasets.yaml'
+
+tests\test_vimdoc_m3_preparation.py:167: AssertionError
+__ test_even_rehashed_config_cannot_enable_execution[approved_invocations-1] __
+
+package_copy = WindowsPath('C:/Users/lanph/AppData/Local/Temp/pytest-of-lanph/pytest-47/test_even_rehashed_config_cann1')
+key = 'approved_invocations', value = 1
+
+    @pytest.mark.parametrize("key,value", [("training_approved", True), ("approved_invocations", 1),
+                                          ("modal_execution_approved", True), ("gpu_execution_approved", 0)])
+    def test_even_rehashed_config_cannot_enable_execution(package_copy, key, value):
+        path = package_copy / prep.CONFIG
+        config = json.loads(path.read_text())
+        config["authorization"][key] = value
+        path.write_text(json.dumps(config))
+        manifest = package_copy / prep.MANIFEST
+        data = json.loads(manifest.read_text())
+        for entry in data["files"]:
+            if entry["path"] == prep.CONFIG:
+                entry["sha256"] = prep.sha256_file(path)
+        manifest.write_text(json.dumps(data))
+>       with pytest.raises(ValueError, match="preparation ONLY"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'preparation ONLY'
+E         Actual message: 'Source/input hash drift: configs/datasets.yaml'
+
+tests\test_vimdoc_m3_preparation.py:167: AssertionError
+_ test_even_rehashed_config_cannot_enable_execution[modal_execution_approved-True] _
+
+package_copy = WindowsPath('C:/Users/lanph/AppData/Local/Temp/pytest-of-lanph/pytest-47/test_even_rehashed_config_cann2')
+key = 'modal_execution_approved', value = True
+
+    @pytest.mark.parametrize("key,value", [("training_approved", True), ("approved_invocations", 1),
+                                          ("modal_execution_approved", True), ("gpu_execution_approved", 0)])
+    def test_even_rehashed_config_cannot_enable_execution(package_copy, key, value):
+        path = package_copy / prep.CONFIG
+        config = json.loads(path.read_text())
+        config["authorization"][key] = value
+        path.write_text(json.dumps(config))
+        manifest = package_copy / prep.MANIFEST
+        data = json.loads(manifest.read_text())
+        for entry in data["files"]:
+            if entry["path"] == prep.CONFIG:
+                entry["sha256"] = prep.sha256_file(path)
+        manifest.write_text(json.dumps(data))
+>       with pytest.raises(ValueError, match="preparation ONLY"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'preparation ONLY'
+E         Actual message: 'Source/input hash drift: configs/datasets.yaml'
+
+tests\test_vimdoc_m3_preparation.py:167: AssertionError
+_ test_even_rehashed_config_cannot_enable_execution[gpu_execution_approved-0] _
+
+package_copy = WindowsPath('C:/Users/lanph/AppData/Local/Temp/pytest-of-lanph/pytest-47/test_even_rehashed_config_cann3')
+key = 'gpu_execution_approved', value = 0
+
+    @pytest.mark.parametrize("key,value", [("training_approved", True), ("approved_invocations", 1),
+                                          ("modal_execution_approved", True), ("gpu_execution_approved", 0)])
+    def test_even_rehashed_config_cannot_enable_execution(package_copy, key, value):
+        path = package_copy / prep.CONFIG
+        config = json.loads(path.read_text())
+        config["authorization"][key] = value
+        path.write_text(json.dumps(config))
+        manifest = package_copy / prep.MANIFEST
+        data = json.loads(manifest.read_text())
+        for entry in data["files"]:
+            if entry["path"] == prep.CONFIG:
+                entry["sha256"] = prep.sha256_file(path)
+        manifest.write_text(json.dumps(data))
+>       with pytest.raises(ValueError, match="preparation ONLY"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'preparation ONLY'
+E         Actual message: 'Source/input hash drift: configs/datasets.yaml'
+
+tests\test_vimdoc_m3_preparation.py:167: AssertionError
+============================== warnings summary ===============================
+tests/test_m16_collision.py::TestM16CollisionAudit::test_cli_execution_with_fixture
+  C:\Users\lanph\AppData\Local\uv\cache\archive-v0\qjBNOifL4eAO0mTF\_pytest\threadexception.py:58: PytestUnhandledThreadExceptionWarning: Exception in thread Thread-69 (_readerthread)
+  
+  Traceback (most recent call last):
+    File "C:\Users\lanph\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\threading.py", line 1043, in _bootstrap_inner
+      self.run()
+      ~~~~~~~~^^
+    File "C:\Users\lanph\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\threading.py", line 994, in run
+      self._target(*self._args, **self._kwargs)
+      ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    File "C:\Users\lanph\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\subprocess.py", line 1615, in _readerthread
+      buffer.append(fh.read())
+                    ~~~~~~~^^
+    File "<frozen codecs>", line 325, in decode
+  UnicodeDecodeError: 'utf-8' codec can't decode byte 0x97 in position 101: invalid start byte
+  
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+    warnings.warn(pytest.PytestUnhandledThreadExceptionWarning(msg))
+
+tests/test_m18_ocr.py::TestM18OCRPolicy::test_cli_execution_and_generation
+  C:\Users\lanph\AppData\Local\uv\cache\archive-v0\qjBNOifL4eAO0mTF\_pytest\threadexception.py:58: PytestUnhandledThreadExceptionWarning: Exception in thread Thread-81 (_readerthread)
+  
+  Traceback (most recent call last):
+    File "C:\Users\lanph\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\threading.py", line 1043, in _bootstrap_inner
+      self.run()
+      ~~~~~~~~^^
+    File "C:\Users\lanph\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\threading.py", line 994, in run
+      self._target(*self._args, **self._kwargs)
+      ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    File "C:\Users\lanph\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\subprocess.py", line 1615, in _readerthread
+      buffer.append(fh.read())
+                    ~~~~~~~^^
+    File "<frozen codecs>", line 325, in decode
+  UnicodeDecodeError: 'utf-8' codec can't decode byte 0x97 in position 101: invalid start byte
+  
+  Enable tracemalloc to get traceback where the object was allocated.
+  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.
+    warnings.warn(pytest.PytestUnhandledThreadExceptionWarning(msg))
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/test_exploratory12_recovery.py::test_live_recovery_pins_match_and_approved_attempt_is_consumed
+FAILED tests/test_m11_artifacts.py::DatasetTests::test_real_pdf_rendering_preserves_empty_pages_and_one_based_labels
+FAILED tests/test_m18_runtime.py::PrepareOCRRuntimeTests::test_corrupt_pdf_leaves_failure_evidence_and_cannot_pass
+FAILED tests/test_m18_runtime.py::PrepareOCRRuntimeTests::test_engine_version_mismatch_is_logged_and_stops_extraction
+SUBFAILED(result=RuntimeError('Tesseract process timeout')) tests/test_m18_runtime.py::PrepareOCRRuntimeTests::test_failures_persist_pages_and_images_before_fraction_stops_run
+SUBFAILED(result={'text': ['long text long text long text long text long text long text long text long text long text long text long text long text long text long text long text long text long text long text long text long text '], 'conf': [20]}) tests/test_m18_runtime.py::PrepareOCRRuntimeTests::test_failures_persist_pages_and_images_before_fraction_stops_run
+FAILED tests/test_m18_runtime.py::PrepareOCRRuntimeTests::test_scan_fallback_uses_word_confidence_and_canonical_page_ids
+FAILED tests/test_vidoseek_exploratory12.py::test_live_config_source_hashes_and_consumed_approval_match
+FAILED tests/test_vidoseek_exploratory24.py::test_live_config_records_consumed_authorization_and_source_pins
+FAILED tests/test_vidoseek_exploratory24.py::test_source_and_environment_drift_rejected
+FAILED tests/test_vidoseek_exploratory24_w66.py::test_live_config_is_closed_and_hash_pinned
+FAILED tests/test_vidoseek_exploratory24_w66.py::test_source_and_environment_drift_are_rejected
+FAILED tests/test_vidoseek_exploratory24_w66.py::test_live_preflight_is_read_only_and_not_a_result
+FAILED tests/test_vidoseek_exploratory24_w66_optimized.py::test_live_config_is_approved_once_and_hash_pinned
+FAILED tests/test_vidoseek_exploratory24_w66_optimized.py::test_source_environment_and_calibration_drift_are_rejected
+FAILED tests/test_vidoseek_exploratory24_w66_optimized.py::test_live_preflight_is_approved_read_only_and_does_not_create_attempt
+FAILED tests/test_vidoseek_fixed_profile_audit.py::test_live_config_source_pins_and_consumed_approval_match
+FAILED tests/test_vidoseek_p1_02r.py::test_protocol_records_consumed_human_run_and_closes_execution
+FAILED tests/test_vidoseek_p1_02r.py::test_recorded_cpu_audit_artifact_matches_every_frozen_gate
+FAILED tests/test_vidoseek_p1_02r.py::test_recorded_l4_calibration_is_exact_and_remains_non_result_evidence
+FAILED tests/test_vidoseek_w66_resource_calibration.py::test_live_config_records_exact_approved_scope_and_matches_review
+FAILED tests/test_vidoseek_w66_resource_calibration_recovery.py::test_live_config_is_approved_once_and_matches_prepared_scope
+FAILED tests/test_vimdoc_archive_content_audit.py::test_closed_local_package_preflight_is_read_only_and_exact
+FAILED tests/test_vimdoc_archive_content_audit.py::test_preparation_cli_passes_without_modal_or_archive_access
+FAILED tests/test_vimdoc_m3_preparation.py::test_live_local_preflight_is_read_only_and_never_execution_ready
+FAILED tests/test_vimdoc_m3_preparation.py::test_even_rehashed_config_cannot_enable_execution[training_approved-True]
+FAILED tests/test_vimdoc_m3_preparation.py::test_even_rehashed_config_cannot_enable_execution[approved_invocations-1]
+FAILED tests/test_vimdoc_m3_preparation.py::test_even_rehashed_config_cannot_enable_execution[modal_execution_approved-True]
+FAILED tests/test_vimdoc_m3_preparation.py::test_even_rehashed_config_cannot_enable_execution[gpu_execution_approved-0]
+29 failed, 894 passed, 2 skipped, 2 warnings, 310 subtests passed in 296.28s (0:04:56)

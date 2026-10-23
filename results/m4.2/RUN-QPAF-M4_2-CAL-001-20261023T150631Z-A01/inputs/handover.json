@@ -1,0 +1,58 @@
+{
+  "schema_version": 2,
+  "task_id": "M2.8",
+  "run_id": "RUN-QPAF-M2_8-EXPANSION-001-20261021T042029Z-A01",
+  "status": "PASS",
+  "policy_id": "qpaf_m28_top_document_expansion_v1",
+  "amendment_id": "QPAF-M1.5-A003",
+  "amendment_sha256": "0afacbde32d2aa4a31a53c39888f11cd20d03af5febfe28aac074de4d23e514c",
+  "source_run_id": "RUN-QPAF-M2_8-CACHE-001-20261020T144311Z-A01",
+  "baseline_candidate_freeze_sha256": "4ff420008b9ccaa3a4d3afc565c43e2c974b3f95dd39a22a742b47297aead06e",
+  "evaluation_unit": "page",
+  "query_count": 1142,
+  "page_count": 5385,
+  "base_candidate_count": 549689,
+  "added_page_count": 2075,
+  "candidate_count": 551764,
+  "max_candidates_per_query": 579,
+  "candidate_freeze_sha256": "2320402ed8f6705e5c220e4120f1975fe1989bf202339e8492167ecdf473764e",
+  "score_cache_sha256": "56d0c82efda9264c117611ddd7135fe2384b68a3ec60fbdfd80fb964c386622b",
+  "qrels_development_sha256": "691b6bc4ada3bc64fe3c408fe32498b04c7f30900eadb39ae09ddbe29aea302c",
+  "qrels_test_sha256": "05eaaa810e47d35d4eb06b3d36a05f03b002ec9d3c5ee6bce5fc27d2e336d154",
+  "query_texts_sha256": "e7994373c9fd5157cde0fb0c5a1440c37c275b85fa19b2b0b566f61d584c4ab4",
+  "splits_sha256": "5e0291b196f167aafa3122b4dc774a9aa71517b57ad78889580ea8ffb70b0487",
+  "score_cache_path": "raw_scores.parquet",
+  "query_texts_path": "queries.json",
+  "qrels_development_path": "qrels_development.json",
+  "qrels_test_sealed_path": "qrels_test_sealed.json",
+  "split_ids_path": "split_ids.json",
+  "splits_directory": "splits",
+  "split_role_sha256": {
+    "train": "61dfe867c27b91a0a96594440b0f0e5ecf51501da0fcecdac94badaf16962191",
+    "validation": "46f8af5853942f6697cc3a995347a1832206212e93ff8aa87acb1775b3a060b4",
+    "test": "d34210f901759a4f174da0c6c2e9b810616dcb33a71a0bd128a25d5d8d12e6f6"
+  },
+  "coverage_report_sha256": "964286047b5dcd2d5c865b8fc36f8b506b1775fcec2bf0d7acc44be17e90b97a",
+  "macro_candidate_recall": 1.0,
+  "uncovered_query_ids": [],
+  "m24_m25_row_audit": {
+    "status": "PASS",
+    "query_count": 1142,
+    "candidate_count": 551764,
+    "candidate_keys_sha256": "8926ad10530ee21e4181d08e947a6058fdee672c1bdc99c1ac122c3b8ed96438"
+  },
+  "m24_development_record_counts": {
+    "train": 799,
+    "validation": 171
+  },
+  "development_report_sha256": "69c8a64cb9435594ea09e9906a6d7fa0673b3acb4f5c8ae4095fb4c9c20326e7",
+  "test_labels_used_only_for_frozen_candidate_coverage": true,
+  "test_ranking_metrics_computed": false,
+  "training_executed": false,
+  "finalizer_source_sha256": "b01c208677519896eb05845635387962d54a456880c013d593344ac03ea2b9af",
+  "source_identity": {
+    "config_sha256": "0a60bbc36d1a26db97ec51986c61da2c06c08f247b105f1b4cdb9457b169c0f9",
+    "source_sha256": "5582b7a540c3453808b2efbdb6bd13d613a728a2c45b6b4364c33667c158d686",
+    "input_sha256": "d1bbd303835c11e8cdb0db5b53bc32aad096f770a0236e23c3cdc486ced74d8d"
+  }
+}

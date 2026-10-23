@@ -1,0 +1,10 @@
+{
+  "process_exit_code": 1,
+  "fit_persisted_success": true,
+  "stdout_error": "Windows default charmap cannot encode Vietnamese JSON owner text after _SUCCESS was written",
+  "error_stage": "CLI JSON stdout after execute() returned; calibration outputs already committed to disk",
+  "new_fit_attempt_executed": false,
+  "automatic_retry": false,
+  "remedy": "Use Python -X utf8 for read-only verification/reporting; preserve original source and attempt",
+  "manifest_sha256": "4752eef37d7c6cf73eb36717bd352e21192d112b1464a3f5a61dab86bcc76b86"
+}

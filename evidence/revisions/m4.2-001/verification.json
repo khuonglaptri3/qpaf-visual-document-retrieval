@@ -1,0 +1,22 @@
+{
+  "confirmation_labels_opened": false,
+  "files_verified": 27,
+  "m42_accepted": false,
+  "real_input_readiness": "BLOCKED",
+  "real_metrics_computed": false,
+  "scope": "sealed_IDs_settings_hashes_and_synthetic_software_only",
+  "software_fixture": {
+    "document_aggregation": "PASS",
+    "real_metrics_computed": false,
+    "scope": "synthetic_software_only",
+    "static_grid_points": 66,
+    "train_only_barrier": "PASS"
+  },
+  "split_counts": {
+    "confirmation": 8904,
+    "train": 1600,
+    "validation": 400
+  },
+  "status": "PASS",
+  "task_id": "M4.2"
+}

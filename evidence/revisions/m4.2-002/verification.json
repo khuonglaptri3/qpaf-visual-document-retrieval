@@ -1,0 +1,57 @@
+{
+  "task_id": "M4.2",
+  "status": "PASS_ACTIVE_PRIMARY_INPUTS_AND_SETTINGS",
+  "scope": "A002_active_primary_shared_baseline_inputs_and_train_only_settings",
+  "owner": "Kh??ng",
+  "owner_acceptance": "PENDING_USER_REVIEW",
+  "run_id": "RUN-QPAF-M4_2-CAL-001-20261023T150631Z-A01",
+  "run_directory": "results/m4.2/RUN-QPAF-M4_2-CAL-001-20261023T150631Z-A01",
+  "run_manifest_sha256": "4752eef37d7c6cf73eb36717bd352e21192d112b1464a3f5a61dab86bcc76b86",
+  "source_commit": "363db3f18252a794c5edd9cec4803e1fecccbf83",
+  "weights": [
+    0.0,
+    0.1,
+    0.9
+  ],
+  "train_ndcg_at_10": 0.8642244283102866,
+  "train_coverage": {
+    "candidate_rows": 386390,
+    "macro_relevant_page_recall": 1.0,
+    "query_count": 799,
+    "uncovered_queries": 0
+  },
+  "common_input_audit": {
+    "candidate_rows": 551764,
+    "expanded_rows": 2075,
+    "label_access": false,
+    "max_candidates_per_query": 579,
+    "normalization_max_abs_difference": 0.0,
+    "query_count": 1142,
+    "status": "PASS"
+  },
+  "grid_replay": {
+    "calibration_output_changed": false,
+    "checked_utc": "2026-10-23T15:17:36.195313+00:00",
+    "grid_candidates": 66,
+    "manifest_sha256": "4752eef37d7c6cf73eb36717bd352e21192d112b1464a3f5a61dab86bcc76b86",
+    "new_run_attempt_created": false,
+    "objective_abs_difference": 3.3306690738754696e-16,
+    "status": "PASS",
+    "test_labels_deserialized": false,
+    "train_ndcg_at_10": 0.8642244283102869,
+    "train_queries": 799,
+    "validation_metrics_computed": false,
+    "verification": "independent_numeric_replay_of_the_same_frozen_grid",
+    "verifier_source_sha256": "b35070436ed0e5cdc49288432bf0d23f268122867d8ccb42ccd27554719fdb17",
+    "weights": [
+      0.0,
+      0.1,
+      0.9
+    ]
+  },
+  "validation_metrics_computed": false,
+  "test_labels_deserialized": false,
+  "vimdoc_confirmation_accessed": false,
+  "vimdoc_confirmation_baseline_package": "PENDING_SEPARATE_EXECUTION",
+  "stdout_encoding_issue": "Recorded in execution_receipt.json; outputs verified without new fitting attempt"
+}

@@ -1,0 +1,336 @@
+FFFFF.FFFFFFFFFFFFFFFFFFFFFFF                                          [100%]
+================================== FAILURES ===================================
+__________ test_materialization_atomically_moves_snapshot_and_marker __________
+tests\test_dataset_materialization.py:166: in test_materialization_atomically_moves_snapshot_and_marker
+    monkeypatch.setattr("huggingface_hub.snapshot_download", fake_snapshot_download)
+C:\Users\lanph\AppData\Local\uv\cache\archive-v0\qjBNOifL4eAO0mTF\_pytest\monkeypatch.py:107: in derive_importpath
+    target = resolve(module)
+             ^^^^^^^^^^^^^^^
+C:\Users\lanph\AppData\Local\uv\cache\archive-v0\qjBNOifL4eAO0mTF\_pytest\monkeypatch.py:70: in resolve
+    found: object = importlib.import_module(used)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\lanph\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1324: in _find_and_load_unlocked
+    ???
+E   ModuleNotFoundError: No module named 'huggingface_hub'
+_________ test_validated_vimdoc_marker_can_finalize_approved_contract _________
+tests\test_dataset_materialization.py:209: in test_validated_vimdoc_marker_can_finalize_approved_contract
+    refreshed = materialize_dataset(
+scripts\materialize_datasets.py:185: in materialize_dataset
+    from huggingface_hub import snapshot_download
+E   ModuleNotFoundError: No module named 'huggingface_hub'
+_______ test_live_recovery_pins_match_and_approved_attempt_is_consumed ________
+tests\test_exploratory12_recovery.py:23: in test_live_recovery_pins_match_and_approved_attempt_is_consumed
+    review = recovery.validate_config(ROOT, config)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts\recover_vidoseek_exploratory12.py:84: in validate_config
+    raise ValueError("Parent artifact inventory/hash drift")
+E   ValueError: Parent artifact inventory/hash drift
+_ PrepareOCRRuntimeTests.test_corrupt_pdf_leaves_failure_evidence_and_cannot_pass _
+tests\test_m18_runtime.py:181: in test_corrupt_pdf_leaves_failure_evidence_and_cannot_pass
+    self.run_prepare(root, {}, corrupt=True)
+tests\test_m18_runtime.py:135: in run_prepare
+    with patch('huggingface_hub.hf_hub_download', side_effect=download), \
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\lanph\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\unittest\mock.py:1481: in __enter__
+    self.target = self.getter()
+                  ^^^^^^^^^^^^^
+C:\Users\lanph\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\pkgutil.py:513: in resolve_name
+    mod = importlib.import_module(modname)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\lanph\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1324: in _find_and_load_unlocked
+    ???
+E   ModuleNotFoundError: No module named 'huggingface_hub'
+_ PrepareOCRRuntimeTests.test_engine_version_mismatch_is_logged_and_stops_extraction _
+tests\test_m18_runtime.py:173: in test_engine_version_mismatch_is_logged_and_stops_extraction
+    self.run_prepare(root, {'text': ['Quality ' * 20], 'conf': [90]}, engine_version='4.1.0')
+tests\test_m18_runtime.py:135: in run_prepare
+    with patch('huggingface_hub.hf_hub_download', side_effect=download), \
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\lanph\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\unittest\mock.py:1481: in __enter__
+    self.target = self.getter()
+                  ^^^^^^^^^^^^^
+C:\Users\lanph\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\pkgutil.py:513: in resolve_name
+    mod = importlib.import_module(modname)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\lanph\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1324: in _find_and_load_unlocked
+    ???
+E   ModuleNotFoundError: No module named 'huggingface_hub'
+_ PrepareOCRRuntimeTests.test_failures_persist_pages_and_images_before_fraction_stops_run (result=RuntimeError('Tesseract process timeout')) _
+tests\test_m18_runtime.py:158: in test_failures_persist_pages_and_images_before_fraction_stops_run
+    self.run_prepare(root, result)
+tests\test_m18_runtime.py:135: in run_prepare
+    with patch('huggingface_hub.hf_hub_download', side_effect=download), \
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\lanph\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\unittest\mock.py:1481: in __enter__
+    self.target = self.getter()
+                  ^^^^^^^^^^^^^
+C:\Users\lanph\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\pkgutil.py:513: in resolve_name
+    mod = importlib.import_module(modname)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\lanph\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1324: in _find_and_load_unlocked
+    ???
+E   ModuleNotFoundError: No module named 'huggingface_hub'
+_ PrepareOCRRuntimeTests.test_failures_persist_pages_and_images_before_fraction_stops_run (result={'text': ['long text long text long text long text long text long text long text long text long text long text long text long text long text long text long text long text long text long text long text long text '], 'conf': [20]}) _
+tests\test_m18_runtime.py:158: in test_failures_persist_pages_and_images_before_fraction_stops_run
+    self.run_prepare(root, result)
+tests\test_m18_runtime.py:135: in run_prepare
+    with patch('huggingface_hub.hf_hub_download', side_effect=download), \
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\lanph\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\unittest\mock.py:1481: in __enter__
+    self.target = self.getter()
+                  ^^^^^^^^^^^^^
+C:\Users\lanph\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\pkgutil.py:513: in resolve_name
+    mod = importlib.import_module(modname)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\lanph\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1324: in _find_and_load_unlocked
+    ???
+E   ModuleNotFoundError: No module named 'huggingface_hub'
+_ PrepareOCRRuntimeTests.test_scan_fallback_uses_word_confidence_and_canonical_page_ids _
+tests\test_m18_runtime.py:144: in test_scan_fallback_uses_word_confidence_and_canonical_page_ids
+    output = self.run_prepare(Path(tmp), {'text': ['', 'Quality text ' * 6, 'ending'], 'conf': [-1, 80, 100]})
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\test_m18_runtime.py:135: in run_prepare
+    with patch('huggingface_hub.hf_hub_download', side_effect=download), \
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\lanph\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\unittest\mock.py:1481: in __enter__
+    self.target = self.getter()
+                  ^^^^^^^^^^^^^
+C:\Users\lanph\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\pkgutil.py:513: in resolve_name
+    mod = importlib.import_module(modname)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\lanph\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1324: in _find_and_load_unlocked
+    ???
+E   ModuleNotFoundError: No module named 'huggingface_hub'
+_________ test_live_config_source_hashes_and_consumed_approval_match __________
+tests\test_vidoseek_exploratory12.py:85: in test_live_config_source_hashes_and_consumed_approval_match
+    proposal = pilot.validate_config(ROOT, config)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\oracle_study\vidoseek_exploratory12.py:99: in validate_config
+    raise ValueError("Exploratory Python/package environment drift")
+E   ValueError: Exploratory Python/package environment drift
+_______ test_live_config_records_consumed_authorization_and_source_pins _______
+tests\test_vidoseek_exploratory24.py:73: in test_live_config_records_consumed_authorization_and_source_pins
+    proposal = study.validate_config(ROOT, config)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts\run_vidoseek_exploratory24.py:140: in validate_config
+    raise ValueError(f"Exploratory-24 source hash drift: {relative}")
+E   ValueError: Exploratory-24 source hash drift: artifacts/vidoseek_fixed_profile_audit_review/result_integrity_review.json
+_________________ test_source_and_environment_drift_rejected __________________
+tests\test_vidoseek_exploratory24.py:127: in test_source_and_environment_drift_rejected
+    with pytest.raises(ValueError, match="environment drift"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AssertionError: Regex pattern did not match.
+E     Expected regex: 'environment drift'
+E     Actual message: 'Exploratory-24 source hash drift: artifacts/vidoseek_fixed_profile_audit_review/result_integrity_review.json'
+_________________ test_live_config_is_closed_and_hash_pinned __________________
+tests\test_vidoseek_exploratory24_w66.py:61: in test_live_config_is_closed_and_hash_pinned
+    proposal = study.validate_config(ROOT, config)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts\run_vidoseek_exploratory24_w66.py:212: in validate_config
+    raise ValueError(f"Exploratory-24 W66 source hash drift: {relative}")
+E   ValueError: Exploratory-24 W66 source hash drift: artifacts/vidoseek_exploratory24_review/result_integrity_review.json
+_______________ test_source_and_environment_drift_are_rejected ________________
+tests\test_vidoseek_exploratory24_w66.py:131: in test_source_and_environment_drift_are_rejected
+    with pytest.raises(ValueError, match="environment drift"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AssertionError: Regex pattern did not match.
+E     Expected regex: 'environment drift'
+E     Actual message: 'Exploratory-24 W66 source hash drift: artifacts/vidoseek_exploratory24_review/result_integrity_review.json'
+______________ test_live_preflight_is_read_only_and_not_a_result ______________
+tests\test_vidoseek_exploratory24_w66.py:150: in test_live_preflight_is_read_only_and_not_a_result
+    evidence = study.preflight(ROOT, config)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts\run_vidoseek_exploratory24_w66.py:273: in preflight
+    proposal = validate_config(root, config)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts\run_vidoseek_exploratory24_w66.py:212: in validate_config
+    raise ValueError(f"Exploratory-24 W66 source hash drift: {relative}")
+E   ValueError: Exploratory-24 W66 source hash drift: artifacts/vidoseek_exploratory24_review/result_integrity_review.json
+______________ test_live_config_is_approved_once_and_hash_pinned ______________
+tests\test_vidoseek_exploratory24_w66_optimized.py:95: in test_live_config_is_approved_once_and_hash_pinned
+    validated = study.validate_config(ROOT, config)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts\run_vidoseek_exploratory24_w66_optimized.py:311: in validate_config
+    raise ValueError(f"Optimized W66 source hash drift: {relative}")
+E   ValueError: Optimized W66 source hash drift: artifacts/vidoseek_exploratory24_review/result_integrity_review.json
+_________ test_source_environment_and_calibration_drift_are_rejected __________
+tests\test_vidoseek_exploratory24_w66_optimized.py:182: in test_source_environment_and_calibration_drift_are_rejected
+    with pytest.raises(ValueError, match="environment drift"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AssertionError: Regex pattern did not match.
+E     Expected regex: 'environment drift'
+E     Actual message: 'Optimized W66 source hash drift: artifacts/vidoseek_exploratory24_review/result_integrity_review.json'
+____ test_live_preflight_is_approved_read_only_and_does_not_create_attempt ____
+tests\test_vidoseek_exploratory24_w66_optimized.py:205: in test_live_preflight_is_approved_read_only_and_does_not_create_attempt
+    evidence = study.preflight(ROOT, config)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts\run_vidoseek_exploratory24_w66_optimized.py:416: in preflight
+    validated = validate_config(root, config)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts\run_vidoseek_exploratory24_w66_optimized.py:311: in validate_config
+    raise ValueError(f"Optimized W66 source hash drift: {relative}")
+E   ValueError: Optimized W66 source hash drift: artifacts/vidoseek_exploratory24_review/result_integrity_review.json
+__________ test_live_config_source_pins_and_consumed_approval_match ___________
+tests\test_vidoseek_fixed_profile_audit.py:52: in test_live_config_source_pins_and_consumed_approval_match
+    bundle = audit.validate_config(ROOT, config)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts\audit_vidoseek_fixed_profiles.py:114: in validate_config
+    raise ValueError("Audit environment drift")
+E   ValueError: Audit environment drift
+________ test_protocol_records_consumed_human_run_and_closes_execution ________
+tests\test_vidoseek_p1_02r.py:108: in test_protocol_records_consumed_human_run_and_closes_execution
+    assert protocol["coverage_audit_result"]["artifact_sha256"] == hashlib.sha256(
+E   AssertionError: assert 'bbb947ca9b04...67fac413beca0' == '1d5b74166060...d397ae8aeff07'
+E     
+E     - 1d5b741660602693d88f0898a372571389a8f5f13b056a7a2a1d397ae8aeff07
+E     + bbb947ca9b04bf291e94298516d8529888b677eee92e212dd8967fac413beca0
+_________ test_recorded_cpu_audit_artifact_matches_every_frozen_gate __________
+tests\test_vidoseek_p1_02r.py:420: in test_recorded_cpu_audit_artifact_matches_every_frozen_gate
+    artifact = vidoseek_p1_02r.validate_recorded_cpu_audit(protocol, AUDIT_PATH)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts\vidoseek_p1_02r.py:539: in validate_recorded_cpu_audit
+    raise RuntimeError("P1-02R CPU-audit artifact hash does not match the protocol")
+E   RuntimeError: P1-02R CPU-audit artifact hash does not match the protocol
+____ test_recorded_l4_calibration_is_exact_and_remains_non_result_evidence ____
+tests\test_vidoseek_p1_02r.py:433: in test_recorded_l4_calibration_is_exact_and_remains_non_result_evidence
+    artifact = vidoseek_p1_02r.validate_recorded_cost_calibration(
+scripts\vidoseek_p1_02r.py:582: in validate_recorded_cost_calibration
+    raise RuntimeError("P1-02R cost-calibration artifact hash does not match the protocol")
+E   RuntimeError: P1-02R cost-calibration artifact hash does not match the protocol
+______ test_live_config_records_exact_approved_scope_and_matches_review _______
+tests\test_vidoseek_w66_resource_calibration.py:117: in test_live_config_records_exact_approved_scope_and_matches_review
+    validated = study.validate_config(ROOT, config)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts\calibrate_vidoseek_w66_resources.py:327: in validate_config
+    raise ValueError(f"Calibration source hash drift: {relative}")
+E   ValueError: Calibration source hash drift: artifacts/vidoseek_exploratory24_review/result_integrity_review.json
+________ test_live_config_is_approved_once_and_matches_prepared_scope _________
+tests\test_vidoseek_w66_resource_calibration_recovery.py:97: in test_live_config_is_approved_once_and_matches_prepared_scope
+    validated = recovery.validate_config(ROOT, config)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts\recover_vidoseek_w66_resource_calibration.py:294: in validate_config
+    raise ValueError(f"Recovery source hash drift: {relative}")
+E   ValueError: Recovery source hash drift: artifacts/vidoseek_exploratory24_review/result_integrity_review.json
+_________ test_closed_local_package_preflight_is_read_only_and_exact __________
+tests\test_vimdoc_archive_content_audit.py:92: in test_closed_local_package_preflight_is_read_only_and_exact
+    result = audit.package_preflight(ROOT, CONFIG_PATH)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts\run_vimdoc_archive_content_audit.py:95: in package_preflight
+    validate_sources(project_root, config)
+scripts\run_vimdoc_archive_content_audit.py:63: in validate_sources
+    raise ValueError(f"Source/input hash drift: {relative}")
+E   ValueError: Source/input hash drift: artifacts/dataset_materialization_vimdoc.json
+_________ test_preparation_cli_passes_without_modal_or_archive_access _________
+tests\test_vimdoc_archive_content_audit.py:258: in test_preparation_cli_passes_without_modal_or_archive_access
+    assert result.returncode == 0
+E   AssertionError: assert 2 == 0
+E    +  where 2 = CompletedProcess(args=['C:\\Users\\lanph\\OneDrive\\Desktop\\Artificial_Intelligent_Project\\.worktrees\\m4-2-baseline...RCHIVE_AUDIT_PREPARATION_REFUSED: Source/input hash drift: artifacts/dataset_materialization_vimdoc.json\n', stderr='').returncode
+______ test_live_local_preflight_is_read_only_and_never_execution_ready _______
+tests\test_vimdoc_m3_preparation.py:120: in test_live_local_preflight_is_read_only_and_never_execution_ready
+    result = prep.preflight(ROOT, include_ids=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scripts\prepare_vimdoc_m3.py:181: in preflight
+    raise ValueError(f"Source/input hash drift: {entry['path']}")
+E   ValueError: Source/input hash drift: configs/datasets.yaml
+__ test_even_rehashed_config_cannot_enable_execution[training_approved-True] __
+tests\test_vimdoc_m3_preparation.py:167: in test_even_rehashed_config_cannot_enable_execution
+    with pytest.raises(ValueError, match="preparation ONLY"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AssertionError: Regex pattern did not match.
+E     Expected regex: 'preparation ONLY'
+E     Actual message: 'Source/input hash drift: configs/datasets.yaml'
+__ test_even_rehashed_config_cannot_enable_execution[approved_invocations-1] __
+tests\test_vimdoc_m3_preparation.py:167: in test_even_rehashed_config_cannot_enable_execution
+    with pytest.raises(ValueError, match="preparation ONLY"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AssertionError: Regex pattern did not match.
+E     Expected regex: 'preparation ONLY'
+E     Actual message: 'Source/input hash drift: configs/datasets.yaml'
+_ test_even_rehashed_config_cannot_enable_execution[modal_execution_approved-True] _
+tests\test_vimdoc_m3_preparation.py:167: in test_even_rehashed_config_cannot_enable_execution
+    with pytest.raises(ValueError, match="preparation ONLY"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AssertionError: Regex pattern did not match.
+E     Expected regex: 'preparation ONLY'
+E     Actual message: 'Source/input hash drift: configs/datasets.yaml'
+_ test_even_rehashed_config_cannot_enable_execution[gpu_execution_approved-0] _
+tests\test_vimdoc_m3_preparation.py:167: in test_even_rehashed_config_cannot_enable_execution
+    with pytest.raises(ValueError, match="preparation ONLY"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AssertionError: Regex pattern did not match.
+E     Expected regex: 'preparation ONLY'
+E     Actual message: 'Source/input hash drift: configs/datasets.yaml'
+=========================== short test summary info ===========================
+FAILED tests/test_dataset_materialization.py::test_materialization_atomically_moves_snapshot_and_marker
+FAILED tests/test_dataset_materialization.py::test_validated_vimdoc_marker_can_finalize_approved_contract
+FAILED tests/test_exploratory12_recovery.py::test_live_recovery_pins_match_and_approved_attempt_is_consumed
+FAILED tests/test_m18_runtime.py::PrepareOCRRuntimeTests::test_corrupt_pdf_leaves_failure_evidence_and_cannot_pass
+FAILED tests/test_m18_runtime.py::PrepareOCRRuntimeTests::test_engine_version_mismatch_is_logged_and_stops_extraction
+SUBFAILED(result=RuntimeError('Tesseract process timeout')) tests/test_m18_runtime.py::PrepareOCRRuntimeTests::test_failures_persist_pages_and_images_before_fraction_stops_run
+SUBFAILED(result={'text': ['long text long text long text long text long text long text long text long text long text long text long text long text long text long text long text long text long text long text long text long text '], 'conf': [20]}) tests/test_m18_runtime.py::PrepareOCRRuntimeTests::test_failures_persist_pages_and_images_before_fraction_stops_run
+FAILED tests/test_m18_runtime.py::PrepareOCRRuntimeTests::test_scan_fallback_uses_word_confidence_and_canonical_page_ids
+FAILED tests/test_vidoseek_exploratory12.py::test_live_config_source_hashes_and_consumed_approval_match
+FAILED tests/test_vidoseek_exploratory24.py::test_live_config_records_consumed_authorization_and_source_pins
+FAILED tests/test_vidoseek_exploratory24.py::test_source_and_environment_drift_rejected
+FAILED tests/test_vidoseek_exploratory24_w66.py::test_live_config_is_closed_and_hash_pinned
+FAILED tests/test_vidoseek_exploratory24_w66.py::test_source_and_environment_drift_are_rejected
+FAILED tests/test_vidoseek_exploratory24_w66.py::test_live_preflight_is_read_only_and_not_a_result
+FAILED tests/test_vidoseek_exploratory24_w66_optimized.py::test_live_config_is_approved_once_and_hash_pinned
+FAILED tests/test_vidoseek_exploratory24_w66_optimized.py::test_source_environment_and_calibration_drift_are_rejected
+FAILED tests/test_vidoseek_exploratory24_w66_optimized.py::test_live_preflight_is_approved_read_only_and_does_not_create_attempt
+FAILED tests/test_vidoseek_fixed_profile_audit.py::test_live_config_source_pins_and_consumed_approval_match
+FAILED tests/test_vidoseek_p1_02r.py::test_protocol_records_consumed_human_run_and_closes_execution
+FAILED tests/test_vidoseek_p1_02r.py::test_recorded_cpu_audit_artifact_matches_every_frozen_gate
+FAILED tests/test_vidoseek_p1_02r.py::test_recorded_l4_calibration_is_exact_and_remains_non_result_evidence
+FAILED tests/test_vidoseek_w66_resource_calibration.py::test_live_config_records_exact_approved_scope_and_matches_review
+FAILED tests/test_vidoseek_w66_resource_calibration_recovery.py::test_live_config_is_approved_once_and_matches_prepared_scope
+FAILED tests/test_vimdoc_archive_content_audit.py::test_closed_local_package_preflight_is_read_only_and_exact
+FAILED tests/test_vimdoc_archive_content_audit.py::test_preparation_cli_passes_without_modal_or_archive_access
+FAILED tests/test_vimdoc_m3_preparation.py::test_live_local_preflight_is_read_only_and_never_execution_ready
+FAILED tests/test_vimdoc_m3_preparation.py::test_even_rehashed_config_cannot_enable_execution[training_approved-True]
+FAILED tests/test_vimdoc_m3_preparation.py::test_even_rehashed_config_cannot_enable_execution[approved_invocations-1]
+FAILED tests/test_vimdoc_m3_preparation.py::test_even_rehashed_config_cannot_enable_execution[modal_execution_approved-True]
+FAILED tests/test_vimdoc_m3_preparation.py::test_even_rehashed_config_cannot_enable_execution[gpu_execution_approved-0]
+30 failed, 1 passed in 18.41s

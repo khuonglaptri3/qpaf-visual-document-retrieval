@@ -1,0 +1,65 @@
+{
+  "bge_m3": {
+    "channel": "dense_score",
+    "evaluation_unit": "page",
+    "evaluator": "qpaf.m24.evaluator.evaluate",
+    "rank_tie_break": "page_id_ascending",
+    "shared_inputs_sha256": "51eaa23303cb7086c3709249f2b400172ee006b942f26f47ddacc80b508c3dd0"
+  },
+  "bm25": {
+    "channel": "bm25_score",
+    "evaluation_unit": "page",
+    "evaluator": "qpaf.m24.evaluator.evaluate",
+    "rank_tie_break": "page_id_ascending",
+    "shared_inputs_sha256": "51eaa23303cb7086c3709249f2b400172ee006b942f26f47ddacc80b508c3dd0"
+  },
+  "colqwen25": {
+    "channel": "visual_score",
+    "evaluation_unit": "page",
+    "evaluator": "qpaf.m24.evaluator.evaluate",
+    "rank_tie_break": "page_id_ascending",
+    "shared_inputs_sha256": "51eaa23303cb7086c3709249f2b400172ee006b942f26f47ddacc80b508c3dd0"
+  },
+  "learned_qarf": {
+    "checkpoint_sha256": "e44ac1a4f3887700a70914fdba8a3e7b35330244e746253d1cd828508be30914",
+    "evaluation_unit": "page",
+    "evaluator": "qpaf.m24.evaluator.evaluate",
+    "gate_granularity": "query",
+    "rank_tie_break": "page_id_ascending",
+    "seed": 20260820,
+    "shared_inputs_sha256": "51eaa23303cb7086c3709249f2b400172ee006b942f26f47ddacc80b508c3dd0"
+  },
+  "rrf_k60": {
+    "evaluation_unit": "page",
+    "evaluator": "qpaf.m24.evaluator.evaluate",
+    "fitting": false,
+    "rank_constant": 60,
+    "rank_scope": "common_rescored_union",
+    "rank_start": 1,
+    "rank_tie_break": "page_id_ascending",
+    "shared_inputs_sha256": "51eaa23303cb7086c3709249f2b400172ee006b942f26f47ddacc80b508c3dd0"
+  },
+  "train_fitted_static": {
+    "evaluation_unit": "page",
+    "evaluator": "qpaf.m24.evaluator.evaluate",
+    "fitting": "train_only",
+    "rank_tie_break": "page_id_ascending",
+    "shared_inputs_sha256": "51eaa23303cb7086c3709249f2b400172ee006b942f26f47ddacc80b508c3dd0",
+    "weights": [
+      0.0,
+      0.1,
+      0.9
+    ]
+  },
+  "uniform_combsum": {
+    "evaluation_unit": "page",
+    "evaluator": "qpaf.m24.evaluator.evaluate",
+    "rank_tie_break": "page_id_ascending",
+    "shared_inputs_sha256": "51eaa23303cb7086c3709249f2b400172ee006b942f26f47ddacc80b508c3dd0",
+    "weights": [
+      0.3333333333333333,
+      0.3333333333333333,
+      0.3333333333333333
+    ]
+  }
+}

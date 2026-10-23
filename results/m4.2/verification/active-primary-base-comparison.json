@@ -1,0 +1,9 @@
+{
+  "base_commit": "5bbb2ded966ac53328109358420c9bc9f731eb58",
+  "selected_failed_nodes": 28,
+  "reproduced_failed_nodes": 28,
+  "same_failed_nodes": true,
+  "same_interpreter_and_dependencies": true,
+  "base_exit_code": 1,
+  "base_summary": "29 failed, 1 passed in 17.91s"
+}

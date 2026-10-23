@@ -1,0 +1,10 @@
+{
+  "base_commit": "5bbb2ded966ac53328109358420c9bc9f731eb58",
+  "base_checkout": "C:\\Users\\lanph\\OneDrive\\Desktop\\Artificial_Intelligent_Project\\.worktrees\\m42-base-check",
+  "selected_nodes": 29,
+  "reproduced_failed_nodes": 29,
+  "same_failed_nodes": true,
+  "exit_code": 1,
+  "python": "C:\\Users\\lanph\\OneDrive\\Desktop\\Artificial_Intelligent_Project\\.worktrees\\m4-2-baseline-freeze\\.venv\\Scripts\\python.exe",
+  "scope": "replay all failing nodes from full suite on unmodified base with same environment"
+}
