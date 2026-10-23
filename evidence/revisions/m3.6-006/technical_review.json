@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "task_id": "M3.6",
+  "recorded_utc": "2026-10-23T03:37:47.178772+00:00",
+  "technical_verdict": "PASS",
+  "memory_issue_status": "RESOLVED_BY_ENFORCED_BOUND",
+  "classification": "ENFORCEMENT_DEMONSTRATED",
+  "runs": {
+    "A02": {
+      "bound": "BELOW_LIMIT",
+      "limit_mib": 4096
+    },
+    "A03": {
+      "bound": "BELOW_LIMIT",
+      "limit_mib": 5120
+    }
+  },
+  "exact_peak_available": false,
+  "claim_scope": "Provider-enforced upper bound under Modal hard memory limit; not a peak",
+  "controls": {
+    "below": {
+      "status": "COMPLETED",
+      "target_mib": 2048,
+      "error_type": null
+    },
+    "above": {
+      "status": "FAILED",
+      "target_mib": 4608,
+      "error_type": "InternalFailure",
+      "error_text": "Server has lost track of input"
+    }
+  },
+  "below_in_sandbox_ru_maxrss_bytes": 6500163584,
+  "provider_counts": {
+    "input_success_count": 1,
+    "input_failure_count": 1,
+    "container_total_count": 9,
+    "container_error_count": 8
+  },
+  "prior_m3_6_004_verdicts_pass": true,
+  "provider_retries_of_above_control": 7,
+  "criteria_revision_ref": "evidence/revisions/m3.6-006/criteria_revision.md",
+  "provider_exit_reason_source": "Modal runner-kill lines ('Runner killed (SIGKILL)') in provider app logs, one required per errored container",
+  "inputs_sha256": {
+    "below": "c98fe65b5b167e2cfb9a20f2e6e9781cfb776387c1de08c2199ab3debf1c7b88",
+    "above": "1424a66291994498d168652248a454a40c4c3899aa0581bac537dcda13e1409b",
+    "provider_stats": "c090f64ca655441829ecea8b5b818f5f2e46828c440253870f4a90ccb9463b59",
+    "runs": "e45f88e9c33798a34884860eb6b6a8961f21e81a09d130d560915615b60c1fb9",
+    "provider_logs": "db1b525032e0cf8f086da2e29e69b27f36e3e360b81540bfc7a33ff9bc1fe243"
+  },
+  "g2_decision_made": false,
+  "labels_deserialized": false,
+  "training_executed": false
+}

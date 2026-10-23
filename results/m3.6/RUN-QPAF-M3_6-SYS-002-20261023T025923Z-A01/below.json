@@ -1,0 +1,115 @@
+{
+  "status": "COMPLETED",
+  "target_mib": 2048,
+  "error_type": null,
+  "error_text": null,
+  "in_sandbox": {
+    "allocation": {
+      "allocated_bytes": 2147483648,
+      "ru_maxrss_bytes": 6500163584
+    },
+    "before": {
+      "stage": "probe_before",
+      "pid": 2,
+      "checked_utc": "2026-10-23T03:02:25.995819+00:00",
+      "kernel": "4.19.0-gvisor",
+      "kernel_version": "#1 SMP Sun Jan 10 15:06:54 PST 2016",
+      "process": {
+        "ru_maxrss_bytes": 4352675840,
+        "vmhwm_bytes": null,
+        "vmrss_bytes": 4352675840,
+        "status_bytes": {
+          "VmRSS": 4352675840
+        },
+        "smaps_rollup_bytes": {}
+      },
+      "cgroups": [
+        {
+          "version": 1,
+          "path": "/sys/fs/cgroup/memory",
+          "membership": "/ta-01M5KBB7PQG75JHSJ9HMZFYBVR",
+          "raw": {
+            "memory.usage_in_bytes": "4333682688",
+            "memory.limit_in_bytes": "4294967296"
+          },
+          "errors": {
+            "memory.max_usage_in_bytes": "[Errno 2] No such file or directory: '/sys/fs/cgroup/memory/memory.max_usage_in_bytes'",
+            "memory.oom_control": "[Errno 2] No such file or directory: '/sys/fs/cgroup/memory/memory.oom_control'"
+          },
+          "current_bytes": 4333682688,
+          "peak_bytes": null,
+          "limit_bytes": 4294967296,
+          "events": null
+        }
+      ],
+      "raw_proc": {
+        "status": "Name:\tpython\nState:\tR (running)\nTgid:\t2\nPid:\t2\nPPid:\t1\nTracerPid:\t0\nUid:\t0\t0\t0\t0\nGid:\t0\t0\t0\t0\nFDSize:\t512\nGroups:\t \nVmSize:\t8814496 kB\nVmRSS:\t4250660 kB\nVmData:\t765228 kB\nThreads:\t4\nSigPnd:\t0000000000000000\nShdPnd:\t0000000000000000\nSigBlk:\t0000000000000000\nSigIgn:\t0000000001001000\nSigCgt:\t0000000100000202\nCapInh:\t00000000a80405fb\nCapPrm:\t00000000a80405fb\nCapEff:\t00000000a80405fb\nCapBnd:\t00000000a80405fb\nCapAmb:\t00000000a80405fb\nNoNewPrivs:\t1\nSeccomp:\t0\nMems_allowed:\t1\nMems_allowed_list:\t0\nvoluntary_ctxt_switches:\t0\nnonvoluntary_ctxt_switches:\t0\n",
+        "cgroup": "7:pids:/ta-01M5KBB7PQG75JHSJ9HMZFYBVR\n6:memory:/ta-01M5KBB7PQG75JHSJ9HMZFYBVR\n5:job:/ta-01M5KBB7PQG75JHSJ9HMZFYBVR\n4:devices:/ta-01M5KBB7PQG75JHSJ9HMZFYBVR\n3:cpuset:/ta-01M5KBB7PQG75JHSJ9HMZFYBVR\n2:cpuacct:/ta-01M5KBB7PQG75JHSJ9HMZFYBVR\n1:cpu:/ta-01M5KBB7PQG75JHSJ9HMZFYBVR\n",
+        "mountinfo": "26 25 0:10 /ta-01M5KBB7PQG75JHSJ9HMZFYBVR /sys/fs/cgroup/cpu rw - cgroup none rw,cpu\n27 25 0:11 /ta-01M5KBB7PQG75JHSJ9HMZFYBVR /sys/fs/cgroup/cpuacct rw - cgroup none rw,cpuacct\n28 25 0:12 /ta-01M5KBB7PQG75JHSJ9HMZFYBVR /sys/fs/cgroup/cpuset rw - cgroup none rw,cpuset\n29 25 0:13 /ta-01M5KBB7PQG75JHSJ9HMZFYBVR /sys/fs/cgroup/devices rw - cgroup none rw,devices\n30 25 0:14 /ta-01M5KBB7PQG75JHSJ9HMZFYBVR /sys/fs/cgroup/job rw - cgroup none rw,job\n31 25 0:15 /ta-01M5KBB7PQG75JHSJ9HMZFYBVR /sys/fs/cgroup/memory rw - cgroup none rw,memory\n32 25 0:16 /ta-01M5KBB7PQG75JHSJ9HMZFYBVR /sys/fs/cgroup/pids rw - cgroup none rw,pids"
+      },
+      "errors": {
+        "smaps_rollup": "[Errno 2] No such file or directory: '/proc/self/smaps_rollup'"
+      },
+      "assessment": {
+        "configured_limit_bytes": 4294967296,
+        "process_high_water_verdict": "FAIL",
+        "container_peak_verdict": "UNAVAILABLE",
+        "reported_container_peak_verified": false,
+        "physical_container_peak_verified": false,
+        "scope": "In-container process/cgroup interfaces; no independent host/provider metric. Current samples are not peaks; process RSS is not container usage."
+      }
+    },
+    "after": {
+      "stage": "probe_after",
+      "pid": 2,
+      "checked_utc": "2026-10-23T03:02:31.461213+00:00",
+      "kernel": "4.19.0-gvisor",
+      "kernel_version": "#1 SMP Sun Jan 10 15:06:54 PST 2016",
+      "process": {
+        "ru_maxrss_bytes": 6500163584,
+        "vmhwm_bytes": null,
+        "vmrss_bytes": 4352675840,
+        "status_bytes": {
+          "VmRSS": 4352675840
+        },
+        "smaps_rollup_bytes": {}
+      },
+      "cgroups": [
+        {
+          "version": 1,
+          "path": "/sys/fs/cgroup/memory",
+          "membership": "/ta-01M5KBB7PQG75JHSJ9HMZFYBVR",
+          "raw": {
+            "memory.usage_in_bytes": "4333686784",
+            "memory.limit_in_bytes": "4294967296"
+          },
+          "errors": {
+            "memory.max_usage_in_bytes": "[Errno 2] No such file or directory: '/sys/fs/cgroup/memory/memory.max_usage_in_bytes'",
+            "memory.oom_control": "[Errno 2] No such file or directory: '/sys/fs/cgroup/memory/memory.oom_control'"
+          },
+          "current_bytes": 4333686784,
+          "peak_bytes": null,
+          "limit_bytes": 4294967296,
+          "events": null
+        }
+      ],
+      "raw_proc": {
+        "status": "Name:\tpython\nState:\tR (running)\nTgid:\t2\nPid:\t2\nPPid:\t1\nTracerPid:\t0\nUid:\t0\t0\t0\t0\nGid:\t0\t0\t0\t0\nFDSize:\t512\nGroups:\t \nVmSize:\t8814496 kB\nVmRSS:\t4250660 kB\nVmData:\t765228 kB\nThreads:\t4\nSigPnd:\t0000000000000000\nShdPnd:\t0000000000000000\nSigBlk:\t0000000000000000\nSigIgn:\t0000000001001000\nSigCgt:\t0000000100000202\nCapInh:\t00000000a80405fb\nCapPrm:\t00000000a80405fb\nCapEff:\t00000000a80405fb\nCapBnd:\t00000000a80405fb\nCapAmb:\t00000000a80405fb\nNoNewPrivs:\t1\nSeccomp:\t0\nMems_allowed:\t1\nMems_allowed_list:\t0\nvoluntary_ctxt_switches:\t0\nnonvoluntary_ctxt_switches:\t0\n",
+        "cgroup": "7:pids:/ta-01M5KBB7PQG75JHSJ9HMZFYBVR\n6:memory:/ta-01M5KBB7PQG75JHSJ9HMZFYBVR\n5:job:/ta-01M5KBB7PQG75JHSJ9HMZFYBVR\n4:devices:/ta-01M5KBB7PQG75JHSJ9HMZFYBVR\n3:cpuset:/ta-01M5KBB7PQG75JHSJ9HMZFYBVR\n2:cpuacct:/ta-01M5KBB7PQG75JHSJ9HMZFYBVR\n1:cpu:/ta-01M5KBB7PQG75JHSJ9HMZFYBVR\n",
+        "mountinfo": "26 25 0:10 /ta-01M5KBB7PQG75JHSJ9HMZFYBVR /sys/fs/cgroup/cpu rw - cgroup none rw,cpu\n27 25 0:11 /ta-01M5KBB7PQG75JHSJ9HMZFYBVR /sys/fs/cgroup/cpuacct rw - cgroup none rw,cpuacct\n28 25 0:12 /ta-01M5KBB7PQG75JHSJ9HMZFYBVR /sys/fs/cgroup/cpuset rw - cgroup none rw,cpuset\n29 25 0:13 /ta-01M5KBB7PQG75JHSJ9HMZFYBVR /sys/fs/cgroup/devices rw - cgroup none rw,devices\n30 25 0:14 /ta-01M5KBB7PQG75JHSJ9HMZFYBVR /sys/fs/cgroup/job rw - cgroup none rw,job\n31 25 0:15 /ta-01M5KBB7PQG75JHSJ9HMZFYBVR /sys/fs/cgroup/memory rw - cgroup none rw,memory\n32 25 0:16 /ta-01M5KBB7PQG75JHSJ9HMZFYBVR /sys/fs/cgroup/pids rw - cgroup none rw,pids"
+      },
+      "errors": {
+        "smaps_rollup": "[Errno 2] No such file or directory: '/proc/self/smaps_rollup'"
+      },
+      "assessment": {
+        "configured_limit_bytes": 4294967296,
+        "process_high_water_verdict": "FAIL",
+        "container_peak_verdict": "UNAVAILABLE",
+        "reported_container_peak_verified": false,
+        "physical_container_peak_verified": false,
+        "scope": "In-container process/cgroup interfaces; no independent host/provider metric. Current samples are not peaks; process RSS is not container usage."
+      }
+    }
+  },
+  "finished_utc": "2026-10-23T03:02:30.982528+00:00"
+}

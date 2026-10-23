@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "task_id": "M3.6",
+  "reviewer": "Thanh (@xThanhSaDec)",
+  "role": "Experiment Governance / QA",
+  "recorded_by": "Claude at the Research Lead's request",
+  "recorded_at_utc": "2026-10-23T04:47:41Z",
+  "decision": "ACCEPTED",
+  "source": "GitHub PR #30 comment by xThanhSaDec",
+  "source_url": "https://github.com/khuonglaptri3/qpaf-visual-document-retrieval/pull/30#issuecomment-6357298942",
+  "comment_created_utc": "2026-10-23T04:20:55Z",
+  "comment_edited_utc": "2026-10-23T04:46:38Z",
+  "confirmation_text": "Thanh (QA) chấp nhận M3.6, theo technical review m3.6-006",
+  "edit_history": "The comment first read \"confirm\" (04:20:55Z). It was not recorded then because it named neither M3.6 nor the QA role. Thanh edited it to the text above at 04:46:38Z.",
+  "wording_note": "The text matches word for word an example the Research Lead forwarded to Thanh, which stated that she should write in her own words and could decline. Posting it from her account is her acceptance.",
+  "pr_head_commit": "56ac8c023900b77c9961dd2e36a5b1301cedbd50",
+  "technical_report_ref": "evidence/revisions/m3.6-006/technical_review.json",
+  "technical_report_sha256": "2265167ec550bf6060d76afef55dfc4a8a37c8244bd41d602962c847ccf3b146",
+  "accepted_scope": "M3.6 technical review under m3.6-006, including the post-hoc m3.6-005 and m3.6-006 criterion revisions disclosed in PR #30",
+  "g2_decision_made": false,
+  "test_labels_opened": false
+}
