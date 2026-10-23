@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "task_id": "M4.2",
+  "owner": "Khương",
+  "scope": "A002_active_primary_shared_baseline_inputs_and_train_only_settings",
+  "dataset": {
+    "id": "Qiuchen-Wang/ViDoSeek",
+    "revision": "e91a92ba5f38690696c7e66be5c5474b54c6e791",
+    "evaluation_unit": "page",
+    "split_counts": {"train": 799, "validation": 171, "test": 172}
+  },
+  "references": {
+    "workbook": {
+      "path": "docs/GUILDLINE_OVERVIEWS_PROPOSAL/POAI_Milestone_Group01_Hoan_Chinh.xlsx",
+      "sha256": "896bf26657a58f4d921c4b51b0428931a8770ccea3248201f1ce148714383bdc"
+    },
+    "approved_dataset_adoption": {
+      "path": "evidence/M1_FINAL/02_protocol/amendments_after_import.md",
+      "sha256": "6a7a0f6328e467c698771115affa58cac32b95ea889da1a91691661e4049dc49"
+    },
+    "m31_manifest": {
+      "path": "evidence/revisions/m3.1-001/manifest.json",
+      "sha256": "0832af156b79d0448ecc630ff572a0053d7cb5da98b4dac2dec1c6ee49e27893"
+    },
+    "m25_freeze": {
+      "path": "configs/m2.5/freeze.json",
+      "sha256": "317b4333968ae4250e0e9bc71846d37f47e5f958872c8cf27949a0c0d8c3579c"
+    },
+    "g2_decision": {
+      "path": "evidence/revisions/m3.7-001/decision.json",
+      "sha256": "888c51d5c1f5309d80ec9f1218d935d4659512a5867b42b031f275196edad621"
+    },
+    "g2_confirmation": {
+      "path": "evidence/revisions/m3.7-001/owner_confirmation.json",
+      "sha256": "20e7fdde52b9ea995e83333ffb7d53606353f3714b6f00d2386e4789e4aa298c"
+    },
+    "qarf_checkpoint": {
+      "path": "results/m3.2/RUN-QPAF-M3_2-MTH-001-20261022T035229Z-A01/QARF/20261022T040759-ff3934df/checkpoints/best.pt",
+      "sha256": "e44ac1a4f3887700a70914fdba8a3e7b35330244e746253d1cd828508be30914"
+    },
+    "qarf_acceptance": {
+      "path": "evidence/revisions/m3.3-001/owner_confirmation.json",
+      "sha256": "943be5b2a2738e01bf5bbca971e1e6a047067e0829ff688a470d07c505f7a1b0"
+    },
+    "qarf_technical_review": {
+      "path": "evidence/revisions/m3.3-001/validation.json",
+      "sha256": "ac689d5c32e02c95e2897f95bab6fadbfd2d90cba8a7c02a0cf3b5a835e89b02"
+    }
+  },
+  "fit": {
+    "implementation": "qpaf.m25.baselines.fit_static_on_train",
+    "partition": "train_only",
+    "grid_denominator": 10,
+    "grid_candidates": 66,
+    "objective": "mean_train_page_ndcg_at_10",
+    "rrf_k": 60,
+    "rrf_fitting": false
+  },
+  "access": {
+    "validation_selection": false,
+    "test_label_access": false,
+    "vimdoc_confirmation_access": false,
+    "gpu_or_cloud_execution": false,
+    "learned_training": false
+  }
+}
