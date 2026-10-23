@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "task_id": "M3.7",
+  "files": {
+    "evidence/revisions/m3.3-001/owner_confirmation.json": "943be5b2a2738e01bf5bbca971e1e6a047067e0829ff688a470d07c505f7a1b0",
+    "evidence/revisions/m3.5-001/comparison.json": "ac29ce5b1d691d8ecc8f8b46e665c726494885de3b73f84a82e8adf8979d0c57",
+    "evidence/revisions/m3.5-001/owner_confirmation.json": "63d13b8d3fb2fa92ace442f3cfc54400503d6a52445b3b9d6fc96d3cd8ca5539",
+    "evidence/revisions/m3.6-001/integrity_review.json": "497b934ce6222e6e4e70363ef374e88236b7592bb549b0c81bbb89b45291e66f",
+    "evidence/revisions/m3.6-004/technical_review.json": "147984be8dbf2e96f56fc27e9893d0f0ea3e00e1729ad18e0980e6f4b043478d",
+    "evidence/revisions/m3.6-006/technical_review.json": "2265167ec550bf6060d76afef55dfc4a8a37c8244bd41d602962c847ccf3b146",
+    "evidence/revisions/m3.6-006/owner_confirmation.json": "d5aac1804688eb8863f656ed84ceaafdd82c3ff2ffd66050435420a1d53fe6fe",
+    "evidence/revisions/m3.6-006/qa_confirmation.json": "571d8faf86d6576c5fdeaba267d01e6e4de9c0b5b8906bc356251bccd1fa1e83"
+  },
+  "run_ids": {
+    "QARF": "RUN-QPAF-M3_2-MTH-001-20261022T035229Z-A01",
+    "QPAF": "RUN-QPAF-M3_4-MTH-001-20261022T112102Z-A01",
+    "M3.6_resources": "RUN-QPAF-M3_6-SYS-001-20261022T165637Z-A03",
+    "M3.6_memory_probe": "RUN-QPAF-M3_6-SYS-002-20261023T025923Z-A01"
+  },
+  "develop_commit": "0716be798c7e8ef1bb4f35f4df1bfc282a16b4db"
+}
