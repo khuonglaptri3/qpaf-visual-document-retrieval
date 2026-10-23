@@ -23,6 +23,7 @@ ABOVE_TARGET_MIB = 4608
 HOLD_SECONDS = 5
 WATCHDOG_SECONDS = 900  # covers two calls x (120 s startup + 300 s timeout) plus image start
 OOM_PATTERN = re.compile(r'\boom(?:[-_ ]?kill(?:ed)?)?\b|out of memory|memory limit|exit ?code[:= ]*137')
+RUNNER_KILL_PREFIX = 'Runner killed (SIGKILL)'  # emitted by Modal's runner, not by the probe
 COUNT_KEYS = ('input_success_count', 'input_failure_count', 'container_total_count',
               'container_error_count')
 REFERENCE_LIMITS_MIB = {'A02': 4096, 'A03': 5120}
@@ -72,6 +73,17 @@ def classify_controls(below, above, provider_stats):
     if not oom_attributed(above.get('error_text') or '', provider_stats):
         return INCONCLUSIVE
     return DEMONSTRATED
+
+
+def classify_with_provider_logs(below, above, provider_stats, log_text):
+    """m3.6-006: Modal's own runner-kill lines are provider exit reasons, one per errored container."""
+    reasons = [line.strip() for line in log_text.splitlines() if line.strip().startswith(RUNNER_KILL_PREFIX)]
+    classification = classify_controls(below, above, {**provider_stats, 'exit_reasons': reasons})
+    every_error_attributed = (len(reasons) == provider_stats.get('container_error_count') and
+                              all(OOM_PATTERN.search(reason.lower()) for reason in reasons))
+    if classification == DEMONSTRATED and not every_error_attributed:
+        return INCONCLUSIVE
+    return classification
 
 
 def memory_bound_verdict(classification, runs):
@@ -237,7 +249,7 @@ def execute(authorization, expected_authorization_sha256, output):
         timer.cancel()
 
 
-def classify(output, provider_stats_path, runs_path, review_output):
+def classify(output, provider_stats_path, runs_path, review_output, provider_logs_path=None):
     from scripts.m36_gpu_worker import read, sha, write_new
     below, above = load_controls(output)
     if (output/'_SUCCESS.json').exists():
@@ -245,7 +257,12 @@ def classify(output, provider_stats_path, runs_path, review_output):
         if marker['below_sha256'] != sha(output/'below.json') or marker['above_sha256'] != sha(output/'above.json'):
             raise ValueError('control records differ from _SUCCESS.json hashes')
     provider_stats, runs = read(provider_stats_path), read(runs_path)
-    verdict = memory_bound_verdict(classify_controls(below, above, provider_stats), runs)
+    if provider_logs_path is None:
+        classification = classify_controls(below, above, provider_stats)
+    else:
+        classification = classify_with_provider_logs(below, above, provider_stats,
+                                                     provider_logs_path.read_text(encoding='utf-8'))
+    verdict = memory_bound_verdict(classification, runs)
     prior = read(ROOT/'evidence/revisions/m3.6-004/technical_review.json')
     prior_pass = (prior['integrity_verdict'] == 'PASS' and
                   prior['operational_latency_cuda_parity_verdict'] == 'PASS')
@@ -265,9 +282,16 @@ def classify(output, provider_stats_path, runs_path, review_output):
                   'container_error_count')},
               'prior_m3_6_004_verdicts_pass': prior_pass,
               'provider_retries_of_above_control': max(0, (provider_stats.get('container_total_count') or 0) - 2),
+              'criteria_revision_ref': ('evidence/revisions/m3.6-005/criteria_revision.md' if provider_logs_path
+                                        is None else 'evidence/revisions/m3.6-006/criteria_revision.md'),
+              'provider_exit_reason_source': ('provider stats export only' if provider_logs_path is None else
+                                              f"Modal runner-kill lines ('{RUNNER_KILL_PREFIX}') in provider app "
+                                              'logs, one required per errored container'),
               'inputs_sha256': {**{name: sha(output/f'{name}.json') for name in ('below', 'above')
                                    if (output/f'{name}.json').exists()},
-                                'provider_stats': sha(provider_stats_path), 'runs': sha(runs_path)},
+                                'provider_stats': sha(provider_stats_path), 'runs': sha(runs_path),
+                                **({} if provider_logs_path is None else
+                                   {'provider_logs': sha(provider_logs_path)})},
               'g2_decision_made': False, 'labels_deserialized': False, 'training_executed': False}
     write_new(review_output, review)
     return review
@@ -287,12 +311,15 @@ def main():
     parser.add_argument('--provider-stats', type=Path)
     parser.add_argument('--runs', type=Path)
     parser.add_argument('--review-output', type=Path)
+    parser.add_argument('--provider-logs', type=Path, help='m3.6-006: Modal app logs as provider exit reasons')
     args = parser.parse_args()
     if args.execute and args.authorization and args.expected_authorization_sha256 and args.output:
         execute(args.authorization.resolve(), args.expected_authorization_sha256, args.output.resolve())
     elif args.classify and args.provider_stats and args.runs and args.review_output:
         print(json.dumps(classify(args.classify.resolve(), args.provider_stats.resolve(), args.runs.resolve(),
-                                  args.review_output.resolve()), ensure_ascii=False, indent=2))
+                                  args.review_output.resolve(),
+                                  args.provider_logs.resolve() if args.provider_logs else None),
+                         ensure_ascii=False, indent=2))
     else:
         parser.error('use --execute with --authorization/--expected-authorization-sha256/--output, '
                      'or --classify with --provider-stats/--runs/--review-output')

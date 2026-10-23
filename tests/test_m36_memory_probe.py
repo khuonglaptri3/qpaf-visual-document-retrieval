@@ -88,6 +88,29 @@ class MemoryProbeTests(unittest.TestCase):
         self.assertEqual(self.api.classify_controls(self.ok, generic, {**self.stats, 'exit_reasons': []}),
                          'INCONCLUSIVE')
 
+    def test_runner_kill_lines_attribute_only_when_one_covers_each_errored_container(self):
+        generic = {**self.oom, 'error_type': 'InternalFailure', 'error_text': 'Server has lost track of input'}
+        kill = ('Runner killed (SIGKILL), exit code: 137. Most often this happens when the process '
+                'runs out of memory.')
+        stats = {**self.stats, 'container_total_count': 3, 'container_error_count': 2}
+        logs = f'Building image\n{kill}\n  {kill}\n'
+        self.assertEqual(self.api.classify_with_provider_logs(self.ok, generic, stats, logs),
+                         'ENFORCEMENT_DEMONSTRATED')
+        self.assertEqual(self.api.classify_with_provider_logs(self.ok, generic, stats, kill), 'INCONCLUSIVE')
+        other = 'Runner killed (SIGKILL), exit code: 9.'
+        self.assertEqual(self.api.classify_with_provider_logs(self.ok, generic, stats, f'{kill}\n{other}'),
+                         'INCONCLUSIVE')
+
+    def test_runner_kill_lines_ignore_application_output_and_never_rescue_a_completion(self):
+        generic = {**self.oom, 'error_text': 'Server has lost track of input'}
+        printed = 'print: out of memory, exit code 137'
+        self.assertEqual(self.api.classify_with_provider_logs(self.ok, generic, self.stats, printed),
+                         'INCONCLUSIVE')
+        kill = 'Runner killed (SIGKILL), exit code: 137. Most often this happens when the process runs out of memory.'
+        self.assertEqual(self.api.classify_with_provider_logs(self.ok, {**self.ok, 'target_mib': 4608},
+                                                              self.stats, kill),
+                         'ENFORCEMENT_NOT_DEMONSTRATED')
+
     def test_bound_verdict_requires_both_reference_runs_with_strict_types(self):
         good = {'A02': {'limit_mib': 4096, 'success_marker': True, 'failed_calls': 0},
                 'A03': {'limit_mib': 5120, 'success_marker': True, 'failed_calls': 0}}
