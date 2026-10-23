@@ -1,0 +1,38 @@
+{
+  "task_id": "M4.2",
+  "checked_utc": "2026-10-23T16:07:20.361376+00:00",
+  "checked_tree_commit": "5131c05",
+  "changes_during_checks": "report encoding and handoff documentation only; sealed source/config/run unchanged",
+  "focused_tests": {
+    "command": "python -X utf8 -m unittest tests.test_m42_active_primary tests.test_m25_freeze tests.test_m42_baselines tests.test_m42_freeze tests.test_m41_confirmation_seal -q",
+    "passed": 45,
+    "failed": 0,
+    "exit_code": 0
+  },
+  "read_only_run_verifier": {
+    "exit_code": 0,
+    "status": "PASS",
+    "manifest_sha256": "4752eef37d7c6cf73eb36717bd352e21192d112b1464a3f5a61dab86bcc76b86"
+  },
+  "full_suite": {
+    "command": "python -X utf8 -m pytest -q",
+    "exit_code": 1,
+    "passed": 894,
+    "failed": 29,
+    "skipped": 2,
+    "subtests_passed": 310,
+    "warnings": 2,
+    "summary": "29 failed, 894 passed, 2 skipped, 2 warnings, 310 subtests passed in 296.28s (0:04:56)",
+    "log": "results/m4.2/verification/pr-review-full-pytest.txt",
+    "log_sha256": "570d603c7c4560b8793b7b7ec111b4ebb88c7f0c574ef2d4263c8daaf5423327"
+  },
+  "failure_comparison": {
+    "unique_failed_nodes": 28,
+    "matches_previously_reproduced_clean_base_nodes": true,
+    "base_receipt": "results/m4.2/verification/active-primary-base-comparison.json",
+    "base_rerun_performed_this_time": false
+  },
+  "no_new_calibration_attempt": true,
+  "no_test_labels_deserialized": true,
+  "human_review": "PENDING"
+}

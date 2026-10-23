@@ -1,120 +1,142 @@
-# M4.2 c?a Kh??ng ? ho?n th?nh g?i baseline tr?n d? li?u ch?nh
+# M4.2 của Khương — hoàn thành baseline trên dữ liệu chính
 
-Ng?y: 23/10/2026. Nh?nh: `feature/m4-2-baseline-freeze`.
-Source commit: `363db3f18252a794c5edd9cec4803e1fecccbf83`.
+Ngày thực hiện: 23/10/2026. Nhánh: `feature/m4-2-baseline-freeze`.
+Source commit của lần chạy: `363db3f18252a794c5edd9cec4803e1fecccbf83`.
 Run: `RUN-QPAF-M4_2-CAL-001-20261023T150631Z-A01`.
 
-**Ho?n th?nh k? thu?t deliverable M4.2 tr?n active primary ViDoSeek:** g?i ??u
-v?o d?ng chung ?? seal, static fitting tr?n train th?t ?? ch?y, tr?ng s? v?
-thi?t l?p c? b?y baseline ?? kh?a v? replay. Owner acceptance ??
-`PENDING_USER_REVIEW`, kh?ng t? k? thay Kh??ng.
+**Hoàn thành kỹ thuật deliverable M4.2 trên active primary ViDoSeek:** đã seal
+gói đầu vào dùng chung, chạy static fitting trên train thật, khóa thiết lập
+của bảy baseline và kiểm replay. `PENDING_USER_REVIEW` trong manifest là
+trạng thái nghiệm thu tại thời điểm tạo run; không sửa run đã seal.
 
-## 1. M4.2 l? nhi?m v? g??
+## 1. Nhiệm vụ và phạm vi
 
-Workbook Milestones h?ng 49 giao Kh??ng ??ng b?ng baseline inputs v? train-only
-settings, b?n giao shared baseline bundle c? ki?m tra static/RRF settings.
-Nh?n ??ng cache/candidates/splits M3, ki?m hash v? fairness, fit static tr?n
-train, gi? RRF k=60, r?i b?n giao cho Ph?t l?m M4.3/M4.4.
+Workbook Milestones hàng 49 giao Khương đóng băng baseline inputs và train-only
+settings, bàn giao shared baseline bundle có kiểm tra static/RRF settings.
+Nhận đúng cache/candidates/splits M3, kiểm hash và fairness, fit static trên
+train, giữ RRF k=60, rồi bàn giao cho Tấn Phát làm M4.3/M4.4.
 
-Ph?m vi theo [A002 ?? duy?t](https://github.com/khuonglaptri3/qpaf-visual-document-retrieval/blob/5bbb2ded966ac53328109358420c9bc9f731eb58/evidence/M1_FINAL/02_protocol/amendments_after_import.md)
-v? [M2.5](https://github.com/khuonglaptri3/qpaf-visual-document-retrieval/blob/5bbb2ded966ac53328109358420c9bc9f731eb58/docs/03_method/m2.5-baselines-statistics-leakage.md).
-L??t ??u g?n thi?u cache ViMDoc th?nh blocker cho to?n M4.2 l? nh?m ph?m vi.
-`m4.2-001` gi? nguy?n nh? preparation ViMDoc l?ch s?; k?t qu? active-primary
-th?c t? ???c append ri?ng ? **m4.2-002**.
+Phạm vi theo [A002 đã duyệt](https://github.com/khuonglaptri3/qpaf-visual-document-retrieval/blob/5bbb2ded966ac53328109358420c9bc9f731eb58/evidence/M1_FINAL/02_protocol/amendments_after_import.md)
+và [M2.5](https://github.com/khuonglaptri3/qpaf-visual-document-retrieval/blob/5bbb2ded966ac53328109358420c9bc9f731eb58/docs/03_method/m2.5-baselines-statistics-leakage.md).
+`m4.2-001` là preparation ViMDoc, giữ nguyên bằng chứng lịch sử; kết quả
+active-primary chạy thực tế nằm riêng ở **m4.2-002**. ViMDoc confirmation và
+baseline package tương ứng cần execution riêng khi đủ đầu vào.
 
-## 2. K?t qu? fit th?t
+## 2. Dữ liệu thực tế
 
-| Th?ng s? | K?t qu? |
+- Dataset `Qiuchen-Wang/ViDoSeek`, revision
+  `e91a92ba5f38690696c7e66be5c5474b54c6e791`, evaluation theo page.
+- Đúng expanded bundle `EXPANSION-001` đã seal ở M3.1/M2.8: **551.764 rows /
+  1.142 query**, gồm 2.075 trang bổ sung; tối đa 579 candidates/query, dưới cap 600.
+- Split **799 train / 171 validation / 172 test**; train có 386.390 candidate rows.
+- Raw/normalized/candidate/top-list hashes khớp byte. Normalization replay lệch
+  lớn nhất **0.0**; top-list raw scores đã đối chiếu với common cache.
+- Development qrels chứa train và validation được đọc để kiểm role; fitter chỉ
+  nhận train IDs/records/qrels. Không tính validation metric để chọn trọng số.
+- Test qrels chỉ được hash, **không deserialize và không đưa vào archive**.
+  Không truy cập ViMDoc confirmation.
+
+## 3. Kết quả fit thật
+
+| Thông số | Kết quả |
 |---|---:|
 | Train query | 799 |
 | Train candidate rows | 386.390 |
-| Grid ?? duy?t | 66 b?, b??c 0.1 |
-| **BM25 weight** | **0.0** |
-| **BGE-M3 weight** | **0.1** |
-| **ColQwen2.5 weight** | **0.9** |
+| Grid đã chốt | 66 bộ, bước 0.1 |
+| **BM25 / BGE-M3 / ColQwen2.5 weights** | **0.0 / 0.1 / 0.9** |
 | **Mean train page nDCG@10** | **0.8642244283102866** |
 | Train relevant-page recall | 1.0 |
 | Uncovered train queries | 0 |
-| Th?i gian seal/load/fit | 265,69 gi?y, CPU local |
+| Thời gian seal/load/fit | 265,69 giây, CPU local |
 
-G?i nguy?n `qpaf.m25.baselines.fit_static_on_train` v? evaluator M2.4, kh?ng
-??i grid/objective/tie rule ?? ch?n k?t qu?. Replay ??c l?p b?ng NumPy tr?n
-**c?ng 66 ?i?m** cho ??ng tr?ng s?; objective l?ch **3.33e-16**, d??i 1e-12.
-[To?n b? 66 ?i?m](../results/m4.2/verification/independent-grid-replay/train_grid.csv).
+Gọi nguyên `qpaf.m25.baselines.fit_static_on_train` và evaluator M2.4. Không đổi
+grid/objective/tie rule. Replay độc lập bằng NumPy trên **cùng 66 điểm** chọn
+đúng trọng số; objective lệch **3.33e-16**, dưới 1e-12.
+[Toàn bộ grid](../results/m4.2/verification/independent-grid-replay/train_grid.csv).
 
-??y l? objective train ?? ch?n tham s?, kh?ng ph?i held-out performance,
-strongest-baseline selection hay k?t lu?n QPAF ?? v??t baseline.
+Đây là objective train để chọn tham số của **static baseline**, chưa phải
+held-out performance hay kết luận QPAF vượt baseline. BM25 bằng 0 trong static
+không xóa BM25 khỏi candidate generation hoặc learned fusion.
 
-## 3. G?i b?n giao ?? kh?a
+## 4. Source và output
 
-- ??ng `EXPANSION-001` M3.1: **551.764 rows / 1.142 query**; 2.075 trang b? sung;
-  t?i ?a 579 candidates/query, d??i cap 600.
-- Raw/normalized/candidate/top-list hashes kh?p byte. Normalization replay l?ch
-  l?n nh?t **0.0**; top-list raw scores c?ng ??i chi?u v?i common cache.
-- Split **799 train / 171 validation / 172 test**. Fitter ch? nh?n train IDs v?
-  train records. Development qrels ???c ki?m role; validation kh?ng t?nh metric
-  ho?c d?ng ?? ch?n tr?ng s?.
-- ?? **b?y contracts** c?ng shared-input SHA-256: BM25, BGE-M3, ColQwen2.5,
-  uniform CombSUM, RRF k60, train-fitted static v? learned QARF.
-- QARF bind checkpoint ?? ???c Thanh ch?p nh?n ? M3.3, seed 20260820, SHA-256
-  `e44ac1a4f3887700a70914fdba8a3e7b35330244e746253d1cd828508be30914`.
-- Bundle ch?a cache, candidates, top lists, expansion log, development qrels,
-  query texts, split IDs, checkpoint v? manifest. Test qrels ch? ???c hash,
-  **kh?ng deserialize v? kh?ng ??a v?o archive**.
+| Đường dẫn | Vai trò |
+|---|---|
+| `src/qpaf/m42/active_primary.py` | Seal inputs, audit common pool, giới hạn train-only, gọi fitter M2.5 và verify |
+| `scripts/run_m42_active_primary.py` | CLI chạy/verify active primary |
+| `configs/m4.2/active_primary.json` | Dataset revision, source/hash pins, splits và fit settings |
+| `src/qpaf/m42/baselines.py`, `scripts/freeze_m42_baselines.py`, `configs/m4.2/freeze.json` | Preparation document-level ViMDoc tương lai, tách khỏi kết quả ViDoSeek |
+| `tests/test_m42_active_primary.py`, `tests/test_m42_baselines.py`, `tests/test_m42_freeze.py` | Kiểm leakage, alignment, hashes, overwrite, fitter và aggregation |
+| `.gitattributes` | Giữ bytes artifact/run để checksum không đổi sau checkout |
+| `docs/03_method/m4.2-active-primary-scope.md` | Căn cứ phạm vi và nguồn áp dụng |
 
-Run manifest SHA-256:
+Output thật ở
+[`results/m4.2/RUN-QPAF-M4_2-CAL-001-20261023T150631Z-A01/`](../results/m4.2/RUN-QPAF-M4_2-CAL-001-20261023T150631Z-A01/):
+
+- `train_fit.json`: trọng số và objective.
+- `shared_inputs.json`: namespace đầu vào chung và checksum.
+- `baseline_contracts.json`: bảy baseline cùng shared-input hash: BM25,
+  BGE-M3, ColQwen2.5, uniform CombSUM, RRF k60, static và learned QARF.
+- `input_audit.json`, `access.json`: coverage, normalization, giới hạn truy cập.
+- `manifest.json`, `_SUCCESS.json`: inventory và seal của lần chạy.
+
+QARF dùng lại checkpoint được chấp nhận ở M3.3, seed 20260820, SHA-256
+`e44ac1a4f3887700a70914fdba8a3e7b35330244e746253d1cd828508be30914`.
+Không train lại retriever hoặc learned model, không chạy GPU/cloud.
+
+Manifest SHA-256:
 `4752eef37d7c6cf73eb36717bd352e21192d112b1464a3f5a61dab86bcc76b86`.
 
-- [Verification m4.2-002](../evidence/revisions/m4.2-002/verification.json).
-- [Run manifest](../results/m4.2/RUN-QPAF-M4_2-CAL-001-20261023T150631Z-A01/manifest.json).
-- [Tr?ng s?](../results/m4.2/RUN-QPAF-M4_2-CAL-001-20261023T150631Z-A01/train_fit.json).
-- [B?y contracts](../results/m4.2/RUN-QPAF-M4_2-CAL-001-20261023T150631Z-A01/baseline_contracts.json).
-- [Archive b?n giao v? checksum](../evidence/revisions/m4.2-002/delivery.json).
+## 5. Kiểm chứng và giới hạn
 
-Archive n?m ? `.cache/m42-delivery/`, g?m c? Parquet/checkpoint ?ang ???c Git
-ignore, kh?ng ch? metadata. CRC archive ?? ki?m.
+**45/45 test liên quan PASS**, gồm active-primary runner, M2.5, M4.1 và
+preparation ViMDoc. Review kỹ thuật phát hiện lỗi provenance khi truyền root
+khác executing checkout; đã tái hiện bằng test rồi sửa. Kiểm top-list score
+khớp common cache cũng có test tương ứng.
 
-## 4. Ki?m th? v? review
-
-**45/45 test li?n quan PASS**, g?m active-primary runner, M2.5, M4.1 v? g?i
-preparation c?. Review ??c l?p ph?t hi?n m?t l?i provenance khi nh?n root kh?c
-executing checkout; ?? t?i hi?n RED, s?a v? ki?m GREEN. B? sung ki?m top-list
-score/common cache theo c?ng chu tr?nh.
-
-Full suite: **894 passed, 29 failed, 2 skipped; 310 subtests passed**. Ch?y l?i
-??ng 28 failing test nodes tr?n base s?ch `5bbb2de` trong c?ng m?i tr??ng cho
-**29 failed, 1 passed**, c?ng t?p failure. S?u failure do PDFium cache 5.14.0
-kh?c c?u h?nh c? 4.30.0; 23 c?n l?i l? historical hash/environment drift.
-Full suite kh?ng ???c ghi l? xanh. [Log](../results/m4.2/verification/active-primary-full-pytest.txt),
+Full suite tại lần chạy lưu bằng chứng: **894 passed, 29 failed, 2 skipped;
+310 subtests passed**. Chạy lại đúng 28 failing nodes trên base sạch `5bbb2de`
+trong cùng môi trường cho **29 failed, 1 passed**, cùng tập failure. Sáu
+failure liên quan PDFium 5.14.0 khác cấu hình cũ 4.30.0; 23 còn lại là
+historical hash/environment drift. Không ghi full suite là xanh.
+[Log](../results/m4.2/verification/active-primary-full-pytest.txt),
 [base comparison](../results/m4.2/verification/active-primary-base-comparison.json).
 
-L?nh fit ?? l?u manifest v? `_SUCCESS.json`, sau ?? CLI exit 1 v? default
-Windows charmap kh?ng in ???c t?n ti?ng Vi?t. Kh?ng ch?y l?i fit. SHA-256,
-selected objective v? to?n grid ??u ?? replay; verify v?i `-X utf8` exit 0.
-[Execution receipt](../evidence/revisions/m4.2-002/execution_receipt.json) gi?
-nguy?n l?i reporting, kh?ng che invocation ban ??u.
-
-L?nh verify ch? ??c:
+Lệnh fit ghi đủ outputs và `_SUCCESS.json`, sau đó CLI exit 1 do Windows
+charmap không in được tên tiếng Việt. Không chạy lại fit để che lỗi. Hash và
+objective đã replay; verifier với `-X utf8` exit 0.
+[Execution receipt](../evidence/revisions/m4.2-002/execution_receipt.json).
 
 ```powershell
 .venv/Scripts/python.exe -X utf8 scripts/run_m42_active_primary.py --output results/m4.2/RUN-QPAF-M4_2-CAL-001-20261023T150631Z-A01 --verify --expected-manifest-sha256 4752eef37d7c6cf73eb36717bd352e21192d112b1464a3f5a61dab86bcc76b86
 ```
 
-## 5. Ngu?n ?? ?p d?ng
+## 6. Artifact và người nhận bàn giao
+
+ZIP đầy đủ gồm **24 files / 31.333.271 bytes**, có cả Parquet và checkpoint bị
+Git ignore. SHA-256:
+`45e764f6bfe081063ea2488dbf5e26ffcaacf2e6f43ea3ad47f56a10c331d2d8`.
+`evidence/revisions/m4.2-002/delivery.json` giữ receipt local ban đầu; thông tin
+bàn giao GitHub được ghi bổ sung, không sửa receipt cũ.
+
+Xem [runbook bàn giao](../docs/06_handover/m4.2-baseline-handoff.md) để tải,
+giải nén và kiểm chứng artifact. Tấn Phát nhận inputs/settings để thực hiện
+M4.3/M4.4; Thanh kiểm fairness/uncertainty ở M4.5. Đây là phân công tiếp theo,
+chưa phải xác nhận hai người đã nhận hoặc đã review.
+
+Validation strongest-baseline selection, test evaluation và scientific claim
+chưa chạy trong M4.2. Kết quả ViDoSeek không đóng nghĩa vụ ViMDoc confirmation.
+Giữ nguyên các sign-off lịch sử của M3.1/A003.
+
+## 7. Nguồn đã áp dụng
 
 - [M2.5 freeze](https://github.com/khuonglaptri3/qpaf-visual-document-retrieval/blob/5bbb2ded966ac53328109358420c9bc9f731eb58/configs/m2.5/freeze.json):
-  grid, roster, objective, tie v? RRF settings c?a d? ?n.
+  grid, roster, objective, tie rule và RRF settings của dự án.
 - [Cormack et al., SIGIR 2009](https://cormack.uwaterloo.ca/cormacksigir09-rrf.pdf):
-  c?ng th?c RRF, k=60 c? ??nh sau pilot trong nghi?n c?u g?c.
-- [scikit-learn Data leakage](https://scikit-learn.org/stable/common_pitfalls.html#data-leakage):
-  fitted component ch? h?c t? train, d? li?u ??nh gi? ? ngo?i fitting.
+  công thức RRF, k=60 giữ cố định sau pilot trong nghiên cứu gốc.
+- [scikit-learn: Data leakage](https://scikit-learn.org/stable/common_pitfalls.html#data-leakage):
+  fitted component chỉ học từ train; dữ liệu đánh giá ngoài fitting.
 - [A003 fairness](https://github.com/khuonglaptri3/qpaf-visual-document-retrieval/blob/5bbb2ded966ac53328109358420c9bc9f731eb58/evidence/M1_FINAL/02_protocol/amendments/QPAF-M1.5-A003.md):
-  baseline d?ng c?ng expanded pool v?i matched learned runs.
-
-## 6. Ranh gi?i b?n giao
-
-G?i M4.2 active-primary s?n s?ng ?? Ph?t nh?n l?m M4.3/M4.4. Validation ch?n
-strongest baseline, ??nh gi? test v? scientific claim ch?a ???c ch?y ? ??y.
-ViMDoc confirmation v?n ??ng theo M4.1; ngh?a v? baseline ViMDoc trong seal
-c? v?n pending cho execution ri?ng. K?t qu? ViDoSeek kh?ng ??ng ngh?a v? ??.
-Gi? nguy?n sign-off l?ch s? M3.1/A003. Ch?a push, m? PR ho?c merge.
+  baseline dùng cùng expanded pool với matched learned runs.
+- [Ghi chú nghiên cứu ban đầu](../docs/03_method/m4.2-baseline-research.md) giữ
+  riêng phần preparation ViMDoc và các nguồn sơ cấp đã đọc.
