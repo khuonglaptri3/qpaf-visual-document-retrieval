@@ -1,0 +1,38 @@
+{
+  "best_ndcg_at_10": 0.8714141246842781,
+  "candidates": [
+    "bm25",
+    "bge_m3",
+    "colqwen25",
+    "uniform_combsum",
+    "rrf_k60",
+    "train_fitted_static",
+    "learned_qarf"
+  ],
+  "co_strongest": [
+    "train_fitted_static"
+  ],
+  "contract_sha256": {
+    "bge_m3": "31be212c3d4cffcea8a45542e75efea4e118f327d124dc9e7c0c7fa93d4a60b7",
+    "bm25": "f0898cbb6ea4eae0c94eaefb7023875551ffff177a1ca52b0a35b75ef75f56be",
+    "colqwen25": "618c473c91cefa968d08dd1c12a2a935e54d236ce3a6efece68b9d0eac924bcb",
+    "learned_qarf": "d041c71525d2d89ac3a2cb9be08b9eb863e7c5ec27c5cb3303b7932bdcfea0d8",
+    "rrf_k60": "4a49dbb6322f573d48f6be8be97d7ea347227b273fd2356011bb096360d881be",
+    "train_fitted_static": "2b54bace04778aad4ca334738a652e732eae5c1b6d4dd61a27836da28e751b2b",
+    "uniform_combsum": "dc569aebca449a43abb988302ed585e4d162c92f9c44e71ecc6b8e86a50963ea"
+  },
+  "independent_verifier": "PENDING_M4.5 (Thanh)",
+  "oracle_rows_eligible": false,
+  "proposed_method_eligible": false,
+  "rule": "baseline_policy.md §3: highest validation mean nDCG@10; ties within tolerance are co-strongest",
+  "tolerance": 1e-12,
+  "validation_ndcg_at_10": {
+    "bge_m3": 0.7638621756639392,
+    "bm25": 0.7250954824895824,
+    "colqwen25": 0.8692955672259587,
+    "learned_qarf": 0.7521473770883798,
+    "rrf_k60": 0.8293657046641482,
+    "train_fitted_static": 0.8714141246842781,
+    "uniform_combsum": 0.8412541217549685
+  }
+}

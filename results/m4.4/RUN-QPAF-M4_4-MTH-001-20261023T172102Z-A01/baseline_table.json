@@ -1,0 +1,97 @@
+{
+  "deployable": [
+    {
+      "co_strongest": false,
+      "method": "bm25",
+      "mrr_at_10": 0.6653137473312912,
+      "ndcg_at_10": 0.7250954824895824,
+      "optimistic_same_split_selection": false,
+      "query_count": 171,
+      "rank": 7,
+      "recall_at_1": 0.5497076023391813,
+      "recall_at_3": 0.7368421052631579
+    },
+    {
+      "co_strongest": false,
+      "method": "bge_m3",
+      "mrr_at_10": 0.7055184256938642,
+      "ndcg_at_10": 0.7638621756639392,
+      "optimistic_same_split_selection": false,
+      "query_count": 171,
+      "rank": 5,
+      "recall_at_1": 0.5847953216374269,
+      "recall_at_3": 0.7953216374269005
+    },
+    {
+      "co_strongest": false,
+      "method": "colqwen25",
+      "mrr_at_10": 0.8304720133667501,
+      "ndcg_at_10": 0.8692955672259587,
+      "optimistic_same_split_selection": false,
+      "query_count": 171,
+      "rank": 2,
+      "recall_at_1": 0.7368421052631579,
+      "recall_at_3": 0.9122807017543859
+    },
+    {
+      "co_strongest": false,
+      "method": "uniform_combsum",
+      "mrr_at_10": 0.7970342522974102,
+      "ndcg_at_10": 0.8412541217549685,
+      "optimistic_same_split_selection": false,
+      "query_count": 171,
+      "rank": 3,
+      "recall_at_1": 0.695906432748538,
+      "recall_at_3": 0.8947368421052632
+    },
+    {
+      "co_strongest": false,
+      "method": "rrf_k60",
+      "mrr_at_10": 0.7816508864754479,
+      "ndcg_at_10": 0.8293657046641482,
+      "optimistic_same_split_selection": false,
+      "query_count": 171,
+      "rank": 4,
+      "recall_at_1": 0.6783625730994152,
+      "recall_at_3": 0.8771929824561403
+    },
+    {
+      "co_strongest": true,
+      "method": "train_fitted_static",
+      "mrr_at_10": 0.833061821219716,
+      "ndcg_at_10": 0.8714141246842781,
+      "optimistic_same_split_selection": false,
+      "query_count": 171,
+      "rank": 1,
+      "recall_at_1": 0.7368421052631579,
+      "recall_at_3": 0.9181286549707602
+    },
+    {
+      "co_strongest": false,
+      "method": "learned_qarf",
+      "mrr_at_10": 0.6968880534670009,
+      "ndcg_at_10": 0.7521473770883798,
+      "optimistic_same_split_selection": true,
+      "query_count": 171,
+      "rank": 6,
+      "recall_at_1": 0.5847953216374269,
+      "recall_at_3": 0.783625730994152
+    }
+  ],
+  "notes": [
+    "Learned QARF and QPAF checkpoints were selected on this validation split; their numbers are optimistic.",
+    "Single seed 20260820; not the three-seed confirmatory result.",
+    "Oracle rows are reported separately (QPAF-M4_4-ORC-001) and never enter selection."
+  ],
+  "proposed_method": {
+    "frozen_checkpoint_sha256": "e4b00ab49e186fffe8b369e26491873304b61177c11fd2ce0f455158e30e5c8e",
+    "method": "qpaf",
+    "mrr_at_10": 0.8282790309106097,
+    "ndcg_at_10": 0.8662796720664044,
+    "optimistic_same_split_selection": true,
+    "query_count": 171,
+    "recall_at_1": 0.7368421052631579,
+    "recall_at_3": 0.9064327485380117
+  },
+  "split": "validation"
+}
