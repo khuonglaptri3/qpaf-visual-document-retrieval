@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "status": "AUTHORIZED_BY_RESEARCH_LEAD_WORKING_SESSION",
+  "task_id": "M3.6",
+  "experiment_id": "QPAF-M3_6-SYS-002",
+  "run_id": "RUN-QPAF-M3_6-SYS-002-20261023T025923Z-A01",
+  "owner": "Khương",
+  "actor": "Claude at the user's request",
+  "experiment_class": "system_test",
+  "evidence_class": "engineering_evidence",
+  "purpose": "Demonstrate Modal hard-memory-limit enforcement for the M3.6 function shape with a below-limit and an above-limit control; no labels, model, checkpoint, workload or quality evaluation",
+  "criteria_revision_ref": "evidence/revisions/m3.6-005/criteria_revision.md",
+  "source_commit": "959f5122106403a50db06af84a2a0388ece0a809",
+  "allowed_tracked_dirty_state": [],
+  "allowed_untracked_state": [
+    "evidence/revisions/m3.6-005/*",
+    "results/m3.6/RUN-QPAF-M3_6-SYS-002-*/*"
+  ],
+  "probe_source": "scripts/m36_memory_probe.py",
+  "controls": {
+    "below": {
+      "target_mib": 2048,
+      "expected": "COMPLETED"
+    },
+    "above": {
+      "target_mib": 4608,
+      "expected": "FAILED_OOM_ATTRIBUTED"
+    }
+  },
+  "gpu": "A10",
+  "gpu_count": 1,
+  "cpu_limit_cores": 2,
+  "memory_limit_mib": 4096,
+  "function_timeout_seconds": 300,
+  "startup_timeout_seconds": 120,
+  "whole_app_watchdog_seconds": 900,
+  "invocations": 2,
+  "automatic_retries": 0,
+  "provider_retry_note": "Modal may retry an input whose container failed. Provider retries of the above-limit control are counted from the provider export and recorded; DEMONSTRATED requires exactly one successful and one failed input, and every container beyond the below one must have errored. Any completed above-limit attempt is ENFORCEMENT_NOT_DEMONSTRATED. If the below control fails, the above control is not invoked.",
+  "runtime": {
+    "python": "3.13.7",
+    "torch": "2.11.0+cu126",
+    "numpy": "2.5.4",
+    "pandas": "3.0.6",
+    "pyarrow": "26.0.0",
+    "modal": "1.5.5"
+  },
+  "base_oci_image": "python:3.13.7-slim-bookworm@sha256:adafcc17694d715c905b4c7bebd96907a1fd5cf183395f0ebc4d3428bd22d92d",
+  "budget_usd": 0.5,
+  "cost_enforcement": "One app, single-use containers, max_containers=1, 300 s function timeout, 900 s whole-app watchdog and app stop; no provider per-run hard dollar cap.",
+  "output_path": "results/m3.6/RUN-QPAF-M3_6-SYS-002-20261023T025923Z-A01",
+  "namespace_policy": "create-once, preserve failure; no rerun authorized by this record",
+  "stop_conditions": [
+    "source/auth drift",
+    "above-limit control completes",
+    "watchdog",
+    "any third invocation"
+  ],
+  "markers": [
+    "_ATTEMPTED.json",
+    "runtime_binding.json",
+    "below.json",
+    "above.json",
+    "_SUCCESS.json or _FAILURE.json or _WATCHDOG.json"
+  ],
+  "test_label_access": false,
+  "development_label_access": false,
+  "training": false,
+  "approval": {
+    "approver": "Tấn Phát (Research Lead)",
+    "text": "I approved as Tấn Phát, confirm for m3.6-005 and approved probe run plan. Finally, I confirm the m3.7 criteria (frozen threshold-seed20260820)",
+    "recorded_utc": "2026-10-23T02:58:43Z",
+    "recorded_by": "Claude at the Research Lead's request",
+    "authority_note": "Research Lead authorizes in place of the M3.6 owner at their own request (M3.2/M3.4 precedent). Khương owner acceptance and Thanh QA acceptance of the result remain required.",
+    "scope": "Two probe invocations only; no G2, quality, confirmation or workload rerun"
+  },
+  "g2_decision_made": false,
+  "modal_profile": "buiphat251399",
+  "modal_workspace": "buiphat251399",
+  "reference_runs_workspace": "tranthanhzt123321",
+  "workspace_note": "A02/A03 ran in workspace tranthanhzt123321; this probe runs in the Research Lead's workspace buiphat251399. Hard-limit enforcement is a Modal platform behaviour; the difference is disclosed for QA."
+}
