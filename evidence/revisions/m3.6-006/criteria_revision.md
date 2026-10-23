@@ -1,7 +1,7 @@
 # M3.6 OOM-attribution source revision — 2026-10-23
 
 **Decision owner:** Tấn Phát — Research Lead / Protocol Owner.
-**Status:** `PENDING_RESEARCH_LEAD_APPROVAL`
+**Status:** `APPROVED_BY_RESEARCH_LEAD`
 **Amends:** [m3.6-005](../m3.6-005/criteria_revision.md), which source
 of OOM attribution counts. Nothing else changes.
 
@@ -75,4 +75,17 @@ The new review goes to `evidence/revisions/m3.6-006/technical_review.json`.
 
 ## Approval
 
-Pending: Tấn Phát's own words go here verbatim, with the time of the reply.
+Tấn Phát (Research Lead), in the working session on 2026-10-23T03:37:29Z,
+recorded verbatim by Claude at their request:
+
+> I approved
+
+The reply answered Claude's request, made after Claude had presented this draft
+(commit `1f6daa7`) in that session: approve or reject m3.6-006, that is,
+whether Modal's runner-kill log lines count as provider exit reasons under the
+four conditions above, knowing the reading was chosen after the probe returned
+`INCONCLUSIVE` and that it reclassifies the same run as
+`ENFORCEMENT_DEMONSTRATED` with no new run.
+
+Khương's owner acceptance and Thanh's QA acceptance of the m3.6-006 review
+remain separate and required.
