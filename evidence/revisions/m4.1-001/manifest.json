@@ -1,0 +1,110 @@
+{
+  "schema_version": 1,
+  "task_id": "M4.1",
+  "owner": "Thanh",
+  "status": "ID_SPLITS_SEALED_CONFIRMATION_ACCESS_CLOSED",
+  "dataset": {
+    "id": "kaistdata/ViMDoc",
+    "revision": "25657f1fe0358f49147148ca89e231291ba42788",
+    "source_parquet_sha256": "7ccac6c8715cc338c041e9276583b9dbd79a818131a9b13a5abf4b9ced73bcc0",
+    "historical_receipt_ref": "artifacts/dataset_materialization_vimdoc.json",
+    "historical_receipt_sha256": "fb26458905dfaa57fbdc5343f305c5ff8340ca62c5d75434345256932417dd05",
+    "historical_document_qrels_sha256": "3643e70c02b777b45a88a8f1489d88db1d53255ef9dea5caf3796b64218a70a0",
+    "document_qrels_hash_replayed_here": false
+  },
+  "g2": {
+    "decision": "GO",
+    "branch": "continue_qpaf",
+    "decision_sha256": "888c51d5c1f5309d80ec9f1218d935d4659512a5867b42b031f275196edad621",
+    "owner_confirmation_sha256": "20e7fdde52b9ea995e83333ffb7d53606353f3714b6f00d2386e4789e4aa298c"
+  },
+  "split": {
+    "selection": "SHA256(UTF8(\"20260820:<query_id>\")), digest bytes then query ID",
+    "development_sample_sha256": "0fc5a2f0de3eb1afa0b14e82e9f143dd57743864ac9468b5a112defb96a3482a",
+    "development_split_namespace": "vimdoc_m3_local_v1:dev_split:20260820",
+    "confirmation_order": "remaining IDs in the same full-universe hash order",
+    "serialization": "UTF-8, one ID per line, final newline",
+    "files": {
+      "train_ids.txt": {
+        "count": 1600,
+        "sha256": "970a9f9c71d9e307c6ecc9c12f1620816de0b568aeaf016964f0aa48176ae26e"
+      },
+      "validation_ids.txt": {
+        "count": 400,
+        "sha256": "cd31064b91d1c977d09d61b98ff3d3e886ba7a338b03b76e8490b331b90ba330"
+      },
+      "confirmation_ids.txt": {
+        "count": 8904,
+        "sha256": "4dd15fb9996eee00439633f07cb3fb0fa87a1a2b217468e532d605fc0e7520ac"
+      }
+    },
+    "query_overlap": 0,
+    "union_count": 10904
+  },
+  "evaluation": {
+    "policy_sha256": {
+      "evidence/M1_FINAL/02_protocol/frozen_protocol.md": "d29061fe4b6f3f9ed9844beab703909fa899c310637cbeef4bd3a9903478d08b",
+      "evidence/M1_FINAL/02_protocol/dataset_split_policy.md": "0d74e1c37ce59698b20e8f043ab8e2293a8ddea947e14274d8bdf79f912e8b0f",
+      "evidence/M1_FINAL/02_protocol/metric_policy.md": "4ce926201bb38b975c3eb43b83b0c719dea48267ff20e8fffa7e7329c0b5579a",
+      "evidence/M1_FINAL/02_protocol/statistical_policy.md": "57827b2ba7e3cb73ef142c0521a17747cbe8bddc510e7ec4e181f3edd4dd3ecd",
+      "evidence/M1_FINAL/02_protocol/baseline_policy.md": "3016ad8581c7d79966c84a0fda578575c98cb2672849f447eb7075001bd171df",
+      "evidence/M1_FINAL/02_protocol/candidate_policy.md": "4a85a2e17cd8adfcc5f301d5393e9e6762221383d3601e0407642bad915d0562",
+      "evidence/M1_FINAL/02_protocol/seed_policy.md": "e5fce4c247c3f7a13fcc8cfd4106aa5c1e2b00c1c58b8709fff9b056e4794049",
+      "evidence/M1_FINAL/02_protocol/run_policy.md": "1a09fbb48bb927d37366d7c8aa98877b1edea02d128aeb5c668144293b48c147"
+    },
+    "unit": "document",
+    "primary_metric": "mean_per_query_document_ndcg_at_10",
+    "page_to_document": "remove_final_underscore_segment",
+    "document_score": "max_fused_page_score",
+    "rank_tie_break": "ascending_document_id",
+    "idcg": "all_relevant_documents",
+    "paired_bootstrap": {
+      "unit": "query_after_seed_averaging",
+      "resamples": 10000,
+      "seed": 20260820,
+      "ci95": "linear_percentile_2.5_97.5"
+    },
+    "implementation_sha256": null,
+    "implementation_status": "PENDING_INDEPENDENT_VERIFICATION"
+  },
+  "method_and_checkpoint": {
+    "methods": [
+      "QARF",
+      "QPAF"
+    ],
+    "seeds": [
+      20260820,
+      20260821,
+      20260822
+    ],
+    "proposed_selection_rule": "validation_document_ndcg_at_10_earliest_epoch_on_tie",
+    "selection_rule_adopted": false,
+    "preparation_ref": "configs/vimdoc_m3_local_v1.json",
+    "preparation_sha256": "0a68c19688519822e4ac58afa51e08ca43ad6350d849f642bac23115bc64be9d",
+    "preparation_status": "PREPARED_NOT_ADOPTED_FOR_EXECUTION",
+    "matched_training_config_sha256": null,
+    "checkpoint_sha256_by_method_seed": null,
+    "status": "PENDING_M4_3_VIMDOC_RUNS_AND_INDEPENDENT_REVIEW"
+  },
+  "baseline_selection": {
+    "policy_sha256": "3016ad8581c7d79966c84a0fda578575c98cb2672849f447eb7075001bd171df",
+    "rule": "validation_mean_document_ndcg_at_10_all_co_strongest_within_1e-12",
+    "selected_baseline_ids_and_hashes": null,
+    "status": "PENDING_M4_2_M4_4"
+  },
+  "access": {
+    "id_only_seal_completed": true,
+    "confirmation_queries_and_labels_opened": false,
+    "confirmation_evaluation_authorized": false,
+    "document_overlap_status": "PENDING_AUTHORIZED_LABEL_ACCESS",
+    "requires_before_open": [
+      "verified ViMDoc candidate/cache and document-qrels contract",
+      "frozen matched method configs and all three seed checkpoints",
+      "independently verified evaluation implementation hash",
+      "all required baseline validation runs and co-strongest selection",
+      "separate result-bearing authorization with one attempt and no automatic retry"
+    ],
+    "test_labels_deserialized": false,
+    "training_executed": false
+  }
+}
