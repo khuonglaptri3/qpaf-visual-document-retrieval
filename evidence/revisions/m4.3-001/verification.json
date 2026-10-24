@@ -1,0 +1,124 @@
+{
+  "checked_utc": "2026-10-23T17:01:32.136049+00:00",
+  "freeze_sha256": "4015c74b54f5ac3d2cbce54f8424c0e9329c009595e81ced5eab0039af7761cc",
+  "fresh_process_replay": {
+    "QARF": {
+      "ancestor_pids": [
+        10984,
+        23040,
+        5992,
+        24004,
+        10476,
+        25740,
+        15104,
+        3840,
+        18444,
+        2084,
+        1176,
+        1060
+      ],
+      "candidate_count": 82255,
+      "checkpoint_numeric_values_checked": 10598,
+      "loaded_source_sha256": {
+        "src/qpaf/m12/model.py": "05c0370343a14b70b1db37e3d2bf6fd852c4ea67f7a967af52fa0ff498adcc3e",
+        "src/qpaf/m24/evaluator.py": "bfd25f331c5c377c708fd1d05f3e3edb85467488301e9658ea9bb486ef476742"
+      },
+      "method": "QARF",
+      "metric_max_abs_difference": 0.0,
+      "parent_pid": 10984,
+      "query_count": 171,
+      "ranking_disagreements": 0,
+      "runtime": {
+        "numpy": "2.5.4",
+        "pandas": "3.0.6",
+        "pyarrow": "26.0.0",
+        "python": "3.13.7",
+        "torch": "2.11.0+cpu"
+      },
+      "score_max_abs_difference": 0.0,
+      "status": "PASS_FRESH_PROCESS",
+      "tolerance": 1e-07,
+      "validation_metrics_recomputed": {
+        "mrr_at_10": 0.6968880534670009,
+        "ndcg_at_10": 0.7521473770883798,
+        "query_count": 171,
+        "recall_at_1": 0.5847953216374269,
+        "recall_at_3": 0.783625730994152
+      },
+      "weight_max_abs_difference": 0.0,
+      "worker_pid": 23176
+    },
+    "QPAF": {
+      "ancestor_pids": [
+        24412,
+        23040,
+        5992,
+        24004,
+        10476,
+        25740,
+        15104,
+        3840,
+        18444,
+        2084,
+        1176,
+        1060
+      ],
+      "candidate_count": 82255,
+      "checkpoint_numeric_values_checked": 10778,
+      "loaded_source_sha256": {
+        "src/qpaf/m12/model.py": "05c0370343a14b70b1db37e3d2bf6fd852c4ea67f7a967af52fa0ff498adcc3e",
+        "src/qpaf/m24/evaluator.py": "bfd25f331c5c377c708fd1d05f3e3edb85467488301e9658ea9bb486ef476742"
+      },
+      "method": "QPAF",
+      "metric_max_abs_difference": 0.0,
+      "parent_pid": 24412,
+      "query_count": 171,
+      "ranking_disagreements": 0,
+      "runtime": {
+        "numpy": "2.5.4",
+        "pandas": "3.0.6",
+        "pyarrow": "26.0.0",
+        "python": "3.13.7",
+        "torch": "2.11.0+cpu"
+      },
+      "score_max_abs_difference": 0.0,
+      "status": "PASS_FRESH_PROCESS",
+      "tolerance": 1e-07,
+      "validation_metrics_recomputed": {
+        "mrr_at_10": 0.8282790309106097,
+        "ndcg_at_10": 0.8662796720664044,
+        "query_count": 171,
+        "recall_at_1": 0.7368421052631579,
+        "recall_at_3": 0.9064327485380117
+      },
+      "weight_max_abs_difference": 0.0,
+      "worker_pid": 18020
+    }
+  },
+  "g2_replay": "EQUAL",
+  "m31_seal_replay": {
+    "candidate_rows": {
+      "train": 386390,
+      "validation": 82255
+    },
+    "parity_identical": true,
+    "record_counts": {
+      "train": 799,
+      "validation": 171
+    },
+    "status": "PASS",
+    "task_id": "M3.1",
+    "test_labels_opened": false,
+    "training_executed": false
+  },
+  "runtime": {
+    "numpy": "2.5.4",
+    "pandas": "3.0.6",
+    "pyarrow": "26.0.0",
+    "python": "3.13.7",
+    "torch": "2.11.0+cpu"
+  },
+  "schema_version": 1,
+  "task_id": "M4.3",
+  "test_labels_deserialized": false
+}

@@ -1,0 +1,167 @@
+{
+  "authorizes_execution": false,
+  "branch_disposition": {
+    "frozen_qpaf": "FROZEN",
+    "g2_decision": "GO",
+    "m4_branch": "continue_qpaf",
+    "negative_qpaf_result": "NOT_TRIGGERED",
+    "revise_once": "NOT_TRIGGERED"
+  },
+  "claim_boundary": "One development seed; the checkpoint was selected on the validation split used by G2, so validation numbers are optimistic. No baseline comparison, no test or confirmation access, no three-seed claim, no protocol change.",
+  "downstream": {
+    "M4.4": "The proposed-method row loads frozen_method.checkpoint by SHA-256.",
+    "M4.5": "Independent fairness/uncertainty audit uses this record unchanged.",
+    "M4.6": "The direction decision cites this freeze; it does not reopen G2."
+  },
+  "evidence_class": "governance_record",
+  "experiment_class": "governance",
+  "experiment_id": "QPAF-M4_3-GAT-001",
+  "frozen_method": {
+    "attempt": "results/m3.4/RUN-QPAF-M3_4-MTH-001-20261022T112102Z-A01/QPAF/20261022T112355-77b54aa0",
+    "authorization_sha256": "4be026b852574e7687fdc4b9337f716aa96a64ac39556ae288193bdba99e5365",
+    "checkpoint": {
+      "path": "results/m3.4/RUN-QPAF-M3_4-MTH-001-20261022T112102Z-A01/QPAF/20261022T112355-77b54aa0/checkpoints/best.pt",
+      "selected_epoch": 19,
+      "sha256": "e4b00ab49e186fffe8b369e26491873304b61177c11fd2ce0f455158e30e5c8e"
+    },
+    "config": {
+      "file_sha256": "3e58a867d11cebf72970cf0c141a90822cd7cbbdad65fb1e081cb14fa4889b58",
+      "frozen_values": {
+        "batch_size": 16,
+        "epochs": 20,
+        "gate": "linear",
+        "learning_rate": 0.01,
+        "loss": "pairwise_logistic (QPAF-M1.5-A001)",
+        "max_grad_norm": 5.0,
+        "optimizer": "adam",
+        "reload_tolerance": 1e-07,
+        "selection_metric": "ndcg_at_10 (validation only; ties keep the earlier epoch)",
+        "weight_decay": 0.0
+      },
+      "path": "results/m3.1/RUN-QPAF-M3_1-SEAL-001-20261021T142631Z-A01/inputs/shared_base.toml",
+      "provenance_config_object_hash": "4e47b74963fbf7da85b917a848feba30461f878c8a165316ecfbf2839d96c76c",
+      "resolved_config_sha256": "8935618aecc229f2d4d0384a04bcf2e54f498d6b04ab10829c3df2362a704be2"
+    },
+    "feature_names": [
+      "score_bm25",
+      "score_dense",
+      "score_visual",
+      "rr_bm25",
+      "rr_dense",
+      "rr_visual",
+      "gap_bm25",
+      "gap_dense",
+      "gap_visual",
+      "disagreement_bm25_dense",
+      "disagreement_bm25_visual",
+      "disagreement_dense_visual",
+      "query_length"
+    ],
+    "gate_granularity": "page",
+    "name": "QPAF",
+    "parameter_count": 42,
+    "resolved_config_sha256": "8935618aecc229f2d4d0384a04bcf2e54f498d6b04ab10829c3df2362a704be2",
+    "run_id": "RUN-QPAF-M3_4-MTH-001-20261022T112102Z-A01",
+    "seed": 20260820,
+    "selection_rule": "maximum validation ndcg_at_10 over 20 epochs; ties keep the earlier epoch",
+    "validation": {
+      "mrr_at_10": 0.8282790309106097,
+      "ndcg_at_10": 0.8662796720664044,
+      "optimistic_same_split_selection": true,
+      "query_count": 171,
+      "recall_at_1": 0.7368421052631579,
+      "recall_at_3": 0.9064327485380117
+    }
+  },
+  "g2": {
+    "decision": "GO",
+    "g2_criteria_sha256": "6dac26ab7b8b54f8c3d7f7cddce598982df789f4691b0a30ea27ad8822d1128a",
+    "g2_decision_sha256": "888c51d5c1f5309d80ec9f1218d935d4659512a5867b42b031f275196edad621",
+    "g2_inputs_sha256": "42074ad0a7766923269f736b879401b96d1ad9a24bcc3621c42727bf7cb0dde6",
+    "g2_owner_confirmation_sha256": "20e7fdde52b9ea995e83333ffb7d53606353f3714b6f00d2386e4789e4aa298c",
+    "m4_branch": "continue_qpaf",
+    "replay_equal": true,
+    "replayed_by": "scripts/decide_g2.py"
+  },
+  "matched_comparator": {
+    "attempt": "results/m3.2/RUN-QPAF-M3_2-MTH-001-20261022T035229Z-A01/QARF/20261022T040759-ff3934df",
+    "authorization_sha256": "ae51a3a5601d43b0a758d5feb69b74b4ba24b0413965e5fee96ed7015ede9b4b",
+    "checkpoint": {
+      "path": "results/m3.2/RUN-QPAF-M3_2-MTH-001-20261022T035229Z-A01/QARF/20261022T040759-ff3934df/checkpoints/best.pt",
+      "selected_epoch": 1,
+      "sha256": "e44ac1a4f3887700a70914fdba8a3e7b35330244e746253d1cd828508be30914"
+    },
+    "gate_granularity": "query",
+    "name": "QARF",
+    "resolved_config_sha256": "8935618aecc229f2d4d0384a04bcf2e54f498d6b04ab10829c3df2362a704be2",
+    "run_id": "RUN-QPAF-M3_2-MTH-001-20261022T035229Z-A01",
+    "seed": 20260820
+  },
+  "owner": "Tấn Phát",
+  "replay": {
+    "QARF": {
+      "candidate_count": 82255,
+      "metric_max_abs_difference": 0.0,
+      "query_count": 171,
+      "ranking_disagreements": 0,
+      "score_max_abs_difference": 0.0,
+      "tolerance": 1e-07,
+      "weight_max_abs_difference": 0.0
+    },
+    "QPAF": {
+      "candidate_count": 82255,
+      "metric_max_abs_difference": 0.0,
+      "query_count": 171,
+      "ranking_disagreements": 0,
+      "score_max_abs_difference": 0.0,
+      "tolerance": 1e-07,
+      "weight_max_abs_difference": 0.0
+    }
+  },
+  "reviews": {
+    "m35_comparison_sha256": "ac29ce5b1d691d8ecc8f8b46e665c726494885de3b73f84a82e8adf8979d0c57",
+    "m36_integrity_sha256": "497b934ce6222e6e4e70363ef374e88236b7592bb549b0c81bbb89b45291e66f"
+  },
+  "schema_version": 1,
+  "sealed_inputs": {
+    "manifest_sha256": "0832af156b79d0448ecc630ff572a0053d7cb5da98b4dac2dec1c6ee49e27893",
+    "replay_status": "PASS",
+    "run_path": "results/m3.1/RUN-QPAF-M3_1-SEAL-001-20261021T142631Z-A01",
+    "seal_pin": {
+      "path": "evidence/revisions/m3.1-001/seal_pin.json",
+      "sha256": "3d5ddd9ca5345885ec64811d80659241b7d063c60a16b6f98b02b0b6ca25f44d"
+    }
+  },
+  "seed_plan": {
+    "completed": [
+      20260820
+    ],
+    "frozen_seed_set": [
+      20260820,
+      20260821,
+      20260822
+    ],
+    "pending": {
+      "20260821": "M5.3",
+      "20260822": "M5.4"
+    },
+    "rule": "Same resolved config and method sources; only training.seed differs; QARF and QPAF use identical seeds."
+  },
+  "source_commit": "69b5309013b0e5a0ed585fd6b666b41d9f64c6c2",
+  "source_sha256": {
+    "src/qpaf/m11/artifacts.py": "a71ac1d3a0ea26e9c7de60d4de4f821d910c72039499adba6ad87c9bc43ec691",
+    "src/qpaf/m12/config.py": "4b50ec1b8f1f48cc47c6028235ea0e18e931349360ac65d48693ea8099fd3f6e",
+    "src/qpaf/m12/features.py": "86eb5d540d2330c0fec263d587581d2f159b77461df85c57f6ecaa64fafa40b6",
+    "src/qpaf/m12/losses.py": "18debc316b02146c38c36a6b1021f0db5e3ba9be55ffdb4c8be153cd11ce5395",
+    "src/qpaf/m12/model.py": "05c0370343a14b70b1db37e3d2bf6fd852c4ea67f7a967af52fa0ff498adcc3e",
+    "src/qpaf/m24/checkpoint.py": "8e1d3882d1c33d16f68a0895b85f856c5519a07fcfcd38a07be6d32888fbbeb4",
+    "src/qpaf/m24/config.py": "5d730b9cb1ba8971ae972729401013e0bb0ccce81310615e2a9088963eb53841",
+    "src/qpaf/m24/dataset.py": "1b2681b163ce4a88a87eeb71ba31f417ee2a4469a9be49845c47d528eb6c5279",
+    "src/qpaf/m24/evaluator.py": "bfd25f331c5c377c708fd1d05f3e3edb85467488301e9658ea9bb486ef476742",
+    "src/qpaf/m24/trainer.py": "242fbcdc3a1cf44c81d29ef7be19aac256b29e5226f870cdf1cee889ff9df7d4"
+  },
+  "status": "FROZEN_TECHNICAL_PASS_PENDING_OWNER_CONFIRMATION",
+  "task_id": "M4.3",
+  "test_labels_opened": false,
+  "training_executed": false
+}
