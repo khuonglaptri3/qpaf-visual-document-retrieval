@@ -1,16 +1,22 @@
 # M4.6 — Main-method direction (`revise_once`)
 
-**Owner:** Tấn Phát (Research Lead). **Direction:** `revise_once`, confirmed
-verbatim in [`owner_confirmation.json`](owner_confirmation.json).
-**Status:** `REVISION_GATE_FAILED_RETURN_TO_RESEARCH_LEAD`. The preregistered
-train-only gate for amendment A004 failed, so A004 is not adopted, no v2 model
-is trained, and the choice between `continue_qpaf` and `negative_qpaf_result`
-returns to the Research Lead. No test or confirmation label was opened.
+**Owner:** Tấn Phát (Research Lead).
+**Final direction:** `continue_qpaf`, confirmed verbatim on 2026-10-24T14:59:12Z
+in [`final_confirmation.json`](final_confirmation.json) ("I approved to be
+continue with continue_qpaf"), event `QPAF-REG-20261024-0005`. The M4.3-frozen
+QPAF-v1 goes to M4.7 unchanged, with the loss-alignment limitation stated.
+
+**How it got there:** the Research Lead first chose `revise_once`
+([`owner_confirmation.json`](owner_confirmation.json)). The preregistered
+train-only gate for amendment A004 failed, so A004 is not adopted and no v2
+model was trained; [`decision.json`](decision.json) keeps its create-time
+status `REVISION_GATE_FAILED_RETURN_TO_RESEARCH_LEAD`, which returned the choice
+to the Research Lead. No test or confirmation label was opened.
 
 Records: [`decision.json`](decision.json) (create-once, pins every input),
 [`loss_alignment_probe.json`](loss_alignment_probe.json),
 [`governance_events.jsonl`](governance_events.jsonl) (`QPAF-REG-20261024-0002`
-to `-0004`), amendment
+to `-0005`), amendment
 [`QPAF-M1.5-A004.md`](../../M1_FINAL/02_protocol/amendments/QPAF-M1.5-A004.md)
 and the design
 [`2026-10-24-m46-revise-once-design.md`](../../../docs/superpowers/specs/2026-10-24-m46-revise-once-design.md).
@@ -55,9 +61,11 @@ loss is tried.
 
 ## Next step
 
-The Research Lead chooses `continue_qpaf` (QPAF-v1 to M4.7, with the loss
-finding as a stated limitation) or `negative_qpaf_result`, in their own words.
-Neither is implied by this record.
+M4.7 freezes the robustness path for QPAF-v1 (M4.3 freeze `4015c74b…61cc`,
+A001 loss). It must state that the A001 loss orders static weights against
+nDCG@10 (Spearman +0.537, minimum at BM25-only) and that A004 did not pass its
+gate. `baseline_policy.md` §3.5 (QPAF against `train_fitted_static`) is decided
+on confirmation. Thanh's review of A004 and the gate result is still pending.
 
 ## Read-only replay
 
