@@ -1,0 +1,36 @@
+# M2.7 frozen shared base for matched QARF/QPAF; `--method` selects gate
+# granularity and nothing else (see configs/m2.7/matched.json).
+schema_version = 1
+experiment_id = "QPAF-M2_7-MTH-001"
+
+[data]
+schema = "qpaf_score_rows_v1" # query_id, page_id, bm25_score, dense_score, visual_score
+max_candidates = 600          # candidate-union cap from the M2.8 cache contract
+positive_threshold = 1        # qrels relevance >= threshold is a positive label
+
+[features]
+schema = "qpaf13_v1"
+query_length_cap = 64
+
+[gate]
+kind = "linear" # linear or mlp
+hidden_dim = 16 # used only by mlp; shared by both granularities
+temperature = 1.0
+
+[loss]
+name = "lambda_pairwise_logistic"  # amendment QPAF-M1.5-A004
+reduction = "query_mean"
+metric_cutoff = 10
+
+[training]
+seed = 20260820 # frozen one-seed development gate seed (seed_policy.md)
+epochs = 20
+batch_size = 16
+optimizer = "adam"
+learning_rate = 0.01
+weight_decay = 0.0
+max_grad_norm = 5.0
+
+[evaluation]
+selection_metric = "ndcg_at_10" # validation only; test labels are never opened here
+reload_tolerance = 1e-7
