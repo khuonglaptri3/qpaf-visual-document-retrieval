@@ -1,0 +1,99 @@
+{
+  "amendment": {
+    "id": "QPAF-M1.5-A004",
+    "path": "evidence/M1_FINAL/02_protocol/amendments/QPAF-M1.5-A004.md",
+    "state": "NOT_ADOPTED_GATE_FAILED"
+  },
+  "authorizes_execution": false,
+  "claim_boundary": "Validation and train only, seed 20260820; no test or confirmation label opened; no performance claim.",
+  "evidence": {
+    "gate_v1": {
+      "G_A": "FAIL",
+      "G_B": "FAIL",
+      "loss": "v1_loss",
+      "max_ndcg": 0.8642244283102866,
+      "min_loss": 0.41519883490564075,
+      "min_loss_ndcg": 0.7290161149394772,
+      "min_loss_weights": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "spearman": 0.5369585638242355,
+      "status": "REVISION_GATE_FAILED"
+    },
+    "gate_v2": {
+      "G_A": "FAIL",
+      "G_B": "FAIL",
+      "loss": "v2_loss",
+      "max_ndcg": 0.8642244283102866,
+      "min_loss": 0.433384655407601,
+      "min_loss_ndcg": 0.7908354436967415,
+      "min_loss_weights": [
+        0.6,
+        0.0,
+        0.4
+      ],
+      "spearman": 0.3606095397140173,
+      "status": "REVISION_GATE_FAILED"
+    },
+    "qpaf_minus_train_fitted_static": {
+      "ci95": [
+        -0.013456822343600072,
+        0.0027826040688651516
+      ],
+      "mean_delta": -0.005134452617873851,
+      "wtl": {
+        "losses": 7,
+        "ties": 161,
+        "wins": 3
+      }
+    },
+    "validation_ndcg_at_10": {
+      "learned_qarf": 0.7521473770883798,
+      "qpaf": 0.8662796720664044,
+      "train_fitted_static": 0.8714141246842781
+    }
+  },
+  "evidence_class": "governance_record",
+  "experiment_class": "governance",
+  "experiment_id": "QPAF-M4_6-GAT-001",
+  "m4_branch": "revise_once",
+  "next_step": "No v2 training. The Research Lead chooses continue_qpaf or negative_qpaf_result; no second loss is tried.",
+  "owner": "Tấn Phát (Research Lead)",
+  "owner_confirmation_ref": "evidence/revisions/m4.6-001/owner_confirmation.json",
+  "pins_sha256": {
+    "a004": "d83a596d5bd7e4e45e8535b6f74064cb4814b1c2b138c6467f33ee7bf35bbbfc",
+    "g2_confirmation": "20e7fdde52b9ea995e83333ffb7d53606353f3714b6f00d2386e4789e4aa298c",
+    "g2_decision": "888c51d5c1f5309d80ec9f1218d935d4659512a5867b42b031f275196edad621",
+    "m43_confirmation": "0223adfc946b846d12df0165c87d87004e1838f14e7f4bb48834454fb44cd145",
+    "m43_freeze": "4015c74b54f5ac3d2cbce54f8424c0e9329c009595e81ced5eab0039af7761cc",
+    "m44_mth_manifest": "aa2ab51814c883b5552b1b45136c1f25dd7d9921a074891f4ae0397f4b03e4a7",
+    "m44_orc_manifest": "6d796a27537c191d5b39436cf6fcaffa9e58b4c01628d9558da6ba261739b5a2",
+    "m45_acceptance": "eb2fe90c794baef1c23c01372125a2eb1ec336029a77d39709c3c24e31144ec0",
+    "m45_verification": "a60349aed7a4da30a65a5700b096dcf922ed5d2fcd4bfe24bc00202d3eb0a41f",
+    "owner_confirmation": "aa6d8e09057b36b88afaea6cc98f62a7007c5eba28bf57130d2448478ecb363c",
+    "probe": "d44be4410b3f14c24c1b1175125ad10ee2489a4dcf5ba96232600d316e3dc8e2",
+    "spec": "834c1afc6e8c7c35d99f0693466b3b8b314e8fef1fe5d7e666565fc3e560b6c4"
+  },
+  "prerequisites": {
+    "G2": "GO_CONFIRMED",
+    "M4.3": "CONFIRMED",
+    "M4.5": "ACCEPTED",
+    "M4.6_owner": "CONFIRMED"
+  },
+  "question": "Freeze the main-method direction: continue_qpaf / revise_once / negative_qpaf_result.",
+  "schema_version": 1,
+  "source_commit": "e7b5197421cefe6e3e0471569ff9ad492a874d81",
+  "status": "REVISION_GATE_FAILED_RETURN_TO_RESEARCH_LEAD",
+  "stop_rule": [
+    "Apply the frozen G2 rule (evidence/revisions/m3.7-001/criteria.json, unchanged) to QPAF-v2 vs QARF-v2.",
+    "G2 NO-GO–PIVOT or PARTIAL–INVESTIGATE leads to negative_qpaf_result; there is no second revision.",
+    "G2 GO makes QPAF-v2 the main method for M4.7 whatever its validation delta against train_fitted_static; v1 and v2 are not picked between on validation.",
+    "QPAF-v1, its M4.3 freeze and the M4.4/M4.5 results remain reported and are never deleted."
+  ],
+  "task_id": "M4.6",
+  "test_labels_opened": false,
+  "timing_disclosure": "revise_once was chosen on 2026-10-24 after the M4.4 validation table, the M4.5 audit and a train-only loss probe were seen; it is post hoc. The A004 loss and the gate thresholds were fixed in the design before the gate ran, and were not changed after it.",
+  "training_executed": false
+}
