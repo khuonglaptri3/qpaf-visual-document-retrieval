@@ -1,0 +1,72 @@
+{
+  "bundle": {
+    "manifest_sha256": "4752eef37d7c6cf73eb36717bd352e21192d112b1464a3f5a61dab86bcc76b86",
+    "run_path": "results/m4.2/RUN-QPAF-M4_2-CAL-001-20261023T150631Z-A01"
+  },
+  "co_strongest_tolerance": 1e-12,
+  "dataset": "ViDoSeek active primary (QPAF-M1.5-A002), page-level, M2.8-002 expanded pool",
+  "evaluator": "qpaf.m24.evaluator.evaluate",
+  "freeze": {
+    "path": "evidence/revisions/m4.3-001/method_freeze.json",
+    "sha256": "4015c74b54f5ac3d2cbce54f8424c0e9329c009595e81ced5eab0039af7761cc"
+  },
+  "limits_seconds": {
+    "MTH": 1800,
+    "ORC": 3600
+  },
+  "metrics": [
+    "ndcg_at_10",
+    "recall_at_1",
+    "recall_at_3",
+    "mrr_at_10"
+  ],
+  "minimum_macro_candidate_recall": 0.95,
+  "oracle": {
+    "candidate_oracle": "scripts.qpaf_candidate_oracle_optimized.candidate_oracle_exact_fast (exact-equal to oracle_study.qpaf._candidate_oracle)",
+    "grids": [
+      "w7",
+      "w66"
+    ],
+    "kinds": [
+      "global",
+      "qarf",
+      "qpaf"
+    ],
+    "max_sweeps": 2,
+    "scores": "qpaf.m25.baselines._normalized (same min-max as the deployable rows)",
+    "selection_eligible": false
+  },
+  "paired": {
+    "comparisons": "qpaf minus each deployable baseline",
+    "resamples": 10000,
+    "scope": "single-seed exploratory; not the three-seed confirmatory test",
+    "seed": 20260820
+  },
+  "parity_tolerance": 1e-07,
+  "primary_metric": "ndcg_at_10",
+  "proposed_method": "qpaf",
+  "roster": [
+    "bm25",
+    "bge_m3",
+    "colqwen25",
+    "uniform_combsum",
+    "rrf_k60",
+    "train_fitted_static",
+    "learned_qarf"
+  ],
+  "saved_predictions": {
+    "learned_qarf": {
+      "path": "results/m3.2/RUN-QPAF-M3_2-MTH-001-20261022T035229Z-A01/QARF/20261022T040759-ff3934df/validation_predictions.json",
+      "sha256": "658c8162b690bff751609298aa8e77bf80cdf035cdbb45711ca5f1050407ab1e"
+    },
+    "qpaf": {
+      "path": "results/m3.4/RUN-QPAF-M3_4-MTH-001-20261022T112102Z-A01/QPAF/20261022T112355-77b54aa0/validation_predictions.json",
+      "sha256": "95ba3ed8e4a395bf0f888866a0e33abec43375d381f37dfa66195e65b7d9db5b"
+    }
+  },
+  "schema_version": 1,
+  "split": "validation",
+  "task_id": "M4.4",
+  "test_labels": "never deserialized; the bundle carries only the sealed test qrels hash",
+  "validation_query_count": 171
+}

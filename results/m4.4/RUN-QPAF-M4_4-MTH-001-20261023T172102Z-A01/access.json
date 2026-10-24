@@ -1,0 +1,12 @@
+{
+  "coverage": {
+    "macro_relevant_page_recall": 1.0,
+    "query_count": 171,
+    "uncovered_queries": 0
+  },
+  "new_training_executed": false,
+  "test_labels_deserialized": false,
+  "train_qrels_used": false,
+  "validation_qrels_deserialized": true,
+  "vimdoc_confirmation_accessed": false
+}

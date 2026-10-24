@@ -1,0 +1,205 @@
+{
+  "schema_version": 1,
+  "task_id": "M4.5",
+  "owner": "Thanh",
+  "technical_reviewer": "Codex, independent replay at Thanh request",
+  "technical_verdict": "PASS",
+  "owner_acceptance": "PENDING_THANH_CONFIRMATION",
+  "scope": "ViDoSeek validation only, 171 queries, one learned seed 20260820",
+  "manifest_sha256": {
+    "m42": "4752eef37d7c6cf73eb36717bd352e21192d112b1464a3f5a61dab86bcc76b86",
+    "mth": "aa2ab51814c883b5552b1b45136c1f25dd7d9921a074891f4ae0397f4b03e4a7",
+    "orc": "6d796a27537c191d5b39436cf6fcaffa9e58b4c01628d9558da6ba261739b5a2"
+  },
+  "train_only": {
+    "queries": 799,
+    "grid_candidates": 66,
+    "weights": [
+      0.0,
+      0.1,
+      0.9
+    ],
+    "mean_ndcg_at_10": 0.8642244283102869,
+    "max_abs_saved_grid_difference": 0.0
+  },
+  "fairness": {
+    "validation_queries": 171,
+    "shared_candidate_rows": 82255,
+    "all_seven_baselines_share_input_hash": true,
+    "max_abs_baseline_score_difference": {
+      "bm25": 0.0,
+      "bge_m3": 0.0,
+      "colqwen25": 0.0,
+      "uniform_combsum": 2.220446049250313e-16,
+      "rrf_k60": 6.938893903907228e-18,
+      "train_fitted_static": 1.1102230246251565e-16
+    },
+    "max_abs_learned_pilot_difference": {
+      "learned_qarf": 0.0,
+      "qpaf": 0.0
+    },
+    "max_abs_per_query_metric_difference": 0.0,
+    "max_abs_aggregate_metric_difference": 0.0,
+    "oracle_separate_and_ineligible": true,
+    "max_abs_oracle_metric_difference": 0.0
+  },
+  "selection": {
+    "co_strongest": [
+      "train_fitted_static"
+    ],
+    "validation_ndcg_at_10": {
+      "bm25": 0.7250954824895824,
+      "bge_m3": 0.7638621756639392,
+      "colqwen25": 0.8692955672259587,
+      "uniform_combsum": 0.8412541217549685,
+      "rrf_k60": 0.8293657046641482,
+      "train_fitted_static": 0.8714141246842781,
+      "learned_qarf": 0.7521473770883798,
+      "qpaf": 0.8662796720664044
+    }
+  },
+  "uncertainty": {
+    "unit": "paired query",
+    "resamples": 10000,
+    "bootstrap_seed": 20260820,
+    "wtl_tolerance": 1e-12,
+    "max_abs_saved_statistics_difference": 0.0,
+    "qpaf_minus_baseline_ndcg_at_10": {
+      "bm25": {
+        "mean_delta": 0.14118418957682186,
+        "median_delta": 0.0,
+        "ci95": [
+          0.10156350682439753,
+          0.1820604419257096
+        ],
+        "wtl": {
+          "wins": 63,
+          "ties": 97,
+          "losses": 11
+        },
+        "sample_std_delta": 0.26928881685577327,
+        "paired_standardized_effect": 0.524285379635493,
+        "top_5pct_positive_gain_query_count": 9,
+        "top_5pct_positive_gain_share": 0.26700589214709347
+      },
+      "bge_m3": {
+        "mean_delta": 0.10241749640246509,
+        "median_delta": 0.0,
+        "ci95": [
+          0.06522797871792563,
+          0.141703677886512
+        ],
+        "wtl": {
+          "wins": 51,
+          "ties": 104,
+          "losses": 16
+        },
+        "sample_std_delta": 0.2573210703319059,
+        "paired_standardized_effect": 0.3980144193802776,
+        "top_5pct_positive_gain_query_count": 9,
+        "top_5pct_positive_gain_share": 0.3226558948968879
+      },
+      "colqwen25": {
+        "mean_delta": -0.003015895159554347,
+        "median_delta": 0.0,
+        "ci95": [
+          -0.007932821641927578,
+          0.0004174732774784378
+        ],
+        "wtl": {
+          "wins": 1,
+          "ties": 167,
+          "losses": 3
+        },
+        "sample_std_delta": 0.028363521550731914,
+        "paired_standardized_effect": -0.1063300674480783,
+        "top_5pct_positive_gain_query_count": 9,
+        "top_5pct_positive_gain_share": 1.0
+      },
+      "uniform_combsum": {
+        "mean_delta": 0.025025550311435853,
+        "median_delta": 0.0,
+        "ci95": [
+          -0.0007126893332326303,
+          0.05040510351876299
+        ],
+        "wtl": {
+          "wins": 31,
+          "ties": 122,
+          "losses": 18
+        },
+        "sample_std_delta": 0.17186824839744083,
+        "paired_standardized_effect": 0.1456089216291128,
+        "top_5pct_positive_gain_query_count": 9,
+        "top_5pct_positive_gain_share": 0.4444285448203056
+      },
+      "rrf_k60": {
+        "mean_delta": 0.03691396740225625,
+        "median_delta": 0.0,
+        "ci95": [
+          0.012233519082969923,
+          0.06258807222885936
+        ],
+        "wtl": {
+          "wins": 32,
+          "ties": 123,
+          "losses": 16
+        },
+        "sample_std_delta": 0.1694282403458238,
+        "paired_standardized_effect": 0.21787375780395474,
+        "top_5pct_positive_gain_query_count": 9,
+        "top_5pct_positive_gain_share": 0.44298952830887023
+      },
+      "train_fitted_static": {
+        "mean_delta": -0.005134452617873851,
+        "median_delta": 0.0,
+        "ci95": [
+          -0.013456822343600072,
+          0.0027826040688651516
+        ],
+        "wtl": {
+          "wins": 3,
+          "ties": 161,
+          "losses": 7
+        },
+        "sample_std_delta": 0.05314063252664987,
+        "paired_standardized_effect": -0.09662008850381934,
+        "top_5pct_positive_gain_query_count": 9,
+        "top_5pct_positive_gain_share": 1.0
+      },
+      "learned_qarf": {
+        "mean_delta": 0.11413229497802459,
+        "median_delta": 0.0,
+        "ci95": [
+          0.07750099280867938,
+          0.1520403030626619
+        ],
+        "wtl": {
+          "wins": 57,
+          "ties": 101,
+          "losses": 13
+        },
+        "sample_std_delta": 0.2488681628482265,
+        "paired_standardized_effect": 0.45860544664215946,
+        "top_5pct_positive_gain_query_count": 9,
+        "top_5pct_positive_gain_share": 0.2809171963163589
+      }
+    }
+  },
+  "interpretation": {
+    "qpaf_minus_strongest_validation_mean": -0.005134452617873851,
+    "qpaf_exceeds_strongest_on_validation": false,
+    "single_seed_exploratory_only": true,
+    "three_seed_or_confirmation_claim": false,
+    "m46_method_direction_decided": false
+  },
+  "limitations": [
+    "QARF and QPAF checkpoints were selected on this validation split.",
+    "M4.3 owner confirmation was recorded after the M4.4 validation run; no test access occurred.",
+    "M4.4 exact-JSON verifier is Python-runtime-sensitive at sub-1e-15 float differences."
+  ],
+  "test_labels_deserialized": false,
+  "vimdoc_confirmation_accessed": false,
+  "new_result_bearing_run": false,
+  "per_query_deltas_sha256": "8c6834dfc9f8525748442ba041d174b8e85e2868ed3dabc87ed878a937985e97"
+}

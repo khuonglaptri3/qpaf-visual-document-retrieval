@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "task_id": "M4.5",
+  "reviewer": "Thanh",
+  "recorded_by": "Codex at Thanh's explicit request",
+  "recorded_at_utc": "2026-10-24T05:04:56Z",
+  "decision": "ACCEPTED",
+  "source": "Thanh's explicit confirmation in the working session on 2026-10-24",
+  "confirmation_text": "Có, ghi Thanh chấp nhận M4.5",
+  "technical_report_ref": "evidence/revisions/m4.5-001/verification.json",
+  "technical_report_sha256": "a60349aed7a4da30a65a5700b096dcf922ed5d2fcd4bfe24bc00202d3eb0a41f",
+  "per_query_ref": "evidence/revisions/m4.5-001/per_query_deltas.csv",
+  "per_query_sha256": "8c6834dfc9f8525748442ba041d174b8e85e2868ed3dabc87ed878a937985e97",
+  "accepted_scope": "Independent M4.5 fairness and uncertainty audit of the one-seed ViDoSeek development validation baseline comparison, including the negative QPAF-minus-strongest point estimate and CI crossing zero",
+  "qpaf_superiority_claimed": false,
+  "m46_direction_decided": false,
+  "test_labels_opened": false
+}
