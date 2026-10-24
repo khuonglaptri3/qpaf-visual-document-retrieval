@@ -1,0 +1,90 @@
+{
+  "block": "oracle_context",
+  "frozen_qpaf_validation_ndcg_at_10": 0.8662796720664044,
+  "global_profiles": {
+    "w66": [
+      0.0,
+      0.3,
+      0.7
+    ],
+    "w7": [
+      0.0,
+      0.0,
+      1.0
+    ]
+  },
+  "notes": [
+    "Oracle rows use validation labels to choose profiles; they are non-deployable upper bounds (baseline_policy.md §2) and never enter strongest-baseline selection.",
+    "Profiles are the frozen W7/W66 sets; no other profile or sweep was searched."
+  ],
+  "rows": [
+    {
+      "gap_vs_frozen_qpaf_ndcg_at_10": 0.0030158951595542494,
+      "grid": "w7",
+      "kind": "global",
+      "method": "oracle_global_w7",
+      "mrr_at_10": 0.8304720133667501,
+      "ndcg_at_10": 0.8692955672259587,
+      "query_count": 171,
+      "recall_at_1": 0.7368421052631579,
+      "recall_at_3": 0.9122807017543859
+    },
+    {
+      "gap_vs_frozen_qpaf_ndcg_at_10": 0.04474978003845109,
+      "grid": "w7",
+      "kind": "qarf",
+      "method": "oracle_qarf_w7",
+      "mrr_at_10": 0.8833820662768032,
+      "ndcg_at_10": 0.9110294521048555,
+      "query_count": 171,
+      "recall_at_1": 0.8128654970760234,
+      "recall_at_3": 0.9649122807017544
+    },
+    {
+      "gap_vs_frozen_qpaf_ndcg_at_10": 0.07659006660143342,
+      "grid": "w7",
+      "kind": "qpaf",
+      "method": "oracle_qpaf_w7",
+      "mrr_at_10": 0.923196881091618,
+      "ndcg_at_10": 0.9428697386678379,
+      "query_count": 171,
+      "recall_at_1": 0.8596491228070176,
+      "recall_at_3": 0.9883040935672515
+    },
+    {
+      "gap_vs_frozen_qpaf_ndcg_at_10": 0.005463196795355008,
+      "grid": "w66",
+      "kind": "global",
+      "method": "oracle_global_w66",
+      "mrr_at_10": 0.8322263993316624,
+      "ndcg_at_10": 0.8717428688617594,
+      "query_count": 171,
+      "recall_at_1": 0.7485380116959064,
+      "recall_at_3": 0.9064327485380117
+    },
+    {
+      "gap_vs_frozen_qpaf_ndcg_at_10": 0.045619945009907514,
+      "grid": "w66",
+      "kind": "qarf",
+      "method": "oracle_qarf_w66",
+      "mrr_at_10": 0.8844611528822055,
+      "ndcg_at_10": 0.911899617076312,
+      "query_count": 171,
+      "recall_at_1": 0.8128654970760234,
+      "recall_at_3": 0.9649122807017544
+    },
+    {
+      "gap_vs_frozen_qpaf_ndcg_at_10": 0.07384530414603285,
+      "grid": "w66",
+      "kind": "qpaf",
+      "method": "oracle_qpaf_w66",
+      "mrr_at_10": 0.9214424951267056,
+      "ndcg_at_10": 0.9401249762124373,
+      "query_count": 171,
+      "recall_at_1": 0.8596491228070176,
+      "recall_at_3": 0.9824561403508771
+    }
+  ],
+  "selection_eligible": false,
+  "split": "validation"
+}

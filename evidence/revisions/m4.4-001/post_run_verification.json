@@ -1,0 +1,47 @@
+{
+  "MTH": {
+    "co_strongest": [
+      "train_fitted_static"
+    ],
+    "qpaf_ndcg_at_10": 0.8662796720664044,
+    "run_id": "RUN-QPAF-M4_4-MTH-001-20261023T172102Z-A01",
+    "status": "PASS",
+    "test_labels_deserialized": false,
+    "validation_ndcg_at_10": {
+      "bge_m3": 0.7638621756639392,
+      "bm25": 0.7250954824895824,
+      "colqwen25": 0.8692955672259587,
+      "learned_qarf": 0.7521473770883798,
+      "rrf_k60": 0.8293657046641482,
+      "train_fitted_static": 0.8714141246842781,
+      "uniform_combsum": 0.8412541217549685
+    }
+  },
+  "ORC": {
+    "oracle_ndcg_at_10": {
+      "oracle_global_w66": 0.8717428688617594,
+      "oracle_global_w7": 0.8692955672259587,
+      "oracle_qarf_w66": 0.911899617076312,
+      "oracle_qarf_w7": 0.9110294521048555,
+      "oracle_qpaf_w66": 0.9401249762124373,
+      "oracle_qpaf_w7": 0.9428697386678379
+    },
+    "recomputed": true,
+    "run_id": "RUN-QPAF-M4_4-ORC-001-20261023T172102Z-A01",
+    "status": "PASS",
+    "test_labels_deserialized": false
+  },
+  "checked_utc": "2026-10-23T17:34:32Z",
+  "pre_run_checks": {
+    "head": "2b0ab8670fa376651f6c369efd1f591667852861",
+    "m42_bundle_verify": "PASS",
+    "m43_freeze_verify": "PASS",
+    "runtime": "3.13.7 2.11.0+cpu 2.5.4 3.0.6 26.0.0",
+    "tests/test_m44_evaluation.py": "14 passed",
+    "tracked_tree_clean_during_execution": true
+  },
+  "schema_version": 1,
+  "task_id": "M4.4",
+  "test_labels_deserialized": false,
+  "verifier": "executor first-pass check (AI-assisted, scripts/run_m44_evaluation.py verify); not the independent M4.5 review"
+}

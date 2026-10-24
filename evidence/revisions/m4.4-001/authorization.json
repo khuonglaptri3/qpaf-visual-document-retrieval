@@ -1,0 +1,223 @@
+{
+  "schema_version": 1,
+  "status": "APPROVED",
+  "drafted_on": "2026-10-24",
+  "note": "Draft authorization manifest per evidence/M1_FINAL/02_protocol/run_policy.md section 3. It grants NOTHING until status is APPROVED and the approval block holds the Research Lead's verbatim approval text and timestamp; its SHA-256 is then recorded in an AUTHORIZATION_RECORDED event and passed to the CLI. Following the M4.2 precedent, this file stays untracked during execution and is committed with the results.",
+  "task_id": "M4.4",
+  "owner": "Tấn Phát",
+  "workbook_task": {
+    "path": "docs/GUILDLINE_OVERVIEWS_PROPOSAL/POAI_Milestone_Group01_Hoan_Chinh.xlsx",
+    "sheet": "Milestones",
+    "row": 51,
+    "title": "Run the full deployable baseline evaluation",
+    "deliverable": "Predictions and fair baseline table with oracle rows separated",
+    "dependency": "G2"
+  },
+  "purpose": "Evaluate the seven frozen deployable baselines and the M4.3 frozen QPAF on the 171 ViDoSeek validation queries, select the strongest deployable baseline (co-strongest within 1e-12), compute single-seed exploratory paired QPAF-minus-baseline statistics, and, separately, W7/W66 oracle context rows on the same pool. Handover to Thanh for the M4.5 fairness/uncertainty audit.",
+  "decisions": {
+    "split": "validation only, confirmed by the Research Lead on 2026-10-23 (test 172 stays sealed)",
+    "oracle": "new W7/W66 oracle rows on the same validation pool, confirmed by the Research Lead on 2026-10-23; frozen profiles only, no other search"
+  },
+  "source_commit": "2b0ab8670fa376651f6c369efd1f591667852861",
+  "git": {
+    "branch": "feature/m4-4-baseline-evaluation (stacked on feature/m4-3-qpaf-freeze)",
+    "tracked_state_policy": "git status --porcelain --untracked-files=no must be empty and HEAD must equal source_commit; the CLI refuses otherwise.",
+    "user_tracked_edit": ".gitignore carries the Research Lead's own uncommitted edit; it is stashed for the execution and restored right after, never committed.",
+    "allowed_untracked": [
+      "evidence/revisions/m4.4-001/authorization.json",
+      "AGENTS.md",
+      "MergeM3.1.md",
+      "MergeM3.2.md",
+      "MergeM3.4.md",
+      "MergeM3.6.md",
+      "MergeM3.7.md",
+      "MergeM3.8.md",
+      "Git-ignored restored M4.2 payload under results/m4.2/RUN-QPAF-M4_2-CAL-001-20261023T150631Z-A01/inputs/"
+    ]
+  },
+  "config": {
+    "path": "configs/m4.4/evaluation.json",
+    "sha256": "799fc3e1e65a8961c4deb77eed2e6ae296f0bae853ba24293a11506e8b477db1"
+  },
+  "inputs": {
+    "m42_bundle": {
+      "run_path": "results/m4.2/RUN-QPAF-M4_2-CAL-001-20261023T150631Z-A01",
+      "manifest_sha256": "4752eef37d7c6cf73eb36717bd352e21192d112b1464a3f5a61dab86bcc76b86",
+      "restore": "scripts/run_m44_evaluation.py restore-inputs copied the seven Git-ignored files from byte-identical local sources; scripts/run_m42_active_primary.py --verify returned PASS"
+    },
+    "m43_freeze": {
+      "path": "evidence/revisions/m4.3-001/method_freeze.json",
+      "sha256": "4015c74b54f5ac3d2cbce54f8424c0e9329c009595e81ced5eab0039af7761cc",
+      "frozen_qpaf_checkpoint_sha256": "e4b00ab49e186fffe8b369e26491873304b61177c11fd2ce0f455158e30e5c8e"
+    },
+    "learned_qarf_checkpoint_sha256": "e44ac1a4f3887700a70914fdba8a3e7b35330244e746253d1cd828508be30914",
+    "static_weights": [
+      0.0,
+      0.1,
+      0.9
+    ],
+    "saved_predictions_for_parity": {
+      "learned_qarf": "658c8162b690bff751609298aa8e77bf80cdf035cdbb45711ca5f1050407ab1e",
+      "qpaf": "95ba3ed8e4a395bf0f888866a0e33abec43375d381f37dfa66195e65b7d9db5b"
+    },
+    "sealed_test_qrels_sha256_never_opened": "05eaaa810e47d35d4eb06b3d36a05f03b002ec9d3c5ee6bce5fc27d2e336d154"
+  },
+  "split": {
+    "split_id": "m2.1-002",
+    "split_manifest": "evidence/revisions/m2.1-002/data_split_manifest.json",
+    "split_sha256": "ea5a19f93dce07cce375d6fb6afed630606e00916c5daa10938562aee9cddfad",
+    "evaluated": "validation",
+    "counts": {
+      "train": 799,
+      "validation": 171,
+      "test": 172
+    },
+    "labels_deserialized": "validation qrels only; train qrels are not used; test qrels are never opened"
+  },
+  "metric": {
+    "primary": "ndcg_at_10",
+    "secondary": [
+      "recall_at_1",
+      "recall_at_3",
+      "mrr_at_10"
+    ],
+    "evaluator": "qpaf.m24.evaluator.evaluate",
+    "evaluator_source_sha256": "bfd25f331c5c377c708fd1d05f3e3edb85467488301e9658ea9bb486ef476742",
+    "evaluation_unit": "page",
+    "tie_break": "score descending, page ID ascending"
+  },
+  "seeds": {
+    "learned_qarf": 20260820,
+    "qpaf": 20260820,
+    "paired_bootstrap": 20260820,
+    "label_free_baselines": "NA",
+    "oracle": "NA"
+  },
+  "experiments": {
+    "QPAF-M4_4-MTH-001": {
+      "run_id_format": "RUN-QPAF-M4_4-MTH-001-<UTC YYYYMMDDTHHMMSSZ at approval>-A01",
+      "run_id": "RUN-QPAF-M4_4-MTH-001-20261023T172102Z-A01",
+      "experiment_class": "learned_evaluation",
+      "evidence_class": "engineering_evidence",
+      "claim_scope": "Validation-only, single-seed development evidence: deployable baseline table, strongest-baseline selection and exploratory paired statistics. Learned checkpoints were selected on this split (optimistic). Becomes scientific_result only after the M4.5 independent review; no test, confirmation or three-seed claim.",
+      "command": [
+        ".venv/Scripts/python.exe",
+        "scripts/run_m44_evaluation.py",
+        "execute",
+        "--experiment",
+        "MTH",
+        "--authorization",
+        "evidence/revisions/m4.4-001/authorization.json",
+        "--expected-authorization-sha256",
+        "<recorded in AUTHORIZATION_RECORDED>",
+        "--run-id",
+        "<run_id>"
+      ],
+      "wall_time_seconds": 1800,
+      "wall_time_basis": "Label-free preflight (scoring, checkpoint reload and CSV writing, no metric) took 29.4 s.",
+      "outputs": [
+        "predictions.csv.gz",
+        "per_query_metrics.csv",
+        "baseline_table.json",
+        "baseline_table.md",
+        "selection.json",
+        "paired_exploratory.json",
+        "learned_parity.json",
+        "access.json",
+        "manifest.json"
+      ],
+      "invocations": 1,
+      "automatic_retries": 0
+    },
+    "QPAF-M4_4-ORC-001": {
+      "run_id_format": "RUN-QPAF-M4_4-ORC-001-<UTC YYYYMMDDTHHMMSSZ at approval>-A01",
+      "run_id": "RUN-QPAF-M4_4-ORC-001-20261023T172102Z-A01",
+      "experiment_class": "oracle_upper_bound",
+      "evidence_class": "scientific_upper_bound",
+      "result_claim_scope": "oracle_upper_bound",
+      "claim_scope": "Non-deployable label-using upper bounds on the same validation pool (global, per-query and per-page W7/W66 oracles). Context only; never eligible for strongest-baseline selection; not learned or deployable improvement.",
+      "command": [
+        ".venv/Scripts/python.exe",
+        "scripts/run_m44_evaluation.py",
+        "execute",
+        "--experiment",
+        "ORC",
+        "--authorization",
+        "evidence/revisions/m4.4-001/authorization.json",
+        "--expected-authorization-sha256",
+        "<recorded in AUTHORIZATION_RECORDED>",
+        "--run-id",
+        "<run_id>"
+      ],
+      "wall_time_seconds": 3600,
+      "wall_time_basis": "Synthetic same-size timing probe (no labels): about 145 s for W7 and 231 s for W66 on 171 queries.",
+      "outputs": [
+        "oracle_predictions.csv.gz",
+        "oracle_per_query.csv",
+        "oracle_table.json",
+        "oracle_details.json",
+        "access.json",
+        "manifest.json"
+      ],
+      "invocations": 1,
+      "automatic_retries": 0
+    }
+  },
+  "actor": "Tấn Phát",
+  "executor": "Claude Code at the Research Lead's request",
+  "runtime": {
+    "python": "3.13.7",
+    "torch": "2.11.0+cpu",
+    "numpy": "2.5.4",
+    "pandas": "3.0.6",
+    "pyarrow": "26.0.0",
+    "device": "cpu",
+    "dtype": "float64",
+    "threads": 1,
+    "deterministic_algorithms": true
+  },
+  "hardware": "Local CPU only (Windows 11); no GPU, no Modal",
+  "limits": {
+    "paid_compute_cost_cap": 0,
+    "wall_time_enforcement": "The run checks elapsed time after scoring and after every oracle query; exceeding the cap fails closed with _FAILED.json.",
+    "retry_rule": "A fresh attempt needs a reviewed reason, a new run_id (A02) with retry_of, a new namespace and a new authorization."
+  },
+  "output": {
+    "namespace_root": "results/m4.4/<run_id>",
+    "create_once_rule": "The CLI refuses an existing namespace and writes _ATTEMPTED.json before any label-bearing work; exactly one of _SUCCESS.json/_FAILED.json follows."
+  },
+  "stop_conditions": [
+    "authorization, config, bundle, freeze, checkpoint or saved-prediction hash drift",
+    "M4.2 bundle verification fails or a restored file differs",
+    "development qrels contain a test query ID, or validation candidate coverage below 0.95 or any uncovered query",
+    "learned QARF or QPAF reload differs from the saved predictions by more than 1e-7",
+    "non-finite score or metric, missing or extra query or candidate row",
+    "wall time above the experiment cap",
+    "dirty tracked tree, HEAD not equal to source_commit, or namespace already exists"
+  ],
+  "pre_run_checks": [
+    "scripts/run_m42_active_primary.py --verify on the restored bundle returns PASS",
+    "scripts/freeze_m43_qpaf.py --verify evidence/revisions/m4.3-001 returns PASS",
+    "tests/test_m44_evaluation.py passes",
+    ".venv reports the runtime versions above"
+  ],
+  "boundaries": {
+    "authorizes_only_these_two_invocations": true,
+    "test_label_deserialization_authorized": false,
+    "confirmation_access_authorized": false,
+    "new_training_authorized": false,
+    "three_seed_or_test_claim_authorized": false,
+    "next_step": "Hand over to Thanh for the M4.5 independent train-only, paired-delta, tie, hash and uncertainty review; M4.6 then freezes the main-method direction."
+  },
+  "approval": {
+    "approver": "Tấn Phát (Research Lead)",
+    "approval_text": "I approved all createria for this authorization",
+    "approved_utc": "2026-10-23T17:21:02Z",
+    "approval_context": "The Research Lead's verbatim reply in the working session to the request to approve this exact draft (MTH and ORC, validation 171 only, test qrels never opened, one invocation each, no retry, CPU, caps 1800 s / 3600 s, source commit 2b0ab86). The same reply did not mention the separate M4.3 owner confirmation, which stays pending.",
+    "recorded_by": "Claude Code at the Research Lead's explicit request; the text above is quoted, not composed"
+  },
+  "independent_review": {
+    "reviewer": "Thanh (M4.5)",
+    "status": "PENDING"
+  }
+}

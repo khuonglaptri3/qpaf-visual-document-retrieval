@@ -1,0 +1,105 @@
+{
+  "authorization_sha256": "8cfd641d0eab3e62f29dbad664a94c5b586b3eec5a75475b22fd690ce710140b",
+  "bundle_manifest_sha256": "4752eef37d7c6cf73eb36717bd352e21192d112b1464a3f5a61dab86bcc76b86",
+  "config_sha256": "799fc3e1e65a8961c4deb77eed2e6ae296f0bae853ba24293a11506e8b477db1",
+  "elapsed_seconds": 14.670532600022852,
+  "evidence_class": "engineering_evidence",
+  "experiment_class": "learned_evaluation",
+  "experiment_id": "QPAF-M4_4-MTH-001",
+  "files": [
+    {
+      "path": "access.json",
+      "sha256": "d3396b9c72818ca818b8993d858d8b38535635723c678bd023d0b1bb32e16b5b",
+      "size_bytes": 296
+    },
+    {
+      "path": "baseline_table.json",
+      "sha256": "ef5840cfb2334ebfdbef5694aaa628e8aff35df6feda606d1ab0f7166af57c09",
+      "size_bytes": 2966
+    },
+    {
+      "path": "baseline_table.md",
+      "sha256": "a346c323895f73643172762e93388ddfd9684bf24fe322509056e3631897a84c",
+      "size_bytes": 1015
+    },
+    {
+      "path": "learned_parity.json",
+      "sha256": "0fa9428c04599859a1e6cfe554c9b171272488c7bd326e9e16735eecf229e58f",
+      "size_bytes": 413
+    },
+    {
+      "path": "paired_exploratory.json",
+      "sha256": "5b3cbe44f86d1d6f314d4747eb0a0ce0b8cb4092a83b070c8686eb6791a0aade",
+      "size_bytes": 14162
+    },
+    {
+      "path": "per_query_metrics.csv",
+      "sha256": "590934eb3d5e34976b6b3fc52739f79d9725730ea3acd5ad08758bafecfc9ecf",
+      "size_bytes": 113257
+    },
+    {
+      "path": "predictions.csv.gz",
+      "sha256": "dfb7f39e168fee60fbd8d9b8438948bb288d2ad8e900b463913f5800cf409713",
+      "size_bytes": 7099484
+    },
+    {
+      "path": "selection.json",
+      "sha256": "e133b8dcd3406e6d28e4cae087d30b391feb479a066c452a3af76f5a2e864819",
+      "size_bytes": 1428
+    }
+  ],
+  "freeze_sha256": "4015c74b54f5ac3d2cbce54f8424c0e9329c009595e81ced5eab0039af7761cc",
+  "run_id": "RUN-QPAF-M4_4-MTH-001-20261023T172102Z-A01",
+  "runtime": {
+    "numpy": "2.5.4",
+    "pandas": "3.0.6",
+    "pyarrow": "26.0.0",
+    "python": "3.13.7",
+    "torch": "2.11.0+cpu"
+  },
+  "schema_version": 1,
+  "source_commit": "2b0ab8670fa376651f6c369efd1f591667852861",
+  "source_hashes": {
+    "configs/m4.4/evaluation.json": "799fc3e1e65a8961c4deb77eed2e6ae296f0bae853ba24293a11506e8b477db1",
+    "scripts/audit_m35_paired.py": "f35a26de4c25b836eb64abdad459f52ff711b2d8ef8c7bae2331b513de906976",
+    "scripts/audit_m36_integrity.py": "2cc9925821ca6deee7e667fd5f6e2e617c88a828c15853c9340ba860ee71b2db",
+    "scripts/qpaf_candidate_oracle_optimized.py": "3322b024fa689e0b08ba2e9d6cd08347b5e889cbd26980c4cd19a3a002d4c4e5",
+    "scripts/run_m44_evaluation.py": "affbf7d6effad08d65f69a8c5c2c772b2738f77d18ff1dca25a0d0b19f6265fa",
+    "src/oracle_study/metrics.py": "bfa630a5450e23f5aab7269aedcb96172bc3096d16e1e3078af5e7b26f97e0f9",
+    "src/oracle_study/profiles.py": "8dec9449b6d54651a10dc51d22fc7245fadd35a48b6d988261392260ab3a0999",
+    "src/oracle_study/qpaf.py": "00ce93a76cf80d43b9df394550b1e6799de8285772b12811b19c768f7ea44d53",
+    "src/qpaf/m12/features.py": "86eb5d540d2330c0fec263d587581d2f159b77461df85c57f6ecaa64fafa40b6",
+    "src/qpaf/m12/model.py": "05c0370343a14b70b1db37e3d2bf6fd852c4ea67f7a967af52fa0ff498adcc3e",
+    "src/qpaf/m24/checkpoint.py": "8e1d3882d1c33d16f68a0895b85f856c5519a07fcfcd38a07be6d32888fbbeb4",
+    "src/qpaf/m24/config.py": "5d730b9cb1ba8971ae972729401013e0bb0ccce81310615e2a9088963eb53841",
+    "src/qpaf/m24/dataset.py": "1b2681b163ce4a88a87eeb71ba31f417ee2a4469a9be49845c47d528eb6c5279",
+    "src/qpaf/m24/evaluator.py": "bfd25f331c5c377c708fd1d05f3e3edb85467488301e9658ea9bb486ef476742",
+    "src/qpaf/m24/trainer.py": "242fbcdc3a1cf44c81d29ef7be19aac256b29e5226f870cdf1cee889ff9df7d4",
+    "src/qpaf/m25/baselines.py": "7ac6ee18756b72afe6011522d8becd2a058724d43512acb6876f36c8f72bc1f6",
+    "src/qpaf/m42/active_primary.py": "0713c103e0bb6ede415f6f7e806c289b53728506e2bdadf8e4adab01ec71f79f",
+    "src/qpaf/m44/__init__.py": "b6a093f0daccaeb0bfafba0b49a683462e01c7e6b807233e582da8499f698cb6",
+    "src/qpaf/m44/common.py": "bb160e3bd2355cdf72c66982c6ee4e041520c96fe97f69a2080546b1fc54968c",
+    "src/qpaf/m44/evaluation.py": "e6f7e7251bb2a0a4ed9e54bff22c6bd945609e3433264a83afdcb277ab827971",
+    "src/qpaf/m44/oracle.py": "b9416d9479124af5c0609bd79eaf815c466d237ec9d93f3c0cd83a528311b701",
+    "tests/test_m44_evaluation.py": "4d47f367578be1dd6e3fd6fb31e246bc4aacca4cadf487a7111afc89667045d3"
+  },
+  "status": "PASS_VALIDATION_EVALUATION_PENDING_INDEPENDENT_REVIEW",
+  "summary": {
+    "co_strongest": [
+      "train_fitted_static"
+    ],
+    "qpaf_ndcg_at_10": 0.8662796720664044,
+    "validation_ndcg_at_10": {
+      "bge_m3": 0.7638621756639392,
+      "bm25": 0.7250954824895824,
+      "colqwen25": 0.8692955672259587,
+      "learned_qarf": 0.7521473770883798,
+      "rrf_k60": 0.8293657046641482,
+      "train_fitted_static": 0.8714141246842781,
+      "uniform_combsum": 0.8412541217549685
+    }
+  },
+  "task_id": "M4.4",
+  "test_labels_deserialized": false,
+  "validation_query_count": 171
+}
