@@ -1,0 +1,267 @@
+{
+  "authorizes_execution": false,
+  "baselines": {
+    "bundle_manifest_sha256": "4752eef37d7c6cf73eb36717bd352e21192d112b1464a3f5a61dab86bcc76b86",
+    "co_strongest": [
+      "train_fitted_static"
+    ],
+    "contracts_sha256": "fa91905406f41fcff3bfd3fcb9e86b9169a7526ea3eb17c8df74ae5f1a247dcf",
+    "roster_size": 7
+  },
+  "claim_boundary": "No new result. Validation numbers stay single-seed and optimistic. The record authorizes no run; R3-R7 each need their own authorization.",
+  "claim_rules": {
+    "ref": "evidence/M1_FINAL/02_protocol/frozen_protocol.md",
+    "section": "§5 items 1-9",
+    "sha256": "d29061fe4b6f3f9ed9844beab703909fa899c310637cbeef4bd3a9903478d08b"
+  },
+  "evaluation": {
+    "evaluator_sha256": "bfd25f331c5c377c708fd1d05f3e3edb85467488301e9658ea9bb486ef476742",
+    "oracle_sha256": "b9416d9479124af5c0609bd79eaf815c466d237ec9d93f3c0cd83a528311b701",
+    "statistics": "paired query bootstrap, 10,000 resamples, seed 20260820, percentile CI95, W/T/L, top-5% positive-gain share"
+  },
+  "evidence_class": "governance_record",
+  "experiment_class": "governance",
+  "experiment_id": "QPAF-M4_7-GAT-001",
+  "gate": "G2A",
+  "held_out": {
+    "dataset": "Qiuchen-Wang/ViDoSeek",
+    "ids_sha256": "d34210f901759a4f174da0c6c2e9b810616dcb33a71a0bd128a25d5d8d12e6f6",
+    "labels_opened": false,
+    "query_count": 172,
+    "sealed_qrels_sha256": "05eaaa810e47d35d4eb06b3d36a05f03b002ec9d3c5ee6bce5fc27d2e336d154",
+    "split": "test"
+  },
+  "limitations": [
+    "The A001 training loss orders static fusion weights against nDCG@10 (train Spearman +0.537; minimum at BM25-only [1, 0, 0], the lowest-nDCG grid point).",
+    "Amendment A004 (|ΔnDCG@10|-weighted pairwise loss) did not pass its preregistered train-only gate and is not adopted.",
+    "Learned QARF is a weak comparator (validation nDCG@10 0.752147), so QPAF − QARF mainly shows page-level gating tolerating that loss better; frozen_protocol.md §5 item 4 (QPAF beats train_fitted_static) is the decisive test."
+  ],
+  "main_method": {
+    "checkpoint_path": "results/m3.4/RUN-QPAF-M3_4-MTH-001-20261022T112102Z-A01/QPAF/20261022T112355-77b54aa0/checkpoints/best.pt",
+    "checkpoint_sha256": "e4b00ab49e186fffe8b369e26491873304b61177c11fd2ce0f455158e30e5c8e",
+    "config_sha256": "3e58a867d11cebf72970cf0c141a90822cd7cbbdad65fb1e081cb14fa4889b58",
+    "freeze_sha256": "4015c74b54f5ac3d2cbce54f8424c0e9329c009595e81ced5eab0039af7761cc",
+    "loss": "pairwise_logistic / query_mean (A001)",
+    "name": "QPAF-v1",
+    "selected_epoch": 19,
+    "selection_rule": "max validation nDCG@10 over 20 epochs; ties keep the earlier epoch"
+  },
+  "matched_comparator": {
+    "checkpoint_path": "results/m3.2/RUN-QPAF-M3_2-MTH-001-20261022T035229Z-A01/QARF/20261022T040759-ff3934df/checkpoints/best.pt",
+    "checkpoint_sha256": "e44ac1a4f3887700a70914fdba8a3e7b35330244e746253d1cd828508be30914",
+    "name": "QARF-v1"
+  },
+  "pins_sha256": {
+    "evaluator": "bfd25f331c5c377c708fd1d05f3e3edb85467488301e9658ea9bb486ef476742",
+    "frozen_protocol": "d29061fe4b6f3f9ed9844beab703909fa899c310637cbeef4bd3a9903478d08b",
+    "g2_confirmation": "20e7fdde52b9ea995e83333ffb7d53606353f3714b6f00d2386e4789e4aa298c",
+    "g2_decision": "888c51d5c1f5309d80ec9f1218d935d4659512a5867b42b031f275196edad621",
+    "m41_manifest": "03673b16ef666c6d8756939efebdbcc73ff1c61a5abcff6c743400e5da6c4668",
+    "m42_baseline_contracts": "fa91905406f41fcff3bfd3fcb9e86b9169a7526ea3eb17c8df74ae5f1a247dcf",
+    "m42_manifest": "4752eef37d7c6cf73eb36717bd352e21192d112b1464a3f5a61dab86bcc76b86",
+    "m42_shared_base": "3e58a867d11cebf72970cf0c141a90822cd7cbbdad65fb1e081cb14fa4889b58",
+    "m42_shared_inputs": "51eaa23303cb7086c3709249f2b400172ee006b942f26f47ddacc80b508c3dd0",
+    "m42_test_ids": "d34210f901759a4f174da0c6c2e9b810616dcb33a71a0bd128a25d5d8d12e6f6",
+    "m43_confirmation": "0223adfc946b846d12df0165c87d87004e1838f14e7f4bb48834454fb44cd145",
+    "m43_freeze": "4015c74b54f5ac3d2cbce54f8424c0e9329c009595e81ced5eab0039af7761cc",
+    "m44_mth_manifest": "aa2ab51814c883b5552b1b45136c1f25dd7d9921a074891f4ae0397f4b03e4a7",
+    "m44_mth_success": "f2a475bc3b9ca70b2ad3aed0c7b176ac1e7f1259033731f6eb7fb0b8fb7ca09b",
+    "m44_orc_manifest": "6d796a27537c191d5b39436cf6fcaffa9e58b4c01628d9558da6ba261739b5a2",
+    "m44_orc_success": "8b9915ef424ce33b7e03056bb47fa176ca6bc5b7e81ac911f7ee462135891b95",
+    "m45_acceptance": "eb2fe90c794baef1c23c01372125a2eb1ec336029a77d39709c3c24e31144ec0",
+    "m45_verification": "a60349aed7a4da30a65a5700b096dcf922ed5d2fcd4bfe24bc00202d3eb0a41f",
+    "m46_decision": "66392aecd1871f8860a933bf14ef601edcbc27f90b5dc192c5402ff5f2987b6f",
+    "m46_final_confirmation": "6ff607e98ee0a79c021b5c2c0ce69afa036b7b7ef2950736788545be7fd49bb3",
+    "oracle": "b9416d9479124af5c0609bd79eaf815c466d237ec9d93f3c0cd83a528311b701",
+    "qarf_checkpoint": "e44ac1a4f3887700a70914fdba8a3e7b35330244e746253d1cd828508be30914",
+    "qpaf_checkpoint": "e4b00ab49e186fffe8b369e26491873304b61177c11fd2ce0f455158e30e5c8e",
+    "spec": "429758342b646ba3ca23e02977c99cbec6c70e08c1811c43ce6f4139501e0920"
+  },
+  "prerequisites": {
+    "G2": "GO_CONFIRMED",
+    "M4.1": "SEALED",
+    "M4.2": "BUNDLE_PINNED",
+    "M4.3": "CONFIRMED",
+    "M4.4": "SUCCESS",
+    "M4.5": "ACCEPTED",
+    "M4.6": "CONTINUE_QPAF_CONFIRMED"
+  },
+  "roster": [
+    {
+      "allowed_data": [
+        "none"
+      ],
+      "authorization": "not_required",
+      "depends_on": [],
+      "id": "R1",
+      "output": "Preregistration record",
+      "owner": "Thanh",
+      "task": "M5.1",
+      "tier": "core",
+      "title": "Preregister the three-seed matrix, ablation order and drop-first rules within the optional tier"
+    },
+    {
+      "allowed_data": [
+        "no_labels"
+      ],
+      "authorization": "not_required",
+      "depends_on": [],
+      "id": "R2",
+      "output": "Cache-identity receipt",
+      "owner": "Khương",
+      "task": "M5.2",
+      "tier": "core",
+      "title": "Seed cache-parity receipt; external labels stay sealed"
+    },
+    {
+      "allowed_data": [
+        "train",
+        "validation"
+      ],
+      "authorization": "required",
+      "depends_on": [
+        "R1",
+        "R2"
+      ],
+      "id": "R3",
+      "output": "Seed-2 checkpoints, predictions, telemetry and independent reviews",
+      "owner": "Tấn Phát",
+      "task": "M5.3",
+      "tier": "core",
+      "title": "Matched QARF/QPAF seed 20260821, with fresh-process reload (<= 1e-7) and finite-output checks"
+    },
+    {
+      "allowed_data": [
+        "train",
+        "validation"
+      ],
+      "authorization": "required",
+      "depends_on": [
+        "R1",
+        "R2"
+      ],
+      "id": "R4",
+      "output": "Seed-3 checkpoints, predictions, telemetry and independent reviews",
+      "owner": "Tấn Phát",
+      "task": "M5.4",
+      "tier": "core",
+      "title": "Matched QARF/QPAF seed 20260822, with fresh-process reload (<= 1e-7) and finite-output checks"
+    },
+    {
+      "allowed_data": [
+        "validation"
+      ],
+      "authorization": "required",
+      "depends_on": [
+        "R1"
+      ],
+      "id": "R5",
+      "output": "One-factor checks and efficiency report",
+      "owner": "Khương",
+      "task": "M5.5",
+      "tier": "optional",
+      "title": "Retriever/normalization one-factor checks; latency and memory on the frozen checkpoints"
+    },
+    {
+      "allowed_data": [
+        "validation"
+      ],
+      "authorization": "required",
+      "depends_on": [
+        "R1"
+      ],
+      "id": "R6",
+      "output": "One-factor ablation table",
+      "owner": "Tấn Phát",
+      "task": "M5.6",
+      "tier": "optional",
+      "title": "Feature and query-vs-page conditioning ablations"
+    },
+    {
+      "allowed_data": [
+        "test"
+      ],
+      "authorization": "required",
+      "depends_on": [
+        "R3",
+        "R4"
+      ],
+      "id": "R7",
+      "output": "Test predictions, metrics and paired statistics for M5.7",
+      "owner": "Tấn Phát runs, Thanh verifies",
+      "task": "TEST-172",
+      "tier": "core",
+      "title": "One sealed evaluation of the 7 baselines, QARF x3, QPAF x3 and the W7/W66 oracle context rows"
+    },
+    {
+      "allowed_data": [
+        "r7_outputs"
+      ],
+      "authorization": "not_required",
+      "depends_on": [
+        "R7"
+      ],
+      "id": "R8",
+      "output": "Robustness evidence for G3",
+      "owner": "Thanh",
+      "task": "M5.7",
+      "tier": "core",
+      "title": "Three-seed aggregation: seed-averaged paired CI, W/T/L, stability, subgroups, errors"
+    },
+    {
+      "allowed_data": [
+        "workbook"
+      ],
+      "authorization": "required",
+      "depends_on": [
+        "R8"
+      ],
+      "id": "R9",
+      "output": "Frozen external result or explicit not-run record",
+      "owner": "Thanh",
+      "task": "M5.8",
+      "tier": "deferred",
+      "title": "Sealed external benchmark"
+    },
+    {
+      "allowed_data": [
+        "none"
+      ],
+      "authorization": "not_applicable",
+      "depends_on": [],
+      "id": "R10",
+      "output": "None; the claim is bounded to ViDoSeek",
+      "owner": "—",
+      "task": "ViMDoc",
+      "tier": "deferred",
+      "title": "ViMDoc confirmation 8,904 (NOT_RUN_DEFERRED: no verified ViMDoc score cache)"
+    }
+  ],
+  "roster_rules": [
+    "Core items cannot be dropped. M5.1 orders drops only within the optional tier.",
+    "R3 and R4 each include a fresh-process reload check (<= 1e-7) and a finite output check before their checkpoints may enter R7.",
+    "R7 runs once, after R3 and R4 have independent reviews. No seed, checkpoint, baseline or method choice is made after it. Oracle rows are label-using upper bounds, never selectable.",
+    "Only R7 may read test labels. R5 and R6 use validation only, and their results cannot change the frozen method, config or checkpoints."
+  ],
+  "schema_version": 1,
+  "seed_plan": {
+    "completed": [
+      20260820
+    ],
+    "pending": [
+      20260821,
+      20260822
+    ],
+    "rule": "same resolved config and method sources; only training.seed changes"
+  },
+  "source_commit": "8102e15262b352695380d93640560c6b3c5d5e9d",
+  "status": "G2A_FROZEN_TECHNICAL_PASS_PENDING_OWNER_CONFIRMATION",
+  "task_id": "M4.7",
+  "test_labels_opened": false,
+  "training_executed": false,
+  "vimdoc": {
+    "query_count": 8904,
+    "reason": "no verified ViMDoc score cache; the claim is bounded to ViDoSeek",
+    "status": "NOT_RUN_DEFERRED"
+  }
+}
