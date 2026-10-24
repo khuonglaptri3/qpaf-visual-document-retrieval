@@ -1,0 +1,17 @@
+{
+  "authorizes_execution": false,
+  "confirmation_text": "I confirm to proceed on revise_once cause it potentially lead to better results",
+  "confirmed_at_utc": "2026-10-24T09:02:43Z",
+  "confirmer": "Tấn Phát (Research Lead / M4.6 owner)",
+  "context": "The reply followed Claude's report of the train-only loss probe (the A001 loss is minimized by BM25-only weights, the lowest-nDCG grid point) and Claude's recommendation of a controlled revise_once. confirmed_at_utc is the time Claude read the reply; the reply arrived just before.",
+  "decision": "CONFIRMED",
+  "experiment_id": "QPAF-M4_6-GAT-001",
+  "m4_branch": "revise_once",
+  "recorded_at_utc": "2026-10-24T14:21:58Z",
+  "recorded_by": "Claude Code at the Research Lead's request",
+  "schema_version": 1,
+  "scope": "Confirms the M4.6 direction revise_once only. It does not approve amendment A004, the gate thresholds or any run, and it does not open test or confirmation labels.",
+  "source": "Research Lead's reply in the Claude Code working session",
+  "task_id": "M4.6",
+  "test_labels_opened": false
+}

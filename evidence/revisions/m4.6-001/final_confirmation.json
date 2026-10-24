@@ -1,0 +1,32 @@
+{
+  "amendment": {
+    "id": "QPAF-M1.5-A004",
+    "state": "NOT_ADOPTED_GATE_FAILED"
+  },
+  "authorizes_execution": false,
+  "confirmation_text": "I approved to be continue with continue_qpaf",
+  "confirmed_at_utc": "2026-10-24T14:59:12Z",
+  "confirmer": "Tấn Phát (Research Lead / M4.6 owner)",
+  "context": "The reply followed decision.json (revise_once, REVISION_GATE_FAILED_RETURN_TO_RESEARCH_LEAD) and Claude's recommendation of continue_qpaf: QPAF-v1 minus train_fitted_static is -0.005134 with CI95 [-0.013457, +0.002783] on single-seed validation, and baseline_policy.md section 3.5 is decided on confirmation. confirmed_at_utc is the time Claude read the reply.",
+  "decision": "CONFIRMED",
+  "decision_ref": "evidence/revisions/m4.6-001/decision.json",
+  "decision_sha256": "66392aecd1871f8860a933bf14ef601edcbc27f90b5dc192c5402ff5f2987b6f",
+  "experiment_id": "QPAF-M4_6-GAT-001",
+  "m4_branch_final": "continue_qpaf",
+  "main_method": {
+    "freeze_ref": "evidence/revisions/m4.3-001/method_freeze.json",
+    "freeze_sha256": "4015c74b54f5ac3d2cbce54f8424c0e9329c009595e81ced5eab0039af7761cc",
+    "loss": "pairwise_logistic / query_mean (A001)",
+    "name": "QPAF-v1"
+  },
+  "probe_ref": "evidence/revisions/m4.6-001/loss_alignment_probe.json",
+  "probe_sha256": "d44be4410b3f14c24c1b1175125ad10ee2489a4dcf5ba96232600d316e3dc8e2",
+  "recorded_at_utc": "2026-10-24T14:59:12Z",
+  "recorded_by": "Claude Code at the Research Lead's request",
+  "required_limitation": "The A001 training loss orders static fusion weights against train nDCG@10 (Spearman +0.537; minimum at BM25-only [1,0,0], the lowest-nDCG grid point). M4.7 and M6.6 must state this limitation.",
+  "schema_version": 1,
+  "scope": "Confirms continue_qpaf as the final M4.6 direction: the M4.3-frozen QPAF-v1 goes to M4.7 unchanged. It does not authorize any run, does not decide M4.7, and opens no test or confirmation labels.",
+  "source": "Research Lead's reply in the Claude Code working session",
+  "task_id": "M4.6",
+  "test_labels_opened": false
+}
