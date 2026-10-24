@@ -1,0 +1,20 @@
+{
+  "authorizes_execution": false,
+  "confirmation_text": "xác nhận",
+  "confirmed_at_utc": "2026-10-24T16:01:24Z",
+  "confirmer": "Tấn Phát (Research Lead / M4.7 owner)",
+  "context": "The reply answered Claude's request to confirm, or not, the G2A freeze after Claude had listed the frozen QPAF-v1 method, config and checkpoints, the QARF-v1 comparator, the ViDoSeek test-172 held-out contract, ViMDoc NOT_RUN_DEFERRED, the three limitations, the R1-R10 roster with its tiers and rules, and the verify results. confirmed_at_utc is the time Claude read the reply.",
+  "decision": "CONFIRMED",
+  "experiment_id": "QPAF-M4_7-GAT-001",
+  "freeze_ref": "evidence/revisions/m4.7-001/g2a_freeze.json",
+  "freeze_sha256": "26d9bab6e7d47fe7dd1e89f6bec2c95265641df5cde8d9bd25c867b9d3a73217",
+  "frozen_checkpoint_sha256": "e4b00ab49e186fffe8b369e26491873304b61177c11fd2ce0f455158e30e5c8e",
+  "gate": "G2A",
+  "recorded_at_utc": "2026-10-24T16:01:24Z",
+  "recorded_by": "Claude Code at the Research Lead's request",
+  "schema_version": 1,
+  "scope": "Confirms the G2A freeze: QPAF-v1 as the main method with its config and checkpoints, the held-out contract on ViDoSeek test 172, and the R1-R10 roster with its tiers and rules. It authorizes no run (R3-R7 each need their own authorization) and opens no test, ViMDoc or confirmation labels.",
+  "source": "Research Lead's reply in the Claude Code working session",
+  "task_id": "M4.7",
+  "test_labels_opened": false
+}

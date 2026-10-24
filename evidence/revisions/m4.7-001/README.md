@@ -1,6 +1,10 @@
 # M4.7 — G2A: freeze the robustness path
 
-**Owner:** Tấn Phát (Research Lead). **Status:**
+**Owner:** Tấn Phát (Research Lead). **Status:** frozen, technical replay
+`PASS`, **confirmed by the Research Lead** on 2026-10-24T16:01:24Z ("xác nhận",
+recorded verbatim in [`owner_confirmation.json`](owner_confirmation.json), event
+`QPAF-REG-20261024-0006` in [`governance_events.jsonl`](governance_events.jsonl)).
+`g2a_freeze.json` is create-once and keeps its creation-time status
 `G2A_FROZEN_TECHNICAL_PASS_PENDING_OWNER_CONFIRMATION`. **Experiment:**
 `QPAF-M4_7-GAT-001` (`governance` / `governance_record`). Nothing was trained or
 evaluated; no test, ViMDoc or confirmation label was deserialized.
