@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "task_id": "M5.2",
+  "recorded_at_utc": "2026-10-25T11:24:55+00:00",
+  "experiment_class": "integration_test",
+  "evidence_class": "engineering_evidence",
+  "tested_implementation_commit": "a127eaedc557dabbe0b9b349eb13febfffe67132",
+  "source_bytes_note": "The tests ran on the exact source bytes subsequently committed in the implementation commit.",
+  "source_files_sha256": {
+    "src/qpaf/m52/__init__.py": "bde752ebe5e9bf578b96e8ce54bbd578a49efc8e1ea861ba4f2abf09422eee78",
+    "src/qpaf/m52/cache_parity.py": "045345b7020c38b0525f28656a3560339675fe4d2da141e467cdeb00182d279c",
+    "scripts/verify_m52_cache_parity.py": "b4bc86e7857fa1252d2425a8822269b4a8d05f1f84f1a62fa21f751119d86f6b",
+    "tests/test_m52_cache_parity.py": "2cf18b33ad03484fcfea1d027ba0ba4faa470a59c759906f1163b09e3edfe944"
+  },
+  "runtime": {
+    "python": "3.13.7",
+    "torch": "2.11.0+cpu",
+    "numpy": "2.5.4",
+    "pandas": "3.0.6",
+    "pyarrow": "26.0.0"
+  },
+  "checks": [
+    {
+      "command": "python -X utf8 -m unittest discover -s tests -p test_m52_cache_parity.py -q",
+      "tests": 13,
+      "failures": 0,
+      "errors": 0,
+      "status": "PASS"
+    },
+    {
+      "command": "python -X utf8 -m unittest discover -s tests -p test_m51_preregistration.py -q",
+      "tests": 4,
+      "failures": 0,
+      "errors": 0,
+      "status": "PASS"
+    },
+    {
+      "command": "git diff --cached --check",
+      "status": "PASS"
+    }
+  ],
+  "full_suite_executed": false,
+  "independent_human_review": "PENDING_USER_REVIEW",
+  "scientific_result": false
+}

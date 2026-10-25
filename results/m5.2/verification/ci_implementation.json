@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "task_id": "M5.2",
+  "implementation_commit": "a127eaedc557dabbe0b9b349eb13febfffe67132",
+  "run_id": 40189080433,
+  "url": "https://github.com/khuonglaptri3/qpaf-visual-document-retrieval/actions/runs/40189080433",
+  "status": "completed",
+  "conclusion": "success",
+  "jobs": [
+    {
+      "name": "tests (windows-latest, 3.14)",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/khuonglaptri3/qpaf-visual-document-retrieval/actions/runs/40189080433/job/121156019389"
+    },
+    {
+      "name": "tests (ubuntu-latest, 3.11)",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/khuonglaptri3/qpaf-visual-document-retrieval/actions/runs/40189080433/job/121156019411"
+    },
+    {
+      "name": "tests (windows-latest, 3.11)",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/khuonglaptri3/qpaf-visual-document-retrieval/actions/runs/40189080433/job/121156019448"
+    },
+    {
+      "name": "method-core (ubuntu-latest)",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/khuonglaptri3/qpaf-visual-document-retrieval/actions/runs/40189080433/job/121156019455"
+    },
+    {
+      "name": "method-core (windows-latest)",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/khuonglaptri3/qpaf-visual-document-retrieval/actions/runs/40189080433/job/121156019499"
+    }
+  ],
+  "scope": "CI for the committed implementation; later evidence publication has its own CI run."
+}
