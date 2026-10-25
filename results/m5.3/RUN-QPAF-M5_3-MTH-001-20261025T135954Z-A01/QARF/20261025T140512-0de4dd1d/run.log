@@ -1,0 +1,22 @@
+2026-10-25 21:05:16,123 INFO stage started: QARF
+2026-10-25 21:05:42,686 INFO QARF epoch 1: train_loss=0.42401286624159484 validation_ndcg_at_10=0.741016 *
+2026-10-25 21:05:51,257 INFO QARF epoch 2: train_loss=0.4168865888000825 validation_ndcg_at_10=0.729890
+2026-10-25 21:05:58,324 INFO QARF epoch 3: train_loss=0.41598448462098786 validation_ndcg_at_10=0.726806
+2026-10-25 21:06:05,463 INFO QARF epoch 4: train_loss=0.41566447467707734 validation_ndcg_at_10=0.726672
+2026-10-25 21:06:12,800 INFO QARF epoch 5: train_loss=0.4155490357198 validation_ndcg_at_10=0.725727
+2026-10-25 21:06:19,743 INFO QARF epoch 6: train_loss=0.4154569774127371 validation_ndcg_at_10=0.725727
+2026-10-25 21:06:26,885 INFO QARF epoch 7: train_loss=0.41540878376152535 validation_ndcg_at_10=0.725727
+2026-10-25 21:06:34,722 INFO QARF epoch 8: train_loss=0.41530840633996957 validation_ndcg_at_10=0.724962
+2026-10-25 21:06:42,165 INFO QARF epoch 9: train_loss=0.4153302753966683 validation_ndcg_at_10=0.724962
+2026-10-25 21:06:49,036 INFO QARF epoch 10: train_loss=0.4153032511347196 validation_ndcg_at_10=0.724962
+2026-10-25 21:06:55,969 INFO QARF epoch 11: train_loss=0.4152590345423191 validation_ndcg_at_10=0.724962
+2026-10-25 21:07:03,274 INFO QARF epoch 12: train_loss=0.4152596836985795 validation_ndcg_at_10=0.724962
+2026-10-25 21:07:10,523 INFO QARF epoch 13: train_loss=0.4152321273208572 validation_ndcg_at_10=0.724962
+2026-10-25 21:07:17,251 INFO QARF epoch 14: train_loss=0.41520481104648665 validation_ndcg_at_10=0.724962
+2026-10-25 21:07:28,566 INFO QARF epoch 15: train_loss=0.4152505975772636 validation_ndcg_at_10=0.724962
+2026-10-25 21:07:39,253 INFO QARF epoch 16: train_loss=0.41528272450725934 validation_ndcg_at_10=0.724962
+2026-10-25 21:07:47,828 INFO QARF epoch 17: train_loss=0.4152926677990789 validation_ndcg_at_10=0.724962
+2026-10-25 21:07:55,892 INFO QARF epoch 18: train_loss=0.4152312545073412 validation_ndcg_at_10=0.724962
+2026-10-25 21:08:05,880 INFO QARF epoch 19: train_loss=0.4152687159316609 validation_ndcg_at_10=0.724962
+2026-10-25 21:08:17,970 INFO QARF epoch 20: train_loss=0.4151821633701014 validation_ndcg_at_10=0.724962
+2026-10-25 21:08:22,376 INFO stage completed
