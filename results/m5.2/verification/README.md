@@ -1,19 +1,25 @@
-# M5.2 ? B?ng ch?ng ki?m ch?ng k? thu?t
+# M5.2 - Technical verification evidence
 
-Receipt ch?nh: [m5.2-001](../../../evidence/revisions/m5.2-001/README.md).
+Main receipt: [m5.2-001](../../../evidence/revisions/m5.2-001/README.md).
 
-- `test_summary.json`: 13 test M5.2 v? 4 test M5.1 PASS tr?n ??ng source bytes
-  c?a implementation commit; kh?ng tuy?n b? ?? ch?y to?n b? pytest local.
-- `ci_implementation.json`: c? n?m job CI c?a implementation commit PASS
-  tr?n Windows/Linux, Python 3.11/3.14 theo workflow repository.
-- `read_only_replay.json`: replay s?u input streams PASS, snapshot 45 file
-  tr??c/sau kh?ng ??i; audit hook kh?ng ghi nh?n vi?c m? qrels/checkpoint
-  ho?c ghi/thay ??i workspace trong ti?n tr?nh verifier. Th?i gian trong
-  report l? th?i gian data audit, kh?ng ph?i latency fusion/model.
-- `governance_events.jsonl`: successor event k? thu?t, kh?ng s?a registry
-  l?ch s?. Registry gi? STARTED v?i source status TECHNICAL_PASS pending
-  review; ch?a c? acceptance event, authorization train ho?c scientific claim.
+- `test_summary.json`: 13 M5.2 tests and 4 M5.1 tests passed on the exact
+  implementation source bytes. This does not claim a local full-pytest run.
+- `ci_implementation.json`: all five implementation CI jobs passed on
+  Windows/Linux with the repository's Python 3.11/3.14 workflow.
+- `read_only_replay.json`: all six input streams passed replay. The 45
+  monitored files and file sets were unchanged. The Python audit hook
+  recorded no qrels/checkpoint opens or workspace mutations during replay.
+  Its elapsed time measures the data audit, not model or fusion latency.
+- `governance_events.jsonl`: append-only successor events preserve the
+  historical registry. Registry status remains STARTED with technical
+  verification passed and owner/independent review pending.
 
-Nghi?m thu/review ??c l?p v?n PENDING_USER_REVIEW. Ph?t ph?i bind receipt v?
-input hashes v?o authorization/provenance ri?ng c?a M5.3/M5.4. H??ng d?n
-nh?n payload v? ch?y l?i: [M5.2 handoff](../../../docs/06_handover/m5.2-cache-parity-handoff.md).
+Event `QPAF-REG-20261025-0003` corrects the owner/actor display metadata in
+event `QPAF-REG-20261025-0002`, which was damaged by PowerShell's US-ASCII
+stdin encoding. The original line is retained. Receipt/input hashes,
+technical results and the pending-acceptance state are unchanged.
+
+Owner acceptance and independent review remain PENDING_USER_REVIEW.
+Tan Phat must bind the receipt and input hashes into the separate
+authorization/provenance records for M5.3/M5.4. Payload restoration and
+replay instructions: [M5.2 handoff](../../../docs/06_handover/m5.2-cache-parity-handoff.md).
