@@ -1,0 +1,11 @@
+{
+  "cache_identity_sha256": "960aed613336e5f6faa8335881306ffc340bceff3094836eb6e3f135babc3291",
+  "execution_authorization": "NOT_GRANTED_BY_THIS_RECEIPT",
+  "independent_human_review": "PENDING_USER_REVIEW",
+  "readme_sha256": "60e0df9c152f8d9b5eab84d21260f6ffae252fc6239029a653d45a7c2851553b",
+  "schema_version": 1,
+  "scientific_result": false,
+  "scope": "Label-free cache identity and six matched input-stream replays",
+  "status": "PASS",
+  "task_id": "M5.2"
+}
