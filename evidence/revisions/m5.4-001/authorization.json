@@ -1,0 +1,316 @@
+{
+  "schema_version": 1,
+  "status": "DRAFT_PENDING_APPROVAL",
+  "drafted_on": "2026-10-25",
+  "note": "Draft authorization manifest per evidence/M1_FINAL/02_protocol/run_policy.md section 3 and 04_experiment_registry/append_only_policy.md. It grants NOTHING until the approval block is filled with the Research Lead's exact approval text and timestamp, the file is committed, and its SHA-256 is recorded in an AUTHORIZATION_RECORDED event. Nothing may be executed from this draft.",
+  "task_id": "M5.4",
+  "roster_id": "R4",
+  "owner": "Tấn Phát",
+  "workbook_task": {
+    "path": "docs/GUILDLINE_OVERVIEWS_PROPOSAL/POAI_Milestone_Group01_Hoan_Chinh.xlsx",
+    "sheet": "Milestones",
+    "row": 60,
+    "title": "Run matched QARF/QPAF seed 3",
+    "deliverable": "Seed-3 checkpoints, predictions, telemetry and independent reviews",
+    "dependency": "G2A"
+  },
+  "experiment_id": "QPAF-M5_4-MTH-001",
+  "registry_event_id": "PENDING (next free QPAF-REG-<date>-NNNN at approval)",
+  "run_id": "PENDING (set at approval)",
+  "run_id_format": "RUN-QPAF-M5_4-MTH-001-<UTC YYYYMMDDTHHMMSSZ at approval>-A01",
+  "purpose": "Train the learned QARF comparator (query-level gate) for preregistered seed 20260822 on the same sealed M3.1 inputs, frozen config, sources, budget and evaluator as the accepted seed-1 M3.2 run, changing only training.seed, and retain checkpoints, predictions, metrics, telemetry and provenance for an independent review before the matched seed-3 QPAF run (m5.4-002) may be authorized.",
+  "experiment_class": "learned_training",
+  "evidence_class": "engineering_evidence",
+  "registry_status_on_approval": "AUTHORIZED",
+  "claim_scope": "QARF seed-3 development training evidence on train/validation only. No test labels, no selection among seeds, no QPAF-versus-QARF or baseline claim. Seed-averaged evidence belongs to M5.7; TEST-172 to R7.",
+  "git": {
+    "code_base_commit": "5ca57fb544b8370b96ce3b4b9a89aad6ef8ed1e9",
+    "code_base_description": "feature/m5-3-seed2-runs tip (M5.3 QARF seed-2 run, supervisor and test fix; M5.3 not yet merged)",
+    "run_branch": "feature/m5-4-seed3-runs",
+    "tracked_state_policy": "At run start, git diff --name-only against code_base_commit must list only paths under allowed_diff_from_base, and git status --porcelain must show no modified tracked files.",
+    "allowed_diff_from_base": [
+      ".gitattributes",
+      "configs/m5.4/",
+      "evidence/revisions/m5.4-001/",
+      "src/qpaf/m54/",
+      "scripts/run_m54_authorized.py",
+      "tests/test_m54_supervisor.py"
+    ],
+    "allowed_untracked": [
+      "AGENTS.md",
+      "MergeM3.1.md",
+      "MergeM3.2.md",
+      "MergeM3.4.md",
+      "MergeM3.6.md",
+      "MergeM3.7.md",
+      "MergeM3.8.md",
+      "MergeM4.3.md",
+      "MergeM4.4.md",
+      "MergeM4.6.md",
+      "MergeM4.7.md",
+      "MergeM4.8.md",
+      "MergeM5.3.md",
+      "MergeM5.4.md",
+      "docs/explainer/qpaf-explainer.html"
+    ]
+  },
+  "seed_contract": {
+    "preregistration": {
+      "path": "evidence/revisions/m5.1-001/preregistration.json",
+      "sha256": "45269eafe36907f99990027f067e724939da69db5ee351669d1e5e7854bf7e29"
+    },
+    "preregistration_confirmation": {
+      "path": "evidence/revisions/m5.1-001/owner_confirmation.json",
+      "sha256": "c9fa0a0ef637362a30f6dcc38f86cd59916620bd714b3d6330afa76de4e80bef"
+    },
+    "cache_receipt": {
+      "path": "evidence/revisions/m5.2-001/cache_identity.json",
+      "sha256": "960aed613336e5f6faa8335881306ffc340bceff3094836eb6e3f135babc3291"
+    },
+    "method_freeze": {
+      "path": "evidence/revisions/m4.3-001/method_freeze.json",
+      "sha256": "4015c74b54f5ac3d2cbce54f8424c0e9329c009595e81ced5eab0039af7761cc"
+    },
+    "seed": 20260822,
+    "rule": "M5.1 matched_run_rule: only training.seed changes; QARF is reviewed before the matched QPAF; fresh-process reload <= 1e-7 and finite outputs for every checkpoint; every valid seed is retained.",
+    "cache_receipt_acceptance": "TECHNICAL_PASS; owner/reviewer acceptance of M5.2 still PENDING_USER_REVIEW",
+    "seed_reference": {
+      "task_id": "M3.2",
+      "run_id": "RUN-QPAF-M3_2-MTH-001-20261022T035229Z-A01",
+      "authorization_path": "evidence/revisions/m3.2-001/authorization.json",
+      "authorization_sha256": "ae51a3a5601d43b0a758d5feb69b74b4ba24b0413965e5fee96ed7015ede9b4b",
+      "attempt_path": "results/m3.2/RUN-QPAF-M3_2-MTH-001-20261022T035229Z-A01/QARF/20261022T040759-ff3934df",
+      "data_manifest_sha256": "890f27092ec956b08f9227909ec4d87e950fb987e3b339027c39b28ac1758ddd",
+      "provenance_sha256": "c2d53992bbc3ba089f74c7d3e27db41027f68267a7bb5bddc8e68b3a5ac72551",
+      "rule": "sealed_inputs, metric, runtime, hardware and the shared limits equal the seed-1 authorization; the command equals its command with only --config and the output root replaced; the finished run must reproduce the seed-1 data_manifest.json byte for byte and its provenance inputs except the config hash."
+    }
+  },
+  "sealed_inputs": {
+    "seal_pin": {
+      "path": "evidence/revisions/m3.1-001/seal_pin.json",
+      "sha256": "3d5ddd9ca5345885ec64811d80659241b7d063c60a16b6f98b02b0b6ca25f44d"
+    },
+    "run_path": "results/m3.1/RUN-QPAF-M3_1-SEAL-001-20261021T142631Z-A01",
+    "manifest_sha256": "0832af156b79d0448ecc630ff572a0053d7cb5da98b4dac2dec1c6ee49e27893",
+    "policy_id": "qpaf_m28_top_document_expansion_v1",
+    "files_relative_to_run_path": {
+      "inputs/shared_base.toml": "3e58a867d11cebf72970cf0c141a90822cd7cbbdad65fb1e081cb14fa4889b58",
+      "inputs/score_cache.parquet": "56d0c82efda9264c117611ddd7135fe2384b68a3ec60fbdfd80fb964c386622b",
+      "inputs/candidate_set.parquet": "60c04acaf25126d5f16ff5f69fa394c5f797d960394e87e2f10ffed1237478ef",
+      "inputs/candidate_freeze.json": "2320402ed8f6705e5c220e4120f1975fe1989bf202339e8492167ecdf473764e",
+      "inputs/query_texts.json": "e7994373c9fd5157cde0fb0c5a1440c37c275b85fa19b2b0b566f61d584c4ab4",
+      "inputs/qrels_development.json": "691b6bc4ada3bc64fe3c408fe32498b04c7f30900eadb39ae09ddbe29aea302c",
+      "inputs/splits/train_ids.txt": "61dfe867c27b91a0a96594440b0f0e5ecf51501da0fcecdac94badaf16962191",
+      "inputs/splits/val_ids.txt": "46f8af5853942f6697cc3a995347a1832206212e93ff8aa87acb1775b3a060b4",
+      "inputs/splits/test_ids.txt": "d34210f901759a4f174da0c6c2e9b810616dcb33a71a0bd128a25d5d8d12e6f6",
+      "inputs/handover.json": "f67559e8e2e17adabdc446bff25327000c7937efedd0e77d269206dc1bf3b20b",
+      "inputs/matched.json": "705dd5705a3849239568eebee2542a9f39ccc2f123e334e7e933fde74f55fa6d"
+    },
+    "sealed_not_to_be_opened": {
+      "inputs/qrels_test_sealed.json": "05eaaa810e47d35d4eb06b3d36a05f03b002ec9d3c5ee6bce5fc27d2e336d154"
+    },
+    "split": {
+      "split_id": "m2.1-002",
+      "split_manifest": "evidence/revisions/m2.1-002/data_split_manifest.json",
+      "split_sha256": "ea5a19f93dce07cce375d6fb6afed630606e00916c5daa10938562aee9cddfad",
+      "counts": {
+        "train": 799,
+        "validation": 171,
+        "test": 172
+      }
+    },
+    "candidate_definition": "M2.8-002 top-document expansion (A003, post hoc), page-level, cap 600, macro candidate recall 1.0, zero uncovered queries",
+    "evaluation_unit": "page"
+  },
+  "method": {
+    "name": "QARF",
+    "gate_granularity": "query",
+    "note": "The method is NOT part of the resolved config (the config has no method key); it is selected only by --method. The command below therefore binds it explicitly.",
+    "seed": 20260822,
+    "seed_purpose": "third of the three frozen seeds (seed_policy.md; M5.1 seed_matrix, task M5.4/R4)"
+  },
+  "config": {
+    "path": "configs/m5.4/shared_base_seed_20260822.toml",
+    "file_sha256": "9e9283cf6367198e8396ed0675f3ba6f17fb016bd2cdb3cd89ba00fc296eb979",
+    "semantic_parent": "results/m3.1/.../inputs/shared_base.toml (M4.3 frozen config 3e58a867...9b58); the bytes differ only in the training.seed digits, and the parsed config equals the M5.2 receipt matrix entry for seed 20260822",
+    "frozen_values": {
+      "gate": "linear",
+      "loss": "pairwise_logistic (QPAF-M1.5-A001)",
+      "optimizer": "adam",
+      "learning_rate": 0.01,
+      "weight_decay": 0.0,
+      "max_grad_norm": 5.0,
+      "batch_size": 16,
+      "epochs": 20,
+      "selection_metric": "ndcg_at_10 (validation only; ties keep the earlier epoch)",
+      "reload_tolerance": 1e-07
+    },
+    "expected_resolved_config_json_sha256": "323858a9472258c9ae78b30d6ec7fc1360f561ad739f2d197d3eff7da394bfad",
+    "expected_provenance_config_object_hash": "a574c13f7be2c80a64f045de1fe54269cdcc0508b9f1561b32c6fa808fd7d1f2",
+    "expected_hash_basis": "Computed before the run with qpaf.m24.config.load_config + qpaf.m11.artifacts.write_json/object_hash; the run's resolved_config.json and provenance.json must reproduce these exactly."
+  },
+  "metric": {
+    "primary": "ndcg_at_10",
+    "split_scope": "validation",
+    "evaluator_source_sha256": "bfd25f331c5c377c708fd1d05f3e3edb85467488301e9658ea9bb486ef476742"
+  },
+  "actor": "Tấn Phát",
+  "command": {
+    "interpreter": ".venv/Scripts/python.exe",
+    "script": "scripts/run_m24_pipeline.py",
+    "arguments": [
+      "--config",
+      "configs/m5.4/shared_base_seed_20260822.toml",
+      "--method",
+      "QARF",
+      "--scores",
+      "results/m3.1/RUN-QPAF-M3_1-SEAL-001-20261021T142631Z-A01/inputs/score_cache.parquet",
+      "--queries",
+      "results/m3.1/RUN-QPAF-M3_1-SEAL-001-20261021T142631Z-A01/inputs/query_texts.json",
+      "--qrels",
+      "results/m3.1/RUN-QPAF-M3_1-SEAL-001-20261021T142631Z-A01/inputs/qrels_development.json",
+      "--splits",
+      "results/m3.1/RUN-QPAF-M3_1-SEAL-001-20261021T142631Z-A01/inputs/splits",
+      "--output",
+      "results/m5.4/<run_id>"
+    ],
+    "forbidden_arguments": [
+      "--epochs",
+      "--resume",
+      "--synthetic-fixture"
+    ]
+  },
+  "runtime": {
+    "python": "3.13.7",
+    "torch": "2.11.0+cpu",
+    "numpy": "2.5.4",
+    "pandas": "3.0.6",
+    "pyarrow": "26.0.0",
+    "device": "cpu",
+    "dtype": "float64",
+    "threads": 1,
+    "deterministic_algorithms": true,
+    "requirements": "requirements-learned-local.txt"
+  },
+  "hardware": "Local CPU only (Windows 11); no GPU",
+  "limits": {
+    "wall_time_seconds": 3600,
+    "wall_time_enforcement": "Enforced by the supervisor: the whole process tree is killed at wall_time_seconds and the attempt is marked FAILED with reason wall_time_exceeded.",
+    "paid_compute_cost_cap": 0,
+    "invocations": 1,
+    "automatic_retries": 0,
+    "retry_rule": "A fresh attempt needs a reviewed reason, a new run_id (A02) with retry_of set to the prior run_id, a new namespace and a new authorization.",
+    "wall_time_basis": "Same 60-minute budget as seed 1; the seed-1 QARF run took 75.4 s."
+  },
+  "output": {
+    "namespace_root": "results/m5.4/<run_id>",
+    "create_once_rule": "The supervisor refuses when the namespace root already exists and creates _ATTEMPTED.json exclusively before starting the runner, so a second invocation is refused even after a failure. The runner alone would allow a retry after a failed attempt.",
+    "attempt_directory": "<root>/QARF/<YYYYMMDDTHHMMSS>-<id>/"
+  },
+  "required_markers": {
+    "supervisor": [
+      "<root>/_ATTEMPTED.json (before the run)",
+      "<root>/supervisor.log",
+      "<root>/_SUCCESS.json (with the fresh_process_reload report) or <root>/_FAILED.json (exactly one, after the run)"
+    ],
+    "runner_success": [
+      "<attempt>/status.json with status = completed",
+      "<attempt>/receipt.json and hashes.csv",
+      "<root>/QARF/complete.json",
+      "<attempt>/summary.json with reload_parity.passed = true"
+    ],
+    "runner_failure": [
+      "<attempt>/status.json with status = failed",
+      "<attempt>/failure.json",
+      "<attempt>/run.log"
+    ],
+    "note": "The supervisor writes the _ATTEMPTED/_SUCCESS markers named in run_policy.md section 4."
+  },
+  "supervisor": {
+    "invocation": [
+      ".venv/Scripts/python.exe",
+      "scripts/run_m54_authorized.py",
+      "--authorization",
+      "evidence/revisions/m5.4-001/authorization.json",
+      "--expected-authorization-sha256",
+      "<pin recorded outside this file at approval>",
+      "--run-id",
+      "<run_id>",
+      "--actor",
+      "Tấn Phát"
+    ],
+    "source_files_sha256": {
+      "src/qpaf/m54/supervisor.py": "bb436f2d8f784fb328615dc83e9722af213350e99e34df3224d84fbcd455b15d",
+      "src/qpaf/m53/reload.py": "54b9d35c25e38d88567c64e2eb163d41dee3cd7aeb6929856137fda701227b5d",
+      "scripts/run_m54_authorized.py": "84cf64f200493c450a81174579305aab9923f4d1f0234ccd9812040283400da7",
+      "scripts/reload_m53_checkpoint.py": "2afcc3b102947437b72c9010215b19e85f2b08d7d059557d0352b9ddaff3bf55",
+      "src/qpaf/m32/supervisor.py": "8de310b80226ce45061ceb2a59bb95d25377dcb933f694e4f195a9ab2a10c63d",
+      "src/qpaf/m34/supervisor.py": "fe35bba8b9ca9c7f41607cde4b68e5cf071931c054d6ee32107063c305be7002"
+    },
+    "source_note": "src/qpaf/m54/supervisor.py is src/qpaf/m53/supervisor.py with only the seed, task, run-ID prefix, output root and messages changed (tests/test_m54_supervisor.py checks this); it reuses the M3.2/M3.4 helpers and the M5.3 reload worker unchanged.",
+    "test_file": "tests/test_m54_supervisor.py",
+    "exit_codes": {
+      "0": "run completed and passed every post-run check",
+      "1": "attempt consumed and marked FAILED",
+      "3": "refused before starting; nothing created"
+    },
+    "validity_rule": "A run is valid evidence only if its namespace holds _ATTEMPTED.json, supervisor.log and exactly one of _SUCCESS.json/_FAILED.json written by this supervisor. The runner can be launched without the supervisor, so M3.3 must reject any run that lacks them.",
+    "must_be_committed_before_approval": true,
+    "actor_rule": "The --actor value must equal the actor field above; the supervisor refuses on any mismatch and when this field is still PENDING."
+  },
+  "stop_conditions": [
+    "source, config, data or hash drift from this manifest",
+    "pre-run verification of the M3.1 seal fails",
+    "split overlap, candidate-key mismatch, missing query or qrels leakage",
+    "development coverage below 0.95 or a query with no positive candidate",
+    "non-finite loss, gradient, parameter or metric; or checkpoint reload parity above 1e-7",
+    "wall time above limits.wall_time_seconds, or any resource, memory or telemetry violation",
+    "namespace already exists, or any actor, invocation, retry or approval mismatch",
+    "any M5.1/M5.2/M4.3 pin, frozen method source or seed-1 reference differs from this manifest",
+    "the fresh-process reload of best.pt or last.pt fails, differs by more than 1e-7 or yields a non-finite value",
+    "the finished run consumed rows or inputs other than the seed-1 run with the seed-3 config"
+  ],
+  "pre_run_checks": [
+    "git state satisfies git.tracked_state_policy",
+    ".venv reports torch 2.11.0+cpu, numpy 2.5.4, pandas 3.0.6, pyarrow 26.0.0",
+    "scripts/seal_m31_inputs.py --verify <run_path> --expected-manifest-sha256 <manifest_sha256> exits 0 immediately before the run",
+    "seed_contract pins, the M5.2 receipt config for (20260822, QARF) and the M4.3 frozen source hashes all hold",
+    "this authorization equals the seed-1 M3.2 one in sealed_inputs, metric, runtime, hardware, limits and command except --config/--output",
+    "results/m5.4/<run_id> does not exist"
+  ],
+  "post_run_checks": [
+    "resolved_config.json SHA-256 equals config.expected_resolved_config_json_sha256",
+    "provenance.json config_sha256 equals config.expected_provenance_config_object_hash",
+    "provenance.json source.git_commit equals git_head recorded in _ATTEMPTED.json",
+    "data_manifest.json shows the test split as not_opened and summary.json reload_parity.passed is true",
+    "the namespace holds only _ATTEMPTED.json, supervisor.log, the QARF stage and the final marker",
+    "data_manifest.json SHA-256 equals seed_contract.seed_reference.data_manifest_sha256",
+    "provenance.json inputs equal the seed-1 inputs with config replaced by config.file_sha256",
+    "summary.json names QARF, query and seed 20260822",
+    "scripts/reload_m53_checkpoint.py in a separate process reloads best.pt and last.pt, finds every value finite and reproduces validation scores, weights and metrics within 1e-7"
+  ],
+  "boundaries": {
+    "authorizes_only_this_single_invocation": true,
+    "qpaf_run_authorized": false,
+    "additional_seeds_authorized": false,
+    "test_label_deserialization_authorized": false,
+    "seed_selection_authorized": false,
+    "next_step": "Hand the run to Thanh for an independent seed-3 QARF review, done together with the seed-2 QARF review. The matched QPAF run needs that review recorded as ACCEPTANCE_RECORDED/PASS and its own authorization (evidence/revisions/m5.4-002)."
+  },
+  "approval": {
+    "approver": "Tấn Phát (Research Lead)",
+    "approval_text": "PENDING",
+    "approved_utc": "PENDING"
+  },
+  "independent_review": {
+    "reviewer": "Thanh (seed-3 QARF review, batched with the seed-2 QARF review)",
+    "status": "PENDING"
+  },
+  "open_items": [
+    "The M5.2 cache receipt is TECHNICAL_PASS but its owner/reviewer acceptance is still PENDING_USER_REVIEW; approving this run accepts the receipt as the M5.1 R2 prerequisite.",
+    "The seed config keeps the frozen comment \"frozen one-seed development gate seed\" on the seed line so that only the seed digits differ from the frozen bytes.",
+    "summary.json will repeat experiment_id QPAF-M2_7-MTH-001 from the frozen config, as in M3.2/M3.4.",
+    "M5.3 is not yet merged into develop; the M5.4 PR depends on it.",
+    "Commit the supervisor, its tests and this file, then re-check supervisor.source_files_sha256 against the committed blobs before filling the approval block."
+  ]
+}

@@ -102,3 +102,6 @@ vimdoc_archive_audit_modal.py -text
 # M5.3 seed-2 config and run evidence are hashed by the authorization and receipts; keep exact bytes.
 /configs/m5.3/** -text -eol
 /results/m5.3/** -text -eol -whitespace
+# M5.4 seed-3 config and run evidence are hashed by the authorization and receipts; keep exact bytes.
+/configs/m5.4/** -text -eol
+/results/m5.4/** -text -eol -whitespace
