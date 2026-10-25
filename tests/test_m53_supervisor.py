@@ -133,10 +133,14 @@ class SeedContractTests(unittest.TestCase):
                 with self.assertRaises(api.Refused):
                     api.check_seed_contract(ROOT, auth)
 
-    def test_the_draft_grants_nothing_until_approved(self):
-        self.assertNotEqual(self.auth['status'], 'APPROVED')
-        with self.assertRaises(api.Refused):
-            api.load_authorization(TEMPLATE, sha(TEMPLATE.read_bytes()), QARF_RUN_ID, 'Tấn Phát')
+    def test_an_unapproved_authorization_grants_nothing(self):
+        unapproved = {**self.auth, 'status': 'DRAFT_PENDING_APPROVAL', 'run_id': QARF_RUN_ID,
+                      'approval': {**self.auth['approval'], 'approval_text': 'PENDING', 'approved_utc': 'PENDING'}}
+        with tempfile.TemporaryDirectory() as temp:
+            path = Path(temp)/'authorization.json'
+            pin = write_json(path, unapproved)
+            with self.assertRaises(api.Refused):
+                api.load_authorization(path, pin, QARF_RUN_ID, 'Tấn Phát')
 
     def test_the_pinned_supervisor_sources_are_the_files_in_this_checkout(self):
         for path, digest in self.auth['supervisor']['source_files_sha256'].items():
