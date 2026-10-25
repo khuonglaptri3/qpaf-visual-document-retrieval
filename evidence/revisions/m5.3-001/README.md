@@ -66,6 +66,10 @@ No seed comparison or seed-averaged claim is made here; that is M5.7.
 
 ## Handover
 
+M5.3 is one task with one PR at the end. Thanh reviews on a branch made from
+`feature/m5-3-seed2-runs` (for example `feature/m5-3-qarf-review`), not from `develop`. That review
+commit is then brought into `feature/m5-3-seed2-runs` before the QPAF run. No intermediate PR is opened.
+
 - **Thanh — independent seed-2 QARF review (as M3.3 did for seed 1).** Replay
   `python evidence/revisions/m5.3-001/post_run_check.py`. Its output must match
   `post_run_verification.json`. The review must also make its own judgement on the run. Record
