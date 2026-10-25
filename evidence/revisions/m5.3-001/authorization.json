@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "status": "DRAFT_PENDING_APPROVAL",
+  "status": "APPROVED",
   "drafted_on": "2026-10-25",
   "note": "Draft authorization manifest per evidence/M1_FINAL/02_protocol/run_policy.md section 3 and 04_experiment_registry/append_only_policy.md. It grants NOTHING until the approval block is filled with the Research Lead's exact approval text and timestamp, the file is committed, and its SHA-256 is recorded in an AUTHORIZATION_RECORDED event. Nothing may be executed from this draft.",
   "task_id": "M5.3",
@@ -15,8 +15,8 @@
     "dependency": "G2A"
   },
   "experiment_id": "QPAF-M5_3-MTH-001",
-  "registry_event_id": "PENDING (next free QPAF-REG-<date>-NNNN at approval)",
-  "run_id": "PENDING (set at approval)",
+  "registry_event_id": "QPAF-REG-20261025-0004",
+  "run_id": "RUN-QPAF-M5_3-MTH-001-20261025T135954Z-A01",
   "run_id_format": "RUN-QPAF-M5_3-MTH-001-<UTC YYYYMMDDTHHMMSSZ at approval>-A01",
   "purpose": "Train the learned QARF comparator (query-level gate) for preregistered seed 20260821 on the same sealed M3.1 inputs, frozen config, sources, budget and evaluator as the accepted seed-1 M3.2 run, changing only training.seed, and retain checkpoints, predictions, metrics, telemetry and provenance for an independent review before the matched seed-2 QPAF run (m5.3-002) may be authorized.",
   "experiment_class": "learned_training",
@@ -298,8 +298,10 @@
   },
   "approval": {
     "approver": "Tấn Phát (Research Lead)",
-    "approval_text": "PENDING",
-    "approved_utc": "PENDING"
+    "approval_text": "I approved covering QARF only, seed 20260821, the frozen config with only the seed changed, one run, 60-minute limit, no retry, and test split not opened.",
+    "approved_utc": "2026-10-25T13:59:54Z",
+    "approval_context": "The Research Lead's verbatim reply in the working session to the request to approve this exact manifest (QARF, seed 20260821, configs/m5.3/shared_base_seed_20260821.toml, sealed M3.1 inputs, 60-minute limit, one invocation, no retry, test split not opened, M5.2 receipt accepted as the R2 prerequisite).",
+    "recorded_by": "Claude Code at the Research Lead's explicit request; the text above is quoted, not composed"
   },
   "independent_review": {
     "reviewer": "Thanh (seed-2 QARF review, as M3.3)",
@@ -309,6 +311,6 @@
     "The M5.2 cache receipt is TECHNICAL_PASS but its owner/reviewer acceptance is still PENDING_USER_REVIEW; approving this run accepts the receipt as the M5.1 R2 prerequisite.",
     "The seed config keeps the frozen comment \"frozen one-seed development gate seed\" on the seed line so that only the seed digits differ from the frozen bytes.",
     "summary.json will repeat experiment_id QPAF-M2_7-MTH-001 from the frozen config, as in M3.2/M3.4.",
-    "Commit the supervisor, its tests and this file, then re-check supervisor.source_files_sha256 against the committed blobs before filling the approval block."
+    "Supervisor and config hashes were re-checked against the committed blobs of 3ebf109 before approval was recorded."
   ]
 }
