@@ -1,0 +1,236 @@
+{
+  "schema_version": 1,
+  "task_id": "M5.1",
+  "roster_id": "R1",
+  "owner": "Thanh",
+  "experiment_id": "QPAF-M5_1-GAT-001",
+  "experiment_class": "governance",
+  "evidence_class": "governance_record",
+  "status": "PREREGISTERED_PENDING_OWNER_SIGNOFF",
+  "registered_at_utc": "2026-10-25T04:39:19Z",
+  "pins_sha256": {
+    "g2a_freeze": "26d9bab6e7d47fe7dd1e89f6bec2c95265641df5cde8d9bd25c867b9d3a73217",
+    "g2a_confirmation": "5f80b4312188721dc2c2033a85ce1a9631bffa32479c576e0500471e622b95e6",
+    "active_primary_scope": "5629fa8b2cd60afe29d8cd34d2c538177dac919a31dbb453e0064451652ae4c1",
+    "baseline": "3016ad8581c7d79966c84a0fda578575c98cb2672849f447eb7075001bd171df",
+    "seed": "e5fce4c247c3f7a13fcc8cfd4106aa5c1e2b00c1c58b8709fff9b056e4794049",
+    "statistics": "57827b2ba7e3cb73ef142c0521a17747cbe8bddc510e7ec4e181f3edd4dd3ecd",
+    "metric": "4ce926201bb38b975c3eb43b83b0c719dea48267ff20e8fffa7e7329c0b5579a",
+    "frozen_protocol": "d29061fe4b6f3f9ed9844beab703909fa899c310637cbeef4bd3a9903478d08b"
+  },
+  "core_roster": [
+    "R1",
+    "R2",
+    "R3",
+    "R4",
+    "R7",
+    "R8"
+  ],
+  "optional_roster": [
+    "R5",
+    "R6"
+  ],
+  "deferred_roster": [
+    "R9",
+    "R10"
+  ],
+  "seed_matrix": [
+    {
+      "seed": 20260820,
+      "methods": [
+        "QARF",
+        "QPAF"
+      ],
+      "state": "completed_pilot",
+      "task": "M3.2/M3.4"
+    },
+    {
+      "seed": 20260821,
+      "methods": [
+        "QARF",
+        "QPAF"
+      ],
+      "state": "pending",
+      "task": "M5.3/R3"
+    },
+    {
+      "seed": 20260822,
+      "methods": [
+        "QARF",
+        "QPAF"
+      ],
+      "state": "pending",
+      "task": "M5.4/R4"
+    }
+  ],
+  "matched_run_rule": {
+    "same_across_methods_and_seeds": [
+      "candidate IDs and order",
+      "score cache and normalization",
+      "13 features",
+      "loss and optimizer",
+      "epochs and batch",
+      "hardware class and execution limits",
+      "evaluation implementation"
+    ],
+    "only_seed_change": "training.seed",
+    "method_difference": "gate_granularity: query for QARF, page for QPAF",
+    "per_run_authorization_required": true,
+    "qarf_review_before_matched_qpaf": true,
+    "cache_parity_receipt_required": "M5.2/R2",
+    "fresh_process_reload_max_abs_difference": 1e-07,
+    "finite_output_required": true,
+    "retain_all_valid_seeds": true,
+    "replacement_seed_without_amendment": false
+  },
+  "ablations": [
+    {
+      "order": 1,
+      "id": "R5-01",
+      "task": "M5.5",
+      "scope": "validation",
+      "factor": "retriever_singletons",
+      "contrast": "BM25, BGE-M3 and ColQwen2.5 saved singleton rows on the fixed candidate pool; no refit"
+    },
+    {
+      "order": 2,
+      "id": "R5-02",
+      "task": "M5.5",
+      "scope": "validation",
+      "factor": "one_channel_removed_from_uniform_fusion",
+      "contrast": "Independently omit BM25, BGE-M3, then ColQwen2.5; each remaining pair has fixed 0.5/0.5 weights on the saved normalized scores and identical candidate rows"
+    },
+    {
+      "order": 3,
+      "id": "R5-03",
+      "task": "M5.5",
+      "scope": "validation",
+      "factor": "normalization",
+      "contrast": "Uniform CombSUM only: frozen min-max versus per-query raw-score z-score (population std, zero-variance channel -> 0); weights stay 1/3 each"
+    },
+    {
+      "order": 4,
+      "id": "R5-04",
+      "task": "M5.5",
+      "scope": "validation",
+      "factor": "efficiency",
+      "contrast": "Measure frozen QARF/QPAF fusion latency and memory separately from retriever extraction under metric_policy.md; no checkpoint change"
+    },
+    {
+      "order": 5,
+      "id": "R6-01",
+      "task": "M5.6",
+      "scope": "validation",
+      "factor": "remove_rank_feature_group",
+      "contrast": "Diagnostic QPAF training from full 13-feature contract, omit only rr_bm25/rr_dense/rr_visual"
+    },
+    {
+      "order": 6,
+      "id": "R6-02",
+      "task": "M5.6",
+      "scope": "validation",
+      "factor": "remove_gap_feature_group",
+      "contrast": "Diagnostic QPAF training from full contract, omit only gap_bm25/gap_dense/gap_visual"
+    },
+    {
+      "order": 7,
+      "id": "R6-03",
+      "task": "M5.6",
+      "scope": "validation",
+      "factor": "remove_disagreement_feature_group",
+      "contrast": "Diagnostic QPAF training from full contract, omit only the three disagreement features"
+    },
+    {
+      "order": 8,
+      "id": "R6-04",
+      "task": "M5.6",
+      "scope": "validation",
+      "factor": "remove_query_length",
+      "contrast": "Diagnostic QPAF training from full contract, omit only query_length"
+    },
+    {
+      "order": 9,
+      "id": "R6-05",
+      "task": "M5.6",
+      "scope": "validation",
+      "factor": "query_vs_page_conditioning",
+      "contrast": "Reuse matched QARF/QPAF per-seed development outputs; gate granularity is the sole factor; no new primary checkpoint"
+    }
+  ],
+  "ablation_rule": {
+    "diagnostic_only": true,
+    "validation_only": true,
+    "r5_no_training": true,
+    "r6_diagnostic_training_seed": 20260820,
+    "r6_same_training_budget_as_frozen_pilot": true,
+    "one_factor_at_a_time_from_full_reference": true,
+    "separate_authorization_before_new_run": true,
+    "cannot_replace_frozen_method_config_or_checkpoints": true,
+    "cannot_reselect_baseline_or_primary_method": true,
+    "a004_adopted": false
+  },
+  "drop_first": {
+    "order": [
+      "R6",
+      "R5"
+    ],
+    "trigger": "Before diagnostic results or TEST-172, if approved resources or schedule cannot cover both optional tasks while preserving all core items",
+    "record_required": "Document available budget/deadline, omitted task, reason and claim impact before omission",
+    "core_droppable": false,
+    "missing_operational_measurement_allows_operational_claim": false
+  },
+  "test_plan": {
+    "dataset": "ViDoSeek",
+    "split": "test",
+    "query_count": 172,
+    "ids_sha256": "d34210f901759a4f174da0c6c2e9b810616dcb33a71a0bd128a25d5d8d12e6f6",
+    "sealed_qrels_sha256": "05eaaa810e47d35d4eb06b3d36a05f03b002ec9d3c5ee6bce5fc27d2e336d154",
+    "labels_opened": false,
+    "only_R7_may_open_labels": true,
+    "run_count": 1,
+    "after_independent_reviews_of": [
+      "R3",
+      "R4"
+    ],
+    "baseline_count": 7,
+    "qarf_seeds": [
+      20260820,
+      20260821,
+      20260822
+    ],
+    "qpaf_seeds": [
+      20260820,
+      20260821,
+      20260822
+    ],
+    "oracle_context_only": [
+      "W7",
+      "W66"
+    ],
+    "post_test_selection_allowed": false
+  },
+  "statistics": {
+    "primary_unit": "ViDoSeek page nDCG@10, per query",
+    "per_query_seed_mean_before_bootstrap": true,
+    "bootstrap_unit": "paired query",
+    "resamples": 10000,
+    "rng": "numpy.default_rng",
+    "rng_seed": 20260820,
+    "ci95": "percentile 2.5/97.5",
+    "wtl_tolerance": 1e-12,
+    "comparators": [
+      "matched QARF",
+      "train_fitted_static"
+    ],
+    "all_co_strongest_baselines_required": true,
+    "secondary_cannot_reverse_primary": true
+  },
+  "claim_boundary": {
+    "main_method": "M4.3-frozen QPAF-v1 with A001 loss",
+    "a004": "FAILED_GATE_NOT_ADOPTED; Thanh review remains separate",
+    "oracle_not_deployable": true,
+    "vimdoc": "NOT_RUN_DEFERRED",
+    "new_training_or_test_execution": false,
+    "execution_authorization": "NOT_GRANTED_BY_THIS_RECORD"
+  }
+}

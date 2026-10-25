@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "task_id": "M5.1",
+  "owner": "Thanh",
+  "recorded_by": "Codex at Thanh's explicit request",
+  "recorded_at_utc": "2026-10-25T04:40:38Z",
+  "decision": "ACCEPTED",
+  "source": "Thanh's explicit confirmation in the working session on 2026-10-25",
+  "confirmation_text": "Có, ghi Thanh chấp nhận M5.1",
+  "preregistration_ref": "evidence/revisions/m5.1-001/preregistration.json",
+  "preregistration_sha256": "45269eafe36907f99990027f067e724939da69db5ee351669d1e5e7854bf7e29",
+  "accepted_scope": "R1 matched three-seed matrix, validation-only optional one-factor order, R6-then-R5 drop-first rule, and once-only TEST-172 boundary under G2A",
+  "execution_authorized": false,
+  "test_labels_opened": false,
+  "a004_review_completed_by_this_confirmation": false
+}
