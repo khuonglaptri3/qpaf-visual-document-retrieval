@@ -1,0 +1,230 @@
+{
+  "run_id": "RUN-QPAF-M5_3-MTH-001-20261025T135954Z-A01",
+  "authorization_sha256": "93f1d2da7ab18da14b3579b7ebc186b60b3fea1b3f6f6e914bab719cea8f7490",
+  "checked_utc": "2026-10-25T14:10:20Z",
+  "checker": "executor first-pass check (AI-assisted); not the independent seed-2 QARF review",
+  "verdict": "ALL CHECKS PASS",
+  "failed": [],
+  "counts": {
+    "PASS": 35,
+    "FAIL": 0
+  },
+  "checks": [
+    {
+      "check": "exactly one attempt directory",
+      "status": "PASS",
+      "detail": "['20261025T140512-0de4dd1d']"
+    },
+    {
+      "check": "_ATTEMPTED and _SUCCESS bind the authorization file hash",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "exactly one final marker and it is _SUCCESS",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "namespace holds only the expected entries",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "finished within the authorized wall limit",
+      "status": "PASS",
+      "detail": "238.505 s"
+    },
+    {
+      "check": "_SUCCESS receipt/summary hashes match the files",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "complete.json points at the attempt and its receipt",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "every receipt output is present and re-hashes identically",
+      "status": "PASS",
+      "detail": "[]"
+    },
+    {
+      "check": "no file in the attempt is missing from the receipt (receipt.json cannot list itself)",
+      "status": "PASS",
+      "detail": "['receipt.json']"
+    },
+    {
+      "check": "best checkpoint hash in summary matches the file",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "last checkpoint hash in summary matches the file",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "the seed config file still matches its pin",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "resolved_config.json equals the authorized expectation",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "provenance config hash equals the authorized expectation",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "provenance git commit equals the supervised HEAD",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "summary names QARF, query granularity, seed 20260821 and the pinned torch",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "the run consumed the sealed scores, queries, development qrels and splits",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "the sealed test qrels were not a run input",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "test split was not opened",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "train/validation sizes and candidate recall as sealed",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "in-process reload parity passed within tolerance",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "fresh-process reload passed in a separate interpreter within 1e-7",
+      "status": "PASS",
+      "detail": "{'score_max_abs_difference': 0.0, 'weight_max_abs_difference': 0.0, 'metric_max_abs_difference': 0.0}"
+    },
+    {
+      "check": "fresh-process reload loaded the checkpoints named in the summary",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "20 epochs, 50 steps each, no skipped queries",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "all epoch losses and metrics are finite",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "all step losses and gradient norms are finite",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "selected epoch is the earliest maximum of validation nDCG@10",
+      "status": "PASS",
+      "detail": "epoch 1"
+    },
+    {
+      "check": "predictions cover 171 queries with finite scores and weights",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "QARF fusion weights are constant within every query (query-level gate)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "data_manifest.json is byte-identical to the seed-1 QARF run (rows, order, counts)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "provenance inputs equal the seed-1 inputs except the config hash",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "resolved config differs from seed 1 only in training.seed",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "same epochs and parameter count as seed 1",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "per-query rows list the same validation queries in the same order as seed 1",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "predictions rank exactly the seed-1 candidate pages per query",
+      "status": "PASS",
+      "detail": ""
+    }
+  ],
+  "observations": {
+    "validation_ndcg_at_10_by_epoch": [
+      0.7410159807755565,
+      0.7298896524762006,
+      0.7268060387894038,
+      0.7266722735626512,
+      0.7257273883363473,
+      0.7257273883363473,
+      0.7257273883363473,
+      0.7249617172628299,
+      0.7249617172628299,
+      0.7249617172628299,
+      0.7249617172628299,
+      0.7249617172628299,
+      0.7249617172628299,
+      0.7249617172628299,
+      0.7249617172628299,
+      0.7249617172628299,
+      0.7249617172628299,
+      0.7249617172628299,
+      0.7249617172628299,
+      0.7249617172628299
+    ],
+    "selected_epoch": 1,
+    "seed1_selected_epoch": 1,
+    "seed1_validation_ndcg_at_10": 0.7521473770883798,
+    "validation": {
+      "query_count": 171,
+      "ndcg_at_10": 0.7410159807755565,
+      "recall_at_1": 0.5672514619883041,
+      "recall_at_3": 0.7777777777777778,
+      "mrr_at_10": 0.6838438689315882
+    },
+    "train_loss_first_to_last": [
+      0.42401286624159484,
+      0.4151821633701014
+    ],
+    "wall_seconds": 238.505,
+    "peak_rss_mb": 748.84375,
+    "note": "Facts read from the run files; no interpretation and no seed comparison claim is recorded here."
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "config_sha256": "fbfb43be257e5d1e74a8199fb092a99f2da2433e74349cc2e1bc6012aef8151b",
+  "cache_config_sha256": "fbfb43be257e5d1e74a8199fb092a99f2da2433e74349cc2e1bc6012aef8151b",
+  "inputs": {
+    "config": "d34cb2eee7b6c1b9214214442cbeeacb7a16455e83e932ae182a027a91a6936c",
+    "scores": "56d0c82efda9264c117611ddd7135fe2384b68a3ec60fbdfd80fb964c386622b",
+    "queries": "e7994373c9fd5157cde0fb0c5a1440c37c275b85fa19b2b0b566f61d584c4ab4",
+    "qrels": "691b6bc4ada3bc64fe3c408fe32498b04c7f30900eadb39ae09ddbe29aea302c",
+    "splits": {
+      "train_ids.txt": "61dfe867c27b91a0a96594440b0f0e5ecf51501da0fcecdac94badaf16962191",
+      "val_ids.txt": "46f8af5853942f6697cc3a995347a1832206212e93ff8aa87acb1775b3a060b4",
+      "test_ids.txt": "d34210f901759a4f174da0c6c2e9b810616dcb33a71a0bd128a25d5d8d12e6f6"
+    }
+  },
+  "source_digest": "1096a386bba76f1c08a48e88eb96517c9028aa2754f0b3adbb2669a1c9f4a54a",
+  "outputs": [
+    {
+      "path": "checkpoints/best.pt",
+      "size_bytes": 11512,
+      "sha256": "3924f3ef204090bdd586447891900752ad67451c3c2857ae0bac6bb501860626"
+    },
+    {
+      "path": "checkpoints/last.pt",
+      "size_bytes": 15736,
+      "sha256": "725bf2383093a721ae36c9ffec75d965946ed0f16039725e030e0a1edbf03678"
+    },
+    {
+      "path": "data_manifest.json",
+      "size_bytes": 640,
+      "sha256": "890f27092ec956b08f9227909ec4d87e950fb987e3b339027c39b28ac1758ddd"
+    },
+    {
+      "path": "epochs.csv",
+      "size_bytes": 2800,
+      "sha256": "f7d7b5282610fb0bcdd5110d24e2cb6ae75dfdc12ca94fba632e45d7db4bc2b6"
+    },
+    {
+      "path": "provenance.json",
+      "size_bytes": 37001,
+      "sha256": "ac2c2023c064cc109e70fe0eca7ff7957e89a0775b941ea396c85dc0ff16155c"
+    },
+    {
+      "path": "report.md",
+      "size_bytes": 405,
+      "sha256": "708eaae80a07b3b0999a7abd475763f081073e1399eeb52b7921edde99772fbc"
+    },
+    {
+      "path": "resolved_config.json",
+      "size_bytes": 724,
+      "sha256": "26bce57a12c13ee9a5612c5de774b278224ac64869e27ee2ea241ca3447b7993"
+    },
+    {
+      "path": "run.log",
+      "size_bytes": 2213,
+      "sha256": "eb5de8a3412b0a2eec681d913dfe8d0c2dcdb087182f52e37d0a50b4ae331b06"
+    },
+    {
+      "path": "status.json",
+      "size_bytes": 158,
+      "sha256": "d3471a96428318096e0ea2800564899d93a933ea2cde70bc0fb524f12d283809"
+    },
+    {
+      "path": "steps.csv",
+      "size_bytes": 57996,
+      "sha256": "89f1cb58433e4cf26844ad7b0c27a5876f0a2abaae9a1a5a2036092863dc8b7e"
+    },
+    {
+      "path": "summary.json",
+      "size_bytes": 926,
+      "sha256": "e682cf51de9c0feb07c49810e54ae43b25b9b983076a8384556ea40544f99472"
+    },
+    {
+      "path": "telemetry.json",
+      "size_bytes": 683,
+      "sha256": "421b80a6ba4647310085fac69ab0ab3c1d1054dd72607f5e52079a9bce64389f"
+    },
+    {
+      "path": "validation_metrics.json",
+      "size_bytes": 177,
+      "sha256": "e67257158ae42d662ad23cbdbd4e149260bf15eb18bc87d790fe5d5e934f51bb"
+    },
+    {
+      "path": "validation_per_query.csv",
+      "size_bytes": 12804,
+      "sha256": "fe445556a0aa1f09de3d410c9eb85d3523cbdaf0843ccd9cb69c5564aa9866da"
+    },
+    {
+      "path": "validation_predictions.json",
+      "size_bytes": 16122416,
+      "sha256": "84bbff7fa7794afbd7029c5405869c658b62c3d3c890fd78ed955dc479ca7611"
+    },
+    {
+      "path": "hashes.csv",
+      "size_bytes": 1343,
+      "sha256": "ac30b80db1d85d267d3379f8018b09007a58ec6750e6e66ee0cb3fb594dcbc91"
+    }
+  ]
+}
