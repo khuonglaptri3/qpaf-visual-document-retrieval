@@ -1,0 +1,263 @@
+{
+  "run_id": "RUN-QPAF-M5_3-MTH-002-20261026T025155Z-A01",
+  "authorization_sha256": "132a1287c2cd3aeb688399b3fde39a0582bc3d8b53a2b057242df5c9257eaecd",
+  "checked_utc": "2026-10-26T02:56:33Z",
+  "checker": "executor first-pass check (AI-assisted); not the independent QPAF review",
+  "verdict": "ALL CHECKS PASS",
+  "failed": [],
+  "counts": {
+    "PASS": 41,
+    "FAIL": 0
+  },
+  "checks": [
+    {
+      "check": "exactly one attempt directory",
+      "status": "PASS",
+      "detail": "['20261026T025443-a29ae705']"
+    },
+    {
+      "check": "_ATTEMPTED and _SUCCESS bind the authorization file hash",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "_ATTEMPTED names the matched QARF comparator run",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "exactly one final marker and it is _SUCCESS",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "namespace holds only the expected entries",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "finished within the authorized wall limit",
+      "status": "PASS",
+      "detail": "80.577 s"
+    },
+    {
+      "check": "_SUCCESS receipt/summary hashes match the files",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "complete.json points at the attempt and its receipt",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "every receipt output is present and re-hashes identically",
+      "status": "PASS",
+      "detail": "[]"
+    },
+    {
+      "check": "no file in the attempt is missing from the receipt (receipt.json cannot list itself)",
+      "status": "PASS",
+      "detail": "['receipt.json']"
+    },
+    {
+      "check": "best checkpoint hash in summary matches the file",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "last checkpoint hash in summary matches the file",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "the seed config file still matches its pin",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "resolved_config.json equals the authorized expectation",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "provenance config hash equals the authorized expectation",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "provenance git commit equals the supervised HEAD",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "summary names QPAF, page granularity, seed 20260821 and the pinned torch",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "the run consumed the sealed scores, queries, development qrels and splits",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "the sealed test qrels were not a run input",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "test split was not opened",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "train/validation sizes and candidate recall as sealed",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "in-process reload parity passed within tolerance",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "fresh-process reload passed in a separate interpreter within 1e-7",
+      "status": "PASS",
+      "detail": "{'score_max_abs_difference': 0.0, 'weight_max_abs_difference': 0.0, 'metric_max_abs_difference': 0.0}"
+    },
+    {
+      "check": "fresh-process reload loaded the checkpoints named in the summary",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "20 epochs, 50 steps each, no skipped queries",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "all epoch losses and metrics are finite",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "all step losses and gradient norms are finite",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "selected epoch is the earliest maximum of validation nDCG@10",
+      "status": "PASS",
+      "detail": "epoch 9"
+    },
+    {
+      "check": "predictions cover 171 queries with finite scores and weights",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "QPAF fusion weights vary across pages within a query (page-level gate)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "data_manifest.json is byte-identical to the seed-1 QPAF run (rows, order, counts)",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "provenance inputs equal the seed-1 QPAF inputs except the config hash",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "resolved config differs from seed 1 only in training.seed",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "same epochs and parameter count as the seed-1 QPAF run",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "QARF comparator carries its ACCEPTANCE_RECORDED/PASS event",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "resolved_config.json is byte-identical to the matched QARF run",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "data_manifest.json is byte-identical to the matched QARF run",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "provenance inputs equal the matched QARF run inputs",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "same seed and epochs as the matched QARF run",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "per-query rows list the same validation queries in the same order as the matched QARF run",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "predictions rank exactly the matched QARF candidate pages per query",
+      "status": "PASS",
+      "detail": ""
+    }
+  ],
+  "observations": {
+    "validation_ndcg_at_10_by_epoch": [
+      0.8568467050615713,
+      0.8602671786428505,
+      0.8577652982620895,
+      0.860794590591676,
+      0.8637786135091036,
+      0.8661560117948485,
+      0.8658350260591475,
+      0.8656558119063609,
+      0.866252499336626,
+      0.8659962200919544,
+      0.8659962200919544,
+      0.8652305490184371,
+      0.8654868282631087,
+      0.8654868282631087,
+      0.865713014355507,
+      0.8655338002027202,
+      0.8655338002027202,
+      0.8654000349759676,
+      0.8661004579136177,
+      0.8661704296641797
+    ],
+    "selected_epoch": 9,
+    "seed1_qpaf_selected_epoch": 19,
+    "seed1_qpaf_validation_ndcg_at_10": 0.8662796720664044,
+    "matched_qarf_selected_epoch": 1,
+    "parameter_count": 42,
+    "matched_qarf_parameter_count": 42,
+    "validation": {
+      "query_count": 171,
+      "ndcg_at_10": 0.866252499336626,
+      "recall_at_1": 0.7368421052631579,
+      "recall_at_3": 0.9122807017543859,
+      "mrr_at_10": 0.8296853244221666
+    },
+    "train_loss_first_to_last": [
+      0.4199045563982734,
+      0.3820090308985879
+    ],
+    "wall_seconds": 80.577,
+    "peak_rss_mb": 758.4609375,
+    "note": "Facts read from the run files; no interpretation, no QPAF-versus-QARF and no seed comparison claim is recorded here."
+  }
+}
