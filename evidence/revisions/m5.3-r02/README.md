@@ -1,7 +1,10 @@
 # M5.3/R3 — technical review QPAF seed 20260821
 
 **Owner review:** Thanh. **Kết quả kỹ thuật:** `PASS` trong [`validation.json`](validation.json).
-**Thanh chưa chấp nhận:** chưa có `owner_confirmation.json` và chưa có event `ACCEPTANCE_RECORDED`.
+**Thanh đã chấp nhận** trong [`owner_confirmation.json`](owner_confirmation.json) (câu trả lời
+nguyên văn của Thanh, do Tấn Phát chuyển lại). Event `PASS` `QPAF-REG-20261026-0009` được ghi nối tiếp ở
+[`governance_events.jsonl`](../m5.3-002/governance_events.jsonl). `validation.json` vẫn ghi
+`PENDING_THANH_CONFIRMATION` vì hash của nó đã được ghim trước khi Thanh chấp nhận.
 
 **Về tính độc lập:** Thanh nhờ (qua Tấn Phát) Claude Code làm technical review này. Claude Code cũng là
 trợ lý đã soạn authorization, chạy run và viết first-pass check, nên đây **không phải** replay độc lập do
