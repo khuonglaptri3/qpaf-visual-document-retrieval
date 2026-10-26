@@ -1,7 +1,10 @@
 # M5.4/R4 — technical review QPAF seed 20260822
 
 **Owner review:** Thanh. **Kết quả kỹ thuật:** `PASS` trong [`validation.json`](validation.json).
-**Thanh chưa chấp nhận:** chưa có `owner_confirmation.json` và chưa có event `ACCEPTANCE_RECORDED`.
+**Thanh đã chấp nhận** trong [`owner_confirmation.json`](owner_confirmation.json) (câu trả lời
+nguyên văn của Thanh, do Tấn Phát chuyển lại). Event `PASS` `QPAF-REG-20261026-0010` được ghi nối tiếp ở
+[`governance_events.jsonl`](../m5.4-002/governance_events.jsonl). `validation.json` vẫn ghi
+`PENDING_THANH_CONFIRMATION` vì hash của nó đã được ghim trước khi Thanh chấp nhận.
 
 **Về tính độc lập:** giống [`m5.3-r02`](../m5.3-r02/README.md). Claude Code làm review này theo yêu cầu
 của Thanh (qua Tấn Phát), và cũng là trợ lý đã chạy run. Vì vậy Thanh cần tự xem và tự xác nhận bằng lời
