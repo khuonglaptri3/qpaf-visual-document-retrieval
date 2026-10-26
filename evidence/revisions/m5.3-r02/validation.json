@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "task_id": "M5.3-QPAF-technical-review",
+  "owner": "Thanh",
+  "technical_reviewer": "Claude Code at Thanh's request, relayed by Tấn Phát; the same assistant that drafted the authorization, executed the run and wrote the first-pass check",
+  "independence_note": "Not an independent replay by a separate reviewer: the metric, receipt and marker checks reuse the M3.3 helpers Thanh wrote, but the QPAF reload, gate checks and this report were written by the executor's assistant. Thanh's acceptance must be his own explicit confirmation.",
+  "checked_utc": "2026-10-26T03:38:17Z",
+  "technical_verdict": "PASS",
+  "owner_acceptance": "PENDING_THANH_CONFIRMATION",
+  "run_id": "RUN-QPAF-M5_3-MTH-002-20261026T025155Z-A01",
+  "attempt_id": "20261026T025443-a29ae705",
+  "authorization_sha256": "132a1287c2cd3aeb688399b3fde39a0582bc3d8b53a2b057242df5c9257eaecd",
+  "seal_manifest_sha256": "0832af156b79d0448ecc630ff572a0053d7cb5da98b4dac2dec1c6ee49e27893",
+  "prediction_sha256": "4d6fe2c6829214a09c35052cdd4580f16ae86654fe637879371060386294618f",
+  "runtime": {
+    "python": "3.13.7",
+    "torch": "2.11.0+cpu",
+    "numpy": "2.5.4",
+    "pandas": "3.0.6",
+    "pyarrow": "26.0.0"
+  },
+  "matched_qarf": {
+    "run_id": "RUN-QPAF-M5_3-MTH-001-20261025T135954Z-A01",
+    "acceptance_event_id": "QPAF-REG-20261026-0001",
+    "review_sha256": "d3061e42be7537f23a9dfb0323e717ed115c10fbc7e21fedd2674225abf0d22f"
+  },
+  "m3_1_seal_replay": {
+    "task_id": "M3.1",
+    "status": "PASS",
+    "record_counts": {
+      "train": 799,
+      "validation": 171
+    },
+    "candidate_rows": {
+      "train": 386390,
+      "validation": 82255
+    },
+    "parity_identical": true,
+    "training_executed": false,
+    "test_labels_opened": false
+  },
+  "first_pass": {
+    "pass": 41,
+    "fail": 0
+  },
+  "receipt_outputs_rehashed": 16,
+  "validation_metrics_recomputed": {
+    "query_count": 171,
+    "ndcg_at_10": 0.866252499336626,
+    "recall_at_1": 0.7368421052631579,
+    "recall_at_3": 0.9122807017543859,
+    "mrr_at_10": 0.8296853244221666
+  },
+  "validation_queries": 171,
+  "validation_candidates": 82255,
+  "metric_max_abs_difference": 0.0,
+  "checkpoint_reload": {
+    "best_epoch": 9,
+    "last_epoch": 20,
+    "score_max_abs_difference": 0.0,
+    "weight_max_abs_difference": 0.0,
+    "tolerance": 1e-07,
+    "status": "PASS_REVIEW_PROCESS_RELOAD"
+  },
+  "page_level_gate": {
+    "weight_width": 3,
+    "max_simplex_deviation": 2.220446049250313e-16,
+    "queries_with_page_varying_weights": 171,
+    "queries": 171
+  },
+  "seed_observation": {
+    "selected_epoch_by_seed": {
+      "QARF": {
+        "20260820": 1,
+        "20260821": 1
+      },
+      "QPAF": {
+        "20260820": 19,
+        "20260821": 9
+      }
+    },
+    "qarf_epochs_2_to_20_equal_across_seeds": true,
+    "interpretation": "Descriptive validation observation only; selected values are validation maxima. Paired QPAF-versus-QARF and seed aggregation belong to M5.7."
+  },
+  "limitations": [
+    "Selected epoch 9 is the maximum on the same validation split; this is not a test estimate.",
+    "M5.2 cache-parity receipt is technical PASS; its human acceptance remains pending.",
+    "The frozen config and summary retain the M2.7 experiment_id; authorization and registry bind this run separately.",
+    "No seed-averaged, QPAF-versus-QARF or baseline improvement claim is made."
+  ],
+  "test_labels_deserialized": false,
+  "training_executed_by_review": false
+}
