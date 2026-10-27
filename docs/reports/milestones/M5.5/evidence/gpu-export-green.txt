@@ -1,0 +1,7 @@
+test_full_payload_round_trips_with_small_metadata_and_bounded_log_lines (test_m55_gpu_transport.ResultTransportTests.test_full_payload_round_trips_with_small_metadata_and_bounded_log_lines) ... ok
+test_missing_conflicting_corrupt_or_wrong_hash_chunks_are_refused (test_m55_gpu_transport.ResultTransportTests.test_missing_conflicting_corrupt_or_wrong_hash_chunks_are_refused) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.145s
+
+OK

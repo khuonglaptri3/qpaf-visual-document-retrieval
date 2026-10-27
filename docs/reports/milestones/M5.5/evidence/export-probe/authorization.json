@@ -1,0 +1,8 @@
+{
+  "purpose": "CPU-only restricted artifact export check",
+  "gpu": false,
+  "invocations": 1,
+  "retries": 0,
+  "timeout_seconds": 60,
+  "source_payload": "synthetic integer sequence"
+}

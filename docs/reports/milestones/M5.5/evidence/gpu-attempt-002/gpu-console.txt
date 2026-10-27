@@ -1,0 +1,84 @@
+✓ Initialized. View run at 
+https://modal.com/apps/tlcn-group1/main/ap-uPaf95h7zm3re3I5X4ufBK
+Building image im-0tXJel0y2hWBOlPFa749J5
+
+=> Step 0: FROM base
+
+=> Step 1: COPY . /
+Saving image...
+Image saved, took 1.04s
+
+Built image im-0tXJel0y2hWBOlPFa749J5 in 6.04s
+
+
+✓ Created objects.
+├── 🔨 Created mount 
+│   C:\Users\lanph\.codex\worktrees\6a15\Artificial_Intelligent_Project\.cache\
+│   m55-validation-gpu-002
+└── 🔨 Created function build_app.<locals>.benchmark_pair.
+Traceback (most recent call last):
+  File "/pkg/modal/_runtime/container_io_manager.py", line 987, in handle_input_exception
+    yield
+  File "/pkg/modal/_container_entrypoint.py", line 190, in run_input_sync
+    container_io_manager.push_outputs(io_context, started_at, values)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pkg/modal/_runtime/container_io_manager.py", line 1036, in push_outputs
+    outputs = await io_context.output_items(started_at, output_data)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pkg/modal/_runtime/container_io_manager.py", line 471, in output_items
+    return await asyncio.gather(
+           ^^^^^^^^^^^^^^^^^^^^^
+    ...<10 lines>...
+    )
+    ^
+  File "/pkg/modal/_runtime/container_io_manager.py", line 453, in package_output
+    formatted = await format_blob_data(
+                ^^^^^^^^^^^^^^^^^^^^^^^
+        serialized_bytes, self._client.stub, self._output_size_limit(invocation_type)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/pkg/modal/_utils/blob_utils.py", line 372, in format_blob_data
+    return {"data_blob_id": await blob_upload(data, api_stub)} if len(data) > max_object_size_bytes else {"data": data}
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pkg/modal/_utils/blob_utils.py", line 365, in blob_upload
+    blob_id, _, _ = await blob_upload_with_r2_failure_info(payload, stub)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pkg/modal/_utils/blob_utils.py", line 355, in blob_upload_with_r2_failure_info
+    blob_id, r2_failed, r2_throughput_bytes_s = await _blob_upload(upload_hashes, payload, stub)
+                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pkg/modal/_utils/blob_utils.py", line 297, in _blob_upload
+    resp = await stub.BlobCreate(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+modal.exception.AuthError: Received :status = '401'
+Stopping app - uncaught exception raised locally: AuthError("Received :status = '401'").
+Traceback (most recent call last):
+  File "C:\Users\lanph\.codex\worktrees\6a15\Artificial_Intelligent_Project\scripts\run_m55_gpu.py", line 290, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\lanph\.codex\worktrees\6a15\Artificial_Intelligent_Project\scripts\run_m55_gpu.py", line 283, in main
+    execute(args.bundle.resolve(), args.authorization.resolve(), args.expected_authorization_sha256,
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            args.output.resolve())
+            ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lanph\.codex\worktrees\6a15\Artificial_Intelligent_Project\scripts\run_m55_gpu.py", line 249, in execute
+    result = invoke_once(function, output)
+  File "C:\Users\lanph\.codex\worktrees\6a15\Artificial_Intelligent_Project\scripts\run_m55_gpu.py", line 203, in invoke_once
+    return call.get(timeout=900)
+           ~~~~~~~~^^^^^^^^^^^^^
+  File "C:\Users\lanph\.codex\worktrees\6a15\Artificial_Intelligent_Project\.cache\verification-overlay\modal\_object.py", line 46, in wrapped
+    return await method(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lanph\.codex\worktrees\6a15\Artificial_Intelligent_Project\.cache\verification-overlay\modal\_functions.py", line 2199, in get
+    return await self._invocation().poll_function(timeout=timeout, index=index)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lanph\.codex\worktrees\6a15\Artificial_Intelligent_Project\.cache\verification-overlay\modal\_functions.py", line 336, in poll_function
+    return await _process_result(
+           ^^^^^^^^^^^^^^^^^^^^^^
+        response.outputs[0].result, response.outputs[0].data_format, self.stub, self.client
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\lanph\.codex\worktrees\6a15\Artificial_Intelligent_Project\.cache\verification-overlay\modal\_utils\function_utils.py", line 572, in _process_result
+    raise exc_with_hints(exc)
+modal.exception.AuthError: Received :status = '401'

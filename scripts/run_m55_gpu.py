@@ -90,7 +90,7 @@ def prepare_bundle(destination):
             target = destination/rel
             target.parent.mkdir(parents=True, exist_ok=True)
             shutil.copyfile(path, target)
-    for name in ('m55_gpu_worker.py', 'm36_memory_telemetry.py'):
+    for name in ('m55_gpu_worker.py', 'm55_gpu_transport.py', 'm36_memory_telemetry.py'):
         git('ls-files', '--error-unmatch', 'scripts/'+name)
         shutil.copyfile(ROOT/'scripts'/name, destination/'scripts'/name)
     shutil.copyfile(config_path, destination/'input/shared_base.toml')
@@ -169,6 +169,12 @@ def build_app(bundle):
         from pathlib import Path
         from scripts.m55_gpu_worker import run_method, verify_bundle
         from scripts.m36_memory_telemetry import snapshot
+        from scripts.m55_gpu_transport import encode_result
+        def export(value):
+            metadata, lines = encode_result(value)
+            for line in lines:
+                print(line, flush=True)
+            return metadata
         started = time.perf_counter()
         verify_bundle(Path('/workspace'))
         outputs, logs = {}, {}
@@ -180,16 +186,16 @@ def build_app(bundle):
                 container_memory.append(snapshot('container_after_'+method))
                 logs[method] = worker['log']
                 if worker['status'] != 'COMPLETED':
-                    return {'status': 'FAILED', 'outputs': outputs, 'logs': logs,
+                    return export({'status': 'FAILED', 'outputs': outputs, 'logs': logs,
                             'failed_method': method, 'reason': worker['reason'],
-                            'seconds': time.perf_counter()-started, 'container_memory': container_memory}
+                            'seconds': time.perf_counter()-started, 'container_memory': container_memory})
                 outputs[method] = worker['output']
-        return {'status': 'COMPLETED', 'outputs': outputs, 'logs': logs,
+        return export({'status': 'COMPLETED', 'outputs': outputs, 'logs': logs,
                 'memory_request_and_limit_mib': MEMORY_MIB, 'container_memory': container_memory,
                 'seconds': time.perf_counter()-started,
                 'packages': {p: importlib.metadata.version(p) for p in ('torch', 'numpy', 'pandas', 'pyarrow')},
                 'pip_freeze': subprocess.check_output(['python', '-m', 'pip', 'freeze'], text=True),
-                'nvidia_smi': subprocess.check_output(['nvidia-smi'], text=True)}
+                'nvidia_smi': subprocess.check_output(['nvidia-smi'], text=True)})
 
     return app, image, benchmark_pair
 
@@ -200,7 +206,22 @@ def invoke_once(function, output):
     write_new(output/'function_call.json', {'function_call_id': call.object_id,
                                           'retrieval_mode': 'durable_spawn_get',
                                           'new_function_invocations': 1})
-    return call.get(timeout=900)
+    result = call.get(timeout=900)
+    if result.get('status') != 'LOGGED_RESULT':
+        return result
+    from scripts.m55_gpu_transport import decode_result
+    write_new(output/'result_transport.json', result)
+    for attempt in range(5):
+        messages = [entry.message for entry in call.logs.fetch()]
+        try:
+            decoded = decode_result(result, messages)
+            with (output/'result_transport.log').open('x', encoding='utf-8', newline='\n') as stream:
+                stream.write('\n'.join(messages))
+            return decoded
+        except ValueError:
+            if attempt == 4:
+                raise
+            time.sleep(1)
 
 
 def execute(bundle, authorization, expected_authorization_sha256, output):

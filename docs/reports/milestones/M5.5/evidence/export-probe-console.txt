@@ -1,0 +1,1 @@
+PASS: restricted CPU result export, 10000 integers, no GPU

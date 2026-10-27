@@ -140,3 +140,28 @@ retry remains0. A new external authorization and namespace are mandatory.
 Two transport tests observed RED before implementation: identity persistence
 before waiting and retention after a failed wait with exactly one submitted input.
 Final full suite before this transport change: **646 tests OK,4 skipped**.
+
+The durable A02 workload reached output serialization and exposed BlobCreate401:
+the restricted runtime forbids blob APIs, while asynchronous results above8KiB
+are offloaded (SDK1.5.5 source confirms the threshold). Retain A02 with its
+durable ID/failure; no numbers are inferred. Keep network/API restrictions.
+New transport emits gzip/base64 stdout chunks plus a <8KiB metadata receipt, then
+reads logs for that existing Call ID and checks full count/bytes/SHA256 before use.
+Two codec tests observed RED→GREEN, and a real restricted/network-blocked CPU
+probe round-tripped10000 integers: `export-probe/verification.json`, PASS,0GPU.
+This actual probe establishes export behavior before the third GPU invocation.
+Full suite after durable transport: **648 tests OK,4 skipped**; two codec tests
+are additional, final full suite pending. Last focused contract/codec run:14PASS.
+
+Ruling: use verified stdout chunks for raw artifacts and a small ordinary return
+receipt — avoids restricted BlobCreate while preserving all measurement/network
+boundaries — incomplete/corrupt logs fail closed; two prior GPU invocations remain
+recorded and are not presented as successful raw-data deliveries.
+
+Ruling: exact CPU replay moves to a CPU-only Modal container fetching the public
+pin-checked historical snapshot/archive — Windows wheel downloads stalled for
+tens of minutes; exact versions are preserved — return audited verification and
+unchanged historical hashes; no GPU workload receives development labels.
+The initial CPU-helper initialization failed locally on Windows cp1252 output
+before invocation; preserve its authorization/attempt/console and use explicit
+UTF8 in a new verification namespace. No CPU success is inferred from that error.

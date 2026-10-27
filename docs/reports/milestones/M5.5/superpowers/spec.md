@@ -80,6 +80,24 @@ waiting, then `call.get(timeout=900)`; retrieval failure must never submit a sec
 input. Record the prior completed invocation rather than claiming only one was ever
 executed. This changes transport/recoverability, not scoring or the timing workload.
 
+The durable successor exposed the actual export error: returning more than the
+SDK's 8KiB asynchronous inline limit invokes BlobCreate, forbidden in a restricted
+Function. Preserve that attempt too. Keep `block_network=True` and
+`restrict_modal_access=True`; after measuring, encode the full result as deterministic
+gzip/base64 stdout chunks <=3,100bytes each. Return only small metadata (codec,
+byte count, chunk count, SHA256) below8KiB. Fetch the existing call's logs read-only
+and verify/reassemble every chunk before accepting the result. Missing/conflicting/
+corrupt chunks or hash mismatch must fail. Probe this exact channel on a CPU-only
+restricted Function before a third bounded GPU invocation. Measurement stages
+exclude serialization/compression and log transfer.
+
+Exact original CPU replay may use a bounded CPU-only Modal verifier that fetches
+the public pinned Git commit/M4.2 archive, avoiding stalled Windows downloads.
+It must enforce Python3.11.14/NumPy2.4.6/pandas3.1.0/PyArrow26.0.0 and run the
+unchanged verifier under write/network/forbidden-import/test-qrels audit guards,
+proving all original run bytes unchanged. This is verification, not another
+scientific run or GPU workload; development-label input is never included in GPU.
+
 Sources checked for this successor: [Modal GPU guide](https://modal.com/docs/guide/gpu),
 [Modal resource pricing](https://modal.com/pricing) and the repository's frozen
 metric policy and M3.6 measurement implementation. The choices of six passes,
