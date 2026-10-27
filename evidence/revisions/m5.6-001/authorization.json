@@ -1,0 +1,163 @@
+{
+  "schema_version": 1,
+  "status": "PENDING_RESEARCH_LEAD_APPROVAL",
+  "task_id": "M5.6",
+  "roster_id": "R6",
+  "owner": "Tấn Phát",
+  "experiment_id": "QPAF-M5_6-ABL-001",
+  "run_id": "PENDING: RUN-QPAF-M5_6-ABL-001-<UTC YYYYMMDDTHHMMSSZ at approval>-A01",
+  "scope": [
+    "R6-00",
+    "R6-01",
+    "R6-02",
+    "R6-03",
+    "R6-04",
+    "R6-05"
+  ],
+  "scope_detail": {
+    "R6-00": "Control: full 13-feature diagnostic retrain; must reproduce the accepted M3.4 pilot (same selected epoch, predictions within 1e-12). Integrity check, not a preregistered contrast.",
+    "R6-01": "M5.1 order 5: omit only rr_bm25, rr_dense, rr_visual",
+    "R6-02": "M5.1 order 6: omit only gap_bm25, gap_dense, gap_visual",
+    "R6-03": "M5.1 order 7: omit only disagreement_bm25_dense, disagreement_bm25_visual, disagreement_dense_visual",
+    "R6-04": "M5.1 order 8: omit only query_length",
+    "R6-05": "M5.1 order 9: QPAF (page) - QARF (query) on the six accepted matched seed runs; no training; per-query three-seed mean delta before the bootstrap"
+  },
+  "permissions": {
+    "device": "cpu",
+    "modal": false,
+    "gpu": false,
+    "training": "diagnostic_only",
+    "retriever_inference": false,
+    "test_labels": false,
+    "vimdoc": false,
+    "network": false
+  },
+  "source_commit": "4330e631079d23b6fdd7e4417f1104584fe6bc60",
+  "source_files_sha256": {
+    "src/qpaf/m56/__init__.py": "ff3346b2d4cf998a5d0d5e60d6f9d0a145a9309214d0a6ddf8ff37d28ebadcab",
+    "src/qpaf/m56/ablation.py": "c506dd5cbb52c243368c686ba7ac0ee49ff2b7b430961a28c859714e16763215",
+    "src/qpaf/m56/conditioning.py": "1f9db2ff90b96bba4d139c5f946633d25234169fa45623ee3569e727cbc65409",
+    "src/qpaf/m56/runner.py": "710e608a10f690d09133cd921d85bbb15b13629dad6d9fd506b5b59986de41a5",
+    "scripts/run_m56_ablations.py": "7b0ff3c6bd9f66216bb70f74d94288aeef615ca703cc3d925610620dfaba700d",
+    "tests/test_m56_ablations.py": "4b50af3639bf128f5c85209db5c1775c90ad8e09cd7541ccb40a769876efdce4",
+    "src/qpaf/m12/features.py": "86eb5d540d2330c0fec263d587581d2f159b77461df85c57f6ecaa64fafa40b6",
+    "src/qpaf/m12/model.py": "05c0370343a14b70b1db37e3d2bf6fd852c4ea67f7a967af52fa0ff498adcc3e",
+    "src/qpaf/m12/losses.py": "18debc316b02146c38c36a6b1021f0db5e3ba9be55ffdb4c8be153cd11ce5395",
+    "src/qpaf/m24/config.py": "5d730b9cb1ba8971ae972729401013e0bb0ccce81310615e2a9088963eb53841",
+    "src/qpaf/m24/dataset.py": "1b2681b163ce4a88a87eeb71ba31f417ee2a4469a9be49845c47d528eb6c5279",
+    "src/qpaf/m24/evaluator.py": "bfd25f331c5c377c708fd1d05f3e3edb85467488301e9658ea9bb486ef476742",
+    "src/qpaf/m24/trainer.py": "242fbcdc3a1cf44c81d29ef7be19aac256b29e5226f870cdf1cee889ff9df7d4",
+    "src/qpaf/m44/common.py": "bb160e3bd2355cdf72c66982c6ee4e041520c96fe97f69a2080546b1fc54968c"
+  },
+  "authority_pins": {
+    "evidence/revisions/m5.1-001/preregistration.json": "45269eafe36907f99990027f067e724939da69db5ee351669d1e5e7854bf7e29",
+    "evidence/revisions/m5.1-001/owner_confirmation.json": "c9fa0a0ef637362a30f6dcc38f86cd59916620bd714b3d6330afa76de4e80bef",
+    "evidence/revisions/m4.7-001/g2a_freeze.json": "26d9bab6e7d47fe7dd1e89f6bec2c95265641df5cde8d9bd25c867b9d3a73217",
+    "evidence/revisions/m4.7-001/owner_confirmation.json": "5f80b4312188721dc2c2033a85ce1a9631bffa32479c576e0500471e622b95e6",
+    "evidence/revisions/m3.4-001/authorization.json": "4be026b852574e7687fdc4b9337f716aa96a64ac39556ae288193bdba99e5365",
+    "results/m3.1/RUN-QPAF-M3_1-SEAL-001-20261021T142631Z-A01/inputs/shared_base.toml": "3e58a867d11cebf72970cf0c141a90822cd7cbbdad65fb1e081cb14fa4889b58",
+    "results/m3.1/RUN-QPAF-M3_1-SEAL-001-20261021T142631Z-A01/inputs/score_cache.parquet": "56d0c82efda9264c117611ddd7135fe2384b68a3ec60fbdfd80fb964c386622b",
+    "results/m3.1/RUN-QPAF-M3_1-SEAL-001-20261021T142631Z-A01/inputs/query_texts.json": "e7994373c9fd5157cde0fb0c5a1440c37c275b85fa19b2b0b566f61d584c4ab4",
+    "results/m3.1/RUN-QPAF-M3_1-SEAL-001-20261021T142631Z-A01/inputs/qrels_development.json": "691b6bc4ada3bc64fe3c408fe32498b04c7f30900eadb39ae09ddbe29aea302c",
+    "results/m3.1/RUN-QPAF-M3_1-SEAL-001-20261021T142631Z-A01/inputs/splits/train_ids.txt": "61dfe867c27b91a0a96594440b0f0e5ecf51501da0fcecdac94badaf16962191",
+    "results/m3.1/RUN-QPAF-M3_1-SEAL-001-20261021T142631Z-A01/inputs/splits/val_ids.txt": "46f8af5853942f6697cc3a995347a1832206212e93ff8aa87acb1775b3a060b4",
+    "results/m3.1/RUN-QPAF-M3_1-SEAL-001-20261021T142631Z-A01/inputs/splits/test_ids.txt": "d34210f901759a4f174da0c6c2e9b810616dcb33a71a0bd128a25d5d8d12e6f6",
+    "results/m3.4/RUN-QPAF-M3_4-MTH-001-20261022T112102Z-A01/QPAF/20261022T112355-77b54aa0/summary.json": "c932709e43f1ac5b1d6f5f3f0a088be6f6e4931b5e81ce8ce2757f8775eaa556"
+  },
+  "accepted_conditioning_runs": {
+    "QARF/20260820": {
+      "attempt": "results/m3.2/RUN-QPAF-M3_2-MTH-001-20261022T035229Z-A01/QARF/20261022T040759-ff3934df",
+      "validation_predictions_sha256": "658c8162b690bff751609298aa8e77bf80cdf035cdbb45711ca5f1050407ab1e",
+      "validation_per_query_sha256": "e7318a489f7fee80071ba56ed9477b94c21ff6cfc2f7bf7ed5600e67b881c777",
+      "acceptance_event": "QPAF-REG-20261022-0022"
+    },
+    "QPAF/20260820": {
+      "attempt": "results/m3.4/RUN-QPAF-M3_4-MTH-001-20261022T112102Z-A01/QPAF/20261022T112355-77b54aa0",
+      "validation_predictions_sha256": "95ba3ed8e4a395bf0f888866a0e33abec43375d381f37dfa66195e65b7d9db5b",
+      "validation_per_query_sha256": "02abf2e14298d042b38f98671cad7f0a6ac7e2f9921237c428771a19a3d52b66",
+      "acceptance_event": "QPAF-REG-20261022-0026"
+    },
+    "QARF/20260821": {
+      "attempt": "results/m5.3/RUN-QPAF-M5_3-MTH-001-20261025T135954Z-A01/QARF/20261025T140512-0de4dd1d",
+      "validation_predictions_sha256": "84bbff7fa7794afbd7029c5405869c658b62c3d3c890fd78ed955dc479ca7611",
+      "validation_per_query_sha256": "fe445556a0aa1f09de3d410c9eb85d3523cbdaf0843ccd9cb69c5564aa9866da",
+      "acceptance_event": "QPAF-REG-20261026-0001"
+    },
+    "QPAF/20260821": {
+      "attempt": "results/m5.3/RUN-QPAF-M5_3-MTH-002-20261026T025155Z-A01/QPAF/20261026T025443-a29ae705",
+      "validation_predictions_sha256": "4d6fe2c6829214a09c35052cdd4580f16ae86654fe637879371060386294618f",
+      "validation_per_query_sha256": "04105bddc465f2b26e305953531261db0b39b544a37ca34f889565ec9e0ec579",
+      "acceptance_event": "QPAF-REG-20261026-0009"
+    },
+    "QARF/20260822": {
+      "attempt": "results/m5.4/RUN-QPAF-M5_4-MTH-001-20261025T154818Z-A01/QARF/20261025T155859-f0aefa1c",
+      "validation_predictions_sha256": "43e05c4b12bf4bed1f45f72a940d94e3f09375f9774c7415d8b9ea0e8e6c1e9d",
+      "validation_per_query_sha256": "582c34e55ed45805bbc89acc0498771016857a5f52567d1da67e0fbd0b313598",
+      "acceptance_event": "QPAF-REG-20261026-0002"
+    },
+    "QPAF/20260822": {
+      "attempt": "results/m5.4/RUN-QPAF-M5_4-MTH-002-20261026T025155Z-A01/QPAF/20261026T025834-242457dc",
+      "validation_predictions_sha256": "8667b6abc44c861180f8e506656ff8ab4a8223723e87df035eefc0d46a22874a",
+      "validation_per_query_sha256": "117dd7a4f216313e7cddcdc64694175355c5df6793cbaff1973a510acfebd4cd",
+      "acceptance_event": "QPAF-REG-20261026-0010"
+    }
+  },
+  "runtime": {
+    "python": "3.13.7",
+    "torch": "2.11.0+cpu",
+    "numpy": "2.5.4",
+    "pandas": "3.0.6",
+    "pyarrow": "26.0.0"
+  },
+  "hardware": "Local CPU only (Windows 11); float64; 1 thread; deterministic algorithms",
+  "limits": {
+    "wall_time_seconds": 3600,
+    "invocations": 1,
+    "automatic_retries": 0
+  },
+  "training_contract": {
+    "seed": 20260820,
+    "config": "results/m3.1/RUN-QPAF-M3_1-SEAL-001-20261021T142631Z-A01/inputs/shared_base.toml",
+    "method": "QPAF (page gate)",
+    "epochs": 20,
+    "selection": "validation nDCG@10, ties keep the earlier epoch",
+    "masking": "Omitted feature columns are multiplied by zero before the frozen 13-input linear gate; kept weights start from the pilot initialisation and omitted weights must be unchanged after training",
+    "checkpoints": "results/m5.6/<run_id>/<R6-0x>/checkpoints/{best,last}.pt, separate from every frozen checkpoint"
+  },
+  "statistics": {
+    "pairing": "validation query",
+    "bootstrap_resamples": 10000,
+    "rng": "numpy default_rng(20260820)",
+    "ci": "percentile 95%",
+    "tie": "|delta| <= 1e-12"
+  },
+  "claim_scope": "Exploratory validation diagnostics only (ablation order fixed after M4.4/M4.5 validation was seen). No test/TEST-172 access, no primary-method, baseline, checkpoint or seed change, no confirmatory claim.",
+  "command": {
+    "interpreter": ".venv/Scripts/python.exe",
+    "script": "scripts/run_m56_ablations.py",
+    "subcommand": "run",
+    "authorization": "evidence/revisions/m5.6-001/authorization.json",
+    "run_id": "<run_id>",
+    "external_pin_argument": "--expected-authorization-sha256, supplied outside this file"
+  },
+  "stop_conditions": [
+    "source, config, input or authority hash drift",
+    "tracked working tree not clean",
+    "non-finite loss, gradient, parameter or prediction",
+    "R6-00 does not reproduce the M3.4 pilot",
+    "omitted-feature weights moved",
+    "fresh-process reload difference above 1e-7",
+    "wall time above 3600 s",
+    "run namespace already exists"
+  ],
+  "approval": {
+    "approver": "PENDING",
+    "approval_text": "PENDING",
+    "approved_utc": "PENDING",
+    "recorded_by": "PENDING"
+  },
+  "independent_review": {
+    "reviewer": "Thanh",
+    "status": "PENDING"
+  }
+}
