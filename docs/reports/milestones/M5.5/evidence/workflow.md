@@ -165,3 +165,89 @@ unchanged historical hashes; no GPU workload receives development labels.
 The initial CPU-helper initialization failed locally on Windows cp1252 output
 before invocation; preserve its authorization/attempt/console and use explicit
 UTF8 in a new verification namespace. No CPU success is inferred from that error.
+
+## Final technical results
+
+- `final-software-tests-framing.txt`: **651 tests OK,4 skipped**, final local full
+  suite after log-fragment regression. Skips: unprivileged symlink unavailable;
+  one Linux-only Modal worker test; two historical M3.1 seal-dependent M4.3 tests.
+  The separate method-core verifier passed23 tests with0skips.
+- `cpu-replay-005/verification.json`: exact original numerical runtime PASS;
+  all13 original run files unchanged; audit writes0/network0/forbidden imports0/
+  test-qrels attempts0. This is a read-only replay, not a new scientific CPU run.
+- CPU helper001 failed Windows UTF8 initialization;002 was refused before input
+  because serialized client3.13 differed from image3.11;003/004 failed archive404.
+  Release inspection established `isDraft=true`;005 used a short-lived capability
+  for that single pinned asset. GitHub token remained local and neither it nor the
+  temporary URL was persisted or sent as a GitHub token to Modal. Failed helper
+  attempts are retained and are not labeled PASS. Stalled local download processes
+  belonging to this task were cancelled; old environments were not modified.
+- A03 provider records: one successful input, one container, execution17.783159s;
+  about252s queue delay is outside per-query fusion timing. Original source commit
+  a858634022f7e975d1d9073f61cb832987eb35f5, Modal image im-HSIzcSl6k7i4RjsjobllRt.
+- A03 local log read hit provider FunctionCallGetInfo quota. Observer SDK1.6.2 read
+  the same fc-01M5YWXVAV3GR59Q464CQPRS3N; no fourth GPU invocation was submitted.
+  Raw log messages were retained exactly as JSON. A new regression demonstrated
+  that message boundaries can split a prefix or base64 payload, then passed after
+  reconstructing the stream before parsing. Full SHA256/count checks passed.
+- `gpu-attempt-003/gpu-offline-verification.json`: independently recomputed2052
+  raw timing rows,171distinct IDs,1026events per method, all stage statistics and
+  parity; original failed-client namespace bytes unchanged. Recovered result SHA256
+  bffda9f4ede0c8310e0c4bcd6a744824ce24c21667144d982860931f9af934d0.
+- QARF median2.569362ms, QPAF2.4263995ms; CUDA allocated0.032428265/
+  0.032439709GiB. Both pass <=10ms/<1.50GiB under the disclosed validation-event
+  counting interpretation. Full171/82255parity, maximum score4.44e-16 and weight
+  7.77e-16;0ranking disagreements. No test labels, training, retriever rerun or
+  primary-method/baseline change.
+- Reported process RSS and provider memory samples remain separate. Provider
+  samplep99~0.76923GiB is not a continuous physical/container peak. Cgroup peak was
+  unavailable; no stronger RAM proof is claimed.
+
+Ruling: recover A03 through the existing provider log stream rather than submit a
+fourth invocation — complete chunks and their canonical raw SHA256 bind the data —
+if incomplete/corrupt, verification fails and no metrics may be accepted.
+Ruling: treat log records as stream fragments, preserving embedded newlines — the
+real API fragmented chunks; a failing regression reproduced this — assuming one
+record per line would silently lose bytes, now caught by framing/hash checks.
+
+Canonical final status: TECHNICAL_COMPLETE_PENDING_INDEPENDENT_ACCEPTANCE.
+Original CPU report/handoff bytes are archived as `.txt` snapshots so their old
+relative links are not presented as live links from a relocated Markdown file.
+No acceptance by Thanh, Research Lead signature or PR merge is inferred.
+Final whole-branch review, task manifest/link checks and remote CI follow below.
+
+## Final independent engineering review and handoff checks
+
+The gpt-6-astra final-review dispatch hit usage quota before it could review.
+No review was claimed from that failed turn. A fresh-context read-only reviewer
+on available gpt-6.1-sol/high completed the final review with noCritical/Important
+findings (`final-engineering-review.md`). It independently decoded all55log
+fragments, matched the recovered object and source/workload pins, recomputed every
+stage/pass p50/p95 with0mismatches, reran15GPUtests/1Gitregression/offline verifier,
+and inspected651testsOK/4skips evidence. This is not human acceptance.
+
+Final: minor (deferred): offline verifier does not itself decode the log fragments;
+fresh reviewer independently decoded and confirmed exact recovered-object equality.
+Final: minor (deferred): offline verifier omits per-pass p50/p95 recomputation;
+fresh reviewer independently checked every method/stage/pass with0mismatches.
+The previously deferred worker-level reference guard remains the third minor.
+
+Parent dispositions of final declined-to-judge items: human acceptance remains
+pending; event counting is not represented as M3.6 distinct-ID equivalence; exact
+billing/physical RAM peak are not claimed; actual CPU/GPU verification receipts
+remain the evidence for execution; remote SHA/CI must be checked after push.
+
+Initial finalization check: exact root/two-file planning layout PASS,77local links
+PASS,48historical files unchanged against starting Git bytes. Credential scan
+checked125evidence files with0findings; no private token or temporary asset URL
+was included. Manifests are regenerated after final report/review updates.
+
+
+## Integration scope
+
+Applied Superpowers7.0.1 `finishing-a-development-branch/SKILL.md` after its actual
+read. Existing integration choice is preserved: update the current PR45 head
+branch targeting develop and retain its managed worktree. No new integration menu
+is needed for this already-authorized continuation. Local full suite651/4skips
+and fresh final review/verification establish readiness; remote CI is checked
+after push. Human acceptance remains pending.

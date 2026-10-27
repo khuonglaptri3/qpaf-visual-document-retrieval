@@ -1,0 +1,35 @@
+✓ Initialized. View run at 
+https://modal.com/apps/tlcn-group1/main/ap-BwVWKsFGFpQXZlcWUZKixu
+✓ Created objects.
+└── 🔨 Created function main.<locals>.replay.
+{
+  "status": "PASS",
+  "verification": {
+    "status": "PASS",
+    "run_id": "RUN-QPAF-M5_5-ABL-001-20261027T033016Z-A01",
+    "query_count": 171,
+    "candidate_count": 82255,
+    "manifest_sha256": "f141871d5adbd90c11fad5084d6c08a599009e3bd0bbbe5f60513e8eebff03be",
+    "read_only": true,
+    "resource_status": "NOT_RUN_DEFERRED_MODAL_NETWORK_BLOCKED",
+    "m55_complete": false
+  },
+  "runtime": {
+    "python": "3.11.14",
+    "numpy": "2.4.6",
+    "pandas": "3.1.0",
+    "pyarrow": "26.0.0"
+  },
+  "audit": {
+    "writes": 0,
+    "network": 0,
+    "forbidden_imports": 0,
+    "test_qrels": 0
+  },
+  "run_bytes_unchanged": true,
+  "execution_location": "Modal CPU, no GPU",
+  "new_scientific_run": false
+}
+Stopping app - local entrypoint completed.
+✓ App completed. View run at 
+https://modal.com/apps/tlcn-group1/main/ap-BwVWKsFGFpQXZlcWUZKixu

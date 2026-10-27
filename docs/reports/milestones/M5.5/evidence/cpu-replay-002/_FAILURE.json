@@ -1,0 +1,4 @@
+{
+  "exception": "InvalidError",
+  "message": "The 'main.<locals>.replay' Function (using `serialized=True`) was defined with Python 3.13, but its Image has 3.11. A serialized Function must be defined using a Python version that is compatible with the one in its remote environment."
+}

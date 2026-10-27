@@ -1,6 +1,6 @@
 # M5.5 PR #45 Continuation Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this continuation task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this continuation task-by-task. Steps use checkbox (`- [x]`) syntax for tracking.
 
 **Goal:** Repair unfinished PR checks, verify the existing CPU result, and produce a precise current handoff.
 
@@ -32,10 +32,10 @@
 
 **Interfaces:** Consumes real temporary Git repositories and fixture `git(root, *args)`; produces commits without detached maintenance racing cleanup.
 
-- [ ] Capture the CI traceback and inspect repeated fixture commits.
-- [ ] Force real automatic maintenance; prove a worker outlives the helper and save a deterministic failing regression.
-- [ ] Apply the smallest fixture-only change, preserving Git error propagation.
-- [ ] Run regression/supervisor tests and full unittest suite; record every skip/failure, then commit.
+- [x] Capture the CI traceback and inspect repeated fixture commits.
+- [x] Force real automatic maintenance; prove a worker outlives the helper and save a deterministic failing regression.
+- [x] Apply the smallest fixture-only change, preserving Git error propagation.
+- [x] Run regression/supervisor tests and full unittest suite; record every skip/failure, then commit.
 
 ## Task 2: Verify the unchanged CPU delivery
 
@@ -43,9 +43,9 @@
 
 **Interfaces:** Existing CLI `verify`, external manifest `f141871d5adbd90c11fad5084d6c08a599009e3bd0bbbe5f60513e8eebff03be`, exact Python 3.11.14 / NumPy 2.4.6 / pandas 3.1.0 / PyArrow 26.0.0.
 
-- [ ] Prepare isolated CPU environment; restore pinned M4.2 inputs, checking original hashes first.
-- [ ] Run existing read-only verifier; expect 171 queries, 82,255 candidates, PASS. Compare all run/source/authority bytes before/after.
-- [ ] Record environment, commands, hashes and access limits; never rerun the original scientific namespace.
+- [x] Prepare isolated CPU environment; restore pinned M4.2 inputs, checking original hashes first.
+- [x] Run existing read-only verifier; expect 171 queries, 82,255 candidates, PASS. Compare all run/source/authority bytes before/after.
+- [x] Record environment, commands, hashes and access limits; never rerun the original scientific namespace.
 
 ## Task 3: Validation-only R5-04 GPU execution
 
@@ -53,12 +53,12 @@
 
 **Interfaces:** `make_workload(ids)` produces 20 warm-up events and six passes over 171 distinct IDs; `validate_payload(workload, records)` refuses non-validation/label-bearing rows; `summarize(rows, measured_ids, peak)` checks 1,026 ordered events. Launcher exports pinned M4.2 validation score/text/ID data and seed-1 reference predictions, then runs one bounded Modal invocation with isolated method subprocesses.
 
-- [ ] Write failing tests for exact workload/counts, payload boundaries, ordered coverage, nonfinite/stage-invalid timings, inclusive 10ms/exclusive 1.5GiB gates and bundle/authorization tampering.
-- [ ] Adapt the frozen M3.6 worker and launcher into new files; preserve their measurement stages, telemetry and source/runtime checks. Add validation-only export, explicit six-pass counts and one new external authorization pin.
-- [ ] Run focused tests/full suite and fresh pre-execution code review; fix material issues before remote invocation.
-- [ ] Commit source, prepare/hash the label-free bundle, record the user's exact GPU/delegation text in a new M5.5 authorization; pin command, checkpoints, runtime/image, workload and limits.
-- [ ] Run one A10/2-core/5GiB invocation, no automatic retry, 900s watchdog; preserve success/failure bytes. Verify 171-query parity, 1,026 events per method, raw timings and independently recomputed summaries.
-- [ ] Record new R5-04 engineering result and its counting interpretation; do not change historical CPU deferred receipts or invent independent human acceptance.
+- [x] Write failing tests for exact workload/counts, payload boundaries, ordered coverage, nonfinite/stage-invalid timings, inclusive 10ms/exclusive 1.5GiB gates and bundle/authorization tampering.
+- [x] Adapt the frozen M3.6 worker and launcher into new files; preserve their measurement stages, telemetry and source/runtime checks. Add validation-only export, explicit six-pass counts and one new external authorization pin.
+- [x] Run focused tests/full suite and fresh pre-execution code review; fix material issues before remote invocation.
+- [x] Commit source, prepare/hash the label-free bundle, record the user's exact GPU/delegation text in a new M5.5 authorization; pin command, checkpoints, runtime/image, workload and limits.
+- [x] Run bounded A10/2-core/5GiB attempts under separate authorizations, no automatic retry, 900s watchdog; preserve all failures and recover existing artifacts without further GPU. Verify 171-query parity, 1,026 events per method, raw timings and independently recomputed summaries.
+- [x] Record new R5-04 engineering result and its counting interpretation; do not change historical CPU deferred receipts or invent independent human acceptance.
 
 ## Task 4: Final report, review and PR continuation
 
@@ -66,7 +66,7 @@
 
 **Interfaces:** Consumes Tasks 1-2 evidence; produces a current linked report and updated existing PR branch.
 
-- [ ] Obtain fresh-context review and address material findings with RED-to-GREEN verification.
-- [ ] Validate bundle layout, local links, hashes, historical bytes and `git diff --check`.
-- [ ] Finalize Vietnamese report with actual checks and explicit R5-04/human-review status.
+- [x] Obtain fresh-context review and address material findings with RED-to-GREEN verification.
+- [x] Validate bundle layout, local links, hashes, historical bytes and `git diff --check`.
+- [x] Finalize Vietnamese report with actual checks and explicit R5-04/human-review status.
 - [ ] Commit and push to the existing PR head; verify remote SHA and CI. Do not merge or fabricate acceptance.

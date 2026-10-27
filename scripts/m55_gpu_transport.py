@@ -3,6 +3,7 @@ import base64
 import gzip
 import hashlib
 import json
+import re
 
 PREFIX = 'QPAF-M55-RESULT:'
 
@@ -24,18 +25,19 @@ def decode_result(metadata, messages):
             or not 1 <= metadata['uncompressed_bytes'] <= 64*1024*1024):
         raise ValueError('invalid result transport metadata')
     parts = {}
-    for message in messages:
-        for line in message.splitlines():
-            if not line.startswith(PREFIX):
-                continue
-            try:
-                index, part = line[len(PREFIX):].split(':', 1)
-                index = int(index)
-            except (ValueError, TypeError) as exc:
-                raise ValueError('malformed result chunk') from exc
-            if index in parts and parts[index] != part:
-                raise ValueError('conflicting result chunks')
-            parts[index] = part
+    # A log message is a stream fragment, not necessarily one complete line.
+    for segment in ''.join(messages).split(PREFIX)[1:]:
+        try:
+            number, remainder = segment.split(':', 1)
+            part = remainder.splitlines()[0]
+            if not re.fullmatch(r'[0-9]{6}', number) or not re.fullmatch(r'[A-Za-z0-9+/=]+', part):
+                raise ValueError('invalid chunk framing')
+            index = int(number)
+        except (ValueError, TypeError, IndexError) as exc:
+            raise ValueError('malformed result chunk') from exc
+        if index in parts and parts[index] != part:
+            raise ValueError('conflicting result chunks')
+        parts[index] = part
     if set(parts) != set(range(metadata['chunk_count'])):
         raise ValueError('result chunks are incomplete or out of range')
     try:

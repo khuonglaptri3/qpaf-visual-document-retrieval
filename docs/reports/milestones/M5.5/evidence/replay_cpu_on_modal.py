@@ -8,6 +8,8 @@ from pathlib import Path
 import subprocess
 import sys
 import threading
+import urllib.error
+import urllib.request
 
 import modal
 
@@ -43,7 +45,29 @@ def main():
             'whole_app_watchdog_seconds': 600, 'invocations': 1, 'automatic_retries': 0,
             'cost_target_usd': .05, 'recorded_utc': datetime.now(timezone.utc).isoformat(),
             'reason': 'Windows package downloads stalled; preserve exact runtime instead of weakening replay pins'}
+    auth['archive_transport'] = 'Short-lived read-only asset URL; no GitHub token sent to Modal or stored'
     write(EVIDENCE/'authorization.json', auth)
+    # The release is a draft: authenticate only to GitHub, then give the CPU
+    # verifier a short-lived capability for this single hash-pinned asset.
+    class NoRedirect(urllib.request.HTTPRedirectHandler):
+        def redirect_request(self, request, fp, code, message, headers, newurl):
+            return None
+    token = subprocess.check_output(['gh', 'auth', 'token'], text=True).strip()
+    request = urllib.request.Request(
+        'https://api.github.com/repos/khuonglaptri3/qpaf-visual-document-retrieval/releases/assets/669652087',
+        headers={'Authorization': 'Bearer '+token, 'Accept': 'application/octet-stream',
+                 'X-GitHub-Api-Version': '2022-11-28', 'User-Agent': 'qpaf-m55-verifier'})
+    del token
+    try:
+        urllib.request.build_opener(NoRedirect()).open(request, timeout=30)
+        raise RuntimeError('Expected an asset download redirect')
+    except urllib.error.HTTPError as exc:
+        if exc.code not in (301, 302, 303, 307, 308):
+            raise RuntimeError('GitHub asset authorization failed: HTTP '+str(exc.code)) from None
+        archive_url = exc.headers['Location']
+    if not archive_url.startswith(('https://release-assets.githubusercontent.com/',
+                                   'https://objects.githubusercontent.com/')):
+        raise ValueError('Unexpected GitHub asset download host')
     image = (modal.Image.from_registry('python:3.11.14-slim-bookworm')
              .apt_install('git')
              .run_commands('timeout 240s python -m pip install --no-cache-dir '
@@ -54,7 +78,7 @@ def main():
     @app.function(image=image, cpu=(2., 2.), memory=(4096, 4096), timeout=300,
                   retries=0, max_containers=1, min_containers=0, buffer_containers=0,
                   scaledown_window=2, single_use_containers=True, serialized=True)
-    def replay():
+    def replay(archive_url):
         import json
         from pathlib import Path
         import shutil
@@ -70,11 +94,12 @@ def main():
                             ['git', 'checkout', '-q', '--detach', 'FETCH_HEAD']):
                 subprocess.run(command, cwd=root, check=True, capture_output=True, timeout=90)
             archive = root/'m42.zip'
-            url = ('https://github.com/khuonglaptri3/qpaf-visual-document-retrieval/releases/download/'
-                   'm4.2-baseline-bundle-20261023/RUN-QPAF-M4_2-CAL-001-20261023T150631Z-A01.zip')
-            request = urllib.request.Request(url, headers={'User-Agent': 'qpaf-m55-read-only-verifier'})
-            with urllib.request.urlopen(request, timeout=60) as incoming, archive.open('xb') as outgoing:
-                shutil.copyfileobj(incoming, outgoing)
+            request = urllib.request.Request(archive_url, headers={'User-Agent': 'qpaf-m55-read-only-verifier'})
+            try:
+                with urllib.request.urlopen(request, timeout=60) as incoming, archive.open('xb') as outgoing:
+                    shutil.copyfileobj(incoming, outgoing)
+            except Exception as exc:
+                raise RuntimeError('Archive transport failed: '+type(exc).__name__) from None
             code = r'''
 import json,os,sys
 from pathlib import Path
@@ -127,7 +152,7 @@ print(json.dumps({'status':'PASS','verification':result,'runtime':expected,'audi
         with modal.enable_output(), app.run():
             write(EVIDENCE/'runtime_binding.json', {'app_id': app.app_id, 'image_id': image.object_id,
                                                    'gpu': False, 'local_sdk': modal.__version__})
-            call = replay.spawn()
+            call = replay.spawn(archive_url)
             write(EVIDENCE/'function_call.json', {'function_call_id': call.object_id})
             result = call.get(timeout=600)
             write(EVIDENCE/'verification.json', result)

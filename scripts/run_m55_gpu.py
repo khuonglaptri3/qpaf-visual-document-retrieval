@@ -216,7 +216,7 @@ def invoke_once(function, output):
         try:
             decoded = decode_result(result, messages)
             with (output/'result_transport.log').open('x', encoding='utf-8', newline='\n') as stream:
-                stream.write('\n'.join(messages))
+                stream.write(''.join(messages))
             return decoded
         except ValueError:
             if attempt == 4:

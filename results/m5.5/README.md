@@ -1,9 +1,10 @@
 # M5.5 — CPU diagnostics and deferred resource work
 
-CPU R5-01/02/03: TECHNICAL_PASS; R5-04: NOT_RUN_DEFERRED_MODAL_NETWORK_BLOCKED.
-Full M5.5 remains PARTIAL, independent human review pending.
+R5-01/02/03/04: TECHNICAL_COMPLETE_PENDING_INDEPENDENT_ACCEPTANCE.
+The CPU run's GPU-deferred fields are historical and remain unchanged.
 
 - [Current run](RUN-QPAF-M5_5-ABL-001-20261027T033016Z-A01/report.md).
-- [Report](../../Bao_cao_tien_do/M5_5_Khuong.md).
+- [Current report and canonical spec/plan](../../docs/reports/milestones/M5.5/README.md).
+- [Verified new GPU result](../../docs/reports/milestones/M5.5/evidence/gpu-attempt-003/gpu-offline-verification.json).
 - [Verification](verification/technical_verification.json).
-- [Cross-machine/GPU handoff](../../docs/06_handover/m5.5-cpu-results-and-gpu-handoff.md).
+- [Current handoff](../../docs/06_handover/m5.5-cpu-results-and-gpu-handoff.md).

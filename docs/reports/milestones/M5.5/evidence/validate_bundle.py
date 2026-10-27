@@ -31,6 +31,9 @@ def main():
     manifest_path = BUNDLE/'evidence/bundle-manifest.json'
     if not manifest_path.exists():
         write(manifest_path, {'status': 'BUILDING'})
+    validation_path = BUNDLE/'evidence/bundle-validation.json'
+    if not validation_path.exists():
+        write(validation_path, {'status': 'BUILDING'})
     checked = []
     documents = [*BUNDLE.rglob('*.md'), ROOT/'docs/README.md', ROOT/'docs/06_handover/README.md',
                  ROOT/'docs/06_handover/m5.5-cpu-results-and-gpu-handoff.md',

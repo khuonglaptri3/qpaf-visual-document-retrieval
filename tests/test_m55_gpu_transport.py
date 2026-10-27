@@ -38,6 +38,13 @@ class ResultTransportTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.api.encode_result({'bad': float('nan')})
 
+    def test_log_messages_may_split_in_the_middle_of_a_prefix_or_payload(self):
+        value = {'status': 'COMPLETED', 'rows': list(range(10000))}
+        meta, lines = self.api.encode_result(value)
+        stream = 'progress\n'+'\n'.join(lines)+'\n'
+        fragments = [stream[i:i+137] for i in range(0, len(stream), 137)]
+        self.assertEqual(self.api.decode_result(meta, fragments), value)
+
 
 if __name__ == '__main__':
     unittest.main()
