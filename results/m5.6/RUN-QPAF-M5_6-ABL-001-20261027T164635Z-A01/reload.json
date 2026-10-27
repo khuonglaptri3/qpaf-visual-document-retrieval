@@ -1,0 +1,31 @@
+{
+  "checks": {
+    "R6-00": {
+      "metric_max_abs_difference": 0.0,
+      "prediction_max_abs_difference": 0.0,
+      "tolerance": 1e-07
+    },
+    "R6-01": {
+      "metric_max_abs_difference": 0.0,
+      "prediction_max_abs_difference": 0.0,
+      "tolerance": 1e-07
+    },
+    "R6-02": {
+      "metric_max_abs_difference": 0.0,
+      "prediction_max_abs_difference": 0.0,
+      "tolerance": 1e-07
+    },
+    "R6-03": {
+      "metric_max_abs_difference": 0.0,
+      "prediction_max_abs_difference": 0.0,
+      "tolerance": 1e-07
+    },
+    "R6-04": {
+      "metric_max_abs_difference": 0.0,
+      "prediction_max_abs_difference": 0.0,
+      "tolerance": 1e-07
+    }
+  },
+  "status": "PASS",
+  "worker_pid": 5804
+}

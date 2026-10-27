@@ -1,0 +1,31 @@
+{
+  "active_feature_count": 10,
+  "checkpoint_sha256": {
+    "best": "7e606e491399af9c997d3e54f942dce4853e78b62c27f2441f5924d5d02c0e80",
+    "last": "5433fca4af79421e30dfdac27d6929dc61024fbe27592fce52dd1b7294988105"
+  },
+  "epochs": 20,
+  "factor": "remove_rank_feature_group",
+  "granularity": "page",
+  "method": "QPAF",
+  "omitted_features": [
+    "rr_bm25",
+    "rr_dense",
+    "rr_visual"
+  ],
+  "omitted_weights_unchanged": true,
+  "roster_id": "R6-01",
+  "seed": 20260820,
+  "selected_epoch": 19,
+  "selection_is_optimistic": true,
+  "selection_metric": "ndcg_at_10",
+  "test_split": "not_opened",
+  "train_seconds": 67.81092720013112,
+  "validation": {
+    "mrr_at_10": 0.8259073609950803,
+    "ndcg_at_10": 0.8658047107712178,
+    "query_count": 171,
+    "recall_at_1": 0.7309941520467836,
+    "recall_at_3": 0.9064327485380117
+  }
+}

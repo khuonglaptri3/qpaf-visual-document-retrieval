@@ -1,0 +1,31 @@
+{
+  "active_feature_count": 10,
+  "checkpoint_sha256": {
+    "best": "01f90a4ae362a1b510e11f5c310e53f5e03ed197fbe3bc735e7d03a264c0ad79",
+    "last": "78c2540242d18b459df4840081fd2deb7148adde167e4e038759dcc01654290c"
+  },
+  "epochs": 20,
+  "factor": "remove_disagreement_feature_group",
+  "granularity": "page",
+  "method": "QPAF",
+  "omitted_features": [
+    "disagreement_bm25_dense",
+    "disagreement_bm25_visual",
+    "disagreement_dense_visual"
+  ],
+  "omitted_weights_unchanged": true,
+  "roster_id": "R6-03",
+  "seed": 20260820,
+  "selected_epoch": 7,
+  "selection_is_optimistic": true,
+  "selection_metric": "ndcg_at_10",
+  "test_split": "not_opened",
+  "train_seconds": 69.61394790001214,
+  "validation": {
+    "mrr_at_10": 0.8299777220829853,
+    "ndcg_at_10": 0.8664786854290242,
+    "query_count": 171,
+    "recall_at_1": 0.7368421052631579,
+    "recall_at_3": 0.9181286549707602
+  }
+}

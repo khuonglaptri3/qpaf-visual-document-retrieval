@@ -1,0 +1,31 @@
+{
+  "active_feature_count": 10,
+  "checkpoint_sha256": {
+    "best": "95fce8b25753f39cfaf423e6f3a398190347471b466e9dbf0f54b5f88d59cf86",
+    "last": "7e6a41488298ec040e908694817fe6c71e4f89d516cbe3ff814df960d033d34f"
+  },
+  "epochs": 20,
+  "factor": "remove_gap_feature_group",
+  "granularity": "page",
+  "method": "QPAF",
+  "omitted_features": [
+    "gap_bm25",
+    "gap_dense",
+    "gap_visual"
+  ],
+  "omitted_weights_unchanged": true,
+  "roster_id": "R6-02",
+  "seed": 20260820,
+  "selected_epoch": 11,
+  "selection_is_optimistic": true,
+  "selection_metric": "ndcg_at_10",
+  "test_split": "not_opened",
+  "train_seconds": 68.09028210001998,
+  "validation": {
+    "mrr_at_10": 0.8301726538568643,
+    "ndcg_at_10": 0.8666578995818107,
+    "query_count": 171,
+    "recall_at_1": 0.7368421052631579,
+    "recall_at_3": 0.9181286549707602
+  }
+}
