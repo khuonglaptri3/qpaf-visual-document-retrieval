@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "task_id": "M5.5",
+  "review_scope": "R5-01/02/03 CPU diagnostics and R5-04 validation-only GPU measurement",
+  "reviewed_head": "2687a8b348ba88ec0fbed97a34897f2769b6817c",
+  "reviewer": "Thanh (@xThanhSaDec), assisted by Codex",
+  "technical_verdict": "PASS_WITH_SCOPE_LIMIT",
+  "cpu": {
+    "run_id": "RUN-QPAF-M5_5-ABL-001-20261027T033016Z-A01",
+    "authorization_sha256": "92d91854949f0e0914e5c3d2e837f811ccfac6eaf485e3ad29e60b5c97f2e0f1",
+    "manifest_sha256": "f141871d5adbd90c11fad5084d6c08a599009e3bd0bbbe5f60513e8eebff03be",
+    "recorded_replay_sha256": "42373b703a9781116c239969e0905d6efd996635dcb940a415b3f3b77eea7a1d",
+    "per_query_rows": 1368,
+    "methods": 8,
+    "queries_per_method": 171,
+    "ndcg_at_10_reaggregation_max_abs_difference": 0.0,
+    "full_cpu_input_replay_in_this_review": "NOT_RUN; pinned Python 3.11.14 runtime and external Parquet payload were not used in this checkout",
+    "recorded_replay_status": "PASS"
+  },
+  "gpu": {
+    "run_id": "RUN-QPAF-M5_5-SYS-001-20261027T143954Z-A03",
+    "authorization_sha256": "c729a38e00ebb5f5bb303e70fa2035fa85931fbb3654c05ca51511287b4fc014",
+    "bundle_manifest_sha256": "1cea4b91fcf4e51455576471c43834d6e1e735fa7c552036301d1768f52a5bdb",
+    "recovered_result_sha256": "bffda9f4ede0c8310e0c4bcd6a744824ce24c21667144d982860931f9af934d0",
+    "recorded_offline_verification_sha256": "ce00d82f3e05023d1862c85f26f17a5bd7758b8045857fa0253e3692ff5a9e61",
+    "offline_verification_rerun": "PASS",
+    "saved_log_fragments": 55,
+    "decoded_chunks": 54,
+    "decoded_log_result_equals_recovered_json": true,
+    "authorized_source_files_verified_at_source_commit": 4,
+    "task_bundle_manifest_entries_rehashed": 135,
+    "task_bundle_manifest_mismatches": 0,
+    "distinct_validation_queries": 171,
+    "timed_events_per_method": 1026,
+    "warmup_events": 20,
+    "candidate_count": 82255,
+    "qarf_online_median_ms_per_query": 2.569362,
+    "qpaf_online_median_ms_per_query": 2.4263995,
+    "qarf_peak_cuda_allocated_gib": 0.03242826461791992,
+    "qpaf_peak_cuda_allocated_gib": 0.0324397087097168,
+    "ranking_disagreements": 0,
+    "original_client_failure_marker_preserved": true,
+    "same_provider_call_recovered_without_new_gpu_invocation": true,
+    "new_gpu_invocations_in_review": 0
+  },
+  "targeted_software_tests": {
+    "command": "python -m unittest tests.test_m55_diagnostics tests.test_m55_gpu tests.test_m55_gpu_transport -q",
+    "python_version": "3.13.7",
+    "tests_run": 40,
+    "failures": 0,
+    "errors": 0
+  },
+  "limitations": [
+    "The original metric policy calls for at least 1000 label-free measured queries. This run covers 171 distinct validation IDs repeated six times, so the original operational latency gate is NOT_ESTABLISHED.",
+    "The measured online fusion excludes retriever extraction, cold start, queue time and file I/O; CUDA allocation is not physical peak RAM.",
+    "The CPU run and its earlier GPU-deferred marker are immutable historical records. The GPU A03 client failure marker remains intact; the result was recovered from the same successful provider call.",
+    "CPU diagnostics are exploratory validation results, not a refit, primary-method change, held-out estimate or baseline improvement claim.",
+    "No new CPU scientific run, GPU invocation, training or test-qrels access occurred in this review."
+  ],
+  "original_operational_latency_gate": "NOT_ESTABLISHED",
+  "test_labels_opened": false
+}

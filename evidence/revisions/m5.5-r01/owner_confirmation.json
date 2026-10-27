@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "task_id": "M5.5",
+  "reviewer": "Thanh (@xThanhSaDec)",
+  "recorded_by": "Codex at Thanh's request",
+  "recorded_at_utc": "2026-10-27T16:23:57Z",
+  "decision": "ACCEPTED_WITH_SCOPE_LIMIT",
+  "source": "Thanh's explicit answer in this working session",
+  "confirmation_text": "Có, nghiệm thu trong phạm vi đó",
+  "accepted_scope": "M5.5 validation-only CPU diagnostics and recovered GPU measurement, with 171 distinct IDs and 1026 timed events per method",
+  "original_operational_latency_gate": "NOT_ESTABLISHED; no claim of at least 1000 distinct measured queries",
+  "test_labels_opened": false,
+  "new_gpu_execution_authorized": false
+}
