@@ -1,0 +1,76 @@
+test_summary_reports_events_separately_and_medians_across_six_passes (test_m55_gpu.ValidationGPUContractTests.test_summary_reports_events_separately_and_medians_across_six_passes) ... ERROR
+test_invalid_candidate_counts_and_cuda_time_exceeding_wall_are_refused (test_m55_gpu.ValidationGPUContractTests.test_invalid_candidate_counts_and_cuda_time_exceeding_wall_are_refused) ... 
+  test_invalid_candidate_counts_and_cuda_time_exceeding_wall_are_refused (test_m55_gpu.ValidationGPUContractTests.test_invalid_candidate_counts_and_cuda_time_exceeding_wall_are_refused) (fields={'candidate_count': 0}) ... FAIL
+  test_invalid_candidate_counts_and_cuda_time_exceeding_wall_are_refused (test_m55_gpu.ValidationGPUContractTests.test_invalid_candidate_counts_and_cuda_time_exceeding_wall_are_refused) (fields={'candidate_count': True}) ... FAIL
+  test_invalid_candidate_counts_and_cuda_time_exceeding_wall_are_refused (test_m55_gpu.ValidationGPUContractTests.test_invalid_candidate_counts_and_cuda_time_exceeding_wall_are_refused) (fields={'candidate_count': 601}) ... FAIL
+  test_invalid_candidate_counts_and_cuda_time_exceeding_wall_are_refused (test_m55_gpu.ValidationGPUContractTests.test_invalid_candidate_counts_and_cuda_time_exceeding_wall_are_refused) (fields={'candidate_count': 1.5}) ... FAIL
+  test_invalid_candidate_counts_and_cuda_time_exceeding_wall_are_refused (test_m55_gpu.ValidationGPUContractTests.test_invalid_candidate_counts_and_cuda_time_exceeding_wall_are_refused) (fields={'gate_cuda_ms': 999999.0}) ... FAIL
+test_invalid_candidate_counts_and_cuda_time_exceeding_wall_are_refused (test_m55_gpu.ValidationGPUContractTests.test_invalid_candidate_counts_and_cuda_time_exceeding_wall_are_refused) ... FAIL
+
+======================================================================
+ERROR: test_summary_reports_events_separately_and_medians_across_six_passes (test_m55_gpu.ValidationGPUContractTests.test_summary_reports_events_separately_and_medians_across_six_passes)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\.codex\worktrees\6a15\Artificial_Intelligent_Project\tests\test_m55_gpu.py", line 69, in test_summary_reports_events_separately_and_medians_across_six_passes
+    self.assertEqual(result['online_wall_ms']['event_p50'], 3.5)
+                     ~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+KeyError: 'event_p50'
+
+======================================================================
+FAIL: test_invalid_candidate_counts_and_cuda_time_exceeding_wall_are_refused (test_m55_gpu.ValidationGPUContractTests.test_invalid_candidate_counts_and_cuda_time_exceeding_wall_are_refused) (fields={'candidate_count': 0})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\.codex\worktrees\6a15\Artificial_Intelligent_Project\tests\test_m55_gpu.py", line 96, in test_invalid_candidate_counts_and_cuda_time_exceeding_wall_are_refused
+    with self.subTest(fields=fields), self.assertRaises(ValueError):
+                                      ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_invalid_candidate_counts_and_cuda_time_exceeding_wall_are_refused (test_m55_gpu.ValidationGPUContractTests.test_invalid_candidate_counts_and_cuda_time_exceeding_wall_are_refused) (fields={'candidate_count': True})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\.codex\worktrees\6a15\Artificial_Intelligent_Project\tests\test_m55_gpu.py", line 96, in test_invalid_candidate_counts_and_cuda_time_exceeding_wall_are_refused
+    with self.subTest(fields=fields), self.assertRaises(ValueError):
+                                      ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_invalid_candidate_counts_and_cuda_time_exceeding_wall_are_refused (test_m55_gpu.ValidationGPUContractTests.test_invalid_candidate_counts_and_cuda_time_exceeding_wall_are_refused) (fields={'candidate_count': 601})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\.codex\worktrees\6a15\Artificial_Intelligent_Project\tests\test_m55_gpu.py", line 96, in test_invalid_candidate_counts_and_cuda_time_exceeding_wall_are_refused
+    with self.subTest(fields=fields), self.assertRaises(ValueError):
+                                      ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_invalid_candidate_counts_and_cuda_time_exceeding_wall_are_refused (test_m55_gpu.ValidationGPUContractTests.test_invalid_candidate_counts_and_cuda_time_exceeding_wall_are_refused) (fields={'candidate_count': 1.5})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\.codex\worktrees\6a15\Artificial_Intelligent_Project\tests\test_m55_gpu.py", line 96, in test_invalid_candidate_counts_and_cuda_time_exceeding_wall_are_refused
+    with self.subTest(fields=fields), self.assertRaises(ValueError):
+                                      ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_invalid_candidate_counts_and_cuda_time_exceeding_wall_are_refused (test_m55_gpu.ValidationGPUContractTests.test_invalid_candidate_counts_and_cuda_time_exceeding_wall_are_refused) (fields={'gate_cuda_ms': 999999.0})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\.codex\worktrees\6a15\Artificial_Intelligent_Project\tests\test_m55_gpu.py", line 96, in test_invalid_candidate_counts_and_cuda_time_exceeding_wall_are_refused
+    with self.subTest(fields=fields), self.assertRaises(ValueError):
+                                      ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_invalid_candidate_counts_and_cuda_time_exceeding_wall_are_refused (test_m55_gpu.ValidationGPUContractTests.test_invalid_candidate_counts_and_cuda_time_exceeding_wall_are_refused)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\.codex\worktrees\6a15\Artificial_Intelligent_Project\tests\test_m55_gpu.py", line 100, in test_invalid_candidate_counts_and_cuda_time_exceeding_wall_are_refused
+    with self.assertRaises(ValueError):
+         ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.119s
+
+FAILED (failures=6, errors=1)

@@ -6,6 +6,8 @@ Các nhận xét về tiến độ trong tài liệu là snapshot theo thời đ
 
 - [M5.5: kết quả CPU và phần GPU để chạy trên máy khác](m5.5-cpu-results-and-gpu-handoff.md)
   — R5-01/02/03 technical PASS; toàn task còn PARTIAL, R5-04 chưa chạy.
+- [M5.5: hồ sơ tiếp tục PR #45](../reports/milestones/M5.5/README.md)
+  — spec/plan hiện hành, sửa CI và kiểm chứng bàn giao trên Windows.
 
 ## Hồ sơ nhập từ các branch M1
 

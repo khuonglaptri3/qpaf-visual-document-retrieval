@@ -1,0 +1,5 @@
+2026-10-27 20:54:06,184 INFO stage started: verification
+2026-10-27 20:54:08,212 INFO method-core unit tests passed: 23
+2026-10-27 20:54:08,541 INFO QARF fixture loss 0.570537 -> 0.519008; gate gradient L1 0.743867; retriever frozen=True
+2026-10-27 20:54:08,861 INFO QPAF fixture loss 0.574728 -> 0.519328; gate gradient L1 0.785393; retriever frozen=True
+2026-10-27 20:54:08,877 INFO stage completed

@@ -108,3 +108,5 @@ vimdoc_archive_audit_modal.py -text
 
 # M5.5 manifests bind exact result/figure bytes, including generated SVG path whitespace.
 /results/m5.5/** -text -eol -whitespace
+# Successor M5.5 receipts bind exact Windows/Linux console and verification bytes.
+/docs/reports/milestones/M5.5/evidence/** -text -eol -whitespace

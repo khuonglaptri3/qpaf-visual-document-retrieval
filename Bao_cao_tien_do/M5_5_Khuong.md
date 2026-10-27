@@ -6,6 +6,9 @@ Ngày: 27/10/2026. Owner: Khương. Nhánh: `feature/m5-5-diagnostics`.
 R5-04 latency/CUDA memory là `NOT_RUN_DEFERRED_MODAL_NETWORK_BLOCKED` theo yêu cầu của người dùng.
 **M5.5 hiện PARTIAL, chưa nghiệm thu toàn bộ; review độc lập của thành viên còn PENDING.**
 
+Lượt tiếp tục PR #45 trên Windows có [hồ sơ hiện hành](../docs/reports/milestones/M5.5/README.md),
+bao gồm spec/plan và bằng chứng mới. Các số liệu và receipt CPU bên dưới giữ nguyên.
+
 ## Kết quả trên 171 query validation
 
 Cả tám hàng dùng đúng 82.255 candidate rows của M4.2/M3.1, cùng qrels và

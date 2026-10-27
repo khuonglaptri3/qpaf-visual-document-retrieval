@@ -18,6 +18,8 @@ M5.5: R5-01/02/03 đã chạy và kiểm chứng kỹ thuật trên CPU; R5-04 G
 đang deferred theo yêu cầu của người dùng. Toàn task còn **PARTIAL**, chưa
 nghiệm thu độc lập. Xem [báo cáo kết quả](../Bao_cao_tien_do/M5_5_Khuong.md)
 và [bàn giao sang máy khác](06_handover/m5.5-cpu-results-and-gpu-handoff.md).
+[Hồ sơ tiếp tục PR #45](reports/milestones/M5.5/README.md) ghi spec, plan,
+kiểm chứng mới và phần còn chờ; không thay thế receipt CPU đã đóng băng.
 
 | Vị trí | Mục đích |
 | --- | --- |

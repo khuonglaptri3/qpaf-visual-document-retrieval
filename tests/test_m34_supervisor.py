@@ -83,8 +83,10 @@ def sha(data):
 
 
 def git(root, *args):
+    # Temporary repositories must have no detached writer when cleanup starts.
     return subprocess.run(['git', '-c', 'user.name=tester', '-c', 'user.email=tester@example.test',
-                           '-c', 'commit.gpgsign=false', *args],
+                           '-c', 'commit.gpgsign=false', '-c', 'maintenance.autoDetach=false',
+                           '-c', 'gc.autoDetach=false', *args],
                           cwd=root, capture_output=True, text=True, check=True).stdout.strip()
 
 
@@ -338,6 +340,42 @@ class SupervisorTests(unittest.TestCase):
                 self.assertIn(reason, result['reason'])
                 self.assertTrue((self.namespace/'_FAILED.json').is_file())
                 self.assertFalse((self.namespace/'_SUCCESS.json').exists())
+
+
+class GitFixtureTests(unittest.TestCase):
+    def test_fixture_commits_do_not_detach_maintenance_before_cleanup(self):
+        # Reproduce a runner that enables maintenance even for a tiny repository.
+        # A detached writer can otherwise recreate .git/objects during rmtree.
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)/'repo'
+            root.mkdir()
+            git(root, 'init', '-q')
+            settings = {'maintenance.auto': 'true', 'maintenance.autoDetach': 'true',
+                        'gc.autoDetach': 'true', 'maintenance.gc.enabled': 'false',
+                        'maintenance.loose-objects.enabled': 'true',
+                        'maintenance.loose-objects.auto': '1'}
+            for key, value in settings.items():
+                git(root, 'config', key, value)
+            (root/'tracked.txt').write_text('fixture data\n')
+            git(root, 'add', 'tracked.txt')
+            trace = Path(folder)/'trace.jsonl'
+            try:
+                with mock.patch.dict(os.environ, {'GIT_TRACE2_EVENT': str(trace)}):
+                    git(root, 'commit', '-q', '-m', 'fixture')
+                events = [json.loads(line) for line in trace.read_text(encoding='utf-8').splitlines()]
+                workers = [event['argv'] for event in events if event.get('event') == 'child_start'
+                           and 'maintenance' in event.get('argv', [])]
+                self.assertTrue(workers, 'the commit must exercise real automatic maintenance')
+                self.assertFalse(any('--detach' in argv for argv in workers), workers)
+                self.assertEqual(git(root, 'show', 'HEAD:tracked.txt'), 'fixture data')
+                with self.assertRaises(subprocess.CalledProcessError):
+                    git(root, 'show', 'HEAD:missing.txt')
+            finally:
+                # Drain the pre-fix detached worker so the regression can fail
+                # cleanly instead of racing TemporaryDirectory's own cleanup.
+                deadline = time.monotonic()+10
+                while (root/'.git/maintenance.lock').exists() and time.monotonic() < deadline:
+                    time.sleep(0.05)
 
 
 class RepositoryTests(unittest.TestCase):

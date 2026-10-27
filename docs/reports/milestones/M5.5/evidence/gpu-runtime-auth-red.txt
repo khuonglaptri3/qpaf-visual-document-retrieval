@@ -1,0 +1,88 @@
+test_dirty_source_pin_scope_budget_or_event_drift_is_refused (test_m55_gpu.GPUAuthorizationTests.test_dirty_source_pin_scope_budget_or_event_drift_is_refused) ... 
+  test_dirty_source_pin_scope_budget_or_event_drift_is_refused (test_m55_gpu.GPUAuthorizationTests.test_dirty_source_pin_scope_budget_or_event_drift_is_refused) (change={'runtime': {'torch': 'other'}}) ... FAIL
+  test_dirty_source_pin_scope_budget_or_event_drift_is_refused (test_m55_gpu.GPUAuthorizationTests.test_dirty_source_pin_scope_budget_or_event_drift_is_refused) (change={'base_oci_image': 'python:latest'}) ... FAIL
+  test_dirty_source_pin_scope_budget_or_event_drift_is_refused (test_m55_gpu.GPUAuthorizationTests.test_dirty_source_pin_scope_budget_or_event_drift_is_refused) (change={'startup_timeout_seconds': 999}) ... FAIL
+  test_dirty_source_pin_scope_budget_or_event_drift_is_refused (test_m55_gpu.GPUAuthorizationTests.test_dirty_source_pin_scope_budget_or_event_drift_is_refused) (change={'worker_timeout_seconds': 999}) ... FAIL
+  test_dirty_source_pin_scope_budget_or_event_drift_is_refused (test_m55_gpu.GPUAuthorizationTests.test_dirty_source_pin_scope_budget_or_event_drift_is_refused) (missing='runtime') ... FAIL
+  test_dirty_source_pin_scope_budget_or_event_drift_is_refused (test_m55_gpu.GPUAuthorizationTests.test_dirty_source_pin_scope_budget_or_event_drift_is_refused) (missing='base_oci_image') ... FAIL
+  test_dirty_source_pin_scope_budget_or_event_drift_is_refused (test_m55_gpu.GPUAuthorizationTests.test_dirty_source_pin_scope_budget_or_event_drift_is_refused) (missing='startup_timeout_seconds') ... FAIL
+  test_dirty_source_pin_scope_budget_or_event_drift_is_refused (test_m55_gpu.GPUAuthorizationTests.test_dirty_source_pin_scope_budget_or_event_drift_is_refused) (missing='worker_timeout_seconds') ... FAIL
+test_exact_owner_scope_and_single_invocation_are_accepted (test_m55_gpu.GPUAuthorizationTests.test_exact_owner_scope_and_single_invocation_are_accepted) ... ok
+test_existing_namespace_is_untouched_before_any_cloud_access (test_m55_gpu.GPUAuthorizationTests.test_existing_namespace_is_untouched_before_any_cloud_access) ... ok
+
+======================================================================
+FAIL: test_dirty_source_pin_scope_budget_or_event_drift_is_refused (test_m55_gpu.GPUAuthorizationTests.test_dirty_source_pin_scope_budget_or_event_drift_is_refused) (change={'runtime': {'torch': 'other'}})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\.codex\worktrees\6a15\Artificial_Intelligent_Project\tests\test_m55_gpu.py", line 160, in test_dirty_source_pin_scope_budget_or_event_drift_is_refused
+    with self.subTest(change=change), self.assertRaises(ValueError):
+                                      ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_dirty_source_pin_scope_budget_or_event_drift_is_refused (test_m55_gpu.GPUAuthorizationTests.test_dirty_source_pin_scope_budget_or_event_drift_is_refused) (change={'base_oci_image': 'python:latest'})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\.codex\worktrees\6a15\Artificial_Intelligent_Project\tests\test_m55_gpu.py", line 160, in test_dirty_source_pin_scope_budget_or_event_drift_is_refused
+    with self.subTest(change=change), self.assertRaises(ValueError):
+                                      ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_dirty_source_pin_scope_budget_or_event_drift_is_refused (test_m55_gpu.GPUAuthorizationTests.test_dirty_source_pin_scope_budget_or_event_drift_is_refused) (change={'startup_timeout_seconds': 999})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\.codex\worktrees\6a15\Artificial_Intelligent_Project\tests\test_m55_gpu.py", line 160, in test_dirty_source_pin_scope_budget_or_event_drift_is_refused
+    with self.subTest(change=change), self.assertRaises(ValueError):
+                                      ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_dirty_source_pin_scope_budget_or_event_drift_is_refused (test_m55_gpu.GPUAuthorizationTests.test_dirty_source_pin_scope_budget_or_event_drift_is_refused) (change={'worker_timeout_seconds': 999})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\.codex\worktrees\6a15\Artificial_Intelligent_Project\tests\test_m55_gpu.py", line 160, in test_dirty_source_pin_scope_budget_or_event_drift_is_refused
+    with self.subTest(change=change), self.assertRaises(ValueError):
+                                      ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_dirty_source_pin_scope_budget_or_event_drift_is_refused (test_m55_gpu.GPUAuthorizationTests.test_dirty_source_pin_scope_budget_or_event_drift_is_refused) (missing='runtime')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\.codex\worktrees\6a15\Artificial_Intelligent_Project\tests\test_m55_gpu.py", line 165, in test_dirty_source_pin_scope_budget_or_event_drift_is_refused
+    with self.subTest(missing=field), self.assertRaises(ValueError):
+                                      ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_dirty_source_pin_scope_budget_or_event_drift_is_refused (test_m55_gpu.GPUAuthorizationTests.test_dirty_source_pin_scope_budget_or_event_drift_is_refused) (missing='base_oci_image')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\.codex\worktrees\6a15\Artificial_Intelligent_Project\tests\test_m55_gpu.py", line 165, in test_dirty_source_pin_scope_budget_or_event_drift_is_refused
+    with self.subTest(missing=field), self.assertRaises(ValueError):
+                                      ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_dirty_source_pin_scope_budget_or_event_drift_is_refused (test_m55_gpu.GPUAuthorizationTests.test_dirty_source_pin_scope_budget_or_event_drift_is_refused) (missing='startup_timeout_seconds')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\.codex\worktrees\6a15\Artificial_Intelligent_Project\tests\test_m55_gpu.py", line 165, in test_dirty_source_pin_scope_budget_or_event_drift_is_refused
+    with self.subTest(missing=field), self.assertRaises(ValueError):
+                                      ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+======================================================================
+FAIL: test_dirty_source_pin_scope_budget_or_event_drift_is_refused (test_m55_gpu.GPUAuthorizationTests.test_dirty_source_pin_scope_budget_or_event_drift_is_refused) (missing='worker_timeout_seconds')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\.codex\worktrees\6a15\Artificial_Intelligent_Project\tests\test_m55_gpu.py", line 165, in test_dirty_source_pin_scope_budget_or_event_drift_is_refused
+    with self.subTest(missing=field), self.assertRaises(ValueError):
+                                      ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+AssertionError: ValueError not raised
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.050s
+
+FAILED (failures=8)
