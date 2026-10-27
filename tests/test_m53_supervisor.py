@@ -104,7 +104,9 @@ class SeedContractTests(unittest.TestCase):
         attempt = api.check_seed_contract(ROOT, self.auth)
         self.assertEqual(attempt, ROOT/self.auth['seed_contract']['seed_reference']['attempt_path'])
         seed1 = api._read(ROOT/self.auth['seed_contract']['seed_reference']['authorization_path'])
-        frozen = (ROOT/seed1['config']['path']).read_bytes()
+        # The sealed payload copy is local; Git contains the same pinned config.
+        frozen = (ROOT/'configs/m2.7/shared_base.toml').read_bytes()
+        self.assertEqual(sha(frozen), seed1['config']['file_sha256'])
         self.assertEqual((ROOT/self.auth['config']['path']).read_bytes(),
                          frozen.replace(b'seed = 20260820', b'seed = 20260821'))
 
@@ -112,8 +114,7 @@ class SeedContractTests(unittest.TestCase):
         cases = {'third seed': lambda a: a['method'].update(seed=20260822),
                  'contract seed': lambda a: a['seed_contract'].update(seed=20260820),
                  'config pin': lambda a: a['config'].update(file_sha256='0'*64),
-                 'frozen config path': lambda a: a['config'].update(path=api._read(
-                     ROOT/a['seed_contract']['seed_reference']['authorization_path'])['config']['path']),
+                 'frozen config path': lambda a: a['config'].update(path='configs/m2.7/shared_base.toml'),
                  'receipt pin': lambda a: a['seed_contract']['cache_receipt'].update(sha256='1'*64),
                  'preregistration pin': lambda a: a['seed_contract']['preregistration'].update(sha256='2'*64),
                  'granularity': lambda a: a['method'].update(gate_granularity='page'),
