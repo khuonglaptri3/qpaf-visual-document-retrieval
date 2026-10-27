@@ -28,6 +28,10 @@ def write(path, data):
 def main():
     require({p.name for p in BUNDLE.iterdir()} == {'README.md', 'evidence', 'superpowers'}, 'task root layout')
     require({p.name for p in (BUNDLE/'superpowers').iterdir()} == {'spec.md', 'plan.md'}, 'planning layout')
+    events = [json.loads(line) for line in (BUNDLE/'evidence/governance_events.jsonl').read_text(encoding='utf-8').splitlines()]
+    auth = json.loads((BUNDLE/'evidence/gpu-attempt-003/gpu-authorization.json').read_text(encoding='utf-8'))
+    require(events[0]['approval_text'] == auth['approval']['text'], 'owner approval text encoding differs')
+    require(events[0]['delegation_text'] == auth['approval']['delegation'], 'owner delegation text encoding differs')
     manifest_path = BUNDLE/'evidence/bundle-manifest.json'
     if not manifest_path.exists():
         write(manifest_path, {'status': 'BUILDING'})

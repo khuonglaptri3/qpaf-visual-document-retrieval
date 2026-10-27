@@ -12,7 +12,7 @@ của lượt trước. Không sửa snapshot để biến nó thành kết qu�
 | R5-01/02/03 | Tám hàng CPU, 171 query / 82.255 candidate; giữ nguyên kết quả | [Run CPU](../../../../results/m5.5/RUN-QPAF-M5_5-ABL-001-20261027T033016Z-A01/report.md) |
 | Replay CPU | PASS đúng Python/thư viện gốc; 0 write/network/forbidden import/test-qrels attempt trong verifier | [Receipt mới](evidence/cpu-replay-005/verification.json) |
 | R5-04 | Hai method đạt ngưỡng latency/CUDA theo protocol validation đã ghi | [Kiểm chứng timings thô](evidence/gpu-attempt-003/gpu-offline-verification.json) |
-| Review kỹ thuật | Review độc lập bằng AI; các finding material có RED→GREEN | [Hồ sơ review](evidence/engineering-review.md) |
+| Review kỹ thuật | Review độc lập bằng AI; các finding material có RED→GREEN | [Review cuối](evidence/final-engineering-review.md) |
 | Human acceptance | PENDING; không tự gán chữ ký hoặc quyết định của Thanh | [Trạng thái](evidence/completion-status.json) |
 
 ## Số đo R5-04 mới
@@ -72,7 +72,9 @@ và [manifest toàn task](evidence/bundle-manifest.json) ràng buộc artifact h
 
 Lỗi CI Ubuntu được tái hiện bằng Git maintenance thật; fixture giờ đợi maintenance
 ở foreground trước khi xóa repository tạm. Test bắt được lỗi trước sửa và qua
-sau sửa. Full suite/CI hiện hành được ghi trong [workflow](evidence/workflow.md);
+sau sửa. Full suite mới nhất: **651 tests OK, 4 skipped**; [raw log](evidence/final-software-tests-framing.txt).
+CI hiện hành có ở [PR checks](https://github.com/khuonglaptri3/qpaf-visual-document-retrieval/pull/45/checks)
+và được ghi trong [workflow](evidence/workflow.md);
 method-core riêng đã qua23 test không skip. Các lần kiểm tra môi trường lỗi cũng
 được giữ log, không trình bày như lượt PASS.
 
@@ -89,5 +91,6 @@ Lệnh trên chỉ đọc và tính lại kết quả đã lưu; không cần GP
 bytes tại [snapshot](evidence/archive-M5_5_Khuong-cpu.txt).
 
 Thanh cần review độc lập protocol đếm lượt, receipts và kết quả rồi ghi nghiệm thu.
-PR chưa merge. Một minor còn để lại: worker-level reference guard có thể chặt hơn;
-reference thực tế đã được kiểm hash, finite và coverage trước invocation.
+PR chưa merge. Ba minor còn để lại được ghi trong [review cuối](evidence/final-engineering-review.md):
+verifier có thể tự decode log và kiểm per-pass stats; worker có thể kiểm reference
+chặt hơn. Reviewer đã kiểm độc lập cả ba trên dữ liệu thực tế, không có finding material.

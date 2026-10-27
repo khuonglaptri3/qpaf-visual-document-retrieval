@@ -14,7 +14,7 @@
     },
     {
       "document": "docs/reports/milestones/M5.5/README.md",
-      "target": "evidence/engineering-review.md"
+      "target": "evidence/final-engineering-review.md"
     },
     {
       "document": "docs/reports/milestones/M5.5/README.md",
@@ -58,6 +58,10 @@
     },
     {
       "document": "docs/reports/milestones/M5.5/README.md",
+      "target": "evidence/final-software-tests-framing.txt"
+    },
+    {
+      "document": "docs/reports/milestones/M5.5/README.md",
       "target": "evidence/workflow.md"
     },
     {
@@ -79,6 +83,10 @@
     {
       "document": "docs/reports/milestones/M5.5/README.md",
       "target": "evidence/archive-M5_5_Khuong-cpu.txt"
+    },
+    {
+      "document": "docs/reports/milestones/M5.5/README.md",
+      "target": "evidence/final-engineering-review.md"
     },
     {
       "document": "docs/reports/milestones/M5.5/superpowers/plan.md",
@@ -309,7 +317,7 @@
       "target": "../docs/reports/milestones/M5.5/evidence/archive-M5_5_Khuong-cpu.txt"
     }
   ],
-  "checked_utc": "2026-10-27T15:54:06.970301+00:00",
+  "checked_utc": "2026-10-27T16:01:47.379359+00:00",
   "git_diff_check": "PASS",
   "historical_base_commit": "1bdb491ec3b74f578c31dda5ba796d1d375ac586",
   "historical_files_sha256": {

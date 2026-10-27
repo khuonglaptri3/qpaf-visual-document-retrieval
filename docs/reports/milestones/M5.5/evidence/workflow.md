@@ -263,3 +263,14 @@ change implementation, workload, checkpoints or scientific output. The current
 PR checks remain the live source for its subsequent head. Draft/human acceptance
 stays pending; no merge was performed. Original checkout is clean onM5.2 and the
 managed PR worktree is retained for review feedback.
+
+
+Final metadata check found terminal Unicode loss in the summary governance event.
+The actual externally pinned GPU authorizations were intact. Archived the old
+summary bytes, restored the exact text by reading the pinned A03 authorization,
+and added exact approval/delegation equality checks to bundle validation. The
+new check failed before correction and passed afterwards. No implementation,
+workload, checkpoint or scientific result changed. Commit1279c19 also passed all
+10remotechecks; its receipt is remote-ci-final-source-verification.json.
+The optional scratch-directory cleanup was rejected by automatic tool policy
+(blocked by policy); scratch is retained. All deliverable artifacts are committed.
