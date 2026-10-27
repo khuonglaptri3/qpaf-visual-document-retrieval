@@ -105,3 +105,6 @@ vimdoc_archive_audit_modal.py -text
 # M5.4 seed-3 config and run evidence are hashed by the authorization and receipts; keep exact bytes.
 /configs/m5.4/** -text -eol
 /results/m5.4/** -text -eol -whitespace
+
+# M5.5 manifests bind exact result/figure bytes, including generated SVG path whitespace.
+/results/m5.5/** -text -eol -whitespace
