@@ -98,3 +98,7 @@ vimdoc_archive_audit_modal.py -text
 
 # M4.4 run receipts hash exact bytes, including compressed predictions.
 /results/m4.4/** -text -eol -whitespace
+
+# M5.3 seed-2 config and run evidence are hashed by the authorization and receipts; keep exact bytes.
+/configs/m5.3/** -text -eol
+/results/m5.3/** -text -eol -whitespace

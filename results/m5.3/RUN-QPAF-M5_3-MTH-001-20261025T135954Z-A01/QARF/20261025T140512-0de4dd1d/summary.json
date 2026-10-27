@@ -1,0 +1,31 @@
+{
+  "kind": "real_data_development",
+  "experiment_id": "QPAF-M2_7-MTH-001",
+  "method": "QARF",
+  "granularity": "query",
+  "seed": 20260821,
+  "epochs": 20,
+  "selected_epoch": 1,
+  "selection_metric": "ndcg_at_10",
+  "validation": {
+    "query_count": 171,
+    "ndcg_at_10": 0.7410159807755565,
+    "recall_at_1": 0.5672514619883041,
+    "recall_at_3": 0.7777777777777778,
+    "mrr_at_10": 0.6838438689315882
+  },
+  "reload_parity": {
+    "max_abs_difference": 0.0,
+    "tolerance": 1e-07,
+    "passed": true,
+    "scope": "in-process fresh model; fresh-environment parity is M6.1"
+  },
+  "test_split": "not_opened",
+  "parameter_count": 42,
+  "checkpoint_sha256": {
+    "best": "3924f3ef204090bdd586447891900752ad67451c3c2857ae0bac6bb501860626",
+    "last": "725bf2383093a721ae36c9ffec75d965946ed0f16039725e030e0a1edbf03678"
+  },
+  "torch": "2.11.0+cpu",
+  "independent_review": "pending"
+}
