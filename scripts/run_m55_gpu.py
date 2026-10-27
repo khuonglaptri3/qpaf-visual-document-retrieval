@@ -194,6 +194,15 @@ def build_app(bundle):
     return app, image, benchmark_pair
 
 
+def invoke_once(function, output):
+    """Submit one durable input; a failed wait must never cause resubmission."""
+    call = function.spawn()
+    write_new(output/'function_call.json', {'function_call_id': call.object_id,
+                                          'retrieval_mode': 'durable_spawn_get',
+                                          'new_function_invocations': 1})
+    return call.get(timeout=900)
+
+
 def execute(bundle, authorization, expected_authorization_sha256, output):
     if output.exists():
         raise FileExistsError('Run namespace exists; no overwrite or retry permitted')
@@ -237,7 +246,7 @@ def execute(bundle, authorization, expected_authorization_sha256, output):
                        'memory_request_and_limit_mib': MEMORY_MIB,
                        'bound_utc': datetime.now(timezone.utc).isoformat(),
                        'gpu_invocations_before_binding': 0})
-            result = function.remote()
+            result = invoke_once(function, output)
             write_new(output/'gpu_result.json', result)
             if result['status'] != 'COMPLETED':
                 raise RuntimeError('remote worker failed; see immutable gpu_result.json')

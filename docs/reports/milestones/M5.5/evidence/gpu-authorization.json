@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "status": "AUTHORIZED_BY_KHUONG_WORKING_SESSION",
+  "task_id": "M5.5",
+  "experiment_id": "QPAF-M5_5-SYS-001",
+  "run_id": "RUN-QPAF-M5_5-SYS-001-20261027T140243Z-A01",
+  "scope": "validation",
+  "source_commit": "cc9eb4ad1f01fb152f9924a9ced2d24b397d4218",
+  "bundle_manifest_sha256": "84cbc56f17fe5374b050ea0f230c393f367422f3363fcc52f20453e698d6588a",
+  "workload_sha256": "667df869e2769f86ab25afb524cb1db69d477872c1378f69e0f604c3955f5a3c",
+  "query_count": 171,
+  "measurement_events_per_method": 1026,
+  "warmup_events": 20,
+  "warmup_overlaps_measured_ids": true,
+  "passes": 6,
+  "methods": [
+    "QARF",
+    "QPAF"
+  ],
+  "invocations": 1,
+  "automatic_retries": 0,
+  "memory_limit_mib": 5120,
+  "function_timeout_seconds": 900,
+  "startup_timeout_seconds": 120,
+  "worker_timeout_seconds": 410,
+  "whole_app_watchdog_seconds": 900,
+  "gpu": "A10",
+  "gpu_count": 1,
+  "cpu_limit_cores": 2,
+  "budget_usd": 0.5,
+  "cost_note": "Operating target; one bounded container with app watchdog, not a provider dollar cap.",
+  "runtime": {
+    "python": "3.13.7",
+    "torch": "2.11.0+cu126",
+    "numpy": "2.5.4",
+    "pandas": "3.0.6",
+    "pyarrow": "26.0.0",
+    "modal": "1.5.5",
+    "dtype": "float64",
+    "threads": 1
+  },
+  "base_oci_image": "python:3.13.7-slim-bookworm@sha256:adafcc17694d715c905b4c7bebd96907a1fd5cf183395f0ebc4d3428bd22d92d",
+  "source_files_sha256": {
+    "scripts/run_m55_gpu.py": "ce81c2b01c07d0ec80670b427625073b522aece45337188dbb7f16015e0fb4b4",
+    "scripts/m55_gpu_worker.py": "e9eaef1934c3c0bfea75229658bf890f9c09746c804e6e13684bfebec3c7b264",
+    "scripts/m36_memory_telemetry.py": "4f05be124029b16e637310541c11b67d4ece4bd581ec337bbeedc010fe08490c"
+  },
+  "permissions": {
+    "validation_only": true,
+    "training": false,
+    "test_labels": false
+  },
+  "output_path": "results/m5.5/RUN-QPAF-M5_5-SYS-001-20261027T140243Z-A01",
+  "approval": {
+    "approver": "Kh\u01b0\u01a1ng (task owner; working-session user)",
+    "text": "Cho ph\u00e9p ch\u1ea1y Modal/GPU \u0111\u1ec3 ho\u00e0n t\u1ea5t s\u1ed1 \u0111o M5.5",
+    "delegation": "T\u1ef1 quy\u1ebft chi ti\u1ebft v\u00e0 tri\u1ec3n khai trong ph\u1ea1m vi validation",
+    "recorded_utc": "2026-10-27T14:02:43.409666+00:00",
+    "timestamp_basis": "Instruction recorded now; no user-message server timestamp inferred",
+    "research_lead_signature": "NOT_RECORDED_NOT_INFERRED"
+  },
+  "independent_human_acceptance": "PENDING",
+  "counting_interpretation": "1026 repeated validation events, 171 distinct IDs; not M3.6 distinct-ID protocol",
+  "namespace_policy": "create once; preserve failure; no retry authorized by this record"
+}

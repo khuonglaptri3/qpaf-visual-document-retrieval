@@ -67,6 +67,19 @@ timings and an existing output namespace. Record any failed attempt without
 overwriting or claiming completion. Finish with fresh-context engineering review,
 artifact hashes and CI. Independent human acceptance remains a distinct pending step.
 
+### Transport successor
+
+The first input-plane `.remote()` attempt completed once on Modal (32.943s), but
+the local `AttemptAwait` RPC exceeded its deadline and returned no raw result.
+Provider history confirms success; ordinary FunctionCall.get cannot retrieve that
+transient input-plane call. Preserve the entire failed client attempt and provider
+history. The app is stopped. Make one manually initiated successor with the same
+validation workload/checkpoints and bounded resources under the owner's existing
+execution delegation. Use `function.spawn()` once, save its durable Call ID before
+waiting, then `call.get(timeout=900)`; retrieval failure must never submit a second
+input. Record the prior completed invocation rather than claiming only one was ever
+executed. This changes transport/recoverability, not scoring or the timing workload.
+
 Sources checked for this successor: [Modal GPU guide](https://modal.com/docs/guide/gpu),
 [Modal resource pricing](https://modal.com/pricing) and the repository's frozen
 metric policy and M3.6 measurement implementation. The choices of six passes,

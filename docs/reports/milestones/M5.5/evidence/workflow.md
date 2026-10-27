@@ -117,3 +117,26 @@ the reviewer's Minor grade — add them under the same observed RED-to-GREEN pas
 without them the promised description of repeated-event timing would be incomplete.
 Final: minor (deferred): worker-level malformed-reference guard; current exact
 reference hashes/coverage/finiteness are checked before the authorized invocation.
+
+## Actual invocation and transport diagnosis
+
+Source commit `cc9eb4ad1f01fb152f9924a9ced2d24b397d4218` prepared the validation-only
+bundle. The local call timed out in input-plane `AttemptAwait` after305.775s.
+Original namespace `RUN-QPAF-M5_5-SYS-001-20261027T140243Z-A01` preserves its
+attempt/runtime/failure files; no result numbers are inferred from the failure.
+Provider SDK1.6.2 observation confirms exactly one successful input, one container,
+execution32.943182s, call `fc-01M5YTTVQM2SFH1KWM9EBETNKG`.
+Ordinary FunctionCall.get returned NotFound for that transient input-plane call.
+Installed SDK source confirms `.remote()` used AttemptStart/AttemptAwait rather
+than the durable FunctionGetOutputs path. The provider confirms the app stopped.
+
+Ruling: manually create one successor under the existing owner delegation, using
+one `.spawn()` and storing its Call ID before `.get()` — this permits read-only
+recovery without resubmission and keeps the same scientific workload/runtime —
+it costs one additional bounded invocation; record the prior completed input and
+do not pretend there was only one invocation across both attempts. Automatic
+retry remains0. A new external authorization and namespace are mandatory.
+
+Two transport tests observed RED before implementation: identity persistence
+before waiting and retention after a failed wait with exactly one submitted input.
+Final full suite before this transport change: **646 tests OK,4 skipped**.

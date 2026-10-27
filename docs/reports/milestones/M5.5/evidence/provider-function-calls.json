@@ -1,0 +1,12 @@
+[
+  {
+    "function_call_id": "fc-01M5YTTVQM2SFH1KWM9EBETNKG",
+    "service_method_name": null,
+    "enqueued_at": "2026-10-27T14:04:40.566541Z",
+    "started_at": "2026-10-27T14:04:44.130704Z",
+    "container_id": "ta-01M5YTTVYP4CX5XX5EGRTHN7YR",
+    "startup_time_seconds": null,
+    "execution_time_seconds": 32.943182,
+    "status": "success"
+  }
+]

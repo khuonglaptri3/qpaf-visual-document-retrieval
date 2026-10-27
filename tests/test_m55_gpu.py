@@ -176,6 +176,48 @@ class GPUAuthorizationTests(unittest.TestCase):
             self.assertEqual(marker.read_text(), 'keep')
             self.assertEqual([p.name for p in output.iterdir()], ['keep.txt'])
 
+    def test_call_id_is_saved_before_waiting_and_only_one_input_is_submitted(self):
+        api = self.api
+        with tempfile.TemporaryDirectory() as folder:
+            output = Path(folder)
+            class Call:
+                object_id = 'fc-durable-fixture'
+                def get(self, timeout):
+                    saved = json.loads((output/'function_call.json').read_text())
+                    if saved['function_call_id'] != self.object_id or timeout != 900:
+                        raise AssertionError('call identity must be persisted before the result wait')
+                    return {'status': 'COMPLETED'}
+            class Function:
+                submitted = 0
+                def spawn(self):
+                    self.submitted += 1
+                    return Call()
+            fn = Function()
+            self.assertTrue(callable(getattr(api, 'invoke_once', None)), 'durable invocation helper missing')
+            self.assertEqual(api.invoke_once(fn, output), {'status': 'COMPLETED'})
+            self.assertEqual(fn.submitted, 1)
+
+    def test_a_result_wait_failure_retains_call_identity_without_resubmitting(self):
+        api = self.api
+        with tempfile.TemporaryDirectory() as folder:
+            output = Path(folder)
+            class Call:
+                object_id = 'fc-interrupted-fixture'
+                def get(self, timeout):
+                    raise ConnectionError('result transport interrupted')
+            class Function:
+                submitted = 0
+                def spawn(self):
+                    self.submitted += 1
+                    return Call()
+            fn = Function()
+            self.assertTrue(callable(getattr(api, 'invoke_once', None)), 'durable invocation helper missing')
+            with self.assertRaises(ConnectionError):
+                api.invoke_once(fn, output)
+            self.assertEqual(fn.submitted, 1)
+            self.assertEqual(json.loads((output/'function_call.json').read_text())['function_call_id'],
+                             'fc-interrupted-fixture')
+
 
 if __name__ == '__main__':
     unittest.main()

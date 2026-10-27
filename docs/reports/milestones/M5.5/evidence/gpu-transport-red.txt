@@ -1,0 +1,25 @@
+test_call_id_is_saved_before_waiting_and_only_one_input_is_submitted (test_m55_gpu.GPUAuthorizationTests.test_call_id_is_saved_before_waiting_and_only_one_input_is_submitted) ... FAIL
+test_a_result_wait_failure_retains_call_identity_without_resubmitting (test_m55_gpu.GPUAuthorizationTests.test_a_result_wait_failure_retains_call_identity_without_resubmitting) ... FAIL
+
+======================================================================
+FAIL: test_call_id_is_saved_before_waiting_and_only_one_input_is_submitted (test_m55_gpu.GPUAuthorizationTests.test_call_id_is_saved_before_waiting_and_only_one_input_is_submitted)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\.codex\worktrees\6a15\Artificial_Intelligent_Project\tests\test_m55_gpu.py", line 196, in test_call_id_is_saved_before_waiting_and_only_one_input_is_submitted
+    self.assertTrue(callable(getattr(api, 'invoke_once', None)), 'durable invocation helper missing')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : durable invocation helper missing
+
+======================================================================
+FAIL: test_a_result_wait_failure_retains_call_identity_without_resubmitting (test_m55_gpu.GPUAuthorizationTests.test_a_result_wait_failure_retains_call_identity_without_resubmitting)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\.codex\worktrees\6a15\Artificial_Intelligent_Project\tests\test_m55_gpu.py", line 214, in test_a_result_wait_failure_retains_call_identity_without_resubmitting
+    self.assertTrue(callable(getattr(api, 'invoke_once', None)), 'durable invocation helper missing')
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: False is not true : durable invocation helper missing
+
+----------------------------------------------------------------------
+Ran 2 tests in 0.048s
+
+FAILED (failures=2)
