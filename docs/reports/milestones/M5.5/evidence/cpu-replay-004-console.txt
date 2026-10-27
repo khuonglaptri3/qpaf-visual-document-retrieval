@@ -1,0 +1,60 @@
+✓ Initialized. View run at 
+https://modal.com/apps/tlcn-group1/main/ap-1PnZZsenqcuUi28td9bRIj
+✓ Created objects.
+└── 🔨 Created function main.<locals>.replay.
+Traceback (most recent call last):
+  File "/pkg/modal/_runtime/container_io_manager.py", line 987, in handle_input_exception
+    yield
+  File "/pkg/modal/_container_entrypoint.py", line 189, in run_input_sync
+    values = io_context.call_function_sync()
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pkg/modal/_runtime/container_io_manager.py", line 266, in call_function_sync
+    expected_value_or_values = self.finalized_function.callable(*args, **kwargs)
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lanph\.codex\worktrees\6a15\Artificial_Intelligent_Project\docs\reports\milestones\M5.5\evidence\replay_cpu_on_modal.py", line 76, in replay
+  File "/usr/local/lib/python3.11/urllib/request.py", line 216, in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/urllib/request.py", line 525, in open
+    response = meth(req, response)
+               ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/urllib/request.py", line 634, in http_response
+    response = self.parent.error(
+               ^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/urllib/request.py", line 563, in error
+    return self._call_chain(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/urllib/request.py", line 496, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/urllib/request.py", line 643, in http_error_default
+    raise HTTPError(req.full_url, code, msg, hdrs, fp)
+urllib.error.HTTPError: HTTP Error 404: Not Found
+Stopping app - uncaught exception raised in remote container: SerializationError("Failed to serialize exception HTTP Error 404: Not Found of type <class 'urllib.error.HTTPError'>: cannot pickle '_io.BufferedReader' object").
+Traceback (most recent call last):
+  File "C:\Users\lanph\.codex\worktrees\6a15\Artificial_Intelligent_Project\docs\reports\milestones\M5.5\evidence\replay_cpu_on_modal.py", line 143, in <module>
+    main()
+  File "C:\Users\lanph\.codex\worktrees\6a15\Artificial_Intelligent_Project\docs\reports\milestones\M5.5\evidence\replay_cpu_on_modal.py", line 132, in main
+    result = call.get(timeout=600)
+             ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lanph\.codex\worktrees\6a15\Artificial_Intelligent_Project\.cache\verification-overlay\modal\_object.py", line 46, in wrapped
+    return await method(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lanph\.codex\worktrees\6a15\Artificial_Intelligent_Project\.cache\verification-overlay\modal\_functions.py", line 2199, in get
+    return await self._invocation().poll_function(timeout=timeout, index=index)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lanph\.codex\worktrees\6a15\Artificial_Intelligent_Project\.cache\verification-overlay\modal\_functions.py", line 336, in poll_function
+    return await _process_result(
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lanph\.codex\worktrees\6a15\Artificial_Intelligent_Project\.cache\verification-overlay\modal\_utils\function_utils.py", line 572, in _process_result
+    raise exc_with_hints(exc)
+  File "<ta-01M5YX0A8ZC3CXD4J4QD0744MR>:C:\Users\lanph\.codex\worktrees\6a15\Artificial_Intelligent_Project\docs\reports\milestones\M5.5\evidence\replay_cpu_on_modal.py", line 76, in replay
+    with urllib.request.urlopen(request, timeout=60) as incoming, archive.open('xb') as outgoing:
+^^^^^^^^^^^^^^^
+  File "<ta-01M5YX0A8ZC3CXD4J4QD0744MR>:/usr/local/lib/python3.11/urllib/request.py", line 216, in urlopen
+  File "<ta-01M5YX0A8ZC3CXD4J4QD0744MR>:/usr/local/lib/python3.11/urllib/request.py", line 525, in open
+  File "<ta-01M5YX0A8ZC3CXD4J4QD0744MR>:/usr/local/lib/python3.11/urllib/request.py", line 634, in http_response
+  File "<ta-01M5YX0A8ZC3CXD4J4QD0744MR>:/usr/local/lib/python3.11/urllib/request.py", line 563, in error
+  File "<ta-01M5YX0A8ZC3CXD4J4QD0744MR>:/usr/local/lib/python3.11/urllib/request.py", line 496, in _call_chain
+  File "<ta-01M5YX0A8ZC3CXD4J4QD0744MR>:/usr/local/lib/python3.11/urllib/request.py", line 643, in http_error_default
+modal.exception.SerializationError: Failed to serialize exception HTTP Error 404: Not Found of type <class 'urllib.error.HTTPError'>: cannot pickle '_io.BufferedReader' object

@@ -1,0 +1,21 @@
+{
+  "task_id": "M5.5",
+  "status": "TECHNICAL_COMPLETE_PENDING_INDEPENDENT_ACCEPTANCE",
+  "r5_01_03": "TECHNICAL_PASS",
+  "r5_04": "RECOVERED_VERIFIED_PASS",
+  "independent_human_acceptance": "PENDING",
+  "gpu_invocations": 3,
+  "automatic_gpu_retries": 0,
+  "gpu_invocations_for_log_recovery": 0,
+  "distinct_validation_queries": 171,
+  "timed_events_per_method": 1026,
+  "candidate_count": 82255,
+  "cpu_replay_ref": "docs/reports/milestones/M5.5/evidence/cpu-replay-005/verification.json",
+  "gpu_verification_ref": "docs/reports/milestones/M5.5/evidence/gpu-attempt-003/gpu-offline-verification.json",
+  "gpu_result_sha256": "bffda9f4ede0c8310e0c4bcd6a744824ce24c21667144d982860931f9af934d0",
+  "test_qrels_accessed": false,
+  "training_executed": false,
+  "new_scientific_cpu_run": false,
+  "source_commit_for_accepted_gpu_data": "a858634022f7e975d1d9073f61cb832987eb35f5",
+  "recorded_utc": "2026-10-27T15:02:42.610475+00:00"
+}

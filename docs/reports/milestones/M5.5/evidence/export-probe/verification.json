@@ -1,0 +1,8 @@
+{
+  "status": "PASS",
+  "row_count": 10000,
+  "gpu_invocations": 0,
+  "restricted_function": true,
+  "network_blocked": true,
+  "full_result_verified": true
+}

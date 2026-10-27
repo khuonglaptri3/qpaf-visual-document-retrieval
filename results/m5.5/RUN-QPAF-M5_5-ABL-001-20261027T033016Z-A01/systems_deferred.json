@@ -1,0 +1,25 @@
+{
+  "historical_measurement_is_new_m55_result": false,
+  "historical_reference": "evidence/revisions/m3.6-004/README.md",
+  "latency_ms": null,
+  "measurement_scope_unresolved": {
+    "counting_interpretation_requires_review": true,
+    "historical_m36_minimum_distinct_measured_queries": 1000,
+    "metric_policy_minimum_measured_queries": 1000,
+    "policy_warmups": 20,
+    "repetitions_create_new_query_ids": false,
+    "validation_query_ids": 171
+  },
+  "modal_called": false,
+  "new_gpu_measurement": false,
+  "next_machine_requires": [
+    "Reviewed measurement-scope decision",
+    "New M5.5 authorization",
+    "Pinned runtime/source/checkpoint/input hashes",
+    "New create-once namespace; do not reuse M3.6 authorization"
+  ],
+  "peak_cuda_gib": null,
+  "reason": "User deferred Modal/GPU because Modal is blocked on this machine.",
+  "roster_id": "R5-04",
+  "status": "NOT_RUN_DEFERRED_MODAL_NETWORK_BLOCKED"
+}

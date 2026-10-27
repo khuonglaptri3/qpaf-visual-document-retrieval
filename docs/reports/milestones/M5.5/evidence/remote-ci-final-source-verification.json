@@ -1,0 +1,108 @@
+{
+  "headRefOid": "1279c19099ed5a2904b5639842a0af3ca342d9a8",
+  "statusCheckRollup": [
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-27T15:56:02Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/khuonglaptri3/qpaf-visual-document-retrieval/actions/runs/40535603628/job/122299880385",
+      "name": "tests (ubuntu-latest, 3.11)",
+      "startedAt": "2026-10-27T15:54:23Z",
+      "status": "COMPLETED",
+      "workflowName": "Research tooling checks"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-27T15:56:00Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/khuonglaptri3/qpaf-visual-document-retrieval/actions/runs/40535593468/job/122299848449",
+      "name": "tests (ubuntu-latest, 3.11)",
+      "startedAt": "2026-10-27T15:54:19Z",
+      "status": "COMPLETED",
+      "workflowName": "Research tooling checks"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-27T15:58:33Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/khuonglaptri3/qpaf-visual-document-retrieval/actions/runs/40535603628/job/122299879809",
+      "name": "tests (windows-latest, 3.11)",
+      "startedAt": "2026-10-27T15:54:21Z",
+      "status": "COMPLETED",
+      "workflowName": "Research tooling checks"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-27T15:58:42Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/khuonglaptri3/qpaf-visual-document-retrieval/actions/runs/40535593468/job/122299848292",
+      "name": "tests (windows-latest, 3.11)",
+      "startedAt": "2026-10-27T15:54:19Z",
+      "status": "COMPLETED",
+      "workflowName": "Research tooling checks"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-27T15:58:38Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/khuonglaptri3/qpaf-visual-document-retrieval/actions/runs/40535603628/job/122299880576",
+      "name": "tests (windows-latest, 3.14)",
+      "startedAt": "2026-10-27T15:54:22Z",
+      "status": "COMPLETED",
+      "workflowName": "Research tooling checks"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-27T15:58:27Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/khuonglaptri3/qpaf-visual-document-retrieval/actions/runs/40535593468/job/122299848281",
+      "name": "tests (windows-latest, 3.14)",
+      "startedAt": "2026-10-27T15:54:19Z",
+      "status": "COMPLETED",
+      "workflowName": "Research tooling checks"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-27T15:56:21Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/khuonglaptri3/qpaf-visual-document-retrieval/actions/runs/40535603628/job/122299880474",
+      "name": "method-core (ubuntu-latest)",
+      "startedAt": "2026-10-27T15:54:22Z",
+      "status": "COMPLETED",
+      "workflowName": "Research tooling checks"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-27T15:56:06Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/khuonglaptri3/qpaf-visual-document-retrieval/actions/runs/40535593468/job/122299848274",
+      "name": "method-core (ubuntu-latest)",
+      "startedAt": "2026-10-27T15:54:19Z",
+      "status": "COMPLETED",
+      "workflowName": "Research tooling checks"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-27T15:58:52Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/khuonglaptri3/qpaf-visual-document-retrieval/actions/runs/40535603628/job/122299880524",
+      "name": "method-core (windows-latest)",
+      "startedAt": "2026-10-27T15:54:22Z",
+      "status": "COMPLETED",
+      "workflowName": "Research tooling checks"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-10-27T15:58:24Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/khuonglaptri3/qpaf-visual-document-retrieval/actions/runs/40535593468/job/122299848237",
+      "name": "method-core (windows-latest)",
+      "startedAt": "2026-10-27T15:54:18Z",
+      "status": "COMPLETED",
+      "workflowName": "Research tooling checks"
+    }
+  ],
+  "url": "https://github.com/khuonglaptri3/qpaf-visual-document-retrieval/pull/45",
+  "observed_utc": "2026-10-27T16:01:44.455259+00:00",
+  "status": "PASS"
+}

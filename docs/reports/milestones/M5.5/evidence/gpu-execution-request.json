@@ -1,0 +1,17 @@
+{
+  "interpreter": "C:\\Users\\lanph\\OneDrive\\Desktop\\Artificial_Intelligent_Project\\.worktrees\\m4-2-baseline-freeze\\.venv\\Scripts\\python.exe",
+  "source_commit": "cc9eb4ad1f01fb152f9924a9ced2d24b397d4218",
+  "command": [
+    "scripts/run_m55_gpu.py",
+    "--bundle",
+    "C:\\Users\\lanph\\.codex\\worktrees\\6a15\\Artificial_Intelligent_Project\\.cache\\m55-validation-gpu",
+    "--authorization",
+    "C:\\Users\\lanph\\.codex\\worktrees\\6a15\\Artificial_Intelligent_Project\\docs\\reports\\milestones\\M5.5\\evidence\\gpu-authorization.json",
+    "--expected-authorization-sha256",
+    "3d4d4446965eb170e2d1b6db1b6ae1da5425d680185814b7e7cb34930b0f4e22",
+    "--output",
+    "C:\\Users\\lanph\\.codex\\worktrees\\6a15\\Artificial_Intelligent_Project\\results\\m5.5\\RUN-QPAF-M5_5-SYS-001-20261027T140243Z-A01"
+  ],
+  "output_path": "results/m5.5/RUN-QPAF-M5_5-SYS-001-20261027T140243Z-A01",
+  "invocations": 1
+}

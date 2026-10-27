@@ -1,0 +1,88 @@
+✓ Initialized. View run at 
+https://modal.com/apps/tlcn-group1/main/ap-MciQ1mukqBSah2ZL0jZK2X
+Building image im-SV9s6CNAquVdVqipbV9FUh
+
+=> Step 0: FROM base
+
+=> Step 1: COPY . /
+Saving image...
+Image saved, took 4.54s
+
+Built image im-SV9s6CNAquVdVqipbV9FUh in 10.44s
+
+
+✓ Created objects.
+├── 🔨 Created mount 
+│   C:\Users\lanph\.codex\worktrees\6a15\Artificial_Intelligent_Project\.cache\
+│   m55-validation-gpu
+└── 🔨 Created function build_app.<locals>.benchmark_pair.
+Traceback (most recent call last):
+  File "C:\Users\lanph\.codex\worktrees\6a15\Artificial_Intelligent_Project\.cache\verification-overlay\grpclib\client.py", line 429, in recv_message
+    message = await recv_message(self._stream, self._codec,
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                                 self._recv_type)
+                                 ^^^^^^^^^^^^^^^^
+  File "C:\Users\lanph\.codex\worktrees\6a15\Artificial_Intelligent_Project\.cache\verification-overlay\grpclib\stream.py", line 29, in recv_message
+    message_bin = await stream.recv_data(message_len)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lanph\.codex\worktrees\6a15\Artificial_Intelligent_Project\.cache\verification-overlay\grpclib\protocol.py", line 347, in recv_data
+    return await self.buffer.read(size)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lanph\.codex\worktrees\6a15\Artificial_Intelligent_Project\.cache\verification-overlay\grpclib\protocol.py", line 88, in read
+    data, data_size, ack_size = await self._unacked.get()
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lanph\AppData\Roaming\uv\python\cpython-3.13-windows-x86_64-none\Lib\asyncio\queues.py", line 186, in get
+    await getter
+asyncio.exceptions.CancelledError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\lanph\.codex\worktrees\6a15\Artificial_Intelligent_Project\.cache\verification-overlay\modal\_grpc_client.py", line 159, in direct
+    return await self.client._call_unary(self.wrapped_method, req, timeout=timeout, metadata=metadata)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lanph\.codex\worktrees\6a15\Artificial_Intelligent_Project\.cache\verification-overlay\modal\client.py", line 505, in _call_unary
+    return await self._call_safely(coro, grpclib_method.name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lanph\.codex\worktrees\6a15\Artificial_Intelligent_Project\.cache\verification-overlay\modal\client.py", line 462, in _call_safely
+    return await request_task
+           ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lanph\.codex\worktrees\6a15\Artificial_Intelligent_Project\.cache\verification-overlay\grpclib\client.py", line 913, in __call__
+    reply = await stream.recv_message()
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lanph\.codex\worktrees\6a15\Artificial_Intelligent_Project\.cache\verification-overlay\grpclib\client.py", line 428, in recv_message
+    with self._wrapper:
+         ^^^^^^^^^^^^^
+  File "C:\Users\lanph\.codex\worktrees\6a15\Artificial_Intelligent_Project\.cache\verification-overlay\grpclib\utils.py", line 70, in __exit__
+    raise self._error
+TimeoutError: Deadline exceeded
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\lanph\.codex\worktrees\6a15\Artificial_Intelligent_Project\scripts\run_m55_gpu.py", line 281, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\lanph\.codex\worktrees\6a15\Artificial_Intelligent_Project\scripts\run_m55_gpu.py", line 274, in main
+    execute(args.bundle.resolve(), args.authorization.resolve(), args.expected_authorization_sha256,
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            args.output.resolve())
+            ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lanph\.codex\worktrees\6a15\Artificial_Intelligent_Project\scripts\run_m55_gpu.py", line 240, in execute
+    result = function.remote()
+  File "C:\Users\lanph\.codex\worktrees\6a15\Artificial_Intelligent_Project\.cache\verification-overlay\modal\_object.py", line 46, in wrapped
+    return await method(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lanph\.codex\worktrees\6a15\Artificial_Intelligent_Project\.cache\verification-overlay\modal\_functions.py", line 1893, in remote
+    return await self._call_function(args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lanph\.codex\worktrees\6a15\Artificial_Intelligent_Project\.cache\verification-overlay\modal\_functions.py", line 1830, in _call_function
+    return await invocation.run_function()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lanph\.codex\worktrees\6a15\Artificial_Intelligent_Project\.cache\verification-overlay\modal\_functions.py", line 472, in run_function
+    await_response: api_pb2.AttemptAwaitResponse = await self.stub.AttemptAwait(
+                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+    )
+    ^
+modal.exception.ConnectionError: Deadline exceeded

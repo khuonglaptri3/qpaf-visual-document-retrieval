@@ -1,0 +1,7 @@
+{
+  "status": "LOGGED_RESULT",
+  "codec": "gzip-base64-json-v1",
+  "sha256": "f581318948527f280bfdcf927958e5a6feee6968e24f20e5b1526905a2bb514a",
+  "uncompressed_bytes": 48921,
+  "chunk_count": 10
+}

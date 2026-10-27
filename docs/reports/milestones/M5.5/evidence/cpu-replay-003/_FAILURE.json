@@ -1,0 +1,4 @@
+{
+  "exception": "SerializationError",
+  "message": "Failed to serialize exception HTTP Error 404: Not Found of type <class 'urllib.error.HTTPError'>: cannot pickle '_io.BufferedReader' object"
+}

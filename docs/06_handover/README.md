@@ -4,6 +4,11 @@ Checklist theo người, trạng thái bàn giao, audit repository và lịch s�
 
 Các nhận xét về tiến độ trong tài liệu là snapshot theo thời điểm và phạm vi ghi trong từng file.
 
+- [M5.5: CPU và số đo GPU đã hoàn thành kỹ thuật](m5.5-cpu-results-and-gpu-handoff.md)
+  — R5-01/02/03/04 technical PASS; nghiệm thu độc lập còn pending.
+- [M5.5: hồ sơ tiếp tục PR #45](../reports/milestones/M5.5/README.md)
+  — spec/plan hiện hành, sửa CI và kiểm chứng bàn giao trên Windows.
+
 ## Hồ sơ nhập từ các branch M1
 
 - [Bảng nghiệm thu M1.1–M1.10 và runbook](M1_ACCEPTANCE_SUMMARY_AND_RUNBOOK.md)

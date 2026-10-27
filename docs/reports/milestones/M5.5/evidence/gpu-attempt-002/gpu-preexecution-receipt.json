@@ -1,0 +1,26 @@
+{
+  "status": "PASS",
+  "source_commit": "daadcc9e296d94a81a236b28a4a53030c58dd613",
+  "reference_checks": {
+    "QARF": {
+      "query_count": 171,
+      "candidate_count": 82255,
+      "finite_scores_and_simplex_weights": true,
+      "sha256": "658c8162b690bff751609298aa8e77bf80cdf035cdbb45711ca5f1050407ab1e"
+    },
+    "QPAF": {
+      "query_count": 171,
+      "candidate_count": 82255,
+      "finite_scores_and_simplex_weights": true,
+      "sha256": "95ba3ed8e4a395bf0f888866a0e33abec43375d381f37dfa66195e65b7d9db5b"
+    }
+  },
+  "authorization_sha256": "c6fe8ca2acf72ac298e7403649ec9120a90618d4a03fb7ca44ee8189a7adbea3",
+  "bundle_manifest_sha256": "3b2214412b5dcdbd3b8936e12b49d9080a181995073f25c596f08f11b955b5de",
+  "query_count": 171,
+  "candidate_count": 82255,
+  "gpu_invocations_so_far": 0,
+  "qrels_exported": false,
+  "label_fields_exported": false,
+  "validation_only": true
+}

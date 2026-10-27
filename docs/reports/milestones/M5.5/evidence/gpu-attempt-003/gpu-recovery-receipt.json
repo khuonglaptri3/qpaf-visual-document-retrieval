@@ -1,0 +1,12 @@
+{
+  "status": "RECOVERED_EXISTING_CALL",
+  "function_call_id": "fc-01M5YWXVAV3GR59Q464CQPRS3N",
+  "result_ref": "docs/reports/milestones/M5.5/evidence/gpu-attempt-003/recovered-gpu-result.json",
+  "result_sha256": "bffda9f4ede0c8310e0c4bcd6a744824ce24c21667144d982860931f9af934d0",
+  "transport_metadata_sha256": "2a32df08e0fd71a954ef223217904d74ffc4872312edfbbe40a4dee86085a2ec",
+  "provider_log_sha256": "e03c4971f2d79b27fea7cddae6c2ff866c3536d74b751fe6ce5a44f2f0764d3d",
+  "decoder_source_sha256": "a0a212e55bc49f39d8ed178a15a90f66519d23b599f1fc6c1003abbe28caacbf",
+  "new_gpu_invocations": 0,
+  "original_failure_preserved": true,
+  "observation_sdk": "1.6.2"
+}

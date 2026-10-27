@@ -1,0 +1,26 @@
+test_log_messages_may_split_in_the_middle_of_a_prefix_or_payload (test_m55_gpu_transport.ResultTransportTests.test_log_messages_may_split_in_the_middle_of_a_prefix_or_payload) ... ERROR
+
+======================================================================
+ERROR: test_log_messages_may_split_in_the_middle_of_a_prefix_or_payload (test_m55_gpu_transport.ResultTransportTests.test_log_messages_may_split_in_the_middle_of_a_prefix_or_payload)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\.codex\worktrees\6a15\Artificial_Intelligent_Project\scripts\m55_gpu_transport.py", line 42, in decode_result
+    raw = gzip.decompress(base64.b64decode(''.join(parts[i] for i in range(len(parts))), validate=True))
+  File "C:\ProgramData\anaconda3\Lib\gzip.py", line 655, in decompress
+    decompressed = do.decompress(data[fp.tell():])
+zlib.error: Error -3 while decompressing data: invalid distance too far back
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\lanph\.codex\worktrees\6a15\Artificial_Intelligent_Project\tests\test_m55_gpu_transport.py", line 46, in test_log_messages_may_split_in_the_middle_of_a_prefix_or_payload
+    self.assertEqual(self.api.decode_result(meta, fragments), value)
+                     ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\lanph\.codex\worktrees\6a15\Artificial_Intelligent_Project\scripts\m55_gpu_transport.py", line 44, in decode_result
+    raise ValueError('corrupt encoded result') from exc
+ValueError: corrupt encoded result
+
+----------------------------------------------------------------------
+Ran 1 test in 0.019s
+
+FAILED (errors=1)

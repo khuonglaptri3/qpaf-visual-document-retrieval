@@ -1,0 +1,31 @@
+{
+  "task_id": "M5.5",
+  "activity": "read-only verification of existing CPU diagnostics",
+  "approval": "Owner authorized finishing M5.5 and delegated validation implementation details",
+  "source_commit": "1bdb491ec3b74f578c31dda5ba796d1d375ac586",
+  "manifest_sha256": "f141871d5adbd90c11fad5084d6c08a599009e3bd0bbbe5f60513e8eebff03be",
+  "runtime": {
+    "python": "3.11.14",
+    "numpy": "2.4.6",
+    "pandas": "3.1.0",
+    "pyarrow": "26.0.0"
+  },
+  "permissions": {
+    "public_pinned_snapshot_download": true,
+    "validation_replay": true,
+    "development_container_read": true,
+    "test_qrels": false,
+    "gpu": false,
+    "training": false,
+    "new_scientific_run": false
+  },
+  "cpu_cores": 2,
+  "memory_mib": 4096,
+  "function_timeout_seconds": 300,
+  "whole_app_watchdog_seconds": 600,
+  "invocations": 1,
+  "automatic_retries": 0,
+  "cost_target_usd": 0.05,
+  "recorded_utc": "2026-10-27T14:39:22.826158+00:00",
+  "reason": "Windows package downloads stalled; preserve exact runtime instead of weakening replay pins"
+}

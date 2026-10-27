@@ -1,0 +1,7 @@
+{
+  "error_type": "AuthError",
+  "message": "Received :status = '401'",
+  "elapsed_seconds": 103.88723769999342,
+  "app_id": "ap-uPaf95h7zm3re3I5X4ufBK",
+  "automatic_retry_performed": false
+}

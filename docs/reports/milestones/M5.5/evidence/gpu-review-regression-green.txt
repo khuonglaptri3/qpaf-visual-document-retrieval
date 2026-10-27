@@ -1,0 +1,16 @@
+test_dirty_source_pin_scope_budget_or_event_drift_is_refused (test_m55_gpu.GPUAuthorizationTests.test_dirty_source_pin_scope_budget_or_event_drift_is_refused) ... ok
+test_exact_owner_scope_and_single_invocation_are_accepted (test_m55_gpu.GPUAuthorizationTests.test_exact_owner_scope_and_single_invocation_are_accepted) ... ok
+test_existing_namespace_is_untouched_before_any_cloud_access (test_m55_gpu.GPUAuthorizationTests.test_existing_namespace_is_untouched_before_any_cloud_access) ... ok
+test_bundle_rejects_a_label_file_even_if_it_has_a_manifest_hash (test_m55_gpu.ValidationGPUContractTests.test_bundle_rejects_a_label_file_even_if_it_has_a_manifest_hash) ... ok
+test_invalid_candidate_counts_and_cuda_time_exceeding_wall_are_refused (test_m55_gpu.ValidationGPUContractTests.test_invalid_candidate_counts_and_cuda_time_exceeding_wall_are_refused) ... ok
+test_missing_reordered_duplicate_and_nonfinite_events_are_refused (test_m55_gpu.ValidationGPUContractTests.test_missing_reordered_duplicate_and_nonfinite_events_are_refused) ... ok
+test_payload_rejects_labels_non_validation_ids_and_invalid_scores (test_m55_gpu.ValidationGPUContractTests.test_payload_rejects_labels_non_validation_ids_and_invalid_scores) ... ok
+test_resource_boundaries_are_inclusive_latency_and_exclusive_allocation (test_m55_gpu.ValidationGPUContractTests.test_resource_boundaries_are_inclusive_latency_and_exclusive_allocation) ... ok
+test_summary_reports_events_separately_and_medians_across_six_passes (test_m55_gpu.ValidationGPUContractTests.test_summary_reports_events_separately_and_medians_across_six_passes) ... ok
+test_workload_is_171_unique_ids_and_1026_events_with_20_warmups (test_m55_gpu.ValidationGPUContractTests.test_workload_is_171_unique_ids_and_1026_events_with_20_warmups) ... ok
+test_fixture_commits_do_not_detach_maintenance_before_cleanup (test_m34_supervisor.GitFixtureTests.test_fixture_commits_do_not_detach_maintenance_before_cleanup) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 1.088s
+
+OK

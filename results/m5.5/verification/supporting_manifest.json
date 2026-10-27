@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "task_id": "M5.5",
+  "scope": "Supporting verification and figures; primary run is immutable and separately pinned",
+  "run_id": "RUN-QPAF-M5_5-ABL-001-20261027T033016Z-A01",
+  "run_manifest_sha256": "f141871d5adbd90c11fad5084d6c08a599009e3bd0bbbe5f60513e8eebff03be",
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "53fa682cdae8b31fb0670fd30038a4b7a82305a38c4724181bba94300cceea14",
+      "size_bytes": 613
+    },
+    {
+      "path": "build_supporting_figure.py",
+      "sha256": "2fc6fbeba6fd8686cd96117351b8fc6f9b817cfdb76deb8a30584c111267ad75",
+      "size_bytes": 4084
+    },
+    {
+      "path": "cli_verification.json",
+      "sha256": "77443975681696735af50eb47a9dd8df6395c14bc4d2aa634a8e6c9d9589d2a8",
+      "size_bytes": 329
+    },
+    {
+      "path": "diagnostics.png",
+      "sha256": "6157e7e576ee13eb55ab98ddc6955b85846d552ff0e7fc12ac9ab536dd74dc36",
+      "size_bytes": 230354
+    },
+    {
+      "path": "diagnostics.svg",
+      "sha256": "3d78b2d4cdb4e9071c6dc8c32ef0ea0aef4b341cbbbdd859d87367deea2239cd",
+      "size_bytes": 99962
+    },
+    {
+      "path": "software_checks.json",
+      "sha256": "a090d03cbd1e52c2e593984a5e89c30a82a263d888746f14d4d73c1165f32040",
+      "size_bytes": 675
+    },
+    {
+      "path": "software_tests.txt",
+      "sha256": "6e515a9651e0fc44ea525ec216e87a839940f874561e5b8c02ed2d7a049e5753",
+      "size_bytes": 93566
+    },
+    {
+      "path": "technical_verification.json",
+      "sha256": "6d1869bf9134df25a0c2aa85a899165402eef6ccc225b8ee539a8026c7ccef32",
+      "size_bytes": 2048
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "C:\Users\lanph\.codex\worktrees\6a15\Artificial_Intelligent_Project\scripts\run_m55_gpu.py", line 311, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\lanph\.codex\worktrees\6a15\Artificial_Intelligent_Project\scripts\run_m55_gpu.py", line 302, in main
+    print(json.dumps(prepare_bundle(args.bundle.resolve()), ensure_ascii=True, indent=2))
+                     ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lanph\.codex\worktrees\6a15\Artificial_Intelligent_Project\scripts\run_m55_gpu.py", line 48, in prepare_bundle
+    raise ValueError('tracked source must be committed before preparation')
+ValueError: tracked source must be committed before preparation
