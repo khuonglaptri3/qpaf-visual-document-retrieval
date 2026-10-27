@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
-  "status": "PENDING_RESEARCH_LEAD_APPROVAL",
+  "status": "APPROVED",
   "task_id": "M5.6",
   "roster_id": "R6",
   "owner": "Tấn Phát",
   "experiment_id": "QPAF-M5_6-ABL-001",
-  "run_id": "PENDING: RUN-QPAF-M5_6-ABL-001-<UTC YYYYMMDDTHHMMSSZ at approval>-A01",
+  "run_id": "RUN-QPAF-M5_6-ABL-001-20261027T164635Z-A01",
   "scope": [
     "R6-00",
     "R6-01",
@@ -151,10 +151,11 @@
     "run namespace already exists"
   ],
   "approval": {
-    "approver": "PENDING",
-    "approval_text": "PENDING",
-    "approved_utc": "PENDING",
-    "recorded_by": "PENDING"
+    "approver": "Tấn Phát (Research Lead, M5.6 owner)",
+    "approval_text": "Tôi (Tấn Phát, Research Lead) duyệt authorization M5.6 (evidence/revisions/m5.6-001/authorization.json): CPU local, seed 20260820, R6-00..R6-05, chỉ validation, 1 lần chạy, không retry, không mở test. Ghi lại lời duyệt này rồi chạy.",
+    "approved_utc": "2026-10-27T16:46:35Z",
+    "timestamp_basis": "Time the Research Lead's reply was recorded in the working session",
+    "recorded_by": "Claude Code at the Research Lead's explicit request; the text above is quoted, not composed"
   },
   "independent_review": {
     "reviewer": "Thanh",
