@@ -69,4 +69,4 @@
 - [x] Obtain fresh-context review and address material findings with RED-to-GREEN verification.
 - [x] Validate bundle layout, local links, hashes, historical bytes and `git diff --check`.
 - [x] Finalize Vietnamese report with actual checks and explicit R5-04/human-review status.
-- [ ] Commit and push to the existing PR head; verify remote SHA and CI. Do not merge or fabricate acceptance.
+- [x] Commit and push to the existing PR head; verify remote SHA and CI. Do not merge or fabricate acceptance.

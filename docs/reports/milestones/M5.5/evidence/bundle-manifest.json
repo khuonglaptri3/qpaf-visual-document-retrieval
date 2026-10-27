@@ -13,7 +13,7 @@
       "size_bytes": 7508
     },
     "evidence/bundle-validation.json": {
-      "sha256": "c4a21b165d52ce40ccff31646753dd4f0475aa5966e41348a762b7027fbfb96e",
+      "sha256": "e5a0c6b717ee11d7c069b56dfc6cd91f19f31bb1a44403c856197b8445ae9bc1",
       "size_bytes": 16348
     },
     "evidence/ci-failure.txt": {
@@ -131,6 +131,10 @@
     "evidence/engineering-review.md": {
       "sha256": "e1c4729e5ca15b6442ec9eb2984aabb3ff158f5b557c3bab00238792c6a1237e",
       "size_bytes": 2654
+    },
+    "evidence/execution-ledger.md": {
+      "sha256": "e51940482b418b71b325fc22f886d414d6a67317d34b76cabd8ca2137989b6bd",
+      "size_bytes": 1678
     },
     "evidence/export-probe-console.txt": {
       "sha256": "69cb11c601a56c914406890070f67d0cc4eedcd747e749564eac08daf50e8c83",
@@ -484,13 +488,25 @@
       "sha256": "0cbea618dd1e53873796487ce5cbd7aa8d9e36165d5114aace0e03a2b7f4e061",
       "size_bytes": 2866
     },
+    "evidence/remote-ci-verification.json": {
+      "sha256": "7f56ecc250cd7d621f3312ac7c85cf1b576ffb19b6ef0c06a666d6ab70743e12",
+      "size_bytes": 4514
+    },
     "evidence/replay_cpu_on_modal.py": {
       "sha256": "041434a00ed7edd962ea9d5c07b86814b3b3036718b95ee407223c1c6d8436fb",
       "size_bytes": 8956
     },
+    "evidence/source-binding-verification.json": {
+      "sha256": "a610fec1abc0b63dbaed72c24092ace02966196d13793ecfc21bb1c5c984642a",
+      "size_bytes": 14018
+    },
     "evidence/supervisor-tests.txt": {
       "sha256": "5831b86840865f622cdc272075e476c72f51c8899867addcc63ba7f2eb71ae9d",
       "size_bytes": 6950
+    },
+    "evidence/task-1-final-tests.txt": {
+      "sha256": "ba9f61d6db7b53a8d93104baa0c8a73ded30202dd70041314873d0278a8e6266",
+      "size_bytes": 103
     },
     "evidence/validate_bundle.py": {
       "sha256": "4e1455d8c4e6a0f33fcf754914aa31fda47f823add6f3339d8c32be0a7d65f01",
@@ -505,11 +521,11 @@
       "size_bytes": 9722
     },
     "evidence/workflow.md": {
-      "sha256": "613fcae3fc1e4d50c6d8edda71cdc77c2ed4982a2bc1ac4af171e74e1899c86b",
-      "size_bytes": 16569
+      "sha256": "7c3637ab698cf9971359f68e608c20752b86fbb0a2ae486917d38210c4fd26fb",
+      "size_bytes": 17228
     },
     "superpowers/plan.md": {
-      "sha256": "bb0a9de59b09d88c0f3110416369ed0d0747a0e7f1d2f165ba4af327cb17b6b8",
+      "sha256": "c1ffcce27aab27bac998e8b493c237dee7ce5a385fae1816cc43f048de426fa3",
       "size_bytes": 5623
     },
     "superpowers/spec.md": {
