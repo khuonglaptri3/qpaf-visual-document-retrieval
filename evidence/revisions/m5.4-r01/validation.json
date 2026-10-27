@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "task_id": "M5.4-QARF-independent-review",
+  "owner": "Thanh",
+  "technical_reviewer": "Codex at Thanh request",
+  "checked_utc": "2026-10-26T01:07:28Z",
+  "technical_verdict": "PASS",
+  "owner_acceptance": "PENDING_THANH_CONFIRMATION",
+  "run_id": "RUN-QPAF-M5_4-MTH-001-20261025T154818Z-A01",
+  "attempt_id": "20261025T155859-f0aefa1c",
+  "authorization_sha256": "b3bd04004bf8503aca6d703f20d3405738e50aa41028bc3ce699cd2a540173f9",
+  "seal_manifest_sha256": "0832af156b79d0448ecc630ff572a0053d7cb5da98b4dac2dec1c6ee49e27893",
+  "prediction_sha256": "43e05c4b12bf4bed1f45f72a940d94e3f09375f9774c7415d8b9ea0e8e6c1e9d",
+  "runtime": {
+    "python": "3.13.7",
+    "torch": "2.11.0+cpu",
+    "numpy": "2.5.4",
+    "pandas": "3.0.6",
+    "pyarrow": "26.0.0"
+  },
+  "m3_1_seal_replay": {
+    "task_id": "M3.1",
+    "status": "PASS",
+    "record_counts": {
+      "train": 799,
+      "validation": 171
+    },
+    "candidate_rows": {
+      "train": 386390,
+      "validation": 82255
+    },
+    "parity_identical": true,
+    "training_executed": false,
+    "test_labels_opened": false
+  },
+  "m5_4_first_pass": {
+    "pass": 35,
+    "fail": 0
+  },
+  "receipt_outputs_rehashed": 16,
+  "validation_metrics_recomputed": {
+    "query_count": 171,
+    "ndcg_at_10": 0.751118077352592,
+    "recall_at_1": 0.5847953216374269,
+    "recall_at_3": 0.783625730994152,
+    "mrr_at_10": 0.6956372412512764
+  },
+  "validation_queries": 171,
+  "validation_candidates": 82255,
+  "metric_max_abs_difference": 0.0,
+  "fresh_checkpoint_reload": {
+    "best_epoch": 1,
+    "last_epoch": 20,
+    "score_max_abs_difference": 3.3306690738754696e-16,
+    "weight_max_abs_difference": 2.220446049250313e-16,
+    "tolerance": 1e-07,
+    "status": "PASS_FRESH_PROCESS"
+  },
+  "seed2_output_observation": {
+    "seed2_review_sha256": "d3061e42be7537f23a9dfb0323e717ed115c10fbc7e21fedd2674225abf0d22f",
+    "max_score_difference": 0.022622183928651896,
+    "max_weight_difference": 0.035664359410276125,
+    "same_ordered_top10_queries": 114,
+    "equal_ndcg_epoch_numbers": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20
+    ],
+    "interpretation": "Descriptive validation observation only; aggregation belongs to M5.7."
+  },
+  "limitations": [
+    "Selected epoch 1 is the maximum on the same validation split; this is not a test estimate.",
+    "M5.2 cache-parity receipt is technical PASS; its human acceptance remains pending.",
+    "The frozen config and summary retain the M2.7 experiment_id; authorization and registry bind this M5.4 run separately.",
+    "No seed-averaged, QPAF comparison or baseline improvement claim is made."
+  ],
+  "test_labels_deserialized": false,
+  "training_executed_by_review": false,
+  "matched_qpaf_run_authorized_by_review": false
+}

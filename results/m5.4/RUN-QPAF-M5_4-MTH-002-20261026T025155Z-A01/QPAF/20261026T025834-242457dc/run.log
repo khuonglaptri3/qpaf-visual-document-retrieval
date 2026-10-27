@@ -1,0 +1,22 @@
+2026-10-26 09:58:34,676 INFO stage started: QPAF
+2026-10-26 09:58:43,305 INFO QPAF epoch 1: train_loss=0.4232768559402155 validation_ndcg_at_10=0.857931 *
+2026-10-26 09:58:46,151 INFO QPAF epoch 2: train_loss=0.4025499148831601 validation_ndcg_at_10=0.857209
+2026-10-26 09:58:49,256 INFO QPAF epoch 3: train_loss=0.3947177613133172 validation_ndcg_at_10=0.859113 *
+2026-10-26 09:58:52,190 INFO QPAF epoch 4: train_loss=0.3911357725334932 validation_ndcg_at_10=0.861066 *
+2026-10-26 09:58:54,977 INFO QPAF epoch 5: train_loss=0.3890716940623601 validation_ndcg_at_10=0.864396 *
+2026-10-26 09:58:57,774 INFO QPAF epoch 6: train_loss=0.38753963619273546 validation_ndcg_at_10=0.863960
+2026-10-26 09:59:00,750 INFO QPAF epoch 7: train_loss=0.3864877358969766 validation_ndcg_at_10=0.865681 *
+2026-10-26 09:59:03,719 INFO QPAF epoch 8: train_loss=0.3856409261859187 validation_ndcg_at_10=0.865579
+2026-10-26 09:59:06,660 INFO QPAF epoch 9: train_loss=0.3849711828912751 validation_ndcg_at_10=0.865817 *
+2026-10-26 09:59:09,213 INFO QPAF epoch 10: train_loss=0.38444913147054416 validation_ndcg_at_10=0.865817
+2026-10-26 09:59:11,850 INFO QPAF epoch 11: train_loss=0.383995106326217 validation_ndcg_at_10=0.865231
+2026-10-26 09:59:14,432 INFO QPAF epoch 12: train_loss=0.3836753464981766 validation_ndcg_at_10=0.865487
+2026-10-26 09:59:17,061 INFO QPAF epoch 13: train_loss=0.3833439676664472 validation_ndcg_at_10=0.865487
+2026-10-26 09:59:19,680 INFO QPAF epoch 14: train_loss=0.3830396208108647 validation_ndcg_at_10=0.865487
+2026-10-26 09:59:22,775 INFO QPAF epoch 15: train_loss=0.3828368017807632 validation_ndcg_at_10=0.865400
+2026-10-26 09:59:25,810 INFO QPAF epoch 16: train_loss=0.3825333779204476 validation_ndcg_at_10=0.865308
+2026-10-26 09:59:29,019 INFO QPAF epoch 17: train_loss=0.38237971447850044 validation_ndcg_at_10=0.864995
+2026-10-26 09:59:32,298 INFO QPAF epoch 18: train_loss=0.3822249811195198 validation_ndcg_at_10=0.866280 *
+2026-10-26 09:59:34,967 INFO QPAF epoch 19: train_loss=0.38207385799490223 validation_ndcg_at_10=0.864589
+2026-10-26 09:59:37,730 INFO QPAF epoch 20: train_loss=0.3819442666072095 validation_ndcg_at_10=0.867861 *
+2026-10-26 09:59:38,939 INFO stage completed

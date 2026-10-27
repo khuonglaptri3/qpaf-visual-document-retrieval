@@ -1,0 +1,29 @@
+{
+  "actor": "Tấn Phát",
+  "attempt": "20261026T025834-242457dc",
+  "authorization_sha256": "1d7e64d367a1aa25ae1e7ca8140f61e19d193660a3dfadd294fddec2cf17f845",
+  "exit_code": 0,
+  "finished_utc": "2026-10-26T02:59:49.599836+00:00",
+  "fresh_process_reload": {
+    "candidates": 82255,
+    "checkpoint_numbers_checked": 10788,
+    "checkpoint_sha256": {
+      "best": "6017e3f186dce5496153421e7b982f1ec253376bc84ac1387cc96d48e25c0bea",
+      "last": "03edb2d21169542c14a1824b5eb26c7f402b2c69cb1d12503f6fa0a59de8c364"
+    },
+    "method": "QPAF",
+    "metric_max_abs_difference": 0.0,
+    "parent_pid": 25880,
+    "queries": 171,
+    "score_max_abs_difference": 0.0,
+    "status": "PASS",
+    "tolerance": 1e-07,
+    "torch": "2.11.0+cpu",
+    "weight_max_abs_difference": 0.0,
+    "worker_pid": 3952
+  },
+  "receipt_sha256": "5c6a23ba0d979eeae252a04d9c9285cd61a1fb4695ceb9bd55e8f9ac439d0531",
+  "run_id": "RUN-QPAF-M5_4-MTH-002-20261026T025155Z-A01",
+  "summary_sha256": "78ea8e773d96ccc83e33f754d1566c8a4af5b772a9d13d04a4013bf387b3f4d0",
+  "wall_seconds": 79.46
+}
