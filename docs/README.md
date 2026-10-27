@@ -10,6 +10,10 @@ Trạng thái thực hiện được xác định bằng evidence của từng r
 từ cột trạng thái hoặc ngày kế hoạch trong workbook. D1 hiện hành là
 [`m2.11-002`, PASS](../evidence/revisions/m2.11-002/decision.json).
 
+M5.2 hiện **HOÀN THÀNH / ACCEPTED** theo xác nhận của Khương ngày 27/10/2026
+rằng review đã hoàn tất. Xem [hồ sơ nghiệm thu hiện hành](../results/m5.2/verification/README.md).
+Trạng thái trong workbook và các receipt đã đóng băng là snapshot lịch sử.
+
 | Vị trí | Mục đích |
 | --- | --- |
 | [Tài liệu chính thức](GUILDLINE_OVERVIEWS_PROPOSAL/README.md) | Đề xuất, workbook, Word, tổng quan và timeline |
