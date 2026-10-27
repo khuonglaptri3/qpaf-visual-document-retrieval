@@ -1,0 +1,113 @@
+{
+  "authority_pins": {
+    "configs/m4.4/evaluation.json": "799fc3e1e65a8961c4deb77eed2e6ae296f0bae853ba24293a11506e8b477db1",
+    "evidence/M1_FINAL/02_protocol/metric_policy.md": "4ce926201bb38b975c3eb43b83b0c719dea48267ff20e8fffa7e7329c0b5579a",
+    "evidence/revisions/m4.3-001/method_freeze.json": "4015c74b54f5ac3d2cbce54f8424c0e9329c009595e81ced5eab0039af7761cc",
+    "evidence/revisions/m4.7-001/g2a_freeze.json": "26d9bab6e7d47fe7dd1e89f6bec2c95265641df5cde8d9bd25c867b9d3a73217",
+    "evidence/revisions/m4.7-001/owner_confirmation.json": "5f80b4312188721dc2c2033a85ce1a9631bffa32479c576e0500471e622b95e6",
+    "evidence/revisions/m5.1-001/owner_confirmation.json": "c9fa0a0ef637362a30f6dcc38f86cd59916620bd714b3d6330afa76de4e80bef",
+    "evidence/revisions/m5.1-001/preregistration.json": "45269eafe36907f99990027f067e724939da69db5ee351669d1e5e7854bf7e29",
+    "evidence/revisions/m5.2-001/cache_identity.json": "960aed613336e5f6faa8335881306ffc340bceff3094836eb6e3f135babc3291",
+    "results/m4.4/RUN-QPAF-M4_4-MTH-001-20261023T172102Z-A01/baseline_table.json": "ef5840cfb2334ebfdbef5694aaa628e8aff35df6feda606d1ab0f7166af57c09",
+    "results/m4.4/RUN-QPAF-M4_4-MTH-001-20261023T172102Z-A01/manifest.json": "aa2ab51814c883b5552b1b45136c1f25dd7d9921a074891f4ae0397f4b03e4a7",
+    "results/m4.4/RUN-QPAF-M4_4-MTH-001-20261023T172102Z-A01/per_query_metrics.csv": "590934eb3d5e34976b6b3fc52739f79d9725730ea3acd5ad08758bafecfc9ecf",
+    "results/m5.2/verification/owner_confirmation.json": "2515fc38ec1001c8afeac90c4ff92fc255b65141980fd31edddc4d72a513c530"
+  },
+  "bundle_manifest_sha256": "4752eef37d7c6cf73eb36717bd352e21192d112b1464a3f5a61dab86bcc76b86",
+  "elapsed_analysis_seconds": 4.1256189459963934,
+  "elapsed_time_is_fusion_latency": false,
+  "execution_head": "43ca69c70642942cd9cccff0550389ea3662e312",
+  "implementation_commit": "60a2cc1ffff7c10dccc21602f112ab22040a0384",
+  "methods": [
+    {
+      "method": "bm25",
+      "normalization": "minmax",
+      "weights": [
+        1.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "method": "bge_m3",
+      "normalization": "minmax",
+      "weights": [
+        0.0,
+        1.0,
+        0.0
+      ]
+    },
+    {
+      "method": "colqwen25",
+      "normalization": "minmax",
+      "weights": [
+        0.0,
+        0.0,
+        1.0
+      ]
+    },
+    {
+      "method": "uniform_combsum",
+      "normalization": "minmax",
+      "weights": [
+        0.3333333333333333,
+        0.3333333333333333,
+        0.3333333333333333
+      ]
+    },
+    {
+      "method": "without_bm25",
+      "normalization": "minmax",
+      "weights": [
+        0.0,
+        0.5,
+        0.5
+      ]
+    },
+    {
+      "method": "without_bge_m3",
+      "normalization": "minmax",
+      "weights": [
+        0.5,
+        0.0,
+        0.5
+      ]
+    },
+    {
+      "method": "without_colqwen25",
+      "normalization": "minmax",
+      "weights": [
+        0.5,
+        0.5,
+        0.0
+      ]
+    },
+    {
+      "method": "uniform_zscore",
+      "normalization": "zscore",
+      "weights": [
+        0.3333333333333333,
+        0.3333333333333333,
+        0.3333333333333333
+      ]
+    }
+  ],
+  "runtime": {
+    "numpy": "2.4.6",
+    "pandas": "3.1.0",
+    "pyarrow": "26.0.0",
+    "python": "3.11.14"
+  },
+  "source_files_sha256": {
+    "scripts/run_m55_diagnostics.py": "8f66f601b337e7ef5137112811f83c20d303434679c85340db22452d8bc5df98",
+    "src/qpaf/m24/dataset.py": "1b2681b163ce4a88a87eeb71ba31f417ee2a4469a9be49845c47d528eb6c5279",
+    "src/qpaf/m24/evaluator.py": "bfd25f331c5c377c708fd1d05f3e3edb85467488301e9658ea9bb486ef476742",
+    "src/qpaf/m25/baselines.py": "7ac6ee18756b72afe6011522d8becd2a058724d43512acb6876f36c8f72bc1f6",
+    "src/qpaf/m42/active_primary.py": "0713c103e0bb6ede415f6f7e806c289b53728506e2bdadf8e4adab01ec71f79f",
+    "src/qpaf/m44/common.py": "bb160e3bd2355cdf72c66982c6ee4e041520c96fe97f69a2080546b1fc54968c",
+    "src/qpaf/m55/__init__.py": "3c2b95c120f8d8c48bc621e85048d39887a06c27cfea571e86a4fd54df32ef0e",
+    "src/qpaf/m55/diagnostics.py": "626f1e009326bc9755d762bb6483e1471d7dec2c5b88d8e84ce2757ef7acc457",
+    "src/qpaf/m55/runner.py": "39413c1ed3179d377385ed8fcd9e52841bc0df20849bc53d27f730c67ee6fc13",
+    "tests/test_m55_diagnostics.py": "c13313f710f42447aae0af2f724332723d0201b568a92e2f9ba2562d9efc4e5e"
+  }
+}

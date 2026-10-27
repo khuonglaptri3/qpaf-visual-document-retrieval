@@ -1,0 +1,41 @@
+{
+  "status": "PASS",
+  "run_id": "RUN-QPAF-M5_5-ABL-001-20261027T033016Z-A01",
+  "query_count": 171,
+  "candidate_count": 82255,
+  "manifest_sha256": "f141871d5adbd90c11fad5084d6c08a599009e3bd0bbbe5f60513e8eebff03be",
+  "read_only": true,
+  "resource_status": "NOT_RUN_DEFERRED_MODAL_NETWORK_BLOCKED",
+  "m55_complete": false,
+  "recorded_at_utc": "2026-10-27T03:32:27Z",
+  "output_ref": "results/m5.5/RUN-QPAF-M5_5-ABL-001-20261027T033016Z-A01",
+  "monitored_file_count": 13,
+  "all_run_files_unchanged": true,
+  "audit_hook": {
+    "file_write_attempts": 0,
+    "network_attempts": 0,
+    "forbidden_imports": 0,
+    "test_label_open_attempts": 0,
+    "development_qrels_opens": 2
+  },
+  "run_file_hashes": {
+    "manifest.json": "f141871d5adbd90c11fad5084d6c08a599009e3bd0bbbe5f60513e8eebff03be",
+    "summary.json": "55d712c3f6535de5b45523a6b49216137a68d71df6c6caf0806cfa16b2354b9c",
+    "access.json": "b99d29ed1236b8aac38944e1a4eb7583552420f90e77f1269462d5d9af88701a",
+    "systems_deferred.json": "52dbdbf5c26a02f4994b60504f697f4df027cadd3e5a08e7cae2ea3002a88733",
+    "_SUCCESS.json": "ffcecd1ced680b599cbf4726f08eb532becaf8b20be01ee6968c0cb46d4e061c",
+    "report.md": "ef45d8b25f3e1cc6bb8066cb5de368ea331881bc1c40b70764193e732e53eb3d",
+    "authorization.json": "92d91854949f0e0914e5c3d2e837f811ccfac6eaf485e3ad29e60b5c97f2e0f1",
+    "provenance.json": "e5857e5e927821de17d1e8b7eafba48c4037afdbed6f117cef638bd1b59cc7f5",
+    "diagnostics.json": "667fbbf113fc1ea5b7c1db3589eadf0b5319297ee887bacf848f4de4885a9f51",
+    "top10.csv": "482f0b49b650b9668a6bd94d5a49fdd94eb5deb22a998c0abe98401a60719ba2",
+    "_ATTEMPTED.json": "f0f31739e2f45bc0e57458e166280d23c3427f7bfdcdb59e65ef792dba507a85",
+    "metrics.csv": "e064837c3f6aecd913f661f3eb5d8e3632dc71bc9ab3f0c333688a9fec22c8c2",
+    "per_query_metrics.csv": "d267e6f203ecdb6b43203b1bd135849cd6fd65d93e97e7f70471739b494e348b"
+  },
+  "gpu_executed": false,
+  "modal_called": false,
+  "checkpoints_deserialized": false,
+  "test_labels_opened": false,
+  "independent_human_review": "PENDING"
+}

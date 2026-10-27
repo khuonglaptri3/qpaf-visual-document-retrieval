@@ -1,0 +1,31 @@
+{
+  "candidate_count": 82255,
+  "confirmatory_claim": false,
+  "cpu_status": "TECHNICAL_PASS",
+  "diagnostic_rows": 8,
+  "gpu_executed": false,
+  "independent_human_review": "PENDING",
+  "m55_complete": false,
+  "modal_called": false,
+  "primary_method_changed": false,
+  "query_count": 171,
+  "reference_parity": {
+    "absolute_tolerance": 1e-12,
+    "max_abs_difference": 6.661338147750939e-16,
+    "methods": [
+      "bm25",
+      "bge_m3",
+      "colqwen25",
+      "uniform_combsum"
+    ],
+    "query_method_pairs": 684,
+    "status": "PASS"
+  },
+  "resource_status": "NOT_RUN_DEFERRED_MODAL_NETWORK_BLOCKED",
+  "split": "validation",
+  "status": "PARTIAL_GPU_DEFERRED_PENDING_REVIEW",
+  "task_id": "M5.5",
+  "test_labels_opened": false,
+  "training_executed": false,
+  "vimdoc_confirmation_accessed": false
+}

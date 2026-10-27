@@ -1,0 +1,10 @@
+{
+  "checkpoints_loaded": false,
+  "gpu_executed": false,
+  "modal_called": false,
+  "test_labels_deserialized": false,
+  "train_qrels_used": false,
+  "training_executed": false,
+  "validation_qrels_deserialized": true,
+  "vimdoc_confirmation_accessed": false
+}

@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "task_id": "M5.5",
+  "recorded_at_utc": "2026-10-27T03:44:55Z",
+  "reviewer_agent": "/root/review_m55_cpu",
+  "review_type": "Automated engineering review; not independent human QA acceptance",
+  "verdict": "PASS",
+  "open_critical_findings": 0,
+  "open_important_findings": 0,
+  "deferred_minor_findings": 0,
+  "implementation_commit": "60a2cc1ffff7c10dccc21602f112ab22040a0384",
+  "run_manifest_sha256": "f141871d5adbd90c11fad5084d6c08a599009e3bd0bbbe5f60513e8eebff03be",
+  "supporting_manifest_sha256": "9442a25291bf7a9ea54872b4f33474f75831d12dd9e86896f68bdf15f48b6845",
+  "checks": [
+    "Configuration and M4.2 input binding fixed and pinned",
+    "All manifest entries and 13 replay-receipt file hashes match",
+    "Authorization/source/authority hashes match",
+    "Metrics, paired contrasts, CSV/JSON rankings and report values agree",
+    "171 validation queries / 82,255 candidates; zero min-max discrepancy",
+    "Full software log: 635 tests OK, 3 skipped",
+    "Figure readable; exploratory and GPU-deferred claims accurate",
+    "Receiver instructions and measurement/counting decision clearly documented"
+  ],
+  "prior_important_finding": "M4.4 config was not directly pinned; regression reproduced the issue, then config SHA and exact M4.2 bundle binding fixed it",
+  "numerical_replay_performed_by_reviewer": false,
+  "test_labels_opened": false,
+  "gpu_executed": false,
+  "live_services_called": false,
+  "independent_human_review": "PENDING",
+  "full_m55_status": "PARTIAL"
+}

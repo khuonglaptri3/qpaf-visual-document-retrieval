@@ -14,6 +14,11 @@ M5.2 hiện **HOÀN THÀNH / ACCEPTED** theo xác nhận của Khương ngày 27
 rằng review đã hoàn tất. Xem [hồ sơ nghiệm thu hiện hành](../results/m5.2/verification/README.md).
 Trạng thái trong workbook và các receipt đã đóng băng là snapshot lịch sử.
 
+M5.5: R5-01/02/03 đã chạy và kiểm chứng kỹ thuật trên CPU; R5-04 GPU/Modal
+đang deferred theo yêu cầu của người dùng. Toàn task còn **PARTIAL**, chưa
+nghiệm thu độc lập. Xem [báo cáo kết quả](../Bao_cao_tien_do/M5_5_Khuong.md)
+và [bàn giao sang máy khác](06_handover/m5.5-cpu-results-and-gpu-handoff.md).
+
 | Vị trí | Mục đích |
 | --- | --- |
 | [Tài liệu chính thức](GUILDLINE_OVERVIEWS_PROPOSAL/README.md) | Đề xuất, workbook, Word, tổng quan và timeline |

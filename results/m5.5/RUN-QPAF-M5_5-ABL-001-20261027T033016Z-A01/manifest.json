@@ -1,0 +1,58 @@
+{
+  "authorization_sha256": "92d91854949f0e0914e5c3d2e837f811ccfac6eaf485e3ad29e60b5c97f2e0f1",
+  "files": [
+    {
+      "path": "access.json",
+      "sha256": "b99d29ed1236b8aac38944e1a4eb7583552420f90e77f1269462d5d9af88701a",
+      "size_bytes": 262
+    },
+    {
+      "path": "authorization.json",
+      "sha256": "92d91854949f0e0914e5c3d2e837f811ccfac6eaf485e3ad29e60b5c97f2e0f1",
+      "size_bytes": 7097
+    },
+    {
+      "path": "diagnostics.json",
+      "sha256": "667fbbf113fc1ea5b7c1db3589eadf0b5319297ee887bacf848f4de4885a9f51",
+      "size_bytes": 3552438
+    },
+    {
+      "path": "metrics.csv",
+      "sha256": "e064837c3f6aecd913f661f3eb5d8e3632dc71bc9ab3f0c333688a9fec22c8c2",
+      "size_bytes": 799
+    },
+    {
+      "path": "per_query_metrics.csv",
+      "sha256": "d267e6f203ecdb6b43203b1bd135849cd6fd65d93e97e7f70471739b494e348b",
+      "size_bytes": 115936
+    },
+    {
+      "path": "provenance.json",
+      "sha256": "e5857e5e927821de17d1e8b7eafba48c4037afdbed6f117cef638bd1b59cc7f5",
+      "size_bytes": 4305
+    },
+    {
+      "path": "report.md",
+      "sha256": "ef45d8b25f3e1cc6bb8066cb5de368ea331881bc1c40b70764193e732e53eb3d",
+      "size_bytes": 937
+    },
+    {
+      "path": "summary.json",
+      "sha256": "55d712c3f6535de5b45523a6b49216137a68d71df6c6caf0806cfa16b2354b9c",
+      "size_bytes": 815
+    },
+    {
+      "path": "systems_deferred.json",
+      "sha256": "52dbdbf5c26a02f4994b60504f697f4df027cadd3e5a08e7cae2ea3002a88733",
+      "size_bytes": 924
+    },
+    {
+      "path": "top10.csv",
+      "sha256": "482f0b49b650b9668a6bd94d5a49fdd94eb5deb22a998c0abe98401a60719ba2",
+      "size_bytes": 1728462
+    }
+  ],
+  "run_id": "RUN-QPAF-M5_5-ABL-001-20261027T033016Z-A01",
+  "schema_version": 1,
+  "task_id": "M5.5"
+}

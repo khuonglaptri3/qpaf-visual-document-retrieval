@@ -4,6 +4,9 @@ Checklist theo người, trạng thái bàn giao, audit repository và lịch s�
 
 Các nhận xét về tiến độ trong tài liệu là snapshot theo thời điểm và phạm vi ghi trong từng file.
 
+- [M5.5: kết quả CPU và phần GPU để chạy trên máy khác](m5.5-cpu-results-and-gpu-handoff.md)
+  — R5-01/02/03 technical PASS; toàn task còn PARTIAL, R5-04 chưa chạy.
+
 ## Hồ sơ nhập từ các branch M1
 
 - [Bảng nghiệm thu M1.1–M1.10 và runbook](M1_ACCEPTANCE_SUMMARY_AND_RUNBOOK.md)

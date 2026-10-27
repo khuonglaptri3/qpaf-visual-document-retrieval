@@ -1,6 +1,6 @@
 # M5.5 CPU Diagnostics Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [x]`) syntax for tracking.
 
 **Goal:** Execute the preregistered CPU part of M5.5 and leave an honest, reproducible GPU handoff.
 
@@ -36,13 +36,13 @@
 - Consumes: frozen `qpaf.m44.common.load_context(root)`, `qpaf.m24.evaluator.evaluate/rank`, the saved normalized cache, M5.1/G2A/M5.2 authority records.
 - Produces: `normalize_scores(raw_scores, method)`, fixed row scoring and `compute_diagnostics(records, saved_minmax)`; `execute(root, authorization, expected_sha256, run_id)`, `verify(root, output, expected_manifest_sha256)`, local `restore_inputs(root, archive)`; CLI subcommands `restore-inputs`, `run`, `verify`.
 
-- [ ] Write meaningful tests first: hand-derived min-max/z-score values; constant channels; negative scores; fixed drop-channel weights; label-independent scoring; malformed/nonfinite/misaligned rows; tie ordering and missing-positive denominator; reference parity; create-once run; tamper refusal; read-only replay; no network/GPU boundary.
-- [ ] Run `.venv/bin/python -m unittest discover -s tests -p test_m55_diagnostics.py -v`.
+- [x] Write meaningful tests first: hand-derived min-max/z-score values; constant channels; negative scores; fixed drop-channel weights; label-independent scoring; malformed/nonfinite/misaligned rows; tie ordering and missing-positive denominator; reference parity; create-once run; tamper refusal; read-only replay; no network/GPU boundary.
+- [x] Run `.venv/bin/python -m unittest discover -s tests -p test_m55_diagnostics.py -v`.
   Expected: missing implementation fails before implementation is added.
-- [ ] Implement the smallest pipeline satisfying the spec, including authority/input/source validation and honest deferred-system status.
-- [ ] Run the focused tests and `.venv/bin/python -m unittest discover -s tests -q`.
+- [x] Implement the smallest pipeline satisfying the spec, including authority/input/source validation and honest deferred-system status.
+- [x] Run the focused tests and `.venv/bin/python -m unittest discover -s tests -q`.
   Expected: all software tests pass, historical skips reported, no live services called.
-- [ ] Commit only the implementation/tests and plan/spec/research records; record the source commit for authorization.
+- [x] Commit only the implementation/tests and plan/spec/research records; record the source commit for authorization.
 
 ## Task 2: Authorized real-data run, report and cross-machine handoff
 
@@ -52,13 +52,13 @@
 - Consumes: Task 1 CLI, exact downloaded M4.2 archive, pinned implementation commit and current user's CPU-only instruction.
 - Produces: a manifest-bound real run, read-only verification, Vietnamese interpretation, supporting chart and a deferred R5-04 checklist.
 
-- [ ] Create and commit the explicit user CPU-only authorization with exact hashes/runtime/run ID and no cloud permission.
-- [ ] Execute `scripts/run_m55_diagnostics.py run` with its external authorization SHA-256.
+- [x] Create and commit the explicit user CPU-only authorization with exact hashes/runtime/run ID and no cloud permission.
+- [x] Execute `scripts/run_m55_diagnostics.py run` with its external authorization SHA-256.
   Expected: all eight rows cover 171 queries/82,255 candidates, the four reference rows match at `1e-12`, CPU technical success and overall partial/deferred status.
-- [ ] Execute `scripts/run_m55_diagnostics.py verify` with the printed manifest SHA-256.
+- [x] Execute `scripts/run_m55_diagnostics.py verify` with the printed manifest SHA-256.
   Expected: artifacts and replay match; all run bytes unchanged.
-- [ ] Write research interpretation and complete a handoff listing inputs, source/runtime, exact receiver commands and the unresolved >=1,000-distinct-query scope decision. Include M3.6 only as historical context.
-- [ ] Independently verify hashes/access flags and unchanged frozen inputs/source; run `git diff --check`.
+- [x] Write research interpretation and complete a handoff listing inputs, source/runtime, exact receiver commands and the unresolved counting/scope decision (base policy measured queries versus M3.6 distinct IDs). Include M3.6 only as historical context.
+- [x] Independently verify hashes/access flags and unchanged frozen inputs/source; run `git diff --check`.
   Expected: PASS, no fabricated resource numbers, no old evidence changes.
-- [ ] Obtain one fresh whole-branch engineering review, fix material findings, and commit the results/report.
-- [ ] Keep work on `feature/m5-5-diagnostics`; do not merge the incomplete full milestone into develop.
+- [x] Obtain one fresh whole-branch engineering review, fix material findings, and commit the results/report.
+- [x] Keep work on `feature/m5-5-diagnostics`; do not merge the incomplete full milestone into develop.
