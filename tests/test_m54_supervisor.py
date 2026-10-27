@@ -51,8 +51,11 @@ class SeedContractTests(unittest.TestCase):
         attempt = api.check_seed_contract(ROOT, self.auth)
         self.assertEqual(attempt, ROOT/self.auth['seed_contract']['seed_reference']['attempt_path'])
         seed1 = api._read(ROOT/self.auth['seed_contract']['seed_reference']['authorization_path'])
+        # The sealed payload copy is local; Git contains the same pinned config.
+        frozen = (ROOT/'configs/m2.7/shared_base.toml').read_bytes()
+        self.assertEqual(sha(frozen), seed1['config']['file_sha256'])
         self.assertEqual((ROOT/self.auth['config']['path']).read_bytes(),
-                         (ROOT/seed1['config']['path']).read_bytes().replace(b'seed = 20260820', b'seed = 20260822'))
+                         frozen.replace(b'seed = 20260820', b'seed = 20260822'))
 
     def test_any_drift_from_the_seed_contract_is_refused(self):
         cases = {'second seed': lambda a: a['method'].update(seed=20260821),
