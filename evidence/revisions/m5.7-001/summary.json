@@ -1,0 +1,450 @@
+{
+  "schema_version": 1,
+  "task_id": "M5.7",
+  "roster_id": "R8",
+  "status": "TECHNICAL_ANALYSIS_COMPLETE",
+  "r7_run_id": "RUN-QPAF-R7-TEST-001-20261028T034438Z-A01",
+  "r7_manifest_sha256": "b4d3d7cf5ac6e8cf6fd622195dad0c57170eb443c48f84ce99c0869ccf42fd1d",
+  "r7_per_query_sha256": "f7a56761aab23004aaebaca07be6054da0c7b041ef3f9f89458db152b1410952",
+  "r7_independent_audit_sha256": "fb98aa2e762e3e3a7e477a99286bd030d55d897e9c8e74033e648ae59972b62b",
+  "preregistration_sha256": "45269eafe36907f99990027f067e724939da69db5ee351669d1e5e7854bf7e29",
+  "validation_selection_sha256": "e133b8dcd3406e6d28e4cae087d30b391feb479a066c452a3af76f5a2e864819",
+  "query_texts_sha256": "e7994373c9fd5157cde0fb0c5a1440c37c275b85fa19b2b0b566f61d584c4ab4",
+  "query_count": 172,
+  "seeds": [
+    20260820,
+    20260821,
+    20260822
+  ],
+  "statistics_policy": {
+    "unit": "paired query after seed averaging",
+    "bootstrap_resamples": 10000,
+    "rng_seed": 20260820,
+    "ci": "linear percentile 2.5/97.5",
+    "wtl_tolerance": 1e-12
+  },
+  "method_mean_by_seed": {
+    "qpaf": {
+      "20260820": {
+        "ndcg_at_10": 0.8172836129645744,
+        "recall_at_1": 0.6627906976744186,
+        "recall_at_3": 0.8895348837209303,
+        "mrr_at_10": 0.7707733480989296
+      },
+      "20260821": {
+        "ndcg_at_10": 0.8200486044896487,
+        "recall_at_1": 0.6627906976744186,
+        "recall_at_3": 0.8837209302325582,
+        "mrr_at_10": 0.7726075119970467
+      },
+      "20260822": {
+        "ndcg_at_10": 0.8190337873579696,
+        "recall_at_1": 0.6627906976744186,
+        "recall_at_3": 0.8895348837209303,
+        "mrr_at_10": 0.7714193429309708
+      }
+    },
+    "qarf": {
+      "20260820": {
+        "ndcg_at_10": 0.7428168124045451,
+        "recall_at_1": 0.5465116279069767,
+        "recall_at_3": 0.8081395348837209,
+        "mrr_at_10": 0.6803340716131414
+      },
+      "20260821": {
+        "ndcg_at_10": 0.7422059963869764,
+        "recall_at_1": 0.5465116279069767,
+        "recall_at_3": 0.8023255813953488,
+        "mrr_at_10": 0.679641934293097
+      },
+      "20260822": {
+        "ndcg_at_10": 0.7428168124045451,
+        "recall_at_1": 0.5465116279069767,
+        "recall_at_3": 0.8081395348837209,
+        "mrr_at_10": 0.6803340716131414
+      }
+    }
+  },
+  "contrasts": {
+    "QPAF_minus_matched_QARF": {
+      "metrics": {
+        "ndcg_at_10": {
+          "mean_delta": 0.07617546120537545,
+          "median_delta": 0.0,
+          "std_delta": 0.22351354906216234,
+          "ci95": [
+            0.042928022490070356,
+            0.10990872631110234
+          ],
+          "wtl": {
+            "wins": 49,
+            "ties": 107,
+            "losses": 16
+          },
+          "top_5pct_positive_gain_query_count": 9,
+          "top_5pct_positive_gain_share": 0.31038513563776693
+        },
+        "recall_at_1": {
+          "mean_delta": 0.11627906976744186,
+          "median_delta": 0.0,
+          "std_delta": 0.43038415184095097,
+          "ci95": [
+            0.05232558139534884,
+            0.18023255813953487
+          ],
+          "wtl": {
+            "wins": 27,
+            "ties": 138,
+            "losses": 7
+          },
+          "top_5pct_positive_gain_query_count": 9,
+          "top_5pct_positive_gain_share": 0.3333333333333333
+        },
+        "recall_at_3": {
+          "mean_delta": 0.0813953488372093,
+          "median_delta": 0.0,
+          "std_delta": 0.32817072892119786,
+          "ci95": [
+            0.03488372093023256,
+            0.1317829457364341
+          ],
+          "wtl": {
+            "wins": 18,
+            "ties": 151,
+            "losses": 3
+          },
+          "top_5pct_positive_gain_query_count": 9,
+          "top_5pct_positive_gain_share": 0.5294117647058824
+        },
+        "mrr_at_10": {
+          "mean_delta": 0.09149670850252246,
+          "median_delta": 0.0,
+          "std_delta": 0.28128941312834904,
+          "ci95": [
+            0.04988208671711578,
+            0.13397061877076413
+          ],
+          "wtl": {
+            "wins": 49,
+            "ties": 107,
+            "losses": 16
+          },
+          "top_5pct_positive_gain_query_count": 9,
+          "top_5pct_positive_gain_share": 0.33541391665095227
+        }
+      },
+      "per_seed_mean_delta": [
+        {
+          "seed": 20260820,
+          "ndcg_at_10": 0.07446680056002941,
+          "recall_at_1": 0.11627906976744186,
+          "recall_at_3": 0.08139534883720931,
+          "mrr_at_10": 0.09043927648578812
+        },
+        {
+          "seed": 20260821,
+          "ndcg_at_10": 0.0778426081026723,
+          "recall_at_1": 0.11627906976744186,
+          "recall_at_3": 0.08139534883720931,
+          "mrr_at_10": 0.0929655777039498
+        },
+        {
+          "seed": 20260822,
+          "ndcg_at_10": 0.07621697495342465,
+          "recall_at_1": 0.11627906976744186,
+          "recall_at_3": 0.08139534883720931,
+          "mrr_at_10": 0.09108527131782947
+        }
+      ],
+      "per_seed_ndcg_mean_std": 0.0016882866121304657,
+      "descriptive_subgroups": {
+        "one_relevant_page": {
+          "query_count": 172,
+          "mean_delta_ndcg_at_10": 0.07617546120537545
+        },
+        "multiple_relevant_pages": {
+          "query_count": 0,
+          "mean_delta_ndcg_at_10": null
+        },
+        "candidate_count_leq_median": {
+          "query_count": 86,
+          "mean_delta_ndcg_at_10": 0.0664798398688065
+        },
+        "candidate_count_gt_median": {
+          "query_count": 86,
+          "mean_delta_ndcg_at_10": 0.08587108254194441
+        },
+        "query_words_leq_median": {
+          "query_count": 94,
+          "mean_delta_ndcg_at_10": 0.08521756253867066
+        },
+        "query_words_gt_median": {
+          "query_count": 78,
+          "mean_delta_ndcg_at_10": 0.06527856985499404
+        }
+      },
+      "descriptive_subgroup_medians": {
+        "candidate_count": 485.5,
+        "query_words": 20.0
+      },
+      "worst_10_queries": [
+        {
+          "query_id": "014e06ff15aa70dca51689af416805faa0a4584a_2",
+          "delta_ndcg_at_10": -0.6488268420329306,
+          "qpaf_seed_mean_ndcg_at_10": 0.3511731579670694,
+          "comparator_seed_mean_ndcg_at_10": 1.0
+        },
+        {
+          "query_id": "00a1765f5fa2e5453d308132b37142e8f84ddd23_1",
+          "delta_ndcg_at_10": -0.5,
+          "qpaf_seed_mean_ndcg_at_10": 0.5,
+          "comparator_seed_mean_ndcg_at_10": 1.0
+        },
+        {
+          "query_id": "025d01d4a3c6f6f9930d7188dc1dd779773c109d_2",
+          "delta_ndcg_at_10": -0.5,
+          "qpaf_seed_mean_ndcg_at_10": 0.5,
+          "comparator_seed_mean_ndcg_at_10": 1.0
+        },
+        {
+          "query_id": "053328d288a9167453f08ade2e36149f95fbf157_2",
+          "delta_ndcg_at_10": -0.5,
+          "qpaf_seed_mean_ndcg_at_10": 0.5,
+          "comparator_seed_mean_ndcg_at_10": 1.0
+        },
+        {
+          "query_id": "02ec82b1931eb6533f83776d2f7adfb8c8054f3e_5",
+          "delta_ndcg_at_10": -0.36907024642854247,
+          "qpaf_seed_mean_ndcg_at_10": 0.6309297535714575,
+          "comparator_seed_mean_ndcg_at_10": 1.0
+        },
+        {
+          "query_id": "03e39ad403954cd1b459ea5b74e6f15db98d1e51_1",
+          "delta_ndcg_at_10": -0.36907024642854247,
+          "qpaf_seed_mean_ndcg_at_10": 0.6309297535714575,
+          "comparator_seed_mean_ndcg_at_10": 1.0
+        },
+        {
+          "query_id": "04a6afc745680ef1189d52b6fe27f8f30604ef95_1",
+          "delta_ndcg_at_10": -0.36907024642854247,
+          "qpaf_seed_mean_ndcg_at_10": 0.6309297535714575,
+          "comparator_seed_mean_ndcg_at_10": 1.0
+        },
+        {
+          "query_id": "03342a0175f5314185dece3b8f2777f36759bf4c_0",
+          "delta_ndcg_at_10": -0.3033017260060436,
+          "qpaf_seed_mean_ndcg_at_10": 0.19669827399395637,
+          "comparator_seed_mean_ndcg_at_10": 0.5
+        },
+        {
+          "query_id": "006708446f8b5d7e63ece4e8794811b0c377b8d5_0",
+          "delta_ndcg_at_10": -0.3010299956639812,
+          "qpaf_seed_mean_ndcg_at_10": 0.0,
+          "comparator_seed_mean_ndcg_at_10": 0.3010299956639812
+        },
+        {
+          "query_id": "02d59c632786097daf539c0e1c249dece29d678c_0",
+          "delta_ndcg_at_10": -0.13092975357145753,
+          "qpaf_seed_mean_ndcg_at_10": 0.5,
+          "comparator_seed_mean_ndcg_at_10": 0.6309297535714575
+        }
+      ]
+    },
+    "QPAF_minus_train_fitted_static": {
+      "metrics": {
+        "ndcg_at_10": {
+          "mean_delta": -0.006748373272429344,
+          "median_delta": 0.0,
+          "std_delta": 0.0799132757923319,
+          "ci95": [
+            -0.019028345555918206,
+            0.005269258696404722
+          ],
+          "wtl": {
+            "wins": 7,
+            "ties": 152,
+            "losses": 13
+          },
+          "top_5pct_positive_gain_query_count": 9,
+          "top_5pct_positive_gain_share": 1.0
+        },
+        "recall_at_1": {
+          "mean_delta": 0.011627906976744186,
+          "median_delta": 0.0,
+          "std_delta": 0.15249857033260467,
+          "ci95": [
+            -0.011627906976744186,
+            0.03488372093023256
+          ],
+          "wtl": {
+            "wins": 3,
+            "ties": 168,
+            "losses": 1
+          },
+          "top_5pct_positive_gain_query_count": 9,
+          "top_5pct_positive_gain_share": 1.0
+        },
+        "recall_at_3": {
+          "mean_delta": -0.025193798449612403,
+          "median_delta": 0.0,
+          "std_delta": 0.15298086843839157,
+          "ci95": [
+            -0.050387596899224806,
+            -0.005813953488372093
+          ],
+          "wtl": {
+            "wins": 0,
+            "ties": 167,
+            "losses": 5
+          },
+          "top_5pct_positive_gain_query_count": 9,
+          "top_5pct_positive_gain_share": 0.0
+        },
+        "mrr_at_10": {
+          "mean_delta": -0.00399747754398917,
+          "median_delta": 0.0,
+          "std_delta": 0.08935335703608993,
+          "ci95": [
+            -0.01710273240433124,
+            0.010057562753783684
+          ],
+          "wtl": {
+            "wins": 7,
+            "ties": 152,
+            "losses": 13
+          },
+          "top_5pct_positive_gain_query_count": 9,
+          "top_5pct_positive_gain_share": 1.0
+        }
+      },
+      "per_seed_mean_delta": [
+        {
+          "seed": 20260820,
+          "ndcg_at_10": -0.008253428578585818,
+          "recall_at_1": 0.011627906976744186,
+          "recall_at_3": -0.023255813953488372,
+          "mrr_at_10": -0.00482419712070875
+        },
+        {
+          "seed": 20260821,
+          "ndcg_at_10": -0.005488437053511634,
+          "recall_at_1": 0.011627906976744186,
+          "recall_at_3": -0.029069767441860465,
+          "mrr_at_10": -0.002990033222591362
+        },
+        {
+          "seed": 20260822,
+          "ndcg_at_10": -0.006503254185190578,
+          "recall_at_1": 0.011627906976744186,
+          "recall_at_3": -0.023255813953488372,
+          "mrr_at_10": -0.004178202288667406
+        }
+      ],
+      "per_seed_ndcg_mean_std": 0.001398698344400818,
+      "descriptive_subgroups": {
+        "one_relevant_page": {
+          "query_count": 172,
+          "mean_delta_ndcg_at_10": -0.006748373272429344
+        },
+        "multiple_relevant_pages": {
+          "query_count": 0,
+          "mean_delta_ndcg_at_10": null
+        },
+        "candidate_count_leq_median": {
+          "query_count": 86,
+          "mean_delta_ndcg_at_10": -0.00495637417385795
+        },
+        "candidate_count_gt_median": {
+          "query_count": 86,
+          "mean_delta_ndcg_at_10": -0.008540372371000736
+        },
+        "query_words_leq_median": {
+          "query_count": 94,
+          "mean_delta_ndcg_at_10": -0.0040182876365276584
+        },
+        "query_words_gt_median": {
+          "query_count": 78,
+          "mean_delta_ndcg_at_10": -0.01003847647466984
+        }
+      },
+      "descriptive_subgroup_medians": {
+        "candidate_count": 485.5,
+        "query_words": 20.0
+      },
+      "worst_10_queries": [
+        {
+          "query_id": "016d380720964134f37e5803bc182f7bcb0af024_1",
+          "delta_ndcg_at_10": -0.5,
+          "qpaf_seed_mean_ndcg_at_10": 0.0,
+          "comparator_seed_mean_ndcg_at_10": 0.5
+        },
+        {
+          "query_id": "02862397eb1a6a6a9011506457d8f88d48654cab_3",
+          "delta_ndcg_at_10": -0.36907024642854247,
+          "qpaf_seed_mean_ndcg_at_10": 0.6309297535714575,
+          "comparator_seed_mean_ndcg_at_10": 1.0
+        },
+        {
+          "query_id": "00c9161083ca956372a7548e69650556a8c7f358_2",
+          "delta_ndcg_at_10": -0.31546487678572877,
+          "qpaf_seed_mean_ndcg_at_10": 0.0,
+          "comparator_seed_mean_ndcg_at_10": 0.31546487678572877
+        },
+        {
+          "query_id": "03342a0175f5314185dece3b8f2777f36759bf4c_0",
+          "delta_ndcg_at_10": -0.3033017260060436,
+          "qpaf_seed_mean_ndcg_at_10": 0.19669827399395637,
+          "comparator_seed_mean_ndcg_at_10": 0.5
+        },
+        {
+          "query_id": "016d380720964134f37e5803bc182f7bcb0af024_0",
+          "delta_ndcg_at_10": -0.1540375675469932,
+          "qpaf_seed_mean_ndcg_at_10": 0.47689218602446437,
+          "comparator_seed_mean_ndcg_at_10": 0.6309297535714575
+        },
+        {
+          "query_id": "001d373f0f9c22ae1a7a3a086f7859aa74c140a8_0",
+          "delta_ndcg_at_10": -0.1488268420329306,
+          "qpaf_seed_mean_ndcg_at_10": 0.3511731579670694,
+          "comparator_seed_mean_ndcg_at_10": 0.5
+        },
+        {
+          "query_id": "011a2465874f6d9a254213a736098a0a2bb02008_0",
+          "delta_ndcg_at_10": -0.13092975357145753,
+          "qpaf_seed_mean_ndcg_at_10": 0.5,
+          "comparator_seed_mean_ndcg_at_10": 0.6309297535714575
+        },
+        {
+          "query_id": "025d29820e87212c70835c906ec824ed69687b11_2",
+          "delta_ndcg_at_10": -0.13092975357145753,
+          "qpaf_seed_mean_ndcg_at_10": 0.5,
+          "comparator_seed_mean_ndcg_at_10": 0.6309297535714575
+        },
+        {
+          "query_id": "053328d288a9167453f08ade2e36149f95fbf157_2",
+          "delta_ndcg_at_10": -0.13092975357145753,
+          "qpaf_seed_mean_ndcg_at_10": 0.5,
+          "comparator_seed_mean_ndcg_at_10": 0.6309297535714575
+        },
+        {
+          "query_id": "01d73640c391613eb67e4d6853ebe1b72a334bd8_2",
+          "delta_ndcg_at_10": -0.07446937096537087,
+          "qpaf_seed_mean_ndcg_at_10": 0.3562071871080222,
+          "comparator_seed_mean_ndcg_at_10": 0.43067655807339306
+        }
+      ]
+    }
+  },
+  "quality_signals": {
+    "delta_qarf_at_least_0_01": true,
+    "ci_qarf_lower_above_zero": true,
+    "above_validation_selected_baseline": false,
+    "overall_quality_gate": false
+  },
+  "limitations": [
+    "R7 is one held-out test split; seed averaging does not create new queries.",
+    "Subgroups and worst cases are descriptive, not additional primary gates.",
+    "Operational latency/memory acceptance is separate.",
+    "No method, seed, checkpoint or baseline was selected on test."
+  ]
+}

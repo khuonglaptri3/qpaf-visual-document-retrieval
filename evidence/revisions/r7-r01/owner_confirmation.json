@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "task_id": "R7-TEST-172-independent-review",
+  "reviewer": "Thanh (@xThanhSaDec)",
+  "recorded_by": "Codex at Thanh explicit request",
+  "recorded_at_utc": "2026-10-28T09:32:27Z",
+  "decision": "ACCEPTED_WITH_NUMERICAL_PARITY_NOTE",
+  "confirmation_text": "Có, ghi Thanh chấp nhận với các giới hạn trên",
+  "technical_report_ref": "evidence/revisions/r7-r01/verification.json",
+  "technical_report_sha256": "fb98aa2e762e3e3a7e477a99286bd030d55d897e9c8e74033e648ae59972b62b",
+  "accepted_scope": "Independent R7 replay of sealed predictions, markers, receipts, 172 per-query metrics, aggregate results and oracle details. Original verifier exact-float comparison fails on this CPU; fresh learned score difference at most 4.44e-16, below 1e-7, with identical rankings.",
+  "new_r7_run_executed": false,
+  "human_confirmation_in_working_session": true
+}
