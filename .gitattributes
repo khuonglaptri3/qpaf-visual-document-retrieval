@@ -110,3 +110,6 @@ vimdoc_archive_audit_modal.py -text
 /results/m5.5/** -text -eol -whitespace
 # Successor M5.5 receipts bind exact Windows/Linux console and verification bytes.
 /docs/reports/milestones/M5.5/evidence/** -text -eol -whitespace
+
+# M5.6 manifest and post-run check bind exact run bytes (CSV, JSON, gz predictions, checkpoints).
+/results/m5.6/** -text -eol -whitespace

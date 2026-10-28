@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "task_id": "M5.6",
+  "roster_id": "R6",
+  "reviewer": "Thanh (@xThanhSaDec), assisted by Codex",
+  "source_branch_head": "aa002017954d886cd72c41e8e056b298741c5b6a",
+  "run_id": "RUN-QPAF-M5_6-ABL-001-20261027T164635Z-A01",
+  "authorization_sha256": "a89efaf416dc306dfc0bd09dd5bb1201d81c382dd0429dad6efd42fa99e1be98",
+  "run_manifest_sha256": "be69197b8fb1d724d86f0bcdde729c365d69638b63e8088adff38defa2630706",
+  "post_run_verification_sha256": "8434b05f5a8c38af4eb98e489feb13346161a21b9dd7fab1381a8dc12c9f4e7c",
+  "technical_verdict": "PASS_WITH_DOCUMENTED_DEVIATION_D1",
+  "post_run_check": {
+    "command": "python evidence/revisions/m5.6-001/post_run_check.py",
+    "python_version": "3.13.7",
+    "passed": 15,
+    "failed": 0,
+    "read_only": true
+  },
+  "targeted_tests": {
+    "command": "python -m unittest tests.test_m56_ablations -q",
+    "tests_run": 13,
+    "failures": 0,
+    "errors": 0
+  },
+  "d1": {
+    "source_authorization_sha256": "a89efaf416dc306dfc0bd09dd5bb1201d81c382dd0429dad6efd42fa99e1be98",
+    "in_run_authorization_sha256": "e3270e2b82f3a8df4eac6731ddfec77c94e53cdf56f754a8054dfab9e2c04789",
+    "source_crlf_count": 164,
+    "in_run_crlf_count": 0,
+    "source_after_crlf_to_lf_equals_in_run_copy_byte_for_byte": true,
+    "impact": "The original runner.verify rejects the in-run byte copy. The external authorization pin, manifest and attempt marker bind the original authorization; the documented post-run check verifies the normalization and replays the remaining checks."
+  },
+  "independent_reaggregation": {
+    "query_count_per_ablation": 171,
+    "r6_01_ndcg_delta": -0.00047496129518651025,
+    "r6_01_wtl": [3, 166, 2],
+    "r6_02_ndcg_delta": 0.0003782275154064988,
+    "r6_02_wtl": [4, 165, 2],
+    "r6_03_ndcg_delta": 0.0001990133626198354,
+    "r6_03_wtl": [5, 163, 3],
+    "r6_04_ndcg_delta": 0.001690437580806362,
+    "r6_04_wtl": [1, 170, 0],
+    "three_seed_query_level_qpaf_minus_qarf_ndcg_mean": 0.11870386781049605,
+    "three_seed_query_counts": [171, 171, 171],
+    "stored_mean_max_abs_difference": 0.0
+  },
+  "fresh_process_reload_max_abs_difference": 8.881784197001252e-16,
+  "fresh_process_reload_tolerance": 1e-07,
+  "claim_scope": "Exploratory validation diagnostics only; no TEST-172 inference, primary method, checkpoint or baseline selection",
+  "test_labels_opened": false,
+  "new_training_executed_by_review": false
+}
