@@ -11,6 +11,11 @@
     "prompting.md",
     "refs_from_scibot.txt"
   ],
+  "line_ending_pin_repair": {
+    "recorded_utc": "2026-10-28T15:05:00Z",
+    "finding": "The receipt entry pinned CRLF bytes; the git blob and LF checkout differ. Only that entry and the config entry (which records the same repair) are updated.",
+    "changed_paths": ["configs/vimdoc_archive_content_audit_v1.json", "artifacts/dataset_materialization_vimdoc.json"]
+  },
   "repair": {
     "classification": "LOCAL_MODAL_MATERIALIZATION_MOUNT_REPAIR_ONLY",
     "consumed_activation_commit": "6a0db676a8b5b43d14081463f835ec6b0fcb8abc",
@@ -33,8 +38,8 @@
   "files": [
     {
       "path": "configs/vimdoc_archive_content_audit_v1.json",
-      "sha256": "d68aa576a088081002d1e938e19a2c443ad8cd570c35c618173d54be26609253",
-      "bytes": 7453
+      "sha256": "3179187db1275ea8e039756123faaaae8bc38b903de2f1d69308a1158a75d3ff",
+      "bytes": 8348
     },
     {
       "path": "configs/vimdoc_ocr_page_identity_v1.json",
@@ -78,8 +83,8 @@
     },
     {
       "path": "artifacts/dataset_materialization_vimdoc.json",
-      "sha256": "20ececf7be4e2e726a0e657de32e80dfc5b380130d907626269cec54a11f1d9d",
-      "bytes": 40891
+      "sha256": "fb26458905dfaa57fbdc5343f305c5ff8340ca62c5d75434345256932417dd05",
+      "bytes": 38733
     }
   ],
   "documentation_migration": {
