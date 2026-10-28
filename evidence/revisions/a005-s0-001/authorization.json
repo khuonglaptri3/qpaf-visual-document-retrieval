@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "status": "PENDING_RESEARCH_LEAD_APPROVAL",
+  "amendment": "QPAF-M1.5-A005",
+  "stage": 0,
+  "owner": "Tấn Phát",
+  "experiment_id": "QPAF-A005-PRB-001",
+  "scope": "Train-only alignment gate of A005 §4.3 on ViDoSeek train (799 queries, page unit). For each of the 66 static grid weights, compute train nDCG@10 and the A005 listwise profile loss (min over log τ in [log 1e-3, 0], golden-section, 60 iterations), then apply the A004 thresholds unchanged. No model is trained.",
+  "gate": {
+    "G_A": "Spearman(profile loss, train nDCG@10) <= -0.5",
+    "G_B": "nDCG@10 at the lowest-loss grid point >= grid max nDCG@10 - 0.01",
+    "pass": "both G_A and G_B",
+    "tie_rule": "first minimum in grid order wins a loss tie (qpaf.m46.probe.gate)"
+  },
+  "outcome_rule": {
+    "PASS": "A005 may proceed to a separately authorized Stage 1 (ViMDoc inputs). It does not authorize Stage 1.",
+    "REVISION_GATE_FAILED": "A005 stops. No ViMDoc work, no training, no second loss (A005 §4.2). QPAF-v1 remains the reported method."
+  },
+  "permissions": {
+    "device": "cpu",
+    "modal": false,
+    "gpu": false,
+    "training": false,
+    "retriever_inference": false,
+    "labels": "ViDoSeek train qrels only, from the M4.2 development qrels filtered to the 799 train IDs",
+    "validation_labels": false,
+    "test_labels": false,
+    "vimdoc": false,
+    "network": false
+  },
+  "source_commit": "ecfabab28eb8c05f8655fbc4ea902acdc39ec190",
+  "source_files_sha256": {
+    "src/qpaf/a005/__init__.py": "5a970434fcc4ac6fc2246c06639f821f64a4066d40ec8a146ebc82cfe74890df",
+    "src/qpaf/a005/losses.py": "16184ffb81beafb640c6765cb445571e21e14a584d3061093155b30ec1f6695f",
+    "src/qpaf/a005/probe.py": "08fdb56b37c7cd5d6d0b3e6d0ea99e9360e4e86d05f31fe98269d6900058375c",
+    "scripts/probe_a005_stage0.py": "f31c4ec6d1ecc6be5827f5c0dacaa64ef8895cbd1180f12f48c528958d2beec5",
+    "tests/test_a005_probe.py": "72a3875e6c193e61df73b1137e07076bcb62f7e3e4482686719b4f988becbe5a",
+    "src/qpaf/m46/probe.py": "be92af7f146bfb227c391d68a21c6b980afdc3994368c732e1a001c0a7dfe0bb",
+    "src/qpaf/m24/dataset.py": "1b2681b163ce4a88a87eeb71ba31f417ee2a4469a9be49845c47d528eb6c5279",
+    "src/qpaf/m24/evaluator.py": "bfd25f331c5c377c708fd1d05f3e3edb85467488301e9658ea9bb486ef476742",
+    "src/qpaf/m24/trainer.py": "242fbcdc3a1cf44c81d29ef7be19aac256b29e5226f870cdf1cee889ff9df7d4",
+    "src/qpaf/m12/features.py": "86eb5d540d2330c0fec263d587581d2f159b77461df85c57f6ecaa64fafa40b6"
+  },
+  "authority_pins": {
+    "evidence/M1_FINAL/02_protocol/amendments/QPAF-M1.5-A005.md": "edf84064de0546bc120c121f41d7a6018635a234c8ecfe3b92fe90c06fa3a4a4",
+    "evidence/M1_FINAL/02_protocol/amendments/QPAF-M1.5-A005.approval-001.md": "eb89ffd404ccd3f53eef800c709722e2ae965ac0f65e8a65257fe42b05990935",
+    "evidence/M1_FINAL/02_protocol/amendments/QPAF-M1.5-A006.md": "199f7cf70b447d5ec86a68d3241b97c6ca2c817bdaf5701f47040750a962f7e1"
+  },
+  "input_pins": {
+    "configs/m4.4/evaluation.json": "799fc3e1e65a8961c4deb77eed2e6ae296f0bae853ba24293a11506e8b477db1",
+    "results/m4.2/RUN-QPAF-M4_2-CAL-001-20261023T150631Z-A01/manifest.json": "4752eef37d7c6cf73eb36717bd352e21192d112b1464a3f5a61dab86bcc76b86",
+    "evidence/revisions/m4.6-001/loss_alignment_probe.json": "d44be4410b3f14c24c1b1175125ad10ee2489a4dcf5ba96232600d316e3dc8e2"
+  },
+  "integrity_checks": [
+    "The M4.2 bundle files match their manifest (qpaf.m42.active_primary.verify_files).",
+    "Development qrels hold no test query ID; only the 799 train IDs are kept.",
+    "All 66 grid nDCG@10 values replay the M4.6 probe within 1e-12; otherwise no record is written."
+  ],
+  "runtime": {
+    "python": "3.13.7",
+    "torch": "2.11.0+cpu",
+    "numpy": "2.5.4",
+    "pandas": "3.0.6",
+    "pyarrow": "26.0.0"
+  },
+  "hardware": "Local CPU only (Windows 11); float64; 1 thread; deterministic algorithms",
+  "limits": {
+    "wall_time_seconds": 3600,
+    "invocations": 1,
+    "automatic_retries": 0
+  },
+  "command": {
+    "interpreter": ".venv/Scripts/python.exe",
+    "create": "scripts/probe_a005_stage0.py --create",
+    "verify": "scripts/probe_a005_stage0.py --verify"
+  },
+  "output": "evidence/revisions/a005-s0-001/alignment_probe.json (create-once)",
+  "stop_conditions": [
+    "authorization not APPROVED or any source pin differs",
+    "tracked working tree not clean",
+    "M4.2 bundle manifest mismatch",
+    "grid nDCG@10 does not replay M4.6 within 1e-12",
+    "output file already exists"
+  ],
+  "failure_rule": "A failed or interrupted invocation is recorded as is and is not retried under this authorization.",
+  "claim_scope": "A train-only diagnostic of whether the A005 loss orders static fusion weights like train nDCG@10. It is not a trained-model result and makes no validation, test or ViMDoc claim.",
+  "independent_review": "WAIVED_BY_A006",
+  "approval": {
+    "approver": "Tấn Phát (Research Lead)",
+    "approval_text": null,
+    "approved_utc": null
+  }
+}
