@@ -21,6 +21,23 @@ sẽ ngụ ý đã có kết quả external để đánh giá.
 - M5.7/R8 chỉ bao gồm ba seed trên ViDoSeek TEST-172. So sánh QPAF với QARF
   matched dương; so sánh với baseline mạnh nhất âm.
 
+### Cache ViDoRe P0-03 cũ
+
+Repo **có** `data/raw_scores.parquet` và `data/cache/retrieval_scores.parquet`:
+[`artifacts/extraction_manifest.json`](../../../artifacts/extraction_manifest.json)
+ghi 309 query tiếng Anh, 140.083 dòng ứng viên và hash file; preflight P0-03
+đã PASS cho phạm vi bundle đó. Vì vậy câu “không có score cache” nói chung là
+không chính xác.
+
+P0-03 không phải bằng chứng sealed R9/M5.8: file score chứa cột relevance;
+[`scripts/extract_vidore_baseline.py`](../../../scripts/extract_vidore_baseline.py)
+đã đọc qrels để quyết định mở rộng độ sâu ứng viên theo coverage; và
+[`artifacts/baseline_metrics.json`](../../../artifacts/baseline_metrics.json)
+ghi rõ metric chỉ kiểm candidate pool, không phải kết quả benchmark official
+full corpus. Chưa có authorization R9, run QPAF-v1 external được niêm phong và
+review nghiệm thu. `NOT RUN` nói về **run R9 hợp lệ**, không phủ nhận cache P0-03
+cũ. ViMDoc thiếu cache đã kiểm chứng là một vấn đề riêng được ghi trong G2A.
+
 `inputs.json` pin byte của năm file đầu vào. `scripts/decide_g3a.py` kiểm pin
 và nội dung trước khi tạo hoặc replay `decision.json`. Nó chỉ đọc governance
 records, không đọc nhãn, chạy evaluation, huấn luyện hay cấp quyền chạy mới.
