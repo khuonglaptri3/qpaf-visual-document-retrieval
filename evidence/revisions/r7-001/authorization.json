@@ -1,11 +1,11 @@
 {
   "schema_version": 1,
-  "status": "PENDING_RESEARCH_LEAD_APPROVAL",
+  "status": "APPROVED",
   "task_id": "TEST-172",
   "roster_id": "R7",
   "owner": "Tấn Phát runs, Thanh verifies",
   "experiment_id": "QPAF-R7-TEST-001",
-  "run_id": "PENDING: RUN-QPAF-R7-TEST-001-<UTC YYYYMMDDTHHMMSSZ at approval>-A01",
+  "run_id": "RUN-QPAF-R7-TEST-001-20261028T034438Z-A01",
   "scope": [
     "R7-00",
     "R7-01",
@@ -207,10 +207,12 @@
   ],
   "failure_rule": "If the run stops after R7-05 has begun, it is not rerun under this authorization. The failure is recorded as is, and any rerun needs an amendment and Thanh's review first.",
   "approval": {
-    "approver": "PENDING",
-    "approval_text": "PENDING",
-    "approved_utc": "PENDING",
-    "recorded_by": "PENDING"
+    "approver": "Tấn Phát (Research Lead, R7 runner)",
+    "approval_text": "Tôi duyệt R7",
+    "approved_utc": "2026-10-28T03:44:38Z",
+    "timestamp_basis": "Time the Research Lead's reply was recorded in the working session",
+    "approved_record": "This file at commit d12d9aa (PENDING_RESEARCH_LEAD_APPROVAL), whose scope, single invocation, no-retry rule and TEST-172 opening were set out to the Research Lead before the reply",
+    "recorded_by": "Claude Code at the Research Lead's explicit request; the text above is quoted, not composed"
   },
   "independent_review": {
     "reviewer": "Thanh",
