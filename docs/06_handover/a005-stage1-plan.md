@@ -39,6 +39,33 @@ Phần dưới cần calibrate trước khi chạy full, theo đúng cách đã 
 - **Archive.** 17,5 GB. Theo receipt tháng 8, archive đã nằm trên Modal volume
   `/vol/datasets/vimdoc/…`, nhưng trạng thái hiện tại chưa được kiểm lại.
 
+## Ngoại suy từ số đo GPU thật của ViDoSeek (2026-10-28)
+
+Nguồn: `artifacts/vidoseek_p1_02r_import/extraction_manifest.json`. Lần chạy đó dùng L4,
+cùng ColQwen2.5 và cùng adapter, trên 5.385 trang và 1.142 query. Giá lấy từ
+https://modal.com/pricing ngày 2026-10-28: L4 $0,000222/s, CPU $0,0000131 mỗi core-giây,
+memory $0,00000222 mỗi GiB-giây.
+
+| Thành phần ViMDoc (70.080 trang, 10.904 query) | Số đo ViDoSeek | Ngoại suy | USD |
+| --- | --- | ---: | ---: |
+| ColQwen2.5 encode trang | 1,03 s/trang | 20,1 giờ L4 | 16,1 |
+| Chấm MaxSim toàn corpus (764 triệu cặp) | 2.958 cặp/s | **71,7 giờ L4** | 57,3 |
+| CPU 4 core + 32 GiB đi kèm container GPU | | | 40,8 |
+| OCR Tesseract (4 core + 16 GiB) | 0,90 s/trang | 17,5 giờ | 5,6 |
+| Encode query, BGE-M3, BM25 | nhỏ | < 2 giờ | < 3 |
+| **Tổng nếu giữ nguyên code ViDoSeek** | | | **khoảng 120** |
+
+Phần đắt nhất là chấm MaxSim chứ không phải OCR. Code ViDoSeek chấm theo batch 128 trang
+với tốc độ khoảng 2.958 cặp/s, thấp hơn nhiều so với khả năng của GPU. Nếu viết lại phần
+chấm theo kiểu nhân ma trận lớn trên GPU, giữ nguyên phép MaxSim và kiểm parity với code
+cũ trên mẫu, ước tính nhanh hơn khoảng 10–20 lần. Khi đó tổng chi phí còn khoảng
+**30–40 USD**. Cả hai mức đều vượt cost cap 10 USD của calibration, nên full run cần một
+cost cap riêng.
+
+ViMDoc có thể khác ViDoSeek ở độ phân giải ảnh, và do đó ở số token ảnh mỗi trang. Đây là
+lý do vẫn nên chạy một mẫu GPU nhỏ trên chính ảnh ViMDoc trước khi chạy full: khoảng 128
+trang, dưới 0,2 USD.
+
 ## Lịch
 
 Thời gian tính theo ngày làm việc, chưa gồm thời gian chờ duyệt.
