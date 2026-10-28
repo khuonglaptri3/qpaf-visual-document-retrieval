@@ -1,17 +1,24 @@
 {
   "schema_version": 1,
   "package_id": "vimdoc_archive_content_audit_v1",
-  "status": "PREPARED_LOCAL_REVIEW_EXECUTION_CLOSED",
+  "status": "APPROVED_FOR_ONE_INVOCATION",
   "prepared_at_utc": "2026-09-11T05:08:50.5799378Z",
   "purpose": "Classify ViMDoc duplicate page-name assets by uncompressed content hash and freeze canonical page identity before OCR.",
   "classification": "DATA_INTEGRITY_ONLY_NOT_OCR_NOT_SCORE_EXTRACTION_NOT_TRAINING",
   "authorization": {
-    "execution_authorized": false,
-    "approved_actor": null,
-    "required_source_commit": null,
-    "approved_invocations": 0,
+    "execution_authorized": true,
+    "approved_actor": "claude",
+    "required_source_commit": "a689d9ecd7c9e06e3332e410c4cbe61cc2c71392",
+    "approved_invocations": 1,
     "approved_retries": 0,
-    "approved_timeout_seconds": 0
+    "approved_timeout_seconds": 21600,
+    "approver": "Tấn Phát (Research Lead)",
+    "approval_text": "Duyệt calibration",
+    "cost_cap_usd": 10,
+    "cost_cap_source": "Research Lead selected '10 USD (Recommended)' for the whole A005 Stage 1 calibration (C1 audit plus C2 sample)",
+    "approved_utc": "2026-10-28T15:08:40Z",
+    "context": "A005 Stage 1 calibration C1; independent review WAIVED_BY_A006",
+    "reserved_compute_usd_at_timeout": 0.474768
   },
   "input": {
     "volume_name": "qpaf-artifacts",
