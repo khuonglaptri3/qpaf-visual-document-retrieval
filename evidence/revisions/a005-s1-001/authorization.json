@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "status": "APPROVED",
+  "amendment": "QPAF-M1.5-A005",
+  "stage": 1,
+  "run_id": "RUN-QPAF-A005-INP-001",
+  "scope": "ViMDoc label-free score cache on the A007 v2 pages: OCR (16 CPU shards), ColQwen2.5 and BGE-M3 query and passage encoding with GPU MaxSim and dense scores (16 L4 shards), BM25 via vidore_benchmark 5.0.0, candidate union (top-200 per channel, union <= 600) with per-query min-max normalization, and the dev-only coverage audit. The doc_ids column is read once and split into dev qrels and a sealed confirmation file that Stage 1 does not read.",
+  "approval": {
+    "approver": "Tấn Phát (Research Lead)",
+    "workspace_text": "Giữ tranthanhzt123321",
+    "cost_cap_selection": "35 USD (Recommended)",
+    "cost_cap_usd": 35,
+    "recorded_utc": "2026-10-28T16:02:00Z",
+    "recorded_by": "Claude at the Research Lead's request"
+  },
+  "modal_workspace": "tranthanhzt123321",
+  "estimated_usd": 23,
+  "source_commit": "f6f918c0d6dce4f38704101bedcd99f0a58f5b4d",
+  "source_files_sha256": {
+    "a005_stage1_modal.py": "4678e2c745606d34395b4f3ccd7df1fffcc6a95fc870912282038639b2807444",
+    "src/qpaf/a005/stage1.py": "1e548aedd7f23161fccece1b4dde129e1627d5566a33c9f17558b310a1002e29",
+    "src/qpaf/a005/candidates.py": "b34e3118a1cdc940ee32332f9db1832923fa456931b3116a8311cfb73c5c9cc9",
+    "src/qpaf/a005/__init__.py": "5a970434fcc4ac6fc2246c06639f821f64a4066d40ec8a146ebc82cfe74890df",
+    "scripts/colqwen25_retriever.py": "48e9e563d18f6bfb9a19344edb016f03406473d202217a102a6503c7b3298d62",
+    "scripts/bge_m3_dense_retriever.py": "04a52544cf8cd76725b038aa172cc801c8f95f44904cc99b13c968f6ea031b0b",
+    "requirements-lock.txt": "17e6673bc89d0e10470c27250c34961058308823399c6b003519576cdd46c1be"
+  },
+  "inputs": {
+    "archive_sha256": "de569c8d4d499b8fac84d4d03a0ddb59054e30351dcb7b1e6da3d1945d2d2c71",
+    "parquet_sha256": "7ccac6c8715cc338c041e9276583b9dbd79a818131a9b13a5abf4b9ced73bcc0",
+    "canonical_pages_sha256": "9dc277153f9137c8c668d70a3f66dfd208e129e5907eede7b47dbac1f2250b84",
+    "split_ids": "evidence/revisions/m4.1-001/{train,validation,confirmation}_ids.txt"
+  },
+  "label_rules": [
+    "doc_ids is read only in prepare, split immediately; confirmation qrels are written once, hashed and not read in Stage 1.",
+    "Dev qrels are used only for the coverage report, after every candidate union is frozen.",
+    "No score, union, normalization or model choice depends on any label."
+  ],
+  "retry_rule": "Each step and shard runs once. A step or shard whose _SUCCESS marker exists is skipped on a re-launch; a failed one is recorded, and any re-attempt needs a note in this record. Stop if projected spend passes the cap.",
+  "command": "modal run --detach a005_stage1_modal.py --pages-sha256 9dc277153f9137c8c668d70a3f66dfd208e129e5907eede7b47dbac1f2250b84",
+  "independent_review": "WAIVED_BY_A006"
+}
