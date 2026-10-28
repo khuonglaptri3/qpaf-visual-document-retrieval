@@ -1,7 +1,6 @@
 {
   "schema_version": 1,
-  "status": "DRAFT_SOURCE_PENDING",
-  "status_note": "Not approvable yet: source_commit and source_files_sha256 are filled only after the R7 runner is implemented, tested without test labels and committed. Approval comes after that.",
+  "status": "PENDING_RESEARCH_LEAD_APPROVAL",
   "task_id": "TEST-172",
   "roster_id": "R7",
   "owner": "Tấn Phát runs, Thanh verifies",
@@ -43,8 +42,32 @@
     "sealed_qrels_sha256": "05eaaa810e47d35d4eb06b3d36a05f03b002ec9d3c5ee6bce5fc27d2e336d154",
     "opened_before_this_run": false
   },
-  "source_commit": "PENDING",
-  "source_files_sha256": "PENDING: R7 runner, its tests, and the reused m12/m24/m25/m42/m44 modules",
+  "source_commit": "faf3555542897d12fab830e0d2725541cf3dfde9",
+  "source_files_sha256": {
+    "src/qpaf/r7/__init__.py": "8aec56a3df9f45f5dc70bb13f4b6f2a4bd993a74b3405c064b25eedc5c829b41",
+    "src/qpaf/r7/sealed.py": "6717d86bc345ef1fa2960f8951cd578c434727cc081975f865ba9c72cbec277c",
+    "src/qpaf/r7/runner.py": "f539eae146e7a42b933fe8afe19b1dba8433535787e56f245ea169509bd5d9d1",
+    "scripts/run_r7_test172.py": "11562172132517b0ee5e4065b8097215857a2263fac5f0256a0a265f689231db",
+    "tests/test_r7_test172.py": "29f1d636bff79b6cee7f1df83b15b17c32e8777669c86e8c65c427332f85a29a",
+    "src/qpaf/m44/common.py": "bb160e3bd2355cdf72c66982c6ee4e041520c96fe97f69a2080546b1fc54968c",
+    "src/qpaf/m44/evaluation.py": "e6f7e7251bb2a0a4ed9e54bff22c6bd945609e3433264a83afdcb277ab827971",
+    "src/qpaf/m44/oracle.py": "b9416d9479124af5c0609bd79eaf815c466d237ec9d93f3c0cd83a528311b701",
+    "src/qpaf/m42/active_primary.py": "0713c103e0bb6ede415f6f7e806c289b53728506e2bdadf8e4adab01ec71f79f",
+    "src/qpaf/m25/baselines.py": "7ac6ee18756b72afe6011522d8becd2a058724d43512acb6876f36c8f72bc1f6",
+    "scripts/audit_m35_paired.py": "f35a26de4c25b836eb64abdad459f52ff711b2d8ef8c7bae2331b513de906976",
+    "scripts/audit_m36_integrity.py": "2cc9925821ca6deee7e667fd5f6e2e617c88a828c15853c9340ba860ee71b2db",
+    "src/oracle_study/qpaf.py": "00ce93a76cf80d43b9df394550b1e6799de8285772b12811b19c768f7ea44d53",
+    "src/oracle_study/profiles.py": "8dec9449b6d54651a10dc51d22fc7245fadd35a48b6d988261392260ab3a0999",
+    "src/oracle_study/metrics.py": "bfa630a5450e23f5aab7269aedcb96172bc3096d16e1e3078af5e7b26f97e0f9",
+    "scripts/qpaf_candidate_oracle_optimized.py": "3322b024fa689e0b08ba2e9d6cd08347b5e889cbd26980c4cd19a3a002d4c4e5",
+    "src/qpaf/m24/dataset.py": "1b2681b163ce4a88a87eeb71ba31f417ee2a4469a9be49845c47d528eb6c5279",
+    "src/qpaf/m24/evaluator.py": "bfd25f331c5c377c708fd1d05f3e3edb85467488301e9658ea9bb486ef476742",
+    "src/qpaf/m24/checkpoint.py": "8e1d3882d1c33d16f68a0895b85f856c5519a07fcfcd38a07be6d32888fbbeb4",
+    "src/qpaf/m24/config.py": "5d730b9cb1ba8971ae972729401013e0bb0ccce81310615e2a9088963eb53841",
+    "src/qpaf/m24/trainer.py": "242fbcdc3a1cf44c81d29ef7be19aac256b29e5226f870cdf1cee889ff9df7d4",
+    "src/qpaf/m12/features.py": "86eb5d540d2330c0fec263d587581d2f159b77461df85c57f6ecaa64fafa40b6",
+    "src/qpaf/m12/model.py": "05c0370343a14b70b1db37e3d2bf6fd852c4ea67f7a967af52fa0ff498adcc3e"
+  },
   "authority_pins": {
     "evidence/M1_FINAL/02_protocol/frozen_protocol.md": "d29061fe4b6f3f9ed9844beab703909fa899c310637cbeef4bd3a9903478d08b",
     "evidence/revisions/m4.7-001/g2a_freeze.json": "26d9bab6e7d47fe7dd1e89f6bec2c95265641df5cde8d9bd25c867b9d3a73217",
@@ -166,7 +189,7 @@
   "claim_scope": "Sealed held-out evaluation of the G2A-frozen roster on ViDoSeek test 172, once. No seed, checkpoint, baseline, method or metric choice is made after any test number is seen. Oracle rows are context only. R6/R5 results played no part in what enters R7. ViMDoc stays NOT_RUN_DEFERRED; the claim is bounded to ViDoSeek.",
   "command": {
     "interpreter": ".venv/Scripts/python.exe",
-    "script": "PENDING: scripts/run_r7_test172.py",
+    "script": "scripts/run_r7_test172.py",
     "subcommand": "run",
     "authorization": "evidence/revisions/r7-001/authorization.json",
     "run_id": "<run_id>",
@@ -192,5 +215,9 @@
   "independent_review": {
     "reviewer": "Thanh",
     "status": "PENDING"
+  },
+  "preflight": {
+    "command": ".venv/Scripts/python.exe scripts/run_r7_test172.py preflight --authorization evidence/revisions/r7-001/authorization.json",
+    "result": "PASS on the draft: six checkpoints reproduce their validation predictions (max difference 0.0), baselines match M4.4 validation (0.0), 172 test queries scored label-free; sealed qrels not read"
   }
 }
