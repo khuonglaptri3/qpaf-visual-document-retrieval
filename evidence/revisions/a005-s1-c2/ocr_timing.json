@@ -1,0 +1,16 @@
+{
+  "call_id": "fc-01M61HVMMEFF89ZME3WSBY2NWS",
+  "empty_pages": 2,
+  "extract_seconds": 86.895108995,
+  "jpg": 35,
+  "ocr_jsonl_sha256": "2d5de2fbb30fbdbf99bde3f625ddc1ce01fd0b88836b51061ea9a381add046c1",
+  "ocr_parallel4_seconds": 40.25576200500001,
+  "ocr_seconds_per_page_parallel4": 0.31449814066406256,
+  "ocr_seconds_per_page_sequential": 1.1640049807578132,
+  "ocr_sequential_seconds": 148.9926375370001,
+  "output_dir": "a005/c2/fc-01M61HVMMEFF89ZME3WSBY2NWS",
+  "pages": 128,
+  "parallel_text_mismatches": 0,
+  "png": 93,
+  "tesseract_version": "tesseract 5.3.0"
+}

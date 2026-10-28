@@ -1,0 +1,19 @@
+{
+  "bge_load_seconds": 28.666902074000006,
+  "bge_passage_seconds": 2.494394843000009,
+  "bge_seconds_per_page": 0.01948745971093757,
+  "colqwen_load_seconds": 51.263077151000005,
+  "colqwen_passage_seconds": 73.56579080900002,
+  "colqwen_seconds_per_page": 0.5747327406953127,
+  "colqwen_tokens_per_page_mean": 682.390625,
+  "gpu": "NVIDIA L4",
+  "maxsim_cpu_pairs_per_second": 10159.145897585853,
+  "maxsim_cpu_seconds": 0.10079587500001708,
+  "maxsim_gpu_cpu_max_abs_difference": 0.0,
+  "maxsim_gpu_cpu_ranking_disagreements": 0,
+  "maxsim_gpu_pairs_per_second": 122206.80183538751,
+  "maxsim_gpu_seconds": 0.0083792389999644,
+  "maxsim_pairs": 1024,
+  "pages": 128,
+  "peak_cuda_allocated_gib": 7.715831279754639
+}
