@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "task_id": "M5.8",
+  "roster_id": "R9",
+  "owner": "Thanh",
+  "status": "NOT_RUN_DEFERRED",
+  "output_type": "explicit not-run record",
+  "g2a_ref": "evidence/revisions/m4.7-001/g2a_freeze.json",
+  "g2a_sha256": "26d9bab6e7d47fe7dd1e89f6bec2c95265641df5cde8d9bd25c867b9d3a73217",
+  "preregistration_ref": "evidence/revisions/m5.1-001/preregistration.json",
+  "preregistration_sha256": "45269eafe36907f99990027f067e724939da69db5ee351669d1e5e7854bf7e29",
+  "r8_summary_ref": "evidence/revisions/m5.7-001/summary.json",
+  "r8_summary_sha256": "03581b796936d8782a1643e858bbfbbe30939d17ffcd82045d7d5203f94e05f9",
+  "reason": "G2A leaves R9 deferred; no separately authorized and verified external benchmark score cache or sealed run is available. R8 quality gate also fails against the validation-selected baseline.",
+  "external_result_claimed": false,
+  "vimdoc_confirmation_status": "NOT_RUN_DEFERRED",
+  "claim_boundary": "All reported held-out results are ViDoSeek TEST-172 only; no ViMDoc or external generalization claim.",
+  "new_training_or_evaluation_executed": false,
+  "authorization_granted_by_this_record": false
+}
