@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "task_id": "M5.9",
+  "gate": "G3_ROBUSTNESS",
+  "confirmer": "Tấn Phát (Research Lead / Gate Owner)",
+  "recorded_by": "Claude at the Research Lead's request",
+  "recorded_at_utc": "2026-10-28T12:45:18Z",
+  "decision": "CONFIRMED",
+  "confirmed_g3_decision": "LIMITED-CLAIM",
+  "confirmed_reasons": ["BASELINE_NOT_BEATEN", "LATENCY_GATE_NOT_ESTABLISHED"],
+  "source": "Research Lead's reply in the Claude Code working session",
+  "confirmation_text": "I approved G3 for all limited-claim",
+  "context": "The reply answered Claude's request to confirm, or not, the M5.9 G3 decision LIMITED-CLAIM in decision.json, after Claude had listed every §5 check, the claim boundary and that the rule is post hoc.",
+  "decision_ref": "evidence/revisions/m5.9-001/decision.json",
+  "decision_sha256": "c87033bf935ded49cc3eea79b2de55d252a182662fb1e877a0871d79e531390c",
+  "criteria_sha256": "121eb15edd9a032c7e4c5505be80d70a97ea279ef71f730a6d2a1df91a235017",
+  "inputs_sha256": "4c294fab62ef3c69e4369646194d95c48df083b16c2ae5a9243c884054df9222",
+  "scope": "Confirms G3 LIMITED-CLAIM on ViDoSeek TEST-172 with all its claim limits: QPAF exceeds matched QARF across three seeds; no claim of beating train_fitted_static, no operational latency claim, no external or ViMDoc claim.",
+  "registry_event_id": "QPAF-REG-20261028-0005",
+  "authorizes_execution": false,
+  "test_labels_opened": false
+}

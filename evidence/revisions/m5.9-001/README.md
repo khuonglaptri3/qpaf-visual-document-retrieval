@@ -1,7 +1,11 @@
 # M5.9 / G3 — Robustness decision
 
 **Gate owner:** Tấn Phát (Research Lead / Gate Owner).
-**Decision:** `LIMITED-CLAIM`. Owner confirmation: `PENDING_RESEARCH_LEAD`.
+**Decision:** `LIMITED-CLAIM`, **confirmed** by the Research Lead in
+[`owner_confirmation.json`](owner_confirmation.json) and registry event
+`QPAF-REG-20261028-0005` in [`governance_events.jsonl`](governance_events.jsonl).
+`decision.json` is create-once and keeps its creation state, `PENDING_RESEARCH_LEAD`.
+The confirmation is added beside it and does not edit it.
 **Machine-readable rule:** [`criteria.json`](criteria.json), applied by
 [`scripts/decide_g3.py`](../../../scripts/decide_g3.py) to the evidence pinned in
 [`inputs.json`](inputs.json). The output is [`decision.json`](decision.json).
@@ -70,6 +74,13 @@ stable across seeds.
 - that QPAF meets the operational latency gate.
 - any external or ViMDoc generalization. M5.8 is `NOT_RUN_DEFERRED`, and M5.10/G3A
   bounds the claim separately.
+
+## Confirmation
+
+Tấn Phát (Research Lead / Gate Owner), in the working session on
+2026-10-28T12:45:18Z, recorded verbatim by Claude at their request:
+
+> I approved G3 for all limited-claim
 
 ## Re-run
 
