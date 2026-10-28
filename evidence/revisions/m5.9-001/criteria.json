@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "task_id": "M5.9",
+  "gate": "G3_ROBUSTNESS",
+  "status": "MAPPING_SELECTED_BY_RESEARCH_LEAD",
+  "mapping_selection": {
+    "selector": "Tấn Phát (Research Lead / Gate Owner)",
+    "question": "Which G3 token should failing frozen_protocol.md §5 item 4 (QPAF does not beat train_fitted_static) map to?",
+    "options_offered": ["LIMITED-CLAIM (Recommended)", "NO-GO"],
+    "selected_option": "LIMITED-CLAIM (Recommended)",
+    "selected_on": "2026-10-28",
+    "recorded_utc": "2026-10-28T12:37:11Z",
+    "recorded_by": "Claude at the Research Lead's request",
+    "source": "Research Lead's choice in Claude's structured question in the working session"
+  },
+  "query_count": 172,
+  "mean_delta_min_inclusive": 0.01,
+  "ci95_lower_min_exclusive": 0.0,
+  "baseline_mean_delta_min_exclusive": 0.0,
+  "top5_share_max_exclusive": 0.9,
+  "latency_ms_max_inclusive": 10.0,
+  "latency_min_measured_queries": 1000,
+  "cuda_gib_max_exclusive": 1.5,
+  "reload_abs_tolerance": 1e-07,
+  "primary_metric": "ViDoSeek page nDCG@10, per query, seed-averaged before the paired query bootstrap (M5.1 statistics)",
+  "accepted_decisions": {
+    "M5.1": ["ACCEPTED"],
+    "M5.2": ["ACCEPTED"],
+    "M5.3_QARF": ["ACCEPTED"],
+    "M5.3_QPAF": ["ACCEPTED"],
+    "M5.4_QARF": ["ACCEPTED"],
+    "M5.4_QPAF": ["ACCEPTED"],
+    "R7": ["ACCEPTED_WITH_NUMERICAL_PARITY_NOTE"],
+    "M5.7": ["ACCEPTED_WITH_NEGATIVE_BASELINE_RESULT"],
+    "M5.5": ["ACCEPTED_WITH_SCOPE_LIMIT"]
+  },
+  "decisions": ["GO", "LIMITED-CLAIM", "NO-GO", "BLOCKED"],
+  "precedence": [
+    "BLOCKED: a core-roster acceptance (M5.1, M5.2, M5.3 QARF/QPAF, M5.4 QARF/QPAF, R7, M5.7) is missing or names other report bytes; seeds differ from the three preregistered seeds; query count or W/T/L totals differ from 172; R7 replay differs; a co-strongest baseline contrast or any required value is missing or non-finite",
+    "NO-GO: seed-averaged QPAF - matched QARF mean delta < 0.01 or CI95 lower <= 0",
+    "LIMITED-CLAIM: any co-strongest baseline mean delta <= 0; top-5% positive-gain share >= 0.90; latency or memory gate failed or not established (accepted M5.5 measurement with >= 1000 measured queries); reload above 1e-7; non-finite outputs",
+    "GO: frozen_protocol.md §5 items 1-9 all pass"
+  ],
+  "claim_limits": {
+    "BASELINE_NOT_BEATEN": "No claim that QPAF improves on the strongest deployable baseline: QPAF does not exceed the validation-selected train_fitted_static on TEST-172; report this negative result.",
+    "GAIN_CONCENTRATION_AT_OR_ABOVE_MAX": "No stability claim: the top 5% of positive-gain queries carry at least 90% of the gain.",
+    "LATENCY_GATE_NOT_ESTABLISHED": "No operational latency claim: the accepted measurement does not meet the 1,000 measured-query rule in metric_policy.md §5.",
+    "LATENCY_ABOVE_MAX": "No operational latency claim: median added fusion latency exceeds 10.0 ms/query.",
+    "CUDA_GATE_NOT_ESTABLISHED": "No operational memory claim: no accepted learned-fusion CUDA measurement.",
+    "CUDA_AT_OR_ABOVE_MAX": "No operational memory claim: peak learned-fusion CUDA allocation is at least 1.50 GiB.",
+    "RELOAD_ABOVE_TOLERANCE": "No deployability claim: fresh-process reload differs by more than 1e-7.",
+    "NONFINITE_OUTPUTS": "No deployability claim: a run produced non-finite values."
+  },
+  "post_hoc": true,
+  "post_hoc_note": "Written on 2026-10-28 after the accepted M5.7 result was known. It adds no threshold: every number comes from frozen_protocol.md §5 and metric_policy.md §5. The only new element is the token mapping, which the Research Lead chose.",
+  "sources": [
+    "evidence/M1_FINAL/02_protocol/frozen_protocol.md#5",
+    "evidence/M1_FINAL/02_protocol/statistical_policy.md#6",
+    "evidence/M1_FINAL/02_protocol/metric_policy.md#5",
+    "evidence/M1_FINAL/02_protocol/seed_policy.md#4",
+    "evidence/revisions/m4.7-001/g2a_freeze.json",
+    "evidence/revisions/m5.1-001/preregistration.json"
+  ]
+}
