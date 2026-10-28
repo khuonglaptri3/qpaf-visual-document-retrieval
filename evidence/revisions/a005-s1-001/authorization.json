@@ -15,9 +15,18 @@
   },
   "modal_workspace": "tranthanhzt123321",
   "estimated_usd": 23,
-  "source_commit": "f6f918c0d6dce4f38704101bedcd99f0a58f5b4d",
+  "source_commit": "767e1b1734b4778376d8e45c42377fa125de9127",
+  "attempts": [
+    {
+      "source_commit": "f6f918c0d6dce4f38704101bedcd99f0a58f5b4d",
+      "modal_app": "ap-nNTucSdlgzCbt9y9VIsKMA",
+      "outcome": "prepare SUCCESS (queries 9c118523..., dev qrels aab40d99..., sealed confirmation qrels ce9ad0fb...). OCR shard 05 was preempted by Modal; the automatic restart met its own create-once directory and failed, and starmap cancelled the other 15 shards before any finished. No OCR, score or label output was used.",
+      "estimated_spend_usd": 0.5
+    }
+  ],
+  "attempt_2_change": "Same computation. An attempt directory without _SUCCESS is renamed to <name>.incomplete-<unix time> and kept; the shard then restarts. OCR and encoding are deterministic, so a restart cannot change results. Shard failures are collected with return_exceptions=True instead of cancelling siblings.",
   "source_files_sha256": {
-    "a005_stage1_modal.py": "4678e2c745606d34395b4f3ccd7df1fffcc6a95fc870912282038639b2807444",
+    "a005_stage1_modal.py": "66a877bb7205236aeb084067e97005be5e076becbe03cc1dfb9df32b2af51ac5",
     "src/qpaf/a005/stage1.py": "1e548aedd7f23161fccece1b4dde129e1627d5566a33c9f17558b310a1002e29",
     "src/qpaf/a005/candidates.py": "b34e3118a1cdc940ee32332f9db1832923fa456931b3116a8311cfb73c5c9cc9",
     "src/qpaf/a005/__init__.py": "5a970434fcc4ac6fc2246c06639f821f64a4066d40ec8a146ebc82cfe74890df",
