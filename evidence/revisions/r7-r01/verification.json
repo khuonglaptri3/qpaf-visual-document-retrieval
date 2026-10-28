@@ -1,0 +1,84 @@
+{
+  "status": "PASS_WITH_NUMERICAL_PARITY_NOTE",
+  "run_id": "RUN-QPAF-R7-TEST-001-20261028T034438Z-A01",
+  "manifest_sha256": "b4d3d7cf5ac6e8cf6fd622195dad0c57170eb443c48f84ce99c0869ccf42fd1d",
+  "authorization_sha256": "dc1d9ff9d9288ad87eac24649ef7c2f315263e3f051e763b06dd95ed0a0db5d9",
+  "prediction_seal_sha256": "52c207449fbf057cbe1ad07e4449612598fa8aa9c844975184207283f1b36fcd",
+  "query_count": 172,
+  "candidate_count": 83119,
+  "source_verifier": "FAILS_EXACT_FLOAT_COMPARISON_ON_THIS_CPU",
+  "score_tolerance": 1e-07,
+  "parity": {
+    "bm25": {
+      "max_abs_difference": 0.0,
+      "nonidentical_scores": 0,
+      "ranking_disagreements": 0
+    },
+    "bge_m3": {
+      "max_abs_difference": 0.0,
+      "nonidentical_scores": 0,
+      "ranking_disagreements": 0
+    },
+    "colqwen25": {
+      "max_abs_difference": 0.0,
+      "nonidentical_scores": 0,
+      "ranking_disagreements": 0
+    },
+    "uniform_combsum": {
+      "max_abs_difference": 0.0,
+      "nonidentical_scores": 0,
+      "ranking_disagreements": 0
+    },
+    "rrf_k60": {
+      "max_abs_difference": 0.0,
+      "nonidentical_scores": 0,
+      "ranking_disagreements": 0
+    },
+    "train_fitted_static": {
+      "max_abs_difference": 0.0,
+      "nonidentical_scores": 0,
+      "ranking_disagreements": 0
+    },
+    "learned_qarf": {
+      "max_abs_difference": 2.220446049250313e-16,
+      "nonidentical_scores": 20743,
+      "ranking_disagreements": 0
+    },
+    "qarf_20260820": {
+      "max_abs_difference": 2.220446049250313e-16,
+      "nonidentical_scores": 20743,
+      "ranking_disagreements": 0
+    },
+    "qarf_20260821": {
+      "max_abs_difference": 4.440892098500626e-16,
+      "nonidentical_scores": 14546,
+      "ranking_disagreements": 0
+    },
+    "qarf_20260822": {
+      "max_abs_difference": 3.3306690738754696e-16,
+      "nonidentical_scores": 15374,
+      "ranking_disagreements": 0
+    },
+    "qpaf_20260820": {
+      "max_abs_difference": 3.3306690738754696e-16,
+      "nonidentical_scores": 14355,
+      "ranking_disagreements": 0
+    },
+    "qpaf_20260821": {
+      "max_abs_difference": 3.3306690738754696e-16,
+      "nonidentical_scores": 17499,
+      "ranking_disagreements": 0
+    },
+    "qpaf_20260822": {
+      "max_abs_difference": 4.440892098500626e-16,
+      "nonidentical_scores": 14439,
+      "ranking_disagreements": 0
+    }
+  },
+  "per_query_metric_max_abs_difference": 0.0,
+  "aggregate_metrics_replayed": true,
+  "per_seed_statistics_replayed": true,
+  "oracle_details_replayed": true,
+  "test_labels_read_by_independent_audit": true,
+  "new_training_or_r7_execution": false
+}

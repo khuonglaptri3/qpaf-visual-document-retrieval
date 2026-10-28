@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "task_id": "M5.7",
+  "roster_id": "R8",
+  "owner": "Thanh (@xThanhSaDec)",
+  "recorded_by": "Codex at Thanh explicit request",
+  "recorded_at_utc": "2026-10-28T09:32:27Z",
+  "decision": "ACCEPTED_WITH_NEGATIVE_BASELINE_RESULT",
+  "confirmation_text": "Có, ghi Thanh chấp nhận với các giới hạn trên",
+  "summary_ref": "evidence/revisions/m5.7-001/summary.json",
+  "summary_sha256": "03581b796936d8782a1643e858bbfbbe30939d17ffcd82045d7d5203f94e05f9",
+  "r7_review_ref": "evidence/revisions/r7-r01/verification.json",
+  "r7_review_sha256": "fb98aa2e762e3e3a7e477a99286bd030d55d897e9c8e74033e648ae59972b62b",
+  "accepted_scope": "Three-seed seed-averaged paired TEST-172 analysis. QPAF exceeds matched QARF but does not exceed validation-selected train_fitted_static; overall quality gate fails. No operational or external-benchmark acceptance.",
+  "human_confirmation_in_working_session": true
+}

@@ -1,0 +1,14 @@
+{
+  "coverage": {
+    "gate": "reported only; checking it after the opening could not change the run",
+    "macro_relevant_page_recall": 1.0,
+    "query_count": 172,
+    "uncovered_queries": 0
+  },
+  "new_training_executed": false,
+  "sealed_qrels_reads": 1,
+  "test_labels_deserialized": true,
+  "train_qrels_used": false,
+  "validation_qrels_deserialized": true,
+  "vimdoc_accessed": false
+}

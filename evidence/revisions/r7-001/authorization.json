@@ -1,0 +1,225 @@
+{
+  "schema_version": 1,
+  "status": "APPROVED",
+  "task_id": "TEST-172",
+  "roster_id": "R7",
+  "owner": "Tấn Phát runs, Thanh verifies",
+  "experiment_id": "QPAF-R7-TEST-001",
+  "run_id": "RUN-QPAF-R7-TEST-001-20261028T034438Z-A01",
+  "scope": [
+    "R7-00",
+    "R7-01",
+    "R7-02",
+    "R7-03",
+    "R7-04",
+    "R7-05"
+  ],
+  "scope_detail": {
+    "R7-00": "Pre-open integrity, before any test label is read: every pin below matches; each of the six checkpoints reloads in a fresh process within 1e-7 and reproduces its accepted validation predictions; the seven baselines reproduce the M4.4 validation table within 1e-12. Any failure stops the run with test labels unopened.",
+    "R7-01": "Score all 172 test queries for every row below and write test predictions with their SHA-256 to the run directory before the sealed qrels are deserialized.",
+    "R7-02": "The seven frozen M4.2 deployable baselines: bm25, bge_m3, colqwen25, uniform_combsum, rrf_k60, train_fitted_static [0.0, 0.1, 0.9], learned_qarf (seed 20260820). No refit, no reselection.",
+    "R7-03": "QARF x3 and QPAF x3 from the six accepted checkpoints (best.pt) listed in method_checkpoints.",
+    "R7-04": "Oracle context: the six M4.4 oracle rows (global/qarf/qpaf x W7/W66) recomputed on test. They use test labels, are non-deployable upper bounds and never selectable.",
+    "R7-05": "Open the sealed qrels once; compute per-query and aggregate metrics and the per-seed paired statistics below. Seed-averaged statistics belong to R8/M5.7."
+  },
+  "permissions": {
+    "device": "cpu",
+    "modal": false,
+    "gpu": false,
+    "training": false,
+    "retriever_inference": false,
+    "test_labels": "ViDoSeek test 172 sealed qrels, deserialized once, only in R7-05",
+    "vimdoc": false,
+    "network": false
+  },
+  "held_out": {
+    "dataset": "Qiuchen-Wang/ViDoSeek",
+    "split": "test",
+    "query_count": 172,
+    "ids": "results/m3.1/RUN-QPAF-M3_1-SEAL-001-20261021T142631Z-A01/inputs/splits/test_ids.txt",
+    "ids_sha256": "d34210f901759a4f174da0c6c2e9b810616dcb33a71a0bd128a25d5d8d12e6f6",
+    "sealed_qrels": "results/m3.1/RUN-QPAF-M3_1-SEAL-001-20261021T142631Z-A01/inputs/qrels_test_sealed.json",
+    "sealed_qrels_sha256": "05eaaa810e47d35d4eb06b3d36a05f03b002ec9d3c5ee6bce5fc27d2e336d154",
+    "opened_before_this_run": false
+  },
+  "source_commit": "faf3555542897d12fab830e0d2725541cf3dfde9",
+  "source_files_sha256": {
+    "src/qpaf/r7/__init__.py": "8aec56a3df9f45f5dc70bb13f4b6f2a4bd993a74b3405c064b25eedc5c829b41",
+    "src/qpaf/r7/sealed.py": "6717d86bc345ef1fa2960f8951cd578c434727cc081975f865ba9c72cbec277c",
+    "src/qpaf/r7/runner.py": "f539eae146e7a42b933fe8afe19b1dba8433535787e56f245ea169509bd5d9d1",
+    "scripts/run_r7_test172.py": "11562172132517b0ee5e4065b8097215857a2263fac5f0256a0a265f689231db",
+    "tests/test_r7_test172.py": "29f1d636bff79b6cee7f1df83b15b17c32e8777669c86e8c65c427332f85a29a",
+    "src/qpaf/m44/common.py": "bb160e3bd2355cdf72c66982c6ee4e041520c96fe97f69a2080546b1fc54968c",
+    "src/qpaf/m44/evaluation.py": "e6f7e7251bb2a0a4ed9e54bff22c6bd945609e3433264a83afdcb277ab827971",
+    "src/qpaf/m44/oracle.py": "b9416d9479124af5c0609bd79eaf815c466d237ec9d93f3c0cd83a528311b701",
+    "src/qpaf/m42/active_primary.py": "0713c103e0bb6ede415f6f7e806c289b53728506e2bdadf8e4adab01ec71f79f",
+    "src/qpaf/m25/baselines.py": "7ac6ee18756b72afe6011522d8becd2a058724d43512acb6876f36c8f72bc1f6",
+    "scripts/audit_m35_paired.py": "f35a26de4c25b836eb64abdad459f52ff711b2d8ef8c7bae2331b513de906976",
+    "scripts/audit_m36_integrity.py": "2cc9925821ca6deee7e667fd5f6e2e617c88a828c15853c9340ba860ee71b2db",
+    "src/oracle_study/qpaf.py": "00ce93a76cf80d43b9df394550b1e6799de8285772b12811b19c768f7ea44d53",
+    "src/oracle_study/profiles.py": "8dec9449b6d54651a10dc51d22fc7245fadd35a48b6d988261392260ab3a0999",
+    "src/oracle_study/metrics.py": "bfa630a5450e23f5aab7269aedcb96172bc3096d16e1e3078af5e7b26f97e0f9",
+    "scripts/qpaf_candidate_oracle_optimized.py": "3322b024fa689e0b08ba2e9d6cd08347b5e889cbd26980c4cd19a3a002d4c4e5",
+    "src/qpaf/m24/dataset.py": "1b2681b163ce4a88a87eeb71ba31f417ee2a4469a9be49845c47d528eb6c5279",
+    "src/qpaf/m24/evaluator.py": "bfd25f331c5c377c708fd1d05f3e3edb85467488301e9658ea9bb486ef476742",
+    "src/qpaf/m24/checkpoint.py": "8e1d3882d1c33d16f68a0895b85f856c5519a07fcfcd38a07be6d32888fbbeb4",
+    "src/qpaf/m24/config.py": "5d730b9cb1ba8971ae972729401013e0bb0ccce81310615e2a9088963eb53841",
+    "src/qpaf/m24/trainer.py": "242fbcdc3a1cf44c81d29ef7be19aac256b29e5226f870cdf1cee889ff9df7d4",
+    "src/qpaf/m12/features.py": "86eb5d540d2330c0fec263d587581d2f159b77461df85c57f6ecaa64fafa40b6",
+    "src/qpaf/m12/model.py": "05c0370343a14b70b1db37e3d2bf6fd852c4ea67f7a967af52fa0ff498adcc3e"
+  },
+  "authority_pins": {
+    "evidence/M1_FINAL/02_protocol/frozen_protocol.md": "d29061fe4b6f3f9ed9844beab703909fa899c310637cbeef4bd3a9903478d08b",
+    "evidence/revisions/m4.7-001/g2a_freeze.json": "26d9bab6e7d47fe7dd1e89f6bec2c95265641df5cde8d9bd25c867b9d3a73217",
+    "evidence/revisions/m4.7-001/owner_confirmation.json": "5f80b4312188721dc2c2033a85ce1a9631bffa32479c576e0500471e622b95e6",
+    "evidence/revisions/m5.1-001/preregistration.json": "45269eafe36907f99990027f067e724939da69db5ee351669d1e5e7854bf7e29",
+    "evidence/revisions/m5.1-001/owner_confirmation.json": "c9fa0a0ef637362a30f6dcc38f86cd59916620bd714b3d6330afa76de4e80bef",
+    "evidence/revisions/m5.2-001/README.md": "60e0df9c152f8d9b5eab84d21260f6ffae252fc6239029a653d45a7c2851553b",
+    "evidence/revisions/m5.3-r01/owner_confirmation.json": "824f2d16c816ed422ebf1a46dfcdf45c3e36e683d674d54a463ea9a56af93e35",
+    "evidence/revisions/m5.3-r02/owner_confirmation.json": "c664495ba96ecded95633d173087dffa1803385d41ecdcdf436a4e050472612b",
+    "evidence/revisions/m5.4-r01/owner_confirmation.json": "9e3631227249f14edcf2155d0684ba4913f836a344ba71117ac94f975410566c",
+    "evidence/revisions/m5.4-r02/owner_confirmation.json": "0bdcc7d1975dbb92cd1b38538a5a2177c5ca7d9e0385664e6c05e1ac6db9e6ba",
+    "results/m4.2/RUN-QPAF-M4_2-CAL-001-20261023T150631Z-A01/manifest.json": "4752eef37d7c6cf73eb36717bd352e21192d112b1464a3f5a61dab86bcc76b86",
+    "results/m4.2/RUN-QPAF-M4_2-CAL-001-20261023T150631Z-A01/baseline_contracts.json": "fa91905406f41fcff3bfd3fcb9e86b9169a7526ea3eb17c8df74ae5f1a247dcf",
+    "results/m4.2/RUN-QPAF-M4_2-CAL-001-20261023T150631Z-A01/shared_inputs.json": "51eaa23303cb7086c3709249f2b400172ee006b942f26f47ddacc80b508c3dd0",
+    "results/m4.4/RUN-QPAF-M4_4-MTH-001-20261023T172102Z-A01/manifest.json": "aa2ab51814c883b5552b1b45136c1f25dd7d9921a074891f4ae0397f4b03e4a7",
+    "results/m4.4/RUN-QPAF-M4_4-ORC-001-20261023T172102Z-A01/manifest.json": "6d796a27537c191d5b39436cf6fcaffa9e58b4c01628d9558da6ba261739b5a2"
+  },
+  "input_pins": {
+    "results/m3.1/RUN-QPAF-M3_1-SEAL-001-20261021T142631Z-A01/inputs/shared_base.toml": "3e58a867d11cebf72970cf0c141a90822cd7cbbdad65fb1e081cb14fa4889b58",
+    "results/m3.1/RUN-QPAF-M3_1-SEAL-001-20261021T142631Z-A01/inputs/score_cache.parquet": "56d0c82efda9264c117611ddd7135fe2384b68a3ec60fbdfd80fb964c386622b",
+    "results/m3.1/RUN-QPAF-M3_1-SEAL-001-20261021T142631Z-A01/inputs/query_texts.json": "e7994373c9fd5157cde0fb0c5a1440c37c275b85fa19b2b0b566f61d584c4ab4",
+    "results/m3.1/RUN-QPAF-M3_1-SEAL-001-20261021T142631Z-A01/inputs/qrels_development.json": "691b6bc4ada3bc64fe3c408fe32498b04c7f30900eadb39ae09ddbe29aea302c",
+    "results/m3.1/RUN-QPAF-M3_1-SEAL-001-20261021T142631Z-A01/inputs/splits/train_ids.txt": "61dfe867c27b91a0a96594440b0f0e5ecf51501da0fcecdac94badaf16962191",
+    "results/m3.1/RUN-QPAF-M3_1-SEAL-001-20261021T142631Z-A01/inputs/splits/val_ids.txt": "46f8af5853942f6697cc3a995347a1832206212e93ff8aa87acb1775b3a060b4",
+    "results/m3.1/RUN-QPAF-M3_1-SEAL-001-20261021T142631Z-A01/inputs/splits/test_ids.txt": "d34210f901759a4f174da0c6c2e9b810616dcb33a71a0bd128a25d5d8d12e6f6"
+  },
+  "method_checkpoints": {
+    "QARF/20260820": {
+      "attempt": "results/m3.2/RUN-QPAF-M3_2-MTH-001-20261022T035229Z-A01/QARF/20261022T040759-ff3934df",
+      "checkpoint": "results/m3.2/RUN-QPAF-M3_2-MTH-001-20261022T035229Z-A01/QARF/20261022T040759-ff3934df/checkpoints/best.pt",
+      "checkpoint_sha256": "e44ac1a4f3887700a70914fdba8a3e7b35330244e746253d1cd828508be30914",
+      "validation_predictions_sha256": "658c8162b690bff751609298aa8e77bf80cdf035cdbb45711ca5f1050407ab1e",
+      "validation_per_query_sha256": "e7318a489f7fee80071ba56ed9477b94c21ff6cfc2f7bf7ed5600e67b881c777",
+      "acceptance_event": "QPAF-REG-20261022-0022"
+    },
+    "QPAF/20260820": {
+      "attempt": "results/m3.4/RUN-QPAF-M3_4-MTH-001-20261022T112102Z-A01/QPAF/20261022T112355-77b54aa0",
+      "checkpoint": "results/m3.4/RUN-QPAF-M3_4-MTH-001-20261022T112102Z-A01/QPAF/20261022T112355-77b54aa0/checkpoints/best.pt",
+      "checkpoint_sha256": "e4b00ab49e186fffe8b369e26491873304b61177c11fd2ce0f455158e30e5c8e",
+      "validation_predictions_sha256": "95ba3ed8e4a395bf0f888866a0e33abec43375d381f37dfa66195e65b7d9db5b",
+      "validation_per_query_sha256": "02abf2e14298d042b38f98671cad7f0a6ac7e2f9921237c428771a19a3d52b66",
+      "acceptance_event": "QPAF-REG-20261022-0026"
+    },
+    "QARF/20260821": {
+      "attempt": "results/m5.3/RUN-QPAF-M5_3-MTH-001-20261025T135954Z-A01/QARF/20261025T140512-0de4dd1d",
+      "checkpoint": "results/m5.3/RUN-QPAF-M5_3-MTH-001-20261025T135954Z-A01/QARF/20261025T140512-0de4dd1d/checkpoints/best.pt",
+      "checkpoint_sha256": "3924f3ef204090bdd586447891900752ad67451c3c2857ae0bac6bb501860626",
+      "validation_predictions_sha256": "84bbff7fa7794afbd7029c5405869c658b62c3d3c890fd78ed955dc479ca7611",
+      "validation_per_query_sha256": "fe445556a0aa1f09de3d410c9eb85d3523cbdaf0843ccd9cb69c5564aa9866da",
+      "acceptance_event": "QPAF-REG-20261026-0001"
+    },
+    "QPAF/20260821": {
+      "attempt": "results/m5.3/RUN-QPAF-M5_3-MTH-002-20261026T025155Z-A01/QPAF/20261026T025443-a29ae705",
+      "checkpoint": "results/m5.3/RUN-QPAF-M5_3-MTH-002-20261026T025155Z-A01/QPAF/20261026T025443-a29ae705/checkpoints/best.pt",
+      "checkpoint_sha256": "6a379d5eea7f2efe4be5fe0d93a64360a674c29ca5b1c53f1590c692cc760a66",
+      "validation_predictions_sha256": "4d6fe2c6829214a09c35052cdd4580f16ae86654fe637879371060386294618f",
+      "validation_per_query_sha256": "04105bddc465f2b26e305953531261db0b39b544a37ca34f889565ec9e0ec579",
+      "acceptance_event": "QPAF-REG-20261026-0009"
+    },
+    "QARF/20260822": {
+      "attempt": "results/m5.4/RUN-QPAF-M5_4-MTH-001-20261025T154818Z-A01/QARF/20261025T155859-f0aefa1c",
+      "checkpoint": "results/m5.4/RUN-QPAF-M5_4-MTH-001-20261025T154818Z-A01/QARF/20261025T155859-f0aefa1c/checkpoints/best.pt",
+      "checkpoint_sha256": "33d8c3f279b73098cfde9eda3949fe67c23ac56a6e72a65c7777b733adbee31a",
+      "validation_predictions_sha256": "43e05c4b12bf4bed1f45f72a940d94e3f09375f9774c7415d8b9ea0e8e6c1e9d",
+      "validation_per_query_sha256": "582c34e55ed45805bbc89acc0498771016857a5f52567d1da67e0fbd0b313598",
+      "acceptance_event": "QPAF-REG-20261026-0002"
+    },
+    "QPAF/20260822": {
+      "attempt": "results/m5.4/RUN-QPAF-M5_4-MTH-002-20261026T025155Z-A01/QPAF/20261026T025834-242457dc",
+      "checkpoint": "results/m5.4/RUN-QPAF-M5_4-MTH-002-20261026T025155Z-A01/QPAF/20261026T025834-242457dc/checkpoints/best.pt",
+      "checkpoint_sha256": "6017e3f186dce5496153421e7b982f1ec253376bc84ac1387cc96d48e25c0bea",
+      "validation_predictions_sha256": "8667b6abc44c861180f8e506656ff8ab4a8223723e87df035eefc0d46a22874a",
+      "validation_per_query_sha256": "117dd7a4f216313e7cddcdc64694175355c5df6793cbaff1973a510acfebd4cd",
+      "acceptance_event": "QPAF-REG-20261026-0010"
+    }
+  },
+  "runtime": {
+    "python": "3.13.7",
+    "torch": "2.11.0+cpu",
+    "numpy": "2.5.4",
+    "pandas": "3.0.6",
+    "pyarrow": "26.0.0"
+  },
+  "hardware": "Local CPU only (Windows 11); float64; 1 thread; deterministic algorithms",
+  "limits": {
+    "wall_time_seconds": 3600,
+    "invocations": 1,
+    "automatic_retries": 0
+  },
+  "evaluation": {
+    "evaluator": "qpaf.m24.evaluator.evaluate",
+    "evaluator_sha256": "bfd25f331c5c377c708fd1d05f3e3edb85467488301e9658ea9bb486ef476742",
+    "oracle_sha256": "b9416d9479124af5c0609bd79eaf815c466d237ec9d93f3c0cd83a528311b701",
+    "unit": "page",
+    "rank_tie_break": "page_id_ascending",
+    "primary_metric": "nDCG@10",
+    "secondary_metrics": [
+      "MRR@10",
+      "Recall@1",
+      "Recall@3"
+    ]
+  },
+  "statistics": {
+    "contrasts_per_seed": [
+      "QPAF_s - QARF_s",
+      "QPAF_s - train_fitted_static"
+    ],
+    "pairing": "test query (172)",
+    "bootstrap_resamples": 10000,
+    "rng": "numpy default_rng(20260820)",
+    "ci": "percentile 95%",
+    "tie": "|delta| <= 1e-12",
+    "also_report": [
+      "W/T/L",
+      "top-5% positive-gain share"
+    ],
+    "seed_aggregation": "not in R7; R8/M5.7 averages the three seeds per query before the bootstrap"
+  },
+  "claim_scope": "Sealed held-out evaluation of the G2A-frozen roster on ViDoSeek test 172, once. No seed, checkpoint, baseline, method or metric choice is made after any test number is seen. Oracle rows are context only. R6/R5 results played no part in what enters R7. ViMDoc stays NOT_RUN_DEFERRED; the claim is bounded to ViDoSeek.",
+  "command": {
+    "interpreter": ".venv/Scripts/python.exe",
+    "script": "scripts/run_r7_test172.py",
+    "subcommand": "run",
+    "authorization": "evidence/revisions/r7-001/authorization.json",
+    "run_id": "<run_id>",
+    "external_pin_argument": "--expected-authorization-sha256, supplied outside this file"
+  },
+  "stop_conditions": [
+    "source, config, input, checkpoint or authority hash drift",
+    "tracked working tree not clean",
+    "any R7-00 check fails (test labels stay unopened)",
+    "test predictions not written and hashed before the sealed qrels are read",
+    "non-finite score or prediction",
+    "test ID set differs from the pinned 172 IDs",
+    "wall time above 3600 s",
+    "run namespace already exists"
+  ],
+  "failure_rule": "If the run stops after R7-05 has begun, it is not rerun under this authorization. The failure is recorded as is, and any rerun needs an amendment and Thanh's review first.",
+  "approval": {
+    "approver": "Tấn Phát (Research Lead, R7 runner)",
+    "approval_text": "Tôi duyệt R7",
+    "approved_utc": "2026-10-28T03:44:38Z",
+    "timestamp_basis": "Time the Research Lead's reply was recorded in the working session",
+    "approved_record": "This file at commit d12d9aa (PENDING_RESEARCH_LEAD_APPROVAL), whose scope, single invocation, no-retry rule and TEST-172 opening were set out to the Research Lead before the reply",
+    "recorded_by": "Claude Code at the Research Lead's explicit request; the text above is quoted, not composed"
+  },
+  "independent_review": {
+    "reviewer": "Thanh",
+    "status": "PENDING"
+  },
+  "preflight": {
+    "command": ".venv/Scripts/python.exe scripts/run_r7_test172.py preflight --authorization evidence/revisions/r7-001/authorization.json",
+    "result": "PASS on the draft: six checkpoints reproduce their validation predictions (max difference 0.0), baselines match M4.4 validation (0.0), 172 test queries scored label-free; sealed qrels not read"
+  }
+}

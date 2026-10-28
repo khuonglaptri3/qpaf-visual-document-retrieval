@@ -1,0 +1,109 @@
+{
+  "authorization_sha256": "dc1d9ff9d9288ad87eac24649ef7c2f315263e3f051e763b06dd95ed0a0db5d9",
+  "elapsed_seconds": 255.83065090002492,
+  "experiment_id": "QPAF-R7-TEST-001",
+  "files": [
+    {
+      "path": "access.json",
+      "sha256": "8bf1fb5e21b6d8a70836aaab0a59e6c7473d7cca0a00b367a1027f9661e106b3",
+      "size_bytes": 394
+    },
+    {
+      "path": "metrics_table.json",
+      "sha256": "829787ace0563c11defb6692000b2bb481522f6cd24d1d70b99776070638ff74",
+      "size_bytes": 4480
+    },
+    {
+      "path": "oracle_details.json",
+      "sha256": "ede0eb70e601c085d67b639825c0633eb4cc917219192e9b5c364212a3e444c7",
+      "size_bytes": 78372
+    },
+    {
+      "path": "oracle_predictions.csv.gz",
+      "sha256": "0e964371e26043a2da9df4eba6962bf51be150e3bfda3bd2486c094029a8b735",
+      "size_bytes": 3836676
+    },
+    {
+      "path": "paired_per_seed.json",
+      "sha256": "2b2ee10f6a61f4d49906fe1f4067ceb0a73dbb0b3db563eedd2273a08e4a8c6f",
+      "size_bytes": 12357
+    },
+    {
+      "path": "per_query_metrics.csv",
+      "sha256": "f7a56761aab23004aaebaca07be6054da0c7b041ef3f9f89458db152b1410952",
+      "size_bytes": 281567
+    },
+    {
+      "path": "prediction_seal.json",
+      "sha256": "ae789a8a6075a398b934d80bb7dac1a727c6743f282231a7c882f210a6c83581",
+      "size_bytes": 224
+    },
+    {
+      "path": "preflight.json",
+      "sha256": "5d0c6aa2fbcb772fafdae3c66fabd694090c38a5d44ee40179ecdae4894bb897",
+      "size_bytes": 1550
+    },
+    {
+      "path": "test_predictions.csv.gz",
+      "sha256": "52c207449fbf057cbe1ad07e4449612598fa8aa9c844975184207283f1b36fcd",
+      "size_bytes": 10364224
+    }
+  ],
+  "git_head": "f3bf57d6a87e96e710108d871bd479704d19e8a1",
+  "prediction_seal_sha256": "52c207449fbf057cbe1ad07e4449612598fa8aa9c844975184207283f1b36fcd",
+  "roster_id": "R7",
+  "run_id": "RUN-QPAF-R7-TEST-001-20261028T034438Z-A01",
+  "runtime": {
+    "numpy": "2.5.4",
+    "pandas": "3.0.6",
+    "pyarrow": "26.0.0",
+    "python": "3.13.7",
+    "torch": "2.11.0+cpu"
+  },
+  "schema_version": 1,
+  "source_commit": "faf3555542897d12fab830e0d2725541cf3dfde9",
+  "source_hashes": {
+    "scripts/audit_m35_paired.py": "f35a26de4c25b836eb64abdad459f52ff711b2d8ef8c7bae2331b513de906976",
+    "scripts/audit_m36_integrity.py": "2cc9925821ca6deee7e667fd5f6e2e617c88a828c15853c9340ba860ee71b2db",
+    "scripts/qpaf_candidate_oracle_optimized.py": "3322b024fa689e0b08ba2e9d6cd08347b5e889cbd26980c4cd19a3a002d4c4e5",
+    "scripts/run_r7_test172.py": "11562172132517b0ee5e4065b8097215857a2263fac5f0256a0a265f689231db",
+    "src/oracle_study/metrics.py": "bfa630a5450e23f5aab7269aedcb96172bc3096d16e1e3078af5e7b26f97e0f9",
+    "src/oracle_study/profiles.py": "8dec9449b6d54651a10dc51d22fc7245fadd35a48b6d988261392260ab3a0999",
+    "src/oracle_study/qpaf.py": "00ce93a76cf80d43b9df394550b1e6799de8285772b12811b19c768f7ea44d53",
+    "src/qpaf/m12/features.py": "86eb5d540d2330c0fec263d587581d2f159b77461df85c57f6ecaa64fafa40b6",
+    "src/qpaf/m12/model.py": "05c0370343a14b70b1db37e3d2bf6fd852c4ea67f7a967af52fa0ff498adcc3e",
+    "src/qpaf/m24/checkpoint.py": "8e1d3882d1c33d16f68a0895b85f856c5519a07fcfcd38a07be6d32888fbbeb4",
+    "src/qpaf/m24/config.py": "5d730b9cb1ba8971ae972729401013e0bb0ccce81310615e2a9088963eb53841",
+    "src/qpaf/m24/dataset.py": "1b2681b163ce4a88a87eeb71ba31f417ee2a4469a9be49845c47d528eb6c5279",
+    "src/qpaf/m24/evaluator.py": "bfd25f331c5c377c708fd1d05f3e3edb85467488301e9658ea9bb486ef476742",
+    "src/qpaf/m24/trainer.py": "242fbcdc3a1cf44c81d29ef7be19aac256b29e5226f870cdf1cee889ff9df7d4",
+    "src/qpaf/m25/baselines.py": "7ac6ee18756b72afe6011522d8becd2a058724d43512acb6876f36c8f72bc1f6",
+    "src/qpaf/m42/active_primary.py": "0713c103e0bb6ede415f6f7e806c289b53728506e2bdadf8e4adab01ec71f79f",
+    "src/qpaf/m44/common.py": "bb160e3bd2355cdf72c66982c6ee4e041520c96fe97f69a2080546b1fc54968c",
+    "src/qpaf/m44/evaluation.py": "e6f7e7251bb2a0a4ed9e54bff22c6bd945609e3433264a83afdcb277ab827971",
+    "src/qpaf/m44/oracle.py": "b9416d9479124af5c0609bd79eaf815c466d237ec9d93f3c0cd83a528311b701",
+    "src/qpaf/r7/__init__.py": "8aec56a3df9f45f5dc70bb13f4b6f2a4bd993a74b3405c064b25eedc5c829b41",
+    "src/qpaf/r7/runner.py": "f539eae146e7a42b933fe8afe19b1dba8433535787e56f245ea169509bd5d9d1",
+    "src/qpaf/r7/sealed.py": "6717d86bc345ef1fa2960f8951cd578c434727cc081975f865ba9c72cbec277c",
+    "tests/test_r7_test172.py": "29f1d636bff79b6cee7f1df83b15b17c32e8777669c86e8c65c427332f85a29a"
+  },
+  "status": "PASS_TEST172_SEALED_EVALUATION_PENDING_INDEPENDENT_VERIFICATION",
+  "summary": {
+    "ndcg_at_10": {
+      "bge_m3": 0.7348483309627035,
+      "bm25": 0.7225810090677703,
+      "colqwen25": 0.824951127827772,
+      "learned_qarf": 0.742816812404545,
+      "qarf_20260820": 0.742816812404545,
+      "qarf_20260821": 0.7422059963869764,
+      "qarf_20260822": 0.742816812404545,
+      "qpaf_20260820": 0.8172836129645745,
+      "qpaf_20260821": 0.8200486044896487,
+      "qpaf_20260822": 0.8190337873579698,
+      "rrf_k60": 0.7877537129681438,
+      "train_fitted_static": 0.8255370415431602,
+      "uniform_combsum": 0.7865174292369267
+    }
+  },
+  "task_id": "TEST-172"
+}
