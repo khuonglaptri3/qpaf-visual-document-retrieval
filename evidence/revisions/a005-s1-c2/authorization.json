@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "status": "APPROVED",
+  "amendment": "QPAF-M1.5-A005",
+  "stage": "1-calibration-C2",
+  "scope": "OCR (Tesseract per vimdoc_ocr_page_identity_v2) and GPU timing for ColQwen2.5 passage encoding, MaxSim scoring on CPU and on GPU with a parity check, and BGE-M3 passage encoding, on 128 label-free ViMDoc v2 pages. Eight synthetic query strings; no ViMDoc query table and no qrels.",
+  "approval": {
+    "approver": "Tấn Phát (Research Lead)",
+    "approval_text": "Duyệt calibration",
+    "cost_cap_usd": 10,
+    "cost_cap_scope": "C1 audit plus C2 sample together, as asked in the cost-cap question",
+    "recorded_by": "Claude at the Research Lead's request"
+  },
+  "spent_before_c2_usd_upper_bound": 0.474768,
+  "estimated_c2_usd": 0.5,
+  "source_commit": "47cb2126a049ab9732f044558d1841576031f63c",
+  "source_files_sha256": {
+    "a005_c2_calibration_modal.py": "77c681d0973c907cb9ffc5c592fb00dcc56f05e1d7c34df8ca190ad97f0b23b8",
+    "scripts/colqwen25_retriever.py": "48e9e563d18f6bfb9a19344edb016f03406473d202217a102a6503c7b3298d62",
+    "scripts/bge_m3_dense_retriever.py": "04a52544cf8cd76725b038aa172cc801c8f95f44904cc99b13c968f6ea031b0b",
+    "requirements-lock.txt": "17e6673bc89d0e10470c27250c34961058308823399c6b003519576cdd46c1be",
+    "configs/vimdoc_m3_local_v1.json": "0a68c19688519822e4ac58afa51e08ca43ad6350d849f642bac23115bc64be9d"
+  },
+  "inputs": {
+    "archive": "datasets/vimdoc/25657f1fe0358f49147148ca89e231291ba42788/ViMDoc_pages.tar.gz (de569c8d...2c71, verified by C1)",
+    "canonical_pages": "audits/vimdoc/vimdoc_identity_v2/canonical_pages.jsonl",
+    "canonical_pages_sha256": "9dc277153f9137c8c668d70a3f66dfd208e129e5907eede7b47dbac1f2250b84",
+    "sample": "128 pages with the smallest SHA-256 of 'a005-c2:20260820:' + page_id"
+  },
+  "resources": {
+    "ocr": "CPU 4, 8 GiB, timeout 1800 s",
+    "gpu": "L4, CPU 4, 32 GiB, timeout 1800 s",
+    "invocations": 1,
+    "retries": 0
+  },
+  "command": "modal run a005_c2_calibration_modal.py --pages-sha256 9dc277153f9137c8c668d70a3f66dfd208e129e5907eede7b47dbac1f2250b84 --sample-size 128",
+  "claim_scope": "Engineering timing only. No retrieval score, metric or label is produced.",
+  "independent_review": "WAIVED_BY_A006"
+}
