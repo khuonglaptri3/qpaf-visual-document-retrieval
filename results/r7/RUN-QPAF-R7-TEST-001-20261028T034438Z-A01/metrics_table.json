@@ -1,0 +1,154 @@
+{
+  "deployable": [
+    {
+      "method": "bm25",
+      "mrr_at_10": 0.6595814876338132,
+      "ndcg_at_10": 0.7225810090677703,
+      "recall_at_1": 0.5290697674418605,
+      "recall_at_3": 0.7616279069767442
+    },
+    {
+      "method": "bge_m3",
+      "mrr_at_10": 0.6701065891472868,
+      "ndcg_at_10": 0.7348483309627035,
+      "recall_at_1": 0.5348837209302325,
+      "recall_at_3": 0.7674418604651163
+    },
+    {
+      "method": "colqwen25",
+      "mrr_at_10": 0.7754891103728313,
+      "ndcg_at_10": 0.824951127827772,
+      "recall_at_1": 0.6627906976744186,
+      "recall_at_3": 0.8953488372093024
+    },
+    {
+      "method": "uniform_combsum",
+      "mrr_at_10": 0.727920819490587,
+      "ndcg_at_10": 0.7865174292369267,
+      "recall_at_1": 0.5930232558139535,
+      "recall_at_3": 0.8488372093023255
+    },
+    {
+      "method": "rrf_k60",
+      "mrr_at_10": 0.7296650055370986,
+      "ndcg_at_10": 0.7877537129681438,
+      "recall_at_1": 0.5988372093023255,
+      "recall_at_3": 0.8430232558139535
+    },
+    {
+      "method": "train_fitted_static",
+      "mrr_at_10": 0.7755975452196382,
+      "ndcg_at_10": 0.8255370415431602,
+      "recall_at_1": 0.6511627906976745,
+      "recall_at_3": 0.9127906976744186
+    },
+    {
+      "method": "learned_qarf",
+      "mrr_at_10": 0.6803340716131414,
+      "ndcg_at_10": 0.742816812404545,
+      "recall_at_1": 0.5465116279069767,
+      "recall_at_3": 0.8081395348837209
+    }
+  ],
+  "methods": [
+    {
+      "method": "qarf_20260820",
+      "mrr_at_10": 0.6803340716131414,
+      "ndcg_at_10": 0.742816812404545,
+      "recall_at_1": 0.5465116279069767,
+      "recall_at_3": 0.8081395348837209
+    },
+    {
+      "method": "qarf_20260821",
+      "mrr_at_10": 0.679641934293097,
+      "ndcg_at_10": 0.7422059963869764,
+      "recall_at_1": 0.5465116279069767,
+      "recall_at_3": 0.8023255813953488
+    },
+    {
+      "method": "qarf_20260822",
+      "mrr_at_10": 0.6803340716131414,
+      "ndcg_at_10": 0.742816812404545,
+      "recall_at_1": 0.5465116279069767,
+      "recall_at_3": 0.8081395348837209
+    },
+    {
+      "method": "qpaf_20260820",
+      "mrr_at_10": 0.7707733480989294,
+      "ndcg_at_10": 0.8172836129645745,
+      "recall_at_1": 0.6627906976744186,
+      "recall_at_3": 0.8895348837209303
+    },
+    {
+      "method": "qpaf_20260821",
+      "mrr_at_10": 0.7726075119970469,
+      "ndcg_at_10": 0.8200486044896487,
+      "recall_at_1": 0.6627906976744186,
+      "recall_at_3": 0.8837209302325582
+    },
+    {
+      "method": "qpaf_20260822",
+      "mrr_at_10": 0.7714193429309708,
+      "ndcg_at_10": 0.8190337873579698,
+      "recall_at_1": 0.6627906976744186,
+      "recall_at_3": 0.8895348837209303
+    }
+  ],
+  "notes": [
+    "Single sealed opening of ViDoSeek test 172; nothing is selected from these numbers.",
+    "Oracle rows use test labels; they are non-deployable upper bounds.",
+    "Per-seed contrasts only; seed-averaged statistics belong to R8/M5.7."
+  ],
+  "oracle_context": [
+    {
+      "method": "oracle_global_w7",
+      "mrr_at_10": 0.7754891103728313,
+      "ndcg_at_10": 0.824951127827772,
+      "recall_at_1": 0.6627906976744186,
+      "recall_at_3": 0.8953488372093024,
+      "selection_eligible": false
+    },
+    {
+      "method": "oracle_qarf_w7",
+      "mrr_at_10": 0.8544319859726837,
+      "ndcg_at_10": 0.8878576407529165,
+      "recall_at_1": 0.7674418604651163,
+      "recall_at_3": 0.9534883720930233,
+      "selection_eligible": false
+    },
+    {
+      "method": "oracle_qpaf_w7",
+      "mrr_at_10": 0.8845514950166112,
+      "ndcg_at_10": 0.9126374436900763,
+      "recall_at_1": 0.7906976744186046,
+      "recall_at_3": 0.9767441860465116,
+      "selection_eligible": false
+    },
+    {
+      "method": "oracle_global_w66",
+      "mrr_at_10": 0.7755975452196382,
+      "ndcg_at_10": 0.8255370415431602,
+      "recall_at_1": 0.6511627906976745,
+      "recall_at_3": 0.9127906976744186,
+      "selection_eligible": false
+    },
+    {
+      "method": "oracle_qarf_w66",
+      "mrr_at_10": 0.8564507198228127,
+      "ndcg_at_10": 0.8894640034753855,
+      "recall_at_1": 0.7674418604651163,
+      "recall_at_3": 0.9534883720930233,
+      "selection_eligible": false
+    },
+    {
+      "method": "oracle_qpaf_w66",
+      "mrr_at_10": 0.8837209302325582,
+      "ndcg_at_10": 0.9106994591939521,
+      "recall_at_1": 0.7906976744186046,
+      "recall_at_3": 0.9767441860465116,
+      "selection_eligible": false
+    }
+  ],
+  "query_count": 172,
+  "split": "test"
+}

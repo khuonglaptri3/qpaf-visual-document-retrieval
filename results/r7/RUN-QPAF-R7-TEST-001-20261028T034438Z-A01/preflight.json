@@ -1,0 +1,57 @@
+{
+  "baseline_reference_max_abs_difference": 0.0,
+  "learned_parity": {
+    "QARF/20260820": {
+      "candidate_count": 82255,
+      "query_count": 171,
+      "ranking_disagreements": 0,
+      "score_max_abs_difference": 0.0,
+      "tolerance": 1e-07,
+      "weight_max_abs_difference": 0.0
+    },
+    "QARF/20260821": {
+      "candidate_count": 82255,
+      "query_count": 171,
+      "ranking_disagreements": 0,
+      "score_max_abs_difference": 0.0,
+      "tolerance": 1e-07,
+      "weight_max_abs_difference": 0.0
+    },
+    "QARF/20260822": {
+      "candidate_count": 82255,
+      "query_count": 171,
+      "ranking_disagreements": 0,
+      "score_max_abs_difference": 0.0,
+      "tolerance": 1e-07,
+      "weight_max_abs_difference": 0.0
+    },
+    "QPAF/20260820": {
+      "candidate_count": 82255,
+      "query_count": 171,
+      "ranking_disagreements": 0,
+      "score_max_abs_difference": 0.0,
+      "tolerance": 1e-07,
+      "weight_max_abs_difference": 0.0
+    },
+    "QPAF/20260821": {
+      "candidate_count": 82255,
+      "query_count": 171,
+      "ranking_disagreements": 0,
+      "score_max_abs_difference": 0.0,
+      "tolerance": 1e-07,
+      "weight_max_abs_difference": 0.0
+    },
+    "QPAF/20260822": {
+      "candidate_count": 82255,
+      "query_count": 171,
+      "ranking_disagreements": 0,
+      "score_max_abs_difference": 0.0,
+      "tolerance": 1e-07,
+      "weight_max_abs_difference": 0.0
+    }
+  },
+  "test_candidates": 83119,
+  "test_labels_deserialized": false,
+  "test_queries": 172,
+  "validation_queries": 171
+}
