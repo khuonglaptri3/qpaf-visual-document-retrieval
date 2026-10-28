@@ -71,6 +71,13 @@ def _done(directory):
     return (directory/'_SUCCESS.json').is_file()
 
 
+def _fresh(directory):
+    """Start an attempt; an earlier attempt without _SUCCESS (e.g. preempted) is kept under a new name."""
+    if directory.exists():
+        directory.rename(directory.with_name(f'{directory.name}.incomplete-{int(time.time())}'))
+    directory.mkdir(parents=True, exist_ok=False)
+
+
 def _finish(directory, report):
     with (directory/'_SUCCESS.json').open('x', encoding='utf-8') as stream:
         json.dump(report, stream, ensure_ascii=False, sort_keys=True, indent=2)
@@ -100,7 +107,7 @@ def prepare() -> dict:
         return json.loads((directory/'_SUCCESS.json').read_text(encoding='utf-8'))
     if sha256((VOL/PARQUET).read_bytes()) != PARQUET_SHA256:
         raise ValueError('ViMDoc parquet differs from the pinned hash')
-    directory.mkdir(parents=True, exist_ok=False)
+    _fresh(directory)
     splits = {role: _ids(role) for role in ('train', 'validation', 'confirmation')}
     texts = pq.read_table(VOL/PARQUET, columns=['id', 'query']).to_pydict()
     queries = sorted(zip(texts['id'], texts['query']), key=lambda row: row[0].encode('utf-8'))
@@ -134,7 +141,7 @@ def ocr_shard(pages_sha256: str, shard: int) -> dict:
     directory = _out('ocr', f'shard_{shard:02d}')
     if _done(directory):
         return json.loads((directory/'_SUCCESS.json').read_text(encoding='utf-8'))
-    directory.mkdir(parents=True, exist_ok=False)
+    _fresh(directory)
     pages = shard_pages(_pages(pages_sha256), SHARDS, shard)
     wanted = {page['canonical_asset_path']: page for page in pages}
     found, started = {}, time.perf_counter()
@@ -208,7 +215,7 @@ def query_embed() -> dict:
     directory = _out('query_embed')
     if _done(directory):
         return json.loads((directory/'_SUCCESS.json').read_text(encoding='utf-8'))
-    directory.mkdir(parents=True, exist_ok=False)
+    _fresh(directory)
     texts = [row['text'] for row in _queries()]
     models, started = _models(), time.perf_counter()
     visual = models['visual']
@@ -242,7 +249,7 @@ def gpu_shard(shard: int) -> dict:
     directory = _out('gpu', f'shard_{shard:02d}')
     if _done(directory):
         return json.loads((directory/'_SUCCESS.json').read_text(encoding='utf-8'))
-    directory.mkdir(parents=True, exist_ok=False)
+    _fresh(directory)
     source = _out('ocr', f'shard_{shard:02d}')
     rows = [json.loads(line) for line in (source/'ocr.jsonl').read_text(encoding='utf-8').splitlines()]
     payloads = {}
@@ -303,7 +310,7 @@ def bm25(pages_sha256: str) -> dict:
     directory = _out('bm25')
     if _done(directory):
         return json.loads((directory/'_SUCCESS.json').read_text(encoding='utf-8'))
-    directory.mkdir(parents=True, exist_ok=False)
+    _fresh(directory)
     pages = [page['page_id'] for page in _pages(pages_sha256)]
     texts = {}
     for shard in range(SHARDS):
@@ -346,7 +353,7 @@ def assemble(pages_sha256: str) -> dict:
     directory = _out('cache')
     if _done(directory):
         return json.loads((directory/'_SUCCESS.json').read_text(encoding='utf-8'))
-    directory.mkdir(parents=True, exist_ok=False)
+    _fresh(directory)
     pages = _pages(pages_sha256)
     page_ids = [page['page_id'] for page in pages]
     documents = {page['page_id']: page['document_id'] for page in pages}
@@ -383,11 +390,16 @@ def assemble(pages_sha256: str) -> dict:
 @app.local_entrypoint()
 def main(pages_sha256: str):
     print(json.dumps(prepare.remote(), indent=2))
-    for report in ocr_shard.starmap([(pages_sha256, s) for s in range(SHARDS)]):
-        print('ocr', report['shard'], report['pages'], round(report['ocr_seconds']))
+    failed = [r for r in ocr_shard.starmap([(pages_sha256, s) for s in range(SHARDS)], return_exceptions=True)
+              if isinstance(r, Exception)]
+    if failed:
+        raise RuntimeError(f'{len(failed)} OCR shards failed: {failed}')
+    print('ocr shards done')
     print(json.dumps(query_embed.remote(), indent=2))
     bm25_call = bm25.spawn(pages_sha256)
-    for report in gpu_shard.map(range(SHARDS)):
-        print('gpu', report['shard'], report['shape'], round(report['colqwen_encode_seconds']))
+    failed = [r for r in gpu_shard.map(range(SHARDS), return_exceptions=True) if isinstance(r, Exception)]
+    if failed:
+        raise RuntimeError(f'{len(failed)} GPU shards failed: {failed}')
+    print('gpu shards done')
     print(json.dumps(bm25_call.get(), indent=2))
     print(json.dumps(assemble.remote(pages_sha256), indent=2))
