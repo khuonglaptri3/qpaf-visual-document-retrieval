@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "task_id": "M5.6",
+  "reviewer": "Thanh (@xThanhSaDec)",
+  "recorded_by": "Codex at Thanh's request",
+  "recorded_at_utc": "2026-10-28T03:27:11Z",
+  "decision": "ACCEPTED_WITH_DOCUMENTED_DEVIATION_D1",
+  "source": "Thanh's explicit confirmation in this working session",
+  "confirmation_text": "Có, chấp nhận M5.6 kèm D1",
+  "accepted_scope": "M5.6 exploratory validation-only R6 ablations and query-vs-page conditioning comparison",
+  "known_deviation": "D1: the in-run authorization copy contains LF where the committed authorization contains CRLF; the content is byte-identical after this line-ending transformation",
+  "test_labels_opened": false,
+  "r7_execution_authorized": false
+}

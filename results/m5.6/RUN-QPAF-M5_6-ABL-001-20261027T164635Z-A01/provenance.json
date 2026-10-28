@@ -1,0 +1,64 @@
+{
+  "ablations": {
+    "R6-00": [],
+    "R6-01": [
+      "rr_bm25",
+      "rr_dense",
+      "rr_visual"
+    ],
+    "R6-02": [
+      "gap_bm25",
+      "gap_dense",
+      "gap_visual"
+    ],
+    "R6-03": [
+      "disagreement_bm25_dense",
+      "disagreement_bm25_visual",
+      "disagreement_dense_visual"
+    ],
+    "R6-04": [
+      "query_length"
+    ]
+  },
+  "authority_pins": {
+    "evidence/revisions/m3.4-001/authorization.json": "4be026b852574e7687fdc4b9337f716aa96a64ac39556ae288193bdba99e5365",
+    "evidence/revisions/m4.7-001/g2a_freeze.json": "26d9bab6e7d47fe7dd1e89f6bec2c95265641df5cde8d9bd25c867b9d3a73217",
+    "evidence/revisions/m4.7-001/owner_confirmation.json": "5f80b4312188721dc2c2033a85ce1a9631bffa32479c576e0500471e622b95e6",
+    "evidence/revisions/m5.1-001/owner_confirmation.json": "c9fa0a0ef637362a30f6dcc38f86cd59916620bd714b3d6330afa76de4e80bef",
+    "evidence/revisions/m5.1-001/preregistration.json": "45269eafe36907f99990027f067e724939da69db5ee351669d1e5e7854bf7e29",
+    "results/m3.1/RUN-QPAF-M3_1-SEAL-001-20261021T142631Z-A01/inputs/qrels_development.json": "691b6bc4ada3bc64fe3c408fe32498b04c7f30900eadb39ae09ddbe29aea302c",
+    "results/m3.1/RUN-QPAF-M3_1-SEAL-001-20261021T142631Z-A01/inputs/query_texts.json": "e7994373c9fd5157cde0fb0c5a1440c37c275b85fa19b2b0b566f61d584c4ab4",
+    "results/m3.1/RUN-QPAF-M3_1-SEAL-001-20261021T142631Z-A01/inputs/score_cache.parquet": "56d0c82efda9264c117611ddd7135fe2384b68a3ec60fbdfd80fb964c386622b",
+    "results/m3.1/RUN-QPAF-M3_1-SEAL-001-20261021T142631Z-A01/inputs/shared_base.toml": "3e58a867d11cebf72970cf0c141a90822cd7cbbdad65fb1e081cb14fa4889b58",
+    "results/m3.1/RUN-QPAF-M3_1-SEAL-001-20261021T142631Z-A01/inputs/splits/test_ids.txt": "d34210f901759a4f174da0c6c2e9b810616dcb33a71a0bd128a25d5d8d12e6f6",
+    "results/m3.1/RUN-QPAF-M3_1-SEAL-001-20261021T142631Z-A01/inputs/splits/train_ids.txt": "61dfe867c27b91a0a96594440b0f0e5ecf51501da0fcecdac94badaf16962191",
+    "results/m3.1/RUN-QPAF-M3_1-SEAL-001-20261021T142631Z-A01/inputs/splits/val_ids.txt": "46f8af5853942f6697cc3a995347a1832206212e93ff8aa87acb1775b3a060b4",
+    "results/m3.4/RUN-QPAF-M3_4-MTH-001-20261022T112102Z-A01/QPAF/20261022T112355-77b54aa0/summary.json": "c932709e43f1ac5b1d6f5f3f0a088be6f6e4931b5e81ce8ce2757f8775eaa556"
+  },
+  "elapsed_seconds": 373.2524016001262,
+  "execution_head": "c1da4f37f83ef9dcf1157c75c33af75ae0fb9170",
+  "implementation_commit": "4330e631079d23b6fdd7e4417f1104584fe6bc60",
+  "runtime": {
+    "numpy": "2.5.4",
+    "pandas": "3.0.6",
+    "pyarrow": "26.0.0",
+    "python": "3.13.7",
+    "torch": "2.11.0+cpu"
+  },
+  "source_files_sha256": {
+    "scripts/run_m56_ablations.py": "7b0ff3c6bd9f66216bb70f74d94288aeef615ca703cc3d925610620dfaba700d",
+    "src/qpaf/m12/features.py": "86eb5d540d2330c0fec263d587581d2f159b77461df85c57f6ecaa64fafa40b6",
+    "src/qpaf/m12/losses.py": "18debc316b02146c38c36a6b1021f0db5e3ba9be55ffdb4c8be153cd11ce5395",
+    "src/qpaf/m12/model.py": "05c0370343a14b70b1db37e3d2bf6fd852c4ea67f7a967af52fa0ff498adcc3e",
+    "src/qpaf/m24/config.py": "5d730b9cb1ba8971ae972729401013e0bb0ccce81310615e2a9088963eb53841",
+    "src/qpaf/m24/dataset.py": "1b2681b163ce4a88a87eeb71ba31f417ee2a4469a9be49845c47d528eb6c5279",
+    "src/qpaf/m24/evaluator.py": "bfd25f331c5c377c708fd1d05f3e3edb85467488301e9658ea9bb486ef476742",
+    "src/qpaf/m24/trainer.py": "242fbcdc3a1cf44c81d29ef7be19aac256b29e5226f870cdf1cee889ff9df7d4",
+    "src/qpaf/m44/common.py": "bb160e3bd2355cdf72c66982c6ee4e041520c96fe97f69a2080546b1fc54968c",
+    "src/qpaf/m56/__init__.py": "ff3346b2d4cf998a5d0d5e60d6f9d0a145a9309214d0a6ddf8ff37d28ebadcab",
+    "src/qpaf/m56/ablation.py": "c506dd5cbb52c243368c686ba7ac0ee49ff2b7b430961a28c859714e16763215",
+    "src/qpaf/m56/conditioning.py": "1f9db2ff90b96bba4d139c5f946633d25234169fa45623ee3569e727cbc65409",
+    "src/qpaf/m56/runner.py": "710e608a10f690d09133cd921d85bbb15b13629dad6d9fd506b5b59986de41a5",
+    "tests/test_m56_ablations.py": "4b50af3639bf128f5c85209db5c1775c90ad8e09cd7541ccb40a769876efdce4"
+  }
+}

@@ -112,3 +112,6 @@ vimdoc_archive_audit_modal.py -text
 /docs/reports/milestones/M5.5/evidence/** -text -eol -whitespace
 # R7 TEST-172 run receipts hash exact bytes, including compressed predictions.
 /results/r7/** -text -eol -whitespace
+
+# M5.6 manifest and post-run check bind exact run bytes (CSV, JSON, gz predictions, checkpoints).
+/results/m5.6/** -text -eol -whitespace

@@ -1,0 +1,92 @@
+{
+  "task_id": "M5.6",
+  "run": "results/m5.6/RUN-QPAF-M5_6-ABL-001-20261027T164635Z-A01",
+  "manifest_sha256": "be69197b8fb1d724d86f0bcdde729c365d69638b63e8088adff38defa2630706",
+  "checks": [
+    {
+      "check": "external manifest pin",
+      "status": "PASS",
+      "detail": "be69197b8fb1d724d86f0bcdde729c365d69638b63e8088adff38defa2630706"
+    },
+    {
+      "check": "success marker binds manifest, no failure marker",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "every manifest artifact matches size and SHA-256",
+      "status": "PASS",
+      "detail": "39 files; bad=[]"
+    },
+    {
+      "check": "run file set equals manifest plus markers",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "attempt and manifest carry the external authorization pin",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "attempt ran at the approval commit",
+      "status": "PASS",
+      "detail": "c1da4f37f83ef9dcf1157c75c33af75ae0fb9170"
+    },
+    {
+      "check": "committed authorization equals the pin",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "D1: in-run copy equals the pinned authorization with CRLF -> LF",
+      "status": "PASS",
+      "detail": "copy sha256 e3270e2b82f3a8df4eac6731ddfec77c94e53cdf56f754a8054dfab9e2c04789; pinned bytes contain CRLF"
+    },
+    {
+      "check": "pinned source and authority hashes unchanged",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "R6-01..04 paired statistics replay exactly",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "R6-05 conditioning statistics replay exactly",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "R6-00 reproduces the M3.4 pilot",
+      "status": "PASS",
+      "detail": "[19, 19]"
+    },
+    {
+      "check": "omitted-feature weights unchanged in every diagnostic",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "fresh-process reload of all best/last checkpoints",
+      "status": "PASS",
+      "detail": "{\"R6-00\": 0.0, \"R6-01\": 0.0, \"R6-02\": 0.0, \"R6-03\": 0.0, \"R6-04\": 0.0}"
+    },
+    {
+      "check": "no test labels, GPU, Modal or primary change",
+      "status": "PASS",
+      "detail": ""
+    }
+  ],
+  "PASS": 15,
+  "FAIL": 0,
+  "deviations": [
+    {
+      "id": "D1",
+      "what": "in-run authorization copy is LF-normalised (runner copies with read_text/write_text); runner.verify refuses on this byte check",
+      "impact": "none on training, checkpoints, predictions or statistics; all other verify steps pass here"
+    }
+  ],
+  "read_only": false
+}

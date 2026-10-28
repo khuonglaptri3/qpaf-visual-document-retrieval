@@ -1,0 +1,11 @@
+{
+  "per_query_metric_max_abs_difference": 0.0,
+  "pilot_run": "results/m3.4/RUN-QPAF-M3_4-MTH-001-20261022T112102Z-A01/QPAF/20261022T112355-77b54aa0",
+  "prediction_max_abs_difference": 0.0,
+  "selected_epoch": [
+    19,
+    19
+  ],
+  "status": "PASS",
+  "tolerance": 1e-12
+}
