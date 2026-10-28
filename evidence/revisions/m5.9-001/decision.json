@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "task_id": "M5.9",
+  "gate": "G3_ROBUSTNESS",
+  "question": "Is the result stable across seeds and checks?",
+  "decision": "LIMITED-CLAIM",
+  "checks": {
+    "prerequisite_M5.1": "PASS",
+    "prerequisite_M5.2": "PASS",
+    "prerequisite_M5.3_QARF": "PASS",
+    "prerequisite_M5.3_QPAF": "PASS",
+    "prerequisite_M5.4_QARF": "PASS",
+    "prerequisite_M5.4_QPAF": "PASS",
+    "prerequisite_R7": "PASS",
+    "prerequisite_M5.7": "PASS",
+    "coverage": "PASS",
+    "mean_delta_min_inclusive": "PASS",
+    "ci95_lower_min_exclusive": "PASS",
+    "strongest_baselines_beaten": "FAIL",
+    "top5_share_max_exclusive": "PASS",
+    "latency_ms_max_inclusive": "NOT_ESTABLISHED",
+    "cuda_gib_max_exclusive": "PASS",
+    "reload_abs_tolerance": "PASS",
+    "finite_outputs": "PASS"
+  },
+  "reasons": [
+    "BASELINE_NOT_BEATEN",
+    "LATENCY_GATE_NOT_ESTABLISHED"
+  ],
+  "claim_limits": [
+    "No claim that QPAF improves on the strongest deployable baseline: QPAF does not exceed the validation-selected train_fitted_static on TEST-172; report this negative result.",
+    "No operational latency claim: the accepted measurement does not meet the 1,000 measured-query rule in metric_policy.md \u00a75."
+  ],
+  "evidence": {
+    "prerequisites": {
+      "M5.1": "ACCEPTED",
+      "M5.2": "ACCEPTED",
+      "M5.3_QARF": "ACCEPTED",
+      "M5.3_QPAF": "ACCEPTED",
+      "M5.4_QARF": "ACCEPTED",
+      "M5.4_QPAF": "ACCEPTED",
+      "R7": "ACCEPTED",
+      "M5.7": "ACCEPTED",
+      "M5.5": "ACCEPTED"
+    },
+    "coverage": {
+      "query_count": 172,
+      "r7_query_count": 172,
+      "seeds_match_preregistration": true,
+      "wtl_totals_match": true,
+      "summary_pins_r7_review": true,
+      "r7_review_pass": true,
+      "r7_per_query_metric_max_abs_difference": 0.0,
+      "baselines_present": true
+    },
+    "quality": {
+      "mean_delta": 0.07617546120537545,
+      "ci95_lower": 0.042928022490070356,
+      "top5_share": 0.31038513563776693,
+      "baseline_mean_delta": {
+        "train_fitted_static": -0.006748373272429344
+      }
+    },
+    "operational": {
+      "source_accepted": true,
+      "median_latency_ms": 2.4263995,
+      "latency_measured_queries": 171,
+      "peak_cuda_gib": 0.0324397087097168,
+      "reload_max_abs_diff": 4.440892098500626e-16,
+      "finite_outputs": true
+    }
+  },
+  "run_ids": {
+    "R7_TEST172": "RUN-QPAF-R7-TEST-001-20261028T034438Z-A01",
+    "QARF_20260820": "RUN-QPAF-M3_2-MTH-001-20261022T035229Z-A01",
+    "QPAF_20260820": "RUN-QPAF-M3_4-MTH-001-20261022T112102Z-A01",
+    "QARF_20260821": "RUN-QPAF-M5_3-MTH-001-20261025T135954Z-A01",
+    "QPAF_20260821": "RUN-QPAF-M5_3-MTH-002-20261026T025155Z-A01",
+    "QARF_20260822": "RUN-QPAF-M5_4-MTH-001-20261025T154818Z-A01",
+    "QPAF_20260822": "RUN-QPAF-M5_4-MTH-002-20261026T025155Z-A01",
+    "M5.5_GPU": "RUN-QPAF-M5_5-SYS-001-20261027T143954Z-A03"
+  },
+  "criteria_sha256": "121eb15edd9a032c7e4c5505be80d70a97ea279ef71f730a6d2a1df91a235017",
+  "inputs_sha256": "4c294fab62ef3c69e4369646194d95c48df083b16c2ae5a9243c884054df9222",
+  "owner_confirmation": "PENDING_RESEARCH_LEAD",
+  "seeds": [
+    20260820,
+    20260821,
+    20260822
+  ],
+  "held_out": "ViDoSeek TEST-172",
+  "external_generalization_claimed": false,
+  "test_labels_read_by_this_record": false,
+  "authorizes_execution": false
+}

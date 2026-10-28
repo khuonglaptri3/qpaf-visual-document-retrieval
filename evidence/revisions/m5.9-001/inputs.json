@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "task_id": "M5.9",
+  "files": {
+    "evidence/revisions/m3.2-001/post_run_verification.json": "f1bb0be6f9e6d160939b3146d9ea0dcc4df86620f7471b1e3acd75df7fb72d8b",
+    "evidence/revisions/m3.4-001/post_run_verification.json": "7beeb82ae413b2b16bceced700429dc3ad65cebbe0d106220a26a695f67acebe",
+    "evidence/revisions/m3.6-001/integrity_review.json": "497b934ce6222e6e4e70363ef374e88236b7592bb549b0c81bbb89b45291e66f",
+    "evidence/revisions/m4.7-001/g2a_freeze.json": "26d9bab6e7d47fe7dd1e89f6bec2c95265641df5cde8d9bd25c867b9d3a73217",
+    "evidence/revisions/m5.1-001/owner_confirmation.json": "c9fa0a0ef637362a30f6dcc38f86cd59916620bd714b3d6330afa76de4e80bef",
+    "evidence/revisions/m5.1-001/preregistration.json": "45269eafe36907f99990027f067e724939da69db5ee351669d1e5e7854bf7e29",
+    "evidence/revisions/m5.2-001/cache_identity.json": "960aed613336e5f6faa8335881306ffc340bceff3094836eb6e3f135babc3291",
+    "evidence/revisions/m5.3-001/post_run_verification.json": "8c3a546da4430c60c771381ba9128a0674ed18050434008d33d2fddcb02e4711",
+    "evidence/revisions/m5.3-002/post_run_verification.json": "9b251485a5225df0f95662d475634b5eb3effdbff1d8107a80de3ab8ab545991",
+    "evidence/revisions/m5.3-r01/owner_confirmation.json": "824f2d16c816ed422ebf1a46dfcdf45c3e36e683d674d54a463ea9a56af93e35",
+    "evidence/revisions/m5.3-r01/validation.json": "d3061e42be7537f23a9dfb0323e717ed115c10fbc7e21fedd2674225abf0d22f",
+    "evidence/revisions/m5.3-r02/owner_confirmation.json": "c664495ba96ecded95633d173087dffa1803385d41ecdcdf436a4e050472612b",
+    "evidence/revisions/m5.3-r02/validation.json": "f8840065f52d114e5329ef6a0dc0f45476e225efd735ce9d9f4e7f4914602e57",
+    "evidence/revisions/m5.4-001/post_run_verification.json": "dbadec1283f79c984bcbecd5dd0369ee7c037486caeaf44c17f682c7c071802c",
+    "evidence/revisions/m5.4-002/post_run_verification.json": "713c26d26e95b490b28adfb9da6beed134833eb505634079abdf8ecd5a9616cf",
+    "evidence/revisions/m5.4-r01/owner_confirmation.json": "9e3631227249f14edcf2155d0684ba4913f836a344ba71117ac94f975410566c",
+    "evidence/revisions/m5.4-r01/validation.json": "61a28a470422acc4e91c24c0a02a3f70411f3a0bdae543316cc7a374646a9b7f",
+    "evidence/revisions/m5.4-r02/owner_confirmation.json": "0bdcc7d1975dbb92cd1b38538a5a2177c5ca7d9e0385664e6c05e1ac6db9e6ba",
+    "evidence/revisions/m5.4-r02/validation.json": "9e776bd6d22d561395fd323389b39f0bbd6b630a392c87dd914c146f064f241e",
+    "evidence/revisions/m5.5-r01/owner_confirmation.json": "3518c66489a07b1670b450991d02f6e29d1a4a6fc98211319123717850f2ec06",
+    "evidence/revisions/m5.5-r01/validation.json": "b822456b9bb7d7a2d86fdf021f74363ee26a737beea76942890dec704b179100",
+    "evidence/revisions/m5.7-001/owner_confirmation.json": "e134ee2ea40f46adb2f272d90ce71e981723a4bad8de2246d1621fb557c9bfc9",
+    "evidence/revisions/m5.7-001/summary.json": "03581b796936d8782a1643e858bbfbbe30939d17ffcd82045d7d5203f94e05f9",
+    "evidence/revisions/r7-r01/owner_confirmation.json": "9ba4b1c3446eb86bc10c6f34bd922074447becd3be32b74e5914da6dfb9aec8b",
+    "evidence/revisions/r7-r01/verification.json": "fb98aa2e762e3e3a7e477a99286bd030d55d897e9c8e74033e648ae59972b62b",
+    "results/m5.2/verification/owner_confirmation.json": "2515fc38ec1001c8afeac90c4ff92fc255b65141980fd31edddc4d72a513c530"
+  },
+  "run_ids": {
+    "R7_TEST172": "RUN-QPAF-R7-TEST-001-20261028T034438Z-A01",
+    "QARF_20260820": "RUN-QPAF-M3_2-MTH-001-20261022T035229Z-A01",
+    "QPAF_20260820": "RUN-QPAF-M3_4-MTH-001-20261022T112102Z-A01",
+    "QARF_20260821": "RUN-QPAF-M5_3-MTH-001-20261025T135954Z-A01",
+    "QPAF_20260821": "RUN-QPAF-M5_3-MTH-002-20261026T025155Z-A01",
+    "QARF_20260822": "RUN-QPAF-M5_4-MTH-001-20261025T154818Z-A01",
+    "QPAF_20260822": "RUN-QPAF-M5_4-MTH-002-20261026T025155Z-A01",
+    "M5.5_GPU": "RUN-QPAF-M5_5-SYS-001-20261027T143954Z-A03"
+  },
+  "develop_commit": "a7200bdde660b4422b76dafa1fac784a61a287cd"
+}
