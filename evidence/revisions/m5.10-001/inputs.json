@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "task_id": "M5.10",
+  "files": {
+    "evidence/revisions/m5.9-001/decision.json": "c87033bf935ded49cc3eea79b2de55d252a182662fb1e877a0871d79e531390c",
+    "evidence/revisions/m5.9-001/owner_confirmation.json": "0586b151496206746f501f09af1b08fc3330d385ca76d435cb166c40101503b1",
+    "evidence/revisions/m5.8-001/decision.json": "7345fcb52ab4255937dd7090c447f39ed81ed4e88ff78991b1d54b4511338650",
+    "evidence/revisions/m4.7-001/g2a_freeze.json": "26d9bab6e7d47fe7dd1e89f6bec2c95265641df5cde8d9bd25c867b9d3a73217",
+    "evidence/revisions/m5.7-001/summary.json": "03581b796936d8782a1643e858bbfbbe30939d17ffcd82045d7d5203f94e05f9"
+  },
+  "source_branch": "develop",
+  "source_commit": "a7c8c6273b18df77bf33b8ccbbb8ff80e68aef01"
+}

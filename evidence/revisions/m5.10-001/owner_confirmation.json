@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "task_id": "M5.10",
+  "gate": "G3A_GENERALIZATION",
+  "owner": "Thanh (@xThanhSaDec)",
+  "recorded_by": "Codex at Thanh explicit request",
+  "recorded_at_utc": "2026-10-28T13:17:59Z",
+  "decision": "ACCEPTED",
+  "confirmed_g3a_decision": "NOT_RUN",
+  "source": "Thanh explicit reply in the working session on 2026-10-28",
+  "confirmation_text": "Có, ghi Thanh chấp nhận G3A NOT RUN",
+  "decision_ref": "evidence/revisions/m5.10-001/decision.json",
+  "decision_sha256": "a82cfc923fd9d17bc445e2b957a32287e9e4d08191943c5a2ae2b0f7a2e00698",
+  "accepted_scope": "G3A NOT RUN on the pinned M5.8/G2A external disposition, with G3 LIMITED-CLAIM and claim bounded to ViDoSeek TEST-172. No external generalization or execution authorization.",
+  "external_generalization_claimed": false,
+  "authorizes_execution": false
+}
