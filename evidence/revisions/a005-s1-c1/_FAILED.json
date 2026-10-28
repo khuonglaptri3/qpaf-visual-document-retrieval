@@ -1,0 +1,11 @@
+{
+  "elapsed_seconds": 140.09486819,
+  "error_message": "Frozen archive identity mismatch: {'document_count': {'expected': 1247, 'observed': 1116}}",
+  "error_type": "ValueError",
+  "package_id": "vimdoc_archive_content_audit_v1",
+  "remaining_authorized_invocations": 0,
+  "schema_version": 1,
+  "stage": "frozen_identity_contract",
+  "status": "FAILED_ATTEMPT_CONSUMED_NO_RETRY",
+  "success_marker_written": false
+}

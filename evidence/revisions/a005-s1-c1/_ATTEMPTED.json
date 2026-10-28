@@ -1,0 +1,16 @@
+{
+  "actor": "claude",
+  "archive_expected_sha256": "de569c8d4d499b8fac84d4d03a0ddb59054e30351dcb7b1e6da3d1945d2d2c71",
+  "archive_relative_path": "datasets/vimdoc/25657f1fe0358f49147148ca89e231291ba42788/ViMDoc_pages.tar.gz",
+  "classification": "read_only_source_archive_content_audit_not_scientific_result",
+  "config_sha256": "5ce4d50527a8526c0329bbe9559bcc8007a7aafeb3cd951b8210578b37fd3c72",
+  "consumed_invocations": 1,
+  "function_call_id": "fc-01M61GYZ9HRNM7K5GCG4XGKVSB",
+  "package_id": "vimdoc_archive_content_audit_v1",
+  "remaining_authorized_invocations": 0,
+  "retries_allowed": 0,
+  "schema_version": 1,
+  "source_commit": "a689d9ecd7c9e06e3332e410c4cbe61cc2c71392",
+  "started_unix_seconds": 1793200194.9397817,
+  "status": "STARTED_DATA_INTEGRITY_ONLY"
+}
