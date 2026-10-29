@@ -185,9 +185,14 @@ query. (c) cho thấy R1 hơn A005 gốc +0,0008 với CI dương, nhưng đây 
 
 Ablation chỉ chạy trên validation với một seed, nên chỉ nói được xu hướng, không phải con số chắc chắn.
 
-- **epsilon 1e-6 so với 1e-3: không có tác dụng đo được** (giống nhau tới 6 chữ số ở cả hai cổng). Lý do: anchor
-  `[0.1, 0.2, 0.7]` không có trọng số bằng 0, nên ε chỉ dịch trọng số cỡ 1e-3 tương đối và gần như bị triệt tiêu
-  sau softmax. Thành phần này chỉ có ý nghĩa nếu anchor có trọng số bằng 0.
+- **epsilon 1e-6 so với 1e-3: có tác dụng ở epoch 0, nhưng train bù lại.** Ở epoch 0, ε = 1e-3 cho validation
+  0,955955, còn ε = 1e-6 cho đúng static 0,956878, tức ε = 1e-3 làm mất 0,0009 ngay từ điểm xuất phát. Sau 40 epoch
+  và trung bình trọng số, hai bản cho per-query giống hệt nhau trên cả 400 query validation: bias của `Δθ` học được
+  đã bù phần lệch nhỏ đó. ε nhỏ vì vậy chỉ giúp điểm xuất phát đúng bằng baseline, không làm model cuối tốt hơn.
+- **Lưu ý: validation quá thô để phân biệt các model đã hội tụ.** Ba seed QARF-SA-R1 có trọng số khác nhau, nhưng
+  cho per-query nDCG giống hệt nhau trên cả 400 query (đều 0,959893). QPAF-SA-R1 cũng vậy với hai trong ba seed.
+  Orchestrator đã chấm lại độc lập bằng `stage4.load_checkpoint` và ra đúng các số này, nên đây không phải lỗi code.
+  Trên 8.904 query confirmation, các seed mới khác nhau (ví dụ QARF 0,961272 / 0,961379 / 0,961363).
 - **LR cosine so với cố định: nhỏ và không nhất quán.** Với QARF-SA, cosine hơn +0,001250 (0,959893 so với
   0,958643). Với QPAF-SA, LR cố định lại hơn nhẹ (0,961156 so với 0,960938, tức −0,000218 cho cosine). Với LR cố
   định, model ở epoch 40 dao động (QPAF-SA 0,958542 ở epoch cuối), nên việc lấy trung bình trọng số mới là phần
