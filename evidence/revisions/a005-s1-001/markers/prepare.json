@@ -1,0 +1,7 @@
+{
+  "confirmation_qrels_read_after_sealing": false,
+  "confirmation_qrels_sealed_sha256": "ce9ad0fb44c2fd1c38794b7a0a67c75be6412a13a960bb7b203b81f484003f2b",
+  "dev_qrels_sha256": "aab40d996476fe297be8d000e17bfd6b326b3c318879321f45583cd8bdc42017",
+  "queries": 10904,
+  "queries_sha256": "9c11852380d60163fcb7942551fa57643a2d2334e4856686838c663b97d8b994"
+}

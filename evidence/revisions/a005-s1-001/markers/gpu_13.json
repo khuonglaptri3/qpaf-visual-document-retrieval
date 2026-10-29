@@ -1,0 +1,14 @@
+{
+  "bge_seconds": 91.03353705500012,
+  "colqwen_encode_seconds": 2824.455808062,
+  "dense_sha256": "91af511b4830f2986f4e508253e3d46a2f70388c8535563339b37d95a112214b",
+  "gpu": "NVIDIA L4",
+  "maxsim_seconds": 91.98958684799982,
+  "pages": 4771,
+  "shape": [
+    10904,
+    4771
+  ],
+  "shard": 13,
+  "visual_sha256": "417407d2dcf37545459c325d7e22b48dc31141757f698a1ad71d45f1a30d0aa5"
+}

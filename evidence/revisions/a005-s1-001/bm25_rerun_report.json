@@ -1,0 +1,32 @@
+{
+  "bm25_matrix_sha256": "a28f354e47093e5dbfdde801a21b41f24502226812c6063ba71fbe1575627ae4",
+  "bm25_union_sha256": "a098080b5c932e53fc3f384673628ca3dc9aab2687993c1d81d1a2de9ad992b6",
+  "inputs_sha256": {
+    "canonical_pages.jsonl": "9dc277153f9137c8c668d70a3f66dfd208e129e5907eede7b47dbac1f2250b84",
+    "ocr_00.jsonl": "6f42c9ecc70be7f9f157f385adef9b8e4c277fbd4c1a241a99ae21a36be8cc9d",
+    "ocr_01.jsonl": "e1712aa68a6c7d7865b52c210b2bf0d04cad2be2b018abac61099e0c11ea1ba7",
+    "ocr_02.jsonl": "6480e394eddbeee5c48b9145caf54254a4265ba031c3160a45d00d25ce218baa",
+    "ocr_03.jsonl": "0b321e24c3ecd5973b5795c6666d0535f9b7dc895e0485f33bb60bafb3ce4824",
+    "ocr_04.jsonl": "154c533102baa63a8171b1f584e7e696d7a1595f5a4829fee7b783a7c845467f",
+    "ocr_05.jsonl": "4f0e766828f585aea14235fa8ec4b9c7b9aa62c684602ad9040896424293d957",
+    "ocr_06.jsonl": "d5bdf218257bec0defa06efc30c346b958f92c15f06d7eb9c24f6707017eb870",
+    "ocr_07.jsonl": "759f0b2eb3cd3fde4adfe13f5d91e1ea857a700ef0c0050179aa23d5193f730b",
+    "ocr_08.jsonl": "9c83590ab9ae91d240e193bd321ea4fd00ef5173887ab133b8baace0961dcc85",
+    "ocr_09.jsonl": "6a52bc6ec27d2ce26e16bdab7b9f709ae8bdfbc13bda23fb32c8165669c00e89",
+    "ocr_10.jsonl": "0e03c2141d25844f29fce50f2a547b2ec492a7c25743675a01db006651efdd5d",
+    "ocr_11.jsonl": "979ccda745acbfc9092a4c2b61b49190e40a6ca30d658048504219f7cf483ee7",
+    "ocr_12.jsonl": "29cc2f02679b3e0dc56009c1df9267b880ec098b5c8bf4122eb1684727f618b7",
+    "ocr_13.jsonl": "aff6ad0ec92bf5c2aeffd81242168c503d73efaf90a187f23c2153eb6196dd74",
+    "ocr_14.jsonl": "738c96feedbca2a6f2f5195436a7f00e16ddae7dbc450d24886924fedf187014",
+    "ocr_15.jsonl": "19b0666af0b233543f158ebc2f7193458567f6c54fda756dd1a4a4749232521b",
+    "queries.jsonl": "9c11852380d60163fcb7942551fa57643a2d2334e4856686838c663b97d8b994",
+    "tops.npz": "cf0a59c7ad3984c591533f786c88556c13a931759916572a168bdc02eff41ef9"
+  },
+  "matches_original_marker": true,
+  "parity_max_abs_difference_first_20_queries": 0.0,
+  "seconds": 2616.375912634,
+  "shape": [
+    10904,
+    76347
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "empty_pages": 127,
+  "extract_seconds": 117.895944149,
+  "images_tar_sha256": "682056e3e99e90292234c16907c4c83f02abef25c183d72159d19ee159cc8577",
+  "ocr_jsonl_sha256": "979ccda745acbfc9092a4c2b61b49190e40a6ca30d658048504219f7cf483ee7",
+  "ocr_seconds": 1496.7994622489998,
+  "pages": 4771,
+  "shard": 11,
+  "tesseract_version": "tesseract 5.3.0"
+}
