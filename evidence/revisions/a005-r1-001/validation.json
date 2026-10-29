@@ -1,0 +1,130 @@
+{
+  "amendment": "QPAF-M1.5-A005",
+  "confirmation_labels_opened": false,
+  "dataset": "ViMDoc",
+  "experiment_id": "QPAF-A005-R1-VAL",
+  "inputs_sha256": {
+    "candidate_scores.parquet": "296e0821e467a98bc5873ba789cfed8efeac511059a00928536f3c48c855ddf5",
+    "dev_qrels.json": "aab40d996476fe297be8d000e17bfd6b326b3c318879321f45583cd8bdc42017",
+    "queries.jsonl": "9c11852380d60163fcb7942551fa57643a2d2334e4856686838c663b97d8b994"
+  },
+  "methods": {
+    "page": "QPAF-SA-R1",
+    "query": "QARF-SA-R1"
+  },
+  "post_hoc": true,
+  "rows": {
+    "page": [
+      {
+        "delta_vs_static": 0.005331091646395225,
+        "description": "A005 original, mean of 3 seeds (epoch chosen on validation, 20 epochs)",
+        "id": "a005_original",
+        "ndcg_at_10": 0.9622088323661977
+      },
+      {
+        "delta_vs_static": 0.004060270819915224,
+        "description": "R1 full, ensemble of 3 weight-averaged models",
+        "id": "full_ensemble",
+        "ndcg_at_10": 0.9609380115397177
+      },
+      {
+        "delta_vs_static": 0.0040237510275494826,
+        "description": "R1 full, mean of 3 weight-averaged models (no ensemble)",
+        "id": "full_seed_mean",
+        "ndcg_at_10": 0.960901491747352
+      },
+      {
+        "delta_vs_static": 0.005061536797405508,
+        "description": "R1 full, ensemble of 3 best-epoch models (epoch picked on validation)",
+        "id": "full_best_epoch_ensemble",
+        "ndcg_at_10": 0.961939277517208
+      },
+      {
+        "delta_vs_static": 0.004060270819915224,
+        "description": "ablation: epsilon 1e-3, weight-averaged, seed 20260820",
+        "id": "eps1e3_seed1",
+        "ndcg_at_10": 0.9609380115397177
+      },
+      {
+        "delta_vs_static": 0.0042780358267466845,
+        "description": "ablation: constant LR, weight-averaged, seed 20260820",
+        "id": "constlr_seed1",
+        "ndcg_at_10": 0.9611557765465492
+      },
+      {
+        "delta_vs_static": 0.004060270819915224,
+        "description": "R1 full, weight-averaged, seed 20260820",
+        "id": "full_seed1",
+        "ndcg_at_10": 0.9609380115397177
+      }
+    ],
+    "query": [
+      {
+        "delta_vs_static": 0.0037308211732853813,
+        "description": "A005 original, mean of 3 seeds (epoch chosen on validation, 20 epochs)",
+        "id": "a005_original",
+        "ndcg_at_10": 0.9606085618930879
+      },
+      {
+        "delta_vs_static": 0.0030156657940965115,
+        "description": "R1 full, ensemble of 3 weight-averaged models",
+        "id": "full_ensemble",
+        "ndcg_at_10": 0.959893406513899
+      },
+      {
+        "delta_vs_static": 0.0030156657940965115,
+        "description": "R1 full, mean of 3 weight-averaged models (no ensemble)",
+        "id": "full_seed_mean",
+        "ndcg_at_10": 0.959893406513899
+      },
+      {
+        "delta_vs_static": 0.0030156657940965115,
+        "description": "R1 full, ensemble of 3 best-epoch models (epoch picked on validation)",
+        "id": "full_best_epoch_ensemble",
+        "ndcg_at_10": 0.959893406513899
+      },
+      {
+        "delta_vs_static": 0.0030156657940965115,
+        "description": "ablation: epsilon 1e-3, weight-averaged, seed 20260820",
+        "id": "eps1e3_seed1",
+        "ndcg_at_10": 0.959893406513899
+      },
+      {
+        "delta_vs_static": 0.001765665794096427,
+        "description": "ablation: constant LR, weight-averaged, seed 20260820",
+        "id": "constlr_seed1",
+        "ndcg_at_10": 0.9586434065138989
+      },
+      {
+        "delta_vs_static": 0.0030156657940965115,
+        "description": "R1 full, weight-averaged, seed 20260820",
+        "id": "full_seed1",
+        "ndcg_at_10": 0.959893406513899
+      }
+    ]
+  },
+  "run_result_sha256": {
+    "page": {
+      "constlr-20260820": "2a01fe89b252e3255f78d9b52e58a7f7aab27d0e5393ef570c6452f4c93d04c0",
+      "eps1e3-20260820": "2154d85b24ae5c9670c7dda54229e02f04b4f63b36cd3cbfa5e66e98bd2eb023",
+      "full-20260820": "b811815ab70d182c726e4408ffd2a49a9bbca930302aa86177ca78c13dce9cc2",
+      "full-20260821": "419fd2d66669d362b03e04f61b328ed73dda2f7e8ac11c41ee18bd5ab933b3a8",
+      "full-20260822": "00bff14c4d4ee811673595b24d32f3a203eed8c76ab9ad5bf2b26493afb7fa1e"
+    },
+    "query": {
+      "constlr-20260820": "b08b66f73313c48a7244c98ff57fd0f264e284026e651b2f594dc7dfb0e94f5e",
+      "eps1e3-20260820": "08defd1cf2c929f5a98773800712a831022f521727a7fd0eab1fbd3da20d98a8",
+      "full-20260820": "b662e5ba13d6339927850a16447b0a79783d208fc38ff03905783cf6e43b7202",
+      "full-20260821": "f5c02b0ab13d7cf766efea0e6387c960d05f50bd56781bf162838a8364f4bcdd",
+      "full-20260822": "e30827e389c8238f408ae4cbd1a02f160c2f25f980e0b4f8cb912550ddec944c"
+    }
+  },
+  "schema_version": 1,
+  "source_commit": "ba1685312831823fd5d30dc2ec4a8464442f103b",
+  "split": "validation",
+  "stage": "R1-validation",
+  "stage3_sha256": "01c6076819ad15feb7ef574ab23c1445e861a55d6819d47c4d8f9f9830368eac",
+  "train_fitted_static": 0.9568777407198025,
+  "unit": "document",
+  "vidoseek_test_accessed": false
+}
