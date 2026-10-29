@@ -27,6 +27,7 @@ Các receipt CPU ghi GPU-deferred được giữ nguyên như snapshot lịch s�
 | [Dữ liệu](04_data_protocol/README.md) | Corpus, qrels, OCR và định danh trang |
 | [Oracle lịch sử](05_oracle_experiments/README.md) | Protocol, review và kết quả của từng study |
 | [Bàn giao kỹ thuật](06_handover/README.md) | Audit, runbook và hồ sơ bàn giao |
+| [Feature lab](feature_lab/README.md) | Bốn thay đổi kiến trúc F1–F4 cho QARF/QPAF, harness CV chung và phân công chạy song song |
 | [Evidence](../evidence/) | Manifest, hash, quyết định và revision đã ghi nhận |
 
 Các tài liệu kỹ thuật và hồ sơ lịch sử giữ vai trò giải thích implementation hoặc
