@@ -119,3 +119,6 @@ results/m2.6/RUN-*/source_snapshot.zip
 !/results/m3.4/**/checkpoints/
 !/results/m3.4/**/*.log
 !/results/m3.4/**/*.pt
+
+# Personal QPAF explainer page; published as a private artifact, not part of the research evidence.
+/docs/explainer/qpaf-explainer.html
