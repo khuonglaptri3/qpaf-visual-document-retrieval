@@ -122,3 +122,87 @@ Không chạy biến thể nào khác của method sau khi mở confirmation, v�
   lợi thế đo được trên confirmation; nếu phải bảo vệ đóng góp, hãy nhấn mạnh neo tĩnh + phần dư khởi tạo bằng 0
   (an toàn, không tệ hơn baseline ở epoch 0), không nhấn mạnh tính theo trang.
 - **Review độc lập được miễn** (`WAIVED_BY_A006`) vì đây là project môn học.
+
+## 6. A005-R1: training tinh chỉnh (post-hoc)
+
+**Đây là phân tích post-hoc.** Tập confirmation đã được mở một lần ở Stage 5, nên mọi con số dưới đây không còn
+sạch như mục 2. Kết quả sạch của A005 vẫn là mục 2 (QPAF-SA-v2 hơn `train_fitted_static` +0,001820, verdict
+`QPAF_SA_BEATS_BASELINE`). Cấu hình R1 được chốt trước khi xem kết quả và không đổi sau đó; confirmation chỉ chạy
+một lần, cho cấu hình `full`.
+
+### Cấu hình
+
+| Thành phần | A005 | R1 (`full`) |
+| --- | --- | --- |
+| epsilon trong `log(w̄ + ε)` | 1e-3 | 1e-6 |
+| Số epoch | 20 | 40 |
+| Learning rate (Adam) | 0,01 cố định | 0,01, cosine theo epoch (epoch 40 còn 3,1e-5) |
+| Model cuối | epoch tốt nhất trên validation | trung bình đều trọng số epoch 20–40 (21 checkpoint), không chọn epoch |
+| Ensemble | không | trung bình điểm fused page của 3 seed, rồi lấy max theo document |
+
+Giữ nguyên: anchor `[0.1, 0.2, 0.7]`, 13 feature, loss listwise trên document với τ học được, weight decay 0,
+clip 5,0, batch 16, 3 seed, và cùng cấu hình cho cổng theo query (QARF-SA-R1) và theo trang (QPAF-SA-R1).
+
+### Bảng validation (400 query, nDCG@10, `train_fitted_static` = 0,956878)
+
+| Dòng | QARF-SA | Delta | QPAF-SA | Delta |
+| --- | ---: | ---: | ---: | ---: |
+| A005 gốc, trung bình 3 seed (epoch chọn trên validation) | 0,960609 | +0,003731 | 0,962209 | +0,005331 |
+| R1 `full`, ensemble 3 model trung bình trọng số | 0,959893 | +0,003016 | 0,960938 | +0,004060 |
+| R1 `full`, trung bình 3 model (không ensemble) | 0,959893 | +0,003016 | 0,960901 | +0,004024 |
+| R1 `full`, ensemble 3 model best-epoch (chọn epoch) | 0,959893 | +0,003016 | 0,961939 | +0,005062 |
+| Ablation `eps1e3`, seed 20260820 | 0,959893 | +0,003016 | 0,960938 | +0,004060 |
+| Ablation `constlr`, seed 20260820 | 0,958643 | +0,001766 | 0,961156 | +0,004278 |
+| `full`, seed 20260820 (để so với hai dòng trên) | 0,959893 | +0,003016 | 0,960938 | +0,004060 |
+
+Trên validation, R1 **không** vượt A005 gốc. Điều này không mâu thuẫn: dòng A005 gốc lấy epoch tốt nhất trên chính
+validation nên bị lạc quan, còn R1 không chọn gì trên validation.
+
+### Bảng confirmation (8.904 query, nDCG@10, mở một lần, post-hoc)
+
+| Phương pháp | nDCG@10 |
+| --- | ---: |
+| `train_fitted_static` | 0,958940 |
+| QPAF-SA-v2 gốc (trung bình 3 seed) | 0,960760 |
+| QARF-SA-R1, từng seed (trung bình trọng số) | 0,961272 / 0,961379 / 0,961363 |
+| QPAF-SA-R1, từng seed (trung bình trọng số) | 0,961540 / 0,961374 / 0,961432 |
+| **QARF-SA-R1 ensemble** | **0,961391** |
+| **QPAF-SA-R1 ensemble** | **0,961556** |
+
+So sánh cặp theo query (ensemble QPAF-SA-R1 trừ đối tượng), bootstrap 10.000 lần theo query, CI 95%:
+
+| So sánh | Delta trung bình | CI95 | Thắng / Hòa / Thua |
+| --- | ---: | --- | --- |
+| (a) so với `train_fitted_static` (kết quả chính chốt trước) | +0,002615 | [+0,001230, +0,004076] | 221 / 8.506 / 177 |
+| (b) so với QARF-SA-R1 ensemble (kết quả chính chốt trước) | +0,000164 | [−0,001099, +0,001470] | 166 / 8.567 / 171 |
+| (c) so với QPAF-SA-v2 gốc | +0,000796 | [+0,000146, +0,001463] | 149 / 8.660 / 95 |
+
+Đọc kết quả: (a) dương và CI không chứa 0, mức tăng so với baseline tĩnh lớn hơn A005 (+0,0026 so với +0,0018).
+(b) vẫn **không khác biệt**: CI chứa 0, nên R1 cũng không cho bằng chứng rằng cổng theo trang tốt hơn cổng theo
+query. (c) cho thấy R1 hơn A005 gốc +0,0008 với CI dương, nhưng đây là mức rất nhỏ và là post-hoc.
+
+### Từng thành phần giúp được bao nhiêu
+
+Ablation chỉ chạy trên validation với một seed, nên chỉ nói được xu hướng, không phải con số chắc chắn.
+
+- **epsilon 1e-6 so với 1e-3: không có tác dụng đo được** (giống nhau tới 6 chữ số ở cả hai cổng). Lý do: anchor
+  `[0.1, 0.2, 0.7]` không có trọng số bằng 0, nên ε chỉ dịch trọng số cỡ 1e-3 tương đối và gần như bị triệt tiêu
+  sau softmax. Thành phần này chỉ có ý nghĩa nếu anchor có trọng số bằng 0.
+- **LR cosine so với cố định: nhỏ và không nhất quán.** Với QARF-SA, cosine hơn +0,001250 (0,959893 so với
+  0,958643). Với QPAF-SA, LR cố định lại hơn nhẹ (0,961156 so với 0,960938, tức −0,000218 cho cosine). Với LR cố
+  định, model ở epoch 40 dao động (QPAF-SA 0,958542 ở epoch cuối), nên việc lấy trung bình trọng số mới là phần
+  làm model ổn định, cosine chỉ hỗ trợ thêm.
+- **Trung bình trọng số so với chọn epoch:** trên validation, chọn epoch (0,961939 cho QPAF-SA ensemble) cao hơn
+  trung bình trọng số (0,960938) khoảng +0,0010, nhưng chọn epoch dùng nhãn validation nên con số đó lạc quan; bù
+  lại trung bình trọng số không phụ thuộc validation. Trên confirmation, phần cải thiện so với A005 gốc (+0,0008)
+  có thể đến từ việc bỏ chọn epoch trên tập validation nhỏ (400 query) kết hợp với trung bình trọng số. Không có
+  ablation trên confirmation nên không tách được từng phần.
+- **Ensemble 3 seed: rất nhỏ.** Trên confirmation, QPAF-SA-R1 trung bình từng seed là 0,961449 và ensemble là
+  0,961556 (+0,000107); QARF-SA-R1 từ 0,961338 lên 0,961391 (+0,000053). Các seed sau khi trung bình trọng số gần
+  như trùng nhau nên ensemble ít có gì để thêm.
+
+### Lưu ý
+
+- Các con số trong mục này là post-hoc (confirmation đã mở ở Stage 5); kết quả sạch vẫn là A005, mục 2.
+- Cải thiện của R1 so với A005 nhỏ (+0,0008 nDCG@10) và không đổi kết luận về cổng theo trang so với theo query.
+- Bằng chứng nằm ở `evidence/revisions/a005-r1-001/`.
