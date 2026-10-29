@@ -16,6 +16,7 @@ import numpy as np  # noqa: E402
 import pyarrow as pa  # noqa: E402
 import pyarrow.parquet as pq  # noqa: E402
 
+from qpaf.a005.bm25_rerun import rebuild_rows  # noqa: E402
 from qpaf.a005.stage1 import assemble_channel, candidate_rows, coverage  # noqa: E402
 
 SHARDS = 16
@@ -39,11 +40,23 @@ def main(argv=None):
     parser.add_argument('--queries', type=Path, required=True)
     parser.add_argument('--dev-qrels', type=Path, required=True)
     parser.add_argument('--output', type=Path, required=True, help='new directory')
+    parser.add_argument('--bm25-union', type=Path,
+                        help='bm25_union.npz from a005_stage1_bm25_modal.py, used instead of bm25.npy')
+    parser.add_argument('--bm25-report', type=Path, help='_SUCCESS.json of that re-run')
+    parser.add_argument('--tops', type=Path, help='tops.npz uploaded to that re-run')
     args = parser.parse_args(argv)
     marker = lambda name: json.loads((args.markers/f'{name}.json').read_text(encoding='utf-8'))  # noqa: E731
     prepare = marker('prepare')
     checks = {args.pages: PAGES_SHA256, args.queries: prepare['queries_sha256'],
-              args.dev_qrels: prepare['dev_qrels_sha256'], args.data/'bm25.npy': marker('bm25')['bm25_sha256']}
+              args.dev_qrels: prepare['dev_qrels_sha256']}
+    if args.bm25_union:
+        rerun = json.loads(args.bm25_report.read_text(encoding='utf-8'))
+        if rerun['bm25_matrix_sha256'] != marker('bm25')['bm25_sha256'] or not rerun['matches_original_marker']:
+            raise ValueError('BM25 re-run does not reproduce the original matrix')
+        checks[args.bm25_union] = rerun['bm25_union_sha256']
+        checks[args.tops] = rerun['inputs_sha256']['tops.npz']
+    else:
+        checks[args.data/'bm25.npy'] = marker('bm25')['bm25_sha256']
     for shard in range(SHARDS):
         gpu = marker(f'gpu_{shard:02d}')
         checks[args.data/f'dense_{shard:02d}.npy'] = gpu['dense_sha256']
@@ -57,18 +70,32 @@ def main(argv=None):
     documents = {p['page_id']: p['document_id'] for p in pages}
     query_ids = [json.loads(line)['query_id'] for line in args.queries.read_text(encoding='utf-8').splitlines()]
     total = len(page_ids)
-    bm25 = np.load(args.data/'bm25.npy', mmap_mode='r')
     shards = {name: [np.load(args.data/f'{name}_{s:02d}.npy', mmap_mode='r') for s in range(SHARDS)]
               for name in ('dense', 'visual')}
-    if bm25.shape != (len(query_ids), total):
-        raise ValueError(f'bm25 shape {bm25.shape}')
+    if args.bm25_union:
+        exchange, tops = np.load(args.bm25_union), np.load(args.tops)
+        exchange = {k: exchange[k] for k in ('bm25_top', 'union', 'values')}
+        tops = {k: tops[k] for k in ('dense_top', 'visual_top')}
+
+        def bm25_rows(rows):
+            return rebuild_rows(total, exchange['bm25_top'][rows], exchange['union'][rows], exchange['values'][rows],
+                                tops['dense_top'][rows], tops['visual_top'][rows])
+        shape = (len(exchange['union']), total)
+    else:
+        bm25 = np.load(args.data/'bm25.npy', mmap_mode='r')
+
+        def bm25_rows(rows):
+            return np.asarray(bm25[rows], dtype=np.float64)
+        shape = bm25.shape
+    if shape != (len(query_ids), total):
+        raise ValueError(f'bm25 shape {shape}')
     schema = pa.schema([('query_id', pa.string()), ('page_id', pa.string()), ('document_id', pa.string())] +
                        [(c, pa.float64()) for c in ('bm25', 'dense', 'visual', 'bm25_norm', 'dense_norm', 'visual_norm')])
     unions, sizes = {}, []
     with pq.ParquetWriter(args.output/'candidate_scores.parquet', schema) as writer:
         for start in range(0, len(query_ids), CHUNK):
             rows = slice(start, start+CHUNK)
-            matrices = {'bm25': np.asarray(bm25[rows], dtype=np.float64)}
+            matrices = {'bm25': bm25_rows(rows)}
             for name in ('dense', 'visual'):
                 matrices[name] = assemble_channel(total, SHARDS, [np.asarray(block[rows]) for block in shards[name]])
             columns = {name: [] for name in schema.names}
@@ -90,7 +117,9 @@ def main(argv=None):
               'candidate_scores_sha256': sha256(args.output/'candidate_scores.parquet'),
               'inputs_sha256': {path.name: expected for path, expected in checks.items()},
               'labels_used': 'dev qrels for the coverage report only, after every union was fixed',
-              'run_location': 'local CPU (Modal workspace tranthanhzt123321 hit its spend limit)'}
+              'run_location': 'local CPU (Modal workspace tranthanhzt123321 hit its spend limit)',
+              'bm25_source': ('re-run exchange (bm25_union.npz); full matrix SHA-256 equals the original marker'
+                              if args.bm25_union else 'original bm25.npy')}
     with (args.output/'_SUCCESS.json').open('x', encoding='utf-8') as stream:
         json.dump(report, stream, ensure_ascii=False, sort_keys=True, indent=2)
     print(json.dumps({k: v for k, v in report.items() if k != 'inputs_sha256'}, indent=2))

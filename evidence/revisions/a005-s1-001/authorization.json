@@ -47,5 +47,31 @@
   ],
   "retry_rule": "Each step and shard runs once. A step or shard whose _SUCCESS marker exists is skipped on a re-launch; a failed one is recorded, and any re-attempt needs a note in this record. Stop if projected spend passes the cap.",
   "command": "modal run --detach a005_stage1_modal.py --pages-sha256 9dc277153f9137c8c668d70a3f66dfd208e129e5907eede7b47dbac1f2250b84",
-  "independent_review": "WAIVED_BY_A006"
+  "independent_review": "WAIVED_BY_A006",
+  "bm25_rerun": {
+    "reason": "The original bm25.npy (6,659,901,632 bytes, volume size correct) could not be downloaded intact: `modal volume get` 1.5.5 left zero-filled 1 MiB blocks and Volume.read_file streams dropped chunks. Seven of 32 shard matrices had the same fault and were recovered by a sequential stream that matched their markers. For bm25.npy three CLI copies merged by hole-filling (attempt 3 filled 0 blocks) and three streams all failed the marker hash; the Research Lead stopped further downloads. Workspace tranthanhzt123321 had hit its spend limit, so assemble could not run next to the volume.",
+    "method": "Recompute BM25 in a second workspace with the same code and pinned image (a005_stage1_bm25_modal.py). The full-matrix SHA-256 must equal the original marker a28f354e...; otherwise nothing is written. Only the BM25 top-200 and the BM25 scores on the union with the locally computed dense/visual top-200 return (qpaf.a005.bm25_rerun); local assemble rebuilds rows that reproduce the original top-200, union and normalization.",
+    "modal_workspace": "buiphat251399",
+    "modal_volume": "qpaf-a005-bm25 (created in buiphat251399)",
+    "approval": {
+      "approver": "Tấn Phát (Research Lead)",
+      "approval_text": "buiphat251399, 2 USD",
+      "cost_cap_usd": 2,
+      "recorded_utc": "2026-10-29T07:10:00Z",
+      "recorded_by": "Claude at the Research Lead's request"
+    },
+    "estimated_usd": 0.5,
+    "inputs": "label-free: v2 canonical pages, queries.jsonl, 16 OCR shard files (all hash-checked against Stage 1 markers), tops.npz (dense/visual top-200 from the hash-checked shard matrices)",
+    "source_files_sha256": {
+      "a005_stage1_bm25_modal.py": "fb8258f3e23023e574c1679862670fc1233c372fd36afe9aadad7f82a40cabb5",
+      "src/qpaf/a005/bm25_rerun.py": "23a6010e3317ae34437888408fcd8f93a39aeb31acc07cd522c29b53218409e8",
+      "src/qpaf/a005/candidates.py": "b34e3118a1cdc940ee32332f9db1832923fa456931b3116a8311cfb73c5c9cc9",
+      "scripts/prepare_a005_bm25_rerun.py": "1c9cbfed638183c29205f6145b46364727489ddaad2a7b5af57361331b89d523",
+      "scripts/assemble_a005_stage1_local.py": "834eee217025242f2dc57a6a5c10f6ebb310699e65e8dcdf2ef41497f2595d2b",
+      "tests/test_a005_bm25_rerun.py": "d25145bdac4f7aee5e9eaa1e50adc464997a0099bfe7fdbfd64aef27532d1453",
+      "requirements-lock.txt": "17e6673bc89d0e10470c27250c34961058308823399c6b003519576cdd46c1be"
+    },
+    "command": "MODAL_PROFILE=buiphat251399 modal run a005_stage1_bm25_modal.py --inputs <bm25_inputs> --expected-sha256 a28f354e47093e5dbfdde801a21b41f24502226812c6063ba71fbe1575627ae4",
+    "retry_rule": "One invocation. A failure is recorded here and not retried without a new note."
+  }
 }
