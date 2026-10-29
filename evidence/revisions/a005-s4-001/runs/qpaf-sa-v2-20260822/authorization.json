@@ -1,0 +1,34 @@
+{
+  "amendment": "QPAF-M1.5-A005",
+  "approval_text": "Tôi sẽ để cho bạn quyết định các task trong planning, miễn là nó sạch.",
+  "cache_sha256": {
+    "candidate_scores.parquet": "296e0821e467a98bc5873ba789cfed8efeac511059a00928536f3c48c855ddf5",
+    "dev_qrels.json": "aab40d996476fe297be8d000e17bfd6b326b3c318879321f45583cd8bdc42017",
+    "queries.jsonl": "9c11852380d60163fcb7942551fa57643a2d2334e4856686838c663b97d8b994"
+  },
+  "created_at": "2026-10-29T13:23:17+00:00",
+  "granularity": "page",
+  "mode": "course_project_light",
+  "owner": "Tấn Phát",
+  "schema_version": 1,
+  "seed": 20260822,
+  "source_files_sha256": {
+    "scripts/train_a005_stage4.py": "48aeed9f8aebe10b19a7ceab0688e3fc7e05daf13d95e9f66a7b76a45b421f98",
+    "src/qpaf/a005/__init__.py": "5a970434fcc4ac6fc2246c06639f821f64a4066d40ec8a146ebc82cfe74890df",
+    "src/qpaf/a005/losses.py": "16184ffb81beafb640c6765cb445571e21e14a584d3061093155b30ec1f6695f",
+    "src/qpaf/a005/model.py": "ff3213b7301a8421dcbce351c21b6bbfa1212561b707c153405c61a36b30f642",
+    "src/qpaf/a005/stage2.py": "80673aba52e60006ed9295057142e415f3d667891e832ad97270078a44bab353",
+    "src/qpaf/a005/stage4.py": "ddf3e3cb50ab2e9d07eb977cdfd62cbb4cc2ba5d24c8365de049ff7c44ea016b",
+    "src/qpaf/a005/trainer.py": "9654d7bb0b5384e8d76f164758b9d7342449739dcbaf991254c833864dfd39d6",
+    "src/qpaf/a005/vimdoc.py": "aeb4d172419164825aa821392f2776cfe49d7f50b70ac7fab11fb58b1567ee25",
+    "src/qpaf/m12/features.py": "86eb5d540d2330c0fec263d587581d2f159b77461df85c57f6ecaa64fafa40b6",
+    "src/qpaf/m24/dataset.py": "1b2681b163ce4a88a87eeb71ba31f417ee2a4469a9be49845c47d528eb6c5279",
+    "src/qpaf/m24/evaluator.py": "bfd25f331c5c377c708fd1d05f3e3edb85467488301e9658ea9bb486ef476742",
+    "src/qpaf/m24/trainer.py": "242fbcdc3a1cf44c81d29ef7be19aac256b29e5226f870cdf1cee889ff9df7d4",
+    "tests/test_a005_stage4.py": "0530b31d5a8baf9cc41186293712c8d292d9f837de6d31489c992e8b39999e39",
+    "tests/test_a005_trainer.py": "de3bcffcef95b0d29f615199e9b127fe11931061a113c22150dfba96d5d69058"
+  },
+  "stage": 4,
+  "stage3_sha256": "01c6076819ad15feb7ef574ab23c1445e861a55d6819d47c4d8f9f9830368eac",
+  "status": "APPROVED"
+}
