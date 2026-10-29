@@ -3,6 +3,7 @@
 .env.*
 !.env.example
 .venv/
+.venv-*/
 venv/
 
 # Python bytecode and packages
@@ -49,6 +50,9 @@ desktop.ini
 *.log
 *.tmp
 *.temp
+
+# Feature-lab smoke runs (docs/feature_lab/)
+results/lab/_smoke/
 
 # Model checkpoints and tensor caches
 *.pt
