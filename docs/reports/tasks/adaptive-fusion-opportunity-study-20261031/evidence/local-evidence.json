@@ -1,0 +1,64 @@
+{
+  "activity": "read-only recomputation of existing validation oracle metrics; no new training/oracle run",
+  "oracle_scope": "171 validation queries, not the 970-query F3 CV pool",
+  "oracle_is_label_using": true,
+  "candidate_oracle_search": "two coordinate sweeps; not a proof of globally optimal page assignment",
+  "summary": {
+    "w7": {
+      "queries": 171,
+      "means": {
+        "global": 0.8692955672259582,
+        "qarf": 0.9110294521048552,
+        "qpaf": 0.9428697386678373
+      },
+      "paired_gaps": {
+        "qarf_minus_global": {
+          "mean": 0.04173388487889678,
+          "wins": 25,
+          "ties": 146,
+          "losses": 0
+        },
+        "qpaf_minus_qarf": {
+          "mean": 0.03184028656298228,
+          "wins": 20,
+          "ties": 151,
+          "losses": 0
+        }
+      }
+    },
+    "w66": {
+      "queries": 171,
+      "means": {
+        "global": 0.8717428688617589,
+        "qarf": 0.9118996170763116,
+        "qpaf": 0.940124976212437
+      },
+      "paired_gaps": {
+        "qarf_minus_global": {
+          "mean": 0.0401567482145526,
+          "wins": 28,
+          "ties": 143,
+          "losses": 0
+        },
+        "qpaf_minus_qarf": {
+          "mean": 0.028225359136125304,
+          "wins": 20,
+          "ties": 151,
+          "losses": 0
+        }
+      }
+    }
+  },
+  "source_sha256": {
+    "src/qpaf/m12/features.py": "86eb5d540d2330c0fec263d587581d2f159b77461df85c57f6ecaa64fafa40b6",
+    "src/qpaf/lab/model.py": "398c7c4507ca3898f96a5ef18c1bd505f908a944cb54e8351885a7801221c7a8",
+    "docs/GUILDLINE_OVERVIEWS_PROPOSAL/DE_XUAT_NGHIEN_CUU_QPAF.md": "7e5c90b4f749bcf29cff52322bb66f4723e078af74293d7b486fc6063f203b44",
+    "results/m4.4/RUN-QPAF-M4_4-ORC-001-20261023T172102Z-A01/oracle_table.json": "ffef27bcf90c72b4f7d8f3c016020461ea23bea80e8bb96d57ba42eae098381f",
+    "results/m4.4/RUN-QPAF-M4_4-ORC-001-20261023T172102Z-A01/oracle_per_query.csv": "9cf18cb5a5e5735b49bf1186ff9bbb7c56daf903eb4786bd28bbb87a0fb06a64",
+    "docs/reports/tasks/lab-f3-objective-20261030/README.md": "a20a4d95d04c6e1f41f1bd755695ccb7a12f5386c9a746b4bc3266c7bc49cc11",
+    "artifacts/score_input_probe_vidore_v3_finance_en.json": "0039a6803bff06e9c90f1437ceba4eafa917ff6fe62cc0f26017163f95ea0efa",
+    "artifacts/dataset_materialization_vidore_v3_finance_en.json": "a37f88fcbe0e48adbf89f5182668fc6de1dd4776589646969c652d5be65779e1",
+    "docs/feature_lab/F1_content_features.md": "3a73995d9d6ac62be8b678a76992fcfeeabf74471326feb8bef13dd67370db2b",
+    "docs/feature_lab/F4_query_embedding.md": "03dcb0e529cf550280dfe8317cc928972bdc2f8f8395b529675d2e5e6385fa1e"
+  }
+}

@@ -1,0 +1,194 @@
+{
+  "scope": "Primary-source research; source-derived summaries are concise and distinguish claims from inference",
+  "sources": [
+    {
+      "id": "V3",
+      "title": "ViDoRe V3",
+      "url": "https://arxiv.org/html/2601.08620v1",
+      "checked_on": "2026-10-31",
+      "section": "2026-01-13; §§3–4, App.B/E",
+      "supported": "Ten corpora, eight public; query taxonomy, page qrels and six language versions. Visual models lead aggregate results. Hybrid generation context is not learned-fusion evidence.",
+      "caveat": "Group translations; public releases are evaluation data. Multi-modality alone is not complementarity."
+    },
+    {
+      "id": "V3I",
+      "title": "ViDoRe V3 Industrial author card",
+      "url": "https://huggingface.co/datasets/vidore/vidore_v3_industrial",
+      "checked_on": "2026-10-31",
+      "section": "Dataset Statistics / Structure",
+      "supported": "27 documents, 5,244 pages, 283 base queries; mean 1.8 relevant pages/query. Images, Markdown, document IDs, graded page qrels.",
+      "caveat": "Test release; no native gate-training split. Corpus structure suggests a hypothesis, not measured QPAF gains."
+    },
+    {
+      "id": "V3F",
+      "title": "ViDoRe V3 Finance EN author card",
+      "url": "https://huggingface.co/datasets/vidore/vidore_v3_finance_en",
+      "checked_on": "2026-10-31",
+      "section": "Dataset Statistics / Structure",
+      "supported": "Six bank reports, 2,942 pages, 309 base queries; mean 4.7 relevant pages/query.",
+      "caveat": "Publisher document licenses differ from annotation license; local exposure must be audited."
+    },
+    {
+      "id": "V3C",
+      "title": "ViDoRe V3 Computer Science author card",
+      "url": "https://huggingface.co/datasets/vidore/vidore_v3_computer_science",
+      "checked_on": "2026-10-31",
+      "section": "Dataset Statistics / Structure",
+      "supported": "Two textbooks, 1,360 pages, 215 base queries; mean 4.6 relevant pages/query.",
+      "caveat": "Only two source books: weak standalone document-generalization split."
+    },
+    {
+      "id": "MM",
+      "title": "MMDocIR paper",
+      "url": "https://arxiv.org/html/2501.08828v3",
+      "checked_on": "2026-10-31",
+      "section": "2025-11-07 v3; §§2–5, App.G",
+      "supported": "Body/release reports 1,658 evaluation questions and 73,843 training questions/6,878 documents. Known-document page retrieval uses Recall@k; visual baselines remain strong.",
+      "caveat": "Abstract/conclusion retain inconsistent older counts; new annotations have research/noncommercial conditions."
+    },
+    {
+      "id": "MMC",
+      "title": "MMDocIR evaluation author release",
+      "url": "https://huggingface.co/datasets/MMDocIR/MMDocIR_Evaluation_Dataset",
+      "checked_on": "2026-10-31",
+      "section": "Evaluation Set Overview / Pages",
+      "supported": "313 documents, 20,395 page screenshots, 1,658 questions; OCR/VLM text and page/layout evidence annotations.",
+      "caveat": "Hub loader named train is not a valid research training split; metadata license conflicts with more restrictive paper/repo statements."
+    },
+    {
+      "id": "MMCODE",
+      "title": "MMDocIR official code",
+      "url": "https://github.com/MMDocRAG/MMDocIR",
+      "checked_on": "2026-10-31",
+      "section": "README; encode.py; metric_eval.py",
+      "supported": "Encoding/evaluation restricts candidate ranges by known source document; domain macro and question-average recall are distinct.",
+      "caveat": "Global pooled search or layout-to-page conversion is a protocol extension."
+    },
+    {
+      "id": "UNI",
+      "title": "UniDoc-Bench paper",
+      "url": "https://arxiv.org/html/2510.03663v2",
+      "checked_on": "2026-10-31",
+      "section": "2025-10-09 v2; §4/App.E Table7",
+      "supported": "Recall@10 reverses by evidence type: text-required text .821 vs image .774; image-required text .751 vs image .922.",
+      "caveat": "OpenAI text embedding versus ColQwen, not this project's retrievers. Evidence-chunk/page-overlap metric differs from page nDCG."
+    },
+    {
+      "id": "UNIREPO",
+      "title": "UniDoc-Bench official repository",
+      "url": "https://github.com/SalesforceAIResearch/UniDoc-Bench",
+      "checked_on": "2026-10-31",
+      "section": "Data Preparation / License / Usage Notice",
+      "supported": "70k pages, eight domains, 1,600 synthetic QA pairs; source paper reports 20% human validation.",
+      "caveat": "CC-BY-NC and an explicit model-use notice; inspect actual intended use and artifact availability before adoption."
+    },
+    {
+      "id": "REAL",
+      "title": "REAL-MM-RAG paper",
+      "url": "https://arxiv.org/html/2502.12342v1",
+      "checked_on": "2026-10-31",
+      "section": "2025-02-17; §§3–5",
+      "supported": "Finance/technical report and slide corpora; controlled rephrasings vary lexical match while retaining semantics. Baselines include BM25/BGE-M3 OCR.",
+      "caveat": "Mostly single verified relevant page and visual dominance: more direct QARF diagnostic than QPAF proof. Group paraphrases."
+    },
+    {
+      "id": "MFAR",
+      "title": "Multi-Field Adaptive Retrieval",
+      "url": "https://arxiv.org/html/2410.20056",
+      "checked_on": "2026-10-31",
+      "section": "ICLR2025; §2.2, §5.1 Table2",
+      "supported": "Query-conditioned field/scorer weights; query conditioning ablation improves mean MRR .456 to .545.",
+      "caveat": "Encoder fine-tuning and structured fields differ from frozen score fusion; no candidate-conditioned claim."
+    },
+    {
+      "id": "DAT",
+      "title": "Dynamic Alpha Tuning",
+      "url": "https://arxiv.org/html/2503.23013v1",
+      "checked_on": "2026-10-31",
+      "section": "2025-03-29; §§4–5",
+      "supported": "An LLM judges two top-ranked results to compute one alpha per query.",
+      "caveat": "Small paragraph-retrieval setting and online LLM cost; does not show page-level weighting is needed."
+    },
+    {
+      "id": "BRUCH",
+      "title": "An Analysis of Fusion Functions for Hybrid Retrieval",
+      "url": "https://arxiv.org/html/2210.11934",
+      "checked_on": "2026-10-31",
+      "section": "TOIS42(1); §5 Table2, §6",
+      "supported": "Tuned global convex fusion is a strong, sample-efficient baseline and can beat default RRF across the evaluated datasets.",
+      "caveat": "Not a universal dominance theorem; normalization and static tuning budget must be controlled."
+    },
+    {
+      "id": "GQR",
+      "title": "Guided Query Refinement",
+      "url": "https://arxiv.org/html/2510.05038v3",
+      "checked_on": "2026-10-31",
+      "section": "ICLR2026; 2026-04-06 v3; Table3",
+      "supported": "ViDoRe2: tuned min-max fusion +3.4% relative mean nDCG@5 over primary versus untuned RRF -2.8%.",
+      "caveat": "GQR modifies query embeddings; its gains are not QPAF convex-score-fusion results. Percentages are relative, not absolute points."
+    },
+    {
+      "id": "MIDR",
+      "title": "MIDR: Enrichment-Augmented Indexing",
+      "url": "https://arxiv.org/html/2609.01316v1",
+      "checked_on": "2026-10-31",
+      "section": "2026-09-01; App.L/M Tables24–25",
+      "supported": "On 1,489 English queries, enriched-text MIDR and reproduced ColQwen2.5 win decisively on 351 and 362 queries. Per-query selector reaches .7042 versus visual .6300.",
+      "caveat": "Label-using selector; MIDR changes text representation with offline MLLM enrichment. Not evidence for the current OCR channel or learned page routing."
+    },
+    {
+      "id": "DRAG",
+      "title": "DRAG / LckBorda",
+      "url": "https://www.mdpi.com/2079-9292/15/4/843",
+      "checked_on": "2026-10-31",
+      "section": "2026-02-16; §3.3",
+      "supported": "Uses page chart/image area for visual/text weights; overlap-first and weighted Borda on remaining pages.",
+      "caveat": "Closest checked heuristic page-aware precedent. Publisher indexed text verified mechanism; direct fetch returned429, so no numerical fusion-ablation claim is used."
+    },
+    {
+      "id": "MULTI",
+      "title": "DocRetriever / MultiDocR",
+      "url": "https://arxiv.org/html/2605.30027v1",
+      "checked_on": "2026-10-31",
+      "section": "KDD2026; §§3.4,5",
+      "supported": "Extends MMDocIR's 313 documents to 2,581 questions with graded relevance and cross-page/cross-modal annotations; a fixed .8 dense weight is a strong control.",
+      "caveat": "Reused source documents/derived queries mean MMDocIR and MultiDocR are not independent confirmations."
+    },
+    {
+      "id": "VIDORAG",
+      "title": "ViDoRAG",
+      "url": "https://arxiv.org/html/2502.18017",
+      "checked_on": "2026-10-31",
+      "section": "2025-06-03 v2; §5.1",
+      "supported": "GMM chooses retrieval depth separately per modality, followed by union and original page order.",
+      "caveat": "Adaptive retrieval depth is not a query/page relevance-score weighting mechanism."
+    },
+    {
+      "id": "UNVEIL",
+      "title": "Unveil",
+      "url": "https://aclanthology.org/2025.acl-long.1166.pdf",
+      "checked_on": "2026-10-31",
+      "section": "ACL2025; §2.2 Eqs8–9",
+      "supported": "Adaptive reweighting applies to distillation training samples.",
+      "caveat": "Do not describe its training-loss ablation as inference-time page-fusion evidence."
+    },
+    {
+      "id": "INTERVAL",
+      "title": "Optimal Fusion Weights Form Intervals, Not Points",
+      "url": "https://arxiv.org/html/2610.24341",
+      "checked_on": "2026-10-31",
+      "section": "2026-10-17 preprint; §§3–5",
+      "supported": "Optimal query-level WRRF weights can occupy intervals; ranking utility need not identify one unique target weight.",
+      "caveat": "Recent preprint; its mean-optimal-weight comparator is not equivalent to optimizing aggregate static utility, and it does not establish QPAF."
+    },
+    {
+      "id": "LIMITS",
+      "title": "Evidence-Unit Fairness and Limits of Query-Adaptive Fusion",
+      "url": "https://arxiv.org/html/2608.00183",
+      "checked_on": "2026-10-31",
+      "section": "2026-09-11 v2; §§IV–V",
+      "supported": "Financial retrieval has oracle headroom but tested lightweight routers do not establish a reliable gain under grouped evaluation.",
+      "caveat": "Recent study with a compact encoder and evidence mapping limits; fixed blend comparator does not settle every strong-static case."
+    }
+  ]
+}

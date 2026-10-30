@@ -1,0 +1,25 @@
+{
+  "type": "original mathematical illustration, not measured research data",
+  "normalized_two_channel_scores": {
+    "relevant_text_page": [
+      1,
+      0
+    ],
+    "relevant_visual_page": [
+      0,
+      1
+    ],
+    "irrelevant_page": [
+      0.625,
+      0.625
+    ]
+  },
+  "static_constraints_for_both_positives_above_negative": [
+    "w > 0.625",
+    "w < 0.375"
+  ],
+  "constraints_incompatible": true,
+  "best_static_ndcg10_on_three_items": 0.9197207891481876,
+  "adaptive_ndcg10": 1.0,
+  "limitation": "A max-score nonlinear combiner also solves this toy. It shows expressivity beyond a fixed/query-level convex weight, not unique QPAF novelty or learnability."
+}

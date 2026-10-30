@@ -1,0 +1,10 @@
+{
+  "status": "PASS",
+  "primary_source_cards": 21,
+  "local_links_checked": 22,
+  "local_source_hashes_checked": 10,
+  "prior_f3_hashes_unchanged": 57,
+  "production_edits": false,
+  "new_experiments_run": false,
+  "scope": "research and proposed experiments only"
+}
