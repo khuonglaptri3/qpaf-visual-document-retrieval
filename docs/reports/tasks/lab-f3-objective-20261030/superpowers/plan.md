@@ -58,4 +58,3 @@
 Existing design is reused by link; no new feature implementation is planned, so existing tests are verification,
 not a retroactive RED→GREEN claim. Input validation gates all full runs. User explicitly requested immediate execution;
 continue without asking again for routine execution decisions.
-

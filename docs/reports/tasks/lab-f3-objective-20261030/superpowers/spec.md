@@ -27,4 +27,3 @@ Giữ nguyên nhánh làm việc ban đầu bằng managed worktree.
 Các run thực có schema qpaf-lab-v1, smoke=false, tracked_changes=false, đúng query IDs/folds/recipe/input hashes.
 Các mean và paired comparisons phải được tính lại từ per-query scores.
 Xác minh bố cục task, links và hashes trước bàn giao. Không push/merge trong phạm vi yêu cầu này.
-

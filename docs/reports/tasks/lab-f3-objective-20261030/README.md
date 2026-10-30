@@ -8,4 +8,3 @@ Trạng thái: đang chuẩn bị môi trường và dữ liệu cho nhánh feat
 - [Evidence](evidence/)
 
 Kết quả thực nghiệm, kiểm chứng và phần còn thiếu sẽ được cập nhật sau khi chạy.
-
