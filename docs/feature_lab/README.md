@@ -11,6 +11,11 @@ harness**, rồi so sánh kết quả để chốt kiến trúc cuối nhanh nh�
 | F4 | [Embedding query](F4_query_embedding.md) | B | Embedding BGE-M3 của query vào gate (kiểu mFAR/DAT) | QARF |
 
 Gợi ý người A là **Thanh**, vì F1 cần OCR ViMDoc trên Modal workspace `tranthanhzt123321`. Người B là **Khương**.
+
+> **Cách chạy:** code bốn feature đã nằm trên branch của từng feature, và asset (OCR, embedding query, cache
+> ViMDoc) đã gom sẵn trong `qpaf-lab-share.zip` (tạo bằng `scripts/prepare_lab_share.py`). Thành viên chỉ cần làm
+> theo [HUONG_DAN_CHAY.md](HUONG_DAN_CHAY.md). Các mục "Chuẩn bị asset" và "Code cần viết" trong từng plan giờ
+> chỉ để tham khảo.
 Research Lead (Tấn Phát) chốt luật giữ/bỏ (mục 6) trước khi chạy và làm bước ghép (mục 7).
 
 ## 1. Vì sao kết quả hiện tại nhỏ
