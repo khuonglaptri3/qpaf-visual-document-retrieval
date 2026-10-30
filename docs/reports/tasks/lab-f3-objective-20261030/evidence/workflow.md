@@ -13,9 +13,12 @@ Installed package root: C:/Users/lanph/.codex/plugins/cache/openai-curated-remot
 - writing-plans/SKILL.md: proportional execution plan and self-review; existing F3 design reused.
 - executing-plans/SKILL.md: direct execution and evidence ledger; final fresh review still pending.
 - using-git-worktrees/SKILL.md: checked existing isolation and native attachments, created managed worktree.
-- test-driven-development/SKILL.md: read; no new production implementation is planned and no retroactive TDD claim.
+- test-driven-development/SKILL.md and writing-good-tests.md: applied to the exact ApproxNDCG performance fix.
 - systematic-debugging/SKILL.md: applied to broken local torch import; torch/lib/torch_cpu.dll is absent.
-- verification-before-completion/SKILL.md: verification gate; actual results pending.
+- verification-before-completion/SKILL.md: applied before the performance commit and final handoff.
+- requesting-code-review/SKILL.md and code-reviewer.md: read; fresh whole-task review is pending.
+- finishing-a-development-branch/SKILL.md: read only; integration/merge is outside this experiment request,
+  and full F3 remains incomplete without ViMDoc. Preserve the local branch/worktree for handoff.
 
 ## Decisions
 
@@ -32,5 +35,15 @@ Installed package root: C:/Users/lanph/.codex/plugins/cache/openai-curated-remot
 
 ## Actual verification
 
-Only prerequisite probes have run so far. Existing .venv torch import failed WinError 126; torch_cpu.dll absent,
-and pandas metadata is missing. No F3 experiment has completed yet.
+- Existing .venv torch import failed WinError 126; torch_cpu.dll absent, pandas metadata missing.
+- New task-local environment imports all four pinned core packages successfully.
+- Original tests: 17/17 passed. Both original smokes passed.
+- Original full baseline: 970 queries, all five folds, means exactly match committed reference (all gaps 0).
+- Dense ApproxNDCG attempts at 2 and 6 threads were deliberately interrupted for performance;
+  their logs are archived, and no partial metric is used.
+- Performance RED: intermediate allocation test failed on the original formula: 131072 elements > 8192 bound.
+- Performance GREEN: 20/20 selected tests passed, including dense/sparse loss and nonzero-gradient equivalence.
+- Microbenchmark [16,579], two positives/query, 6 threads: dense 0.23624s vs positive-rank 0.01108s per
+  forward/backward (~21.3x); largest intermediate 5363856 vs 18528 elements. This is not a full-run latency claim.
+- Full repository command python -m unittest discover -s tests -q: 802 tests, OK (skipped=6), 440.112s.
+- Optimized full F3 runs and final evidence review remain pending.

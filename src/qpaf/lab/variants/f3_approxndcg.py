@@ -14,12 +14,16 @@ def approx_ndcg_loss(unit_scores, unit_mask, positive, log_tau, anchor_scores, a
         return unit_scores.new_zeros(()), 0
     s, m, p = unit_scores[valid], unit_mask[valid], positive[valid].to(unit_scores.dtype)
     s = torch.where(m, s, s.detach().min()-1)  # padding far below every real unit
-    beats = torch.sigmoid((s[:, None, :]-s[:, :, None])/alpha)*m[:, None, :]  # [b, i, j]: j above i
+    # Only positive units contribute DCG, but each still ranks against every real unit.
+    # Avoid computing the unused negative-unit ranks in a quadratic [B, U, U] tensor.
+    rows, columns = p.nonzero(as_tuple=True)
+    beats = torch.sigmoid((s[rows]-s[rows, columns, None])/alpha)*m[rows]
     rank = 0.5+beats.sum(-1)  # 1 + Σ_{j≠i}; the self term contributes 0.5
-    gain = p*torch.sigmoid((CUTOFF+0.5-rank)/width)/torch.log2(1+rank)
+    gain = torch.sigmoid((CUTOFF+0.5-rank)/width)/torch.log2(1+rank)
+    dcg = s.new_zeros(s.shape[0]).scatter_add(0, rows, gain)
     ideal = (1/torch.log2(torch.arange(2, CUTOFF+2, dtype=s.dtype))).cumsum(0)
     count = p.sum(1).clamp(max=CUTOFF).long()
-    return (1-gain.sum(1)/ideal[count-1]).mean(), int(valid.sum())
+    return (1-dcg/ideal[count-1]).mean(), int(valid.sum())
 
 
 def build(assets):

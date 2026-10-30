@@ -36,6 +36,16 @@
 
 ## Task 2: Full runs on eligible datasets
 
+### Performance prerequisite (added after measuring the original implementation)
+
+- [ ] RED: add output/gradient equivalence against the original dense formula, padding/multi-positive/invalid-query
+  cases, and an intermediate-size resource bound that the old all-pairs formula fails.
+- [ ] GREEN: compute only positive-unit ranks and scatter their DCG gains per query.
+- [ ] Run selected tests and full unittest discovery; retain named failures and resolve environment gaps.
+- [ ] Commit source/tests before real runs; rerun both smokes and compare with archived original 6-thread smoke.
+- [ ] Reuse the completed baseline only if shared harness/baseline source and input hashes are identical.
+- [ ] Preserve interrupted dense attempts separately; no incomplete metrics enter results.
+
 **Files:** Create ../evidence/results/<dataset>-<variant>.json and execution logs.
 **Interfaces:** Consume Task 1 inputs; produce full per-query scores for Task 3.
 

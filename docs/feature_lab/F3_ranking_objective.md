@@ -34,7 +34,9 @@ Siêu tham số chốt sẵn, không quét trên CV: α = 0,01 (ApproxNDCG), k =
 
 Hook `loss(unit_scores, unit_mask, positive, log_tau, anchor_scores)` nhận tensor `[B, U]` và trả về
 `(loss, số query hợp lệ)`. Hook `aggregate(page_scores [B, N], units [B, N], unit_count)` trả về `[B, unit_count]`.
-Các phác thảo dưới đây đã chạy thử với harness:
+Các phác thảo dưới đây đã chạy thử với harness. Công thức ApproxNDCG bên dưới là bản dense để đối chiếu;
+implementation hiện tại chỉ tính hạng cho đơn vị positive (mỗi positive vẫn so với mọi ứng viên), giữ
+nguyên loss và gradient nhưng tránh tạo hạng cho các đơn vị có gain bằng 0.
 
 ```python
 """F3: ApproxNDCG@10 loss (Qin, Liu & Li 2010) on units (docs/feature_lab/F3)."""
@@ -133,8 +135,9 @@ def build(assets):
 
 Lặp lại cho `f3_topk_hard`. `f3_lse_pool` chỉ chạy `--dataset vimdoc`.
 
-ApproxNDCG tạo tensor `[B, U, U]`. Với ViDoSeek (U tối đa khoảng 570 trang), mỗi batch khoảng 40 MB, nên chậm
-hơn baseline khoảng 2–3 lần. Vẫn chạy được trên CPU.
+ApproxNDCG ban đầu tạo tensor `[B, U, U]`. Implementation hiện tại dùng `[tổng số positive trong batch, U]`,
+giảm bộ nhớ và số phép tính khi nhãn thưa. Loss/gradient được đối chiếu với công thức dense trong
+`tests/test_lab_f3.py`; recipe và siêu tham số không đổi. Vẫn chạy trên CPU.
 
 ## 5. Đọc kết quả
 

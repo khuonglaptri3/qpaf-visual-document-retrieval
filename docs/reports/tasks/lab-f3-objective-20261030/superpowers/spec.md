@@ -9,6 +9,10 @@ Thực thi trực tiếp trong phiên này theo thiết kế đã có tại [F3]
 và [protocol](../../../../feature_lab/README.md), source 2f15eb19b1a224f5768a5cfaa28692fb06e55b95.
 Không thiết kế variant mới, không thay đổi harness, không quét tham số, không gọi compute GPU/cloud hoặc mở nhãn test.
 Được kiểm tra và tải cache hiện có từ Modal volume bằng tài khoản đã cấu hình; không khởi tạo compute hay tạo dữ liệu mới.
+Amendment during execution: the original ApproxNDCG allocates all unit-pair ranks, including ranks whose
+gain is multiplied by zero. Permit an exact positive-rank-only optimization in f3_approxndcg.py,
+with regression proof of loss/gradient equivalence and bounded intermediate tensor size. Common harness,
+objective formula, alpha, cutoff, width, recipe and other variants remain unchanged.
 Giữ nguyên nhánh làm việc ban đầu bằng managed worktree.
 
 ## Deliverables
@@ -27,4 +31,8 @@ Giữ nguyên nhánh làm việc ban đầu bằng managed worktree.
 
 Các run thực có schema qpaf-lab-v1, smoke=false, tracked_changes=false, đúng query IDs/folds/recipe/input hashes.
 Các mean và paired comparisons phải được tính lại từ per-query scores.
+Run the full repository test suite for the performance fix; report any existing failures by name.
+Before full runs, compare optimized smoke per-query scores against the archived original smoke.
+The completed original baseline may be reused only after git verifies that every shared harness file
+and the baseline variant are unchanged between its source commit and the current source.
 Xác minh bố cục task, links và hashes trước bàn giao. Không push/merge trong phạm vi yêu cầu này.
