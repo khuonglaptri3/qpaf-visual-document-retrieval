@@ -4,7 +4,7 @@
 
 Steps: check the share folder against its MANIFEST, check the code is committed, run the unit tests,
 reproduce the committed baseline once per machine, run each variant on its datasets, then write
-results/lab/SUMMARY_<feature>.md. Finished runs are skipped while src/ and scripts/ are unchanged, so
+results/lab/SUMMARY_<feature>.md. Finished runs are skipped while src/ and run_lab.py are unchanged, so
 re-running after an interruption resumes. --smoke runs the whole chain on a small slice in a few minutes.
 """
 import argparse
@@ -60,9 +60,10 @@ def check_share(share, names):
 
 
 def code_unchanged(commit):
-    """True when src/ and scripts/ at HEAD equal those of the commit that produced a result."""
+    """True when src/ and scripts/run_lab.py at HEAD equal those of the commit that produced a result."""
     try:
-        return subprocess.run(['git', 'diff', '--quiet', commit, 'HEAD', '--', 'src', 'scripts'], cwd=ROOT).returncode == 0
+        return subprocess.run(['git', 'diff', '--quiet', commit, 'HEAD', '--', 'src', 'scripts/run_lab.py'],
+                              cwd=ROOT).returncode == 0
     except OSError:
         return False
 
