@@ -1,0 +1,6 @@
+command: C:\Users\lanph\.codex\worktrees\2e13\Artificial_Intelligent_Project\.venv\Scripts\python.exe -u scripts/run_lab.py --dataset vidoseek --data C:\Users\lanph\.codex\worktrees\2e13\Artificial_Intelligent_Project\results\m2.8\RUN-QPAF-M2_8-EXPANSION-001-20261021T042029Z-A01\bundle --variant f3_approxndcg --output C:\Users\lanph\.codex\worktrees\2e13\Artificial_Intelligent_Project\docs\reports\tasks\lab-f3-objective-20261030\evidence\results\vidoseek\vidoseek-f3_approxndcg.json
+fold 0: 766 train / 204 held-out queries, anchor [0.0, 0.1, 0.9]
+  f3_approxndcg qarf seed 20260820 epoch 10: loss 0.14710
+  f3_approxndcg qarf seed 20260820 epoch 20: loss 0.14746
+  f3_approxndcg qarf seed 20260820 epoch 30: loss 0.14687
+  f3_approxndcg qarf seed 20260820 epoch 40: loss 0.14687

@@ -1,0 +1,22 @@
+uv : Resolved 7 packages in 797ms
+At line:2 char:1
++ uv pip install --python .venv/Scripts/python.exe --link-mode copy 'nu ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Resolved 7 packages in 797ms:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+Downloading pandas (11.1MiB)
+Downloading pyarrow (24.6MiB)
+Downloading numpy (12.3MiB)
+ Downloaded numpy
+ Downloaded pyarrow
+ Downloaded pandas
+Prepared 4 packages in 25.01s
+Installed 7 packages in 29.94s
+ + numpy==2.2.6
+ + pandas==2.2.3
+ + pyarrow==20.0.0
+ + python-dateutil==3.0.0
+ + pytz==2026.6
+ + six==1.17.0
+ + tzdata==2026.6

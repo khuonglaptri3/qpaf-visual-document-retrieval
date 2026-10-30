@@ -115,3 +115,6 @@ vimdoc_archive_audit_modal.py -text
 
 # M5.6 manifest and post-run check bind exact run bytes (CSV, JSON, gz predictions, checkpoints).
 /results/m5.6/** -text -eol -whitespace
+
+# F3 handoff hashes captured result and console bytes, including traceback whitespace.
+/docs/reports/tasks/lab-f3-objective-20261030/evidence/** -text -eol -whitespace

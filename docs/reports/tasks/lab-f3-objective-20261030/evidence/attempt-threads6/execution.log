@@ -1,0 +1,8 @@
+2026-10-30T14:20:59.771990+00:00 START unit-tests
+2026-10-30T14:21:19.532890+00:00 PASS unit-tests
+2026-10-30T14:21:19.532890+00:00 START smoke-f3_approxndcg
+2026-10-30T14:21:58.249986+00:00 PASS smoke-f3_approxndcg
+2026-10-30T14:21:58.338784+00:00 START smoke-f3_topk_hard
+2026-10-30T14:22:32.344198+00:00 PASS smoke-f3_topk_hard
+REUSE full-baseline: same clean source, input hashes, recipe, exact reference means; original 2-thread environment in attempt-threads2/environment.json
+2026-10-30T14:22:32.555782+00:00 START full-f3_approxndcg

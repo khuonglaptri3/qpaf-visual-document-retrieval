@@ -1,0 +1,18 @@
+{
+  "baseline_reused_from_threads": 2,
+  "environment": {
+    "MKL_NUM_THREADS": "6",
+    "OMP_NUM_THREADS": "6"
+  },
+  "executable": "C:\\Users\\lanph\\.codex\\worktrees\\2e13\\Artificial_Intelligent_Project\\.venv\\Scripts\\python.exe",
+  "packages": {
+    "numpy": "2.2.6",
+    "pandas": "2.2.3",
+    "pyarrow": "20.0.0",
+    "torch": "2.7.1+cpu"
+  },
+  "partial_attempt": "attempt-threads2/full-f3_approxndcg.log (incomplete, excluded)",
+  "platform": "win32",
+  "python": "3.11.16 (main, Aug 25 2026, 13:59:19) [MSC v.1944 64 bit (AMD64)]",
+  "source_commit": "e3252f669cb76c1256cbc5149793c7eadd27c878"
+}

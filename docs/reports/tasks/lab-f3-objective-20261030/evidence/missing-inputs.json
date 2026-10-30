@@ -1,0 +1,17 @@
+{
+  "dataset": "vimdoc",
+  "status": "not_run_missing_cache",
+  "required_sha256": {
+    "candidate_scores.parquet": "296e0821e467a98bc5873ba789cfed8efeac511059a00928536f3c48c855ddf5",
+    "dev_qrels.json": "aab40d996476fe297be8d000e17bfd6b326b3c318879321f45583cd8bdc42017",
+    "queries.jsonl": "9c11852380d60163fcb7942551fa57643a2d2334e4856686838c663b97d8b994"
+  },
+  "variants_not_run": [
+    "f3_approxndcg",
+    "f3_topk_hard",
+    "f3_lse_pool"
+  ],
+  "local_cache_source_in_branch_docs": "C:/Users/HP/qpaf-cache/a005-s1-001",
+  "configured_modal_profile": "tlcn-group1",
+  "required_modal_volume_not_in_accessible_list": "qpaf-artifacts"
+}

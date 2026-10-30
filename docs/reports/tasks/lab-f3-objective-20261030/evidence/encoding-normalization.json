@@ -1,0 +1,75 @@
+{
+  "operation": "lossless UTF-16 to UTF-8 after capture",
+  "files": [
+    {
+      "path": "cpu-benchmark.log",
+      "original_sha256": "a4548dab87a2e162485d84b14a73e8a892973b4771fa370ac60b9c26c55f039f",
+      "utf8_sha256": "ec2ac03492cd79c8a66cac03e3a9f2458030ddfb55c8605e5420548689d1a3fc"
+    },
+    {
+      "path": "execution.log",
+      "original_sha256": "073f0b271640e7de6c6c50bcf7d6a0d12acbcf27612f254a7558e62ee341cc05",
+      "utf8_sha256": "bbebe616515dcf263248e74da29503245cf981521ddc0f7de8327f71d25db62f"
+    },
+    {
+      "path": "full-suite.log",
+      "original_sha256": "b46b98fdff1f7b5b0deff2a658b199c419baf4d3cffd1d9acfd99d377246409c",
+      "utf8_sha256": "4afbd1e45bca9a4d775abb87b6a8b40c6d1e229289ee408442797dce95c56dcf"
+    },
+    {
+      "path": "install-data-packages.log",
+      "original_sha256": "3a62d237884a2b2f4d18f2d3518df87849476c329dc4dfad94bdd0f7948f51fc",
+      "utf8_sha256": "07edc90ae7abb9cd2d46f53685d745b769d204acd1f4db3f483016afe11d6e30"
+    },
+    {
+      "path": "install-project.log",
+      "original_sha256": "e50569892f86a82663fba94b4093af3506c514eb1a9103cbe32aced5045c9e34",
+      "utf8_sha256": "0d627deaabeef2151dee8844d2fdf630b9f59de16117600896ebf06df20dbb34"
+    },
+    {
+      "path": "install-torch.log",
+      "original_sha256": "b0f480a60e752597b360e19ea9e2c3ceb55f28a3a90cc3a6c230d49284b15872",
+      "utf8_sha256": "3eea516940cfae98adf364e37c022b6a72887a7774ceb078168f8db25c949758"
+    },
+    {
+      "path": "install-verification-packages.log",
+      "original_sha256": "27d6f1bf6cdf4916d915279916d277603dc1eb1bc4377f5a066567b58c54ef18",
+      "utf8_sha256": "35919978fddc8f9bb406ddfa2ba48ff1b3c008c68134e5d2476ec4829206962e"
+    },
+    {
+      "path": "installed-packages.txt",
+      "original_sha256": "69cc48728254c2854d41d7ffacb8058e9cae088b931895cab30976310bc0e603",
+      "utf8_sha256": "03880d6cbec841cffac505e3ee259441f6bc358612ecafd176bf6ece0f0993b9"
+    },
+    {
+      "path": "modal-volumes.json",
+      "original_sha256": "f93b8a2eaf96c0ad7433483b0c5c95e4574d3b8b1aff6dc8e376a05cfcd9fc48",
+      "utf8_sha256": "703cd94170fad9b727396281083b1d337a8d99ac64bfed385bc37627174f5b76"
+    },
+    {
+      "path": "performance-green.log",
+      "original_sha256": "8ab0cbddfc9f0470889ee468aeeda425132997279f0dc3185b5f1e63749a6c1f",
+      "utf8_sha256": "a982b1d3aa229fad401b1c31a1466378e90c46409672a1c05abf84fbbe02ffc5"
+    },
+    {
+      "path": "performance-red.log",
+      "original_sha256": "55de5c34bc5d8271fc169b9fbfab8812d0d5485ac601e91226e8661592148607",
+      "utf8_sha256": "eeb843022b5e9073ad36a4db12c03e098262b5e8c2ed52b44da00b0f9a7ba453"
+    },
+    {
+      "path": "sparse-benchmark.log",
+      "original_sha256": "c6e99269a203f53445121247e80044b3aaffa62195790987c32dfff4afcb928e",
+      "utf8_sha256": "e9f617cdbca077641b9ea52b35a8db62af820f7a5c278a73e63a92367b533355"
+    },
+    {
+      "path": "attempt-threads2/execution.log",
+      "original_sha256": "64d34676286cd35166e62c96cdc0e6d3c71ae389c2dccf53e0737c3831436640",
+      "utf8_sha256": "c76d85b1d2fe8b24e51527c60f2c9c80f51ca7cec1ab8e7f0a2b4b04189ea34d"
+    },
+    {
+      "path": "attempt-threads6/execution.log",
+      "original_sha256": "0ae351a62022c6b5a5b0c562de600be95e37efe3e1e3a3ed79aefece867089b3",
+      "utf8_sha256": "91b51a952d5a6c92f6b37590f0bcce53c57eaeaf7e9cf4d9a7d20d96d2578999"
+    }
+  ]
+}

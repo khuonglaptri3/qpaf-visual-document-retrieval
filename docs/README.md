@@ -28,6 +28,7 @@ Các receipt CPU ghi GPU-deferred được giữ nguyên như snapshot lịch s�
 | [Oracle lịch sử](05_oracle_experiments/README.md) | Protocol, review và kết quả của từng study |
 | [Bàn giao kỹ thuật](06_handover/README.md) | Audit, runbook và hồ sơ bàn giao |
 | [Feature lab](feature_lab/README.md) | Bốn thay đổi kiến trúc F1–F4 cho QARF/QPAF, harness CV chung và phân công chạy song song |
+| [Kết quả chạy F3](reports/tasks/lab-f3-objective-20261030/README.md) | ViDoSeek: baseline và hai variant đã chạy CV 5 fold; ViMDoc còn thiếu cache |
 | [Evidence](../evidence/) | Manifest, hash, quyết định và revision đã ghi nhận |
 
 Các tài liệu kỹ thuật và hồ sơ lịch sử giữ vai trò giải thích implementation hoặc

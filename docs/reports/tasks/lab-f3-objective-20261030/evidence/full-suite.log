@@ -1,0 +1,217 @@
+2026-10-30 21:34:43,100 INFO stage started: prepare
+2026-10-30 21:34:43,101 INFO stage completed
+2026-10-30 21:34:44,323 INFO stage started: prepare
+2026-10-30 21:34:44,323 INFO stage completed
+2026-10-30 21:34:45,626 INFO stage started: visual
+2026-10-30 21:34:45,627 ERROR stage failed
+Traceback (most recent call last):
+  File "C:\Users\lanph\.codex\worktrees\2e13\Artificial_Intelligent_Project\tests\test_m11_artifacts.py", line 135, in test_failure_keeps_log_but_cannot_be_used_as_complete
+    raise RuntimeError('expected')
+RuntimeError: expected
+2026-10-30 21:34:46,775 INFO stage started: visual
+2026-10-30 21:34:46,776 INFO stage completed
+2026-10-30 21:34:47,924 INFO stage started: prepare
+2026-10-30 21:34:47,926 INFO stage completed
+2026-10-30 21:34:56,310 INFO stage started: prepare
+2026-10-30 21:34:56,325 INFO stage completed
+2026-10-30 21:34:57,774 INFO stage started: bm25
+2026-10-30 21:34:57,815 INFO stage completed
+2026-10-30 21:34:59,130 INFO stage started: dense
+2026-10-30 21:34:59,165 INFO stage completed
+2026-10-30 21:35:00,411 INFO stage started: visual
+2026-10-30 21:35:00,439 INFO stage completed
+2026-10-30 21:35:01,808 INFO stage started: oracle
+2026-10-30 21:35:01,836 INFO evaluated 1 queries; independent QA remains pending
+2026-10-30 21:35:01,837 INFO stage completed
+2026-10-30 21:35:09,726 INFO stage started: dense
+2026-10-30 21:35:09,726 INFO stage completed
+.venv/Scripts/python.exe : cannot open doc.pdf: Failed to load document (PDFium: Data format error).
+At line:2 char:370
++ ... HREADS='6'; .venv/Scripts/python.exe -m unittest discover -s tests -q ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (cannot open doc... format error).:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+Materialized and hash-verified 1 source PDFs
+Partial snapshot: 1/2 terminal records; saved to C:\Users\lanph\AppData\Local\Temp\tmpjemh1d6z\run\partial-output
+Partial snapshot: 0/1 terminal records; saved to C:\Users\lanph\AppData\Local\Temp\tmpjqx8jzmr\partial-output
+warning: in the working copy of 'configs/m4.4/evaluation.json', LF will be replaced by CRLF the next time Git touches 
+it
+warning: in the working copy of 'evidence/M1_FINAL/02_protocol/metric_policy.md', LF will be replaced by CRLF the next 
+time Git touches it
+warning: in the working copy of 'evidence/revisions/m4.3-001/method_freeze.json', LF will be replaced by CRLF the next 
+time Git touches it
+warning: in the working copy of 'evidence/revisions/m4.7-001/g2a_freeze.json', LF will be replaced by CRLF the next 
+time Git touches it
+warning: in the working copy of 'evidence/revisions/m4.7-001/owner_confirmation.json', LF will be replaced by CRLF the 
+next time Git touches it
+warning: in the working copy of 'evidence/revisions/m5.1-001/owner_confirmation.json', LF will be replaced by CRLF the 
+next time Git touches it
+warning: in the working copy of 'evidence/revisions/m5.1-001/preregistration.json', LF will be replaced by CRLF the 
+next time Git touches it
+warning: in the working copy of 'evidence/revisions/m5.2-001/cache_identity.json', LF will be replaced by CRLF the 
+next time Git touches it
+warning: in the working copy of 'results/m4.4/RUN-QPAF-M4_4-MTH-001-20261023T172102Z-A01/baseline_table.json', LF will 
+be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'results/m4.4/RUN-QPAF-M4_4-MTH-001-20261023T172102Z-A01/manifest.json', LF will be 
+replaced by CRLF the next time Git touches it
+warning: in the working copy of 'results/m4.4/RUN-QPAF-M4_4-MTH-001-20261023T172102Z-A01/per_query_metrics.csv', LF 
+will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'results/m5.2/verification/owner_confirmation.json', LF will be replaced by CRLF the 
+next time Git touches it
+warning: in the working copy of 'scripts/run_m55_diagnostics.py', LF will be replaced by CRLF the next time Git 
+touches it
+warning: in the working copy of 'src/qpaf/m11/artifacts.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/qpaf/m12/config.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/qpaf/m12/features.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/qpaf/m12/losses.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/qpaf/m12/model.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/qpaf/m24/checkpoint.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/qpaf/m24/config.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/qpaf/m24/evaluator.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/qpaf/m24/trainer.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/qpaf/m25/baselines.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/qpaf/m42/active_primary.py', LF will be replaced by CRLF the next time Git 
+touches it
+warning: in the working copy of 'src/qpaf/m44/common.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/qpaf/m55/__init__.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/qpaf/m55/diagnostics.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/qpaf/m55/runner.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'tests/test_m55_diagnostics.py', LF will be replaced by CRLF the next time Git touches 
+it
+warning: in the working copy of 'configs/m4.4/evaluation.json', LF will be replaced by CRLF the next time Git touches 
+it
+warning: in the working copy of 'evidence/M1_FINAL/02_protocol/metric_policy.md', LF will be replaced by CRLF the next 
+time Git touches it
+warning: in the working copy of 'evidence/revisions/m4.3-001/method_freeze.json', LF will be replaced by CRLF the next 
+time Git touches it
+warning: in the working copy of 'evidence/revisions/m4.7-001/g2a_freeze.json', LF will be replaced by CRLF the next 
+time Git touches it
+warning: in the working copy of 'evidence/revisions/m4.7-001/owner_confirmation.json', LF will be replaced by CRLF the 
+next time Git touches it
+warning: in the working copy of 'evidence/revisions/m5.1-001/owner_confirmation.json', LF will be replaced by CRLF the 
+next time Git touches it
+warning: in the working copy of 'evidence/revisions/m5.1-001/preregistration.json', LF will be replaced by CRLF the 
+next time Git touches it
+warning: in the working copy of 'evidence/revisions/m5.2-001/cache_identity.json', LF will be replaced by CRLF the 
+next time Git touches it
+warning: in the working copy of 'results/m4.4/RUN-QPAF-M4_4-MTH-001-20261023T172102Z-A01/baseline_table.json', LF will 
+be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'results/m4.4/RUN-QPAF-M4_4-MTH-001-20261023T172102Z-A01/manifest.json', LF will be 
+replaced by CRLF the next time Git touches it
+warning: in the working copy of 'results/m4.4/RUN-QPAF-M4_4-MTH-001-20261023T172102Z-A01/per_query_metrics.csv', LF 
+will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'results/m5.2/verification/owner_confirmation.json', LF will be replaced by CRLF the 
+next time Git touches it
+warning: in the working copy of 'scripts/run_m55_diagnostics.py', LF will be replaced by CRLF the next time Git 
+touches it
+warning: in the working copy of 'src/qpaf/m11/artifacts.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/qpaf/m12/config.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/qpaf/m12/features.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/qpaf/m12/losses.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/qpaf/m12/model.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/qpaf/m24/checkpoint.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/qpaf/m24/config.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/qpaf/m24/evaluator.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/qpaf/m24/trainer.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/qpaf/m25/baselines.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/qpaf/m42/active_primary.py', LF will be replaced by CRLF the next time Git 
+touches it
+warning: in the working copy of 'src/qpaf/m44/common.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/qpaf/m55/__init__.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/qpaf/m55/diagnostics.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/qpaf/m55/runner.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'tests/test_m55_diagnostics.py', LF will be replaced by CRLF the next time Git touches 
+it
+warning: in the working copy of 'configs/m4.4/evaluation.json', LF will be replaced by CRLF the next time Git touches 
+it
+warning: in the working copy of 'evidence/M1_FINAL/02_protocol/metric_policy.md', LF will be replaced by CRLF the next 
+time Git touches it
+warning: in the working copy of 'evidence/revisions/m4.3-001/method_freeze.json', LF will be replaced by CRLF the next 
+time Git touches it
+warning: in the working copy of 'evidence/revisions/m4.7-001/g2a_freeze.json', LF will be replaced by CRLF the next 
+time Git touches it
+warning: in the working copy of 'evidence/revisions/m4.7-001/owner_confirmation.json', LF will be replaced by CRLF the 
+next time Git touches it
+warning: in the working copy of 'evidence/revisions/m5.1-001/owner_confirmation.json', LF will be replaced by CRLF the 
+next time Git touches it
+warning: in the working copy of 'evidence/revisions/m5.1-001/preregistration.json', LF will be replaced by CRLF the 
+next time Git touches it
+warning: in the working copy of 'evidence/revisions/m5.2-001/cache_identity.json', LF will be replaced by CRLF the 
+next time Git touches it
+warning: in the working copy of 'results/m4.4/RUN-QPAF-M4_4-MTH-001-20261023T172102Z-A01/baseline_table.json', LF will 
+be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'results/m4.4/RUN-QPAF-M4_4-MTH-001-20261023T172102Z-A01/manifest.json', LF will be 
+replaced by CRLF the next time Git touches it
+warning: in the working copy of 'results/m4.4/RUN-QPAF-M4_4-MTH-001-20261023T172102Z-A01/per_query_metrics.csv', LF 
+will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'results/m5.2/verification/owner_confirmation.json', LF will be replaced by CRLF the 
+next time Git touches it
+warning: in the working copy of 'scripts/run_m55_diagnostics.py', LF will be replaced by CRLF the next time Git 
+touches it
+warning: in the working copy of 'src/qpaf/m11/artifacts.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/qpaf/m12/config.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/qpaf/m12/features.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/qpaf/m12/losses.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/qpaf/m12/model.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/qpaf/m24/checkpoint.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/qpaf/m24/config.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/qpaf/m24/evaluator.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/qpaf/m24/trainer.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/qpaf/m25/baselines.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/qpaf/m42/active_primary.py', LF will be replaced by CRLF the next time Git 
+touches it
+warning: in the working copy of 'src/qpaf/m44/common.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/qpaf/m55/__init__.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/qpaf/m55/diagnostics.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/qpaf/m55/runner.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'tests/test_m55_diagnostics.py', LF will be replaced by CRLF the next time Git touches 
+it
+warning: in the working copy of 'configs/m4.4/evaluation.json', LF will be replaced by CRLF the next time Git touches 
+it
+warning: in the working copy of 'evidence/M1_FINAL/02_protocol/metric_policy.md', LF will be replaced by CRLF the next 
+time Git touches it
+warning: in the working copy of 'evidence/revisions/m4.3-001/method_freeze.json', LF will be replaced by CRLF the next 
+time Git touches it
+warning: in the working copy of 'evidence/revisions/m4.7-001/g2a_freeze.json', LF will be replaced by CRLF the next 
+time Git touches it
+warning: in the working copy of 'evidence/revisions/m4.7-001/owner_confirmation.json', LF will be replaced by CRLF the 
+next time Git touches it
+warning: in the working copy of 'evidence/revisions/m5.1-001/owner_confirmation.json', LF will be replaced by CRLF the 
+next time Git touches it
+warning: in the working copy of 'evidence/revisions/m5.1-001/preregistration.json', LF will be replaced by CRLF the 
+next time Git touches it
+warning: in the working copy of 'evidence/revisions/m5.2-001/cache_identity.json', LF will be replaced by CRLF the 
+next time Git touches it
+warning: in the working copy of 'results/m4.4/RUN-QPAF-M4_4-MTH-001-20261023T172102Z-A01/baseline_table.json', LF will 
+be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'results/m4.4/RUN-QPAF-M4_4-MTH-001-20261023T172102Z-A01/manifest.json', LF will be 
+replaced by CRLF the next time Git touches it
+warning: in the working copy of 'results/m4.4/RUN-QPAF-M4_4-MTH-001-20261023T172102Z-A01/per_query_metrics.csv', LF 
+will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'results/m5.2/verification/owner_confirmation.json', LF will be replaced by CRLF the 
+next time Git touches it
+warning: in the working copy of 'scripts/run_m55_diagnostics.py', LF will be replaced by CRLF the next time Git 
+touches it
+warning: in the working copy of 'src/qpaf/m11/artifacts.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/qpaf/m12/config.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/qpaf/m12/features.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/qpaf/m12/losses.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/qpaf/m12/model.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/qpaf/m24/checkpoint.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/qpaf/m24/config.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/qpaf/m24/evaluator.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/qpaf/m24/trainer.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/qpaf/m25/baselines.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/qpaf/m42/active_primary.py', LF will be replaced by CRLF the next time Git 
+touches it
+warning: in the working copy of 'src/qpaf/m44/common.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/qpaf/m55/__init__.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/qpaf/m55/diagnostics.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/qpaf/m55/runner.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'tests/test_m55_diagnostics.py', LF will be replaced by CRLF the next time Git touches 
+it
+----------------------------------------------------------------------
+Ran 802 tests in 440.112s
+
+OK (skipped=6)

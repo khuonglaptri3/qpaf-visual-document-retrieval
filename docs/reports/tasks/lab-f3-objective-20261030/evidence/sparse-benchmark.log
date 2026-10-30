@@ -1,0 +1,25 @@
+{
+  "shape": [
+    16,
+    579
+  ],
+  "positives_per_query": 2,
+  "threads": 6,
+  "rows": {
+    "dense": {
+      "loss": 0.6470657826888049,
+      "valid_queries": 16,
+      "seconds_per_forward_backward": 0.2362397800083272,
+      "largest_intermediate_elements": 5363856
+    },
+    "positive_ranks": {
+      "loss": 0.6470657826888049,
+      "valid_queries": 16,
+      "seconds_per_forward_backward": 0.011076840001624077,
+      "largest_intermediate_elements": 18528
+    }
+  },
+  "loss_and_gradients_match": true,
+  "speedup": 21.32736231395325,
+  "note": "Microbenchmark only; full experiments retain the original objective and recipe."
+}

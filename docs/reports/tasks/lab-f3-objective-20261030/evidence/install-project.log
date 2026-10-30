@@ -1,0 +1,12 @@
+uv : Resolved 1 package in 5ms
+At line:2 char:1
++ uv pip install --python .venv/Scripts/python.exe --no-deps --link-mod ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (Resolved 1 package in 5ms:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+   Building visual-rag-oracle-study @ file:///C:/Users/lanph/.codex/worktrees/2e13/Artificial_Intelligent_Project
+      Built visual-rag-oracle-study @ file:///C:/Users/lanph/.codex/worktrees/2e13/Artificial_Intelligent_Project
+Prepared 1 package in 9.57s
+Installed 1 package in 597ms
+ + visual-rag-oracle-study==0.1.0 (from file:///C:/Users/lanph/.codex/worktrees/2e13/Artificial_Intelligent_Project)

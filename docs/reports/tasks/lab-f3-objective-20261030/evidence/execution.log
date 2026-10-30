@@ -1,0 +1,14 @@
+2026-10-30T14:41:35.842245+00:00 START unit-tests
+2026-10-30T14:41:54.434651+00:00 PASS unit-tests
+2026-10-30T14:41:54.434651+00:00 START smoke-f3_approxndcg
+2026-10-30T14:42:28.038019+00:00 PASS smoke-f3_approxndcg
+2026-10-30T14:42:28.143002+00:00 START smoke-f3_topk_hard
+2026-10-30T14:43:02.592096+00:00 PASS smoke-f3_topk_hard
+REUSE full-baseline: same clean source, input hashes, recipe, exact reference means; original 2-thread environment in attempt-threads2/environment.json
+2026-10-30T14:43:02.854104+00:00 START full-f3_approxndcg
+2026-10-30T14:52:21.743918+00:00 PASS full-f3_approxndcg
+2026-10-30T14:52:21.840015+00:00 START full-f3_topk_hard
+2026-10-30T15:02:49.549625+00:00 PASS full-f3_topk_hard
+2026-10-30T15:02:49.614803+00:00 START comparison
+2026-10-30T15:02:51.174822+00:00 PASS comparison
+Eligible ViDoSeek runs complete; ViMDoc remains missing.

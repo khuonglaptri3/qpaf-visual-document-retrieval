@@ -28,40 +28,40 @@
 **Files:** Create ../evidence/environment.json, input-validation.json, unit-tests.log; reuse existing source and tests.
 **Interfaces:** Produce a verified Python executable and eligible dataset directories for Task 2.
 
-- [ ] Create canonical spec/plan, provenance and local branch at pinned source; commit preparation.
-- [ ] Diagnose existing broken torch import (torch_cpu.dll absent); create task-local environment with pinned CPU packages.
-- [ ] Recover only required cached ViDoSeek score file and compare input hashes to committed baseline; locate ViMDoc cache.
-- [ ] Run existing tests.test_lab and tests.test_lab_f3. Expected: no failure.
-- [ ] Run both eligible loss variants with --limit 120 --epochs 2 --folds 2. Expected: finite results and smoke=true.
+- [x] Create canonical spec/plan, provenance and local branch at pinned source; commit preparation.
+- [x] Diagnose existing broken torch import (torch_cpu.dll absent); create task-local environment with pinned CPU packages.
+- [x] Recover only required cached ViDoSeek score file and compare input hashes to committed baseline; locate ViMDoc cache.
+- [x] Run existing tests.test_lab and tests.test_lab_f3. Expected: no failure.
+- [x] Run both eligible loss variants with --limit 120 --epochs 2 --folds 2. Expected: finite results and smoke=true.
 
 ## Task 2: Full runs on eligible datasets
 
 ### Performance prerequisite (added after measuring the original implementation)
 
-- [ ] RED: add output/gradient equivalence against the original dense formula, padding/multi-positive/invalid-query
+- [x] RED: add output/gradient equivalence against the original dense formula, padding/multi-positive/invalid-query
   cases, and an intermediate-size resource bound that the old all-pairs formula fails.
-- [ ] GREEN: compute only positive-unit ranks and scatter their DCG gains per query.
-- [ ] Run selected tests and full unittest discovery; retain named failures and resolve environment gaps.
-- [ ] Commit source/tests before real runs; rerun both smokes and compare with archived original 6-thread smoke.
-- [ ] Reuse the completed baseline only if shared harness/baseline source and input hashes are identical.
-- [ ] Preserve interrupted dense attempts separately; no incomplete metrics enter results.
+- [x] GREEN: compute only positive-unit ranks and scatter their DCG gains per query.
+- [x] Run selected tests and full unittest discovery; retain named failures and resolve environment gaps.
+- [x] Commit source/tests before real runs; rerun both smokes and compare with archived original 6-thread smoke.
+- [x] Reuse the completed baseline only if shared harness/baseline source and input hashes are identical.
+- [x] Preserve interrupted dense attempts separately; no incomplete metrics enter results.
 
 **Files:** Create ../evidence/results/<dataset>-<variant>.json and execution logs.
 **Interfaces:** Consume Task 1 inputs; produce full per-query scores for Task 3.
 
-- [ ] Run baseline with unchanged default recipe. Expected: hashes equal reference and means within 5e-5; stop full variants for a mismatched dataset.
-- [ ] Run f3_approxndcg and f3_topk_hard for ViDoSeek; repeat on ViMDoc if eligible, plus f3_lse_pool there.
-- [ ] Verify full records, IDs, folds, recipe, finite scores, source_commit and tracked_changes.
-- [ ] Preserve missing-input findings for any ineligible dataset.
+- [x] Run baseline with unchanged default recipe. Expected: hashes equal reference and means within 5e-5; stop full variants for a mismatched dataset.
+- [x] Run f3_approxndcg and f3_topk_hard for ViDoSeek; repeat on ViMDoc if eligible, plus f3_lse_pool there.
+- [x] Verify full records, IDs, folds, recipe, finite scores, source_commit and tracked_changes.
+- [x] Preserve missing-input findings for any ineligible dataset.
 
 ## Task 3: Analyze and verify handoff
 
 **Files:** Finalize ../README.md, ../evidence/workflow.md, comparisons.json, hashes.json and validation.json.
 **Interfaces:** Consume Task 2 per-query JSON; produce a reproducible report.
 
-- [ ] Recompute means and paired bootstrap comparisons against baseline; leave verdict n/a.
-- [ ] Fresh review of evidence and report against spec; use requesting-code-review per executing-plans.
-- [ ] Verify layout, local links, report index, hashes and git diff --check.
+- [x] Recompute means and paired bootstrap comparisons against baseline; leave verdict n/a.
+- [x] Fresh review of evidence and report against spec; use requesting-code-review per executing-plans.
+- [x] Verify layout, local links, report index, hashes and git diff --check.
 - [ ] Commit final local artifacts and report what ran, results and remaining work.
 
 ## Self-review
@@ -69,3 +69,7 @@
 Existing design is reused by link; no new feature implementation is planned, so existing tests are verification,
 not a retroactive RED→GREEN claim. Input validation gates all full runs. User explicitly requested immediate execution;
 continue without asking again for routine execution decisions.
+
+## Remaining dataset scope
+
+ViDoSeek work is verified; ViMDoc remains unrun until the exact three cache files in ../evidence/missing-inputs.json arrive.

@@ -1,0 +1,36 @@
+{
+  "batch_size": 16,
+  "units": 579,
+  "concurrent_full_run_threads": 2,
+  "rows": [
+    {
+      "threads": 1,
+      "seconds_per_forward_backward": 0.4276443999959156,
+      "loss": 0.6470657826888049,
+      "gradients_agree": true,
+      "max_abs_gradient": 3.0457766009078298
+    },
+    {
+      "threads": 2,
+      "seconds_per_forward_backward": 0.2591771200008225,
+      "loss": 0.6470657826888049,
+      "gradients_agree": true,
+      "max_abs_gradient": 3.0457766009078298
+    },
+    {
+      "threads": 4,
+      "seconds_per_forward_backward": 0.2440470399975311,
+      "loss": 0.6470657826888049,
+      "gradients_agree": true,
+      "max_abs_gradient": 3.0457766009078298
+    },
+    {
+      "threads": 6,
+      "seconds_per_forward_backward": 0.18991572000086307,
+      "loss": 0.6470657826888049,
+      "gradients_agree": true,
+      "max_abs_gradient": 3.0457766009078298
+    }
+  ],
+  "note": "Execution-only thread measurement; no model hyperparameters changed."
+}

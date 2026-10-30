@@ -1,0 +1,55 @@
+command: C:\Users\lanph\.codex\worktrees\2e13\Artificial_Intelligent_Project\.venv\Scripts\python.exe -u scripts/run_lab.py --dataset vidoseek --data C:\Users\lanph\.codex\worktrees\2e13\Artificial_Intelligent_Project\results\m2.8\RUN-QPAF-M2_8-EXPANSION-001-20261021T042029Z-A01\bundle --variant baseline --output C:\Users\lanph\.codex\worktrees\2e13\Artificial_Intelligent_Project\docs\reports\tasks\lab-f3-objective-20261030\evidence\results\vidoseek\vidoseek-baseline.json
+fold 0: 766 train / 204 held-out queries, anchor [0.0, 0.1, 0.9]
+  baseline qarf seed 20260820 epoch 10: loss 1.03804
+  baseline qarf seed 20260820 epoch 20: loss 1.03586
+  baseline qarf seed 20260820 epoch 30: loss 1.03211
+  baseline qarf seed 20260820 epoch 40: loss 1.03232
+  baseline qpaf seed 20260820 epoch 10: loss 1.04302
+  baseline qpaf seed 20260820 epoch 20: loss 1.04149
+  baseline qpaf seed 20260820 epoch 30: loss 1.03740
+  baseline qpaf seed 20260820 epoch 40: loss 1.03746
+fold 1: 759 train / 211 held-out queries, anchor [0.0, 0.1, 0.9]
+  baseline qarf seed 20260820 epoch 10: loss 1.03766
+  baseline qarf seed 20260820 epoch 20: loss 1.03403
+  baseline qarf seed 20260820 epoch 30: loss 1.03162
+  baseline qarf seed 20260820 epoch 40: loss 1.03697
+  baseline qpaf seed 20260820 epoch 10: loss 1.03638
+  baseline qpaf seed 20260820 epoch 20: loss 1.03381
+  baseline qpaf seed 20260820 epoch 30: loss 1.02924
+  baseline qpaf seed 20260820 epoch 40: loss 1.03213
+fold 2: 773 train / 197 held-out queries, anchor [0.0, 0.1, 0.9]
+  baseline qarf seed 20260820 epoch 10: loss 0.97142
+  baseline qarf seed 20260820 epoch 20: loss 0.95582
+  baseline qarf seed 20260820 epoch 30: loss 0.97956
+  baseline qarf seed 20260820 epoch 40: loss 0.97238
+  baseline qpaf seed 20260820 epoch 10: loss 0.97846
+  baseline qpaf seed 20260820 epoch 20: loss 0.96122
+  baseline qpaf seed 20260820 epoch 30: loss 0.98301
+  baseline qpaf seed 20260820 epoch 40: loss 0.97110
+fold 3: 800 train / 170 held-out queries, anchor [0.0, 0.1, 0.9]
+  baseline qarf seed 20260820 epoch 10: loss 1.01098
+  baseline qarf seed 20260820 epoch 20: loss 1.00656
+  baseline qarf seed 20260820 epoch 30: loss 1.00488
+  baseline qarf seed 20260820 epoch 40: loss 1.00450
+  baseline qpaf seed 20260820 epoch 10: loss 1.01983
+  baseline qpaf seed 20260820 epoch 20: loss 1.01682
+  baseline qpaf seed 20260820 epoch 30: loss 1.01501
+  baseline qpaf seed 20260820 epoch 40: loss 1.01439
+fold 4: 782 train / 188 held-out queries, anchor [0.0, 0.1, 0.9]
+  baseline qarf seed 20260820 epoch 10: loss 1.01478
+  baseline qarf seed 20260820 epoch 20: loss 1.01081
+  baseline qarf seed 20260820 epoch 30: loss 1.00988
+  baseline qarf seed 20260820 epoch 40: loss 1.01054
+  baseline qpaf seed 20260820 epoch 10: loss 1.02211
+  baseline qpaf seed 20260820 epoch 20: loss 1.01862
+  baseline qpaf seed 20260820 epoch 30: loss 1.01490
+  baseline qpaf seed 20260820 epoch 40: loss 1.01534
+{
+  "output": "C:\\Users\\lanph\\.codex\\worktrees\\2e13\\Artificial_Intelligent_Project\\docs\\reports\\tasks\\lab-f3-objective-20261030\\evidence\\results\\vidoseek\\vidoseek-baseline.json",
+  "mean": {
+    "static": 0.8654918902483821,
+    "qarf": 0.8657493114901997,
+    "qpaf": 0.8608887436871109
+  },
+  "seconds": 615.8
+}

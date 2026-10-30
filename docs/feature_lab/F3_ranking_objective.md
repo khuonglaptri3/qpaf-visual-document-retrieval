@@ -2,6 +2,9 @@
 
 **Người chạy:** thành viên B · **Ưu tiên:** trung bình–cao · **Chi phí:** CPU, không cần dữ liệu mới
 
+Lượt chạy ngày 30/10/2026: [báo cáo, JSON kết quả và kiểm chứng ViDoSeek](../reports/tasks/lab-f3-objective-20261030/README.md).
+ViMDoc chưa chạy vì thiếu cache; không suy ra hiệu quả từ việc đã có implementation.
+
 Đọc [README](README.md) trước để nắm protocol chung. File này chỉ mô tả phần riêng của F3.
 
 ## 1. Vấn đề và giả thuyết

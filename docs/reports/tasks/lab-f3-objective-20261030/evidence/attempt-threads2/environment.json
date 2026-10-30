@@ -1,0 +1,16 @@
+{
+  "environment": {
+    "MKL_NUM_THREADS": "2",
+    "OMP_NUM_THREADS": "2"
+  },
+  "executable": "C:\\Users\\lanph\\.codex\\worktrees\\2e13\\Artificial_Intelligent_Project\\.venv\\Scripts\\python.exe",
+  "packages": {
+    "numpy": "2.2.6",
+    "pandas": "2.2.3",
+    "pyarrow": "20.0.0",
+    "torch": "2.7.1+cpu"
+  },
+  "platform": "win32",
+  "python": "3.11.16 (main, Aug 25 2026, 13:59:19) [MSC v.1944 64 bit (AMD64)]",
+  "source_commit": "41bc94e56e7f550436899780e76e68376b6aebd3"
+}

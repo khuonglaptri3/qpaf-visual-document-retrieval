@@ -1,0 +1,16 @@
+command: C:\Users\lanph\.codex\worktrees\2e13\Artificial_Intelligent_Project\.venv\Scripts\python.exe -u scripts/run_lab.py --dataset vidoseek --data C:\Users\lanph\.codex\worktrees\2e13\Artificial_Intelligent_Project\results\m2.8\RUN-QPAF-M2_8-EXPANSION-001-20261021T042029Z-A01\bundle --variant f3_topk_hard --limit 120 --epochs 2 --folds 2 --output C:\Users\lanph\.codex\worktrees\2e13\Artificial_Intelligent_Project\docs\reports\tasks\lab-f3-objective-20261030\evidence\smoke\vidoseek-f3_topk_hard.json
+fold 0: 62 train / 58 held-out queries, anchor [0.0, 0.3, 0.7]
+  f3_topk_hard qarf seed 20260820 epoch 2: loss 3.52908
+  f3_topk_hard qpaf seed 20260820 epoch 2: loss 3.52830
+fold 1: 58 train / 62 held-out queries, anchor [0.0, 0.2, 0.8]
+  f3_topk_hard qarf seed 20260820 epoch 2: loss 3.52197
+  f3_topk_hard qpaf seed 20260820 epoch 2: loss 3.52168
+{
+  "output": "C:\\Users\\lanph\\.codex\\worktrees\\2e13\\Artificial_Intelligent_Project\\docs\\reports\\tasks\\lab-f3-objective-20261030\\evidence\\smoke\\vidoseek-f3_topk_hard.json",
+  "mean": {
+    "static": 0.8726140505296432,
+    "qarf": 0.8753244379928907,
+    "qpaf": 0.8747467426435024
+  },
+  "seconds": 11.0
+}

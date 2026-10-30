@@ -1,0 +1,23 @@
+.venv/Scripts/python.exe : test_approx_ndcg_sparse_labels_do_not_allocate_all_unit_pairs 
+(tests.test_lab_f3.LossTests.test_approx_ndcg_sparse_labels_do_not_allocate_all_unit_pairs) ... FAIL
+At line:2 char:53
++ ... HREADS='6'; .venv/Scripts/python.exe -m unittest tests.test_lab_f3.Lo ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (test_approx_ndc...pairs) ... FAIL:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+
+======================================================================
+FAIL: test_approx_ndcg_sparse_labels_do_not_allocate_all_unit_pairs 
+(tests.test_lab_f3.LossTests.test_approx_ndcg_sparse_labels_do_not_allocate_all_unit_pairs)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\.codex\worktrees\2e13\Artificial_Intelligent_Project\tests\test_lab_f3.py", line 93, in 
+test_approx_ndcg_sparse_labels_do_not_allocate_all_unit_pairs
+    self.assertLessEqual(allocations.elements, 8192)
+AssertionError: 131072 not less than or equal to 8192
+
+----------------------------------------------------------------------
+Ran 1 test in 0.073s
+
+FAILED (failures=1)

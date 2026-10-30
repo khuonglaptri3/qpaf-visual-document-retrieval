@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "full_records": 3,
+  "queries_per_record": 970,
+  "unit_tests": 20,
+  "source_commits": {
+    "baseline": "41bc94e56e7f550436899780e76e68376b6aebd3",
+    "f3_approxndcg": "e3252f669cb76c1256cbc5149793c7eadd27c878",
+    "f3_topk_hard": "e3252f669cb76c1256cbc5149793c7eadd27c878"
+  },
+  "local_links_checked": 31,
+  "full_suite_tests": 802,
+  "full_suite_skipped": 6,
+  "harness_unchanged": true,
+  "overall_scope": "partial: ViMDoc cache unavailable"
+}

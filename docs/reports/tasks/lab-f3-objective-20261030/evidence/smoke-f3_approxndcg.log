@@ -1,0 +1,16 @@
+command: C:\Users\lanph\.codex\worktrees\2e13\Artificial_Intelligent_Project\.venv\Scripts\python.exe -u scripts/run_lab.py --dataset vidoseek --data C:\Users\lanph\.codex\worktrees\2e13\Artificial_Intelligent_Project\results\m2.8\RUN-QPAF-M2_8-EXPANSION-001-20261021T042029Z-A01\bundle --variant f3_approxndcg --limit 120 --epochs 2 --folds 2 --output C:\Users\lanph\.codex\worktrees\2e13\Artificial_Intelligent_Project\docs\reports\tasks\lab-f3-objective-20261030\evidence\smoke\vidoseek-f3_approxndcg.json
+fold 0: 62 train / 58 held-out queries, anchor [0.0, 0.3, 0.7]
+  f3_approxndcg qarf seed 20260820 epoch 2: loss 0.15571
+  f3_approxndcg qpaf seed 20260820 epoch 2: loss 0.15598
+fold 1: 58 train / 62 held-out queries, anchor [0.0, 0.2, 0.8]
+  f3_approxndcg qarf seed 20260820 epoch 2: loss 0.11572
+  f3_approxndcg qpaf seed 20260820 epoch 2: loss 0.11589
+{
+  "output": "C:\\Users\\lanph\\.codex\\worktrees\\2e13\\Artificial_Intelligent_Project\\docs\\reports\\tasks\\lab-f3-objective-20261030\\evidence\\smoke\\vidoseek-f3_approxndcg.json",
+  "mean": {
+    "static": 0.8726140505296432,
+    "qarf": 0.8724015531039121,
+    "qpaf": 0.8724015531039121
+  },
+  "seconds": 11.1
+}

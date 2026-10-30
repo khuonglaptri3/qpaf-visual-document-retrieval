@@ -1,0 +1,23 @@
+command: C:\Users\lanph\.codex\worktrees\2e13\Artificial_Intelligent_Project\.venv\Scripts\python.exe -m unittest tests.test_lab tests.test_lab_f3 -v
+test_paired_bootstrap (tests.test_lab.CompareTests.test_paired_bootstrap) ... ok
+test_summary_renders_without_a_verdict_rule (tests.test_lab.CompareTests.test_summary_renders_without_a_verdict_rule) ... ok
+test_folds_are_deterministic_and_in_range (tests.test_lab.DataTests.test_folds_are_deterministic_and_in_range) ... ok
+test_make_query_sorts_pages_and_indexes_units (tests.test_lab.DataTests.test_make_query_sorts_pages_and_indexes_units) ... ok
+test_bad_feature_width_is_rejected (tests.test_lab.HarnessTests.test_bad_feature_width_is_rejected) ... ok
+test_baseline_cross_validation_scores_every_query_once (tests.test_lab.HarnessTests.test_baseline_cross_validation_scores_every_query_once) ... ok
+test_extra_features_are_label_free_and_standardized (tests.test_lab.HarnessTests.test_extra_features_are_label_free_and_standardized) ... ok
+test_load_variant_rejects_bad_names (tests.test_lab.HarnessTests.test_load_variant_rejects_bad_names) ... ok
+test_every_gate_starts_at_the_anchor (tests.test_lab.ModelTests.test_every_gate_starts_at_the_anchor) ... ok
+test_listwise_loss_has_finite_gradients_with_padding (tests.test_lab.ModelTests.test_listwise_loss_has_finite_gradients_with_padding) ... ok
+test_max_pool_matches_numpy_and_ignores_padding (tests.test_lab.ModelTests.test_max_pool_matches_numpy_and_ignores_padding) ... ok
+test_unit_ndcg_matches_the_m24_metric_with_ties (tests.test_lab.ModelTests.test_unit_ndcg_matches_the_m24_metric_with_ties) ... ok
+test_all_variants_run_cross_validation (tests.test_lab_f3.F3ExperimentTests.test_all_variants_run_cross_validation) ... ok
+test_approx_ndcg_gradient_is_finite_with_padding (tests.test_lab_f3.LossTests.test_approx_ndcg_gradient_is_finite_with_padding) ... ok
+test_approx_ndcg_matches_exact_ndcg_when_sharp (tests.test_lab_f3.LossTests.test_approx_ndcg_matches_exact_ndcg_when_sharp) ... ok
+test_topk_hard_equals_listwise_when_k_covers_all_and_queries_are_easy (tests.test_lab_f3.LossTests.test_topk_hard_equals_listwise_when_k_covers_all_and_queries_are_easy) ... ok
+test_lse_pool_limits (tests.test_lab_f3.PoolTests.test_lse_pool_limits) ... ok
+
+----------------------------------------------------------------------
+Ran 17 tests in 74.368s
+
+OK

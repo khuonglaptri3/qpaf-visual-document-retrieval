@@ -1,0 +1,55 @@
+command: C:\Users\lanph\.codex\worktrees\2e13\Artificial_Intelligent_Project\.venv\Scripts\python.exe -u scripts/run_lab.py --dataset vidoseek --data C:\Users\lanph\.codex\worktrees\2e13\Artificial_Intelligent_Project\results\m2.8\RUN-QPAF-M2_8-EXPANSION-001-20261021T042029Z-A01\bundle --variant f3_topk_hard --output C:\Users\lanph\.codex\worktrees\2e13\Artificial_Intelligent_Project\docs\reports\tasks\lab-f3-objective-20261030\evidence\results\vidoseek\vidoseek-f3_topk_hard.json
+fold 0: 766 train / 204 held-out queries, anchor [0.0, 0.1, 0.9]
+  f3_topk_hard qarf seed 20260820 epoch 10: loss 1.53154
+  f3_topk_hard qarf seed 20260820 epoch 20: loss 1.53215
+  f3_topk_hard qarf seed 20260820 epoch 30: loss 1.53795
+  f3_topk_hard qarf seed 20260820 epoch 40: loss 1.50148
+  f3_topk_hard qpaf seed 20260820 epoch 10: loss 1.53390
+  f3_topk_hard qpaf seed 20260820 epoch 20: loss 1.53290
+  f3_topk_hard qpaf seed 20260820 epoch 30: loss 1.53637
+  f3_topk_hard qpaf seed 20260820 epoch 40: loss 1.50166
+fold 1: 759 train / 211 held-out queries, anchor [0.0, 0.1, 0.9]
+  f3_topk_hard qarf seed 20260820 epoch 10: loss 1.52411
+  f3_topk_hard qarf seed 20260820 epoch 20: loss 1.51553
+  f3_topk_hard qarf seed 20260820 epoch 30: loss 1.52445
+  f3_topk_hard qarf seed 20260820 epoch 40: loss 1.52844
+  f3_topk_hard qpaf seed 20260820 epoch 10: loss 1.51581
+  f3_topk_hard qpaf seed 20260820 epoch 20: loss 1.50799
+  f3_topk_hard qpaf seed 20260820 epoch 30: loss 1.51474
+  f3_topk_hard qpaf seed 20260820 epoch 40: loss 1.51793
+fold 2: 773 train / 197 held-out queries, anchor [0.0, 0.1, 0.9]
+  f3_topk_hard qarf seed 20260820 epoch 10: loss 1.45929
+  f3_topk_hard qarf seed 20260820 epoch 20: loss 1.45210
+  f3_topk_hard qarf seed 20260820 epoch 30: loss 1.47513
+  f3_topk_hard qarf seed 20260820 epoch 40: loss 1.43409
+  f3_topk_hard qpaf seed 20260820 epoch 10: loss 1.46338
+  f3_topk_hard qpaf seed 20260820 epoch 20: loss 1.45429
+  f3_topk_hard qpaf seed 20260820 epoch 30: loss 1.47122
+  f3_topk_hard qpaf seed 20260820 epoch 40: loss 1.43332
+fold 3: 800 train / 170 held-out queries, anchor [0.0, 0.1, 0.9]
+  f3_topk_hard qarf seed 20260820 epoch 10: loss 1.52911
+  f3_topk_hard qarf seed 20260820 epoch 20: loss 1.52558
+  f3_topk_hard qarf seed 20260820 epoch 30: loss 1.53047
+  f3_topk_hard qarf seed 20260820 epoch 40: loss 1.50386
+  f3_topk_hard qpaf seed 20260820 epoch 10: loss 1.53611
+  f3_topk_hard qpaf seed 20260820 epoch 20: loss 1.53151
+  f3_topk_hard qpaf seed 20260820 epoch 30: loss 1.53442
+  f3_topk_hard qpaf seed 20260820 epoch 40: loss 1.50948
+fold 4: 782 train / 188 held-out queries, anchor [0.0, 0.1, 0.9]
+  f3_topk_hard qarf seed 20260820 epoch 10: loss 1.51534
+  f3_topk_hard qarf seed 20260820 epoch 20: loss 1.51080
+  f3_topk_hard qarf seed 20260820 epoch 30: loss 1.51427
+  f3_topk_hard qarf seed 20260820 epoch 40: loss 1.50994
+  f3_topk_hard qpaf seed 20260820 epoch 10: loss 1.52364
+  f3_topk_hard qpaf seed 20260820 epoch 20: loss 1.51647
+  f3_topk_hard qpaf seed 20260820 epoch 30: loss 1.51420
+  f3_topk_hard qpaf seed 20260820 epoch 40: loss 1.50802
+{
+  "output": "C:\\Users\\lanph\\.codex\\worktrees\\2e13\\Artificial_Intelligent_Project\\docs\\reports\\tasks\\lab-f3-objective-20261030\\evidence\\results\\vidoseek\\vidoseek-f3_topk_hard.json",
+  "mean": {
+    "static": 0.8654918902483821,
+    "qarf": 0.8643346839124031,
+    "qpaf": 0.8615627883495572
+  },
+  "seconds": 603.4
+}

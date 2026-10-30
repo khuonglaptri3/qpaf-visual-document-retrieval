@@ -1,0 +1,29 @@
+{
+  "dataset": "vidoseek",
+  "files": {
+    "qrels_development.json": {
+      "expected": "691b6bc4ada3bc64fe3c408fe32498b04c7f30900eadb39ae09ddbe29aea302c",
+      "matches": true,
+      "sha256": "691b6bc4ada3bc64fe3c408fe32498b04c7f30900eadb39ae09ddbe29aea302c"
+    },
+    "queries.json": {
+      "expected": "e7994373c9fd5157cde0fb0c5a1440c37c275b85fa19b2b0b566f61d584c4ab4",
+      "matches": true,
+      "sha256": "e7994373c9fd5157cde0fb0c5a1440c37c275b85fa19b2b0b566f61d584c4ab4"
+    },
+    "raw_scores.parquet": {
+      "expected": "56d0c82efda9264c117611ddd7135fe2384b68a3ec60fbdfd80fb964c386622b",
+      "matches": true,
+      "sha256": "56d0c82efda9264c117611ddd7135fe2384b68a3ec60fbdfd80fb964c386622b"
+    }
+  },
+  "sealed_labels_opened_by_runner": false,
+  "vimdoc": {
+    "required": [
+      "candidate_scores.parquet",
+      "queries.jsonl",
+      "dev_qrels.json"
+    ],
+    "status": "missing"
+  }
+}
