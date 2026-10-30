@@ -7,7 +7,8 @@ Ngày bắt đầu: 2026-10-30. Đây là hoạt động mới; không hồi t�
 Người dùng: “Thực hiện luôn đi chạy luôn đi”, sau khi được giải thích nhánh feature/lab-f3-objective.
 Thực thi trực tiếp trong phiên này theo thiết kế đã có tại [F3](../../../../feature_lab/F3_ranking_objective.md)
 và [protocol](../../../../feature_lab/README.md), source 2f15eb19b1a224f5768a5cfaa28692fb06e55b95.
-Không thiết kế variant mới, không thay đổi harness, không quét tham số, không gọi GPU/cloud hoặc mở nhãn test.
+Không thiết kế variant mới, không thay đổi harness, không quét tham số, không gọi compute GPU/cloud hoặc mở nhãn test.
+Được kiểm tra và tải cache hiện có từ Modal volume bằng tài khoản đã cấu hình; không khởi tạo compute hay tạo dữ liệu mới.
 Giữ nguyên nhánh làm việc ban đầu bằng managed worktree.
 
 ## Deliverables

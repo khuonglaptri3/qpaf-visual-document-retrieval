@@ -24,6 +24,7 @@ Installed package root: C:/Users/lanph/.codex/plugins/cache/openai-curated-remot
 - Worktree native path: C:/Users/lanph/.codex/worktrees/2e13/Artificial_Intelligent_Project.
 - Original checkout remains on feature/m5-2-cache-parity.
 - Separate environment avoids modifying the original broken .venv.
+- modal skill read at .agents/skills/modal/SKILL.md (metadata version 1.5.5); only read-only volume listing/downloading is in scope.
 - Use existing run_lab.py with explicit --output to keep JSON under task evidence.
 - Do not implement verdict() after viewing results; preserve n/a.
 - A005/F3 implementation predates this task; this record does not certify prior development.

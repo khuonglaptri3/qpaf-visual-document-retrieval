@@ -10,7 +10,8 @@
 ## Global Constraints
 
 - Existing F3 protocol only, 5 folds / 40 epochs / seed 20260820.
-- No test or confirmation labels, cloud calls, hyperparameter sweep, harness changes, or remote writes.
+- No test or confirmation labels, cloud compute, hyperparameter sweep, harness changes, or remote writes.
+- Read-only listing/downloading existing Modal cache through the configured account is allowed.
 - All logs, JSON and validation under ../evidence/.
 - A missing dataset remains explicitly incomplete.
 
