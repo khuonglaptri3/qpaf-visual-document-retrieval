@@ -62,7 +62,7 @@
 - [x] Recompute means and paired bootstrap comparisons against baseline; leave verdict n/a.
 - [x] Fresh review of evidence and report against spec; use requesting-code-review per executing-plans.
 - [x] Verify layout, local links, report index, hashes and git diff --check.
-- [ ] Commit final local artifacts and report what ran, results and remaining work.
+- [x] Commit final local artifacts and report what ran, results and remaining work.
 
 ## Self-review
 

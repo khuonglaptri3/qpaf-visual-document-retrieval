@@ -22,7 +22,7 @@
     "evidence/cpu-benchmark.log": "ec2ac03492cd79c8a66cac03e3a9f2458030ddfb55c8605e5420548689d1a3fc",
     "evidence/encoding-normalization.json": "76442e625a0f16673342bf8e1abb502e0cabc2f185760835cd87cfeea97945d9",
     "evidence/environment.json": "33a852f8f2a1ab38afacebb589d72a3d35b3afa399863e185333946d447d652d",
-    "evidence/execution-ledger.md": "de97770caf665390db30a69b0b1f67a92d02c3b98b9efb298e1f727232cba226",
+    "evidence/execution-ledger.md": "51a54e9a6c81ca543b7cfbc24dd8e12998d04a90258be150c65606d0afa51e34",
     "evidence/execution.log": "bbebe616515dcf263248e74da29503245cf981521ddc0f7de8327f71d25db62f",
     "evidence/final-review.md": "bb83179893718b34b14f3538dfe7e49690478adbc2f8edf13b52079c5902cda2",
     "evidence/full-baseline.log": "e841e7c43449742cca2a1f70f3386f9cc9d7c7724bd5a7bf091480ee2abddb62",
@@ -56,7 +56,7 @@
     "evidence/validation.json": "e73e1c17af5b04222f24e1cfe59b5bc23d39a5e25e5e3a15a9ef9d4d600cf57b",
     "evidence/workflow.md": "8d04379e9beb0defa0add2b9ac14ab295fab8a0764852075ea6465c4c71d74ff",
     "README.md": "a20a4d95d04c6e1f41f1bd755695ccb7a12f5386c9a746b4bc3266c7bc49cc11",
-    "superpowers/plan.md": "b43ba346946c532ed119925dfcfa70ff5ba95922471fb79cc28787825400fa6f",
+    "superpowers/plan.md": "0e9081b5f9ce4540dc6a2876f4e0bec4597545397055cf3e8649efb8af252d5c",
     "superpowers/spec.md": "5bd7baf115d1e145712e8281d14296fae375f78ca377a9041536f25d35361040"
   }
 }

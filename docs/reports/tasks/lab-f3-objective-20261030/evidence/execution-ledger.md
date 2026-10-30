@@ -86,3 +86,6 @@
 - Final: Ruling: independent review recomputes statistics from recorded runs, without repeating training/full suite —
   direct recorded verification is already available — cost: this is not independent machine replication.
 - All review dispositions are preserved in final-review.md; original checkout remains untouched and no remote push/merge occurred.
+
+Task 3 complete for the ViDoSeek handoff: results and reviewed evidence committed locally in 3002c60;
+final layout/link/provenance/hash checks passed. ViMDoc remains unrun pending exact cache inputs.
