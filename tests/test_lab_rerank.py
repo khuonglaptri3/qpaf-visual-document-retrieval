@@ -32,5 +32,31 @@ class RerankFusionTests(unittest.TestCase):
             self.assertAlmostEqual(sum(anchor), 1.)
 
 
+class LambdaGateTests(unittest.TestCase):
+    def setUp(self):
+        from qpaf.lab.rerank_gate import query_tensors
+        self.queries = synthetic(20, documents=8, pages=3)  # 24 pages, above the top-20 cut
+        rng = np.random.default_rng(1)
+        self.rerank = {q.query_id: {p: float(rng.normal()) for p in q.page_ids} for q in self.queries}
+        self.text = {p: '' if p.endswith('_0') else 'page text' for q in self.queries for p in q.page_ids}
+        self.items = [query_tensors(q, ANCHOR, self.rerank, self.text) for q in self.queries]
+
+    def test_untrained_gate_matches_constant_lambda(self):
+        from qpaf.lab.rerank_gate import LambdaGate, page_lambdas, columns_for
+        for granularity in ('query', 'page'):
+            columns = columns_for(granularity)
+            gate = LambdaGate(0.6, len(columns))
+            lam = page_lambdas(gate, columns, np.zeros(len(columns)), np.ones(len(columns)), self.items[0])
+            np.testing.assert_allclose(lam, 0.6)
+
+    def test_training_keeps_lambda_in_range(self):
+        from qpaf.lab.rerank_gate import page_lambdas, train_gate
+        recipe = {'epochs': 4, 'average_from': 2, 'learning_rate': 0.01, 'weight_decay': 0., 'batch_size': 8,
+                  'max_grad_norm': 5.}
+        model, columns, mean, std = train_gate(self.items, 0.6, 'page', 20260820, recipe)
+        lam = page_lambdas(model, columns, mean, std, self.items[0])
+        self.assertTrue(np.isfinite(lam).all() and ((lam > 0) & (lam < 1)).all())
+
+
 if __name__ == '__main__':
     unittest.main()
