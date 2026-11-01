@@ -36,7 +36,8 @@ BATCH = 8
 CHUNK = 400
 GPU = ['L4', 'A10', 'L40S']  # bfloat16; no T4
 DATA_PACKAGES = ('huggingface_hub>=0.30,<1.0', 'requests>=2.32,<3', 'pillow>=11,<12', 'pypdfium2>=4.30,<5')
-GPU_PACKAGES = ('torch==2.11.0', 'transformers==4.53.3', 'peft>=0.15,<0.18', 'numpy==2.2.6')
+# torchvision: transformers 4.53 builds the Qwen2-VL video processor inside AutoProcessor and needs it.
+GPU_PACKAGES = ('torch==2.11.0', 'torchvision==0.26.0', 'transformers==4.53.3', 'peft>=0.15,<0.18', 'numpy==2.2.6')
 
 volume = modal.Volume.from_name(VOLUME, create_if_missing=True)
 data_image = modal.Image.debian_slim(python_version='3.13').pip_install(*DATA_PACKAGES)
