@@ -8,6 +8,9 @@ already pins: ViMDoc images from kaistdata/ViMDoc ViMDoc_pages.tar.gz (streamed;
 configs/vimdoc_archive_content_audit_v1.json), ViDoSeek pages rendered from Qiuchen-Wang/ViDoSeek PDFs at
 RENDER_DPI. score writes one log-odds of "True" per pair, in pair order, in the scripts/modal_lab_rerank.py
 format, so scripts/lab_rerank.py screen/gate read it unchanged. Only query text and page IDs leave this machine.
+
+The buiphat251399 workspace allows 10 GPUs at once; the scorer uses up to max_containers=4, so keep at most two
+GPU apps (this one or scripts/modal_lab_rerank.py) running together. prepare is CPU-only.
 """
 from datetime import datetime, timezone
 import hashlib

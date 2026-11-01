@@ -6,6 +6,9 @@
 module re-imported inside the container picks the same model. Runs on the local side with only the standard
 library; the output carries one score per pair in pair order (bge: logit; Qwen3: log-odds of "yes"), plus the
 model revision, runtime and SHA-256 of the pairs file. No labels are sent.
+
+The buiphat251399 workspace allows 10 GPUs at once: each app uses up to max_containers=4, so run at most two
+GPU apps (this script or scripts/modal_lab_visual_rerank.py) at the same time.
 """
 from datetime import datetime, timezone
 import hashlib
