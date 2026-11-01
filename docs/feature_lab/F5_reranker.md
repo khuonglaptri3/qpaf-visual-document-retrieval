@@ -64,3 +64,5 @@ mục 6 (thắng trên ViDoSeek, không thua trên ViMDoc), F5 được giữ. C
 QPAF trên bốn kênh (ba kênh cũ + reranker trên top-K): gate lần đầu có lý do để thích ứng theo trang, ví dụ bỏ
 qua reranker text khi OCR rỗng (ViMDoc có 2.169 trang OCR rỗng). Việc này cần đổi harness từ 3 sang 4 kênh trên
 `feature/lab-feature-plans`.
+
+Các bước mở rộng F5 (λ học được, Qwen3-Reranker, reranker ảnh) nằm ở [F6–F8](F6_F8_reranker.md).
