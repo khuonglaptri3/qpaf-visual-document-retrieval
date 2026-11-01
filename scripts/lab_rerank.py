@@ -177,7 +177,7 @@ def gate(args):
                                    'bias': float(model.delta.bias.item()), 'tau': float(np.exp(model.log_tau.item())),
                                    'weights_per_raw_unit': dict(zip([names[c] for c in columns], weights.tolist()))}
         folds.append(record)
-        print(f'fold {k}: λ0 {LAMBDAS[best]}, QARF-λ mean/std {lam_stats["query"][-1]}, QPAF-λ {lam_stats["page"][-1]}')
+        print(f'fold {k}: lambda0 {LAMBDAS[best]}, QARF mean/std {lam_stats["query"][-1]}, QPAF {lam_stats["page"][-1]}')
     ids = [q.query_id for q in queries]
     static = {i: float(v) for i, v in zip(ids, table[:, 0])}
     rows = {'static': static, 'constant': dict(zip(ids, const.tolist())),
