@@ -1,0 +1,85 @@
+{
+ "file": "test_predictions.csv.gz",
+ "gate": {
+  "anchor": [
+   0.0,
+   0.1,
+   0.9
+  ],
+  "created_utc": "2026-11-02T05:25:59+00:00",
+  "dataset": "vidoseek",
+  "dev_queries": 970,
+  "inputs_sha256": {
+   "qrels_development.json": "691b6bc4ada3bc64fe3c408fe32498b04c7f30900eadb39ae09ddbe29aea302c",
+   "queries.json": "e7994373c9fd5157cde0fb0c5a1440c37c275b85fa19b2b0b566f61d584c4ab4",
+   "raw_scores.parquet": "56d0c82efda9264c117611ddd7135fe2384b68a3ec60fbdfd80fb964c386622b",
+   "splits/test_ids.txt": "d34210f901759a4f174da0c6c2e9b810616dcb33a71a0bd128a25d5d8d12e6f6"
+  },
+  "recipe": {
+   "average_from": 20,
+   "batch_size": 16,
+   "epochs": 40,
+   "epsilon": 1e-06,
+   "learning_rate": 0.01,
+   "max_grad_norm": 5.0,
+   "query_length_cap": 64,
+   "weight_decay": 0.0
+  },
+  "seed": 20260820,
+  "source_commit": "3d6f2e881bf864ec293dfbc6bd92d280cc0ece19",
+  "split": "test",
+  "test_queries": 172,
+  "top_k": 20
+ },
+ "gate_pages_sha256": "99c76b38030965a823edfbfd592e9ab8ebb5e2ca5693385015f68d10fda6c3b7",
+ "pairs_sha256": "0bac4e8d39a042b64440e7d24d448be0c2b174256a4b3b2a165d634c94244818",
+ "reranked": {
+  "f7_static_qwen4b": {
+   "base": "static",
+   "lambda": 0.8
+  },
+  "f9_qpaf_qwen4b": {
+   "base": "qpaf",
+   "lambda": 0.9
+  }
+ },
+ "reranker": {
+  "devices": [
+   "NVIDIA A10G"
+  ],
+  "dtype": "bfloat16",
+  "finished_utc": "2026-11-02T05:34:56+00:00",
+  "gpu": [
+   "L4",
+   "A10",
+   "L40S"
+  ],
+  "gpu_seconds": 352.0,
+  "instruction": "Given a question, retrieve the document page that contains the answer",
+  "key": "qwen3-4b",
+  "limit": 0,
+  "max_length": 1024,
+  "model": "Qwen/Qwen3-Reranker-4B",
+  "packages": [
+   "torch==2.11.0",
+   "transformers==4.53.3",
+   "huggingface_hub>=0.30,<1.0",
+   "numpy==2.2.6"
+  ],
+  "pairs": 4016,
+  "revision": "22e683669bc0f0bd69640a1354a6d0aebcfeede5",
+  "torch": "2.11.0+cu130",
+  "volume_run": "qwen3-4b/0bac4e8d39a042b6-limit0"
+ },
+ "rows": [
+  "static",
+  "qarf",
+  "qpaf",
+  "f7_static_qwen4b",
+  "f9_qpaf_qwen4b"
+ ],
+ "sealed_utc": "2026-11-02T05:40:08+00:00",
+ "sha256": "3678f4a20bf4c495c27f3de6c7835a22bfaf435423bb5df20aa61361093bca50",
+ "size_bytes": 3938844,
+ "test_labels_read": false
+}

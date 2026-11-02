@@ -1,0 +1,15 @@
+{
+ "approval": {
+  "approval_text": "PENDING",
+  "approved_utc": "PENDING",
+  "approver": "PENDING",
+  "recorded_by": "PENDING"
+ },
+ "predictions_sha256": "3678f4a20bf4c495c27f3de6c7835a22bfaf435423bb5df20aa61361093bca50",
+ "protocol": "docs/feature_lab/F9_heldout_vidoseek.md",
+ "scope": "read bundle/qrels_test_sealed.json once with `scripts/lab_heldout.py open`; no rerun, no retry",
+ "sealed_qrels_sha256": "05eaaa810e47d35d4eb06b3d36a05f03b002ec9d3c5ee6bce5fc27d2e336d154",
+ "source_commit": "PENDING",
+ "status": "PENDING_RESEARCH_LEAD",
+ "task": "F9 held-out check on ViDoSeek TEST-172 (post-hoc: TEST-172 was opened once in R7)"
+}
