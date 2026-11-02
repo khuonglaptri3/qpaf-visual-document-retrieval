@@ -49,3 +49,35 @@ lưu **top-10 document của mỗi hàng cho mỗi query** kèm điểm. Như v�
 5. `open`: kiểm hash của file niêm phong, của nhãn sealed (theo marker `prepare` của A005 Stage 1: `ce9ad0fb…3f2b`)
    và code; đọc `confirmation_qrels.sealed.json` đúng một lần; ghi `heldout_result.json` (create-once). Không chạy
    lại, không chọn gì từ kết quả.
+
+## 6. Kết quả (mở nhãn một lần, 2/11/2026 09:00 UTC, post-hoc)
+
+Phần trên được commit ở `075466b` trước khi có điểm reranker; top-10 niêm phong ở `0618428` (SHA-256 `3a47d1b4…52eb`);
+lời cho phép của Research Lead ("Tôi cho phép mở") ở `d4a0c10`. Kết quả:
+[`results/lab/vimdoc/heldout/heldout_result.json`](../../results/lab/vimdoc/heldout/heldout_result.json).
+Qwen3-4B chấm 203.331 cặp: 88/204 chunk trên workspace Modal `buiphat251399` (hết credit giữa chừng), 116 chunk
+còn lại trên `tranthanhzt123321` sau khi chép nguyên byte các chunk đã xong sang Volume mới; cùng image, revision và
+code, GPU A10 và A10G. 5 trong 8.904 query không có document đúng trong pool (nDCG@10 = 0 ở mọi hàng).
+
+| Hàng | nDCG@10 | R@1 | R@3 | CV dev (nDCG@10) |
+| --- | ---: | ---: | ---: | ---: |
+| static | 0,9589 | 92,13 | 97,26 | 0,9586 |
+| QARF | 0,9615 | 92,57 | 97,57 | 0,9611 |
+| QPAF | 0,9615 | 92,48 | 97,64 | 0,9613 |
+| static + 4B (F7) | 0,9682 | 93,80 | 98,05 | 0,9706 |
+| **QPAF + 4B (F9, hàng chính)** | **0,9708** | **94,09** | **98,42** | 0,9716 |
+
+| So sánh ghép cặp (8.904 query) | nDCG@10 (thắng/hòa/thua) | R@1 (điểm %) |
+| --- | --- | --- |
+| **F9 − QPAF (chính)** | **+0,0092 [+0,0076, +0,0110]** 362/8.434/108 | **+1,62 [+1,25, +2,00]** |
+| F9 − static | +0,0118 [+0,0099, +0,0138] 402/8.359/143 | +1,97 [+1,55, +2,38] |
+| F9 − QARF | +0,0093 [+0,0075, +0,0111] 369/8.389/146 | +1,53 [+1,13, +1,91] |
+| F9 − F7 | +0,0025 [+0,0009, +0,0042] 219/8.518/167 | +0,29 [−0,04, +0,63] |
+
+Đọc kết quả: ba hàng baseline gần như trùng A005-R1 trên cùng split (0,9589 / 0,9614 / 0,9616) và CV dev, nên pipeline
+held-out khớp lab. Mức tăng của reranker giữ trên confirmation (+0,0092 so với +0,0103 của CV) và có ý nghĩa với
+khoảng tin cậy hẹp, nhưng nhỏ về tuyệt đối vì ViMDoc mức document đã gần trần (QPAF 0,9615). F9 − F7 lần này có ý
+nghĩa trên nDCG@10 (+0,0025) nhưng không có ý nghĩa trên R@1; trên ViDoSeek nó là +0,0029 không có ý nghĩa. Hai bộ
+cùng chiều, nên gate QPAF có thể thêm một chút khi đứng trước reranker, nhưng mức đó rất nhỏ và là một trong bốn so
+sánh không hiệu chỉnh đa so sánh. Confirmation ViMDoc giờ đã mở ba lần (A005 Stage 5, R1 và lần này); không dùng nó
+để chọn thêm gì.
