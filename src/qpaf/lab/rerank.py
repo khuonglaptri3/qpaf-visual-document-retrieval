@@ -1,5 +1,7 @@
 """F5: a zero-shot reranker on the top-K pages of the static fusion, interpolated with it (docs/feature_lab/F5).
 
+F9 applies the same rule to the page scores of the trained QARF/QPAF gate instead of the static fusion.
+
 The reranker sees only (query text, page OCR), never labels, so its scores are a fourth label-free signal.
 Within each held-out fold the static anchor is the lab's train-fold anchor; only the top-K pages under it are
 reranked and they always stay above the rest, so λ = 0 reproduces the static ranking exactly.
@@ -40,19 +42,29 @@ def fold_anchors(queries, folds=5):
     return anchors
 
 
+def top_of(fused, k=TOP_K):
+    """Indices of the top-k pages under fused page scores; ties go to the smaller page index."""
+    return np.argsort(-np.asarray(fused), kind='stable')[:k]
+
+
 def top_pages(q, anchor, k=TOP_K):
-    """Indices of the top-k pages under the static anchor; ties go to the smaller page index."""
-    fused = minmax(q.raw)@np.asarray(anchor)
-    return np.argsort(-fused, kind='stable')[:k]
+    """Indices of the top-k pages under the static anchor."""
+    return top_of(minmax(q.raw)@np.asarray(anchor), k)
 
 
 def fuse(q, anchor, rerank, lam, k=TOP_K):
+    """fuse_scores on the static fusion of the anchor."""
+    return fuse_scores(minmax(q.raw)@np.asarray(anchor), rerank, lam, k)
+
+
+def fuse_scores(fused, rerank, lam, k=TOP_K):
     """Page scores: top-k pages get 2 + (1−λ)·minmax(fused) + λ·minmax(rerank) over the top-k, others keep fused.
 
-    `rerank` maps a page index to the reranker score; it must cover top_pages(q, anchor, k).
+    `fused` lies in [0, 1] (static anchor or a trained lab gate, F9); `rerank` maps a page index to the reranker
+    score and must cover top_of(fused, k).
     """
-    fused = minmax(q.raw)@np.asarray(anchor)
-    top = top_pages(q, anchor, k)
+    fused = np.asarray(fused, dtype=np.float64)
+    top = top_of(fused, k)
     mixed = (1-lam)*minmax(fused[top]) + lam*minmax(np.array([rerank[i] for i in top]))
     scores = fused.copy()
     scores[top] = 2+mixed

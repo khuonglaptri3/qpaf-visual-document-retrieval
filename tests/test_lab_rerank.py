@@ -32,6 +32,32 @@ class RerankFusionTests(unittest.TestCase):
             self.assertAlmostEqual(sum(anchor), 1.)
 
 
+class GateStackTests(unittest.TestCase):
+    RECIPE = {'epochs': 4, 'average_from': 2}
+
+    def setUp(self):
+        from qpaf.lab.rerank_stack import gate_page_scores
+        self.queries = synthetic(30, documents=8, pages=3)
+        self.scores, self.anchors = gate_page_scores(self.queries, 20260820, folds=3, recipe=self.RECIPE,
+                                                     log=lambda *_: None)
+
+    def test_page_scores_reproduce_the_lab_rows(self):
+        from qpaf.lab.train import run_experiment
+        from qpaf.lab.variants import load_variant
+        result = run_experiment(self.queries, load_variant('baseline'), folds=3, recipe=self.RECIPE,
+                                log=lambda *_: None)
+        self.assertEqual(self.anchors, result['fold_anchors'])
+        for method in ('qarf', 'qpaf'):
+            for q, page_scores in zip(self.queries, self.scores[method]):
+                self.assertEqual(unit_score(q, page_scores), result['per_query'][method][q.query_id])
+
+    def test_lambda_zero_keeps_the_gate_ranking(self):
+        from qpaf.lab.rerank import fuse_scores, top_of
+        for q, page_scores in zip(self.queries, self.scores['qpaf']):
+            rerank = {i: float(-i) for i in top_of(page_scores)}
+            self.assertEqual(unit_score(q, fuse_scores(page_scores, rerank, 0.)), unit_score(q, page_scores))
+
+
 class LambdaGateTests(unittest.TestCase):
     def setUp(self):
         from qpaf.lab.rerank_gate import query_tensors
