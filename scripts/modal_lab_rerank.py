@@ -1,11 +1,14 @@
-"""F5/F7: score the (query, page OCR) pairs of scripts/lab_rerank.py with a pinned reranker on a Modal GPU.
+"""F5/F7/F9: score the (query, page OCR) pairs of scripts/lab_rerank.py with a pinned reranker on a Modal GPU.
 
-    MODAL_PROFILE=<profile> QPAF_RERANKER=<key> modal run scripts/modal_lab_rerank.py --pairs <x_pairs.json> --out <x_scores.json> [--limit N]
+    $env:MODAL_PROFILE='<profile>'; $env:QPAF_RERANKER='<key>'; modal run --detach scripts/modal_lab_rerank.py --pairs <x_pairs.json>
+    $env:MODAL_PROFILE='<profile>'; $env:QPAF_RERANKER='<key>'; modal run scripts/modal_lab_rerank.py --pairs <x_pairs.json> --stage collect --out <x_scores.json>
 
 <key> is one of MODELS (default bge-v2-m3, the F5 model). The key is baked into the image environment so the
-module re-imported inside the container picks the same model. Runs on the local side with only the standard
-library; the output carries one score per pair in pair order (bge: logit; Qwen3: log-odds of "yes"), plus the
-model revision, runtime and SHA-256 of the pairs file. No labels are sent.
+module re-imported inside the container picks the same model. `submit` (the default) spawns one call per chunk
+of pairs not yet on the `qpaf-lab-rerank` Volume and returns; with --detach the app finishes those calls even
+after the local client exits. Each call writes its chunk to the Volume, so rerunning `submit` only resends missing
+chunks. `collect` uses no GPU: it reads the chunks back and writes one score per pair in pair order (bge: logit;
+Qwen3: log-odds of "yes"), plus the model revision, runtime and SHA-256 of the pairs file. No labels are sent.
 
 The buiphat251399 workspace allows 10 GPUs at once: each app uses up to max_containers=4, so run at most two
 GPU apps (this script or scripts/modal_lab_visual_rerank.py) at the same time.
@@ -39,6 +42,8 @@ MAX_LENGTH = 1024
 CHUNK = 1000
 PACKAGES = ('torch==2.11.0', 'transformers==4.53.3', 'huggingface_hub>=0.30,<1.0', 'numpy==2.2.6')
 MODEL_DIR = '/model'
+OUT = '/out'
+volume = modal.Volume.from_name('qpaf-lab-rerank', create_if_missing=True)
 
 
 def download():
@@ -51,7 +56,7 @@ image = (modal.Image.debian_slim(python_version='3.13').pip_install(*PACKAGES)
 app = modal.App(f'qpaf-lab-rerank-{KEY}')
 
 
-@app.cls(gpu=SPEC['gpu'], image=image, timeout=1800, max_containers=4)
+@app.cls(gpu=SPEC['gpu'], image=image, timeout=1800, max_containers=4, volumes={OUT: volume})
 class Reranker:
     @modal.enter()
     def load(self):
@@ -87,8 +92,16 @@ class Reranker:
         return self.model(**inputs, return_dict=True).logits.view(-1).float().cpu().tolist()
 
     @modal.method()
-    def score(self, pairs):
-        """One score per [query, passage] pair, in input order; batches are length-sorted to cut padding."""
+    def score(self, run, index, pairs):
+        """Write one score per [query, passage] pair, in input order, to <run>/<index>.json on the Volume.
+
+        Batches are length-sorted to cut padding; a chunk already on the Volume is left as it is.
+        """
+        target = Path(OUT)/run/f'{index:05d}.json'
+        volume.reload()
+        if target.exists():
+            return
+        started = time.perf_counter()
         order = sorted(range(len(pairs)), key=lambda i: len(pairs[i][1]))
         out = [0.]*len(pairs)
         with self.torch.no_grad():
@@ -96,18 +109,44 @@ class Reranker:
                 chosen = order[start:start+SPEC['batch']]
                 for i, value in zip(chosen, self.batch_scores([pairs[i] for i in chosen])):
                     out[i] = value
-        return {'scores': out, 'torch': self.torch.__version__, 'device': self.torch.cuda.get_device_name()}
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(json.dumps({'scores': out, 'torch': self.torch.__version__,
+                                      'device': self.torch.cuda.get_device_name(),
+                                      'seconds': round(time.perf_counter()-started, 1)}))
+        volume.commit()
+
+
+def finished_chunks(run):
+    """Chunk index -> Volume path of every chunk already written for this run."""
+    prefix = f'{run}/'
+    paths = [entry.path.lstrip('/') for entry in volume.listdir('/', recursive=True)]
+    return {int(Path(p).stem): p for p in paths if p.startswith(prefix) and p.endswith('.json')}
 
 
 @app.local_entrypoint()
-def main(pairs: str, out: str, limit: int = 0):
+def main(pairs: str, stage: str = 'submit', out: str = '', limit: int = 0):
     raw = Path(pairs).read_bytes()
     data = json.loads(raw)
     items = data['pairs'][:limit] if limit else data['pairs']
     texts = [[data['queries'][q], data['pages'][p]] for q, p in items]
     chunks = [texts[i:i+CHUNK] for i in range(0, len(texts), CHUNK)]
-    started = time.perf_counter()
-    results = list(Reranker().score.map(chunks))
+    digest = hashlib.sha256(raw).hexdigest()
+    run = f'{KEY}/{digest[:16]}-limit{limit}'
+    done = finished_chunks(run)
+    if stage == 'submit':
+        missing = [i for i in range(len(chunks)) if i not in done]
+        if missing:
+            Reranker().score.spawn_map([run]*len(missing), missing, [chunks[i] for i in missing])
+        print(f'{run}: {len(chunks)} chunks, {len(done)} already on the Volume, {len(missing)} submitted. '
+              'Without --detach the app stops when this command returns.')
+        return
+    if stage != 'collect':
+        raise SystemExit("stage must be 'submit' or 'collect'")
+    if not out:
+        raise SystemExit('collect needs --out')
+    if len(done) != len(chunks):
+        raise SystemExit(f'{run}: {len(chunks)-len(done)} of {len(chunks)} chunks not on the Volume yet')
+    results = [json.loads(b''.join(volume.read_file(done[i]))) for i in range(len(chunks))]
     scores = [s for r in results for s in r['scores']]
     if len(scores) != len(items) or not all(s == s and abs(s) != float('inf') for s in scores):
         raise SystemExit('reranker returned a wrong count or a non-finite score')
@@ -115,8 +154,8 @@ def main(pairs: str, out: str, limit: int = 0):
                 'dtype': SPEC['dtype'], 'gpu': SPEC['gpu'], 'devices': sorted({r['device'] for r in results}),
                 'torch': results[0]['torch'], 'packages': list(PACKAGES), 'pairs': len(items), 'limit': limit,
                 'instruction': QWEN_INSTRUCTION if SPEC['kind'] == 'qwen3' else None,
-                'seconds': round(time.perf_counter()-started, 1),
+                'volume_run': run, 'gpu_seconds': round(sum(r['seconds'] for r in results), 1),
                 'finished_utc': datetime.now(timezone.utc).isoformat(timespec='seconds')}
-    body = {'pairs_sha256': hashlib.sha256(raw).hexdigest(), 'manifest': manifest, 'scores': scores}
+    body = {'pairs_sha256': digest, 'manifest': manifest, 'scores': scores}
     Path(out).write_text(json.dumps(body, indent=1)+'\n', encoding='utf-8')
     print(json.dumps(manifest, indent=1))

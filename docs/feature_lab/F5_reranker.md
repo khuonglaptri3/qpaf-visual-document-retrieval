@@ -42,7 +42,8 @@ trên fold train. K = 20 và `max_length` không được quét.
 
 ```powershell
 .venv/Scripts/python.exe scripts/lab_rerank.py pairs --dataset vidoseek --data <bundle> --page-text <share>/assets/vidoseek_page_text.jsonl --out <cache>/vidoseek_pairs.json
-$env:MODAL_PROFILE='buiphat251399'; modal run scripts/modal_lab_rerank.py --pairs <cache>/vidoseek_pairs.json --out <cache>/vidoseek_scores.json
+$env:MODAL_PROFILE='buiphat251399'; modal run --detach scripts/modal_lab_rerank.py --pairs <cache>/vidoseek_pairs.json
+$env:MODAL_PROFILE='buiphat251399'; modal run scripts/modal_lab_rerank.py --pairs <cache>/vidoseek_pairs.json --stage collect --out <cache>/vidoseek_scores.json
 .venv/Scripts/python.exe scripts/lab_rerank.py screen --dataset vidoseek --data <bundle> --pairs <cache>/vidoseek_pairs.json --scores <cache>/vidoseek_scores.json
 ```
 

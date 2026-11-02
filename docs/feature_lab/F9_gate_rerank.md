@@ -23,7 +23,8 @@ tầng đầu: top-20 trang và điểm fused lấy từ gate QARF/QPAF baseline
 ```powershell
 .venv/Scripts/python.exe scripts/lab_rerank.py base --dataset vidoseek --data <bundle> --out <cache>/vidoseek_gate_pages.npz
 .venv/Scripts/python.exe scripts/lab_rerank.py pairs --dataset vidoseek --data <bundle> --page-text <share>/assets/vidoseek_page_text.jsonl --base <cache>/vidoseek_gate_pages.npz --skip <cache>/vidoseek_pairs.json --out <cache>/vidoseek_pairs_gate.json
-$env:MODAL_PROFILE='buiphat251399'; $env:QPAF_RERANKER='qwen3-4b'; modal run scripts/modal_lab_rerank.py --pairs <cache>/vidoseek_pairs_gate.json --out <cache>/vidoseek_scores_gate_qwen3-4b.json
+$env:MODAL_PROFILE='buiphat251399'; $env:QPAF_RERANKER='qwen3-4b'; modal run --detach scripts/modal_lab_rerank.py --pairs <cache>/vidoseek_pairs_gate.json
+$env:MODAL_PROFILE='buiphat251399'; $env:QPAF_RERANKER='qwen3-4b'; modal run scripts/modal_lab_rerank.py --pairs <cache>/vidoseek_pairs_gate.json --stage collect --out <cache>/vidoseek_scores_gate_qwen3-4b.json
 .venv/Scripts/python.exe scripts/lab_rerank.py stack --dataset vidoseek --data <bundle> --base <cache>/vidoseek_gate_pages.npz --pairs <cache>/vidoseek_pairs.json --scores <cache>/vidoseek_scores_qwen3-4b.json --pairs <cache>/vidoseek_pairs_gate.json --scores <cache>/vidoseek_scores_gate_qwen3-4b.json --name f9_stack_qwen4b --against results/lab/vidoseek/vidoseek-f7_qwen4b.json
 ```
 
@@ -58,4 +59,4 @@ File `.npz` điểm gate và file cặp để ngoài repo; chỉ commit `results
 
 - Gate một seed (đúng như baseline đã commit), reranker chấm một lần trên GPU trộn A10/A10G.
 - Cặp mới và cặp cũ được chấm ở hai lượt khác nhau của cùng model và revision; bf16 có thể lệch rất nhỏ giữa GPU.
-- Held-out chưa đụng tới.
+- Held-out chưa đụng tới. Kế hoạch kiểm chứng một lần trên ViDoSeek TEST-172: [F9_heldout_vidoseek.md](F9_heldout_vidoseek.md).

@@ -32,7 +32,8 @@ không quét K, `max_length`, `max_pixels` hay prompt.
 ## 3. Chạy
 
 ```powershell
-$env:MODAL_PROFILE='buiphat251399'; $env:QPAF_RERANKER='qwen3-4b'; modal run scripts/modal_lab_rerank.py --pairs <cache>/vidoseek_pairs.json --out <cache>/vidoseek_scores_qwen3-4b.json
+$env:MODAL_PROFILE='buiphat251399'; $env:QPAF_RERANKER='qwen3-4b'; modal run --detach scripts/modal_lab_rerank.py --pairs <cache>/vidoseek_pairs.json
+$env:MODAL_PROFILE='buiphat251399'; $env:QPAF_RERANKER='qwen3-4b'; modal run scripts/modal_lab_rerank.py --pairs <cache>/vidoseek_pairs.json --stage collect --out <cache>/vidoseek_scores_qwen3-4b.json
 .venv/Scripts/python.exe scripts/lab_rerank.py screen --dataset vidoseek --data <bundle> --pairs <cache>/vidoseek_pairs.json --scores <cache>/vidoseek_scores_qwen3-4b.json --name f7_qwen4b --against results/lab/vidoseek/vidoseek-f5_rerank.json
 .venv/Scripts/python.exe scripts/lab_rerank.py gate --dataset vidoseek --data <bundle> --pairs <cache>/vidoseek_pairs.json --scores <cache>/vidoseek_scores_qwen3-4b.json --name f6_gate_qwen4b
 modal run scripts/modal_lab_visual_rerank.py --pairs <cache>/vidoseek_pairs.json --stage prepare
