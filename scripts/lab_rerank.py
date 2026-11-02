@@ -161,6 +161,13 @@ def provenance():
             'tracked_changes': bool(git(ROOT, 'status', '--porcelain', '--untracked-files=no'))}
 
 
+def screen_row(path):
+    """Name and per-query row of another screen result; F5 files predate the 'variant' key."""
+    other = json.loads(path.read_text(encoding='utf-8'))
+    label = other['variant'] if 'variant' in other else path.stem.split('-', 1)[1]
+    return label, other['per_query'][label]
+
+
 def print_comparisons(comparisons):
     for name, c in comparisons.items():
         print(f"  {name}: {c['delta']:+.4f} [{c['ci95'][0]:+.4f}, {c['ci95'][1]:+.4f}] {c['wins']}/{c['ties']}/{c['losses']}")
@@ -179,9 +186,8 @@ def screen(args):
     comparisons = {f'{a} - {b}': paired(rows[a], rows[b]) for a in (name, f'{name}_only')
                    for b in ('static', 'baseline_qarf', 'baseline_qpaf')}
     for path in args.against:
-        other = json.loads(path.read_text(encoding='utf-8'))
-        label = other['variant'] if 'variant' in other else path.stem.split('-', 1)[1]
-        comparisons[f'{name} - {label}'] = paired(rows[name], other['per_query'][label])
+        label, row = screen_row(path)
+        comparisons[f'{name} - {label}'] = paired(rows[name], row)
     # Own schema: compare_lab.py reads only qpaf-lab-v1 gate rows, so this file never enters its tables.
     result = {'schema': 'qpaf-lab-f5-screen-v1', 'variant': name, 'dataset': args.dataset, 'top_k': TOP_K,
               'lambdas': list(LAMBDAS), 'fold_lambda': chosen, 'fold_anchors': anchors,
@@ -297,9 +303,9 @@ def stack(args):
                    for b in ('static', 'baseline_qarf', 'baseline_qpaf')}
     comparisons['f9_qpaf - f9_qarf'] = paired(rows['f9_qpaf'], rows['f9_qarf'])
     for path in args.against:
-        other = json.loads(path.read_text(encoding='utf-8'))
+        label, row = screen_row(path)
         for a in mains:
-            comparisons[f"{a} - {other['variant']}"] = paired(rows[a], other['per_query'][other['variant']])
+            comparisons[f'{a} - {label}'] = paired(rows[a], row)
     result = {'schema': 'qpaf-lab-f9-stack-v1', 'variant': args.name, 'dataset': args.dataset, 'top_k': TOP_K,
               'lambdas': list(LAMBDAS), 'fold_lambda': chosen, 'fold_anchors': anchors, 'mean_by_lambda': by_lambda,
               'mean': {n: float(np.mean(list(row.values()))) for n, row in rows.items()},
