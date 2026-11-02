@@ -1,15 +1,21 @@
 {
  "approval": {
-  "approval_text": "PENDING",
-  "approved_utc": "PENDING",
-  "approver": "PENDING",
-  "recorded_by": "PENDING"
+  "approval_text": "Tôi cho phép mở",
+  "approved_utc": "2026-11-02T08:59:57+00:00",
+  "approver": "Tấn Phát (Research Lead)",
+  "recorded_by": "Claude, at the Research Lead's request (chat reply quoted verbatim)"
  },
+ "no_leakage": [
+  "anchor, QARF/QPAF gates and both lambdas were fitted on the 2,000 dev queries only (docs/feature_lab/F9_heldout_vimdoc.md)",
+  "the five rows were written as top-10 document lists and SHA-256 sealed (prediction_seal.json) before any confirmation label was read",
+  "confirmation_qrels.sealed.json is read once, inside `scripts/lab_heldout.py open`, after the hash checks",
+  "nothing is selected, tuned or rerun from the confirmation numbers"
+ ],
  "predictions_sha256": "3a47d1b40c47886c90c4a34479e7f107a0af5e0ebdbe4547582c3d9e49a352eb",
  "protocol": "docs/feature_lab/F9_heldout_vimdoc.md",
  "scope": "read confirmation_qrels.sealed.json once with `scripts/lab_heldout.py open`; no rerun, no retry",
  "sealed_qrels_sha256": "ce9ad0fb44c2fd1c38794b7a0a67c75be6412a13a960bb7b203b81f484003f2b",
- "source_commit": "PENDING",
- "status": "PENDING_RESEARCH_LEAD",
+ "source_commit": "0618428c3bdc6f94217e5ce1729bbf3811792ec9",
+ "status": "APPROVED",
  "task": "F9 held-out check on the ViMDoc confirmation split (post-hoc: opened in A005 Stage 5 and R1)"
 }
