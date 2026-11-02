@@ -50,8 +50,9 @@ def load_base(path, queries):
         if data['query_ids'].tolist() != [q.query_id for q in queries] or \
                 np.diff(offsets).tolist() != [len(q.page_ids) for q in queries]:
             raise SystemExit(f'{path} was written for other queries or pages')
-        scores = {m: [data[m][a:b] for a, b in zip(offsets[:-1], offsets[1:])] for m in ('qarf', 'qpaf')}
-        return scores, json.loads(str(data['meta']))
+        flat = {m: data[m] for m in ('qarf', 'qpaf')}  # each NpzFile lookup decompresses the whole array again
+        meta = json.loads(str(data['meta']))
+    return {m: [values[a:b] for a, b in zip(offsets[:-1], offsets[1:])] for m, values in flat.items()}, meta
 
 
 def build_pairs(args):
