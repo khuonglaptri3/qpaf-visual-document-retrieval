@@ -106,3 +106,5 @@ một mình, MonoQwen2-VL vẫn đạt 0,8572 trong top-20.
 1. Chốt F7 Qwen3-4B làm reranker, rồi chạy held-out một lần với cấu hình đã chốt.
 2. Nếu vẫn cần F8 trên ViMDoc: thêm checkpoint theo chunk lên Volume và đặt `timeout` ≥ 5 giờ trước khi chạy lại.
 3. QPAF bốn kênh (xem F5 mục 5): lần này với Qwen3-4B làm kênh thứ tư.
+
+Reranker đặt sau gate QARF/QPAF đã train (thay vì sau static) được thử ở [F9](F9_gate_rerank.md).
