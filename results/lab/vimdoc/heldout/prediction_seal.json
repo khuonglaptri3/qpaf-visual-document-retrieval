@@ -1,0 +1,84 @@
+{
+ "file": "confirmation_rankings.jsonl.gz",
+ "gate": {
+  "anchor": [
+   0.1,
+   0.2,
+   0.7
+  ],
+  "created_utc": "2026-11-02T06:08:04+00:00",
+  "dataset": "vimdoc",
+  "dev_queries": 2000,
+  "inputs_sha256": {
+   "candidate_scores.parquet": "296e0821e467a98bc5873ba789cfed8efeac511059a00928536f3c48c855ddf5",
+   "dev_qrels.json": "aab40d996476fe297be8d000e17bfd6b326b3c318879321f45583cd8bdc42017",
+   "queries.jsonl": "9c11852380d60163fcb7942551fa57643a2d2334e4856686838c663b97d8b994"
+  },
+  "recipe": {
+   "average_from": 20,
+   "batch_size": 16,
+   "epochs": 40,
+   "epsilon": 1e-06,
+   "learning_rate": 0.01,
+   "max_grad_norm": 5.0,
+   "query_length_cap": 64,
+   "weight_decay": 0.0
+  },
+  "seed": 20260820,
+  "source_commit": "075466bd10acc786ea014d1452ab1d6687b23b46",
+  "test_queries": 8904,
+  "top_k": 20
+ },
+ "gate_pages_sha256": "7798df56f21995fcc7ce216c4cf5daf7b5c32da98e6d66ed1256158b20901dea",
+ "pairs_sha256": "3ca9b2f878508429b282de318d38f3174a8f46e72b7348bffa6ebaacbed5a10c",
+ "reranked": {
+  "f7_static_qwen4b": {
+   "base": "static",
+   "lambda": 0.8
+  },
+  "f9_qpaf_qwen4b": {
+   "base": "qpaf",
+   "lambda": 0.5
+  }
+ },
+ "reranker": {
+  "devices": [
+   "NVIDIA A10",
+   "NVIDIA A10G"
+  ],
+  "dtype": "bfloat16",
+  "finished_utc": "2026-11-02T08:53:54+00:00",
+  "gpu": [
+   "L4",
+   "A10",
+   "L40S"
+  ],
+  "gpu_seconds": 26840.3,
+  "instruction": "Given a question, retrieve the document page that contains the answer",
+  "key": "qwen3-4b",
+  "limit": 0,
+  "max_length": 1024,
+  "model": "Qwen/Qwen3-Reranker-4B",
+  "packages": [
+   "torch==2.11.0",
+   "transformers==4.53.3",
+   "huggingface_hub>=0.30,<1.0",
+   "numpy==2.2.6"
+  ],
+  "pairs": 203331,
+  "revision": "22e683669bc0f0bd69640a1354a6d0aebcfeede5",
+  "torch": "2.11.0+cu130",
+  "volume_run": "qwen3-4b/3ca9b2f878508429-limit0"
+ },
+ "rows": [
+  "static",
+  "qarf",
+  "qpaf",
+  "f7_static_qwen4b",
+  "f9_qpaf_qwen4b"
+ ],
+ "sealed_utc": "2026-11-02T08:55:46+00:00",
+ "sha256": "3a47d1b40c47886c90c4a34479e7f107a0af5e0ebdbe4547582c3d9e49a352eb",
+ "size_bytes": 4954145,
+ "test_labels_read": false
+}

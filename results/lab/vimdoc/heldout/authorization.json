@@ -1,0 +1,15 @@
+{
+ "approval": {
+  "approval_text": "PENDING",
+  "approved_utc": "PENDING",
+  "approver": "PENDING",
+  "recorded_by": "PENDING"
+ },
+ "predictions_sha256": "3a47d1b40c47886c90c4a34479e7f107a0af5e0ebdbe4547582c3d9e49a352eb",
+ "protocol": "docs/feature_lab/F9_heldout_vimdoc.md",
+ "scope": "read confirmation_qrels.sealed.json once with `scripts/lab_heldout.py open`; no rerun, no retry",
+ "sealed_qrels_sha256": "ce9ad0fb44c2fd1c38794b7a0a67c75be6412a13a960bb7b203b81f484003f2b",
+ "source_commit": "PENDING",
+ "status": "PENDING_RESEARCH_LEAD",
+ "task": "F9 held-out check on the ViMDoc confirmation split (post-hoc: opened in A005 Stage 5 and R1)"
+}
