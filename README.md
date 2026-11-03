@@ -5,6 +5,10 @@ and [saved-file index / reproduction commands](results/m2.6/README.md).
 
 Tài liệu chính thức thống nhất: [GUILDLINE_OVERVIEWS_PROPOSAL](docs/GUILDLINE_OVERVIEWS_PROPOSAL/README.md). Các tài liệu kỹ thuật và evidence bên ngoài giữ vai trò truy nguồn implementation và kết quả.
 
+**Phương pháp đề xuất cuối (điều chỉnh sau thực nghiệm, 04/11/2026):** QPAF + Qwen3-Reranker-4B (F9). Gate QPAF xếp hạng ứng viên, reranker
+chấm lại 20 trang đầu; gần như toàn bộ mức tăng đến từ reranker. Xem [mục 13 của đề xuất](docs/GUILDLINE_OVERVIEWS_PROPOSAL/DE_XUAT_NGHIEN_CUU_QPAF.md)
+và [kết luận Feature Lab](docs/feature_lab/KET_LUAN.md).
+
 Repository này gom công cụ oracle trong `src/oracle_study` và các module nghiên cứu M1–M2.1 trong `src/qpaf`.
 
 ## Trạng thái sau khi tích hợp các branch

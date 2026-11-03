@@ -10,7 +10,7 @@
 - Trần Huỳnh Xuân Thanh — 23110060
 - Bùi Trần Tấn Phát — 23110052
 
-**Trạng thái tài liệu:** Đề xuất nghiên cứu; chưa triển khai đầy đủ và chưa có kết quả learned fusion được kiểm chứng trong repo. Các đóng góp và mức cải thiện được trình bày dưới dạng giả thuyết cần kiểm chứng.
+**Trạng thái tài liệu:** Đề xuất nghiên cứu. Mục 1–12 là bản đề xuất ban đầu, giữ nguyên để đối chiếu với các giả thuyết đã đặt. Phương pháp đề xuất cuối được điều chỉnh sau thực nghiệm ở **mục 13** (04/11/2026).
 
 **Cập nhật triển khai ngày 26/09/2026:** M1.1 được chấp nhận ở phạm vi khả thi theo
 [báo cáo Oracle trên ViDoSeek](../../results/m1.1/README.md); artifact từng query
@@ -18,6 +18,11 @@ và tái lập còn chờ. [Lõi M1.2](../03_method/m1.2-method-core.md) đã tr
 gate QARF/QPAF, fusion và loss, có kiểm chứng gradient trên fixture tổng hợp.
 Chưa có kết quả learned QPAF trên corpus thật hoặc nghiệm thu độc lập của nhóm;
 các giả thuyết nghiên cứu bên dưới vẫn cần kiểm chứng thực nghiệm.
+
+**Cập nhật ngày 04/11/2026 (điều chỉnh sau thực nghiệm):** phương pháp đề xuất cuối là
+**QPAF + reranker (F9)**. Gate QPAF học được xếp hạng ứng viên, sau đó Qwen3-Reranker-4B
+chấm lại 20 trang đầu dựa trên câu hỏi và OCR của trang. Quyết định này có sau khi đã có
+kết quả và lệch khỏi luật chọn của H3; lý do, bằng chứng và giới hạn ở mục 13.
 
 ---
 
@@ -28,6 +33,8 @@ Tài liệu giàu thông tin trực quan như báo cáo, biểu mẫu, hóa đơ
 Đề tài đề xuất **Query-Page-Adaptive Fusion (QPAF)**, một module dung hợp nhẹ sinh trọng số riêng cho từng cặp câu hỏi–trang ứng viên. QPAF kết hợp điểm từ ba kênh BM25, dense-text và visual retrieval sau khi chuẩn hóa, trong khi giữ cố định các retriever nền. Thiết kế này nhằm kiểm tra một giả thuyết hẹp: mức độ hữu ích của từng kênh không chỉ thay đổi giữa các câu hỏi mà còn có thể thay đổi giữa các trang ứng viên của cùng một câu hỏi.
 
 Nghiên cứu được thực hiện theo các cổng quyết định. Trước hết, nhóm đo chất lượng và tính bổ trợ của ba retriever. Tiếp theo, nhóm dùng oracle trên tập trọng số được định nghĩa trước để đo trần tiềm năng của dung hợp ở mức toàn cục, câu hỏi, cụm ứng viên và cặp câu hỏi–trang. Chỉ khi oracle cho thấy headroom đủ rõ, nhóm mới huấn luyện bộ dự đoán trọng số. Cách tổ chức này giúp tách biệt **khả năng tồn tại của tín hiệu dung hợp** với **khả năng học và triển khai tín hiệu đó**.
+
+**Điều chỉnh sau thực nghiệm (04/11/2026).** Thực nghiệm cho thấy gate QPAF học được trên ba kênh không cải thiện ổn định so với fixed fusion, còn một reranker zero-shot đặt sau gate mang lại gần như toàn bộ mức tăng. Phương pháp đề xuất cuối vì vậy là QPAF + Qwen3-Reranker-4B (F9); mục 13 trình bày phương pháp, kết quả và giới hạn.
 
 ## 2. Bối cảnh và động lực
 
@@ -243,6 +250,8 @@ Nếu các giả thuyết được thực nghiệm hỗ trợ, đề tài dự k
 
 Đây là các **đóng góp dự kiến**, không phải kết quả đã được chứng minh.
 
+Đóng góp thực tế sau thực nghiệm nằm ở mục 13.5. Module QPAF ở đóng góp 3 đã được xây dựng, nhưng mức cải thiện của nó không được thực nghiệm ủng hộ.
+
 ## 9. Rủi ro và phương án xử lý
 
 | Rủi ro | Ảnh hưởng | Kiểm soát |
@@ -279,6 +288,92 @@ Mốc thời gian cụ thể phụ thuộc vào tài nguyên GPU, khả năng t�
 ## 12. Kết luận
 
 QPAF là một mở rộng có phạm vi rõ từ adaptive fusion theo câu hỏi sang adaptive fusion theo cặp câu hỏi–trang cho Visual RAG. Điểm mạnh của đề xuất không nằm ở giả định rằng mô hình chi tiết hơn chắc chắn tốt hơn, mà ở thiết kế thực nghiệm có thể bác bỏ giả thuyết đó sớm. Bằng cách đo complementarity, oracle headroom và learned performance theo thứ tự, đề tài có thể chọn Global, QARF, CARF hoặc QPAF dựa trên bằng chứng thay vì mặc định chọn phương án phức tạp nhất.
+
+Sau thực nghiệm (mục 13), thiết kế này đã làm đúng việc của nó: oracle cho thấy có headroom theo trang, nhưng gate học được trên ba điểm không khai thác được headroom đó. Mức tăng thực sự đến từ một tín hiệu thứ tư, reranker đọc nội dung trang. Phương pháp cuối giữ gate QPAF làm tầng đầu và thêm reranker phía sau.
+
+## 13. Điều chỉnh sau thực nghiệm (04/11/2026)
+
+Mục này được thêm sau khi có kết quả; mục 1–12 giữ nguyên như bản đề xuất ban đầu. Chi tiết thực nghiệm:
+[Feature Lab](../feature_lab/README.md) và [kết luận F9](../feature_lab/KET_LUAN.md). Các số dưới đây là nDCG@10 nếu không ghi khác;
+khoảng tin cậy là bootstrap ghép cặp 95% theo query.
+
+### 13.1 Phương pháp đề xuất cuối: QPAF + reranker (F9)
+
+1. **Ba kênh:** BM25, BGE-M3 (dense-text) và ColQwen2.5 (visual), candidate pool và chuẩn hóa như mục 5.1–5.3.
+2. **Gate QPAF** như mục 5.5, neo vào trọng số fixed fusion: $\boldsymbol{w}(q,p)=\operatorname{softmax}\!\left(\log(\bar{\boldsymbol{w}}+\varepsilon)+\Delta_\theta(\boldsymbol{x}_{q,p})\right)$.
+   Trong đó $\bar{\boldsymbol{w}}$ là trọng số static chọn trên lưới $W_{66}$, $\Delta_\theta$ tuyến tính khởi tạo bằng 0, và $\boldsymbol{x}_{q,p}$ gồm 13 feature
+   lấy từ điểm, thứ hạng, khoảng cách điểm, mức bất đồng giữa các kênh và độ dài query.
+3. **Reranker:** `Qwen/Qwen3-Reranker-4B` zero-shot (không train) chấm cặp (câu hỏi, OCR trang) cho 20 trang đầu theo $S_{\mathrm{QPAF}}$.
+   Điểm $r(q,p)$ là log-odds của "yes" so với "no".
+4. **Điểm cuối:**
+
+$$
+S_{\mathrm{F9}}(q,p)=
+\begin{cases}
+2+(1-\lambda)\,\tilde{S}_{\mathrm{QPAF}}(q,p)+\lambda\,\tilde{r}(q,p), & p\in\operatorname{Top}_{20}^{\mathrm{QPAF}}(q),\\
+S_{\mathrm{QPAF}}(q,p), & \text{trường hợp còn lại,}
+\end{cases}
+$$
+
+trong đó $\tilde{\cdot}$ là min–max trong 20 trang đầu của câu hỏi; hằng số 2 giữ 20 trang này trên mọi trang còn lại. $\lambda$ được chọn trên dev
+bằng CV (lưới $0; 0{,}1; \dots; 1$): 0,9 cho ViDoSeek và 0,5 cho ViMDoc. Các retriever vẫn đóng băng; phần được học hoặc chọn trên dev chỉ có
+$\bar{\boldsymbol{w}}$, gate và $\lambda$. Phương pháp này được cài thành gói riêng [`src/qpaf/f9`](../../src/qpaf/f9/), chạy bằng [`scripts/run_f9.py`](../../scripts/run_f9.py) và dùng lại nguyên code lab đã sinh ra kết quả held-out.
+
+### 13.2 Đối chiếu với H3 và H4
+
+Thực nghiệm dùng CV 5-fold trên dev pool (ViDoSeek 970 query, mức trang; ViMDoc 2.000 query, mức document), một seed.
+
+| Giả thuyết | Bằng chứng | Kết luận |
+| --- | --- | --- |
+| H3, phần oracle | Trên 24 query khám phá của ViDoSeek, oracle QPAF hơn oracle QARF +0,0500 ($W_7$) và +0,0321 ($W_{66}$), cận dưới bootstrap đều dương ([quyết định tiếp tục](../03_method/QPAF_POSTHOC_CONTINUATION_DECISION.md)) | Có headroom theo trang, trên mẫu nhỏ |
+| H3, phần learned | QPAF − QARF: ViDoSeek −0,0049 [−0,0096, −0,0002], ViMDoc +0,0002 [−0,0027, +0,0032]. Khi có reranker phía sau: −0,0004 [−0,0035, +0,0027] và +0,0017 [−0,0006, +0,0041] | Không được ủng hộ |
+| H4, gate so với fixed fusion | QPAF − static: ViDoSeek −0,0046 [−0,0081, −0,0010], ViMDoc +0,0027 [−0,0002, +0,0058]. Ba hướng cải thiện gate đã chạy (F1 feature nội dung, F2 hiệu chỉnh điểm, F3 objective xếp hạng) không cho cải thiện có ý nghĩa; F4 (embedding query) không chạy | Không được ủng hộ |
+
+Chẩn đoán out-of-fold giải thích vì sao: trên ViDoSeek, khi trang đúng ở hạng 2–10 thì 570/573 trang xếp trên nó thuộc cùng document. Ba kênh
+không tách được các trang trong cùng một document, nên mọi cách trộn lại ba điểm, kể cả theo trang, đều có rất ít thông tin để khai thác.
+Reranker đọc đồng thời câu hỏi và nội dung trang nên mang tín hiệu mới.
+
+### 13.3 Kết quả held-out của F9 (post-hoc)
+
+| Split | Fixed fusion | QPAF | Static + reranker (F7) | **QPAF + reranker (F9)** | F9 − QPAF | F9 − F7 |
+| --- | ---: | ---: | ---: | ---: | --- | --- |
+| ViDoSeek TEST-172 (172 query) | 0,8255 | 0,8255 | 0,8951 | **0,8980** | +0,0725 [+0,0418, +0,1056] | +0,0029 [−0,0082, +0,0148] |
+| ViMDoc confirmation (8.904 query) | 0,9589 | 0,9615 | 0,9682 | **0,9708** | +0,0092 [+0,0076, +0,0110] | +0,0025 [+0,0009, +0,0042] |
+
+Cấu hình được chọn chỉ trên CV; các hàng và phép so sánh được đăng ký trước, dự đoán được niêm phong trước khi mở nhãn. Kết quả vẫn là
+post-hoc vì TEST-172 đã mở hai lần và ViMDoc confirmation đã mở ba lần. Trên 1.142 query ViDoSeek (970 điểm OOF của dev và 172 điểm test),
+Recall@1 của F9 là 83,27%, so với 75,57% của ColQwen2.5 trong bài báo HEAVEN. Tuy vậy, pool của nhóm là hợp các top list chứ không phải
+toàn corpus. ViMDoc không so được với bài báo vì dự án dùng nhãn mức document.
+
+### 13.4 Vì sao giữ QPAF dù H3 không được ủng hộ
+
+Theo đúng câu chữ của H3, khi QPAF không vượt QARF thì nhóm phải chọn phương án đơn giản hơn. Phương án đơn giản nhất có reranker là
+static + reranker (F7). Nhóm vẫn chọn F9 vì ba lý do:
+
+1. F9 là hàng chính đã đăng ký trước trên cả hai held-out.
+2. F9 không thua F7 có ý nghĩa ở đâu, và hơn F7 có ý nghĩa trên ViMDoc held-out (+0,0025). Trên ViDoSeek và trên CV, chênh lệch không có ý nghĩa.
+3. Gate tốn rất ít so với reranker.
+
+Đây là một **độ lệch có chủ ý khỏi luật H3**, được ghi lại ở đây. Nó không biến QPAF thành nguồn cải thiện chính: gần như toàn bộ mức tăng
+đến từ reranker. Điều kiện để tuyên bố QPAF cải thiện trong [quyết định tiếp tục](../03_method/QPAF_POSTHOC_CONTINUATION_DECISION.md)
+(QPAF − QARF ≥ 0,01 trên ba seed, cận dưới CI95 > 0) không đạt.
+
+### 13.5 Đóng góp thực tế
+
+1. Formulation và protocol Global–QARF–QPAF có cổng dừng, CV trên dev pool và held-out được niêm phong trước khi mở nhãn.
+2. Một kết quả âm có kiểm soát: headroom oracle theo trang tồn tại, nhưng gate học được trên ba điểm không khai thác được nó. Nguyên nhân được
+   chẩn đoán là nhầm lẫn giữa các trang trong cùng document.
+3. Pipeline QPAF + reranker (F9) với kết quả held-out ở mục 13.3, kèm ablation tách phần đóng góp của reranker và của gate.
+4. So sánh với HEAVEN trên ViDoSeek, kèm giới hạn ở mục 13.3.
+
+### 13.6 Giới hạn
+
+- Held-out là post-hoc (mục 13.3). Kết quả chính thức sạch trước lab vẫn là A005 §2 và M5.9, theo [Feature Lab mục 7](../feature_lab/README.md).
+- Gate chạy một seed. Mục 6.3 cho phép single-seed nếu nêu rõ, và ở đây là single-seed.
+- Reranker được thêm sau thực nghiệm, không có trong mục 5–6. Nó dùng OCR nên phụ thuộc chất lượng OCR.
+- ViDoRe V3 (mục 6.1) chưa được đánh giá cho F9; kết luận chỉ áp dụng cho ViDoSeek và ViMDoc.
+- Chi phí: ba kênh cộng Qwen3-4B trên 20 trang mỗi query. ViMDoc confirmation cần khoảng 7,5 GPU-giờ cho 203.331 cặp. Chỉ có GPU-giây tổng,
+  chưa đo latency theo query như chỉ số hệ thống ở mục 6.3.
 
 ## Tài liệu tham khảo
 
