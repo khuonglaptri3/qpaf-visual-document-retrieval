@@ -145,7 +145,24 @@ Giới hạn khi so sánh:
 - Cả hai held-out đã dùng hết. Ý tưởng mới (ví dụ F6 λ học được cho ViMDoc) chỉ được chọn trên CV, và mọi con số held-out thêm sẽ lại là post-hoc.
 - Bước "combo, 3 seed" của [README §7](README.md) không chạy vì không feature F1–F4 nào được giữ. Bước kiểm chứng held-out đã làm trực tiếp cho F9.
 
-## 8. Nguồn
+## 8. Chạy phương pháp cuối
+
+Mã nằm ở [`src/qpaf/f9`](../../src/qpaf/f9/) (gói riêng) và [`scripts/run_f9.py`](../../scripts/run_f9.py); gói gọi lại nguyên code lab trong `src/qpaf/lab`, không sửa nó,
+nên bằng chứng held-out ở mục 3 vẫn gắn với đúng code đã được cho phép. Ví dụ ViDoSeek TEST-172 (ViMDoc thêm `--dataset vimdoc --data <A005 Stage 1 cache>`; `<cache>` nằm ngoài repo vì cặp chứa OCR):
+
+```powershell
+.venv/Scripts/python.exe scripts/run_f9.py prepare --page-text <qpaf-lab-share>/assets/vidoseek_page_text.jsonl --out <cache>
+$env:MODAL_PROFILE='<profile>'; $env:QPAF_RERANKER='qwen3-4b'; modal run --detach scripts/modal_lab_rerank.py --pairs <cache>/f9_pairs.json
+$env:MODAL_PROFILE='<profile>'; $env:QPAF_RERANKER='qwen3-4b'; modal run scripts/modal_lab_rerank.py --pairs <cache>/f9_pairs.json --stage collect --out <cache>/f9_scores_qwen3-4b.json
+.venv/Scripts/python.exe scripts/run_f9.py rank --cache <cache> --out <cache>/f9_top10.jsonl.gz
+.venv/Scripts/python.exe scripts/run_f9.py verify --lab-cache <cache lab_heldout> [--refit]
+```
+
+- Hai lệnh `modal run` do người dùng chạy (`--detach`, rồi `collect` sau khi chunk xong); `rank` kiểm điểm là Qwen3-Reranker-4B @ `22e68366` trên đúng file cặp, rồi ghi top-10 đơn vị mỗi query.
+- `verify` không đọc nhãn: tính lại hàng `f9_qpaf_qwen4b` từ điểm gate và điểm Qwen3-4B của lần chạy held-out và so với file dự đoán đã niêm phong (ViDoSeek: từng điểm trang; ViMDoc: top-10 document và điểm).
+  Kết quả phải trùng tuyệt đối, nên gói mới tính cùng số với code đã sinh ra mục 3; `--refit` còn train lại gate trên dev và đòi điểm tầng 1 giống hệt.
+
+## 9. Nguồn
 
 - Tài liệu: [README](README.md), [F5](F5_reranker.md), [F6–F8](F6_F8_reranker.md), [F9](F9_gate_rerank.md), [held-out ViDoSeek](F9_heldout_vidoseek.md), [held-out ViMDoc](F9_heldout_vimdoc.md).
 - Held-out: [ViDoSeek](../../results/lab/vidoseek/heldout/heldout_result.json), [ViMDoc](../../results/lab/vimdoc/heldout/heldout_result.json).
