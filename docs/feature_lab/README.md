@@ -18,6 +18,23 @@ Gợi ý người A là **Thanh**, vì F1 cần OCR ViMDoc trên Modal workspace
 > chỉ để tham khảo.
 Research Lead (Tấn Phát) chốt luật giữ/bỏ (mục 6) trước khi chạy và làm bước ghép (mục 7).
 
+> **Trạng thái (04/11/2026): cả bốn feature đã đóng, không feature nào được ghép.** `verdict()` chưa được viết,
+> nên đây là quyết định của Research Lead dựa trên CI95, không phải verdict tự động. Delta so với `baseline` cùng method.
+>
+> | Feature | Kết quả CV (1 seed) | Quyết định |
+> | --- | --- | --- |
+> | F1 | Mọi delta âm; ViMDoc `f1_content_mlp` QPAF −0,0046 [−0,0085, −0,0007] | Bác bỏ (31/10) |
+> | F2 | Mọi delta ≈ 0, không cái nào có ý nghĩa | Bác bỏ (31/10) |
+> | F3 | Chỉ ViDoSeek: cả 4 CI95 chứa 0, tốt nhất `f3_approxndcg` QPAF +0,0022 [−0,0018, +0,0062]. ViMDoc chưa chạy | Đóng (04/11) |
+> | F4 | Chưa chạy | Đóng (04/11), không có số liệu |
+>
+> F3/F4 không chạy nốt vì [F9](F9_gate_rerank.md) cho thấy khi đã có reranker thì gate không đóng góp thêm
+> (QPAF + 4B so với static + 4B: −0,003 / +0,001, không có ý nghĩa). Mọi cải thiện gate, kể cả nếu F3/F4 có thắng,
+> đều không đổi được kiến trúc cuối. F4 đóng mà không có số liệu, nên không được ghi là "đã thử và thất bại".
+> Hướng tiếp theo là reranker: [F5](F5_reranker.md), [F6–F8](F6_F8_reranker.md), [F9](F9_gate_rerank.md).
+>
+> **Cấu hình cuối đã chốt (04/11/2026): F9, gate QPAF + Qwen3-Reranker-4B.** Kết luận và số held-out: [KET_LUAN.md](KET_LUAN.md).
+
 ## 1. Vì sao kết quả hiện tại nhỏ
 
 Harness này chạy lại baseline của A005-R1 bằng CV 5-fold trên dev pool. Đây là hàng `baseline` bên dưới (1 seed,

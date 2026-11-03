@@ -2,6 +2,12 @@
 
 **Người chạy:** thành viên B · **Ưu tiên:** trung bình–cao · **Chi phí:** CPU, không cần dữ liệu mới
 
+> **Đã đóng (04/11/2026).** Khương chạy ViDoSeek ngày 30/10: cả 4 delta so với baseline đều có CI95 chứa 0
+> (`f3_approxndcg` QARF +0,0007, QPAF +0,0022; `f3_topk_hard` QARF −0,0014, QPAF +0,0007). Baseline tái lập khớp
+> từng query. ViMDoc (gồm `f3_lse_pool`) chưa chạy vì thiếu cache. Báo cáo và JSON nằm trên branch
+> `feature/lab-f3-objective` (commit `1290111`), thư mục `docs/reports/tasks/lab-f3-objective-20261030/`.
+> Lý do không chạy nốt: xem mục "Trạng thái" trong [README](README.md).
+
 Đọc [README](README.md) trước để nắm protocol chung. File này chỉ mô tả phần riêng của F3.
 
 ## 1. Vấn đề và giả thuyết

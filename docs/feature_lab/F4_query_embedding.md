@@ -2,6 +2,9 @@
 
 **Người chạy:** thành viên B · **Ưu tiên:** trung bình · **Chi phí:** encode khoảng 3.000 query một lần (CPU vài phút)
 
+> **Đã đóng mà chưa chạy (04/11/2026).** Implementation và test nằm trên `feature/lab-f4-qemb`, nhưng chưa có kết quả CV.
+> Lý do: xem mục "Trạng thái" trong [README](README.md). Không có số liệu, nên không được kết luận F4 thất bại.
+
 Đọc [README](README.md) trước để nắm protocol chung. File này chỉ mô tả phần riêng của F4.
 
 ## 1. Vấn đề và giả thuyết
