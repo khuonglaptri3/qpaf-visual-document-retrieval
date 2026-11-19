@@ -159,3 +159,38 @@ c9ea10aa0bcce5f3eaefb8ac94f66272c5c938214392f4a84c2940ac30b9f995  tests/test_jev
 f25da71bf5a4e097c0da413e5a36a574cae2521c5cf57841d4384b5ab3e3c1ef  tests/test_jev_evaluation.py
 a43162cc4430e901e4f5c780ec2bcf14f22ca0137d2b25712f71a5231c84cf27  tests/test_jev_cli.py
 ```
+
+
+## Review fix round 1
+
+Reviewed [Task 1 findings](task-1-review.md) against `516b7879c57d2cce899a1c8f415fe789ff8fe595`. Applied the installed Superpowers 7.0.1 review reception, systematic debugging, TDD and verification skills. The fix commit is `7cd81b0f13baaa4a94eaef589d4b933e38cdf214`.
+
+- Split selection resolves the complete requested cohort before reading raw rows. In native mode, an explicit partition supplies IDs from the split manifest. An explicit `--query-ids` file can narrow that partition and must contain only IDs assigned to it. Imported pools reject missing required query IDs before any output.
+- ViMDoc evaluation requires a complete page-to-document mapping. Old F9 pair bytes and existing score-cache hashes remain usable with `evaluate --units FILE`.
+- Both report formats include ranking scope, label unit and synthetic status. Comparison rejects explicit incompatibilities. Legacy comparisons with unspecified scope or label unit report `unknown`. An unspecified synthetic status is JSON `null` and CSV `unknown` unless a compared report establishes synthetic status.
+- Preparation diagnostics name missing split and score files and show the corresponding prepare flags.
+
+### RED and GREEN
+
+The same targeted command ran before and after the fix.
+
+```powershell
+python -m unittest -v tests.test_jev_cli.CliTest.test_demo_writes_cache_and_evaluation_marked_as_synthetic tests.test_jev_cli.CliTest.test_imported_f9_bytes_allow_existing_cache_evaluation tests.test_jev_cli.CliTest.test_partition_requires_the_complete_expected_import_cohort tests.test_jev_cli.CliTest.test_native_partition_uses_manifest_ids_instead_of_held_out_defaults tests.test_jev_cli.CliTest.test_missing_import_sidecars_name_the_path_and_next_command tests.test_jev_evaluation.EvaluationTest.test_known_vimdoc_requires_page_to_document_mapping tests.test_jev_evaluation.EvaluationTest.test_comparison_preserves_matching_protocol_fields tests.test_jev_evaluation.EvaluationTest.test_comparison_rejects_explicit_protocol_mismatches tests.test_jev_evaluation.EvaluationTest.test_missing_legacy_protocol_fields_remain_unknown
+```
+
+Before implementation, exit 1 and `Ran 9 tests in 3.505s`, `FAILED (failures=7, errors=3)`. The import silently accepted an incomplete test cohort, native validation selected the held-out page `b` and failed on its OCR, the ViMDoc path accepted missing document units, the score/split errors omitted `Next command: prepare`, comparison accepted contradictory synthetic status, and three protocol assertions raised `KeyError: 'ranking_scope'`.
+
+After implementation, exit 0 and `Ran 9 tests in 4.278s`, `OK`. The partition plus contracts run also passed all 13 tests, and the direct evaluation plus CLI tests for ViMDoc units passed both tests.
+
+`python -m unittest tests.test_jev_contracts tests.test_jev_evaluation tests.test_jev_cli -v` exited 0 with `Ran 31 tests in 7.286s`, `OK`. Python 3.11 with `-I -S -m unittest discover -s tests -p 'test_jev*.py' -q` exited 0 with `Ran 31 tests in 3.091s`, `OK (skipped=2)`. Both skips required optional PyArrow. The controller scoped this review round to the focused suite. The earlier full-suite evidence remains above. `git diff --check` passed and all six changed files were LF.
+
+### Hashes of files changed by the fix
+
+```text
+f2f0f7f7e62ee41e3ed48ec75453c1fb43fbec293e91e41c5a7efbf91dd30993  src/qpaf/jev/contracts.py
+9e1d5b6d5843ae1734f787e81e454983002d4a71ce03421fef8c871c167572b1  src/qpaf/jev/data.py
+b839fcd3edfacb1605072b2d418da5683fb657dc654ff17f3dfe27b2b4e154ef  src/qpaf/jev/evaluation.py
+b43c04e42e5f8215bb0fe67d174793293b88a53708321cc6456a768ac595d8fc  src/qpaf/jev/cli.py
+b1b8db9181fde832ce1a618255c2f7095d2e1d3cc0c4e0766385bde2992f1019  tests/test_jev_evaluation.py
+22ad0e420ba0c3737fe3c8473d01b5142b03e9a397e38ae6ddd8abddb53c82e1  tests/test_jev_cli.py
+```
