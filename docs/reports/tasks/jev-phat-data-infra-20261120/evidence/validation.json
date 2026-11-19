@@ -1,0 +1,26 @@
+{
+  "verified_at": "2026-11-20T01:17:04.990723+07:00",
+  "scope": "Branch documentation bootstrap, not model/runtime verification",
+  "base": "842176c5b707298672629738390a09e222f47e86",
+  "checks": {
+    "exact_task_layout": true,
+    "exact_planning_files": true,
+    "root_index_links_report": true,
+    "all_f9_source_references_exist": true,
+    "branch_exact": true,
+    "implementation_explicitly_pending": true,
+    "local_links": true,
+    "only_own_docs_staged": true,
+    "tracked_source_unchanged": true
+  },
+  "missing_links": [],
+  "passed": 9,
+  "failed": 0,
+  "staged_paths_before_generated_outputs": [
+    "docs/README.md",
+    "docs/reports/tasks/jev-phat-data-infra-20261120/README.md",
+    "docs/reports/tasks/jev-phat-data-infra-20261120/evidence/workflow.md",
+    "docs/reports/tasks/jev-phat-data-infra-20261120/superpowers/plan.md",
+    "docs/reports/tasks/jev-phat-data-infra-20261120/superpowers/spec.md"
+  ]
+}
