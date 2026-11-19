@@ -6,7 +6,7 @@ from pathlib import Path
 import re
 
 from .contracts import (
-    decode_json, number, positive_int, read_json, text_id, validate_pairs, validate_splits,
+    decode_json, number, positive_int, read_json, text_id, validate_pairs, validate_split_manifest,
 )
 from .evaluation import minmax
 
@@ -15,7 +15,7 @@ CHANNELS = ("bm25", "dense", "visual")
 F9_PAIR_NAMES = ("f9_pairs.json", "test_pairs.json")
 
 
-def f9_bundle_paths(dataset, folder, page_text, query_ids=None):
+def f9_bundle_paths(dataset, folder, page_text, query_ids=None, *, use_default_ids=True):
     """Return only the label-free paths needed from the native F9 input layout."""
     folder = Path(folder)
     if dataset == "vidoseek":
@@ -27,12 +27,10 @@ def f9_bundle_paths(dataset, folder, page_text, query_ids=None):
         default_ids = root / "evidence" / "revisions" / "m4.1-001" / "confirmation_ids.txt"
     else:
         raise ValueError("--f9-bundle requires --dataset vidoseek or vimdoc")
-    return {
-        "queries": folder / queries,
-        "page_text": page_text,
-        "raw_scores": folder / scores,
-        "query_ids": query_ids or default_ids,
-    }
+    paths = {"queries": folder / queries, "page_text": page_text, "raw_scores": folder / scores}
+    if query_ids is not None or use_default_ids:
+        paths["query_ids"] = query_ids or default_ids
+    return paths
 
 
 def f9_pairs_path(folder):
@@ -229,14 +227,30 @@ def prepare_candidates(dataset, queries, pages, rows, top_k, *, weights=None, un
     return validate_pairs(bundle)
 
 
-def subset_partition(bundle, manifest, partition):
-    """Return a leakage-checked subset and its indices into original score vectors."""
-    validate_splits(bundle, manifest)
+def partition_query_ids(manifest, partition, selected_ids=None):
+    """Resolve the expected population before reading candidate rows."""
+    validate_split_manifest(manifest)
     if partition not in ("train", "validation", "test"):
         raise ValueError("partition must be train, validation or test")
-    queries = {query: text for query, text in bundle["queries"].items() if manifest["splits"][query] == partition}
-    if not queries:
+    assigned = [query for query, role in manifest["splits"].items() if role == partition]
+    if selected_ids is not None:
+        unrelated = sorted(set(selected_ids) - set(assigned))
+        if unrelated:
+            raise ValueError(f"query IDs are not assigned to partition {partition!r}: {unrelated}")
+        assigned = selected_ids
+    if not assigned:
         raise ValueError(f"partition {partition!r} contains no selected queries")
+    return assigned
+
+
+def subset_partition(bundle, manifest, partition, selected_ids=None):
+    """Return a leakage-checked subset and its indices into original score vectors."""
+    validate_pairs(bundle)
+    expected = set(partition_query_ids(manifest, partition, selected_ids))
+    missing = sorted(expected - bundle["queries"].keys())
+    if missing:
+        raise ValueError(f"pairs lack required queries for partition {partition!r}: {missing}")
+    queries = {query: text for query, text in bundle["queries"].items() if query in expected}
     indices = [index for index, (query, _) in enumerate(bundle["pairs"]) if query in queries]
     pairs = [bundle["pairs"][index] for index in indices]
     pages = dict.fromkeys(page for _, page in pairs)

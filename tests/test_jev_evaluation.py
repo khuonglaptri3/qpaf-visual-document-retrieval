@@ -88,3 +88,30 @@ class EvaluationTest(unittest.TestCase):
             compare(left, right)
         with self.assertRaisesRegex(ValueError, "a"):
             compare(left, left, groups={})
+
+    def test_known_vimdoc_requires_page_to_document_mapping(self):
+        bundle = {**document_pool(), "dataset": "ViMDoc"}
+        del bundle["units"]
+        with self.assertRaisesRegex(ValueError, "--units"):
+            evaluate(bundle, [0, 0, 1], {"q": {"document": 1}})
+
+    def test_comparison_preserves_matching_protocol_fields(self):
+        report = evaluate(document_pool(), [0, 3, 2], {"q": {"a": 1}})
+        comparison = compare(report, report, resamples=10)
+        self.assertEqual(comparison["ranking_scope"], "provided_candidate_pool")
+        self.assertEqual(comparison["label_unit"], "mapped")
+        self.assertFalse(comparison["synthetic"])
+
+    def test_comparison_rejects_explicit_protocol_mismatches(self):
+        report = evaluate(document_pool(), [0, 3, 2], {"q": {"a": 1}})
+        for key, incompatible in (("ranking_scope", "full"), ("label_unit", "page"), ("synthetic", True)):
+            with self.subTest(field=key):
+                with self.assertRaisesRegex(ValueError, key):
+                    compare(report, {**report, key: incompatible}, resamples=10)
+
+    def test_missing_legacy_protocol_fields_remain_unknown(self):
+        report = {"per_query": {"q": {"m": 1}}}
+        comparison = compare(report, report, resamples=10)
+        self.assertEqual(comparison["ranking_scope"], "unknown")
+        self.assertEqual(comparison["label_unit"], "unknown")
+        self.assertIsNone(comparison["synthetic"])

@@ -7,6 +7,9 @@ from statistics import mean
 from .contracts import baseline_scores, number, positive_int, score_vector, text_id, validate_pairs
 
 
+PROTOCOL_FIELDS = ("synthetic", "ranking_scope", "label_unit")
+
+
 def minmax(values):
     low, high = min(values), max(values)
     if low == high:
@@ -78,6 +81,8 @@ def _metrics(ranking, judgments, k):
 
 def evaluate(bundle, scores, qrels, k=10):
     validate_pairs(bundle)
+    if bundle["dataset"].strip().casefold() == "vimdoc" and "units" not in bundle:
+        raise ValueError("ViMDoc requires a complete page-to-document mapping; supply --units FILE to evaluate")
     positive_int(k, "k")
     scores = score_vector(scores, len(bundle["pairs"]))
     judgments = validate_qrels(qrels, bundle["queries"])
@@ -111,6 +116,29 @@ def _percentile(ordered, fraction):
     return ordered[low] + (ordered[high] - ordered[low]) * (index - low)
 
 
+def _comparison_protocol(left, right):
+    protocol = {}
+    for field in ("ranking_scope", "label_unit"):
+        a, b = left.get(field), right.get(field)
+        if any(value is not None and not text_id(value) for value in (a, b)):
+            raise ValueError(f"comparison requires a valid {field} value")
+        if a in (None, "unknown") or b in (None, "unknown"):
+            protocol[field] = "unknown"
+        elif a != b:
+            raise ValueError(f"comparison requires matching {field} across both reports")
+        else:
+            protocol[field] = a
+    a, b = left.get("synthetic"), right.get("synthetic")
+    if any(value is not None and type(value) is not bool for value in (a, b)):
+        raise ValueError("comparison requires synthetic to be boolean when specified")
+    if a is not None and b is not None and a != b:
+        raise ValueError("comparison requires matching synthetic status across both reports")
+    protocol["synthetic"] = a if a == b else None
+    if a is True or b is True:
+        protocol["synthetic"] = True
+    return protocol
+
+
 def compare(left, right, seed=20260820, resamples=10000, groups=None):
     """Report right minus left, with a query-paired or group-paired percentile CI."""
     positive_int(resamples, "resamples")
@@ -121,9 +149,10 @@ def compare(left, right, seed=20260820, resamples=10000, groups=None):
     a, b = left["per_query"], right["per_query"]
     if not a or a.keys() != b.keys() or not all(map(text_id, a)):
         raise ValueError("comparison requires the same nonempty query cohort on both sides")
-    for key in ("dataset", "k", "qrels_sha256", "ranking_scope", "label_unit"):
+    for key in ("dataset", "k", "qrels_sha256"):
         if key in left and key in right and left[key] != right[key]:
             raise ValueError(f"comparison requires matching {key} across both reports")
+    protocol = _comparison_protocol(left, right)
     if groups is not None and not isinstance(groups, dict):
         raise ValueError("groups: expected a mapping from query ID to group ID")
     first = next(iter(a.values()))
@@ -176,7 +205,7 @@ def compare(left, right, seed=20260820, resamples=10000, groups=None):
             },
         }
     return {
-        "synthetic": bool(left.get("synthetic") or right.get("synthetic")),
+        **protocol,
         "queries": len(a),
         "resampling": "group" if groups is not None else "query",
         "groups": len(clustered),

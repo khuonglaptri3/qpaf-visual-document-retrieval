@@ -186,15 +186,12 @@ def baseline_scores(bundle):
     return score_vector(bundle["base_scores"], len(bundle["pairs"]), "base_scores")
 
 
-def validate_splits(bundle, manifest):
-    validate_pairs(bundle)
+def validate_split_manifest(manifest):
     if not isinstance(manifest, dict):
         raise ValueError("split manifest: expected a JSON object")
     splits, groups = manifest.get("splits"), manifest.get("groups")
     if not isinstance(splits, dict) or not isinstance(groups, dict):
         raise ValueError("split manifest: splits and groups must be mappings")
-    if missing := sorted(bundle["queries"].keys() - splits.keys()):
-        raise ValueError(f"split manifest: queries missing assignments: {missing}")
     if splits.keys() != groups.keys():
         difference = splits.keys() ^ groups.keys()
         raise ValueError(f"split manifest: splits and groups must cover the same queries: {difference}")
@@ -205,4 +202,12 @@ def validate_splits(bundle, manifest):
             raise ValueError(f"split manifest: invalid split or group for query {query_id!r}")
         if roles.setdefault(group, split) != split:
             raise ValueError(f"split manifest: group {group!r} spans partitions")
+    return manifest
+
+
+def validate_splits(bundle, manifest):
+    validate_pairs(bundle)
+    validate_split_manifest(manifest)
+    if missing := sorted(bundle["queries"].keys() - manifest["splits"].keys()):
+        raise ValueError(f"split manifest: queries missing assignments: {missing}")
     return manifest

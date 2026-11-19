@@ -36,9 +36,17 @@ class CliTest(unittest.TestCase):
         self.assertTrue(self.read("demo/pairs.json")["synthetic"])
         self.assertTrue(self.read("demo/scores.json")["manifest"]["synthetic"])
         self.assertTrue(self.read("demo/evaluation.json")["synthetic"])
-        with (self.cwd / "demo/evaluation.csv").open(encoding="utf-8", newline="") as file:
-            self.assertEqual(len(list(csv.DictReader(file))), 2)
-        self.assertTrue(self.read("demo/comparison.json")["synthetic"])
+        comparison = self.read("demo/comparison.json")
+        self.assertTrue(comparison["synthetic"])
+        self.assertEqual(comparison["ranking_scope"], "provided_candidate_pool")
+        self.assertEqual(comparison["label_unit"], "page")
+        for name, count in (("evaluation", 2), ("comparison", 4)):
+            with (self.cwd / f"demo/{name}.csv").open(encoding="utf-8", newline="") as file:
+                rows = list(csv.DictReader(file))
+            self.assertEqual(len(rows), count)
+            self.assertEqual({row["ranking_scope"] for row in rows}, {"provided_candidate_pool"})
+            self.assertEqual({row["label_unit"] for row in rows}, {"page"})
+            self.assertEqual({row["synthetic"] for row in rows}, {"True"})
 
     def test_doctor_diagnoses_missing_private_inputs(self):
         result = self.cli("doctor")
@@ -61,24 +69,23 @@ class CliTest(unittest.TestCase):
         result = self.cli("prepare", "--f9-pairs", "f9_pairs.json", "--out", "prep")
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertEqual((self.cwd / "prep/pairs.json").read_bytes(), raw)
-        self.save("qrels.json", {"q": {"b": 1, "outside": 1}})
+        self.save("qrels.json", {"q": {"document": 1, "outside": 1}})
         common = ("evaluate", "--pairs", "prep/pairs.json", "--qrels", "qrels.json")
-        result = self.cli(*common, "--scores", "f9_scores.json", "--out", "metrics.json", "--csv", "metrics.csv")
-        self.assertEqual(result.returncode, 0, result.stderr)
-        self.assertEqual(self.read("metrics.json")["mean"]["recall@10"], 0.5)
-        result = self.cli(*common, "--baseline")
+        result = self.cli(*common, "--scores", "f9_scores.json", "--out", "metrics.json")
         self.assertNotEqual(result.returncode, 0)
-        self.assertIn("base_scores", result.stderr)
-
+        self.assertIn("--units", result.stderr)
+        self.assertFalse((self.cwd / "metrics.json").exists())
         self.save("units.json", {"a": "document", "b": "document"})
-        self.save("doc-qrels.json", {"q": {"document": 1}})
         result = self.cli(
-            "evaluate", "--pairs", "prep/pairs.json", "--scores", "f9_scores.json",
-            "--qrels", "doc-qrels.json", "--units", "units.json", "--out", "doc-metrics.json",
+            *common, "--scores", "f9_scores.json", "--units", "units.json",
+            "--out", "metrics.json", "--csv", "metrics.csv",
         )
         self.assertEqual(result.returncode, 0, result.stderr)
-        self.assertEqual(self.read("doc-metrics.json")["mean"]["recall@10"], 1)
-        self.assertEqual(self.read("doc-metrics.json")["ranking_scope"], "provided_candidate_pool")
+        self.assertEqual(self.read("metrics.json")["mean"]["recall@10"], 0.5)
+        self.assertEqual(self.read("metrics.json")["ranking_scope"], "provided_candidate_pool")
+        result = self.cli(*common, "--baseline", "--units", "units.json")
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("base_scores", result.stderr)
 
     def test_native_vimdoc_bundle_reads_only_label_free_inputs(self):
         try:
@@ -183,3 +190,70 @@ class CliTest(unittest.TestCase):
         self.assertNotEqual(result.returncode, 0)
         self.assertIn("group", result.stderr)
         self.assertEqual(hashlib.sha256((self.cwd / "prep/pairs.json").read_bytes()).hexdigest(), digest)
+
+    def test_partition_requires_the_complete_expected_import_cohort(self):
+        self.save("pool.json", {
+            "dataset": "test", "top_k": 1, "queries": {"present": "text"}, "pages": {"p": ""},
+            "pairs": [["present", "p"]],
+        })
+        self.save("splits.json", {
+            "splits": {"present": "test", "missing": "test"},
+            "groups": {"present": "g", "missing": "h"},
+        })
+        args = (
+            "prepare", "--f9-pairs", "pool.json", "--splits", "splits.json",
+            "--partition", "test", "--out", "prep",
+        )
+        result = self.cli(*args)
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("missing", result.stderr)
+        self.assertFalse((self.cwd / "prep/pairs.json").exists())
+
+        (self.cwd / "ids.txt").write_text("present\n", encoding="utf-8")
+        result = self.cli(*args, "--query-ids", "ids.txt")
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(self.read("prep/pairs.json")["pairs"], [["present", "p"]])
+
+    def test_native_partition_uses_manifest_ids_instead_of_held_out_defaults(self):
+        try:
+            import pyarrow as pa
+            import pyarrow.parquet as pq
+        except ImportError:
+            self.skipTest("native Parquet preparation requires optional pyarrow")
+        folder = self.cwd / "private"
+        (folder / "splits").mkdir(parents=True)
+        (folder / "splits/test_ids.txt").write_text("t\n", encoding="utf-8")
+        pq.write_table(pa.table({
+            "query_id": ["v", "t"], "page_id": ["a", "b"],
+            "bm25_score": [1.0, 2.0], "dense_score": [0.0, 0.0], "visual_score": [0.0, 0.0],
+        }), folder / "raw_scores.parquet")
+        self.save("private/queries.json", {"v": "validation", "t": "test"})
+        self.save("pages.json", {"a": "OCR only for validation"})
+        self.save("split.json", {"splits": {"v": "validation", "t": "test"}, "groups": {"v": "x", "t": "y"}})
+        result = subprocess.run(
+            [
+                sys.executable, str(SCRIPT), "prepare", "--dataset", "vidoseek", "--f9-bundle", "private",
+                "--page-text", "pages.json", "--weights", "1", "0", "0",
+                "--splits", "split.json", "--partition", "validation", "--out", "prep",
+            ],
+            cwd=self.cwd, capture_output=True, text=True, check=False,
+        )
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(self.read("prep/pairs.json")["pairs"], [["v", "a"]])
+        self.assertNotIn("query_ids", self.read("prep/manifest.json")["inputs_sha256"])
+
+    def test_missing_import_sidecars_name_the_path_and_next_command(self):
+        self.save("pool.json", {
+            "dataset": "test", "top_k": 1, "queries": {"q": "text"}, "pages": {"p": ""},
+            "pairs": [["q", "p"]],
+        })
+        args = ("prepare", "--f9-pairs", "pool.json", "--out", "prep")
+        for options, missing in (
+            (("--import-scores", "scores.json"), "scores.json"),
+            (("--splits", "splits.json", "--partition", "test"), "splits.json"),
+        ):
+            with self.subTest(missing=missing):
+                result = self.cli(*args, *options)
+                self.assertNotEqual(result.returncode, 0)
+                self.assertIn(missing, result.stderr)
+                self.assertIn("Next command: prepare", result.stderr)

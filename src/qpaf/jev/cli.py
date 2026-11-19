@@ -14,16 +14,19 @@ from .contracts import (
 )
 from .data import (
     f9_bundle_paths, f9_pairs_path, lexical_scores, load_query_ids, load_raw_rows, load_texts,
-    prepare_candidates, require_inputs, subset_partition,
+    partition_query_ids, prepare_candidates, require_inputs, subset_partition,
 )
-from .evaluation import blend_scores, compare, evaluate
+from .evaluation import PROTOCOL_FIELDS, blend_scores, compare, evaluate
 
 
 def _prep_inputs(args):
     if args.f9_bundle is not None:
         if args.queries is not None:
             raise ValueError("--f9-bundle uses the native query file in the bundle")
-        return f9_bundle_paths(args.dataset, args.f9_bundle, args.page_text, args.query_ids)
+        return f9_bundle_paths(
+            args.dataset, args.f9_bundle, args.page_text, args.query_ids,
+            use_default_ids=getattr(args, "partition", None) is None,
+        )
     paths = {"queries": args.queries, "page_text": args.page_text, "raw_scores": args.raw_scores}
     if args.query_ids is not None:
         paths["query_ids"] = args.query_ids
@@ -31,10 +34,20 @@ def _prep_inputs(args):
 
 
 def _prep_hint(args):
-    if args.f9_bundle is not None:
-        return ("prepare --dataset vidoseek|vimdoc --f9-bundle DIR --page-text FILE.jsonl "
-                "--weights BM25 DENSE VISUAL --out DIR")
-    return "prepare --dataset NAME --queries FILE --page-text FILE --raw-scores FILE --out DIR"
+    if args.f9_pairs is not None or args.f9_cache is not None:
+        command = "prepare --f9-pairs FILE --out DIR"
+        if getattr(args, "import_scores", None) is not None:
+            command += " --import-scores FILE"
+    elif args.f9_bundle is not None:
+        command = ("prepare --dataset vidoseek|vimdoc --f9-bundle DIR --page-text FILE.jsonl "
+                   "--weights BM25 DENSE VISUAL --out DIR")
+    else:
+        command = "prepare --dataset NAME --queries FILE --page-text FILE --raw-scores FILE --out DIR"
+    if getattr(args, "partition", None) is not None:
+        command += f" --splits FILE --partition {args.partition}"
+    if args.query_ids is not None:
+        command += " --query-ids FILE"
+    return command
 
 
 def _outputs_differ(outputs, inputs):
@@ -95,13 +108,24 @@ def _prepare(args):
     score_path = out / "scores.json"
     if (args.splits is None) != (args.partition is None):
         raise ValueError("prepare requires --splits and --partition together")
-    sidecars = (args.splits, args.import_scores)
+    importing = args.f9_pairs is not None or args.f9_cache is not None
+    sidecars = {name: path for name, path in {"splits": args.splits, "import_scores": args.import_scores}.items()
+                if path is not None}
+    if args.query_ids is not None:
+        sidecars["query_ids"] = args.query_ids
+    require_inputs(sidecars, _prep_hint(args))
+    split_raw = args.splits.read_bytes() if args.splits is not None else None
+    splits = decode_json(split_raw, args.splits) if split_raw is not None else None
+    selected = load_query_ids(args.query_ids) if args.query_ids is not None else None
+
     outputs = (pairs_path, manifest_path, base_path, score_path)
     raw = None
     imported = None
-    if args.f9_pairs is not None or args.f9_cache is not None:
+    if importing:
+        if args.query_ids is not None and args.partition is None:
+            raise ValueError("F9 import requires --splits and --partition with --query-ids")
         if any(option is not None for option in (
-            args.dataset, args.queries, args.page_text, args.query_ids, args.weights, args.units, args.top_k,
+            args.dataset, args.queries, args.page_text, args.weights, args.units, args.top_k,
         )) or args.synthetic:
             raise ValueError("F9 pairs import only accepts --out, --import-scores and optional partition selection")
         source = _validate_import_input(args)
@@ -110,7 +134,7 @@ def _prepare(args):
         if args.import_scores is not None:
             score_raw = args.import_scores.read_bytes()
             imported = decode_scores(score_raw, args.import_scores, bundle, digest)
-        _outputs_differ(outputs, (source, *sidecars))
+        _outputs_differ(outputs, (source, *sidecars.values()))
         provenance = {"source": "f9-pairs", "inputs_sha256": {"f9_pairs": digest}}
         if imported is not None:
             provenance["inputs_sha256"]["score_cache"] = hashlib.sha256(score_raw).hexdigest()
@@ -125,13 +149,17 @@ def _prepare(args):
         require_inputs(paths, _prep_hint(args))
         if args.f9_bundle is not None and args.weights is None:
             raise ValueError("native F9 channel scores require explicit --weights BM25 DENSE VISUAL")
-        _outputs_differ(outputs, (*paths.values(), *sidecars))
-        selected = load_query_ids(paths["query_ids"]) if "query_ids" in paths else None
-        queries = load_texts(paths["queries"], "query_id", selected)
+        _outputs_differ(outputs, (*paths.values(), *sidecars.values()))
+        raw_ids = selected
+        if args.partition is not None:
+            raw_ids = partition_query_ids(splits, args.partition, selected)
+        elif "query_ids" in paths and raw_ids is None:
+            raw_ids = load_query_ids(paths["query_ids"])
+        queries = load_texts(paths["queries"], "query_id", raw_ids)
         pages = load_texts(paths["page_text"], "page_id")
         units = read_json(args.units) if args.units is not None else None
         rows = load_raw_rows(
-            paths["raw_scores"], args.weights, selected, args.dataset if args.f9_bundle is not None else None
+            paths["raw_scores"], args.weights, raw_ids, args.dataset if args.f9_bundle is not None else None
         )
         bundle = prepare_candidates(
             args.dataset, queries, pages, rows, 20 if args.top_k is None else args.top_k,
@@ -145,10 +173,9 @@ def _prepare(args):
         }
     selected_indices = range(len(bundle["pairs"]))
     if args.splits is not None:
-        split_raw = args.splits.read_bytes()
-        bundle, selected_indices = subset_partition(
-            bundle, decode_json(split_raw, args.splits), args.partition,
-        )
+        bundle, selected_indices = subset_partition(bundle, splits, args.partition, selected)
+        if importing and args.query_ids is not None:
+            provenance["inputs_sha256"]["query_ids"] = sha256_file(args.query_ids)
         provenance["inputs_sha256"]["splits"] = hashlib.sha256(split_raw).hexdigest()
         provenance["partition"] = args.partition
         raw = None
@@ -196,17 +223,24 @@ def _write_csv(path, fields, rows):
     atomic_write(path, stream.getvalue().encode("utf-8"))
 
 
+def _csv_protocol(report):
+    return {name: "unknown" if report[name] is None else report[name] for name in PROTOCOL_FIELDS}
+
+
 def _evaluation_csv(path, report):
-    _write_csv(path, ["query_id", "synthetic", *report["mean"]], [
-        {"query_id": query, "synthetic": report["synthetic"], **row}
+    protocol = _csv_protocol(report)
+    _write_csv(path, ["query_id", *PROTOCOL_FIELDS, *report["mean"]], [
+        {"query_id": query, **protocol, **row}
         for query, row in report["per_query"].items()
     ])
 
 
 def _comparison_csv(path, report):
-    _write_csv(path, ["metric", "synthetic", "delta", "ci95_low", "ci95_high", "win", "tie", "loss"], [
+    protocol = _csv_protocol(report)
+    fields = ["metric", *PROTOCOL_FIELDS, "delta", "ci95_low", "ci95_high", "win", "tie", "loss"]
+    _write_csv(path, fields, [
         {
-            "metric": name, "synthetic": report["synthetic"], "delta": row["delta"],
+            "metric": name, **protocol, "delta": row["delta"],
             "ci95_low": row["ci95"][0], "ci95_high": row["ci95"][1], **row["win_tie_loss"],
         }
         for name, row in report["metrics"].items()
@@ -323,7 +357,9 @@ def _add_prepare_inputs(parser, required):
     parser.add_argument("--dataset", help="Dataset name; native F9 layout accepts vidoseek or vimdoc")
     parser.add_argument("--queries", type=Path, help="ID-to-text JSON or {query_id,text} JSONL")
     parser.add_argument("--page-text", type=Path, help="ID-to-OCR JSON or {page_id,text} JSONL")
-    parser.add_argument("--query-ids", type=Path, help="Selected query IDs, one per line")
+    parser.add_argument(
+        "--query-ids", type=Path, help="Selected query IDs, one per line. With --partition, every ID must belong to it.",
+    )
 
 
 def _add_report_outputs(parser):
@@ -354,7 +390,10 @@ def build_parser():
     prep.add_argument("--weights", type=float, nargs=3, metavar=("BM25", "DENSE", "VISUAL"))
     prep.add_argument("--units", type=Path, help="Optional page-ID to label-unit mapping in JSON")
     prep.add_argument("--splits", type=Path, help="Query split/group manifest")
-    prep.add_argument("--partition", choices=("train", "validation", "test"), help="Select a split from --splits")
+    prep.add_argument(
+        "--partition", choices=("train", "validation", "test"),
+        help="Require all queries assigned to this split, narrowed only by explicit --query-ids",
+    )
     prep.add_argument("--import-scores", type=Path, help="Validate an F9 cache and rebind to the output pairs")
     prep.add_argument("--synthetic", action="store_true", help="Mark these inputs as synthetic")
     prep.add_argument("--out", type=Path, required=True, help="Output directory")
