@@ -37,3 +37,7 @@ cho commit nguồn; dùng Git history khi cần đọc tài liệu đã được
 
 [`catalog.json`](catalog.json) là danh mục tài liệu và ghi nhận các đường dẫn cũ
 đã loại bỏ; danh mục này không phải biên bản nghiệm thu nghiên cứu.
+
+## Nghiên cứu Jev — branch Khương
+
+[Kev decision model và domain fine-tuning](reports/tasks/jev-khuong-model-20261120/README.md): branch/brief đã tạo; implementation và thí nghiệm chưa chạy.

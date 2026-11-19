@@ -1,0 +1,36 @@
+{
+  "algorithm": "SHA-256",
+  "excludes": "this manifest itself",
+  "files": [
+    {
+      "path": "docs/reports/tasks/jev-khuong-model-20261120/evidence/validation.json",
+      "sha256": "545878595d16d7396c6f7139945540de2bd86d262a6c51c94083422e7e38515a",
+      "bytes": 924
+    },
+    {
+      "path": "docs/reports/tasks/jev-khuong-model-20261120/evidence/workflow.md",
+      "sha256": "5c2ce79f859352a75c7297f4944921018622fd435e447011ffda9db96c04305d",
+      "bytes": 1969
+    },
+    {
+      "path": "docs/reports/tasks/jev-khuong-model-20261120/README.md",
+      "sha256": "18ce71dca9ab0b37e3eac23c776c167e4ddca8ea3ec43095cbb026a81e4cbca0",
+      "bytes": 2446
+    },
+    {
+      "path": "docs/reports/tasks/jev-khuong-model-20261120/superpowers/plan.md",
+      "sha256": "e75acd582650d67d7ab36cd18b980b5a026ccc94bcbdc51f30fc1ff42ebc803a",
+      "bytes": 2447
+    },
+    {
+      "path": "docs/reports/tasks/jev-khuong-model-20261120/superpowers/spec.md",
+      "sha256": "b0a54febf060e0d0466ede1a683cf376a425108ebb805b83b7b52281a5f34332",
+      "bytes": 2433
+    },
+    {
+      "path": "docs/README.md",
+      "sha256": "0efce6efbc2160084ba29e905238c6a801ab57364e064027fa171506cf48bafe",
+      "bytes": 3071
+    }
+  ]
+}
