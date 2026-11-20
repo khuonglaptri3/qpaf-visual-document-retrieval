@@ -1,0 +1,259 @@
+{
+  "schema": 1,
+  "published": true,
+  "shared_commit": "796410160ee90bbe2a86b6799a76976f958f576f",
+  "full_data_model_quality_verified": false,
+  "branches": [
+    {
+      "owner": "phat",
+      "branch": "research/jev-phat-data-infra",
+      "commit": "5685219af4bf034c7a0ce2824e57106a268cc341",
+      "url": "https://github.com/khuonglaptri3/qpaf-visual-document-retrieval/tree/research/jev-phat-data-infra",
+      "fresh_clone": {
+        "returncode": 0,
+        "commit": "5685219af4bf034c7a0ce2824e57106a268cc341",
+        "synthetic": true,
+        "artifacts_verified": true,
+        "artifacts_sha256": {
+          "f9_pairs.json": "5b6b90e748f0cf104dcb09eaaaad59f2da84d33a6ae6d57fdb4e56b75199b404",
+          "prepared/base_scores.json": "2948e4e616f4aa1873b02366a6b5c75162aacc79cefd4fe8f1d7045706e1fe6a",
+          "prepared/manifest.json": "de8133972b44889741c6ebfb6fd18d9ea910c6c48fe17e02a265983141c9ec88",
+          "prepared/pairs.json": "ed53b1f3d5a713549029d829e558f95918cd6dcd1a037fa91bfcf1d0a65406a4",
+          "splits.json": "99ed08b45cd6bac33d9ffb586dbba13dcc8c17575a14022df5aef39fefb515c0"
+        },
+        "python_version": "Python 3.11.16",
+        "clone": {
+          "command": [
+            "git",
+            "clone",
+            "--quiet",
+            "--depth",
+            "1",
+            "--single-branch",
+            "--branch",
+            "research/jev-phat-data-infra",
+            "file:///C:/Users/lanph/.codex/worktrees/7f7a/Artificial_Intelligent_Project",
+            "C:\\Users\\lanph\\AppData\\Local\\Temp\\jev-delivery-phat-l7y18cni\\clone"
+          ],
+          "returncode": 0,
+          "stdout": "",
+          "stderr": ""
+        },
+        "pinned_base_fetch": {
+          "command": [
+            "git",
+            "fetch",
+            "--quiet",
+            "--depth",
+            "1",
+            "file:///C:/Users/lanph/.codex/worktrees/7f7a/Artificial_Intelligent_Project",
+            "842176c5b707298672629738390a09e222f47e86"
+          ],
+          "returncode": 0,
+          "stdout": "",
+          "stderr": ""
+        },
+        "smoke": {
+          "command": [
+            "C:\\Users\\lanph\\AppData\\Roaming\\uv\\python\\cpython-3.11-windows-x86_64-none\\python.exe",
+            "-I",
+            "-S",
+            "C:\\Users\\lanph\\AppData\\Local\\Temp\\jev-delivery-phat-l7y18cni\\clone\\scripts\\run_jev_phat.py",
+            "--out",
+            "C:\\Users\\lanph\\AppData\\Local\\Temp\\jev-delivery-phat-l7y18cni\\demo"
+          ],
+          "returncode": 0,
+          "stdout": "Prepared 2 pairs for 1 queries in C:\\Users\\lanph\\AppData\\Local\\Temp\\jev-delivery-phat-l7y18cni\\demo\\prepared. Empty OCR pages: 1.\nPairs verified: 1 queries, 2 pairs, 1 empty OCR pages\nScore length, values and input hash verified.\nJev CPU toolkit ready (Python 3.11.16). Try demo --out DIR.\nSynthetic phat demo artifacts: C:\\Users\\lanph\\AppData\\Local\\Temp\\jev-delivery-phat-l7y18cni\\demo\n",
+          "stderr": ""
+        },
+        "bundle_validation": {
+          "command": [
+            "C:\\Users\\lanph\\AppData\\Roaming\\uv\\python\\cpython-3.11-windows-x86_64-none\\python.exe",
+            "-I",
+            "-S",
+            "C:\\Users\\lanph\\AppData\\Local\\Temp\\jev-delivery-phat-l7y18cni\\clone\\docs\\reports\\tasks\\jev-runnable-team-kit-20261120\\evidence\\finalize_artifacts.py"
+          ],
+          "returncode": 0,
+          "stdout": "{\n  \"schema\": 1,\n  \"passed\": true,\n  \"checks\": [\n    {\n      \"name\": \"docs/reports/tasks/jev-phat-data-infra-20261120: root layout\",\n      \"passed\": true,\n      \"detail\": null\n    },\n    {\n      \"name\": \"docs/reports/tasks/jev-phat-data-infra-20261120: planning layout\",\n      \"passed\": true,\n      \"detail\": null\n    },\n    {\n      \"name\": \"docs/reports/tasks/jev-phat-data-infra-20261120: provenance\",\n      \"passed\": true,\n      \"detail\": null\n    },\n    {\n      \"name\": \"docs/reports/tasks/jev-phat-data-infra-20261120: report links\",\n      \"passed\": true,\n      \"detail\": null\n    },\n    {\n      \"name\": \"docs/reports/tasks/jev-runnable-team-kit-20261120: root layout\",\n      \"passed\": true,\n      \"detail\": null\n    },\n    {\n      \"name\": \"docs/reports/tasks/jev-runnable-team-kit-20261120: planning layout\",\n      \"passed\": true,\n      \"detail\": null\n    },\n    {\n      \"name\": \"docs/reports/tasks/jev-runnable-team-kit-20261120: provenance\",\n      \"passed\": true,\n      \"detail\": null\n    },\n    {\n      \"name\": \"docs/reports/tasks/jev-runnable-team-kit-20261120: report links\",\n      \"passed\": true,\n      \"detail\": null\n    },\n    {\n      \"name\": \"delivered Markdown local links\",\n      \"passed\": true,\n      \"detail\": []\n    },\n    {\n      \"name\": \"frozen source/results/evidence preserved\",\n      \"passed\": true,\n      \"detail\": []\n    },\n    {\n      \"name\": \"delivery diff whitespace\",\n      \"passed\": true,\n      \"detail\": \"\"\n    }\n  ],\n  \"excluded_immutable_snapshot_links\": [\n    \"docs/reports/tasks/jev-phat-data-infra-20261120/evidence/plan-bootstrap-before-runtime-20261120.md\",\n    \"docs/reports/tasks/jev-phat-data-infra-20261120/evidence/README-bootstrap-before-runtime-20261120.md\",\n    \"docs/reports/tasks/jev-phat-data-infra-20261120/evidence/spec-bootstrap-before-runtime-20261120.md\",\n    \"docs/reports/tasks/jev-phat-data-infra-20261120/evidence/workflow-bootstrap-before-runtime-20261120.md\"\n  ],\n  \"hash_mismatches\": []\n}\n",
+          "stderr": ""
+        }
+      },
+      "remote_sha": "5685219af4bf034c7a0ce2824e57106a268cc341",
+      "matched": true
+    },
+    {
+      "owner": "thanh",
+      "branch": "research/jev-thanh-baselines",
+      "commit": "24f953f4d3435bd8211847e293f74affa5f3b4a4",
+      "url": "https://github.com/khuonglaptri3/qpaf-visual-document-retrieval/tree/research/jev-thanh-baselines",
+      "fresh_clone": {
+        "returncode": 0,
+        "commit": "24f953f4d3435bd8211847e293f74affa5f3b4a4",
+        "synthetic": true,
+        "artifacts_verified": true,
+        "artifacts_sha256": {
+          "baseline.csv": "bcdd35e0b535ab7dccf1ea11f85831269533b16990178161d4f91a85f258d382",
+          "baseline.json": "d1424c03ad5227c10af8cb6d85e0563957986bcd0ddf9618be1e719b3c09d391",
+          "comparison.csv": "0c3cc224f26fb5f96c9ba4cbe20d22505fc51309f34c6c9bfb74126d426e560a",
+          "comparison.json": "70d19870b2149c10f1941a353876e75a53329c176e7913d4132d5eac3080dfd2",
+          "evaluation.csv": "1262544ccd267bbc6440035f23f8c651127dcf1d0bfa19e19e7d2284340d7851",
+          "evaluation.json": "61ec7e47994dc15736584c83938ec108d92aa415ebbc61d207554930eb2b831a",
+          "f9_pairs.json": "5b6b90e748f0cf104dcb09eaaaad59f2da84d33a6ae6d57fdb4e56b75199b404",
+          "prepared/base_scores.json": "3a420d9c69ea483f6527bbf82eb912665f2d9e7d77ddfd9770b2184708655656",
+          "prepared/manifest.json": "1f7a907d1c86a518a7a17e07e2072281c20e078bd7524e544ca2df76e38b1e91",
+          "prepared/pairs.json": "5b6b90e748f0cf104dcb09eaaaad59f2da84d33a6ae6d57fdb4e56b75199b404",
+          "qrels.json": "23a09204968e8cb5a249176349266d7194a29e4d98d44dd755e06c4d9f973c81",
+          "scores.json": "db21b80dfd73234088be5cd1c5b574b663e12243e51f567baef7bd0adb6453bb",
+          "splits.json": "99ed08b45cd6bac33d9ffb586dbba13dcc8c17575a14022df5aef39fefb515c0"
+        },
+        "python_version": "Python 3.11.16",
+        "clone": {
+          "command": [
+            "git",
+            "clone",
+            "--quiet",
+            "--depth",
+            "1",
+            "--single-branch",
+            "--branch",
+            "research/jev-thanh-baselines",
+            "file:///C:/Users/lanph/.codex/worktrees/7f7a/Artificial_Intelligent_Project",
+            "C:\\Users\\lanph\\AppData\\Local\\Temp\\jev-delivery-thanh-yr86a86d\\clone"
+          ],
+          "returncode": 0,
+          "stdout": "",
+          "stderr": ""
+        },
+        "pinned_base_fetch": {
+          "command": [
+            "git",
+            "fetch",
+            "--quiet",
+            "--depth",
+            "1",
+            "file:///C:/Users/lanph/.codex/worktrees/7f7a/Artificial_Intelligent_Project",
+            "842176c5b707298672629738390a09e222f47e86"
+          ],
+          "returncode": 0,
+          "stdout": "",
+          "stderr": ""
+        },
+        "smoke": {
+          "command": [
+            "C:\\Users\\lanph\\AppData\\Roaming\\uv\\python\\cpython-3.11-windows-x86_64-none\\python.exe",
+            "-I",
+            "-S",
+            "C:\\Users\\lanph\\AppData\\Local\\Temp\\jev-delivery-thanh-yr86a86d\\clone\\scripts\\run_jev_thanh.py",
+            "--out",
+            "C:\\Users\\lanph\\AppData\\Local\\Temp\\jev-delivery-thanh-yr86a86d\\demo"
+          ],
+          "returncode": 0,
+          "stdout": "Prepared 4 pairs for 2 queries in C:\\Users\\lanph\\AppData\\Local\\Temp\\jev-delivery-thanh-yr86a86d\\demo\\prepared. Empty OCR pages: 1.\nWrote 4 scores to C:\\Users\\lanph\\AppData\\Local\\Temp\\jev-delivery-thanh-yr86a86d\\demo\\scores.json\nWrote C:\\Users\\lanph\\AppData\\Local\\Temp\\jev-delivery-thanh-yr86a86d\\demo\\baseline.json\nWrote C:\\Users\\lanph\\AppData\\Local\\Temp\\jev-delivery-thanh-yr86a86d\\demo\\evaluation.json\nWrote C:\\Users\\lanph\\AppData\\Local\\Temp\\jev-delivery-thanh-yr86a86d\\demo\\comparison.json\nSynthetic thanh demo artifacts: C:\\Users\\lanph\\AppData\\Local\\Temp\\jev-delivery-thanh-yr86a86d\\demo\n",
+          "stderr": ""
+        },
+        "bundle_validation": {
+          "command": [
+            "C:\\Users\\lanph\\AppData\\Roaming\\uv\\python\\cpython-3.11-windows-x86_64-none\\python.exe",
+            "-I",
+            "-S",
+            "C:\\Users\\lanph\\AppData\\Local\\Temp\\jev-delivery-thanh-yr86a86d\\clone\\docs\\reports\\tasks\\jev-runnable-team-kit-20261120\\evidence\\finalize_artifacts.py"
+          ],
+          "returncode": 0,
+          "stdout": "{\n  \"schema\": 1,\n  \"passed\": true,\n  \"checks\": [\n    {\n      \"name\": \"docs/reports/tasks/jev-runnable-team-kit-20261120: root layout\",\n      \"passed\": true,\n      \"detail\": null\n    },\n    {\n      \"name\": \"docs/reports/tasks/jev-runnable-team-kit-20261120: planning layout\",\n      \"passed\": true,\n      \"detail\": null\n    },\n    {\n      \"name\": \"docs/reports/tasks/jev-runnable-team-kit-20261120: provenance\",\n      \"passed\": true,\n      \"detail\": null\n    },\n    {\n      \"name\": \"docs/reports/tasks/jev-runnable-team-kit-20261120: report links\",\n      \"passed\": true,\n      \"detail\": null\n    },\n    {\n      \"name\": \"docs/reports/tasks/jev-thanh-baselines-20261120: root layout\",\n      \"passed\": true,\n      \"detail\": null\n    },\n    {\n      \"name\": \"docs/reports/tasks/jev-thanh-baselines-20261120: planning layout\",\n      \"passed\": true,\n      \"detail\": null\n    },\n    {\n      \"name\": \"docs/reports/tasks/jev-thanh-baselines-20261120: provenance\",\n      \"passed\": true,\n      \"detail\": null\n    },\n    {\n      \"name\": \"docs/reports/tasks/jev-thanh-baselines-20261120: report links\",\n      \"passed\": true,\n      \"detail\": null\n    },\n    {\n      \"name\": \"delivered Markdown local links\",\n      \"passed\": true,\n      \"detail\": []\n    },\n    {\n      \"name\": \"frozen source/results/evidence preserved\",\n      \"passed\": true,\n      \"detail\": []\n    },\n    {\n      \"name\": \"delivery diff whitespace\",\n      \"passed\": true,\n      \"detail\": \"\"\n    }\n  ],\n  \"excluded_immutable_snapshot_links\": [\n    \"docs/reports/tasks/jev-thanh-baselines-20261120/evidence/plan-bootstrap-before-runtime-20261120.md\",\n    \"docs/reports/tasks/jev-thanh-baselines-20261120/evidence/README-bootstrap-before-runtime-20261120.md\",\n    \"docs/reports/tasks/jev-thanh-baselines-20261120/evidence/spec-bootstrap-before-runtime-20261120.md\",\n    \"docs/reports/tasks/jev-thanh-baselines-20261120/evidence/workflow-bootstrap-before-runtime-20261120.md\"\n  ],\n  \"hash_mismatches\": []\n}\n",
+          "stderr": ""
+        }
+      },
+      "remote_sha": "24f953f4d3435bd8211847e293f74affa5f3b4a4",
+      "matched": true
+    },
+    {
+      "owner": "khuong",
+      "branch": "research/jev-khuong-model",
+      "commit": "c3cf284ea25bf4f270a1cad4cfc0dd1edbf51a34",
+      "url": "https://github.com/khuonglaptri3/qpaf-visual-document-retrieval/tree/research/jev-khuong-model",
+      "fresh_clone": {
+        "returncode": 0,
+        "commit": "c3cf284ea25bf4f270a1cad4cfc0dd1edbf51a34",
+        "synthetic": true,
+        "artifacts_verified": true,
+        "artifacts_sha256": {
+          "base-plan.json": "0caf51cb5c1c6ab79fa48e06af95aaae525abe8d2ce3ed6c5c47e6df832cd5e9",
+          "f9_pairs.json": "5b6b90e748f0cf104dcb09eaaaad59f2da84d33a6ae6d57fdb4e56b75199b404",
+          "kev-plan.json": "4bd19f061bf0467c7fe46b38ce25dd23215af45b698afcf8c7663bed70e42e4c",
+          "page-qrels.json": "7e133650fd21963841590d4f6bc687f600cc7e6551432c694a50279580bec7f5",
+          "prepared/base_scores.json": "2948e4e616f4aa1873b02366a6b5c75162aacc79cefd4fe8f1d7045706e1fe6a",
+          "prepared/manifest.json": "1058b4282c7b46d14e5fe0866aefd36e73493b192b485ead648a3659d10f8725",
+          "prepared/pairs.json": "ed53b1f3d5a713549029d829e558f95918cd6dcd1a037fa91bfcf1d0a65406a4",
+          "splits.json": "99ed08b45cd6bac33d9ffb586dbba13dcc8c17575a14022df5aef39fefb515c0",
+          "train.jsonl": "10a9955c4660c451855407878d30ef4f700889ea533e5bac9fe8cbfde7f58f5c",
+          "train.jsonl.manifest.json": "a0d7dd5a8df89676c5c06e6073b92d01d8ed01bfaac4fe23956a40a8f1c61baf"
+        },
+        "python_version": "Python 3.11.16",
+        "clone": {
+          "command": [
+            "git",
+            "clone",
+            "--quiet",
+            "--depth",
+            "1",
+            "--single-branch",
+            "--branch",
+            "research/jev-khuong-model",
+            "file:///C:/Users/lanph/.codex/worktrees/7f7a/Artificial_Intelligent_Project",
+            "C:\\Users\\lanph\\AppData\\Local\\Temp\\jev-delivery-khuong-atzybbr1\\clone"
+          ],
+          "returncode": 0,
+          "stdout": "",
+          "stderr": ""
+        },
+        "pinned_base_fetch": {
+          "command": [
+            "git",
+            "fetch",
+            "--quiet",
+            "--depth",
+            "1",
+            "file:///C:/Users/lanph/.codex/worktrees/7f7a/Artificial_Intelligent_Project",
+            "842176c5b707298672629738390a09e222f47e86"
+          ],
+          "returncode": 0,
+          "stdout": "",
+          "stderr": ""
+        },
+        "smoke": {
+          "command": [
+            "C:\\Users\\lanph\\AppData\\Roaming\\uv\\python\\cpython-3.11-windows-x86_64-none\\python.exe",
+            "-I",
+            "-S",
+            "C:\\Users\\lanph\\AppData\\Local\\Temp\\jev-delivery-khuong-atzybbr1\\clone\\scripts\\run_jev_khuong.py",
+            "--out",
+            "C:\\Users\\lanph\\AppData\\Local\\Temp\\jev-delivery-khuong-atzybbr1\\demo"
+          ],
+          "returncode": 0,
+          "stdout": "Prepared 2 pairs for 1 queries in C:\\Users\\lanph\\AppData\\Local\\Temp\\jev-delivery-khuong-atzybbr1\\demo\\prepared. Empty OCR pages: 1.\nExported 2 train records (1 positive) to C:\\Users\\lanph\\AppData\\Local\\Temp\\jev-delivery-khuong-atzybbr1\\demo\\train.jsonl\nSynthetic khuong demo artifacts: C:\\Users\\lanph\\AppData\\Local\\Temp\\jev-delivery-khuong-atzybbr1\\demo\n",
+          "stderr": ""
+        },
+        "bundle_validation": {
+          "command": [
+            "C:\\Users\\lanph\\AppData\\Roaming\\uv\\python\\cpython-3.11-windows-x86_64-none\\python.exe",
+            "-I",
+            "-S",
+            "C:\\Users\\lanph\\AppData\\Local\\Temp\\jev-delivery-khuong-atzybbr1\\clone\\docs\\reports\\tasks\\jev-runnable-team-kit-20261120\\evidence\\finalize_artifacts.py"
+          ],
+          "returncode": 0,
+          "stdout": "{\n  \"schema\": 1,\n  \"passed\": true,\n  \"checks\": [\n    {\n      \"name\": \"docs/reports/tasks/jev-khuong-model-20261120: root layout\",\n      \"passed\": true,\n      \"detail\": null\n    },\n    {\n      \"name\": \"docs/reports/tasks/jev-khuong-model-20261120: planning layout\",\n      \"passed\": true,\n      \"detail\": null\n    },\n    {\n      \"name\": \"docs/reports/tasks/jev-khuong-model-20261120: provenance\",\n      \"passed\": true,\n      \"detail\": null\n    },\n    {\n      \"name\": \"docs/reports/tasks/jev-khuong-model-20261120: report links\",\n      \"passed\": true,\n      \"detail\": null\n    },\n    {\n      \"name\": \"docs/reports/tasks/jev-runnable-team-kit-20261120: root layout\",\n      \"passed\": true,\n      \"detail\": null\n    },\n    {\n      \"name\": \"docs/reports/tasks/jev-runnable-team-kit-20261120: planning layout\",\n      \"passed\": true,\n      \"detail\": null\n    },\n    {\n      \"name\": \"docs/reports/tasks/jev-runnable-team-kit-20261120: provenance\",\n      \"passed\": true,\n      \"detail\": null\n    },\n    {\n      \"name\": \"docs/reports/tasks/jev-runnable-team-kit-20261120: report links\",\n      \"passed\": true,\n      \"detail\": null\n    },\n    {\n      \"name\": \"delivered Markdown local links\",\n      \"passed\": true,\n      \"detail\": []\n    },\n    {\n      \"name\": \"frozen source/results/evidence preserved\",\n      \"passed\": true,\n      \"detail\": []\n    },\n    {\n      \"name\": \"delivery diff whitespace\",\n      \"passed\": true,\n      \"detail\": \"\"\n    }\n  ],\n  \"excluded_immutable_snapshot_links\": [\n    \"docs/reports/tasks/jev-khuong-model-20261120/evidence/plan-bootstrap-before-runtime-20261120.md\",\n    \"docs/reports/tasks/jev-khuong-model-20261120/evidence/README-bootstrap-before-runtime-20261120.md\",\n    \"docs/reports/tasks/jev-khuong-model-20261120/evidence/spec-bootstrap-before-runtime-20261120.md\",\n    \"docs/reports/tasks/jev-khuong-model-20261120/evidence/workflow-bootstrap-before-runtime-20261120.md\"\n  ],\n  \"hash_mismatches\": []\n}\n",
+          "stderr": ""
+        }
+      },
+      "remote_sha": "c3cf284ea25bf4f270a1cad4cfc0dd1edbf51a34",
+      "matched": true
+    }
+  ],
+  "main_checkout": {
+    "branch": "feature/lab-f3-objective",
+    "head": "1290111de49217a5c2d726fda5674ff8c0f77137",
+    "index_sha256": "647bffac3bce325ef53f7e387385c03356b1f931f4dbbdc5525ab9e0c17586a4",
+    "staged_diff_empty": true,
+    "index_bytes_unchanged": true
+  }
+}

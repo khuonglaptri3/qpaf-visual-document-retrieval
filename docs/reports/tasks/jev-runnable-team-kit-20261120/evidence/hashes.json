@@ -78,6 +78,16 @@
       "sha256": "4f057b71117f03e912366b35ace2477dcb6222319d5f07a7f73d5007939d93f8"
     },
     {
+      "path": "docs/reports/tasks/jev-runnable-team-kit-20261120/evidence/delivery-push.json",
+      "bytes": 546,
+      "sha256": "7cc9faff46514d61c87d490cf1867b535c20ca7b762b63b9a1fa477df1e43278"
+    },
+    {
+      "path": "docs/reports/tasks/jev-runnable-team-kit-20261120/evidence/delivery.json",
+      "bytes": 18520,
+      "sha256": "3857aad4ce3e805c4a59d1684affb707be9849ed132c307581144c0e146909c2"
+    },
+    {
       "path": "docs/reports/tasks/jev-runnable-team-kit-20261120/evidence/final-fix-demos.log",
       "bytes": 2730,
       "sha256": "a5121b4a2c2111b8cd16a954a684e46fde4fd4e3f8baca5b6b37ff9e3f43bddd"
@@ -204,8 +214,8 @@
     },
     {
       "path": "docs/reports/tasks/jev-runnable-team-kit-20261120/evidence/sdd/progress.md",
-      "bytes": 18411,
-      "sha256": "bb004cb68f39d5a67f9a5164c2d8552a04a35bbe35cdc7ce75c2bcb0611637e4"
+      "bytes": 19069,
+      "sha256": "753f58f75d88f93d049be16f035400a5b05c1925d255b0ad1dc40662ee425310"
     },
     {
       "path": "docs/reports/tasks/jev-runnable-team-kit-20261120/evidence/sdd/task-1-brief.md",
@@ -369,18 +379,18 @@
     },
     {
       "path": "docs/reports/tasks/jev-runnable-team-kit-20261120/evidence/workflow.md",
-      "bytes": 9434,
-      "sha256": "9a66834f30be41b4bd408351022eef34a4809ce3060763e52a9c1b57536e5991"
+      "bytes": 11893,
+      "sha256": "ef6c446149227425ebefda53ec342cd229fd77d914ca7ba5b4a9c3e85f4f3ccf"
     },
     {
       "path": "docs/reports/tasks/jev-runnable-team-kit-20261120/README.md",
-      "bytes": 21709,
-      "sha256": "83af477468db5bc4929c54a09145235e0bcd5b3f30936225d82ba613efb8902d"
+      "bytes": 22571,
+      "sha256": "89586f85d7aa1cd1a1028dcd32a0ad6f6b6e0172d42a44b010fad9ac1fc181dd"
     },
     {
       "path": "docs/reports/tasks/jev-runnable-team-kit-20261120/superpowers/plan.md",
-      "bytes": 11961,
-      "sha256": "429c8db401a1f93cea255574e2c75e07f6fe502e9cfea2fbb354076c31f0e958"
+      "bytes": 12155,
+      "sha256": "92d94c4318d451e5d00d4b7a4cacd52890510e03a4d3a2ed188392eb01dcafd4"
     },
     {
       "path": "docs/reports/tasks/jev-runnable-team-kit-20261120/superpowers/spec.md",

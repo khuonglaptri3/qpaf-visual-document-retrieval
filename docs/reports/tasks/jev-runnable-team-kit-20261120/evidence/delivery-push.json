@@ -1,0 +1,14 @@
+{
+  "command": [
+    "git",
+    "push",
+    "--atomic",
+    "origin",
+    "research/jev-phat-data-infra",
+    "research/jev-thanh-baselines",
+    "research/jev-khuong-model"
+  ],
+  "returncode": 0,
+  "stdout": "",
+  "stderr": "To https://github.com/khuonglaptri3/qpaf-visual-document-retrieval.git\n   82ef99a..c3cf284  research/jev-khuong-model -> research/jev-khuong-model\n   eef7175..5685219  research/jev-phat-data-infra -> research/jev-phat-data-infra\n   582d2bb..24f953f  research/jev-thanh-baselines -> research/jev-thanh-baselines\n"
+}
