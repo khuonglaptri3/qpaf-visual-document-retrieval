@@ -66,3 +66,14 @@ Role demos exercise Phát's prepare/split/cache path, Thanh's baseline/toy-score
 - [ ] Push ordinary fast-forward updates to all three branches and confirm remote SHAs. Preserve main checkout/index, leave managed worktree clean/detached, finalize hashes/provenance/report.
 
 Controller evidence helpers `evidence/update_owner_docs.py`, `evidence/finalize_artifacts.py` and `evidence/verify_delivery.py` archive bootstrap status, validate exact bundle/link/hash invariants, smoke actual fresh local clones under Python 3.11 `-I -S`, and then match published refs to the tested commits. They do not submit jobs or push; publication is a separate controller action after both review gates. Record immutable commit/clone/remote proofs without self-referential hashes. Final research-status update links the published GitHub runbook because the main checkout intentionally stays at its original source tree.
+
+### Final review: one combined fix wave
+
+Findings and triggers: [whole-branch review](../evidence/sdd/final-review.md). One implementer owns the complete wave; one scoped re-review follows. Fixes stay in new Jev code/evidence/tests, with no old F9/private/GPU changes.
+
+- [x] Reproduce source-partition relabeling and reject conflicting reimport before output; retain same-partition and legacy behavior.
+- [x] Reproduce shared-demo sentinel overwrite and stale preparation cache; reserve coherent fresh output directories and retain prior bytes on rejection.
+- [x] Replace arbitrary demo training argv with typed permitted settings and fixed dry-run paths; verify edited config cannot execute a trainer.
+- [x] Bind prepare and comparison provenance to consumed bytes; cover controlled mutation, including streaming/Parquet source handling.
+- [x] Require complete unique hash inventory in verification mode; reject missing/empty/omitted/duplicate/wrong-byte manifests.
+- [x] Record focused RED/GREEN, run the full changed Jev suite once plus appropriate Parquet/owner demos, commit wave and complete scoped review before distribution. Retain the prior historical-suite limitations and exact upstream scheduler caveat.

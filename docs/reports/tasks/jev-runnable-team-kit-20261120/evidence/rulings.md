@@ -61,3 +61,23 @@ Collected in ledger order. These are implementation and delivery choices within 
 15. Ruling: Task3 explicit native-label adapter may touch CLI/data/evaluation with fixture tests. Also match known external units_sha256 in compare (existing result field), retaining legacy unknown and generic pipeline semantics; no new comparison framework. This is small protocol consistency glue alongside known qrels hash check.
 
    Cost if wrong: Results could be compared under different label/ranking protocols; raw manifests permit diagnosis.
+
+16. Ruling: preserve byte-exact archived bootstrap documents and explicitly exclude only their moved relative navigation links, while including their bytes in current hashes. Current report/spec/plan links remain checked.
+
+   Cost if wrong: Archive navigation requires the original location or Git history; the narrow exclusion is visible in validation output.
+
+17. Ruling: use private per-input snapshots for preparation provenance and coherent new output directories for prepared/shared-demo runs, as verified by the combined review fixes. Each hash identifies consumed bytes; the data owner still coordinates versions across independent source files.
+
+   Cost if wrong: Snapshotting adds temporary disk and IO proportional to the inputs. A reused destination requires a new run path.
+
+18. Ruling: preserve the pinned upstream scheduler and document its exact ten-effective-step limitation; preserve expected diagnostic output in passing tests instead of changing unrelated tests. The final suite exit codes and named skips remain authoritative.
+
+   Cost if wrong: Both training controls need the same adjusted budget, and expected test noise requires careful log reading.
+
+19. Ruling: retain first runnable publication evidence in the common bundle and write final remote-ref proof to the existing uncommitted research evidence, avoiding a cycle where recording a commit changes that same commit.
+
+   Cost if wrong: The common registry describes the dated initial publication; the final research registry identifies the latest verified remote heads.
+
+20. Ruling: accept the scoped review's two Minor residuals without a second code wave: abrupt POSIX publication termination can leave an empty destination, and malformed raw-input diagnostics can name the snapshot path. Keep them visible in the review and use new run paths.
+
+   Cost if wrong: A forcibly interrupted run may need a new destination, and input-error diagnosis may require checking the original CLI arguments. Targeted WSL tests cover ordinary failures and racing writers, not process-kill recovery.

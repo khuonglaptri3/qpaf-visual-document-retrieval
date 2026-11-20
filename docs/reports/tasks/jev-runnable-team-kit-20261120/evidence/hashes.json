@@ -9,8 +9,8 @@
   "files": [
     {
       "path": "configs/jev/khuong.json",
-      "bytes": 161,
-      "sha256": "74b3c2459525bf4307e179b24d2c54e12becbd680dcafdb0a4b445478c49a7c9"
+      "bytes": 99,
+      "sha256": "3fd7239c9e5ae1386c73239d4f7a522546b59aa20a486a0452f1ce57788a69a8"
     },
     {
       "path": "configs/jev/models.json",
@@ -78,9 +78,34 @@
       "sha256": "4f057b71117f03e912366b35ace2477dcb6222319d5f07a7f73d5007939d93f8"
     },
     {
+      "path": "docs/reports/tasks/jev-runnable-team-kit-20261120/evidence/final-fix-demos.log",
+      "bytes": 2730,
+      "sha256": "a5121b4a2c2111b8cd16a954a684e46fde4fd4e3f8baca5b6b37ff9e3f43bddd"
+    },
+    {
+      "path": "docs/reports/tasks/jev-runnable-team-kit-20261120/evidence/final-fix-green.log",
+      "bytes": 15574,
+      "sha256": "ee1673da15f56fc0f7f26303df7d1b11a8471f61d103b943649e2b9c48318ff4"
+    },
+    {
+      "path": "docs/reports/tasks/jev-runnable-team-kit-20261120/evidence/final-fix-parquet.log",
+      "bytes": 1015,
+      "sha256": "fc556802ef4d3f2d9458805b6fcdb3c98467f0745683ddb85820e153273682f6"
+    },
+    {
+      "path": "docs/reports/tasks/jev-runnable-team-kit-20261120/evidence/final-fix-red.log",
+      "bytes": 12845,
+      "sha256": "7f4d4eb80a5cd8f630e6e25fe564d0989a294f0f1155485dfd5926e492817698"
+    },
+    {
+      "path": "docs/reports/tasks/jev-runnable-team-kit-20261120/evidence/final-fix-wsl.json",
+      "bytes": 2526,
+      "sha256": "444d108a63b5fc2644df62de8f0485a23c20f2f6b931311d15c212f4642a454d"
+    },
+    {
       "path": "docs/reports/tasks/jev-runnable-team-kit-20261120/evidence/finalize_artifacts.py",
-      "bytes": 5513,
-      "sha256": "f2bfc061d131dfd4baf3d96d31dcbf899e05b381f6a6eb07e054ef3d9e201641"
+      "bytes": 6733,
+      "sha256": "499f5c5b6423fff294c1489e825a760130db8cf9674b272dc239e3a8266e6188"
     },
     {
       "path": "docs/reports/tasks/jev-runnable-team-kit-20261120/evidence/help/compare.txt",
@@ -144,8 +169,8 @@
     },
     {
       "path": "docs/reports/tasks/jev-runnable-team-kit-20261120/evidence/rulings.md",
-      "bytes": 6910,
-      "sha256": "4f918787053847209a147b70efbccdc37d55a6819aa7f4e1daef952e2f64fd96"
+      "bytes": 8979,
+      "sha256": "c2794643edc94e3a5faa5b68c67fe9cb0dfcc66ec414d66e8388ad490f59718c"
     },
     {
       "path": "docs/reports/tasks/jev-runnable-team-kit-20261120/evidence/runtime-package-availability.json",
@@ -158,14 +183,29 @@
       "sha256": "2fa546c2a1e0eda49de698aac8c4419cdba34b7e7ede3a766bae5874ad65bf39"
     },
     {
+      "path": "docs/reports/tasks/jev-runnable-team-kit-20261120/evidence/sdd/final-fix-report.md",
+      "bytes": 8859,
+      "sha256": "7eb02327bd78b67b8e193a62449b294444a540531435c5266b1fffd82e0410b4"
+    },
+    {
+      "path": "docs/reports/tasks/jev-runnable-team-kit-20261120/evidence/sdd/final-fix-review.md",
+      "bytes": 2769,
+      "sha256": "227361e0aaee10a47628f2d1c0d70095eef98b22645d3c2c8515b4cad872a4ba"
+    },
+    {
       "path": "docs/reports/tasks/jev-runnable-team-kit-20261120/evidence/sdd/final-review-brief.md",
       "bytes": 3938,
       "sha256": "bbb0871ea6a7ce014bbad3b90d8b03382682e1008111945864dd6973258b78ba"
     },
     {
+      "path": "docs/reports/tasks/jev-runnable-team-kit-20261120/evidence/sdd/final-review.md",
+      "bytes": 4090,
+      "sha256": "160a7068c8cac5bfe3bc9c2df0472bb4b672d3640d24648cffce2d5936b5569e"
+    },
+    {
       "path": "docs/reports/tasks/jev-runnable-team-kit-20261120/evidence/sdd/progress.md",
-      "bytes": 15262,
-      "sha256": "1dccb0f6bbe0c1886b0e0533576bb24e5904355611f1f5d8a8b7aee552e3751d"
+      "bytes": 18411,
+      "sha256": "bb004cb68f39d5a67f9a5164c2d8552a04a35bbe35cdc7ce75c2bcb0611637e4"
     },
     {
       "path": "docs/reports/tasks/jev-runnable-team-kit-20261120/evidence/sdd/task-1-brief.md",
@@ -329,23 +369,23 @@
     },
     {
       "path": "docs/reports/tasks/jev-runnable-team-kit-20261120/evidence/workflow.md",
-      "bytes": 8228,
-      "sha256": "e9776d7841def00791948efbb5407fe02277b717e9a4e19ee5f2bceaa153e0dc"
+      "bytes": 9434,
+      "sha256": "9a66834f30be41b4bd408351022eef34a4809ce3060763e52a9c1b57536e5991"
     },
     {
       "path": "docs/reports/tasks/jev-runnable-team-kit-20261120/README.md",
-      "bytes": 20369,
-      "sha256": "b31fbf2e36abfcfebf0d698be6731e66b742fda5d95af46bbd38205c737fa8e6"
+      "bytes": 21709,
+      "sha256": "83af477468db5bc4929c54a09145235e0bcd5b3f30936225d82ba613efb8902d"
     },
     {
       "path": "docs/reports/tasks/jev-runnable-team-kit-20261120/superpowers/plan.md",
-      "bytes": 10743,
-      "sha256": "09c95eac985c9bc71dddc215a895fe2e45f7f24cbec5b5e098dfaf8d08cf2f03"
+      "bytes": 11961,
+      "sha256": "429c8db401a1f93cea255574e2c75e07f6fe502e9cfea2fbb354076c31f0e958"
     },
     {
       "path": "docs/reports/tasks/jev-runnable-team-kit-20261120/superpowers/spec.md",
-      "bytes": 6587,
-      "sha256": "d28e0a4d436525af941a1d1f1c56eb9bae04ca69876fa7c04c8fefd361ff4104"
+      "bytes": 7278,
+      "sha256": "207d76975a81f54335e95274bfc8949bc3f5207a3e76c7d3e2a289793f48838e"
     },
     {
       "path": "README.md",
@@ -404,18 +444,18 @@
     },
     {
       "path": "src/qpaf/jev/cli.py",
-      "bytes": 25119,
-      "sha256": "4ee0e8f1a99c8c8e38a5fde46a1f85e3d2e277b4bd282d804959229b22aa9fcf"
+      "bytes": 27447,
+      "sha256": "6982aeae0a2d0179feb0fa11bf67d9feb749ded7572b320c1e1b705609f0f633"
     },
     {
       "path": "src/qpaf/jev/contracts.py",
-      "bytes": 8380,
-      "sha256": "f2f0f7f7e62ee41e3ed48ec75453c1fb43fbec293e91e41c5a7efbf91dd30993"
+      "bytes": 8847,
+      "sha256": "fcf1b1ee9241cbc7c62ac6fee9d29da78f1ac0fecfb96038a631baa517d95baf"
     },
     {
       "path": "src/qpaf/jev/data.py",
-      "bytes": 14824,
-      "sha256": "3f78caf1d7cdfb183676cdd7310f1b813536a358fcb9dd8be6c74ba8873e9db5"
+      "bytes": 15067,
+      "sha256": "890cd10fd6083a909d0aca71201f1dfa47cbb38517e064071e2de912faddd4a6"
     },
     {
       "path": "src/qpaf/jev/evaluation.py",
@@ -424,8 +464,8 @@
     },
     {
       "path": "src/qpaf/jev/owners.py",
-      "bytes": 4481,
-      "sha256": "d43f4ae2b96503e0a54176dd2c6aae548c1b83145e6ad335337002bfd3567575"
+      "bytes": 5131,
+      "sha256": "9afcb21f95000e2dfc8b3e33c2dbdc2aee994171fd9e99aff5d177297dd913c0"
     },
     {
       "path": "src/qpaf/jev/training.py",
@@ -456,6 +496,11 @@
       "path": "tests/test_jev_owner_workflows.py",
       "bytes": 11061,
       "sha256": "c7ae0e78606be97b2d15ca46ba061da4e14a33c034a4bf1338bdd1d2d8e2e66e"
+    },
+    {
+      "path": "tests/test_jev_publication.py",
+      "bytes": 15256,
+      "sha256": "da256d498e3877c0f4ba86306379c4b7b165e413c3d1130dd6af42d18af93cad"
     },
     {
       "path": "tests/test_jev_training.py",
