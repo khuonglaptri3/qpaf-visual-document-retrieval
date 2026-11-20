@@ -44,15 +44,47 @@ def require_kev_source():
         raise ValueError(f"install requirements/jev-kev.txt to use the official Kev source at {expected}")
 
 
+def _indexed_shards(path):
+    # Match the Transformers local loader's default checkpoint selection order.
+    for name in ("model.safetensors", "model.safetensors.index.json", "pytorch_model.bin", "pytorch_model.bin.index.json"):
+        index = path / name
+        if index.is_file():
+            break
+    else:
+        return {}
+    if not name.endswith(".index.json"):
+        return {}
+
+    data = read_json(index)
+    weights = data.get("weight_map") if isinstance(data, dict) else None
+    if not isinstance(weights, dict) or not weights or not all(isinstance(shard, str) and shard for shard in weights.values()):
+        raise ValueError(f"{index}: expected a nonempty weight_map with shard paths")
+    shards = {}
+    # An indexed shard can be under hidden metadata directories or behind directory symlinks.
+    for name in set(weights.values()):
+        shard = path / name
+        if not shard.is_file():
+            raise ValueError(f"{index}: referenced shard is missing: {name}")
+        shards[Path(name).as_posix()] = shard
+    return shards
+
+
 def tree_hash(path):
     """A local checkpoint can change without its directory name changing."""
     if not path.is_dir():
         raise ValueError(f"local checkpoint directory does not exist: {path}")
-    files = {f.relative_to(path).as_posix(): sha256_file(f) for f in sorted(path.rglob("*"))
+    files = {f.relative_to(path).as_posix(): f for f in path.rglob("*")
              if f.is_file() and not {".git", ".cache"}.intersection(f.relative_to(path).parts)}
+    files.update(_indexed_shards(path))
     if not files:
         raise ValueError(f"empty checkpoint directory: {path}")
-    return sha256(encode_json(files)).hexdigest()
+    digests, resolved_digests = {}, {}
+    for name, file in sorted(files.items()):
+        target = file.resolve()
+        if target not in resolved_digests:
+            resolved_digests[target] = sha256_file(target)
+        digests[name] = resolved_digests[target]
+    return sha256(encode_json(digests)).hexdigest()
 
 
 def _open_kev_checkpoint(model):

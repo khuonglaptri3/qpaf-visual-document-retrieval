@@ -21,6 +21,39 @@ else:
 
 from qpaf.jev.cli import main
 from qpaf.jev.contracts import load_scores, write_json
+from qpaf.jev.backends import tree_hash
+
+
+class LocalWeightIdentityTest(unittest.TestCase):
+    def assert_shard_mutation_changes_identity(self, model, shard_name):
+        shard = model / shard_name
+        shard.write_bytes(b"old weights")
+        write_json(model / "model.safetensors.index.json", {"metadata": {}, "weight_map": {
+            "first.weight": shard_name, "second.weight": shard_name,
+        }})
+        old_identity = tree_hash(model)
+        shard.write_bytes(b"new weights")
+        self.assertNotEqual(tree_hash(model), old_identity)
+
+    def test_shard_index_binds_a_file_under_the_local_cache(self):
+        with TemporaryDirectory() as tmp:
+            model = Path(tmp)
+            (model / ".cache").mkdir()
+            self.assert_shard_mutation_changes_identity(model, ".cache/weights.safetensors")
+
+    def test_shard_index_binds_a_file_through_a_nested_symlinked_directory(self):
+        with TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            model, target = root / "model", root / "actual-shards"
+            (model / "shards").mkdir(parents=True)
+            target.mkdir()
+            try:
+                (model / "shards/link").symlink_to(target, target_is_directory=True)
+            except OSError as exc:
+                if sys.platform == "win32" and exc.winerror in (5, 1314):
+                    self.skipTest("creating Windows directory symlinks is not permitted")
+                raise
+            self.assert_shard_mutation_changes_identity(model, "shards/link/weights.safetensors")
 
 
 class ScoringTest(unittest.TestCase):
@@ -229,7 +262,16 @@ class ActualRuntimeTest(unittest.TestCase):
             bert = BertForSequenceClassification(BertConfig(**common, vocab_size=len(tok), num_labels=1)).eval()
             bert.save_pretrained(bert_dir)
             causal = Qwen2ForCausalLM(Qwen2Config(**common, vocab_size=len(qt), num_key_value_heads=1)).eval()
-            causal.save_pretrained(qwen_dir)
+            causal.save_pretrained(qwen_dir, max_shard_size="4KB")
+            index_file = qwen_dir / "model.safetensors.index.json"
+            index = json.loads(index_file.read_bytes())
+            shard = next(iter(index["weight_map"].values()))
+            hidden_shard = f".cache/{shard}"
+            (qwen_dir / ".cache").mkdir()
+            (qwen_dir / shard).rename(qwen_dir / hidden_shard)
+            index["weight_map"] = {parameter: hidden_shard if name == shard else name
+                                   for parameter, name in index["weight_map"].items()}
+            write_json(index_file, index)
             pairs = [("fruit", "apple"), ("held out", "apple"), ("fruit", ""), ("fruit", "car")]
             ids = tok([q for q, _ in pairs], [p for _, p in pairs], padding=True, return_tensors="pt")
             expected = bert(**ids).logits[:, 0].detach().tolist()

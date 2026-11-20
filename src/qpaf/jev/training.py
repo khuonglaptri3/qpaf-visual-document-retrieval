@@ -72,6 +72,8 @@ def validate_train_options(args):
         positive_int(getattr(args, field), field)
     if args.max_steps < 0 or not 384 <= args.max_state <= 65536:
         raise ValueError("max-steps must be nonnegative and max-state must be in [384,65536]")
+    if not -(2**63) <= args.seed < 2**64:
+        raise ValueError("seed: expected an integer from -9223372036854775808 through 18446744073709551615")
     if number(args.lr, "lr") <= 0 or number(args.head_lr, "head-lr") < 0:
         raise ValueError("lr must be positive and head-lr nonnegative")
     if args.init_checkpoint is not None and args.init != "kev":

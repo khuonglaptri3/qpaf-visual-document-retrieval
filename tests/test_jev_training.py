@@ -99,6 +99,30 @@ class TrainingTest(unittest.TestCase):
         self.assertIn("sha256", result.stderr)
         self.assertFalse((self.root / "new").exists())
 
+    def test_train_commands_enforce_the_torch_seed_range(self):
+        self.export()
+        modal_worker = str(ROOT / "scripts/modal_jev_rerank.py")
+        for seed, expected in (
+            ("-9223372036854775809", 2),
+            ("-9223372036854775808", 0),
+            ("18446744073709551615", 0),
+            ("18446744073709551616", 2),
+        ):
+            args = ["train", "--init", "base", "--data", "train.jsonl", "--out", "new", "--seed", seed]
+            modal_flags = ["--execute"] if expected else []
+            cli_result = cli(self.root, *args)
+            modal_result = subprocess.run([sys.executable, "-I", "-S", modal_worker, "--volume", "test-volume",
+                                           *modal_flags, *args], cwd=self.root, capture_output=True, text=True)
+            for entry_point, result in (("local", cli_result), ("modal", modal_result)):
+                with self.subTest(seed=seed, entry_point=entry_point):
+                    self.assertEqual(result.returncode, expected, result.stderr or result.stdout)
+                    if expected:
+                        self.assertIn("seed", result.stderr)
+                        self.assertEqual(result.stdout, "")
+                    else:
+                        argv = json.loads(result.stdout)["argv"]
+                        self.assertEqual(argv[argv.index("--seed") + 1], seed)
+
     def execute_args(self, out):
         return ["train", "--init", "base", "--data", str(self.root / "train.jsonl"), "--out", str(out),
                 "--epochs", "2", "--max-steps", "1", "--execute"]
