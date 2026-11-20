@@ -1,7 +1,7 @@
 # Spec: Kev decision model và domain fine-tuning
 
 Owner: **Khương**. Branch: `research/jev-khuong-model`. Base: `842176c5b707298672629738390a09e222f47e86`.
-Ngày bắt đầu branch/brief: 2026-11-20. Status: nghiên cứu/implementation chưa thực hiện.
+Ngày bắt đầu branch/brief: 2026-11-20. Status: đã có code runnable; nghiên cứu model/dữ liệu thật còn chờ thực hiện.
 
 ## Câu hỏi và phạm vi
 
@@ -23,4 +23,4 @@ Nghiệm thu: Loader khôi phục đủ adapter/head; không giấu lỗi bằng
 
 Tận dụng F9 + worker Kev riêng theo hướng đã trao đổi; standalone SciFact chỉ là chẩn đoán, không thay dữ liệu đồ án. Không viết lại cả retrieval pipeline. Nhóm còn phải xác nhận split, data availability và budget sau khi smoke. Brief này không tự chấp thuận một job GPU trả phí.
 
-Code hiện có là F9 tại base; branch bootstrap chỉ thêm tài liệu. Chưa có runner Jev, model training, baseline replay mới, environment installation hoặc model-quality verification.
+Đã tích hợp toolkit chung từ commit `796410160ee90bbe2a86b6799a76976f958f576f`. Xem [spec triển khai](../../jev-runnable-team-kit-20261120/superpowers/spec.md) và [kết quả kiểm chứng](../../jev-runnable-team-kit-20261120/README.md). Có CLI dữ liệu/evaluation, BGE/Qwen/Kev adapters, train-only export, trainer chính thức và local/Modal worker. Tiny CPU integration đã chạy; benchmark 4B trên dữ liệu đồ án và GPU chưa chạy.

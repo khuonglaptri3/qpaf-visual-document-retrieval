@@ -1,27 +1,19 @@
-# Kế hoạch nghiên cứu: Kev decision model và domain fine-tuning
+# Kế hoạch tiếp tục của Khương
 
-Spec: [spec.md](spec.md). Owner: Khương. Branch: `research/jev-khuong-model`.
+Spec: [spec.md](spec.md). Branch: `research/jev-khuong-model`.
 
-## Bootstrap đã làm
+## Code đã bàn giao
 
-- [x] Tạo branch từ F9 base `842176c5b707298672629738390a09e222f47e86`, giữ source hiện có.
-- [x] Ghi scope, contract, ownership, kế hoạch và giới hạn; kiểm chứng tài liệu trước commit.
+- [x] Giữ F9 base và brief; tích hợp shared implementation `796410160ee90bbe2a86b6799a76976f958f576f` với lịch sử review còn truy cập được.
+- [x] Cung cấp `scripts/run_jev_khuong.py`, cấu hình owner và hướng dẫn chung; demo mặc định dùng stdlib/offline.
+- [x] Có hợp đồng dữ liệu/cache/split, evaluator chung, model adapters và đường export/train/dry-run thực tế.
+- [x] Kiểm chứng shared toolkit và tiny CPU train/reload; đây là kiểm chứng plumbing, chưa phải kết quả 4B/dữ liệu đồ án.
 
-## Thực hiện tiếp — chưa chạy
+## Nghiên cứu tiếp trên dữ liệu thật
 
-- [ ] Đọc loader/trainer Kev tại commit 5e22da2be8ecb2f38790d81d87bb55b0be61a6e2; pin checkpoint jaredpalmer/kev-4b revision 6cfce5c2fa4b4bd64026336ab649c5ca78857d52 cùng base/tokenizer/head. Không dùng generic loader làm mất head.
-- [ ] Nhận cặp query–OCR và protocol của Phát; làm ví dụ đọc tay, ghi lỗi rõ, kiểm score đủ/hữu hạn/đúng thứ tự; dùng Noul relevance, không sinh đáp án dài.
-- [ ] Chạy Kev-4B frozen trên cùng pool với BGE/Qwen4B, xuất score contract chung cho Thanh; ghi token/truncation/precision/runtime và peak memory.
-- [ ] Tạo training records chỉ từ train của ViDoSeek; chia group trước mining/pair creation; không dùng nhãn outer-eval để mine negatives, tune hoặc teacher-label train.
-- [ ] Smoke 32–64 record: forward/backward, finite adapter/head gradients, save/reload score agreement và đo VRAM; chưa coi smoke là bằng chứng chất lượng.
-- [ ] Pilot LoRA/head và base-initialized cùng kiến trúc/data/loss/budget; chọn checkpoint trong train/validation, xuất score cho evaluator của Thanh.
-- [ ] Viết phương pháp và ablation frozen→adapted/base→Kev; chỉ mở rộng 0.8B, QLoRA hoặc joint-context sau khi lõi được kiểm chứng.
+- [ ] Nhận pairs/split/page-level train labels đã khóa từ Phát; kiểm tra ví dụ query–OCR.
+- [ ] Chạy Kev-4B frozen trên cùng pairs với BGE/Qwen4B; lưu score/token/time/VRAM thực tế.
+- [ ] Smoke GPU forward/backward và save/reload; fine-tune LoRA/head từ Kev và cùng kiến trúc từ Qwen3.5-4B-Base với cùng data/loss/budget.
+- [ ] Chọn checkpoint bằng train/validation, gửi scores cho Thanh; viết ablation frozen/adapted và base/Kev.
 
-## Phạm vi file dự kiến
-
-- `src/qpaf/jev/adapter.py` (dự kiến, chưa tạo)
-- `scripts/modal_jev_rerank.py` (dự kiến, chưa tạo)
-- `scripts/train_jev_reranker.py` (dự kiến, chưa tạo)
-- `tests/test_jev_adapter_contract.py` (dự kiến, chưa tạo)
-
-Trước implementation, người phụ trách đọc spec/plan và hướng dẫn repo, hoàn thiện thiết kế kỹ thuật cụ thể nếu còn thiếu; áp dụng workflow thích hợp và test cho code thay đổi. Những đường dẫn dự kiến không phải scripts đã runnable. Không sửa core lịch sử/receipt đã đóng băng. Khi xong lưu log/raw metrics/checkpoint references trong evidence và cập nhật README hiện hành.
+Lệnh chính xác và prerequisites: [runbook chung](../../jev-runnable-team-kit-20261120/README.md). Không sửa core/receipts lịch sử. Không dùng document labels làm page labels; không dùng outer-eval để train/tune. Budget training của hai initialization phải giống nhau; tránh đúng mười effective optimizer steps do giới hạn scheduler upstream đã ghi trong runbook.

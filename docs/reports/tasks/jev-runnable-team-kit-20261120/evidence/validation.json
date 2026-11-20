@@ -3,6 +3,26 @@
   "passed": true,
   "checks": [
     {
+      "name": "docs/reports/tasks/jev-khuong-model-20261120: root layout",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "docs/reports/tasks/jev-khuong-model-20261120: planning layout",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "docs/reports/tasks/jev-khuong-model-20261120: provenance",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "docs/reports/tasks/jev-khuong-model-20261120: report links",
+      "passed": true,
+      "detail": null
+    },
+    {
       "name": "docs/reports/tasks/jev-runnable-team-kit-20261120: root layout",
       "passed": true,
       "detail": null
@@ -38,5 +58,10 @@
       "detail": ""
     }
   ],
-  "excluded_immutable_snapshot_links": []
+  "excluded_immutable_snapshot_links": [
+    "docs/reports/tasks/jev-khuong-model-20261120/evidence/plan-bootstrap-before-runtime-20261120.md",
+    "docs/reports/tasks/jev-khuong-model-20261120/evidence/README-bootstrap-before-runtime-20261120.md",
+    "docs/reports/tasks/jev-khuong-model-20261120/evidence/spec-bootstrap-before-runtime-20261120.md",
+    "docs/reports/tasks/jev-khuong-model-20261120/evidence/workflow-bootstrap-before-runtime-20261120.md"
+  ]
 }

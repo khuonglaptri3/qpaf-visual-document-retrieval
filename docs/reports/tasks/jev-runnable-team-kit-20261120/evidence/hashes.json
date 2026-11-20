@@ -29,8 +29,63 @@
     },
     {
       "path": "docs/README.md",
-      "bytes": 3020,
-      "sha256": "4efaa1cab15d926368e3807c107685026b174d1085246ca88bf8128147309cc7"
+      "bytes": 3252,
+      "sha256": "e34ebe7a84713837f5ff8852c9a0b496b84080dce96288322a4dda2f9011f447"
+    },
+    {
+      "path": "docs/reports/tasks/jev-khuong-model-20261120/evidence/hashes-bootstrap-before-runtime-20261120.json",
+      "bytes": 1223,
+      "sha256": "464f613d1fbc6b21f3238551775e46d072c3ec3ddecfbad6cbe5613dae26ded3"
+    },
+    {
+      "path": "docs/reports/tasks/jev-khuong-model-20261120/evidence/plan-bootstrap-before-runtime-20261120.md",
+      "bytes": 2447,
+      "sha256": "e75acd582650d67d7ab36cd18b980b5a026ccc94bcbdc51f30fc1ff42ebc803a"
+    },
+    {
+      "path": "docs/reports/tasks/jev-khuong-model-20261120/evidence/README-bootstrap-before-runtime-20261120.md",
+      "bytes": 2446,
+      "sha256": "18ce71dca9ab0b37e3eac23c776c167e4ddca8ea3ec43095cbb026a81e4cbca0"
+    },
+    {
+      "path": "docs/reports/tasks/jev-khuong-model-20261120/evidence/spec-bootstrap-before-runtime-20261120.md",
+      "bytes": 2433,
+      "sha256": "b0a54febf060e0d0466ede1a683cf376a425108ebb805b83b7b52281a5f34332"
+    },
+    {
+      "path": "docs/reports/tasks/jev-khuong-model-20261120/evidence/validation-bootstrap-before-runtime-20261120.json",
+      "bytes": 924,
+      "sha256": "545878595d16d7396c6f7139945540de2bd86d262a6c51c94083422e7e38515a"
+    },
+    {
+      "path": "docs/reports/tasks/jev-khuong-model-20261120/evidence/validation.json",
+      "bytes": 344,
+      "sha256": "8361b1e6b3032944589576945879ed0f3ee48ca3c93d478e8107e82ab2adee9e"
+    },
+    {
+      "path": "docs/reports/tasks/jev-khuong-model-20261120/evidence/workflow-bootstrap-before-runtime-20261120.md",
+      "bytes": 1969,
+      "sha256": "5c2ce79f859352a75c7297f4944921018622fd435e447011ffda9db96c04305d"
+    },
+    {
+      "path": "docs/reports/tasks/jev-khuong-model-20261120/evidence/workflow.md",
+      "bytes": 2840,
+      "sha256": "a82565fd7967206ed7368a67c9fe997b43ffb653bd93b7784e7aeb61e08ddcfc"
+    },
+    {
+      "path": "docs/reports/tasks/jev-khuong-model-20261120/README.md",
+      "bytes": 2001,
+      "sha256": "2bd437a4a0f63fe1aac7b1ccde1918d55d380eae4fab048add11f7681cde3a87"
+    },
+    {
+      "path": "docs/reports/tasks/jev-khuong-model-20261120/superpowers/plan.md",
+      "bytes": 1632,
+      "sha256": "d74d3be0b7052407579054033e1d11f65d5888c60cc77b44ed02d20630969eed"
+    },
+    {
+      "path": "docs/reports/tasks/jev-khuong-model-20261120/superpowers/spec.md",
+      "bytes": 2742,
+      "sha256": "dbae2e4eb10a45eabc2ed727b1396714f8a76ab078286aba061764e7368bd609"
     },
     {
       "path": "docs/reports/tasks/jev-runnable-team-kit-20261120/evidence/.gitignore",
@@ -359,8 +414,8 @@
     },
     {
       "path": "docs/reports/tasks/jev-runnable-team-kit-20261120/evidence/validation.json",
-      "bytes": 955,
-      "sha256": "e362f4cc145edf0fdd6e3e00cc47866100e597112758842ba3d35fb4bb429242"
+      "bytes": 1903,
+      "sha256": "31d93e998a6b8f7d15ca59ad39afad1ab6eeae31d460f113a26611f853217a63"
     },
     {
       "path": "docs/reports/tasks/jev-runnable-team-kit-20261120/evidence/verify_delivery.py",
