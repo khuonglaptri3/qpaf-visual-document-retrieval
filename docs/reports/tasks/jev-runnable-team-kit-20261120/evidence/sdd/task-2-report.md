@@ -100,3 +100,23 @@ CUDA profiling and live Modal execution remain unverified. The legacy suite was 
 58e2eabfa58824b44acca1a40dac56280fffd2c59774ad6616b4f65c92cddcb7  tests/test_jev_backends.py
 7183c35670296cbccd87cf6189928a7e3968ddbf2ef5ac7f02bb84fe80ca9a4c  tests/test_jev_training.py
 ```
+
+## Review fix round 3
+
+2026-11-20. Addressed the remaining local weight dependency finding in the [scoped review](task-2-fix2-review.md) of `710c7e4b077ecfb9c19f4f67f15834a927504096`. The source and tests are in `4b1377cb96da68b2d421bea696562a578a90f23f`. Applied the same Superpowers 7.0.1 review, test-driven development, and verification workflows.
+
+The pinned Transformers resolver gives `transformers_weights` in the effective config precedence over its default filenames. The fingerprint now includes that archive, the selected index when present, and all root-relative shard references. This covers files under hidden directories or behind symlinks. The resolver validates explicit filename types and lexical containment and refuses missing explicit selections. Versioned `configuration_files` are resolved by `PreTrainedConfig.get_config_dict` in local-only mode. The same identity function runs before cache lookup and again after loading local weights.
+
+### Verification
+
+- RED via `python -I -S -m unittest discover -s tests -p test_jev_backends.py -k explicit_weights -v` exited 1 in 0.138 seconds with four failing assertions across three tests. Both selected-weight mutations retained the old digest, and the missing and escaping selections were accepted. GREEN via the same command exited 0 with all three tests passing in 0.052 seconds.
+- `python -I -S -m unittest discover -s tests -p test_jev_backends.py -v` exited 0 with 14 passes and two skips in 2.244 seconds. The skips were for the opt-in runtime and Windows directory symlink privilege. `python3 -I -S -m unittest discover -s tests -p test_jev_backends.py -k LocalWeightIdentityTest -v` exited 0 with five passes on WSL Ubuntu, including the actual symlink.
+- `python -u -m unittest tests.test_jev_backends.ActualRuntimeTest.test_real_baseline_forwards_and_trained_checkpoint_reload -v` exited 0 in 117.284 seconds with the existing opt-in, offline, and thread settings. BGE used an explicit archive in `.cache`. Qwen used a custom index in `.cache` selected by `config.5.17.0.json`, with a real shard in `.cache`. Both models had default archive decoys and matched the independent forward checks. Official Kev training took one optimizer step with 78 forward tokens. Reload scored four pairs with 369 input tokens. Mutating either selected archive or shard changed its fingerprint.
+- `python -I -S -m compileall -q src/qpaf/jev/backends.py tests/test_jev_backends.py` and scoped Git whitespace checks exited 0. The previous full-suite runs remain documented above. This round used focused tests.
+
+### Fix-round source SHA-256
+
+```text
+73bfbfae31a6af30b0432d6e98c276d77a29e688928c51538396ac64f05e40a6  src/qpaf/jev/backends.py
+0766f5ce1677951139ba714193dcfed86f662a45a83df39824f56e597a61b2f4  tests/test_jev_backends.py
+```
