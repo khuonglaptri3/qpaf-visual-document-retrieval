@@ -164,8 +164,8 @@
     },
     {
       "path": "docs/reports/tasks/jev-runnable-team-kit-20261120/evidence/sdd/progress.md",
-      "bytes": 14769,
-      "sha256": "d7b6e77b0a76f6d5506f2f0ecf1a2846327af723c69c487db9f4305319ee7de9"
+      "bytes": 15262,
+      "sha256": "1dccb0f6bbe0c1886b0e0533576bb24e5904355611f1f5d8a8b7aee552e3751d"
     },
     {
       "path": "docs/reports/tasks/jev-runnable-team-kit-20261120/evidence/sdd/task-1-brief.md",
@@ -221,6 +221,11 @@
       "path": "docs/reports/tasks/jev-runnable-team-kit-20261120/evidence/sdd/task-3-brief.md",
       "bytes": 7679,
       "sha256": "4c4a782cb0769734a4e2dba8e60eceb290ed13e3c5c288cb33750b03acd14fab"
+    },
+    {
+      "path": "docs/reports/tasks/jev-runnable-team-kit-20261120/evidence/sdd/task-3-fix1-review.md",
+      "bytes": 1046,
+      "sha256": "57d125cd47ae7e321d878d862e0ff19781effc15c37c8f6bcf732002b9f0d93f"
     },
     {
       "path": "docs/reports/tasks/jev-runnable-team-kit-20261120/evidence/sdd/task-3-report.md",
