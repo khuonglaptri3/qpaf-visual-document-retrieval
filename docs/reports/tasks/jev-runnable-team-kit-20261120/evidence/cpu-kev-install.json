@@ -1,0 +1,12 @@
+{
+  "command": [
+    "C:\\Users\\lanph\\.local\\bin\\uv.EXE",
+    "pip",
+    "install",
+    "--python",
+    "C:\\Users\\lanph\\AppData\\Local\\codex-jev-cpu-runtime-20261120\\Scripts\\python.exe",
+    "kev @ git+https://github.com/jaredpalmer/kev@5e22da2be8ecb2f38790d81d87bb55b0be61a6e2",
+    "pytest"
+  ],
+  "returncode": 0
+}

@@ -1,0 +1,73 @@
+Python 3.11.16
+
+$ python -I -S scripts/run_jev_phat.py
+Prepared 2 pairs for 1 queries in C:\Users\lanph\.codex\worktrees\7f7a\Artificial_Intelligent_Project\docs\reports\tasks\jev-runnable-team-kit-20261120\evidence\runs\phat\synthetic-_wjc4du5\prepared. Empty OCR pages: 1.
+Pairs verified: 1 queries, 2 pairs, 1 empty OCR pages
+Score length, values and input hash verified.
+Jev CPU toolkit ready (Python 3.11.16). Try demo --out DIR.
+Synthetic phat demo artifacts: C:\Users\lanph\.codex\worktrees\7f7a\Artificial_Intelligent_Project\docs\reports\tasks\jev-runnable-team-kit-20261120\evidence\runs\phat\synthetic-_wjc4du5
+exit: 0
+pairs_sha256: ed53b1f3d5a713549029d829e558f95918cd6dcd1a037fa91bfcf1d0a65406a4; pairs: 2
+supplied scores: [1.0, 2.0]
+train partition; one explicit empty OCR page
+
+$ python -I -S scripts/run_jev_thanh.py
+Prepared 4 pairs for 2 queries in C:\Users\lanph\.codex\worktrees\7f7a\Artificial_Intelligent_Project\docs\reports\tasks\jev-runnable-team-kit-20261120\evidence\runs\thanh\synthetic-r4rhamkm\prepared. Empty OCR pages: 1.
+Wrote 4 scores to C:\Users\lanph\.codex\worktrees\7f7a\Artificial_Intelligent_Project\docs\reports\tasks\jev-runnable-team-kit-20261120\evidence\runs\thanh\synthetic-r4rhamkm\scores.json
+Wrote C:\Users\lanph\.codex\worktrees\7f7a\Artificial_Intelligent_Project\docs\reports\tasks\jev-runnable-team-kit-20261120\evidence\runs\thanh\synthetic-r4rhamkm\baseline.json
+Wrote C:\Users\lanph\.codex\worktrees\7f7a\Artificial_Intelligent_Project\docs\reports\tasks\jev-runnable-team-kit-20261120\evidence\runs\thanh\synthetic-r4rhamkm\evaluation.json
+Wrote C:\Users\lanph\.codex\worktrees\7f7a\Artificial_Intelligent_Project\docs\reports\tasks\jev-runnable-team-kit-20261120\evidence\runs\thanh\synthetic-r4rhamkm\comparison.json
+Synthetic thanh demo artifacts: C:\Users\lanph\.codex\worktrees\7f7a\Artificial_Intelligent_Project\docs\reports\tasks\jev-runnable-team-kit-20261120\evidence\runs\thanh\synthetic-r4rhamkm
+exit: 0
+pairs_sha256: 5b6b90e748f0cf104dcb09eaaaad59f2da84d33a6ae6d57fdb4e56b75199b404; pairs: 4
+supplied scores: [1.0, 2.0, 1.0, 2.0]
+synthetic fixture only; baseline MRR@10=0.5; toy lexical MRR@10=1.0; delta=0.5
+
+$ python -I -S scripts/run_jev_khuong.py
+Prepared 2 pairs for 1 queries in C:\Users\lanph\.codex\worktrees\7f7a\Artificial_Intelligent_Project\docs\reports\tasks\jev-runnable-team-kit-20261120\evidence\runs\khuong\synthetic-dldolpy_\prepared. Empty OCR pages: 1.
+Exported 2 train records (1 positive) to C:\Users\lanph\.codex\worktrees\7f7a\Artificial_Intelligent_Project\docs\reports\tasks\jev-runnable-team-kit-20261120\evidence\runs\khuong\synthetic-dldolpy_\train.jsonl
+Synthetic khuong demo artifacts: C:\Users\lanph\.codex\worktrees\7f7a\Artificial_Intelligent_Project\docs\reports\tasks\jev-runnable-team-kit-20261120\evidence\runs\khuong\synthetic-dldolpy_
+exit: 0
+pairs_sha256: ed53b1f3d5a713549029d829e558f95918cd6dcd1a037fa91bfcf1d0a65406a4; pairs: 2
+supplied scores: [1.0, 2.0]
+train_sha256: 10a9955c4660c451855407878d30ef4f700889ea533e5bac9fe8cbfde7f58f5c; one positive and one negative
+Both local dry-run plans; no checkpoint produced
+
+$ python -I -S scripts/modal_jev_rerank.py --volume jev-thanh score --backend bge --pairs inputs/pairs.json --out runs/validation-01/bge.json
+{
+  "volume": "jev-thanh",
+  "gpu": "A100-80GB",
+  "requirements": "jev-baselines.txt",
+  "worker_cwd": "/data",
+  "argv": [
+    "score",
+    "--backend",
+    "bge",
+    "--pairs",
+    "inputs/pairs.json",
+    "--out",
+    "runs/validation-01/bge.json"
+  ]
+}
+exit: 0
+
+$ python -I -S scripts/modal_jev_rerank.py --volume jev-khuong train --init kev --data inputs/train.jsonl --out runs/pilot-01/kev-init --max-steps 1
+{
+  "volume": "jev-khuong",
+  "gpu": "A100-80GB",
+  "requirements": "jev-kev.txt",
+  "worker_cwd": "/data",
+  "argv": [
+    "train",
+    "--init",
+    "kev",
+    "--data",
+    "inputs/train.jsonl",
+    "--out",
+    "runs/pilot-01/kev-init",
+    "--max-steps",
+    "1",
+    "--execute"
+  ]
+}
+exit: 0

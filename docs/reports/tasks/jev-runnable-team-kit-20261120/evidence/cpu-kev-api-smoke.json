@@ -1,0 +1,11 @@
+{
+  "command": [
+    "C:\\Users\\lanph\\AppData\\Local\\codex-jev-cpu-runtime-20261120\\Scripts\\python.exe",
+    "-c",
+    "import torch,transformers,peft,numpy,kev.api; from kev.checkpoint import Checkpoint; print(torch.__version__,transformers.__version__,peft.__version__,numpy.__version__); print(kev.api.SystemOneRequest.model_validate({\"state\":\"test\", \"questions\":{\"relevant\":{\"type\":\"noul\", \"instructions\":\"relevant?\"}}}).model_dump())"
+  ],
+  "returncode": 0,
+  "seconds": 18.0,
+  "stdout": "2.8.0+cpu 5.17.0 0.21.0 2.5.3\n{'state': 'test', 'model': 'kev-latest', 'questions': {'relevant': {'type': 'noul', 'instructions': 'relevant?', 'criteria': None}}}\n",
+  "stderr": ""
+}

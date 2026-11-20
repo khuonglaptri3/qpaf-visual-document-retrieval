@@ -1,0 +1,16 @@
+usage: run_jev.py evaluate [-h] --pairs PAIRS --qrels QRELS [--units UNITS]
+                           (--scores SCORES | --baseline) [--lambda LAM]
+                           [--k K] [--out OUT] [--csv CSV]
+
+options:
+  -h, --help           show this help message and exit
+  --pairs PAIRS
+  --qrels QRELS        Full query-to-unit judgments in JSON
+  --units UNITS        Page-to-unit map for byte-exact imported pairs without
+                       units
+  --scores SCORES      Existing byte-bound score cache
+  --baseline           Use explicit aligned base_scores
+  --lambda, --lam LAM  Explicit reranker blend weight in [0,1]
+  --k K
+  --out OUT            JSON result path; default is stdout
+  --csv CSV            Optional CSV result path

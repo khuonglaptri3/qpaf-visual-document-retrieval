@@ -1,0 +1,13 @@
+usage: run_jev.py compare [-h] --left LEFT --right RIGHT [--groups GROUPS]
+                          [--seed SEED] [--resamples RESAMPLES] [--out OUT]
+                          [--csv CSV]
+
+options:
+  -h, --help            show this help message and exit
+  --left LEFT
+  --right RIGHT
+  --groups GROUPS       Optional query-to-group JSON or split manifest
+  --seed SEED
+  --resamples RESAMPLES
+  --out OUT             JSON result path; default is stdout
+  --csv CSV             Optional CSV result path

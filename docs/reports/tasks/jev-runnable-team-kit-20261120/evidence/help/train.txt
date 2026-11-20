@@ -1,0 +1,39 @@
+usage: run_jev.py train [-h] --data DATA --out OUT [--init {kev,base}]
+                        [--base BASE] [--init-checkpoint INIT_CHECKPOINT]
+                        [--device {cuda,cpu}] [--dtype {bf16,fp32}]
+                        [--weights-dtype {fp32,bf16}] [--lora LORA]
+                        [--lora-targets {all,dense,attn,qv}]
+                        [--head-dim HEAD_DIM] [--seed SEED] [--lr LR]
+                        [--head-lr HEAD_LR] [--epochs EPOCHS]
+                        [--max-steps MAX_STEPS] [--batch-size BATCH_SIZE]
+                        [--accum ACCUM] [--max-state MAX_STATE]
+                        [--checkpointing {0,1}] [--execute]
+
+options:
+  -h, --help            show this help message and exit
+  --data DATA           Exported train JSONL with its adjacent manifest
+  --out OUT             New checkpoint directory
+  --init {kev,base}
+  --base BASE           Override the pinned backbone with a local model
+                        directory
+  --init-checkpoint INIT_CHECKPOINT
+                        Override the pinned Kev initialization with a local
+                        run
+  --device {cuda,cpu}
+  --dtype {bf16,fp32}   Autocast precision, CUDA bf16 or CPU fp32 by default
+  --weights-dtype {fp32,bf16}
+  --lora LORA
+  --lora-targets {all,dense,attn,qv}
+  --head-dim HEAD_DIM
+  --seed SEED
+  --lr LR
+  --head-lr HEAD_LR
+  --epochs EPOCHS
+  --max-steps MAX_STEPS
+                        Optimizer step limit (0 uses all epochs)
+  --batch-size BATCH_SIZE
+  --accum ACCUM
+  --max-state MAX_STATE
+                        Official state token limit (384 to 65536)
+  --checkpointing {0,1}
+  --execute             Start the official trainer

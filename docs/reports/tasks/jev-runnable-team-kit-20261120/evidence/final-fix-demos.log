@@ -1,0 +1,22 @@
+$ & 'C:/Users/lanph/AppData/Roaming/uv/python/cpython-3.11.16-windows-x86_64-none/python.exe' -I -B -S scripts/run_jev_phat.py
+Prepared 2 pairs for 1 queries in C:\Users\lanph\.codex\worktrees\7f7a\Artificial_Intelligent_Project\docs\reports\tasks\jev-runnable-team-kit-20261120\evidence\runs\phat\synthetic-o1fb1rfd\prepared. Empty OCR pages: 1.
+Pairs verified: 1 queries, 2 pairs, 1 empty OCR pages
+Score length, values and input hash verified.
+Jev CPU toolkit ready (Python 3.11.16). Try demo --out DIR.
+Synthetic phat demo artifacts: C:\Users\lanph\.codex\worktrees\7f7a\Artificial_Intelligent_Project\docs\reports\tasks\jev-runnable-team-kit-20261120\evidence\runs\phat\synthetic-o1fb1rfd
+Exit 0
+
+$ & 'C:/Users/lanph/AppData/Roaming/uv/python/cpython-3.11.16-windows-x86_64-none/python.exe' -I -B -S scripts/run_jev_thanh.py
+Prepared 4 pairs for 2 queries in C:\Users\lanph\.codex\worktrees\7f7a\Artificial_Intelligent_Project\docs\reports\tasks\jev-runnable-team-kit-20261120\evidence\runs\thanh\synthetic-kuz6dxel\prepared. Empty OCR pages: 1.
+Wrote 4 scores to C:\Users\lanph\.codex\worktrees\7f7a\Artificial_Intelligent_Project\docs\reports\tasks\jev-runnable-team-kit-20261120\evidence\runs\thanh\synthetic-kuz6dxel\scores.json
+Wrote C:\Users\lanph\.codex\worktrees\7f7a\Artificial_Intelligent_Project\docs\reports\tasks\jev-runnable-team-kit-20261120\evidence\runs\thanh\synthetic-kuz6dxel\baseline.json
+Wrote C:\Users\lanph\.codex\worktrees\7f7a\Artificial_Intelligent_Project\docs\reports\tasks\jev-runnable-team-kit-20261120\evidence\runs\thanh\synthetic-kuz6dxel\evaluation.json
+Wrote C:\Users\lanph\.codex\worktrees\7f7a\Artificial_Intelligent_Project\docs\reports\tasks\jev-runnable-team-kit-20261120\evidence\runs\thanh\synthetic-kuz6dxel\comparison.json
+Synthetic thanh demo artifacts: C:\Users\lanph\.codex\worktrees\7f7a\Artificial_Intelligent_Project\docs\reports\tasks\jev-runnable-team-kit-20261120\evidence\runs\thanh\synthetic-kuz6dxel
+Exit 0
+
+$ & 'C:/Users/lanph/AppData/Roaming/uv/python/cpython-3.11.16-windows-x86_64-none/python.exe' -I -B -S scripts/run_jev_khuong.py
+Prepared 2 pairs for 1 queries in C:\Users\lanph\.codex\worktrees\7f7a\Artificial_Intelligent_Project\docs\reports\tasks\jev-runnable-team-kit-20261120\evidence\runs\khuong\synthetic-krh3x8fg\prepared. Empty OCR pages: 1.
+Exported 2 train records (1 positive) to C:\Users\lanph\.codex\worktrees\7f7a\Artificial_Intelligent_Project\docs\reports\tasks\jev-runnable-team-kit-20261120\evidence\runs\khuong\synthetic-krh3x8fg\train.jsonl
+Synthetic khuong demo artifacts: C:\Users\lanph\.codex\worktrees\7f7a\Artificial_Intelligent_Project\docs\reports\tasks\jev-runnable-team-kit-20261120\evidence\runs\khuong\synthetic-krh3x8fg
+Exit 0
