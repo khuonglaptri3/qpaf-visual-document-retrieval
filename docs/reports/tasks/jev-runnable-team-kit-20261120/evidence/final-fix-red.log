@@ -1,0 +1,164 @@
+$ python -I -B -S -m unittest discover -s tests -p test_jev_publication.py -v
+test_verifier_requires_each_expected_file_once_and_checks_size_and_digest (test_jev_publication.InventoryTest.test_verifier_requires_each_expected_file_once_and_checks_size_and_digest) ...
+  test_verifier_requires_each_expected_file_once_and_checks_size_and_digest (test_jev_publication.InventoryTest.test_verifier_requires_each_expected_file_once_and_checks_size_and_digest) (name='missing') ... FAIL
+  test_verifier_requires_each_expected_file_once_and_checks_size_and_digest (test_jev_publication.InventoryTest.test_verifier_requires_each_expected_file_once_and_checks_size_and_digest) (name='empty') ... FAIL
+  test_verifier_requires_each_expected_file_once_and_checks_size_and_digest (test_jev_publication.InventoryTest.test_verifier_requires_each_expected_file_once_and_checks_size_and_digest) (name='omitted') ... FAIL
+  test_verifier_requires_each_expected_file_once_and_checks_size_and_digest (test_jev_publication.InventoryTest.test_verifier_requires_each_expected_file_once_and_checks_size_and_digest) (name='duplicate') ... FAIL
+  test_verifier_requires_each_expected_file_once_and_checks_size_and_digest (test_jev_publication.InventoryTest.test_verifier_requires_each_expected_file_once_and_checks_size_and_digest) (name='wrong_size') ... FAIL
+test_compare_hashes_reports_and_groups_consumed_before_replacement (test_jev_publication.PublicationTest.test_compare_hashes_reports_and_groups_consumed_before_replacement) ... FAIL
+test_export_rejects_mixed_assignments_in_explicit_train_bundle (test_jev_publication.PublicationTest.test_export_rejects_mixed_assignments_in_explicit_train_bundle) ... FAIL
+test_khuong_rejects_editable_trainer_flags_before_running_workflow (test_jev_publication.PublicationTest.test_khuong_rejects_editable_trainer_flags_before_running_workflow) ... FAIL
+test_partitioned_source_keeps_its_role_on_reimport (test_jev_publication.PublicationTest.test_partitioned_source_keeps_its_role_on_reimport) ... FAIL
+test_prepare_hashes_inputs_consumed_before_source_replacement (test_jev_publication.PublicationTest.test_prepare_hashes_inputs_consumed_before_source_replacement) ... FAIL
+test_prepare_late_failure_does_not_publish_a_partial_run (test_jev_publication.PublicationTest.test_prepare_late_failure_does_not_publish_a_partial_run) ... FAIL
+test_prepare_preserves_previous_imported_run (test_jev_publication.PublicationTest.test_prepare_preserves_previous_imported_run) ... FAIL
+test_shared_demo_preserves_an_occupied_directory (test_jev_publication.PublicationTest.test_shared_demo_preserves_an_occupied_directory) ... FAIL
+
+======================================================================
+FAIL: test_verifier_requires_each_expected_file_once_and_checks_size_and_digest (test_jev_publication.InventoryTest.test_verifier_requires_each_expected_file_once_and_checks_size_and_digest) (name='missing')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\.codex\worktrees\7f7a\Artificial_Intelligent_Project\tests\test_jev_publication.py", line 219, in test_verifier_requires_each_expected_file_once_and_checks_size_and_digest
+    self.assertEqual(code, 0 if name == "valid" else 1, log.getvalue())
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 != 1 : {
+  "passed": true
+}
+
+
+======================================================================
+FAIL: test_verifier_requires_each_expected_file_once_and_checks_size_and_digest (test_jev_publication.InventoryTest.test_verifier_requires_each_expected_file_once_and_checks_size_and_digest) (name='empty')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\.codex\worktrees\7f7a\Artificial_Intelligent_Project\tests\test_jev_publication.py", line 219, in test_verifier_requires_each_expected_file_once_and_checks_size_and_digest
+    self.assertEqual(code, 0 if name == "valid" else 1, log.getvalue())
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 != 1 : {
+  "passed": true,
+  "hash_mismatches": []
+}
+
+
+======================================================================
+FAIL: test_verifier_requires_each_expected_file_once_and_checks_size_and_digest (test_jev_publication.InventoryTest.test_verifier_requires_each_expected_file_once_and_checks_size_and_digest) (name='omitted')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\.codex\worktrees\7f7a\Artificial_Intelligent_Project\tests\test_jev_publication.py", line 219, in test_verifier_requires_each_expected_file_once_and_checks_size_and_digest
+    self.assertEqual(code, 0 if name == "valid" else 1, log.getvalue())
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 != 1 : {
+  "passed": true,
+  "hash_mismatches": []
+}
+
+
+======================================================================
+FAIL: test_verifier_requires_each_expected_file_once_and_checks_size_and_digest (test_jev_publication.InventoryTest.test_verifier_requires_each_expected_file_once_and_checks_size_and_digest) (name='duplicate')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\.codex\worktrees\7f7a\Artificial_Intelligent_Project\tests\test_jev_publication.py", line 219, in test_verifier_requires_each_expected_file_once_and_checks_size_and_digest
+    self.assertEqual(code, 0 if name == "valid" else 1, log.getvalue())
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 != 1 : {
+  "passed": true,
+  "hash_mismatches": []
+}
+
+
+======================================================================
+FAIL: test_verifier_requires_each_expected_file_once_and_checks_size_and_digest (test_jev_publication.InventoryTest.test_verifier_requires_each_expected_file_once_and_checks_size_and_digest) (name='wrong_size')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\.codex\worktrees\7f7a\Artificial_Intelligent_Project\tests\test_jev_publication.py", line 219, in test_verifier_requires_each_expected_file_once_and_checks_size_and_digest
+    self.assertEqual(code, 0 if name == "valid" else 1, log.getvalue())
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 0 != 1 : {
+  "passed": true,
+  "hash_mismatches": []
+}
+
+
+======================================================================
+FAIL: test_compare_hashes_reports_and_groups_consumed_before_replacement (test_jev_publication.PublicationTest.test_compare_hashes_reports_and_groups_consumed_before_replacement)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\.codex\worktrees\7f7a\Artificial_Intelligent_Project\tests\test_jev_publication.py", line 190, in test_compare_hashes_reports_and_groups_consumed_before_replacement
+    self.assertEqual(result["inputs_sha256"], expected)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'left': '44136fa355b3678a1146ad16f7e8649e94fb4fc21[175 chars]f8a'} != {'left': '57315e96666c810b086f65118d62cedae9782c431[175 chars]c52'}
+- {'groups': '44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a',
+-  'left': '44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a',
+-  'right': '44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a'}
++ {'groups': '060fa697f0dec6f849571db4fd2ef55fbc0c7e19deac7834266387c8f8679c52',
++  'left': '57315e96666c810b086f65118d62cedae9782c431ad1c6e8de141cc9aecd5beb',
++  'right': 'adecd9f6ffac316b07bf04947469561ada3fff50017b4aa8983658eb21084cd6'}
+
+======================================================================
+FAIL: test_export_rejects_mixed_assignments_in_explicit_train_bundle (test_jev_publication.PublicationTest.test_export_rejects_mixed_assignments_in_explicit_train_bundle)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\.codex\worktrees\7f7a\Artificial_Intelligent_Project\tests\test_jev_publication.py", line 77, in test_export_rejects_mixed_assignments_in_explicit_train_bundle
+    self.assertEqual(code, 2, error)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+AssertionError: 0 != 2 :
+
+======================================================================
+FAIL: test_khuong_rejects_editable_trainer_flags_before_running_workflow (test_jev_publication.PublicationTest.test_khuong_rejects_editable_trainer_flags_before_running_workflow)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\.codex\worktrees\7f7a\Artificial_Intelligent_Project\tests\test_jev_publication.py", line 131, in test_khuong_rejects_editable_trainer_flags_before_running_workflow
+    self.assertIn("training_args", errors.getvalue())
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'training_args' not found in "Jev: unexpected trainer dispatch with execute=True, data=C:\\Users\\lanph\\AppData\\Local\\Temp\\tmpio3p0gn8\\private.jsonl\nJev: demo command 'train' exited 2\n"
+
+======================================================================
+FAIL: test_partitioned_source_keeps_its_role_on_reimport (test_jev_publication.PublicationTest.test_partitioned_source_keeps_its_role_on_reimport)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\.codex\worktrees\7f7a\Artificial_Intelligent_Project\tests\test_jev_publication.py", line 62, in test_partitioned_source_keeps_its_role_on_reimport
+    self.assertEqual(code, 2, error)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+AssertionError: 0 != 2 :
+
+======================================================================
+FAIL: test_prepare_hashes_inputs_consumed_before_source_replacement (test_jev_publication.PublicationTest.test_prepare_hashes_inputs_consumed_before_source_replacement)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\.codex\worktrees\7f7a\Artificial_Intelligent_Project\tests\test_jev_publication.py", line 166, in test_prepare_hashes_inputs_consumed_before_source_replacement
+    self.assertEqual(json.loads((dest / "manifest.json").read_bytes())["inputs_sha256"], digests)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: {'queries': '88c9cfda1e6458c816f8fd18d2f7e6e64e49863be[341 chars]237'} != {'queries': 'a80c9d2f05c046f1dd4a63b262ba4527d0dc74a1f[341 chars]e9d'}
+Diff is 830 characters long. Set self.maxDiff to None to see it.
+
+======================================================================
+FAIL: test_prepare_late_failure_does_not_publish_a_partial_run (test_jev_publication.PublicationTest.test_prepare_late_failure_does_not_publish_a_partial_run)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\.codex\worktrees\7f7a\Artificial_Intelligent_Project\tests\test_jev_publication.py", line 112, in test_prepare_late_failure_does_not_publish_a_partial_run
+    self.assertFalse(out.exists())
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+AssertionError: True is not false
+
+======================================================================
+FAIL: test_prepare_preserves_previous_imported_run (test_jev_publication.PublicationTest.test_prepare_preserves_previous_imported_run)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\.codex\worktrees\7f7a\Artificial_Intelligent_Project\tests\test_jev_publication.py", line 102, in test_prepare_preserves_previous_imported_run
+    self.assertEqual(code, 2, error)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+AssertionError: 0 != 2 :
+
+======================================================================
+FAIL: test_shared_demo_preserves_an_occupied_directory (test_jev_publication.PublicationTest.test_shared_demo_preserves_an_occupied_directory)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\.codex\worktrees\7f7a\Artificial_Intelligent_Project\tests\test_jev_publication.py", line 88, in test_shared_demo_preserves_an_occupied_directory
+    self.assertEqual(code, 2, error)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+AssertionError: 0 != 2 :
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.872s
+
+FAILED (failures=13)
+Exit 1

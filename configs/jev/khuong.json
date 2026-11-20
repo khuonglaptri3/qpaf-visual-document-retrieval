@@ -1,0 +1,5 @@
+{
+  "workflow": "export and plan both initializations",
+  "partition": "train",
+  "max_steps": 1
+}

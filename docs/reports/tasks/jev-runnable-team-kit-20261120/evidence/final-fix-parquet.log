@@ -1,0 +1,18 @@
+$ & 'C:/Users/lanph/AppData/Local/codex-jev-cpu-runtime-20261120/Scripts/python.exe' -I -B -m unittest discover -s tests -p test_jev_cli.py -k native -v
+test_native_partition_uses_manifest_ids_instead_of_held_out_defaults (test_jev_cli.CliTest.test_native_partition_uses_manifest_ids_instead_of_held_out_defaults) ... ok
+test_native_vimdoc_bundle_reads_only_label_free_inputs (test_jev_cli.CliTest.test_native_vimdoc_bundle_reads_only_label_free_inputs) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 3.661s
+
+OK
+Exit 0
+
+$ & 'C:/Users/lanph/AppData/Local/codex-jev-cpu-runtime-20261120/Scripts/python.exe' -I -B -m unittest discover -s tests -p test_jev_publication.py -k parquet -v
+test_parquet_hash_identifies_the_consumed_ranking_after_replacement (test_jev_publication.PublicationTest.test_parquet_hash_identifies_the_consumed_ranking_after_replacement) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 1.095s
+
+OK
+Exit 0

@@ -1,0 +1,21 @@
+usage: run_jev.py score [-h] --backend {baseline,lexical,bge,qwen,kev}
+                        --pairs PAIRS --out OUT [--checkpoint CHECKPOINT]
+                        [--chunks CHUNKS] [--device {cpu,cuda}]
+                        [--precision {fp16,bf16,fp32}] [--input-cap INPUT_CAP]
+                        [--batch-size BATCH_SIZE] [--chunk-size CHUNK_SIZE]
+
+options:
+  -h, --help            show this help message and exit
+  --backend {baseline,lexical,bge,qwen,kev}
+  --pairs PAIRS
+  --out OUT
+  --checkpoint CHECKPOINT
+                        Local model or adapted Kev checkpoint directory
+  --chunks CHUNKS       Resumable chunk directory (default: <out>.chunks)
+  --device {cpu,cuda}
+  --precision {fp16,bf16,fp32}
+                        Defaults to model/device precision
+  --input-cap INPUT_CAP
+                        Maximum input tokens per query/page
+  --batch-size BATCH_SIZE
+  --chunk-size CHUNK_SIZE

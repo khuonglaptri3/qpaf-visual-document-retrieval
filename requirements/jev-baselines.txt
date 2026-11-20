@@ -1,0 +1,7 @@
+# BGE and Qwen inference, Python 3.13
+torch==2.8.0
+transformers==5.17.0
+numpy==2.5.3
+tokenizers==0.23.3
+huggingface-hub==1.33.0
+sentencepiece==0.2.1

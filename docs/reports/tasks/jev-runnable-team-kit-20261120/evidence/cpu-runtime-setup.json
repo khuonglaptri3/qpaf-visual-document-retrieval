@@ -1,0 +1,25 @@
+[
+  {
+    "command": [
+      "C:\\Users\\lanph\\.local\\bin\\uv.EXE",
+      "venv",
+      "--python",
+      "3.13",
+      "C:\\Users\\lanph\\AppData\\Local\\codex-jev-cpu-runtime-20261120"
+    ],
+    "returncode": 0
+  },
+  {
+    "command": [
+      "C:\\Users\\lanph\\.local\\bin\\uv.EXE",
+      "pip",
+      "install",
+      "--python",
+      "C:\\Users\\lanph\\AppData\\Local\\codex-jev-cpu-runtime-20261120\\Scripts\\python.exe",
+      "torch==2.8.0",
+      "--index",
+      "https://download.pytorch.org/whl/cpu"
+    ],
+    "returncode": 0
+  }
+]

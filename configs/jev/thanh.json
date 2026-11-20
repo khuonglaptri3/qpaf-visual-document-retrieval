@@ -1,0 +1,5 @@
+{
+  "workflow": "score, evaluate and compare",
+  "k": 10,
+  "resamples": 1000
+}

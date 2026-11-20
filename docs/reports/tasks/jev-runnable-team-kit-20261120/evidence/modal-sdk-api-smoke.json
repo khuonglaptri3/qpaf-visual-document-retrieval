@@ -1,0 +1,7 @@
+{
+  "sdk_version": "1.5.5",
+  "function_type": "Function",
+  "app_constructed": true,
+  "remote_or_app_run_called": false,
+  "network_job_submitted": false
+}

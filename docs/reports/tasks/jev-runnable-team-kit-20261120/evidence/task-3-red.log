@@ -1,0 +1,234 @@
+Python 3.11.16
+-I -S -m unittest discover -s tests -p test_jev_owner_workflows.py
+FFFFFFFFFFFFFFFFFF
+======================================================================
+FAIL: test_compare_rejects_changed_known_unit_map_and_allows_legacy_unknown (test_jev_owner_workflows.OwnerWorkflowsTest.test_compare_rejects_changed_known_unit_map_and_allows_legacy_unknown)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\.codex\worktrees\7f7a\Artificial_Intelligent_Project\tests\test_jev_owner_workflows.py", line 194, in test_compare_rejects_changed_known_unit_map_and_allows_legacy_unknown
+    self.assertNotEqual(result.returncode, 0, result.stdout)
+AssertionError: 0 == 0 : {
+  "ranking_scope": "provided_candidate_pool",
+  "label_unit": "mapped",
+  "synthetic": true,
+  "queries": 1,
+  "resampling": "query",
+  "groups": 1,
+  "seed": 20260820,
+  "resamples": 5,
+  "metrics": {
+    "ndcg@10": {
+      "delta": -0.36907024642854247,
+      "ci95": [
+        -0.36907024642854247,
+        -0.36907024642854247
+      ],
+      "win_tie_loss": {
+        "win": 0,
+        "tie": 0,
+        "loss": 1
+      }
+    },
+    "mrr@10": {
+      "delta": -0.5,
+      "ci95": [
+        -0.5,
+        -0.5
+      ],
+      "win_tie_loss": {
+        "win": 0,
+        "tie": 0,
+        "loss": 1
+      }
+    },
+    "recall@10": {
+      "delta": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "win_tie_loss": {
+        "win": 0,
+        "tie": 1,
+        "loss": 0
+      }
+    },
+    "recall@20": {
+      "delta": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "win_tie_loss": {
+        "win": 0,
+        "tie": 1,
+        "loss": 0
+      }
+    }
+  },
+  "per_query": {
+    "q2": {
+      "ndcg@10": -0.36907024642854247,
+      "mrr@10": -0.5,
+      "recall@10": 0.0,
+      "recall@20": 0.0
+    }
+  },
+  "inputs_sha256": {
+    "left": "be89a274dd3fb9c4641c226b21638c5eca3cfe9187ef81b7b4334bd218016c30",
+    "right": "894878d6941dcfe70105fded710628441fb21715942c4eeeb153058bd89edd1b"
+  }
+}
+
+
+======================================================================
+FAIL: test_demo_rejects_existing_output_directory (test_jev_owner_workflows.OwnerWorkflowsTest.test_demo_rejects_existing_output_directory) (owner='phat')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\.codex\worktrees\7f7a\Artificial_Intelligent_Project\tests\test_jev_owner_workflows.py", line 107, in test_demo_rejects_existing_output_directory
+    self.assertIn("output directory", result.stderr)
+AssertionError: 'output directory' not found in "C:\\Users\\lanph\\AppData\\Roaming\\uv\\python\\cpython-3.11-windows-x86_64-none\\python.exe: can't open file 'C:\\\\Users\\\\lanph\\\\.codex\\\\worktrees\\\\7f7a\\\\Artificial_Intelligent_Project\\\\scripts\\\\run_jev_phat.py': [Errno 2] No such file or directory\n"
+
+======================================================================
+FAIL: test_demo_rejects_existing_output_directory (test_jev_owner_workflows.OwnerWorkflowsTest.test_demo_rejects_existing_output_directory) (owner='thanh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\.codex\worktrees\7f7a\Artificial_Intelligent_Project\tests\test_jev_owner_workflows.py", line 107, in test_demo_rejects_existing_output_directory
+    self.assertIn("output directory", result.stderr)
+AssertionError: 'output directory' not found in "C:\\Users\\lanph\\AppData\\Roaming\\uv\\python\\cpython-3.11-windows-x86_64-none\\python.exe: can't open file 'C:\\\\Users\\\\lanph\\\\.codex\\\\worktrees\\\\7f7a\\\\Artificial_Intelligent_Project\\\\scripts\\\\run_jev_thanh.py': [Errno 2] No such file or directory\n"
+
+======================================================================
+FAIL: test_demo_rejects_existing_output_directory (test_jev_owner_workflows.OwnerWorkflowsTest.test_demo_rejects_existing_output_directory) (owner='khuong')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\.codex\worktrees\7f7a\Artificial_Intelligent_Project\tests\test_jev_owner_workflows.py", line 107, in test_demo_rejects_existing_output_directory
+    self.assertIn("output directory", result.stderr)
+AssertionError: 'output directory' not found in "C:\\Users\\lanph\\AppData\\Roaming\\uv\\python\\cpython-3.11-windows-x86_64-none\\python.exe: can't open file 'C:\\\\Users\\\\lanph\\\\.codex\\\\worktrees\\\\7f7a\\\\Artificial_Intelligent_Project\\\\scripts\\\\run_jev_khuong.py': [Errno 2] No such file or directory\n"
+
+======================================================================
+FAIL: test_khuong_exports_train_labels_and_writes_matched_dry_run_plans (test_jev_owner_workflows.OwnerWorkflowsTest.test_khuong_exports_train_labels_and_writes_matched_dry_run_plans)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\.codex\worktrees\7f7a\Artificial_Intelligent_Project\tests\test_jev_owner_workflows.py", line 78, in test_khuong_exports_train_labels_and_writes_matched_dry_run_plans
+    self.assertEqual(result.returncode, 0, result.stderr)
+AssertionError: 2 != 0 : C:\Users\lanph\AppData\Roaming\uv\python\cpython-3.11-windows-x86_64-none\python.exe: can't open file 'C:\\Users\\lanph\\.codex\\worktrees\\7f7a\\Artificial_Intelligent_Project\\scripts\\run_jev_khuong.py': [Errno 2] No such file or directory
+
+
+======================================================================
+FAIL: test_native_vimdoc_qrels_preserve_out_of_pool_documents_and_max_pool (test_jev_owner_workflows.OwnerWorkflowsTest.test_native_vimdoc_qrels_preserve_out_of_pool_documents_and_max_pool)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\.codex\worktrees\7f7a\Artificial_Intelligent_Project\tests\test_jev_owner_workflows.py", line 140, in test_native_vimdoc_qrels_preserve_out_of_pool_documents_and_max_pool
+    self.assertEqual(result.returncode, 0, result.stderr)
+AssertionError: 2 != 0 : usage: run_jev.py [-h]
+                  {score,export-train,train,doctor,prepare,evaluate,compare,demo}
+                  ...
+run_jev.py: error: unrecognized arguments: --qrels-format vimdoc-dev
+
+
+======================================================================
+FAIL: test_native_vimdoc_rejects_ambiguous_roles_and_judgments (test_jev_owner_workflows.OwnerWorkflowsTest.test_native_vimdoc_rejects_ambiguous_roles_and_judgments) (qrels={'train': {'q2': ['d1']}, 'validation': {'q2': ['d1']}})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\.codex\worktrees\7f7a\Artificial_Intelligent_Project\tests\test_jev_owner_workflows.py", line 182, in test_native_vimdoc_rejects_ambiguous_roles_and_judgments
+    self.assertIn(message, result.stderr)
+AssertionError: 'duplicate query' not found in 'usage: run_jev.py [-h]\n                  {score,export-train,train,doctor,prepare,evaluate,compare,demo}\n                  ...\nrun_jev.py: error: unrecognized arguments: --qrels-format vimdoc-dev\n'
+
+======================================================================
+FAIL: test_native_vimdoc_rejects_ambiguous_roles_and_judgments (test_jev_owner_workflows.OwnerWorkflowsTest.test_native_vimdoc_rejects_ambiguous_roles_and_judgments) (qrels={'train': {}, 'validation': {'q2': ['d1', 'd1']}})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\.codex\worktrees\7f7a\Artificial_Intelligent_Project\tests\test_jev_owner_workflows.py", line 182, in test_native_vimdoc_rejects_ambiguous_roles_and_judgments
+    self.assertIn(message, result.stderr)
+AssertionError: 'duplicate document' not found in 'usage: run_jev.py [-h]\n                  {score,export-train,train,doctor,prepare,evaluate,compare,demo}\n                  ...\nrun_jev.py: error: unrecognized arguments: --qrels-format vimdoc-dev\n'
+
+======================================================================
+FAIL: test_native_vimdoc_rejects_ambiguous_roles_and_judgments (test_jev_owner_workflows.OwnerWorkflowsTest.test_native_vimdoc_rejects_ambiguous_roles_and_judgments) (qrels={'train': {'q2': ['d1']}, 'validation': {}})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\.codex\worktrees\7f7a\Artificial_Intelligent_Project\tests\test_jev_owner_workflows.py", line 182, in test_native_vimdoc_rejects_ambiguous_roles_and_judgments
+    self.assertIn(message, result.stderr)
+AssertionError: 'validation partition' not found in 'usage: run_jev.py [-h]\n                  {score,export-train,train,doctor,prepare,evaluate,compare,demo}\n                  ...\nrun_jev.py: error: unrecognized arguments: --qrels-format vimdoc-dev\n'
+
+======================================================================
+FAIL: test_native_vimdoc_rejects_ambiguous_roles_and_judgments (test_jev_owner_workflows.OwnerWorkflowsTest.test_native_vimdoc_rejects_ambiguous_roles_and_judgments) (qrels={'train': {}, 'validation': {'q2': ['d1']}, 'test': {}})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\.codex\worktrees\7f7a\Artificial_Intelligent_Project\tests\test_jev_owner_workflows.py", line 182, in test_native_vimdoc_rejects_ambiguous_roles_and_judgments
+    self.assertIn(message, result.stderr)
+AssertionError: 'train and validation' not found in 'usage: run_jev.py [-h]\n                  {score,export-train,train,doctor,prepare,evaluate,compare,demo}\n                  ...\nrun_jev.py: error: unrecognized arguments: --qrels-format vimdoc-dev\n'
+
+======================================================================
+FAIL: test_native_vimdoc_rejects_ambiguous_roles_and_judgments (test_jev_owner_workflows.OwnerWorkflowsTest.test_native_vimdoc_rejects_ambiguous_roles_and_judgments) (qrels={'train': {}, 'validation': {'q2': {'d1': 1}}})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\.codex\worktrees\7f7a\Artificial_Intelligent_Project\tests\test_jev_owner_workflows.py", line 182, in test_native_vimdoc_rejects_ambiguous_roles_and_judgments
+    self.assertIn(message, result.stderr)
+AssertionError: 'document IDs' not found in 'usage: run_jev.py [-h]\n                  {score,export-train,train,doctor,prepare,evaluate,compare,demo}\n                  ...\nrun_jev.py: error: unrecognized arguments: --qrels-format vimdoc-dev\n'
+
+======================================================================
+FAIL: test_native_vimdoc_requires_the_document_map (test_jev_owner_workflows.OwnerWorkflowsTest.test_native_vimdoc_requires_the_document_map)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\.codex\worktrees\7f7a\Artificial_Intelligent_Project\tests\test_jev_owner_workflows.py", line 151, in test_native_vimdoc_requires_the_document_map
+    self.assertIn("page-to-document mapping", result.stderr)
+AssertionError: 'page-to-document mapping' not found in 'usage: run_jev.py [-h]\n                  {score,export-train,train,doctor,prepare,evaluate,compare,demo}\n                  ...\nrun_jev.py: error: unrecognized arguments: --qrels-format vimdoc-dev\n'
+
+======================================================================
+FAIL: test_native_vimdoc_uses_embedded_units (test_jev_owner_workflows.OwnerWorkflowsTest.test_native_vimdoc_uses_embedded_units)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\.codex\worktrees\7f7a\Artificial_Intelligent_Project\tests\test_jev_owner_workflows.py", line 163, in test_native_vimdoc_uses_embedded_units
+    self.assertEqual(result.returncode, 0, result.stderr)
+AssertionError: 2 != 0 : usage: run_jev.py [-h]
+                  {score,export-train,train,doctor,prepare,evaluate,compare,demo}
+                  ...
+run_jev.py: error: unrecognized arguments: --qrels-format vimdoc-dev
+
+
+======================================================================
+FAIL: test_owner_commands_report_missing_explicit_input (test_jev_owner_workflows.OwnerWorkflowsTest.test_owner_commands_report_missing_explicit_input) (owner='phat')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\.codex\worktrees\7f7a\Artificial_Intelligent_Project\tests\test_jev_owner_workflows.py", line 121, in test_owner_commands_report_missing_explicit_input
+    self.assertIn("Jev:", result.stderr)
+AssertionError: 'Jev:' not found in "C:\\Users\\lanph\\AppData\\Roaming\\uv\\python\\cpython-3.11-windows-x86_64-none\\python.exe: can't open file 'C:\\\\Users\\\\lanph\\\\.codex\\\\worktrees\\\\7f7a\\\\Artificial_Intelligent_Project\\\\scripts\\\\run_jev_phat.py': [Errno 2] No such file or directory\n"
+
+======================================================================
+FAIL: test_owner_commands_report_missing_explicit_input (test_jev_owner_workflows.OwnerWorkflowsTest.test_owner_commands_report_missing_explicit_input) (owner='thanh')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\.codex\worktrees\7f7a\Artificial_Intelligent_Project\tests\test_jev_owner_workflows.py", line 121, in test_owner_commands_report_missing_explicit_input
+    self.assertIn("Jev:", result.stderr)
+AssertionError: 'Jev:' not found in "C:\\Users\\lanph\\AppData\\Roaming\\uv\\python\\cpython-3.11-windows-x86_64-none\\python.exe: can't open file 'C:\\\\Users\\\\lanph\\\\.codex\\\\worktrees\\\\7f7a\\\\Artificial_Intelligent_Project\\\\scripts\\\\run_jev_thanh.py': [Errno 2] No such file or directory\n"
+
+======================================================================
+FAIL: test_owner_commands_report_missing_explicit_input (test_jev_owner_workflows.OwnerWorkflowsTest.test_owner_commands_report_missing_explicit_input) (owner='khuong')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\.codex\worktrees\7f7a\Artificial_Intelligent_Project\tests\test_jev_owner_workflows.py", line 121, in test_owner_commands_report_missing_explicit_input
+    self.assertIn("Jev:", result.stderr)
+AssertionError: 'Jev:' not found in "C:\\Users\\lanph\\AppData\\Roaming\\uv\\python\\cpython-3.11-windows-x86_64-none\\python.exe: can't open file 'C:\\\\Users\\\\lanph\\\\.codex\\\\worktrees\\\\7f7a\\\\Artificial_Intelligent_Project\\\\scripts\\\\run_jev_khuong.py': [Errno 2] No such file or directory\n"
+
+======================================================================
+FAIL: test_phat_prepares_partition_and_byte_bound_baseline (test_jev_owner_workflows.OwnerWorkflowsTest.test_phat_prepares_partition_and_byte_bound_baseline)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\.codex\worktrees\7f7a\Artificial_Intelligent_Project\tests\test_jev_owner_workflows.py", line 39, in test_phat_prepares_partition_and_byte_bound_baseline
+    self.assertEqual(result.returncode, 0, result.stderr)
+AssertionError: 2 != 0 : C:\Users\lanph\AppData\Roaming\uv\python\cpython-3.11-windows-x86_64-none\python.exe: can't open file 'C:\\Users\\lanph\\.codex\\worktrees\\7f7a\\Artificial_Intelligent_Project\\scripts\\run_jev_phat.py': [Errno 2] No such file or directory
+
+
+======================================================================
+FAIL: test_thanh_evaluates_supplied_baseline_and_toy_scores_with_csv (test_jev_owner_workflows.OwnerWorkflowsTest.test_thanh_evaluates_supplied_baseline_and_toy_scores_with_csv)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\lanph\.codex\worktrees\7f7a\Artificial_Intelligent_Project\tests\test_jev_owner_workflows.py", line 59, in test_thanh_evaluates_supplied_baseline_and_toy_scores_with_csv
+    self.assertEqual(result.returncode, 0, result.stderr)
+AssertionError: 2 != 0 : C:\Users\lanph\AppData\Roaming\uv\python\cpython-3.11-windows-x86_64-none\python.exe: can't open file 'C:\\Users\\lanph\\.codex\\worktrees\\7f7a\\Artificial_Intelligent_Project\\scripts\\run_jev_thanh.py': [Errno 2] No such file or directory
+
+
+----------------------------------------------------------------------
+Ran 10 tests in 3.018s
+
+FAILED (failures=18)
