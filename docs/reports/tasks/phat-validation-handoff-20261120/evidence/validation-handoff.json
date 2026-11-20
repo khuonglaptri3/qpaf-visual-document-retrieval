@@ -1,0 +1,180 @@
+{
+  "source_commit": "51c5b83379ac6d526f87f307ebb8fc06f591b1c2",
+  "archive": "phat-validation-scoring-inputs.zip",
+  "archive_sha256": "93f376361cc565f9ebafa03d4ea50c4d5286ed7196c4dee675dec2fd7a4cdedb",
+  "entries": {
+    "inputs/pairs.json": {
+      "sha256": "b1cb9f569e3673e69889eb17fb3588b9ae5b0421b3611416d786948f2a6aba3f",
+      "bytes": 2707485
+    },
+    "inputs/bge_missing_pairs.json": {
+      "sha256": "ed0d566fec0c260d73356a0eddb3eaba4d3ab8bbbd51b005e59c318d46df9902",
+      "bytes": 749578
+    },
+    "vimdoc/inputs/pairs.json": {
+      "sha256": "a748fe3a4e457bad6ed8ded177c8e871c0bd37c74028d22d34506453032cfb42",
+      "bytes": 13967351
+    }
+  },
+  "local_delivery": "verified local archive",
+  "worker_jobs_submitted": 0,
+  "runtime_previews": {
+    "bge.json": {
+      "volume": "jev-thanh",
+      "gpu": "A100-80GB",
+      "requirements": "jev-baselines.txt",
+      "worker_cwd": "/data",
+      "argv": [
+        "score",
+        "--backend",
+        "bge",
+        "--pairs",
+        "inputs/pairs.json",
+        "--out",
+        "runs/validation-01/bge.json",
+        "--chunks",
+        "runs/validation-01/bge-chunks",
+        "--device",
+        "cuda",
+        "--precision",
+        "fp16",
+        "--input-cap",
+        "1024",
+        "--batch-size",
+        "4"
+      ]
+    },
+    "kev.json": {
+      "volume": "jev-khuong",
+      "gpu": "A100-80GB",
+      "requirements": "jev-kev.txt",
+      "worker_cwd": "/data",
+      "argv": [
+        "score",
+        "--backend",
+        "kev",
+        "--pairs",
+        "inputs/pairs.json",
+        "--out",
+        "runs/validation-01/kev.json",
+        "--chunks",
+        "runs/validation-01/kev-chunks",
+        "--device",
+        "cuda",
+        "--precision",
+        "fp32",
+        "--input-cap",
+        "1024",
+        "--batch-size",
+        "1"
+      ]
+    },
+    "train-base.json": {
+      "volume": "jev-khuong",
+      "gpu": "A100-80GB",
+      "requirements": "jev-kev.txt",
+      "worker_cwd": "/data",
+      "argv": [
+        "train",
+        "--init",
+        "base",
+        "--data",
+        "inputs/train.jsonl",
+        "--out",
+        "runs/pilot-01/base",
+        "--max-steps",
+        "1",
+        "--execute"
+      ]
+    },
+    "train-kev.json": {
+      "volume": "jev-khuong",
+      "gpu": "A100-80GB",
+      "requirements": "jev-kev.txt",
+      "worker_cwd": "/data",
+      "argv": [
+        "train",
+        "--init",
+        "kev",
+        "--data",
+        "inputs/train.jsonl",
+        "--out",
+        "runs/pilot-01/kev",
+        "--max-steps",
+        "1",
+        "--execute"
+      ]
+    }
+  },
+  "vidoseek": {
+    "queries": 171,
+    "pairs": 3420,
+    "qwen": {
+      "delta": 0.043935054497029544,
+      "ci95": [
+        0.012123541606756145,
+        0.07683440242903143
+      ],
+      "win_tie_loss": {
+        "win": 30,
+        "tie": 123,
+        "loss": 18
+      }
+    },
+    "train_and_grouping": {
+      "train_queries": 799,
+      "train_pairs": 15980,
+      "train_documents": 282,
+      "validation_documents": 130,
+      "shared_documents": 124,
+      "validation_queries_from_train_documents": 162,
+      "judgments": {
+        "1": 799
+      },
+      "exported": 795,
+      "positives": 795,
+      "doc_ci": {
+        "delta": 0.043935054497029544,
+        "ci95": [
+          0.009610163898844233,
+          0.07928969226680241
+        ],
+        "win_tie_loss": {
+          "win": 30,
+          "tie": 123,
+          "loss": 18
+        }
+      }
+    },
+    "bge_cached": 2877,
+    "bge_missing": 543
+  },
+  "vimdoc": {
+    "queries": 400,
+    "pairs": 8000,
+    "gate_mean": {
+      "ndcg@10": 0.9605604253144064,
+      "mrr@10": 0.9516309523809524,
+      "recall@10": 0.9875,
+      "recall@20": 0.9875
+    },
+    "qwen_mean": {
+      "ndcg@10": 0.9552301960708676,
+      "mrr@10": 0.94425,
+      "recall@10": 0.9875,
+      "recall@20": 0.9875
+    },
+    "paired": {
+      "delta": -0.005330229243538816,
+      "ci95": [
+        -0.0181652150504905,
+        0.0069034964185947685
+      ],
+      "win_tie_loss": {
+        "win": 16,
+        "tie": 365,
+        "loss": 19
+      }
+    }
+  }
+}

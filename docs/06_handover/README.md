@@ -48,3 +48,5 @@ Các hướng dẫn cũ dưới đây giữ vai trò snapshot trước khi có h
 - [2026-09-28-m13-primary-corpus-design.md](../superpowers/specs/2026-09-28-m13-primary-corpus-design.md)
 - [2026-09-28-m14-m15-m16-audit-design.md](../superpowers/specs/2026-09-28-m14-m15-m16-audit-design.md)
 - [2026-09-28-m18-ocr-artifact-design.md](../superpowers/specs/2026-09-28-m18-ocr-artifact-design.md)
+
+- [Phát: ViDoSeek and ViMDoc validation handoff, scoring inputs, runtime and verification](../reports/tasks/phat-validation-handoff-20261120/README.md)
