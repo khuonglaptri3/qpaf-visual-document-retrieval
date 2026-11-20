@@ -266,6 +266,42 @@ def subset_partition(bundle, manifest, partition, selected_ids=None):
     return subset, indices
 
 
+def vimdoc_dev_qrels(source, bundle):
+    """Flatten explicit native ViMDoc development positives to document judgments."""
+    if bundle["dataset"].casefold() != "vimdoc":
+        raise ValueError("vimdoc-dev qrels require a ViMDoc dataset")
+    units = bundle.get("units")
+    if not isinstance(units, dict) or any(not text_id(units.get(page)) for _, page in bundle["pairs"]):
+        raise ValueError("vimdoc-dev qrels require a complete page-to-document mapping in pairs or --units")
+    if not isinstance(source, dict) or source.keys() != {"train", "validation"}:
+        raise ValueError("vimdoc-dev qrels require exactly the train and validation roles")
+
+    judgments, roles = {}, {}
+    for role, queries in source.items():
+        if not isinstance(queries, dict):
+            raise ValueError(f"vimdoc-dev {role}: expected a query-to-document IDs mapping")
+        for query, documents in queries.items():
+            if not text_id(query):
+                raise ValueError(f"vimdoc-dev {role}: invalid query ID {query!r}")
+            if query in roles:
+                raise ValueError(f"vimdoc-dev: duplicate query {query!r} across development roles")
+            if not isinstance(documents, list) or not all(map(text_id, documents)):
+                raise ValueError(f"vimdoc-dev query {query!r}: expected a list of positive document IDs")
+            if len(documents) != len(set(documents)):
+                raise ValueError(f"vimdoc-dev query {query!r}: duplicate document IDs")
+            roles[query] = role
+            judgments[query] = dict.fromkeys(documents, 1)
+
+    partition = bundle.get("partition")
+    if partition is not None:
+        if partition not in source:
+            raise ValueError("vimdoc-dev qrels only cover train and validation partitions")
+        other = [query for query in bundle["queries"] if query in roles and roles[query] != partition]
+        if other:
+            raise ValueError(f"vimdoc-dev: queries outside the {partition} partition: {other}")
+    return judgments
+
+
 def lexical_scores(bundle):
     """Toy exact-word overlap for the offline demo."""
     tokens = {query: set(re.findall(r"\w+", text.casefold())) for query, text in bundle["queries"].items()}

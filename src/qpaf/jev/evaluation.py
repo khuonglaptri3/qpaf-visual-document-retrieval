@@ -152,6 +152,9 @@ def compare(left, right, seed=20260820, resamples=10000, groups=None):
     for key in ("dataset", "k", "qrels_sha256"):
         if key in left and key in right and left[key] != right[key]:
             raise ValueError(f"comparison requires matching {key} across both reports")
+    left_units, right_units = left.get("units_sha256"), right.get("units_sha256")
+    if left_units not in (None, "unknown") and right_units not in (None, "unknown") and left_units != right_units:
+        raise ValueError("comparison requires matching units_sha256 across both reports")
     protocol = _comparison_protocol(left, right)
     if groups is not None and not isinstance(groups, dict):
         raise ValueError("groups: expected a mapping from query ID to group ID")

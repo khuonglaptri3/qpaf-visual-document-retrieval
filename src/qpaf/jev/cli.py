@@ -14,7 +14,7 @@ from .contracts import (
 )
 from .data import (
     f9_bundle_paths, f9_pairs_path, lexical_scores, load_query_ids, load_raw_rows, load_texts,
-    partition_query_ids, prepare_candidates, require_inputs, subset_partition,
+    partition_query_ids, prepare_candidates, require_inputs, subset_partition, vimdoc_dev_qrels,
 )
 from .evaluation import PROTOCOL_FIELDS, blend_scores, compare, evaluate
 from .backends import score_file
@@ -278,7 +278,12 @@ def _evaluate(args):
             raise ValueError("--units disagrees with the mapping already embedded in pairs JSON")
         bundle = {**bundle, "units": units}
     qrels_raw = args.qrels.read_bytes()
-    report = evaluate(bundle, scores, decode_json(qrels_raw, args.qrels), args.k)
+    judgments = decode_json(qrels_raw, args.qrels)
+    if args.qrels_format == "vimdoc-dev":
+        judgments = vimdoc_dev_qrels(judgments, bundle)
+    report = evaluate(bundle, scores, judgments, args.k)
+    if args.qrels_format == "vimdoc-dev":
+        report["qrels_format"] = args.qrels_format
     report.update({
         "synthetic": report["synthetic"] or manifest.get("synthetic", False),
         "pairs_sha256": digest,
@@ -334,7 +339,7 @@ def _demo(args):
     write_json(qrels_path, qrels)
     write_scores(base_path, pairs_path, baseline_scores(bundle), _cpu_manifest("toy supplied base scores", True))
     write_scores(scores_path, pairs_path, lexical_scores(bundle), _cpu_manifest("toy lexical overlap", True))
-    common = {"pairs": pairs_path, "qrels": qrels_path, "units": None, "k": 10, "lam": None}
+    common = {"pairs": pairs_path, "qrels": qrels_path, "qrels_format": "flat", "units": None, "k": 10, "lam": None}
     left, right = dest / "baseline.json", dest / "evaluation.json"
     _evaluate(argparse.Namespace(
         **common, baseline=True, scores=None, out=left, csv=dest / "baseline.csv",
@@ -449,6 +454,10 @@ def build_parser():
     ev = commands.add_parser("evaluate", help="Compute unit-level metrics and per-query results")
     ev.add_argument("--pairs", type=Path, required=True)
     ev.add_argument("--qrels", type=Path, required=True, help="Full query-to-unit judgments in JSON")
+    ev.add_argument(
+        "--qrels-format", choices=("flat", "vimdoc-dev"), default="flat",
+        help="Native vimdoc-dev reads train/validation document positives and requires a page-to-document map",
+    )
     ev.add_argument("--units", type=Path, help="Page-to-unit map for byte-exact imported pairs without units")
     score = ev.add_mutually_exclusive_group(required=True)
     score.add_argument("--scores", type=Path, help="Existing byte-bound score cache")

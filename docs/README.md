@@ -28,6 +28,7 @@ Các receipt CPU ghi GPU-deferred được giữ nguyên như snapshot lịch s�
 | [Oracle lịch sử](05_oracle_experiments/README.md) | Protocol, review và kết quả của từng study |
 | [Bàn giao kỹ thuật](06_handover/README.md) | Audit, runbook và hồ sơ bàn giao |
 | [Feature lab](feature_lab/README.md) | Lab F1–F9 cho QARF/QPAF (gate F1–F4, reranker F5–F9), harness CV chung và [kết luận cấu hình cuối](feature_lab/KET_LUAN.md) |
+| [Bộ công cụ Jev](reports/tasks/jev-runnable-team-kit-20261120/README.md) | Demo offline, chuẩn bị dữ liệu, baseline, đánh giá và train Kev |
 | [Evidence](../evidence/) | Manifest, hash, quyết định và revision đã ghi nhận |
 
 Các tài liệu kỹ thuật và hồ sơ lịch sử giữ vai trò giải thích implementation hoặc
