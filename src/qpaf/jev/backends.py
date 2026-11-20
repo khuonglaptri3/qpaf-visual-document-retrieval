@@ -44,29 +44,64 @@ def require_kev_source():
         raise ValueError(f"install requirements/jev-kev.txt to use the official Kev source at {expected}")
 
 
-def _indexed_shards(path):
+def _explicit_weight_name(path):
+    config_path = path / "config.json"
+    if not config_path.is_file():
+        return None
+    config = read_json(config_path)
+    if not isinstance(config, dict):
+        raise ValueError(f"{config_path}: expected a model configuration object")
+    if "configuration_files" in config:
+        try:
+            from transformers import PreTrainedConfig
+        except ImportError as exc:
+            raise ValueError("versioned local model configuration requires Transformers") from exc
+        config, _ = PreTrainedConfig.get_config_dict(path, local_files_only=True)
+    return config.get("transformers_weights")
+
+
+def _weight_archive(path):
+    name = _explicit_weight_name(path)
+    if name is not None:
+        if not isinstance(name, str) or not (
+            name.endswith((".safetensors", ".safetensors.index.json")) or name == "adapter_model.bin"
+        ):
+            raise ValueError("transformers_weights must name a safetensors archive, safetensors index or adapter_model.bin")
+        archive = path / name
+        # The loader checks lexical containment. Linked targets inside the directory are supported.
+        if not Path(os.path.abspath(archive)).is_relative_to(Path(os.path.abspath(path))):
+            raise ValueError(f"transformers_weights must reference a file inside the model directory: {name}")
+        if not archive.is_file():
+            raise ValueError(f"transformers_weights references a missing archive: {name}")
+        return name, archive
+
     # Match the Transformers local loader's default checkpoint selection order.
     for name in ("model.safetensors", "model.safetensors.index.json", "pytorch_model.bin", "pytorch_model.bin.index.json"):
-        index = path / name
-        if index.is_file():
-            break
-    else:
-        return {}
-    if not name.endswith(".index.json"):
-        return {}
+        archive = path / name
+        if archive.is_file():
+            return name, archive
+    return None, None
 
-    data = read_json(index)
+
+def _weight_files(path):
+    name, archive = _weight_archive(path)
+    if archive is None:
+        return {}
+    files = {Path(name).as_posix(): archive}
+    if not name.endswith(".index.json"):
+        return files
+
+    data = read_json(archive)
     weights = data.get("weight_map") if isinstance(data, dict) else None
     if not isinstance(weights, dict) or not weights or not all(isinstance(shard, str) and shard for shard in weights.values()):
-        raise ValueError(f"{index}: expected a nonempty weight_map with shard paths")
-    shards = {}
+        raise ValueError(f"{archive}: expected a nonempty weight_map with shard paths")
     # An indexed shard can be under hidden metadata directories or behind directory symlinks.
     for name in set(weights.values()):
         shard = path / name
         if not shard.is_file():
-            raise ValueError(f"{index}: referenced shard is missing: {name}")
-        shards[Path(name).as_posix()] = shard
-    return shards
+            raise ValueError(f"{archive}: referenced shard is missing: {name}")
+        files[Path(name).as_posix()] = shard
+    return files
 
 
 def tree_hash(path):
@@ -75,7 +110,7 @@ def tree_hash(path):
         raise ValueError(f"local checkpoint directory does not exist: {path}")
     files = {f.relative_to(path).as_posix(): f for f in path.rglob("*")
              if f.is_file() and not {".git", ".cache"}.intersection(f.relative_to(path).parts)}
-    files.update(_indexed_shards(path))
+    files.update(_weight_files(path))
     if not files:
         raise ValueError(f"empty checkpoint directory: {path}")
     digests, resolved_digests = {}, {}

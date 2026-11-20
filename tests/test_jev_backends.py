@@ -25,10 +25,10 @@ from qpaf.jev.backends import tree_hash
 
 
 class LocalWeightIdentityTest(unittest.TestCase):
-    def assert_shard_mutation_changes_identity(self, model, shard_name):
+    def assert_shard_mutation_changes_identity(self, model, shard_name, index_name="model.safetensors.index.json"):
         shard = model / shard_name
         shard.write_bytes(b"old weights")
-        write_json(model / "model.safetensors.index.json", {"metadata": {}, "weight_map": {
+        write_json(model / index_name, {"metadata": {}, "weight_map": {
             "first.weight": shard_name, "second.weight": shard_name,
         }})
         old_identity = tree_hash(model)
@@ -40,6 +40,41 @@ class LocalWeightIdentityTest(unittest.TestCase):
             model = Path(tmp)
             (model / ".cache").mkdir()
             self.assert_shard_mutation_changes_identity(model, ".cache/weights.safetensors")
+
+    def test_explicit_weights_archive_binds_a_file_under_the_local_cache(self):
+        with TemporaryDirectory() as tmp:
+            model = Path(tmp)
+            (model / ".cache").mkdir()
+            (model / "model.safetensors").write_bytes(b"default archive")
+            archive_name = ".cache/selected.safetensors"
+            write_json(model / "config.json", {"transformers_weights": archive_name})
+            archive = model / archive_name
+            archive.write_bytes(b"old selected weights")
+            before = tree_hash(model)
+            archive.write_bytes(b"new selected weights")
+            self.assertNotEqual(tree_hash(model), before)
+
+    def test_explicit_weights_index_binds_a_file_under_the_local_cache(self):
+        with TemporaryDirectory() as tmp:
+            model = Path(tmp)
+            (model / ".cache").mkdir()
+            (model / "model.safetensors").write_bytes(b"default archive")
+            index_name = ".cache/selected.safetensors.index.json"
+            write_json(model / "config.json", {"transformers_weights": index_name})
+            self.assert_shard_mutation_changes_identity(model, ".cache/weights.safetensors", index_name)
+
+    def test_explicit_weights_cannot_be_missing_or_escape_the_model_directory(self):
+        with TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            model = root / "model"
+            model.mkdir()
+            (root / "outside.safetensors").write_bytes(b"external archive")
+            (model / "model.safetensors").write_bytes(b"default archive")
+            for name in ("missing.safetensors", "../outside.safetensors"):
+                with self.subTest(name=name):
+                    write_json(model / "config.json", {"transformers_weights": name})
+                    with self.assertRaisesRegex(ValueError, "transformers_weights"):
+                        tree_hash(model)
 
     def test_shard_index_binds_a_file_through_a_nested_symlinked_directory(self):
         with TemporaryDirectory() as tmp:
@@ -261,6 +296,13 @@ class ActualRuntimeTest(unittest.TestCase):
                           intermediate_size=32, pad_token_id=1, max_position_embeddings=512)
             bert = BertForSequenceClassification(BertConfig(**common, vocab_size=len(tok), num_labels=1)).eval()
             bert.save_pretrained(bert_dir)
+            (bert_dir / ".cache").mkdir()
+            bert_archive = bert_dir / ".cache/selected.safetensors"
+            (bert_dir / "model.safetensors").rename(bert_archive)
+            bert_config = json.loads((bert_dir / "config.json").read_bytes())
+            write_json(bert_dir / "config.json", {**bert_config, "transformers_weights": ".cache/selected.safetensors"})
+            (bert_dir / "model.safetensors").write_bytes(b"unused default archive")
+
             causal = Qwen2ForCausalLM(Qwen2Config(**common, vocab_size=len(qt), num_key_value_heads=1)).eval()
             causal.save_pretrained(qwen_dir, max_shard_size="4KB")
             index_file = qwen_dir / "model.safetensors.index.json"
@@ -271,7 +313,13 @@ class ActualRuntimeTest(unittest.TestCase):
             (qwen_dir / shard).rename(qwen_dir / hidden_shard)
             index["weight_map"] = {parameter: hidden_shard if name == shard else name
                                    for parameter, name in index["weight_map"].items()}
-            write_json(index_file, index)
+            selected_index = ".cache/selected.safetensors.index.json"
+            write_json(qwen_dir / selected_index, index)
+            qwen_config = json.loads((qwen_dir / "config.json").read_bytes())
+            versioned = "config.5.17.0.json"
+            write_json(qwen_dir / versioned, {**qwen_config, "transformers_weights": selected_index})
+            write_json(qwen_dir / "config.json", {**qwen_config, "configuration_files": [versioned]})
+            (qwen_dir / "model.safetensors").write_bytes(b"unused default archive")
             pairs = [("fruit", "apple"), ("held out", "apple"), ("fruit", ""), ("fruit", "car")]
             ids = tok([q for q, _ in pairs], [p for _, p in pairs], padding=True, return_tensors="pt")
             expected = bert(**ids).logits[:, 0].detach().tolist()
@@ -286,6 +334,9 @@ class ActualRuntimeTest(unittest.TestCase):
                 if name == "bge":
                     for got, want in zip(cache["scores"], expected, strict=True):
                         self.assertAlmostEqual(got, want, places=5)
+                    with bert_archive.open("ab") as stream:
+                        stream.write(b"changed")
+                    self.assertNotEqual(tree_hash(bert_dir), cache["manifest"]["revision"])
                 else:
                     prompt = ('<|im_start|>system\nJudge whether the Document meets the requirements based on the Query '
                               'and the Instruct provided. Note that the answer can only be "yes" or "no".'
@@ -321,4 +372,7 @@ class ActualRuntimeTest(unittest.TestCase):
             self.assertTrue(all(0 <= p <= 1 for p in cache["scores"]))
             self.assertTrue(any(p != round(p, 4) for p in cache["scores"]))
             self.assertEqual(Path(cache["manifest"]["local_kev_base"]["path"]), qwen_dir)
+            with (qwen_dir / hidden_shard).open("ab") as stream:
+                stream.write(b"changed")
+            self.assertNotEqual(tree_hash(qwen_dir), cache["manifest"]["local_kev_base"]["sha256"])
             print(f"Kev reloaded scores: {cache['scores']}, tokens={cache['manifest']['input_tokens']}")
