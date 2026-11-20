@@ -17,6 +17,8 @@ from .data import (
     partition_query_ids, prepare_candidates, require_inputs, subset_partition,
 )
 from .evaluation import PROTOCOL_FIELDS, blend_scores, compare, evaluate
+from .backends import score_file
+from .training import export_training, train
 
 
 def _prep_inputs(args):
@@ -370,6 +372,51 @@ def _add_report_outputs(parser):
 def build_parser():
     parser = argparse.ArgumentParser(description="Prepare and evaluate Jev reranker candidate pools.")
     commands = parser.add_subparsers(title="commands", required=True)
+
+    score_model = commands.add_parser("score", help="Score prepared pairs using a baseline or pinned model")
+    score_model.add_argument("--backend", choices=("baseline", "lexical", "bge", "qwen", "kev"), required=True)
+    score_model.add_argument("--pairs", type=Path, required=True)
+    score_model.add_argument("--out", type=Path, required=True)
+    score_model.add_argument("--checkpoint", type=Path, help="Local model or adapted Kev checkpoint directory")
+    score_model.add_argument("--chunks", type=Path, help="Resumable chunk directory (default: <out>.chunks)")
+    score_model.add_argument("--device", choices=("cpu", "cuda"), default="cuda")
+    score_model.add_argument("--precision", choices=("fp16", "bf16", "fp32"), help="Defaults to model/device precision")
+    score_model.add_argument("--input-cap", type=int, default=1024, help="Maximum input tokens per query/page")
+    score_model.add_argument("--batch-size", type=int, default=4)
+    score_model.add_argument("--chunk-size", type=int, default=128)
+    score_model.set_defaults(handler=score_file)
+
+    export = commands.add_parser("export-train", help="Export train-only page judgments as Kev Noul JSONL")
+    export.add_argument("--pairs", type=Path, required=True)
+    export.add_argument("--splits", type=Path, required=True)
+    export.add_argument("--qrels", type=Path, required=True)
+    export.add_argument("--out", type=Path, required=True, help="Output JSONL plus <out>.manifest.json")
+    export.add_argument("--unjudged-as-negative", action="store_true", help="Label unjudged train candidates false")
+    export.set_defaults(handler=export_training)
+
+    trainer = commands.add_parser("train", help="Print or run the official controlled Kev training command")
+    trainer.add_argument("--data", type=Path, required=True, help="Exported train JSONL with its adjacent manifest")
+    trainer.add_argument("--out", type=Path, required=True, help="New checkpoint directory")
+    trainer.add_argument("--init", choices=("kev", "base"), default="kev")
+    trainer.add_argument("--base", type=Path, help="Override the pinned backbone with a local model directory")
+    trainer.add_argument("--init-checkpoint", type=Path, help="Override the pinned Kev initialization with a local run")
+    trainer.add_argument("--device", choices=("cuda", "cpu"), default="cuda")
+    trainer.add_argument("--dtype", choices=("bf16", "fp32"), help="Autocast precision, CUDA bf16 or CPU fp32 by default")
+    trainer.add_argument("--weights-dtype", choices=("fp32", "bf16"), default="fp32")
+    trainer.add_argument("--lora", type=int, default=16)
+    trainer.add_argument("--lora-targets", choices=("all", "dense", "attn", "qv"), default="all")
+    trainer.add_argument("--head-dim", type=int, default=256)
+    trainer.add_argument("--seed", type=int, default=1)
+    trainer.add_argument("--lr", type=float, default=2e-5)
+    trainer.add_argument("--head-lr", type=float, default=0.0)
+    trainer.add_argument("--epochs", type=int, default=1)
+    trainer.add_argument("--max-steps", type=int, default=0, help="Optimizer step limit (0 uses all epochs)")
+    trainer.add_argument("--batch-size", type=int, default=2)
+    trainer.add_argument("--accum", type=int, default=4)
+    trainer.add_argument("--max-state", type=int, default=1024, help="Official state token limit (384 to 65536)")
+    trainer.add_argument("--checkpointing", type=int, choices=(0, 1), default=1)
+    trainer.add_argument("--execute", action="store_true", help="Start the official trainer")
+    trainer.set_defaults(handler=train)
 
     doctor = commands.add_parser("doctor", help="Check CPU setup and inspect local input paths")
     _add_prepare_inputs(doctor, required=False)

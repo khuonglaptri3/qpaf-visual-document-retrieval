@@ -1,0 +1,13 @@
+# Official Kev inference and training, Python 3.13
+torch==2.8.0
+transformers==5.17.0
+numpy==2.5.3
+tokenizers==0.23.3
+huggingface-hub==1.33.0
+peft==0.21.0
+accelerate==1.15.0
+datasets==5.2.0
+scikit-learn==1.9.1
+pydantic==2.14.4
+psutil==7.2.2 ; sys_platform == "win32"
+kev @ git+https://github.com/jaredpalmer/kev.git@5e22da2be8ecb2f38790d81d87bb55b0be61a6e2
