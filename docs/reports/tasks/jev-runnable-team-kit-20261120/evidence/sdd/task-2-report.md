@@ -46,3 +46,33 @@ b98aca7aabfe86ddd70a7f5ecf87cf75fa741a40a98297b7497b4b15edf45047  src/qpaf/jev/c
 27f4577c2f8618f7d5e9891f9b565911dec7bac74f091b49b69206c6d7027d95  tests/test_jev_backends.py
 54ceb76cb69f3dbe432775491f6e6bff1277021a41226f6e6280919a0b013e01  tests/test_jev_training.py
 ```
+
+## Review fix round 1
+
+2026-11-20. The [review](task-2-review.md) assessed `e108880f16bb2a2de57c9e8d3de23c39ae0eed1c`. The preceding source hashes describe that commit. This round's source and regression tests are in `50d27bc3d5b5b615b2e802fc51dc49f7eb513c96`. The review used Superpowers 7.0.1 `receiving-code-review/SKILL.md` with the previously loaded systematic debugging, test-driven development, and verification workflows. Execution stayed in the existing worktree and used the same external CPU environment.
+
+- Local Kev score identity now reads the pinned official checkpoint metadata. The adapter or full checkpoint is hashed, and the actual local base path, tokenizer, and backbone files are hashed from `Meta.base`. A Hub backbone in a local checkpoint requires a full immutable commit in `Meta.base_revision`. The adapter verifies the metadata it loads and the scoring loop verifies the local hashes again after loading, before its first chunk can be written.
+- Fully cached reuse checks the installed Kev source commit and probes the actual Torch build and device. The runtime fields cover CPU capability and thread count or selected CUDA device class, compute capability, memory and SM count, CUDA build, NVIDIA driver API version, cuDNN and precision settings. Physical accelerator UUIDs are outside the fingerprint so sequential allocations of the same device class can reuse compatible chunks.
+- Cache configuration is published by renaming a complete nonempty staged directory on the same coherent filesystem. Two initializers targeting the same directory with different configurations produce one winner and one stale-configuration error. Previous chunk directories require a fresh `--chunks` directory under the new identity scheme. Modal Volumes use last-write-wins across containers. Use separate Volumes for independent concurrent jobs, or distinct output and chunk directories on a shared Volume, and reuse a given chunk directory sequentially. [Modal Volume consistency](https://modal.com/docs/guide/volumes#filesystem-consistency)
+- The offline Modal planner and workers share pure score and training setting validation. The planner rejects invalid options before importing the SDK, including when outer `--execute` is present. Staged file and directory checks run inside the worker.
+- The run manifest records exported, trainer-admitted, and context-dropped rows separately from scheduled, actual, and unvisited record visits. The pinned trainer records post-filter `requested_records` as admitted rows multiplied by epochs. Its `records_seen` measures processed visits. Training uses a single JSONL source with replay and augmentation disabled. A failed write now removes the snapshot created by that invocation.
+
+### Verification
+
+- RED via `python -I -S -m unittest discover -s tests -p 'test_jev*.py' -v` on the reviewed source exited 1. It ran 48 tests in 11.933 seconds with 10 failing assertions and three optional skips. The failures covered cached runtime and source changes, two competing successful cache writes, the actual local base mutation, an unpinned Hub base, model-load mutation, invalid score and train planner settings, missing admission provenance, and a partial snapshot left after an injected write failure.
+- GREEN via `python -I -S -m unittest discover -s tests -p 'test_jev*.py' -q` exited 0. It ran 48 tests in 14.505 seconds with 45 passes and three optional skips. The final isolated checks synchronized both test initializers at the rename boundary, exercised invalid Modal plans with and without outer `--execute`, and accepted a valid training plan whose staged files exist only on the Volume.
+- `python -u -m unittest tests.test_jev_backends tests.test_jev_training tests.test_jev_contracts tests.test_jev_evaluation tests.test_jev_cli -v` exited 0 with all 48 passing in 144.766 seconds. The run used the opt-in and offline environment values documented above. Real BGE and Qwen forwards passed. The official trainer reported one drop from three records at a 384-token state limit, admitted two, and performed one optimizer step with 78 forward tokens. The saved counts showed three exported rows, two admitted, one dropped for context, two scheduled visits, one actual visit, and one unvisited. The adapter and head reloaded through the real Kev API, verified the local base path in the score manifest, and returned `[0.4989367127418518, 0.49899986386299133, 0.4993443489074707, 0.4989033341407776]` with 369 scored input tokens.
+- `python -I -S -m compileall -q src/qpaf/jev scripts/modal_jev_rerank.py tests/test_jev_backends.py tests/test_jev_training.py`, isolated help for the Modal worker and local score/train commands, and `git diff-tree --check HEAD^ HEAD` all exited 0.
+- An isolated Torch 2.8.0+cpu probe constructed AdamW and `OneCycleLR(pct_start=0.1)` with total steps 1, 9, 10, and 11. Steps 1, 9, and 11 initialized. Exactly 10 effective optimizer steps raised `ZeroDivisionError: float division by zero` at scheduler initialization. The effective total is the available steps across epochs limited by a positive `--max-steps`. This includes an uncapped run that naturally totals ten. The pinned scheduler is unchanged. The tested end-to-end smoke uses one step.
+
+CUDA profiling and live Modal execution remain unverified. The legacy suite was not rerun in this fix round.
+
+### Fix-round source SHA-256
+
+```text
+79a0a3db1f977328cab279e309a9ffa9067b58ad77153ba033b2c055d0bb7f69  scripts/modal_jev_rerank.py
+8bb32b36082490b5d909bd8959a063322d194f2e081bec6c7a33b2da237f6a7c  src/qpaf/jev/backends.py
+1e0eea92f9bad295694effbf3a69d15cb25aa46df672f59e987dab7ab59d52a1  src/qpaf/jev/training.py
+528d635b65e96fd6588d96b909e57e6f65a7f81de78b54ded0e7b784d13247c2  tests/test_jev_backends.py
+124f5ba3d36eba60527bf1b5ae3aaea068e00be377505c78e40de779fb49261c  tests/test_jev_training.py
+```
