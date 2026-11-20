@@ -2,6 +2,8 @@
 
 Ba nhánh nghiên cứu dùng chung CLI Jev để chuẩn bị pool F9, chấm điểm, đánh giá theo query và xuất dữ liệu huấn luyện Kev. Demo offline đã chạy với Python 3.11. Số liệu demo chỉ kiểm tra luồng trên dữ liệu tổng hợp. Chấm điểm dữ liệu đầy đủ, đo chất lượng mô hình và chạy GPU vẫn đang chờ.
 
+**Đã bàn giao code và publish cả ba branch.** Shared code `7964101` đã qua task review, whole-branch review và đợt sửa được re-review. Mỗi owner branch đã qua clone sạch Python3.11 `-I -S`, kiểm tra artifact và inventory riêng. [Bằng chứng publication đầu tiên](evidence/delivery.json) ghi đúng commit/remote SHA đã kiểm, [push log](evidence/delivery-push.json) ghi cập nhật atomic fast-forward. Các commit báo cáo sau đó giữ nguyên code; xem remote hiện hành bằng `git ls-remote --heads origin 'research/jev-*'`.
+
 [Đặc tả](superpowers/spec.md) · [Kế hoạch](superpowers/plan.md) · [Quy trình và quyền thực thi](evidence/workflow.md) · [Báo cáo triển khai và kiểm chứng](evidence/sdd/task-3-report.md)
 
 ## Chạy thử từ clone sạch
@@ -10,9 +12,9 @@ Clone nhánh được giao ở thư mục mới. Dùng URL origin mà nhóm cấ
 
 | Thành viên | Nhánh | Script |
 | --- | --- | --- |
-| Tấn Phát | `research/jev-phat-data-infra` | `scripts/run_jev_phat.py` |
-| Thanh | `research/jev-thanh-baselines` | `scripts/run_jev_thanh.py` |
-| Khương | `research/jev-khuong-model` | `scripts/run_jev_khuong.py` |
+| Phát | [research/jev-phat-data-infra](https://github.com/khuonglaptri3/qpaf-visual-document-retrieval/tree/research/jev-phat-data-infra) | `scripts/run_jev_phat.py` |
+| Thanh | [research/jev-thanh-baselines](https://github.com/khuonglaptri3/qpaf-visual-document-retrieval/tree/research/jev-thanh-baselines) | `scripts/run_jev_thanh.py` |
+| Khương | [research/jev-khuong-model](https://github.com/khuonglaptri3/qpaf-visual-document-retrieval/tree/research/jev-khuong-model) | `scripts/run_jev_khuong.py` |
 
 ~~~powershell
 git clone --branch research/jev-phat-data-infra https://github.com/khuonglaptri3/qpaf-visual-document-retrieval.git qpaf-jev
