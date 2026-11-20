@@ -46,3 +46,31 @@ e1fbfbcbb373df35b1c9fe35080eaa6fae4cc17e0dbc2ae2140355649d8ccc0d  scripts/run_je
 d43f4ae2b96503e0a54176dd2c6aae548c1b83145e6ad335337002bfd3567575  src/qpaf/jev/owners.py
 c7ae0e78606be97b2d15ca46ba061da4e14a33c034a4bf1338bdd1d2d8e2e66e  tests/test_jev_owner_workflows.py
 ~~~
+
+## Review fix round 1
+
+On 2026-11-20, the [Task 3 review](task-3-review.md) identified that the documented matched baseline read a saved score cache and reported `score_mode: pure`. I followed Superpowers 7.0.1 `receiving-code-review/SKILL.md` and `subagent-driven-development/references/fix-loop.md`. The runbook now records the matched baseline via `--baseline` and checks the separately saved cache with `doctor`. The saved-cache reuse explanation documents its mode.
+
+Using Python 3.11.16 under `-I -S`, I ran the following commands. `$run` was the ignored synthetic run directory printed by Thanh's wrapper and `$priv` pointed to the same directory. I copied `$run/qrels.json` to `$priv/dev-page-qrels.json` to run the documented path.
+
+~~~powershell
+python -I -S scripts/run_jev_thanh.py
+Copy-Item -LiteralPath "$run/qrels.json" -Destination "$priv/dev-page-qrels.json"
+python -I -S scripts/run_jev.py score --backend baseline --pairs "$run/prepared/pairs.json" --out "$run/base.json"
+python -I -S scripts/run_jev.py evaluate --pairs "$run/prepared/pairs.json" --scores "$run/base.json" --qrels "$priv/dev-page-qrels.json" --k 10 --out "$run/baseline-eval.json"
+python -I -S scripts/run_jev.py doctor --pairs "$run/prepared/pairs.json" --scores "$run/base.json"
+python -I -S scripts/run_jev.py evaluate --pairs "$run/prepared/pairs.json" --baseline --qrels "$priv/dev-page-qrels.json" --k 10 --out "$run/baseline-eval.json"
+~~~
+
+Each CLI invocation exited 0. Score wrote four values. Doctor printed `Score length, values and input hash verified.` The two evaluation runs wrote `baseline-eval.json`. The following values were read from the successive JSON reports. Per-query metrics also matched exactly. The fixture reports had `synthetic: true`.
+
+~~~text
+--scores report: {"score_mode":"pure","mean":{"ndcg@10":0.5088912804029996,"mrr@10":0.5,"recall@10":0.75,"recall@20":0.75}}
+--baseline report: {"score_mode":"baseline","mean":{"ndcg@10":0.5088912804029996,"mrr@10":0.5,"recall@10":0.75,"recall@20":0.75}}
+~~~
+
+The fix changed runbook text and this evidence report. The focused CLI verification covers the changed example. Staged whitespace verification passed.
+
+~~~text
+b31fbf2e36abfcfebf0d698be6731e66b742fda5d95af46bbd38205c737fa8e6  docs/reports/tasks/jev-runnable-team-kit-20261120/README.md
+~~~

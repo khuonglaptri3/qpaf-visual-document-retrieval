@@ -124,6 +124,7 @@ Scores được lưu theo thứ tự pairs, đúng số phần tử, dùng giá 
 
 ~~~sh
 python scripts/run_jev.py score --backend baseline --pairs "$run/prepared/pairs.json" --out "$run/base.json"
+python scripts/run_jev.py doctor --pairs "$run/prepared/pairs.json" --scores "$run/base.json"
 python scripts/run_jev.py score --backend bge --pairs "$run/prepared/pairs.json" --out "$run/bge.json" --chunks "$run/bge-chunks" --device cuda --precision fp16 --input-cap 1024 --batch-size 4
 python scripts/run_jev.py score --backend qwen --pairs "$run/prepared/pairs.json" --out "$run/qwen.json" --chunks "$run/qwen-chunks" --device cuda --precision bf16 --input-cap 1024 --batch-size 4
 python scripts/run_jev.py doctor --pairs "$run/prepared/pairs.json" --scores "$run/bge.json"
@@ -132,13 +133,13 @@ python scripts/run_jev.py doctor --pairs "$run/prepared/pairs.json" --scores "$r
 Dùng lại cache đã kiểm tra bằng `--scores` với đúng pairs. Chạy pure rerank và blend thành các báo cáo riêng. Chọn `--lambda` từ quy trình development đã thống nhất. Báo cáo dưới đây dùng cùng qrels, cohort và k.
 
 ~~~sh
-python scripts/run_jev.py evaluate --pairs "$run/prepared/pairs.json" --scores "$run/base.json" --qrels "$priv/dev-page-qrels.json" --k 10 --out "$run/baseline-eval.json"
+python scripts/run_jev.py evaluate --pairs "$run/prepared/pairs.json" --baseline --qrels "$priv/dev-page-qrels.json" --k 10 --out "$run/baseline-eval.json"
 python scripts/run_jev.py evaluate --pairs "$run/prepared/pairs.json" --scores "$run/bge.json" --qrels "$priv/dev-page-qrels.json" --k 10 --out "$run/bge-pure.json" --csv "$run/bge-pure.csv"
 python scripts/run_jev.py evaluate --pairs "$run/prepared/pairs.json" --scores "$run/bge.json" --lambda 0.5 --qrels "$priv/dev-page-qrels.json" --k 10 --out "$run/bge-blend.json"
 python scripts/run_jev.py compare --left "$run/baseline-eval.json" --right "$run/bge-pure.json" --groups "$priv/splits.json" --seed 20260820 --resamples 10000 --out "$run/paired.json" --csv "$run/paired.csv"
 ~~~
 
-Có thể dùng `--baseline` thay cho `--scores "$run/base.json"`. Với ViMDoc native, sử dụng `--qrels-format vimdoc-dev`. CLI kiểm tra hai role development, phát hiện query trùng giữa các role và tài liệu trùng trong cùng query, giữ positive ngoài pool và lấy điểm trang cao nhất cho mỗi tài liệu. Lệnh dưới đây đọc map `units` nhúng từ Parquet. Nếu dùng pairs import chưa có map, thêm `--units "$priv/vimdoc-page-to-doc.json"` (JSON `{"page-id":"document-id"}`) ở mọi lần đánh giá. Khi cả hai báo cáo ghi hash sidecar, compare yêu cầu hash giống nhau.
+Dùng `--baseline` cho báo cáo baseline đối chứng để JSON ghi `score_mode: baseline`. Lệnh `doctor` kiểm tra cache `base.json` với đúng file pairs. Khi tái sử dụng cache bằng `--scores "$run/base.json"`, JSON ghi `score_mode: pure`. Với ViMDoc native, sử dụng `--qrels-format vimdoc-dev`. CLI kiểm tra hai role development, phát hiện query trùng giữa các role và tài liệu trùng trong cùng query, giữ positive ngoài pool và lấy điểm trang cao nhất cho mỗi tài liệu. Lệnh dưới đây đọc map `units` nhúng từ Parquet. Nếu dùng pairs import chưa có map, thêm `--units "$priv/vimdoc-page-to-doc.json"` (JSON `{"page-id":"document-id"}`) ở mọi lần đánh giá. Khi cả hai báo cáo ghi hash sidecar, compare yêu cầu hash giống nhau.
 
 ~~~sh
 python scripts/run_jev.py evaluate --pairs "$run/vimdoc/pairs.json" --baseline --qrels "$priv/vimdoc/dev_qrels.json" --qrels-format vimdoc-dev --k 10 --out "$run/vimdoc-baseline.json"
