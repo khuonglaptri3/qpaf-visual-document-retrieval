@@ -1,0 +1,82 @@
+Python 3.11.16
+python -I -S -m unittest discover -s tests -p "test_jev_*.py" -v
+test_real_baseline_forwards_and_trained_checkpoint_reload (test_jev_backends.ActualRuntimeTest.test_real_baseline_forwards_and_trained_checkpoint_reload) ... skipped 'set JEV_MODEL_TESTS=1 in the pinned Kev environment'
+test_explicit_weights_archive_binds_a_file_under_the_local_cache (test_jev_backends.LocalWeightIdentityTest.test_explicit_weights_archive_binds_a_file_under_the_local_cache) ... ok
+test_explicit_weights_cannot_be_missing_or_escape_the_model_directory (test_jev_backends.LocalWeightIdentityTest.test_explicit_weights_cannot_be_missing_or_escape_the_model_directory) ... ok
+test_explicit_weights_index_binds_a_file_under_the_local_cache (test_jev_backends.LocalWeightIdentityTest.test_explicit_weights_index_binds_a_file_under_the_local_cache) ... ok
+test_shard_index_binds_a_file_through_a_nested_symlinked_directory (test_jev_backends.LocalWeightIdentityTest.test_shard_index_binds_a_file_through_a_nested_symlinked_directory) ... skipped 'creating Windows directory symlinks is not permitted'
+test_shard_index_binds_a_file_under_the_local_cache (test_jev_backends.LocalWeightIdentityTest.test_shard_index_binds_a_file_under_the_local_cache) ... ok
+test_cached_kev_scores_validate_source_pin (test_jev_backends.ScoringTest.test_cached_kev_scores_validate_source_pin) ... Jev: wrong official Kev commit
+ok
+test_cached_scores_reject_a_changed_runtime (test_jev_backends.ScoringTest.test_cached_scores_reject_a_changed_runtime) ... Jev: stale scoring configuration in C:\Users\lanph\AppData\Local\Temp\tmpqhz8f40v\chunks; use a fresh --chunks directory
+ok
+test_cpu_score_from_arbitrary_cwd (test_jev_backends.ScoringTest.test_cpu_score_from_arbitrary_cwd) ... ok
+test_different_configurations_cannot_both_claim_a_shared_chunk_directory (test_jev_backends.ScoringTest.test_different_configurations_cannot_both_claim_a_shared_chunk_directory) ... Jev: stale scoring configuration in C:\Users\lanph\AppData\Local\Temp\tmpbs9e4cyp\chunks; use a fresh --chunks directory
+ok
+test_local_kev_rejects_an_unpinned_hub_backbone_before_scoring (test_jev_backends.ScoringTest.test_local_kev_rejects_an_unpinned_hub_backbone_before_scoring) ... Jev: Kev head.pt must declare an existing local backbone or a Hub backbone pinned to a full commit SHA
+ok
+test_local_kev_rejects_changes_during_model_load_before_caching (test_jev_backends.ScoringTest.test_local_kev_rejects_changes_during_model_load_before_caching) ... Jev: kev scoring failed at chunk [0,4); 0/4 validated scores before error: local checkpoint or backbone changed during model load
+ok
+test_local_kev_scores_bind_the_base_declared_by_the_head (test_jev_backends.ScoringTest.test_local_kev_scores_bind_the_base_declared_by_the_head) ... Jev: stale scoring configuration in C:\Users\lanph\AppData\Local\Temp\tmpf1f7ov5t\chunks; use a fresh --chunks directory
+ok
+test_modal_plan_without_sdk_uses_volume_paths_and_matching_environment (test_jev_backends.ScoringTest.test_modal_plan_without_sdk_uses_volume_paths_and_matching_environment) ... ok
+test_modal_plans_reject_invalid_numeric_settings_before_loading_the_sdk (test_jev_backends.ScoringTest.test_modal_plans_reject_invalid_numeric_settings_before_loading_the_sdk) ... ok
+test_model_failure_then_resume_preserves_order_and_rejects_stale_chunks (test_jev_backends.ScoringTest.test_model_failure_then_resume_preserves_order_and_rejects_stale_chunks) ... ok
+test_demo_writes_cache_and_evaluation_marked_as_synthetic (test_jev_cli.CliTest.test_demo_writes_cache_and_evaluation_marked_as_synthetic) ... ok
+test_doctor_diagnoses_missing_private_inputs (test_jev_cli.CliTest.test_doctor_diagnoses_missing_private_inputs) ... ok
+test_imported_f9_bytes_allow_existing_cache_evaluation (test_jev_cli.CliTest.test_imported_f9_bytes_allow_existing_cache_evaluation) ... ok
+test_missing_import_sidecars_name_the_path_and_next_command (test_jev_cli.CliTest.test_missing_import_sidecars_name_the_path_and_next_command) ... ok
+test_native_partition_uses_manifest_ids_instead_of_held_out_defaults (test_jev_cli.CliTest.test_native_partition_uses_manifest_ids_instead_of_held_out_defaults) ... skipped 'native Parquet preparation requires optional pyarrow'
+test_native_vimdoc_bundle_reads_only_label_free_inputs (test_jev_cli.CliTest.test_native_vimdoc_bundle_reads_only_label_free_inputs) ... skipped 'native Parquet preparation requires optional pyarrow'
+test_partition_requires_the_complete_expected_import_cohort (test_jev_cli.CliTest.test_partition_requires_the_complete_expected_import_cohort) ... ok
+test_partition_rewrites_paired_scores_and_keeps_only_its_queries (test_jev_cli.CliTest.test_partition_rewrites_paired_scores_and_keeps_only_its_queries) ... ok
+test_raw_csv_preparation_and_explicit_baseline_comparison (test_jev_cli.CliTest.test_raw_csv_preparation_and_explicit_baseline_comparison) ... ok
+test_baseline_never_uses_pair_order (test_jev_contracts.ContractsTest.test_baseline_never_uses_pair_order) ... ok
+test_cache_is_bound_to_raw_bytes_and_preserves_details (test_jev_contracts.ContractsTest.test_cache_is_bound_to_raw_bytes_and_preserves_details) ... ok
+test_duplicate_pair_and_missing_text_rejected (test_jev_contracts.ContractsTest.test_duplicate_pair_and_missing_text_rejected) ... ok
+test_empty_ocr_remains_a_valid_page (test_jev_contracts.ContractsTest.test_empty_ocr_remains_a_valid_page) ... ok
+test_explicit_base_selection_keeps_scores_aligned_with_page_order (test_jev_contracts.ContractsTest.test_explicit_base_selection_keeps_scores_aligned_with_page_order) ... ok
+test_explicit_channel_weights_use_query_local_normalization (test_jev_contracts.ContractsTest.test_explicit_channel_weights_use_query_local_normalization) ... ok
+test_invalid_existing_cache_fails_even_with_matching_hash (test_jev_contracts.ContractsTest.test_invalid_existing_cache_fails_even_with_matching_hash) ... ok
+test_invalid_write_leaves_previous_cache_intact (test_jev_contracts.ContractsTest.test_invalid_write_leaves_previous_cache_intact) ... ok
+test_split_validation_checks_group_leakage_even_outside_pool (test_jev_contracts.ContractsTest.test_split_validation_checks_group_leakage_even_outside_pool) ... ok
+test_writer_rejects_pair_changes_since_scoring (test_jev_contracts.ContractsTest.test_writer_rejects_pair_changes_since_scoring) ... ok
+test_comparison_preserves_matching_protocol_fields (test_jev_evaluation.EvaluationTest.test_comparison_preserves_matching_protocol_fields) ... ok
+test_comparison_rejects_explicit_protocol_mismatches (test_jev_evaluation.EvaluationTest.test_comparison_rejects_explicit_protocol_mismatches) ... ok
+test_comparison_rejects_mismatched_cohorts (test_jev_evaluation.EvaluationTest.test_comparison_rejects_mismatched_cohorts) ... ok
+test_document_pooling_uses_max_and_retains_out_of_pool_gold (test_jev_evaluation.EvaluationTest.test_document_pooling_uses_max_and_retains_out_of_pool_gold) ... ok
+test_explicit_blend_minmaxes_each_score_vector (test_jev_evaluation.EvaluationTest.test_explicit_blend_minmaxes_each_score_vector) ... ok
+test_graded_relevance_uses_exponential_gain (test_jev_evaluation.EvaluationTest.test_graded_relevance_uses_exponential_gain) ... ok
+test_group_bootstrap_samples_whole_groups (test_jev_evaluation.EvaluationTest.test_group_bootstrap_samples_whole_groups) ... ok
+test_incomplete_coverage_fails_explicitly (test_jev_evaluation.EvaluationTest.test_incomplete_coverage_fails_explicitly) ... ok
+test_known_vimdoc_requires_page_to_document_mapping (test_jev_evaluation.EvaluationTest.test_known_vimdoc_requires_page_to_document_mapping) ... ok
+test_missing_legacy_protocol_fields_remain_unknown (test_jev_evaluation.EvaluationTest.test_missing_legacy_protocol_fields_remain_unknown) ... ok
+test_queries_without_hits_stay_in_mean (test_jev_evaluation.EvaluationTest.test_queries_without_hits_stay_in_mean) ... ok
+test_tied_units_follow_unit_id_even_when_page_order_differs (test_jev_evaluation.EvaluationTest.test_tied_units_follow_unit_id_even_when_page_order_differs) ... ok
+test_compare_rejects_changed_known_unit_map_and_allows_legacy_unknown (test_jev_owner_workflows.OwnerWorkflowsTest.test_compare_rejects_changed_known_unit_map_and_allows_legacy_unknown) ... ok
+test_demo_rejects_existing_output_directory (test_jev_owner_workflows.OwnerWorkflowsTest.test_demo_rejects_existing_output_directory) ... ok
+test_khuong_exports_train_labels_and_writes_matched_dry_run_plans (test_jev_owner_workflows.OwnerWorkflowsTest.test_khuong_exports_train_labels_and_writes_matched_dry_run_plans) ... ok
+test_native_vimdoc_qrels_preserve_out_of_pool_documents_and_max_pool (test_jev_owner_workflows.OwnerWorkflowsTest.test_native_vimdoc_qrels_preserve_out_of_pool_documents_and_max_pool) ... ok
+test_native_vimdoc_rejects_ambiguous_roles_and_judgments (test_jev_owner_workflows.OwnerWorkflowsTest.test_native_vimdoc_rejects_ambiguous_roles_and_judgments) ... ok
+test_native_vimdoc_requires_the_document_map (test_jev_owner_workflows.OwnerWorkflowsTest.test_native_vimdoc_requires_the_document_map) ... ok
+test_native_vimdoc_uses_embedded_units (test_jev_owner_workflows.OwnerWorkflowsTest.test_native_vimdoc_uses_embedded_units) ... ok
+test_owner_commands_report_missing_explicit_input (test_jev_owner_workflows.OwnerWorkflowsTest.test_owner_commands_report_missing_explicit_input) ... ok
+test_phat_prepares_partition_and_byte_bound_baseline (test_jev_owner_workflows.OwnerWorkflowsTest.test_phat_prepares_partition_and_byte_bound_baseline) ... ok
+test_thanh_evaluates_supplied_baseline_and_toy_scores_with_csv (test_jev_owner_workflows.OwnerWorkflowsTest.test_thanh_evaluates_supplied_baseline_and_toy_scores_with_csv) ... ok
+test_document_level_and_leaky_groups_rejected (test_jev_training.TrainingTest.test_document_level_and_leaky_groups_rejected) ... ok
+test_dry_run_controls_only_differ_in_initial_checkpoint (test_jev_training.TrainingTest.test_dry_run_controls_only_differ_in_initial_checkpoint) ... ok
+test_failed_snapshot_write_leaves_no_partial_snapshot (test_jev_training.TrainingTest.test_failed_snapshot_write_leaves_no_partial_snapshot) ... ok
+test_only_assigned_judged_pages_become_labelled_requests (test_jev_training.TrainingTest.test_only_assigned_judged_pages_become_labelled_requests) ... ok
+test_run_provenance_separates_context_drops_from_budgeted_visits (test_jev_training.TrainingTest.test_run_provenance_separates_context_drops_from_budgeted_visits) ... ok
+test_train_commands_enforce_the_torch_seed_range (test_jev_training.TrainingTest.test_train_commands_enforce_the_torch_seed_range) ... ok
+test_train_refuses_mutated_export_before_starting_trainer (test_jev_training.TrainingTest.test_train_refuses_mutated_export_before_starting_trainer) ... ok
+
+----------------------------------------------------------------------
+Ran 64 tests in 20.316s
+
+OK (skipped=4)
+Wrote 4 scores to C:\Users\lanph\AppData\Local\Temp\tmpr45mrxue\scores
+Wrote 4 scores to C:\Users\lanph\AppData\Local\Temp\tmpqhz8f40v\scores
+Wrote 4 scores to C:\Users\lanph\AppData\Local\Temp\tmpbs9e4cyp\scores-128
+Wrote 4 scores to C:\Users\lanph\AppData\Local\Temp\tmpf1f7ov5t\scores
+Saved adapter, pointer head and run provenance to C:\Users\lanph\AppData\Local\Temp\tmpj_dspdc2\new

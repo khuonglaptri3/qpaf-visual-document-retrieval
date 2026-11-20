@@ -1,5 +1,18 @@
 # QPAF — Query-Page Adaptive Fusion
 
+## Chạy nhanh toolkit Jev
+
+Từ clone sạch của nhánh nghiên cứu tương ứng, dùng Python 3.11 trở lên để tự kiểm tra offline. Không cần cài package hay tải model.
+
+| Người phụ trách | Windows PowerShell | Linux |
+| --- | --- | --- |
+| Phát · dữ liệu và cache | `py -3.11 -I -S scripts/run_jev_phat.py` | `python3.11 -I -S scripts/run_jev_phat.py` |
+| Thanh · baseline và đánh giá | `py -3.11 -I -S scripts/run_jev_thanh.py` | `python3.11 -I -S scripts/run_jev_thanh.py` |
+| Khương · export và plan train | `py -3.11 -I -S scripts/run_jev_khuong.py` | `python3.11 -I -S scripts/run_jev_khuong.py` |
+
+Đường dẫn artifact tổng hợp được in sau khi chạy. [Runbook dữ liệu thật, GPU và kiểm chứng](docs/reports/tasks/jev-runnable-team-kit-20261120/README.md)
+
+
 M2.6 full OCR: [execution report](docs/superpowers/reports/2026-10-19-m26-full-ocr.md)
 and [saved-file index / reproduction commands](results/m2.6/README.md).
 

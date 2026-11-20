@@ -1,0 +1,90 @@
+{
+  "task_root_layout": [
+    "README.md",
+    "evidence",
+    "superpowers"
+  ],
+  "planning_files": [
+    "plan.md",
+    "spec.md"
+  ],
+  "source_hash_checks": [
+    {
+      "commit": "fc00899a15a6ea9e59a31260ab97d565c787d71d",
+      "path": "src/qpaf/jev/__init__.py",
+      "matches": true
+    },
+    {
+      "commit": "fc00899a15a6ea9e59a31260ab97d565c787d71d",
+      "path": "src/qpaf/jev/contracts.py",
+      "matches": true
+    },
+    {
+      "commit": "fc00899a15a6ea9e59a31260ab97d565c787d71d",
+      "path": "src/qpaf/jev/data.py",
+      "matches": true
+    },
+    {
+      "commit": "fc00899a15a6ea9e59a31260ab97d565c787d71d",
+      "path": "src/qpaf/jev/evaluation.py",
+      "matches": true
+    },
+    {
+      "commit": "fc00899a15a6ea9e59a31260ab97d565c787d71d",
+      "path": "src/qpaf/jev/cli.py",
+      "matches": true
+    },
+    {
+      "commit": "fc00899a15a6ea9e59a31260ab97d565c787d71d",
+      "path": "scripts/run_jev.py",
+      "matches": true
+    },
+    {
+      "commit": "fc00899a15a6ea9e59a31260ab97d565c787d71d",
+      "path": "tests/test_jev_contracts.py",
+      "matches": true
+    },
+    {
+      "commit": "fc00899a15a6ea9e59a31260ab97d565c787d71d",
+      "path": "tests/test_jev_evaluation.py",
+      "matches": true
+    },
+    {
+      "commit": "fc00899a15a6ea9e59a31260ab97d565c787d71d",
+      "path": "tests/test_jev_cli.py",
+      "matches": true
+    },
+    {
+      "commit": "7cd81b0f13baaa4a94eaef589d4b933e38cdf214",
+      "path": "src/qpaf/jev/contracts.py",
+      "matches": true
+    },
+    {
+      "commit": "7cd81b0f13baaa4a94eaef589d4b933e38cdf214",
+      "path": "src/qpaf/jev/data.py",
+      "matches": true
+    },
+    {
+      "commit": "7cd81b0f13baaa4a94eaef589d4b933e38cdf214",
+      "path": "src/qpaf/jev/evaluation.py",
+      "matches": true
+    },
+    {
+      "commit": "7cd81b0f13baaa4a94eaef589d4b933e38cdf214",
+      "path": "src/qpaf/jev/cli.py",
+      "matches": true
+    },
+    {
+      "commit": "7cd81b0f13baaa4a94eaef589d4b933e38cdf214",
+      "path": "tests/test_jev_evaluation.py",
+      "matches": true
+    },
+    {
+      "commit": "7cd81b0f13baaa4a94eaef589d4b933e38cdf214",
+      "path": "tests/test_jev_cli.py",
+      "matches": true
+    }
+  ],
+  "source_hash_mismatches": 0,
+  "private_data_not_available": "No real private bundle was used; test fixture and explicit paths verified. Full-data/model runs remain user executions, not claimed."
+}

@@ -1,0 +1,4 @@
+{
+  "workflow": "prepare and verify baseline",
+  "partition": "train"
+}

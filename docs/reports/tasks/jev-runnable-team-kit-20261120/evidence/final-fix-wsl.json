@@ -1,0 +1,22 @@
+{
+  "reason": "new POSIX directory-publication branch warrants targeted cross-platform verification",
+  "command": [
+    "wsl.exe",
+    "--exec",
+    "python3",
+    "-I",
+    "-B",
+    "-S",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests",
+    "-p",
+    "test_jev_publication.py",
+    "-v"
+  ],
+  "returncode": 0,
+  "stdout": "",
+  "stderr": "test_verifier_requires_each_expected_file_once_and_checks_size_and_digest (test_jev_publication.InventoryTest.test_verifier_requires_each_expected_file_once_and_checks_size_and_digest) ... ok\ntest_compare_hashes_reports_and_groups_consumed_before_replacement (test_jev_publication.PublicationTest.test_compare_hashes_reports_and_groups_consumed_before_replacement) ... ok\ntest_concurrent_claim_of_prepare_destination_preserves_new_owner (test_jev_publication.PublicationTest.test_concurrent_claim_of_prepare_destination_preserves_new_owner) ... ok\ntest_configured_max_steps_is_a_positive_integer (test_jev_publication.PublicationTest.test_configured_max_steps_is_a_positive_integer) ... ok\ntest_export_rejects_mixed_assignments_in_explicit_train_bundle (test_jev_publication.PublicationTest.test_export_rejects_mixed_assignments_in_explicit_train_bundle) ... ok\ntest_khuong_rejects_editable_trainer_flags_before_running_workflow (test_jev_publication.PublicationTest.test_khuong_rejects_editable_trainer_flags_before_running_workflow) ... ok\ntest_parquet_hash_identifies_the_consumed_ranking_after_replacement (test_jev_publication.PublicationTest.test_parquet_hash_identifies_the_consumed_ranking_after_replacement) ... skipped 'Parquet preparation requires optional pyarrow'\ntest_partitioned_source_keeps_its_role_on_reimport (test_jev_publication.PublicationTest.test_partitioned_source_keeps_its_role_on_reimport) ... ok\ntest_prepare_hashes_inputs_consumed_before_source_replacement (test_jev_publication.PublicationTest.test_prepare_hashes_inputs_consumed_before_source_replacement) ... ok\ntest_prepare_late_failure_does_not_publish_a_partial_run (test_jev_publication.PublicationTest.test_prepare_late_failure_does_not_publish_a_partial_run) ... ok\ntest_prepare_preserves_previous_imported_run (test_jev_publication.PublicationTest.test_prepare_preserves_previous_imported_run) ... ok\ntest_shared_demo_preserves_an_occupied_directory (test_jev_publication.PublicationTest.test_shared_demo_preserves_an_occupied_directory) ... ok\n\n----------------------------------------------------------------------\nRan 12 tests in 0.144s\n\nOK (skipped=1)\n"
+}

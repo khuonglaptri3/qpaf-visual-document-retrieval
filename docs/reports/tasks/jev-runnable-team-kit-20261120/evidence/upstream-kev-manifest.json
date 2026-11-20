@@ -1,0 +1,68 @@
+{
+  "revision": "5e22da2be8ecb2f38790d81d87bb55b0be61a6e2",
+  "recorded_at": "2026-11-20T01:46:23.871178+07:00",
+  "files": [
+    {
+      "path": "kev/api.py",
+      "url": "https://raw.githubusercontent.com/jaredpalmer/kev/5e22da2be8ecb2f38790d81d87bb55b0be61a6e2/kev/api.py",
+      "local_path": "upstream-kev\\kev\\api.py",
+      "sha256": "a6f53af5354f8ea17915abc78360fdf291a5108ce39a53a2d9135d48c603ae58",
+      "bytes": 7526
+    },
+    {
+      "path": "kev/admission.py",
+      "url": "https://raw.githubusercontent.com/jaredpalmer/kev/5e22da2be8ecb2f38790d81d87bb55b0be61a6e2/kev/admission.py",
+      "error": "HTTP Error 404: Not Found"
+    },
+    {
+      "path": "kev/checkpoint.py",
+      "url": "https://raw.githubusercontent.com/jaredpalmer/kev/5e22da2be8ecb2f38790d81d87bb55b0be61a6e2/kev/checkpoint.py",
+      "local_path": "upstream-kev\\kev\\checkpoint.py",
+      "sha256": "02062399977ee0da316dd52e03a79fa5e10134aa49c0b5ed801598c52042dc32",
+      "bytes": 23232
+    },
+    {
+      "path": "kev/data.py",
+      "url": "https://raw.githubusercontent.com/jaredpalmer/kev/5e22da2be8ecb2f38790d81d87bb55b0be61a6e2/kev/data.py",
+      "local_path": "upstream-kev\\kev\\data.py",
+      "sha256": "e77a2fffeb8ee7e05b118893be8e38b8358aef97c3ca2e143cdce208201b92f9",
+      "bytes": 25861
+    },
+    {
+      "path": "kev/model.py",
+      "url": "https://raw.githubusercontent.com/jaredpalmer/kev/5e22da2be8ecb2f38790d81d87bb55b0be61a6e2/kev/model.py",
+      "local_path": "upstream-kev\\kev\\model.py",
+      "sha256": "2ff3b2e67c048e3bc5a0d1a32aafe50804ed315a5564fce06bb4b95697c5271c",
+      "bytes": 35153
+    },
+    {
+      "path": "kev/train.py",
+      "url": "https://raw.githubusercontent.com/jaredpalmer/kev/5e22da2be8ecb2f38790d81d87bb55b0be61a6e2/kev/train.py",
+      "local_path": "upstream-kev\\kev\\train.py",
+      "sha256": "73b76371a002d04c98b3ff80f493615f9518990ba2d39cfdb55c3095d6a17731",
+      "bytes": 53761
+    },
+    {
+      "path": "kev/device.py",
+      "url": "https://raw.githubusercontent.com/jaredpalmer/kev/5e22da2be8ecb2f38790d81d87bb55b0be61a6e2/kev/device.py",
+      "local_path": "upstream-kev\\kev\\device.py",
+      "sha256": "bb882f59df46eae633d3b29ff0a939c000aa60a7d6d04ae73829b336f9bc9711",
+      "bytes": 5540
+    },
+    {
+      "path": "pyproject.toml",
+      "url": "https://raw.githubusercontent.com/jaredpalmer/kev/5e22da2be8ecb2f38790d81d87bb55b0be61a6e2/pyproject.toml",
+      "local_path": "upstream-kev\\pyproject.toml",
+      "sha256": "7c17fbe9efcadda3eb488b59adf1b6db5938cd33af4d3bd389ce4359b73fcc7d",
+      "bytes": 1721
+    },
+    {
+      "path": "LICENSE",
+      "url": "https://raw.githubusercontent.com/jaredpalmer/kev/5e22da2be8ecb2f38790d81d87bb55b0be61a6e2/LICENSE",
+      "local_path": "upstream-kev/LICENSE",
+      "sha256": "6b08bb37982c233aa12bcbdf19106da12f3f4fcf800773ea42e28ebeddd34fb8",
+      "bytes": 11343
+    }
+  ],
+  "executed": false
+}

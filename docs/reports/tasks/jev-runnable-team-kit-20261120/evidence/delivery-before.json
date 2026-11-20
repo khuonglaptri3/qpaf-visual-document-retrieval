@@ -1,0 +1,15 @@
+{
+  "main_checkout": {
+    "branch": "feature/lab-f3-objective",
+    "head": "1290111de49217a5c2d726fda5674ff8c0f77137",
+    "index_sha256": "647bffac3bce325ef53f7e387385c03356b1f931f4dbbdc5525ab9e0c17586a4",
+    "staged_diff": "",
+    "status": "M docs/README.md\n?? docs/reports/tasks/reranking-jev-direction-study-20261119/"
+  },
+  "remote_refs": {
+    "refs/heads/research/jev-khuong-model": "82ef99a5ba1e68af1bdcca74e08274a78e288479",
+    "refs/heads/research/jev-phat-data-infra": "eef7175e59e66f2973c35e108035c0f3bb1b5ffb",
+    "refs/heads/research/jev-thanh-baselines": "582d2bbb3f3e81c789d6d170b9347762e5163bca"
+  },
+  "delivery": "reviewed shared ancestry merged into existing owner branches; ordinary fast-forward push only"
+}
