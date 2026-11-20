@@ -41,4 +41,4 @@ cho commit nguồn; dùng Git history khi cần đọc tài liệu đã được
 
 ## Nghiên cứu Jev — branch Phát
 
-[Dữ liệu, tái lập retrieval và hạ tầng thực nghiệm](reports/tasks/jev-phat-data-infra-20261120/README.md): branch/brief đã tạo; implementation và thí nghiệm chưa chạy.
+[Dữ liệu, tái lập retrieval và hạ tầng thực nghiệm](reports/tasks/jev-phat-data-infra-20261120/README.md): đã có code và lệnh demo offline; benchmark 4B/dữ liệu đồ án còn chờ chạy.

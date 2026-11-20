@@ -1,28 +1,19 @@
-# Kế hoạch nghiên cứu: Dữ liệu, tái lập retrieval và hạ tầng thực nghiệm
+# Kế hoạch tiếp tục của Phát
 
-Spec: [spec.md](spec.md). Owner: Phát. Branch: `research/jev-phat-data-infra`.
+Spec: [spec.md](spec.md). Branch: `research/jev-phat-data-infra`.
 
-## Bootstrap đã làm
+## Code đã bàn giao
 
-- [x] Tạo branch từ F9 base `842176c5b707298672629738390a09e222f47e86`, giữ source hiện có.
-- [x] Ghi scope, contract, ownership, kế hoạch và giới hạn; kiểm chứng tài liệu trước commit.
+- [x] Giữ F9 base và brief; tích hợp shared implementation `796410160ee90bbe2a86b6799a76976f958f576f` với lịch sử review còn truy cập được.
+- [x] Cung cấp `scripts/run_jev_phat.py`, cấu hình owner và hướng dẫn chung; demo mặc định dùng stdlib/offline.
+- [x] Có hợp đồng dữ liệu/cache/split, evaluator chung, model adapters và đường export/train/dry-run thực tế.
+- [x] Kiểm chứng shared toolkit và tiny CPU train/reload; đây là kiểm chứng plumbing, chưa phải kết quả 4B/dữ liệu đồ án.
 
-## Thực hiện tiếp — chưa chạy
+## Nghiên cứu tiếp trên dữ liệu thật
 
-- [ ] Kiểm tra bộ qpaf-lab-share và cache ở máy đã chạy/Modal volume qpaf-lab-rerank; xác minh nội dung thực tế, không mặc định tên volume đồng nghĩa dữ liệu còn đủ. Dữ liệu nhạy cảm để ngoài Git.
-- [ ] Cùng nhóm khóa ViDoSeek trước, split theo document/query family phù hợp, cohort/top-20/OCR/input policy; giữ những tập đã dùng chọn model là development/exploratory.
-- [ ] Khôi phục raw three-channel scores, query/page mapping, OCR và pairs; phân biệt raw score với mean/per-query metrics. Tính Recall@20 và pool ceiling như chẩn đoán chỉ trên dữ liệu được phép đánh giá.
-- [ ] Fit lại các anchor/gate phụ thuộc nhãn trong đúng training folds nếu protocol đổi; tạo cùng pairs và SHA-256 cho Thanh/Khương; không gửi qrels evaluation vào inference worker.
-- [ ] Định nghĩa score cache contract và kiểm số pair, finite scores, IDs, hash/model/head revision; giữ sidecar lỗi/token/timing, không silent fallback.
-- [ ] Setup môi trường F9 cũ và Kev riêng trên Linux/CUDA; pin source/deps, smoke GPU/memory trước khi chốt tài nguyên; 48 GB là đề xuất khảo sát, không phải bảo đảm fit.
-- [ ] Điều phối jobs, lưu checkpoint/raw scores theo run riêng và đo retrieval/rerank/end-to-end riêng; ghép báo cáo sau khi Thanh xác nhận evaluator.
+- [ ] Khôi phục OCR/query/page/document mapping và raw channel/reranker cache riêng; lập inventory có/còn thiếu.
+- [ ] Cùng nhóm khóa split/group/cohort/top-20 và input policy; tạo pairs/score manifests cùng hash, kiểm tra coverage.
+- [ ] Chuẩn bị môi trường và Volume riêng cho job đồng thời; ghi GPU/token/time/cost, điều phối frozen và training pilot.
+- [ ] Tích hợp outputs chung của Thanh/Khương; giữ raw pairs, revisions và log để tái lập.
 
-## Phạm vi file dự kiến
-
-- `scripts/prepare_jev_inputs.py` (dự kiến, chưa tạo)
-- `src/qpaf/jev/contracts.py` (dự kiến, chưa tạo)
-- `scripts/modal_jev_environment.py` (dự kiến, chưa tạo)
-- `configs/jev/` (dự kiến, chưa tạo)
-- `tests/test_jev_input_contract.py` (dự kiến, chưa tạo)
-
-Trước implementation, người phụ trách đọc spec/plan và hướng dẫn repo, hoàn thiện thiết kế kỹ thuật cụ thể nếu còn thiếu; áp dụng workflow thích hợp và test cho code thay đổi. Những đường dẫn dự kiến không phải scripts đã runnable. Không sửa core lịch sử/receipt đã đóng băng. Khi xong lưu log/raw metrics/checkpoint references trong evidence và cập nhật README hiện hành.
+Lệnh chính xác và prerequisites: [runbook chung](../../jev-runnable-team-kit-20261120/README.md). Không sửa core/receipts lịch sử. Không dùng document labels làm page labels; không dùng outer-eval để train/tune. Budget training của hai initialization phải giống nhau; tránh đúng mười effective optimizer steps do giới hạn scheduler upstream đã ghi trong runbook.

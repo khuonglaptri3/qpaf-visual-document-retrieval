@@ -1,35 +1,22 @@
-# Phát: Dữ liệu, tái lập retrieval và hạ tầng thực nghiệm
+# Phát: branch nghiên cứu Jev đã có code
 
-**Đã có branch và brief; chưa implement phần nghiên cứu mới.** Branch chứa toàn bộ source F9 từ commit `842176c5b707298672629738390a09e222f47e86`. Bootstrap chỉ thêm task bundle này và một dòng mục lục; không thêm model code hay số benchmark.
+**Đã có toolkit runnable và lệnh khởi động.** Branch `research/jev-phat-data-infra` tích hợp shared implementation `796410160ee90bbe2a86b6799a76976f958f576f`. Kết quả mô hình 4B trên dữ liệu đồ án còn chờ chạy.
 
-Branch: `research/jev-phat-data-infra`. Câu hỏi: Khôi phục/reuse được artifact nào của F9, candidate pool còn headroom nào, và setup chung nào cho phép so model đúng protocol với chi phí đo được?
-
-## Bắt đầu trên máy của người phụ trách
-
-```powershell
-git fetch origin
-git switch --track origin/research/jev-phat-data-infra
+```bash
+git clone --branch research/jev-phat-data-infra --single-branch https://github.com/khuonglaptri3/qpaf-visual-document-retrieval.git
+cd qpaf-visual-document-retrieval
+python scripts/run_jev_phat.py
 ```
 
-Nếu local branch đã có, dùng `git switch research/jev-phat-data-infra`. Đây là lệnh cho checkout của người phụ trách; không tự đổi branch đang làm của người khác.
+Python >=3.11 chạy demo offline, không cần thư viện model. Output mặc định ở common task `evidence/runs/phat/`, có nhãn synthetic. Đây là kiểm tra setup; số demo không dùng kết luận chất lượng Jev.
 
-Đọc [spec](superpowers/spec.md) và [plan](superpowers/plan.md) trước. Các file dự kiến trong plan chưa được tạo; không có lệnh chạy Jev sẵn ở thời điểm bootstrap. Nhận input contract từ Phát; Thanh chấm mọi output bằng evaluator chung; Khương cung cấp model outputs. Chi phí/GPU và cache thực tế còn cần xác nhận.
+[Hướng dẫn dùng dữ liệu thật, model và GPU](../jev-runnable-team-kit-20261120/README.md) có lệnh prepare/score/evaluate/compare/export-train/train, pin môi trường và ví dụ local/Modal. Dùng input riêng và môi trường model riêng theo runbook; `--execute` mới chạy training/cloud.
 
-## Code/tài liệu có sẵn để tận dụng
+## Phần việc tiếp theo của Phát
 
-- [scripts/lab_rerank.py](../../../../scripts/lab_rerank.py)
-- [scripts/modal_lab_rerank.py](../../../../scripts/modal_lab_rerank.py)
-- [docs/feature_lab/HUONG_DAN_CHAY.md](../../../../docs/feature_lab/HUONG_DAN_CHAY.md)
-- [src/qpaf/f9/method.py](../../../../src/qpaf/f9/method.py)
+- Khôi phục OCR/query/page/document mapping và raw channel/reranker cache riêng; lập inventory có/còn thiếu.
+- Cùng nhóm khóa split/group/cohort/top-20 và input policy; tạo pairs/score manifests cùng hash, kiểm tra coverage.
+- Chuẩn bị môi trường và Volume riêng cho job đồng thời; ghi GPU/token/time/cost, điều phối frozen và training pilot.
+- Tích hợp outputs chung của Thanh/Khương; giữ raw pairs, revisions và log để tái lập.
 
-## Đầu ra và nghiệm thu
-
-Inventory cache có/còn thiếu; data/split/pairs manifests và SHA-256; pairs.json; input/score contract; môi trường/launcher pin version; GPU/token/time/cost logs; run manifests và bản tích hợp.
-
-Input mapping/hash và cohort rõ; cùng pool cho mọi model; cache chỉ reuse khi tương thích; nhãn không lẫn; jobs có resume/manifests/cost evidence; baseline và Kev giữ môi trường riêng.
-
-Giữ raw cache/pairs/revisions để tránh chạy lại khi tương thích; mean/per-query JSON lịch sử dùng tham chiếu và chẩn đoán, không thay raw examples/scores. Không trộn kết quả khác protocol vào bảng mới.
-
-## Bằng chứng bootstrap
-
-[Workflow](evidence/workflow.md), [kiểm chứng tài liệu](evidence/validation.json), [SHA-256](evidence/hashes.json). Các kiểm tra này không chứng minh môi trường model hoặc chất lượng Jev đã chạy thành công.
+Đọc [spec](superpowers/spec.md), [plan](superpowers/plan.md), [workflow](evidence/workflow.md), [kiểm chứng](evidence/validation.json) và [hash](evidence/hashes.json). Bootstrap ban đầu được lưu trong evidence; trạng thái cũ không mô tả bản code hiện tại. Source F9, kết quả/receipts đã đóng băng giữ nguyên. [Bằng chứng shared implementation](../jev-runnable-team-kit-20261120/README.md).

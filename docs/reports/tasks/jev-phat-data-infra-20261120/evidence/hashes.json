@@ -3,34 +3,64 @@
   "excludes": "this manifest itself",
   "files": [
     {
+      "path": "docs/README.md",
+      "bytes": 3276,
+      "sha256": "bb840f2f7c8d8d9849d974e6522f1d7dcf12d8f53a22aafd46264836b69a0fd1"
+    },
+    {
+      "path": "docs/reports/tasks/jev-phat-data-infra-20261120/evidence/hashes-bootstrap-before-runtime-20261120.json",
+      "bytes": 1238,
+      "sha256": "347603ceaeddb475e7455ff03370b2923548c948a9428754ad6e6941b5bd3118"
+    },
+    {
+      "path": "docs/reports/tasks/jev-phat-data-infra-20261120/evidence/plan-bootstrap-before-runtime-20261120.md",
+      "bytes": 2663,
+      "sha256": "10e980a00ad8beeb02b0d942f0a221146d04a8cf914dafb1a6bfc85202c69c71"
+    },
+    {
+      "path": "docs/reports/tasks/jev-phat-data-infra-20261120/evidence/README-bootstrap-before-runtime-20261120.md",
+      "bytes": 2591,
+      "sha256": "f640dc7f8a3426f5f8e9c75e5c3373a1847a48814bad9e5d48211c7efe1f5858"
+    },
+    {
+      "path": "docs/reports/tasks/jev-phat-data-infra-20261120/evidence/spec-bootstrap-before-runtime-20261120.md",
+      "bytes": 2491,
+      "sha256": "819ad75f1ebc2f624613e982f46456e18c1aed278c4d0bba2ecb886706e2fd6e"
+    },
+    {
+      "path": "docs/reports/tasks/jev-phat-data-infra-20261120/evidence/validation-bootstrap-before-runtime-20261120.json",
+      "bytes": 936,
+      "sha256": "9a8a11239f5bce5998e739d4a4ca161388f36f9e2095a475f640b7df64e3254b"
+    },
+    {
       "path": "docs/reports/tasks/jev-phat-data-infra-20261120/evidence/validation.json",
-      "sha256": "9a8a11239f5bce5998e739d4a4ca161388f36f9e2095a475f640b7df64e3254b",
-      "bytes": 936
+      "bytes": 344,
+      "sha256": "bf92b1da5f93bdc9c08fe3210a8d70254f1f1d4107ef743688a5cb22721cef04"
+    },
+    {
+      "path": "docs/reports/tasks/jev-phat-data-infra-20261120/evidence/workflow-bootstrap-before-runtime-20261120.md",
+      "bytes": 1969,
+      "sha256": "29dd73696f2098623ec06bf1f32781331b139b2bda4f1c003faa86c8f36e7511"
     },
     {
       "path": "docs/reports/tasks/jev-phat-data-infra-20261120/evidence/workflow.md",
-      "sha256": "29dd73696f2098623ec06bf1f32781331b139b2bda4f1c003faa86c8f36e7511",
-      "bytes": 1969
+      "bytes": 2840,
+      "sha256": "adbfbdf2b051c8b11f68473aa6e73f322556ec9d55d38cc84c705e86241947db"
     },
     {
       "path": "docs/reports/tasks/jev-phat-data-infra-20261120/README.md",
-      "sha256": "f640dc7f8a3426f5f8e9c75e5c3373a1847a48814bad9e5d48211c7efe1f5858",
-      "bytes": 2591
+      "bytes": 2021,
+      "sha256": "49306f987b33d8c0d34c49782cafc04e129722598d9215a32a0d4dbf0e78e9c8"
     },
     {
       "path": "docs/reports/tasks/jev-phat-data-infra-20261120/superpowers/plan.md",
-      "sha256": "10e980a00ad8beeb02b0d942f0a221146d04a8cf914dafb1a6bfc85202c69c71",
-      "bytes": 2663
+      "bytes": 1654,
+      "sha256": "6029ffba3cb924a6dc51ad25bfa8c4b27eff888775f5c6abac341dfa4c3015fd"
     },
     {
       "path": "docs/reports/tasks/jev-phat-data-infra-20261120/superpowers/spec.md",
-      "sha256": "819ad75f1ebc2f624613e982f46456e18c1aed278c4d0bba2ecb886706e2fd6e",
-      "bytes": 2491
-    },
-    {
-      "path": "docs/README.md",
-      "sha256": "fc5c9f23409b19e6ae6860befb21d81b2c67f9b22652239ed622ee847c3dbb45",
-      "bytes": 3095
+      "bytes": 2800,
+      "sha256": "1b7519c144bbc9a5e82ff1b894af4ed6dcdf8530f8f665d64cfa8c78303af112"
     }
   ]
 }
