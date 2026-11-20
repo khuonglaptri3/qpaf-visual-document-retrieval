@@ -53,7 +53,7 @@ b98aca7aabfe86ddd70a7f5ecf87cf75fa741a40a98297b7497b4b15edf45047  src/qpaf/jev/c
 
 - Local Kev score identity now reads the pinned official checkpoint metadata. The adapter or full checkpoint is hashed, and the actual local base path, tokenizer, and backbone files are hashed from `Meta.base`. A Hub backbone in a local checkpoint requires a full immutable commit in `Meta.base_revision`. The adapter verifies the metadata it loads and the scoring loop verifies the local hashes again after loading, before its first chunk can be written.
 - Fully cached reuse checks the installed Kev source commit and probes the actual Torch build and device. The runtime fields cover CPU capability and thread count or selected CUDA device class, compute capability, memory and SM count, CUDA build, NVIDIA driver API version, cuDNN and precision settings. Physical accelerator UUIDs are outside the fingerprint so sequential allocations of the same device class can reuse compatible chunks.
-- Cache configuration is published by renaming a complete nonempty staged directory on the same coherent filesystem. Two initializers targeting the same directory with different configurations produce one winner and one stale-configuration error. Previous chunk directories require a fresh `--chunks` directory under the new identity scheme. Modal Volumes use last-write-wins across containers. Use separate Volumes for independent concurrent jobs, or distinct output and chunk directories on a shared Volume, and reuse a given chunk directory sequentially. [Modal Volume consistency](https://modal.com/docs/guide/volumes#filesystem-consistency)
+- Cache configuration is published by renaming a complete nonempty staged directory on the same coherent filesystem. Two initializers targeting the same directory with different configurations produce one winner and one stale-configuration error. Previous chunk directories require a fresh `--chunks` directory under the new identity scheme. Modal workers on the same Volume share the writable `/data/.huggingface` cache. Use separate named Volumes for independent concurrent jobs. Run jobs strictly sequentially when reusing a shared Volume. [Modal Volume consistency](https://modal.com/docs/guide/volumes#filesystem-consistency)
 - The offline Modal planner and workers share pure score and training setting validation. The planner rejects invalid options before importing the SDK, including when outer `--execute` is present. Staged file and directory checks run inside the worker.
 - The run manifest records exported, trainer-admitted, and context-dropped rows separately from scheduled, actual, and unvisited record visits. The pinned trainer records post-filter `requested_records` as admitted rows multiplied by epochs. Its `records_seen` measures processed visits. Training uses a single JSONL source with replay and augmentation disabled. A failed write now removes the snapshot created by that invocation.
 
@@ -75,4 +75,28 @@ CUDA profiling and live Modal execution remain unverified. The legacy suite was 
 1e0eea92f9bad295694effbf3a69d15cb25aa46df672f59e987dab7ab59d52a1  src/qpaf/jev/training.py
 528d635b65e96fd6588d96b909e57e6f65a7f81de78b54ded0e7b784d13247c2  tests/test_jev_backends.py
 124f5ba3d36eba60527bf1b5ae3aaea068e00be377505c78e40de779fb49261c  tests/test_jev_training.py
+```
+
+## Review fix round 2
+
+2026-11-20. Addressed the two open findings and Volume wording in the [scoped review](task-2-fix1-review.md) of `d8df0554e260a7eaac1c442f1d889d50ce627ec7`. The source and tests are in `50147cc1af1be638d76de8ece8bdb28a1d90a65a`. This round used the same Superpowers 7.0.1 review, test-driven development, and verification workflows.
+
+- Local model hashing follows the pinned Transformers default selection between root safetensors and PyTorch weight files or indexes. A selected index contributes every referenced shard, including files under `.cache` and through directory symlinks. Repeated parameter references and resolved aliases share a file digest. The existing post-load identity check uses the same dependency coverage.
+- The shared training validator accepts the Torch seed range `[-9223372036854775808, 18446744073709551615]`. Both entry points check the range before execution, including outer Modal `--execute`. The pinned trainer, its dependency versions, and the ten-effective-step scheduler limitation are as documented above.
+
+### Verification
+
+- Windows RED via `python -I -S -m unittest discover -s tests -p 'test_jev*.py' -k shard_index -k torch_seed_range -v` exited 1. Three tests ran in 2.930 seconds, with five failing assertions and one symlink privilege skip. The hidden shard did not change the hash. Local dry-run accepted both invalid seeds, and the invalid Modal requests reached the SDK import. The same focused command exited 0 after the fixes in 4.650 seconds, with two passes and the one conditional skip. Both inclusive seed boundaries were preserved in the generated argv, and both adjacent out-of-range values were refused with exit 2.
+- In the existing WSL Ubuntu Python 3.14.4 runtime, `python3 -I -S -m unittest discover -s tests -p test_jev_backends.py -k shard_index -v` exposed both shard omissions before the fix. The same command exited 0 after the fix with both cases passing in 0.006 seconds, including the nested directory symlink.
+- `python -I -S -m unittest discover -s tests -p 'test_jev*.py' -q` exited 0 on Windows with 47 passes and four skips in 27.661 seconds. The corresponding `python3` command in WSL Ubuntu exited 0 with 48 passes and three optional runtime/data skips in 29.649 seconds.
+- `python -u -m unittest tests.test_jev_backends tests.test_jev_training tests.test_jev_contracts tests.test_jev_evaluation tests.test_jev_cli -v` exited 0 with 50 passes and the Windows directory symlink skip in 245.033 seconds. The run used the same pinned CPU and offline flags. The fixture saved six real tiny Qwen shards and moved one indexed shard into `.cache`. Real BGE and sharded Qwen forwards passed. The official Kev trainer admitted two of three rows, executed one step with 78 forward tokens, and saved the adapter and head. Reload against the sharded base returned `[0.4989367127418518, 0.49899986386299133, 0.4993443489074707, 0.4989033341407776]` with 369 input tokens.
+- `python -I -S -m compileall -q src/qpaf/jev scripts/modal_jev_rerank.py tests/test_jev_backends.py tests/test_jev_training.py`, isolated help for the local train and Modal worker commands, and `git diff-tree --check HEAD^ HEAD` all exited 0.
+
+### Fix-round source SHA-256
+
+```text
+4319c7a19aa097fc454bf29f59be405b144e62979ffe4b93938d5063bb95f559  src/qpaf/jev/backends.py
+4b403b4b1027fa41024f8ca250ba161f10039b5e47303fc2acb9e7140ba388af  src/qpaf/jev/training.py
+58e2eabfa58824b44acca1a40dac56280fffd2c59774ad6616b4f65c92cddcb7  tests/test_jev_backends.py
+7183c35670296cbccd87cf6189928a7e3968ddbf2ef5ac7f02bb84fe80ca9a4c  tests/test_jev_training.py
 ```
