@@ -37,5 +37,6 @@
       "passed": true,
       "detail": ""
     }
-  ]
+  ],
+  "excluded_immutable_snapshot_links": []
 }

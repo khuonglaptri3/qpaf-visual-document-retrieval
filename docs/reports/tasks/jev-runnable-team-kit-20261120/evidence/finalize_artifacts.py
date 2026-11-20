@@ -49,11 +49,16 @@ def validate() -> dict:
         current = (bundle / "README.md").read_text(encoding="utf-8")
         check(f"{rel}: report links", all(x in current for x in ("superpowers/spec.md", "superpowers/plan.md", "evidence/")))
     broken = []
+    immutable_archives = []
     for path in delivered_files():
         if path.suffix != ".md" or "upstream-kev" in path.parts:
             continue
         # Upstream source snapshots are evidence, not authored navigation.
         if path.name.endswith("-review-package.md"):
+            continue
+        if path.parent.name == "evidence" and path.stem.endswith("-bootstrap-before-runtime-20261120"):
+            # Byte-exact historical documents retain links relative to their original location.
+            immutable_archives.append(path.relative_to(ROOT).as_posix())
             continue
         for target in re.findall(r"(?<!!)\[[^\]]*\]\(([^)]+)\)", path.read_text(encoding="utf-8")):
             target = target.split("#", 1)[0].strip("<>")
@@ -68,7 +73,8 @@ def validate() -> dict:
     check("frozen source/results/evidence preserved", not old_changes, old_changes)
     diff_check = subprocess.run(["git", "diff", "--check", BASE], cwd=ROOT, capture_output=True, text=True)
     check("delivery diff whitespace", diff_check.returncode == 0, diff_check.stdout + diff_check.stderr)
-    return {"schema": 1, "passed": all(c["passed"] for c in checks), "checks": checks}
+    return {"schema": 1, "passed": all(c["passed"] for c in checks), "checks": checks,
+            "excluded_immutable_snapshot_links": immutable_archives}
 
 
 def main() -> int:

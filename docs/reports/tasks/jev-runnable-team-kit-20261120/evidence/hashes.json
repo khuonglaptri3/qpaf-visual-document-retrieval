@@ -38,9 +38,19 @@
       "sha256": "127672b43b817aa8f10c44cdb48d4eeef8c0201da894e8a2430cce505ab49933"
     },
     {
+      "path": "docs/reports/tasks/jev-runnable-team-kit-20261120/evidence/controller-owner-probe-green.json",
+      "bytes": 16676,
+      "sha256": "be9ee6cfb7f18018b44dbf7ddb0d23157710e3efa101ec0170f1183f5fe6ea10"
+    },
+    {
+      "path": "docs/reports/tasks/jev-runnable-team-kit-20261120/evidence/controller-owner-probe.json",
+      "bytes": 18219,
+      "sha256": "61fb64934f0dea564585d5caad19d9b77ada3c4e1dda93dda2806adb8b255dfc"
+    },
+    {
       "path": "docs/reports/tasks/jev-runnable-team-kit-20261120/evidence/controller-packaging.md",
-      "bytes": 1544,
-      "sha256": "edb7a170b89aeb9a8f549f9d7371c72c16714cf0bd5227047373ec2883a455fa"
+      "bytes": 2393,
+      "sha256": "55ff73af34111a179af0dd3c91507787030a5d0cc3821ba6413cc8d983aa1680"
     },
     {
       "path": "docs/reports/tasks/jev-runnable-team-kit-20261120/evidence/cpu-kev-api-smoke.json",
@@ -69,8 +79,8 @@
     },
     {
       "path": "docs/reports/tasks/jev-runnable-team-kit-20261120/evidence/finalize_artifacts.py",
-      "bytes": 5122,
-      "sha256": "024a5bf1c48b6e0342ce823a81124505d58b62bfbf66d571b6bac47055e5d6cc"
+      "bytes": 5513,
+      "sha256": "f2bfc061d131dfd4baf3d96d31dcbf899e05b381f6a6eb07e054ef3d9e201641"
     },
     {
       "path": "docs/reports/tasks/jev-runnable-team-kit-20261120/evidence/help/compare.txt",
@@ -148,9 +158,14 @@
       "sha256": "2fa546c2a1e0eda49de698aac8c4419cdba34b7e7ede3a766bae5874ad65bf39"
     },
     {
+      "path": "docs/reports/tasks/jev-runnable-team-kit-20261120/evidence/sdd/final-review-brief.md",
+      "bytes": 3938,
+      "sha256": "bbb0871ea6a7ce014bbad3b90d8b03382682e1008111945864dd6973258b78ba"
+    },
+    {
       "path": "docs/reports/tasks/jev-runnable-team-kit-20261120/evidence/sdd/progress.md",
-      "bytes": 13988,
-      "sha256": "f3976a216a06d9736de256f1f20a7f008b54071cc5ebe478ba76f1b6a7086491"
+      "bytes": 14769,
+      "sha256": "d7b6e77b0a76f6d5506f2f0ecf1a2846327af723c69c487db9f4305319ee7de9"
     },
     {
       "path": "docs/reports/tasks/jev-runnable-team-kit-20261120/evidence/sdd/task-1-brief.md",
@@ -209,8 +224,13 @@
     },
     {
       "path": "docs/reports/tasks/jev-runnable-team-kit-20261120/evidence/sdd/task-3-report.md",
-      "bytes": 7482,
-      "sha256": "cbca49d35b67cabf3448dc3b2378384158cd9dd69724d0f944d021f49bca6433"
+      "bytes": 9794,
+      "sha256": "fc0a4918e50fb5de9ee4e84fc2ee857458e6f47b1080c26002dd46da6e8b9010"
+    },
+    {
+      "path": "docs/reports/tasks/jev-runnable-team-kit-20261120/evidence/sdd/task-3-review.md",
+      "bytes": 2306,
+      "sha256": "8546a6b46a07a29105957959210683c49fd8e6e0032164eabacc2596f196998f"
     },
     {
       "path": "docs/reports/tasks/jev-runnable-team-kit-20261120/evidence/task-1-controller-verification.json",
@@ -294,8 +314,8 @@
     },
     {
       "path": "docs/reports/tasks/jev-runnable-team-kit-20261120/evidence/validation.json",
-      "bytes": 912,
-      "sha256": "dfd687b81805f9c79d216b5695e2692eda4dbe1a72340023db2d22b4b1ded47d"
+      "bytes": 955,
+      "sha256": "e362f4cc145edf0fdd6e3e00cc47866100e597112758842ba3d35fb4bb429242"
     },
     {
       "path": "docs/reports/tasks/jev-runnable-team-kit-20261120/evidence/verify_delivery.py",
@@ -304,13 +324,13 @@
     },
     {
       "path": "docs/reports/tasks/jev-runnable-team-kit-20261120/evidence/workflow.md",
-      "bytes": 7435,
-      "sha256": "1bc07d06fbb58e271e20bc5ad8efdc041f586d8dac49f5db2ae2e6dd9aa623e9"
+      "bytes": 8228,
+      "sha256": "e9776d7841def00791948efbb5407fe02277b717e9a4e19ee5f2bceaa153e0dc"
     },
     {
       "path": "docs/reports/tasks/jev-runnable-team-kit-20261120/README.md",
-      "bytes": 20099,
-      "sha256": "a5b3de96e78ebe97ef4e1b871feaa0efcfa00a9b72b3fd65ea550691923b00b0"
+      "bytes": 20369,
+      "sha256": "b31fbf2e36abfcfebf0d698be6731e66b742fda5d95af46bbd38205c737fa8e6"
     },
     {
       "path": "docs/reports/tasks/jev-runnable-team-kit-20261120/superpowers/plan.md",
@@ -319,8 +339,8 @@
     },
     {
       "path": "docs/reports/tasks/jev-runnable-team-kit-20261120/superpowers/spec.md",
-      "bytes": 5983,
-      "sha256": "c07aa90204e9aec9c22779dfe58b3c09653183a04e69742a9cbf96ae3557d4e2"
+      "bytes": 6587,
+      "sha256": "d28e0a4d436525af941a1d1f1c56eb9bae04ca69876fa7c04c8fefd361ff4104"
     },
     {
       "path": "README.md",
