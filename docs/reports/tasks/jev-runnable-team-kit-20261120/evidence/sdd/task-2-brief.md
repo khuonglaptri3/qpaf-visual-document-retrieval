@@ -10,3 +10,13 @@ Consumes Task 1 contract functions and validated bundle dict. Real scoring produ
 - [ ] Implement training export and command runner with source/base/init pin, same-backbone base control, configurable seeds/LR/LoRA/head/budget. Check upstream record schema and flags, disable unintended augmentation defaults for controlled relevance training. Save data/checkpoint/run provenance; no eval-label training.
 - [ ] Implement local and Modal worker paths, isolated requirement sets and source pins; help/dry-run are side-effect free; explicit Modal command is the only cloud trigger. No jobs submitted during implementation.
 - [ ] Focused tests and compile/help checks, self-review, record actual limitations and commit own paths. Real GPU/inference/training verification is not claimed from contract tests.
+
+### Controller-verified integration context
+
+Read evidence/model-integration-notes.md and evidence/upstream-kev snapshots for exact current API/flags. CPU runtime C:/Users/lanph/AppData/Local/codex-jev-cpu-runtime-20261120/Scripts/python.exe actually imports torch2.8.0+cpu, transformers5.17.0, peft0.21.0, numpy2.5.3, pinned Kev. Cold imports can take ~45s; allow >60s subprocess timeout. cpu-kev-api-smoke.json is clean success.
+
+Task1 offers read_pairs_snapshot and write_scores(..., expected_pairs_sha256=...) to prevent pool mutation while scoring. Core CLI exposes build_parser with argparse handler dispatch; exact prepare/evaluate interfaces are documented in task-1-report.md. Known ViMDoc requires units and evaluate results preserve ranking_scope/label_unit/synthetic. Keep generated runtime/checkpoint artifacts outside Git.
+
+Required opt-in real CPU integration tests (alongside stdlib/no-download default tests): create tiny local random HF BERT classifier and Qwen2 causal model + fast tokenizer with yes/no/control tokens; run the actual adapters. Export synthetic train-only Noul records, execute ONE official Kev base-training step against local tiny Qwen2, then reload adapter/head with Checkpoint and score, verifying finite outputs/checkpoint files. Do not download model weights. Read official SPECIAL token names and save config API. Official kev.train creates its --out directory with exist_ok=False: wrapper must not precreate that directory for metadata before invocation. Assert the command actually runs, not just mock subprocess counts.
+
+Do not alter Task1 APIs except necessary CLI wiring. Core remains stdlib-only under -I -S. If a new load/score/config error is discovered, add regression first and raise context if cross-task contract needs changing. Include all actual RED/GREEN/model integration commands in task-2-report.md.

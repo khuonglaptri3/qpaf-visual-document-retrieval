@@ -1,0 +1,47 @@
+{
+  "commit": "e108880f16bb2a2de57c9e8d3de23c39ae0eed1c",
+  "source_hash_checks": [
+    {
+      "path": "configs/jev/models.json",
+      "matched": true
+    },
+    {
+      "path": "requirements/jev-baselines.txt",
+      "matched": true
+    },
+    {
+      "path": "requirements/jev-kev.txt",
+      "matched": true
+    },
+    {
+      "path": "scripts/modal_jev_rerank.py",
+      "matched": true
+    },
+    {
+      "path": "scripts/train_jev_reranker.py",
+      "matched": true
+    },
+    {
+      "path": "src/qpaf/jev/backends.py",
+      "matched": true
+    },
+    {
+      "path": "src/qpaf/jev/cli.py",
+      "matched": true
+    },
+    {
+      "path": "src/qpaf/jev/training.py",
+      "matched": true
+    },
+    {
+      "path": "tests/test_jev_backends.py",
+      "matched": true
+    },
+    {
+      "path": "tests/test_jev_training.py",
+      "matched": true
+    }
+  ],
+  "all_match": true,
+  "hosted_gpu_job_called": false
+}

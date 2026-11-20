@@ -1,0 +1,10 @@
+{
+  "command": [
+    "C:\\Users\\lanph\\AppData\\Local\\codex-jev-cpu-runtime-20261120\\Scripts\\python.exe",
+    "-c",
+    "import torch; print(torch.__version__); print(torch.ones(2).sum().item())"
+  ],
+  "returncode": 0,
+  "stdout": "2.8.0+cpu\n2.0\n",
+  "stderr": "C:\\Users\\lanph\\AppData\\Local\\codex-jev-cpu-runtime-20261120\\Lib\\site-packages\\torch\\_subclasses\\functional_tensor.py:279: UserWarning: Failed to initialize NumPy: No module named 'numpy' (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\pytorch\\torch\\csrc\\utils\\tensor_numpy.cpp:81.)\n  cpu = _conversion_method_template(device=torch.device(\"cpu\"))\n"
+}

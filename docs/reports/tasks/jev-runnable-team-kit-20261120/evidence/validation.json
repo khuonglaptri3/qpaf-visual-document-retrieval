@@ -1,0 +1,41 @@
+{
+  "schema": 1,
+  "passed": true,
+  "checks": [
+    {
+      "name": "docs/reports/tasks/jev-runnable-team-kit-20261120: root layout",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "docs/reports/tasks/jev-runnable-team-kit-20261120: planning layout",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "docs/reports/tasks/jev-runnable-team-kit-20261120: provenance",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "docs/reports/tasks/jev-runnable-team-kit-20261120: report links",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "delivered Markdown local links",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "frozen source/results/evidence preserved",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "delivery diff whitespace",
+      "passed": true,
+      "detail": ""
+    }
+  ]
+}

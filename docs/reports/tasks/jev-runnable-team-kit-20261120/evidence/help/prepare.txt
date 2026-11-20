@@ -1,0 +1,42 @@
+usage: run_jev.py prepare [-h] (--f9-pairs F9_PAIRS | --f9-cache F9_CACHE |
+                          --f9-bundle F9_BUNDLE | --raw-scores RAW_SCORES)
+                          [--dataset DATASET] [--queries QUERIES]
+                          [--page-text PAGE_TEXT] [--query-ids QUERY_IDS]
+                          [--top-k TOP_K] [--weights BM25 DENSE VISUAL]
+                          [--units UNITS] [--splits SPLITS]
+                          [--partition {train,validation,test}]
+                          [--import-scores IMPORT_SCORES] [--synthetic]
+                          --out OUT
+
+Raw rows require query_id, page_id and either a base_score or the three
+numeric bm25, dense and visual channels with explicit --weights. A document_id
+column or --units supplies document pooling. Native F9 Parquet preparation
+also requires pyarrow.
+
+options:
+  -h, --help            show this help message and exit
+  --f9-pairs F9_PAIRS   Existing F9 pairs JSON, imported byte-for-byte
+  --f9-cache F9_CACHE   Folder containing f9_pairs.json or test_pairs.json
+  --f9-bundle F9_BUNDLE
+                        Native ViDoSeek or ViMDoc retriever cache folder
+  --raw-scores RAW_SCORES
+                        Score rows in JSON, JSONL, CSV or Parquet
+  --dataset DATASET     Dataset name; native F9 layout accepts vidoseek or
+                        vimdoc
+  --queries QUERIES     ID-to-text JSON or {query_id,text} JSONL
+  --page-text PAGE_TEXT
+                        ID-to-OCR JSON or {page_id,text} JSONL
+  --query-ids QUERY_IDS
+                        Selected query IDs, one per line. With --partition,
+                        every ID must belong to it.
+  --top-k TOP_K         Candidate pages per query (default: 20)
+  --weights BM25 DENSE VISUAL
+  --units UNITS         Optional page-ID to label-unit mapping in JSON
+  --splits SPLITS       Query split/group manifest
+  --partition {train,validation,test}
+                        Require all queries assigned to this split, narrowed
+                        only by explicit --query-ids
+  --import-scores IMPORT_SCORES
+                        Validate an F9 cache and rebind to the output pairs
+  --synthetic           Mark these inputs as synthetic
+  --out OUT             Output directory

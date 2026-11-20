@@ -1,0 +1,24 @@
+usage: run_jev.py doctor [-h] [--f9-pairs F9_PAIRS | --f9-cache F9_CACHE |
+                         --f9-bundle F9_BUNDLE | --raw-scores RAW_SCORES]
+                         [--dataset DATASET] [--queries QUERIES]
+                         [--page-text PAGE_TEXT] [--query-ids QUERY_IDS]
+                         [--pairs PAIRS] [--scores SCORES]
+
+options:
+  -h, --help            show this help message and exit
+  --f9-pairs F9_PAIRS   Existing F9 pairs JSON, imported byte-for-byte
+  --f9-cache F9_CACHE   Folder containing f9_pairs.json or test_pairs.json
+  --f9-bundle F9_BUNDLE
+                        Native ViDoSeek or ViMDoc retriever cache folder
+  --raw-scores RAW_SCORES
+                        Score rows in JSON, JSONL, CSV or Parquet
+  --dataset DATASET     Dataset name; native F9 layout accepts vidoseek or
+                        vimdoc
+  --queries QUERIES     ID-to-text JSON or {query_id,text} JSONL
+  --page-text PAGE_TEXT
+                        ID-to-OCR JSON or {page_id,text} JSONL
+  --query-ids QUERY_IDS
+                        Selected query IDs, one per line. With --partition,
+                        every ID must belong to it.
+  --pairs PAIRS         Validate a prepared pairs file
+  --scores SCORES       Validate an existing score cache against --pairs

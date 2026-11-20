@@ -1,0 +1,12 @@
+usage: run_jev.py export-train [-h] --pairs PAIRS --splits SPLITS
+                               --qrels QRELS --out OUT
+                               [--unjudged-as-negative]
+
+options:
+  -h, --help            show this help message and exit
+  --pairs PAIRS
+  --splits SPLITS
+  --qrels QRELS
+  --out OUT             Output JSONL plus <out>.manifest.json
+  --unjudged-as-negative
+                        Label unjudged train candidates false
