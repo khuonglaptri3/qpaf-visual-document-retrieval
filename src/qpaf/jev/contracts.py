@@ -86,6 +86,8 @@ def validate_pairs(bundle):
     if not isinstance(bundle, dict) or not text_id(bundle.get("dataset")):
         raise ValueError("pairs: expected an object with a nonempty dataset name")
     positive_int(bundle.get("top_k"), "top_k")
+    if "partition" in bundle and bundle["partition"] not in ("train", "validation", "test"):
+        raise ValueError("pairs.partition must be train, validation or test")
     if "synthetic" in bundle and type(bundle["synthetic"]) is not bool:
         raise ValueError("pairs.synthetic must be boolean")
     queries, pages, pairs = (bundle.get(key) for key in ("queries", "pages", "pairs"))
@@ -210,4 +212,9 @@ def validate_splits(bundle, manifest):
     validate_split_manifest(manifest)
     if missing := sorted(bundle["queries"].keys() - manifest["splits"].keys()):
         raise ValueError(f"split manifest: queries missing assignments: {missing}")
+    if "partition" in bundle:
+        partition = bundle["partition"]
+        conflicting = [q for q in bundle["queries"] if manifest["splits"][q] != partition]
+        if conflicting:
+            raise ValueError(f"split assignments conflict with source partition {partition!r}: {conflicting}")
     return manifest

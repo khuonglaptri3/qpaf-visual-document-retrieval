@@ -80,7 +80,11 @@ def load_texts(path, id_key, selected=None):
 
 
 def load_query_ids(path):
-    ids = Path(path).read_text(encoding="utf-8-sig").splitlines()
+    return decode_query_ids(Path(path).read_bytes(), path)
+
+
+def decode_query_ids(raw, path):
+    ids = raw.decode("utf-8-sig").splitlines()
     if not ids or any(not text_id(key) or key.strip() != key for key in ids) or len(set(ids)) != len(ids):
         raise ValueError(f"{path}: expected unique nonempty query IDs, one per line")
     return ids
@@ -246,6 +250,8 @@ def partition_query_ids(manifest, partition, selected_ids=None):
 def subset_partition(bundle, manifest, partition, selected_ids=None):
     """Return a leakage-checked subset and its indices into original score vectors."""
     validate_pairs(bundle)
+    if "partition" in bundle and bundle["partition"] != partition:
+        raise ValueError(f"cannot change source partition {bundle['partition']!r} to {partition!r}")
     expected = set(partition_query_ids(manifest, partition, selected_ids))
     missing = sorted(expected - bundle["queries"].keys())
     if missing:

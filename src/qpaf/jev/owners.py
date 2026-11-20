@@ -8,7 +8,7 @@ import sys
 from tempfile import mkdtemp
 
 from . import cli
-from .contracts import read_json, write_json
+from .contracts import positive_int, read_json, write_json
 
 
 ROOT = Path(__file__).resolve().parents[3]
@@ -68,7 +68,7 @@ def _khuong(out, config):
         stream = StringIO()
         with redirect_stdout(stream):
             _command("train", "--init", init, "--data", data, "--out", out / f"{init}-checkpoint",
-                     *config["training_args"])
+                     "--device", "cpu", "--max-steps", config["max_steps"])
         write_json(out / f"{init}-plan.json", json.loads(stream.getvalue()))
 
 
@@ -78,6 +78,15 @@ def main(owner, argv=None):
         return cli.main(args)
     try:
         config = read_json(ROOT / "configs/jev" / f"{owner}.json")
+        if owner == "khuong":
+            if not isinstance(config, dict):
+                raise ValueError("khuong demo config must be a JSON object")
+            extra = config.keys() - {"workflow", "partition", "max_steps"}
+            if extra:
+                raise ValueError(f"unknown khuong demo settings: {sorted(extra)}")
+            positive_int(config.get("max_steps"), "khuong demo max_steps")
+            if config.get("partition") != "train" or not isinstance(config.get("workflow"), str):
+                raise ValueError("khuong demo requires partition 'train' and a workflow description")
         parser = argparse.ArgumentParser(
             description=f"Offline synthetic {owner} demo: {config['workflow']}.",
             epilog="Pass any shared Jev command (e.g. doctor --help or prepare --help) for real inputs.",

@@ -1,19 +1,22 @@
 """Command-line workflows for the Jev CPU toolkit."""
 import argparse
+from contextlib import contextmanager, redirect_stdout
 import csv
 from datetime import datetime, timezone
 import hashlib
 import json
 from io import StringIO
+import os
 from pathlib import Path
 import sys
+from tempfile import TemporaryDirectory
 
 from .contracts import (
     atomic_write, baseline_scores, decode_json, decode_scores, encode_json, load_pairs, load_scores,
-    read_json, read_pairs_snapshot, sha256_file, write_json, write_scores,
+    read_json, read_pairs_snapshot, write_json, write_scores,
 )
 from .data import (
-    f9_bundle_paths, f9_pairs_path, lexical_scores, load_query_ids, load_raw_rows, load_texts,
+    decode_query_ids, f9_bundle_paths, f9_pairs_path, lexical_scores, load_query_ids, load_raw_rows, load_texts,
     partition_query_ids, prepare_candidates, require_inputs, subset_partition, vimdoc_dev_qrels,
 )
 from .evaluation import PROTOCOL_FIELDS, blend_scores, compare, evaluate
@@ -102,6 +105,50 @@ def _cpu_manifest(model, synthetic, input_cap=None):
     }
 
 
+@contextmanager
+def _input_snapshots(paths):
+    """Stream each input once; every parser uses the private copy hashed here."""
+    with TemporaryDirectory(prefix="jev-inputs-") as folder:
+        copies, digests = {}, {}
+        for name, source in paths.items():
+            target = Path(folder) / name / source.name
+            target.parent.mkdir()
+            digest = hashlib.sha256()
+            with source.open("rb") as reader, target.open("xb") as writer:
+                while chunk := reader.read(1024 * 1024):
+                    digest.update(chunk)
+                    writer.write(chunk)
+            copies[name], digests[name] = target, digest.hexdigest()
+        yield copies, digests
+
+
+@contextmanager
+def _new_run(out, command):
+    """Build a complete artifact set before claiming its final directory."""
+    occupied = f"{command} output directory must be new: {out}"
+    if out.exists() or out.is_symlink():
+        raise ValueError(occupied)
+    out.parent.mkdir(parents=True, exist_ok=True)
+    with TemporaryDirectory(prefix=".jev-", dir=out.parent) as folder:
+        stage = Path(folder) / "artifacts"
+        stage.mkdir()
+        yield stage
+        try:
+            if os.name == "nt":
+                # On Windows rename itself atomically refuses any existing destination.
+                stage.rename(out)
+                return
+            # POSIX rename can replace someone else's empty directory. Claim our own.
+            out.mkdir()
+        except FileExistsError as exc:
+            raise ValueError(occupied) from exc
+        try:
+            stage.replace(out)
+        except OSError:
+            out.rmdir()
+            raise
+
+
 def _prepare(args):
     out = args.out
     pairs_path = out / "pairs.json"
@@ -118,7 +165,7 @@ def _prepare(args):
     require_inputs(sidecars, _prep_hint(args))
     split_raw = args.splits.read_bytes() if args.splits is not None else None
     splits = decode_json(split_raw, args.splits) if split_raw is not None else None
-    selected = load_query_ids(args.query_ids) if args.query_ids is not None else None
+    selected = None
 
     outputs = (pairs_path, manifest_path, base_path, score_path)
     raw = None
@@ -138,6 +185,10 @@ def _prepare(args):
             imported = decode_scores(score_raw, args.import_scores, bundle, digest)
         _outputs_differ(outputs, (source, *sidecars.values()))
         provenance = {"source": "f9-pairs", "inputs_sha256": {"f9_pairs": digest}}
+        if args.query_ids is not None:
+            ids_raw = args.query_ids.read_bytes()
+            selected = decode_query_ids(ids_raw, args.query_ids)
+            provenance["inputs_sha256"]["query_ids"] = hashlib.sha256(ids_raw).hexdigest()
         if imported is not None:
             provenance["inputs_sha256"]["score_cache"] = hashlib.sha256(score_raw).hexdigest()
     else:
@@ -152,53 +203,35 @@ def _prepare(args):
         if args.f9_bundle is not None and args.weights is None:
             raise ValueError("native F9 channel scores require explicit --weights BM25 DENSE VISUAL")
         _outputs_differ(outputs, (*paths.values(), *sidecars.values()))
-        raw_ids = selected
-        if args.partition is not None:
-            raw_ids = partition_query_ids(splits, args.partition, selected)
-        elif "query_ids" in paths and raw_ids is None:
-            raw_ids = load_query_ids(paths["query_ids"])
-        queries = load_texts(paths["queries"], "query_id", raw_ids)
-        pages = load_texts(paths["page_text"], "page_id")
-        units = read_json(args.units) if args.units is not None else None
-        rows = load_raw_rows(
-            paths["raw_scores"], args.weights, raw_ids, args.dataset if args.f9_bundle is not None else None
-        )
-        bundle = prepare_candidates(
-            args.dataset, queries, pages, rows, 20 if args.top_k is None else args.top_k,
-            weights=args.weights, units=units, synthetic=args.synthetic,
-        )
+        with _input_snapshots(paths) as (copies, digests):
+            selected = load_query_ids(copies["query_ids"]) if "query_ids" in copies else None
+            raw_ids = partition_query_ids(splits, args.partition, selected) if args.partition else selected
+            queries = load_texts(copies["queries"], "query_id", raw_ids)
+            pages = load_texts(copies["page_text"], "page_id")
+            units = read_json(copies["units"]) if "units" in copies else None
+            rows = load_raw_rows(
+                copies["raw_scores"], args.weights, raw_ids, args.dataset if args.f9_bundle is not None else None
+            )
+            bundle = prepare_candidates(
+                args.dataset, queries, pages, rows, 20 if args.top_k is None else args.top_k,
+                weights=args.weights, units=units, synthetic=args.synthetic,
+            )
         provenance = {
             "source": "f9-raw-bundle" if args.f9_bundle is not None else "raw-scores",
             "selection": "per-query channel min-max and supplied weights" if args.weights is not None else "base_score",
             "weights_bm25_dense_visual": args.weights,
-            "inputs_sha256": {name: sha256_file(path) for name, path in paths.items()},
+            "inputs_sha256": digests,
         }
     selected_indices = range(len(bundle["pairs"]))
     if args.splits is not None:
         bundle, selected_indices = subset_partition(bundle, splits, args.partition, selected)
-        if importing and args.query_ids is not None:
-            provenance["inputs_sha256"]["query_ids"] = sha256_file(args.query_ids)
         provenance["inputs_sha256"]["splits"] = hashlib.sha256(split_raw).hexdigest()
-        provenance["partition"] = args.partition
         raw = None
+    if "partition" in bundle:
+        provenance["partition"] = bundle["partition"]
     if raw is None:
         raw = encode_json(bundle)
     pairs_digest = hashlib.sha256(raw).hexdigest()
-    atomic_write(pairs_path, raw)
-    if imported is not None:
-        write_scores(
-            score_path, pairs_path, [imported["scores"][index] for index in selected_indices],
-            {**imported["manifest"], "source_cache_sha256": provenance["inputs_sha256"]["score_cache"],
-             "source_pairs_sha256": imported["pairs_sha256"],
-             "synthetic": bundle.get("synthetic", False) or imported["manifest"].get("synthetic", False)},
-            expected_pairs_sha256=pairs_digest,
-        )
-    if "base_scores" in bundle:
-        write_scores(
-            base_path, pairs_path, baseline_scores(bundle),
-            {**_cpu_manifest("supplied base scores", bundle.get("synthetic", False)), **provenance},
-            expected_pairs_sha256=pairs_digest,
-        )
     manifest = {
         **provenance,
         "dataset": bundle["dataset"],
@@ -211,7 +244,24 @@ def _prepare(args):
         "pairs_sha256": pairs_digest,
         "created_utc": datetime.now(timezone.utc).isoformat(timespec="seconds"),
     }
-    write_json(manifest_path, manifest)
+    with _new_run(out, "prepare") as stage:
+        staged_pairs = stage / pairs_path.name
+        atomic_write(staged_pairs, raw)
+        if imported is not None:
+            write_scores(
+                stage / score_path.name, staged_pairs, [imported["scores"][index] for index in selected_indices],
+                {**imported["manifest"], "source_cache_sha256": provenance["inputs_sha256"]["score_cache"],
+                 "source_pairs_sha256": imported["pairs_sha256"],
+                 "synthetic": bundle.get("synthetic", False) or imported["manifest"].get("synthetic", False)},
+                expected_pairs_sha256=pairs_digest,
+            )
+        if "base_scores" in bundle:
+            write_scores(
+                stage / base_path.name, staged_pairs, baseline_scores(bundle),
+                {**_cpu_manifest("supplied base scores", bundle.get("synthetic", False)), **provenance},
+                expected_pairs_sha256=pairs_digest,
+            )
+        write_json(stage / manifest_path.name, manifest)
     print(f"Prepared {manifest['pairs']} pairs for {manifest['queries']} queries in {out}. "
           f"Empty OCR pages: {manifest['empty_ocr_pages']}.")
     return 0
@@ -304,13 +354,19 @@ def _evaluate(args):
 
 def _compare(args):
     _outputs_differ((args.out, args.csv), (args.left, args.right, args.groups))
-    groups = read_json(args.groups) if args.groups is not None else None
+    paths = {"left": args.left, "right": args.right}
+    if args.groups is not None:
+        paths["groups"] = args.groups
+    documents, digests = {}, {}
+    for name, path in paths.items():
+        raw = path.read_bytes()
+        documents[name] = decode_json(raw, path)
+        digests[name] = hashlib.sha256(raw).hexdigest()
+    groups = documents.get("groups")
     if isinstance(groups, dict) and isinstance(groups.get("groups"), dict):
         groups = groups["groups"]  # Accept the groups map in a split manifest.
-    report = compare(read_json(args.left), read_json(args.right), args.seed, args.resamples, groups)
-    report["inputs_sha256"] = {"left": sha256_file(args.left), "right": sha256_file(args.right)}
-    if args.groups is not None:
-        report["inputs_sha256"]["groups"] = sha256_file(args.groups)
+    report = compare(documents["left"], documents["right"], args.seed, args.resamples, groups)
+    report["inputs_sha256"] = digests
     if args.csv is not None:
         _comparison_csv(args.csv, report)
     _publish(report, args.out)
@@ -318,6 +374,13 @@ def _compare(args):
 
 
 def _demo(args):
+    with _new_run(args.out, "demo") as stage, redirect_stdout(StringIO()):
+        _demo_artifacts(stage)
+    print(f"Synthetic demo artifacts: {args.out}")
+    return 0
+
+
+def _demo_artifacts(dest):
     bundle = prepare_candidates(
         "synthetic-toy-jev-demo",
         {"q1": "red apple", "q2": "blue bicycle"},
@@ -332,7 +395,6 @@ def _demo(args):
         synthetic=True,
     )
     qrels = {"q1": {"p1": 1, "outside-demo-pool": 1}, "q2": {"p2": 1}}
-    dest = args.out
     pairs_path, qrels_path = dest / "pairs.json", dest / "qrels.json"
     base_path, scores_path = dest / "base_scores.json", dest / "scores.json"
     write_json(pairs_path, bundle)
@@ -351,8 +413,6 @@ def _demo(args):
         left=left, right=right, groups=None, seed=20260820, resamples=1000,
         out=dest / "comparison.json", csv=dest / "comparison.csv",
     ))
-    print(f"Synthetic demo artifacts: {dest}")
-    return 0
 
 
 def _add_prepare_inputs(parser, required):
@@ -448,7 +508,7 @@ def build_parser():
     )
     prep.add_argument("--import-scores", type=Path, help="Validate an F9 cache and rebind to the output pairs")
     prep.add_argument("--synthetic", action="store_true", help="Mark these inputs as synthetic")
-    prep.add_argument("--out", type=Path, required=True, help="Output directory")
+    prep.add_argument("--out", type=Path, required=True, help="New directory for this prepared run")
     prep.set_defaults(handler=_prepare)
 
     ev = commands.add_parser("evaluate", help="Compute unit-level metrics and per-query results")
@@ -477,7 +537,7 @@ def build_parser():
     comp.set_defaults(handler=_compare)
 
     demo = commands.add_parser("demo", help="Run a complete synthetic workflow offline")
-    demo.add_argument("--out", type=Path, required=True, help="Output directory")
+    demo.add_argument("--out", type=Path, required=True, help="New output directory")
     demo.set_defaults(handler=_demo)
     return parser, commands
 

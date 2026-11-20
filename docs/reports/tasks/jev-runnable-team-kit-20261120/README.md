@@ -63,6 +63,8 @@ Chuẩn bị các file sau theo nguồn được nhóm chia sẻ.
 - **Manifest split** dùng `{"splits":{"qid":"train"},"groups":{"qid":"group-id"}}`. Mỗi query có một split và một group, một group chỉ thuộc một split. Có thể dùng `--query-ids FILE` với danh sách ID mỗi dòng để giới hạn một pilot trong split đã chọn.
 - **Nhãn development** dùng file riêng có quyền truy cập. Đánh giá flat cần `{"qid":{"page-or-document-id":1}}`, gồm cả positive ngoài candidate pool. ViMDoc native dùng `dev_qrels.json` dạng `{"train":{"qid":["document-id"]},"validation":{"qid2":["document-id"]}}`. Huấn luyện cần nhãn **trang** ViDoSeek và chỉ split train. Tách file nhãn khỏi dữ liệu chấm điểm và lưu ngoài Git.
 
+Mỗi lệnh `prepare` cần một thư mục `--out` chưa tồn tại. Khi chạy lại với score cache hoặc cohort khác, hãy chọn tên thư mục mới. Pairs đã ghi `partition` chỉ cho phép lấy tập con trong chính partition đó. Với dữ liệu thô, cần đủ dung lượng tạm cho bản sao của các file đầu vào để SHA-256 khớp với dữ liệu đã đọc.
+
 Nhập pairs F9 nguyên byte rồi kiểm tra baseline cache nếu pairs có `base_scores`.
 
 ~~~sh

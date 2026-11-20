@@ -77,6 +77,46 @@ def validate() -> dict:
             "excluded_immutable_snapshot_links": immutable_archives}
 
 
+def inventory_record(path: Path) -> dict:
+    data = path.read_bytes()
+    return {"path": path.relative_to(ROOT).as_posix(), "bytes": len(data), "sha256": hashlib.sha256(data).hexdigest()}
+
+
+def verify_inventory(path: Path) -> list[str]:
+    try:
+        manifest = json.loads(path.read_bytes())
+    except (OSError, ValueError) as exc:
+        return [f"cannot read hash inventory: {exc}"]
+    if not isinstance(manifest, dict) or not isinstance(manifest.get("files"), list):
+        return ["hash inventory requires a files list"]
+    expected = {p.relative_to(ROOT).as_posix(): p for p in delivered_files()}
+    records, errors = {}, []
+    for entry in manifest["files"]:
+        if not isinstance(entry, dict) or not isinstance(entry.get("path"), str):
+            errors.append("invalid hash inventory entry")
+            continue
+        name = entry["path"]
+        if name in records:
+            errors.append(f"duplicate path: {name}")
+        records[name] = entry
+    errors.extend(f"missing path: {name}" for name in sorted(expected.keys() - records.keys()))
+    errors.extend(f"unexpected path: {name}" for name in sorted(records.keys() - expected.keys()))
+    if errors:
+        return errors
+    for name, source in expected.items():
+        try:
+            actual = inventory_record(source)
+        except OSError as exc:
+            errors.append(f"{name}: {exc}")
+            continue
+        record = records[name]
+        if type(record.get("bytes")) is not int or record["bytes"] != actual["bytes"]:
+            errors.append(f"size mismatch: {name}")
+        if record.get("sha256") != actual["sha256"]:
+            errors.append(f"SHA-256 mismatch: {name}")
+    return errors
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--write", action="store_true", help="write validation and hash evidence after checks")
@@ -88,22 +128,13 @@ def main() -> int:
             "algorithm": "SHA-256",
             "scope": "delivered Jev code/configs/tests/task bundles and entry documentation",
             "excludes": ["evidence/hashes.json manifests", "ignored review-package scratch", "ignored generated runs/checkpoints/logs"],
-            "files": [
-                {"path": p.relative_to(ROOT).as_posix(), "bytes": p.stat().st_size, "sha256": hashlib.sha256(p.read_bytes()).hexdigest()}
-                for p in delivered_files()
-            ],
+            "files": [inventory_record(p) for p in delivered_files()],
         }
         (TASK / "evidence/hashes.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
     else:
-        manifest_path = TASK / "evidence/hashes.json"
-        if manifest_path.is_file():
-            mismatches = []
-            for item in json.loads(manifest_path.read_text(encoding="utf-8"))["files"]:
-                p = ROOT / item["path"]
-                if not p.is_file() or hashlib.sha256(p.read_bytes()).hexdigest() != item["sha256"]:
-                    mismatches.append(item["path"])
-            result["hash_mismatches"] = mismatches
-            result["passed"] = result["passed"] and not mismatches
+        mismatches = verify_inventory(TASK / "evidence/hashes.json")
+        result["hash_mismatches"] = mismatches
+        result["passed"] = result["passed"] and not mismatches
     print(json.dumps(result, ensure_ascii=True, indent=2))
     return 0 if result["passed"] else 1
 

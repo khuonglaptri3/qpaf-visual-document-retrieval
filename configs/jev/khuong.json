@@ -1,10 +1,5 @@
 {
   "workflow": "export and plan both initializations",
   "partition": "train",
-  "training_args": [
-    "--device",
-    "cpu",
-    "--max-steps",
-    "1"
-  ]
+  "max_steps": 1
 }
