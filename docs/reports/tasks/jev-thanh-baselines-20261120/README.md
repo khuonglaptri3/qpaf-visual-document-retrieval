@@ -1,36 +1,22 @@
-# Thanh: Reranker baseline và đánh giá độc lập
+# Thanh: branch nghiên cứu Jev đã có code
 
-**Đã có branch và brief; chưa implement phần nghiên cứu mới.** Branch chứa toàn bộ source F9 từ commit `842176c5b707298672629738390a09e222f47e86`. Bootstrap chỉ thêm task bundle này và một dòng mục lục; không thêm model code hay số benchmark.
+**Đã có toolkit runnable và lệnh khởi động.** Branch `research/jev-thanh-baselines` tích hợp shared implementation `796410160ee90bbe2a86b6799a76976f958f576f`. Kết quả mô hình 4B trên dữ liệu đồ án còn chờ chạy.
 
-Branch: `research/jev-thanh-baselines`. Câu hỏi: Kev có cải thiện nDCG/MRR/Recall hoặc hiệu quả chi phí so với BGE và Qwen4B khi giữ cùng cohort, pool và protocol không?
-
-## Bắt đầu trên máy của người phụ trách
-
-```powershell
-git fetch origin
-git switch --track origin/research/jev-thanh-baselines
+```bash
+git clone --branch research/jev-thanh-baselines --single-branch https://github.com/khuonglaptri3/qpaf-visual-document-retrieval.git
+cd qpaf-visual-document-retrieval
+python scripts/run_jev_thanh.py
 ```
 
-Nếu local branch đã có, dùng `git switch research/jev-thanh-baselines`. Đây là lệnh cho checkout của người phụ trách; không tự đổi branch đang làm của người khác.
+Python >=3.11 chạy demo offline, không cần thư viện model. Output mặc định ở common task `evidence/runs/thanh/`, có nhãn synthetic. Đây là kiểm tra setup; số demo không dùng kết luận chất lượng Jev.
 
-Đọc [spec](superpowers/spec.md) và [plan](superpowers/plan.md) trước. Các file dự kiến trong plan chưa được tạo; không có lệnh chạy Jev sẵn ở thời điểm bootstrap. Nhận input contract từ Phát; Thanh chấm mọi output bằng evaluator chung; Khương cung cấp model outputs. Chi phí/GPU và cache thực tế còn cần xác nhận.
+[Hướng dẫn dùng dữ liệu thật, model và GPU](../jev-runnable-team-kit-20261120/README.md) có lệnh prepare/score/evaluate/compare/export-train/train, pin môi trường và ví dụ local/Modal. Dùng input riêng và môi trường model riêng theo runbook; `--execute` mới chạy training/cloud.
 
-## Code/tài liệu có sẵn để tận dụng
+## Phần việc tiếp theo của Thanh
 
-- [scripts/lab_rerank.py](../../../../scripts/lab_rerank.py)
-- [scripts/modal_lab_rerank.py](../../../../scripts/modal_lab_rerank.py)
-- [src/qpaf/lab/rerank.py](../../../../src/qpaf/lab/rerank.py)
-- [src/qpaf/f9/method.py](../../../../src/qpaf/f9/method.py)
-- [docs/feature_lab/KET_LUAN.md](../../../../docs/feature_lab/KET_LUAN.md)
+- Nhận pool/split/protocol đã khóa từ Phát; kiểm tra raw-score reuse theo pairs hash và coverage.
+- Replay lịch sử bằng F9 full-ranking khi đủ cache; chạy baseline không rerank, BGE và Qwen4B trên protocol mới.
+- Chấm mọi model bằng evaluator chung; lưu per-query nDCG/MRR/Recall, paired delta/CI/W–T–L và chi phí.
+- Phân tích lỗi/headroom và ablation cùng Khương; không kết luận Jev thắng từ demo hoặc mean khác protocol.
 
-## Đầu ra và nghiệm thu
-
-Baseline không rerank; bge_scores.json; qwen4b_scores.json; per-query metric table; nDCG@10/MRR@10/Recall@10/20; paired Δ/CI/W–T–L; failure/latency/cost analysis.
-
-Một evaluator cho toàn bộ model; cùng cohort/pool; metrics có per-query evidence và uncertainty; không silent missing-query skip; không chép mean khác protocol; không tuyên bố Jev thắng khi bằng chứng chưa đủ.
-
-Giữ raw cache/pairs/revisions để tránh chạy lại khi tương thích; mean/per-query JSON lịch sử dùng tham chiếu và chẩn đoán, không thay raw examples/scores. Không trộn kết quả khác protocol vào bảng mới.
-
-## Bằng chứng bootstrap
-
-[Workflow](evidence/workflow.md), [kiểm chứng tài liệu](evidence/validation.json), [SHA-256](evidence/hashes.json). Các kiểm tra này không chứng minh môi trường model hoặc chất lượng Jev đã chạy thành công.
+Đọc [spec](superpowers/spec.md), [plan](superpowers/plan.md), [workflow](evidence/workflow.md), [kiểm chứng](evidence/validation.json) và [hash](evidence/hashes.json). Bootstrap ban đầu được lưu trong evidence; trạng thái cũ không mô tả bản code hiện tại. Source F9, kết quả/receipts đã đóng băng giữ nguyên. [Bằng chứng shared implementation](../jev-runnable-team-kit-20261120/README.md).

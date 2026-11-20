@@ -1,0 +1,9 @@
+# Provenance: branch bootstrap
+
+Recorded: 2026-11-20T01:17:06.007658+07:00. User explicitly requested one research branch per Khương/Phát/Thanh after asking whether implementation existed. Scope: create/publish new branches and concrete handoff briefs; no product implementation or GPU operations.
+
+Actually read Superpowers 7.0.1 `C:/Users/lanph/.codex/plugins/cache/openai-curated-remote/superpowers/7.0.1/skills/using-superpowers/SKILL.md`, `C:/Users/lanph/.codex/plugins/cache/openai-curated-remote/superpowers/7.0.1/skills/using-git-worktrees/SKILL.md`, `C:/Users/lanph/.codex/plugins/cache/openai-curated-remote/superpowers/7.0.1/skills/verification-before-completion/SKILL.md`. Reused brainstorming/writing-plans material read in the ongoing conversation; this is a research roadmap, not a claim that a complete approved software implementation-plan workflow ran.
+
+Native managed worktree operation `e8badf2c-07d3-40c0-bd84-155061160c1b`, root `C:/Users/lanph/.codex/worktrees/7f7a/Artificial_Intelligent_Project`, started detached at F9 `842176c5b707298672629738390a09e222f47e86`. Root checkout remained on feature/lab-f3-objective; its uncommitted research report and index were not staged. Existing refs checked before creation, no branch overwrite. No dependency installation or inference test was run: this bootstrap changes documentation only; runtime readiness is not claimed. Known root Windows torch WinError126/shm.dll issue remains separate work.
+
+This branch belongs to Thanh; only docs index and `docs/reports/tasks/jev-thanh-baselines-20261120` were committed. Source from the base was not modified. Document validation checks exact layout, required files, local links, index entry, source references, and documentation-only staged diff. Hash inventory excludes itself to avoid circular hashing. Actual counts/diff are in validation.json. Research phases in plan remain unchecked; no training, metrics, human messages, deployment or force push.

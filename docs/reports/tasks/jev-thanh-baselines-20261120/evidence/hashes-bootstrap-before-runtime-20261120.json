@@ -1,0 +1,36 @@
+{
+  "algorithm": "SHA-256",
+  "excludes": "this manifest itself",
+  "files": [
+    {
+      "path": "docs/reports/tasks/jev-thanh-baselines-20261120/evidence/validation.json",
+      "sha256": "1de70f35585d95edead69bbfa7562342db7de0f7a58b88a3628e05a8bc1806cc",
+      "bytes": 936
+    },
+    {
+      "path": "docs/reports/tasks/jev-thanh-baselines-20261120/evidence/workflow.md",
+      "sha256": "4ee5cb30bde5fc7d6a8c069c8cee17ac873960fedc1282a370def5dfa953931f",
+      "bytes": 1969
+    },
+    {
+      "path": "docs/reports/tasks/jev-thanh-baselines-20261120/README.md",
+      "sha256": "dde02103b07b25741e907cf354c27548ab472c84294d6f9495d8196489b2b255",
+      "bytes": 2581
+    },
+    {
+      "path": "docs/reports/tasks/jev-thanh-baselines-20261120/superpowers/plan.md",
+      "sha256": "464b34f045f643206b40ef7e97118e42f1deacc0a5bbd513c27a26525c03e954",
+      "bytes": 2474
+    },
+    {
+      "path": "docs/reports/tasks/jev-thanh-baselines-20261120/superpowers/spec.md",
+      "sha256": "0c73ae11bbd1e33147e27d5cec84c9531e4649a2de257e4f62fef3e85f87d36f",
+      "bytes": 2385
+    },
+    {
+      "path": "docs/README.md",
+      "sha256": "a3ca6d474c6abd69433eafe3f22b144db96ac006e391503cc4365addb5dcf94d",
+      "bytes": 3076
+    }
+  ]
+}

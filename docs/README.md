@@ -41,4 +41,4 @@ cho commit nguồn; dùng Git history khi cần đọc tài liệu đã được
 
 ## Nghiên cứu Jev — branch Thanh
 
-[Reranker baseline và đánh giá độc lập](reports/tasks/jev-thanh-baselines-20261120/README.md): branch/brief đã tạo; implementation và thí nghiệm chưa chạy.
+[Reranker baseline và đánh giá độc lập](reports/tasks/jev-thanh-baselines-20261120/README.md): đã có code và lệnh demo offline; benchmark 4B/dữ liệu đồ án còn chờ chạy.

@@ -3,34 +3,64 @@
   "excludes": "this manifest itself",
   "files": [
     {
+      "path": "docs/README.md",
+      "bytes": 3257,
+      "sha256": "44c84a48c54270bbdefce39dbaad0787745d263099ac10bab1d9c4778aff4538"
+    },
+    {
+      "path": "docs/reports/tasks/jev-thanh-baselines-20261120/evidence/hashes-bootstrap-before-runtime-20261120.json",
+      "bytes": 1238,
+      "sha256": "be04ac4ea21b13b23226c24f7c937a6117864154e79b70f4a1ab3a9f023a611e"
+    },
+    {
+      "path": "docs/reports/tasks/jev-thanh-baselines-20261120/evidence/plan-bootstrap-before-runtime-20261120.md",
+      "bytes": 2474,
+      "sha256": "464b34f045f643206b40ef7e97118e42f1deacc0a5bbd513c27a26525c03e954"
+    },
+    {
+      "path": "docs/reports/tasks/jev-thanh-baselines-20261120/evidence/README-bootstrap-before-runtime-20261120.md",
+      "bytes": 2581,
+      "sha256": "dde02103b07b25741e907cf354c27548ab472c84294d6f9495d8196489b2b255"
+    },
+    {
+      "path": "docs/reports/tasks/jev-thanh-baselines-20261120/evidence/spec-bootstrap-before-runtime-20261120.md",
+      "bytes": 2385,
+      "sha256": "0c73ae11bbd1e33147e27d5cec84c9531e4649a2de257e4f62fef3e85f87d36f"
+    },
+    {
+      "path": "docs/reports/tasks/jev-thanh-baselines-20261120/evidence/validation-bootstrap-before-runtime-20261120.json",
+      "bytes": 936,
+      "sha256": "1de70f35585d95edead69bbfa7562342db7de0f7a58b88a3628e05a8bc1806cc"
+    },
+    {
       "path": "docs/reports/tasks/jev-thanh-baselines-20261120/evidence/validation.json",
-      "sha256": "1de70f35585d95edead69bbfa7562342db7de0f7a58b88a3628e05a8bc1806cc",
-      "bytes": 936
+      "bytes": 344,
+      "sha256": "a99eb81af5acec033ff73697a639064a5213637e0aed90bbc820de89ecbc2aa6"
+    },
+    {
+      "path": "docs/reports/tasks/jev-thanh-baselines-20261120/evidence/workflow-bootstrap-before-runtime-20261120.md",
+      "bytes": 1969,
+      "sha256": "4ee5cb30bde5fc7d6a8c069c8cee17ac873960fedc1282a370def5dfa953931f"
     },
     {
       "path": "docs/reports/tasks/jev-thanh-baselines-20261120/evidence/workflow.md",
-      "sha256": "4ee5cb30bde5fc7d6a8c069c8cee17ac873960fedc1282a370def5dfa953931f",
-      "bytes": 1969
+      "bytes": 2840,
+      "sha256": "8ed87190bb057761054793f40f80abaa630388d1f7ccc3f89c60907640f33ee0"
     },
     {
       "path": "docs/reports/tasks/jev-thanh-baselines-20261120/README.md",
-      "sha256": "dde02103b07b25741e907cf354c27548ab472c84294d6f9495d8196489b2b255",
-      "bytes": 2581
+      "bytes": 2019,
+      "sha256": "4a8e6d215e8c7cb096ea3154e9066ebd2a2772fc14dafce2c6efc0fa9b137bea"
     },
     {
       "path": "docs/reports/tasks/jev-thanh-baselines-20261120/superpowers/plan.md",
-      "sha256": "464b34f045f643206b40ef7e97118e42f1deacc0a5bbd513c27a26525c03e954",
-      "bytes": 2474
+      "bytes": 1651,
+      "sha256": "c43d7b352699c131bff5c1b2ee5674a8868afb0ec7a0b24ea4622d13d54a90cc"
     },
     {
       "path": "docs/reports/tasks/jev-thanh-baselines-20261120/superpowers/spec.md",
-      "sha256": "0c73ae11bbd1e33147e27d5cec84c9531e4649a2de257e4f62fef3e85f87d36f",
-      "bytes": 2385
-    },
-    {
-      "path": "docs/README.md",
-      "sha256": "a3ca6d474c6abd69433eafe3f22b144db96ac006e391503cc4365addb5dcf94d",
-      "bytes": 3076
+      "bytes": 2694,
+      "sha256": "ab740f28d118722c6457ab6b72c86a657d9d528348ead729e74ba3645f61984f"
     }
   ]
 }
