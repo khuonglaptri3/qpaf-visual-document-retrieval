@@ -2,8 +2,12 @@
 from hashlib import sha256
 from importlib import metadata
 import json
+import os
 from pathlib import Path
+import platform
+import re
 import sys
+from tempfile import TemporaryDirectory
 import time
 
 from .contracts import (
@@ -49,6 +53,34 @@ def tree_hash(path):
     if not files:
         raise ValueError(f"empty checkpoint directory: {path}")
     return sha256(encode_json(files)).hexdigest()
+
+
+def _open_kev_checkpoint(model):
+    from kev.checkpoint import Checkpoint
+
+    return Checkpoint(model)
+
+
+def _kev_base_reference(meta):
+    base, revision = meta.base, meta.base_revision
+    if not isinstance(base, str) or not base.strip():
+        raise ValueError("Kev head.pt must declare a backbone")
+    local = Path(base)
+    if local.is_dir():
+        return {"model": base, "revision": revision, "path": str(local.resolve())}
+    if not re.fullmatch(r"[\w.-]+/[\w.-]+", base) or not isinstance(revision, str) or not re.fullmatch(r"[0-9a-f]{40}", revision):
+        raise ValueError("Kev head.pt must declare an existing local backbone or a Hub backbone pinned to a full commit SHA")
+    return {"model": base, "revision": revision, "path": None}
+
+
+def _local_identity(backend, path):
+    revision = tree_hash(path)
+    base = None
+    if backend == "kev":
+        base = _kev_base_reference(_open_kev_checkpoint(str(path)).meta)
+        if base["path"] is not None:
+            base["sha256"] = tree_hash(Path(base["path"]))
+    return revision, base
 
 
 class TransformerAdapter:
@@ -99,11 +131,15 @@ class TransformerAdapter:
 
 class KevAdapter:
     def __init__(self, config, torch, dtype):
-        from kev.checkpoint import Checkpoint, LoadOptions
+        from kev.checkpoint import LoadOptions
         require_kev_source()
         self.torch, self.device, self.cap = torch, config["device"], config["input_cap"]
         name, revision = config["model"], config["hub_revision"]
-        checkpoint = Checkpoint(f"{name}@{revision}" if revision else name)
+        checkpoint = _open_kev_checkpoint(f"{name}@{revision}" if revision else name)
+        if config["local_kev_base"] is not None:
+            expected = {k: v for k, v in config["local_kev_base"].items() if k != "sha256"}
+            if _kev_base_reference(checkpoint.meta) != expected:
+                raise ValueError("Kev backbone reference changed before model load")
         self.tokenizer, self.model = checkpoint.load(self.device, LoadOptions(dtype=dtype))
         if self.model.dtype != DTYPES[config["precision"]]:
             raise ValueError(f"checkpoint loads at {self.model.dtype}; request its actual precision")
@@ -169,24 +205,91 @@ def _environment(backend):
     return environment
 
 
+def _cuda_driver_version():
+    import ctypes
+
+    lib = ctypes.WinDLL("nvcuda.dll") if sys.platform == "win32" else ctypes.CDLL("libcuda.so.1")
+    version = ctypes.c_int()
+    status = lib.cuDriverGetVersion(ctypes.byref(version))
+    if status != 0 or version.value <= 0:
+        raise ValueError(f"could not read the active NVIDIA driver API version (status {status})")
+    return version.value
+
+
+def _runtime_identity(device, backend):
+    try:
+        import torch
+    except ImportError as exc:
+        req = "kev" if backend == "kev" else "baselines"
+        raise ValueError(f"install requirements/jev-{req}.txt: {exc}") from exc
+
+    runtime = {"torch": str(torch.__version__), "build_sha256": sha256(torch.__config__.show().encode()).hexdigest(),
+               "deterministic_algorithms": torch.are_deterministic_algorithms_enabled(),
+               "float32_matmul_precision": torch.get_float32_matmul_precision()}
+    if device == "cpu":
+        return {**runtime, "hardware": platform.machine(), "processor": platform.processor(),
+                "capability": torch.backends.cpu.get_cpu_capability(), "threads": torch.get_num_threads()}
+    if not torch.cuda.is_available():
+        raise ValueError("CUDA is unavailable; select --device cpu or install a CUDA Torch runtime")
+    try:
+        props = torch.cuda.get_device_properties(torch.cuda.current_device())
+        return {**runtime, "hardware": props.name, "compute_capability": [props.major, props.minor],
+                "memory_bytes": props.total_memory, "multiprocessors": props.multi_processor_count,
+                "cuda": torch.version.cuda, "driver_api": _cuda_driver_version(), "cudnn": torch.backends.cudnn.version(),
+                "cudnn_deterministic": torch.backends.cudnn.deterministic,
+                "cudnn_benchmark": torch.backends.cudnn.benchmark, "cudnn_tf32": torch.backends.cudnn.allow_tf32,
+                "cublas_workspace": os.environ.get("CUBLAS_WORKSPACE_CONFIG"),
+                "nvidia_tf32_override": os.environ.get("NVIDIA_TF32_OVERRIDE")}
+    except RuntimeError as exc:
+        raise ValueError(f"could not identify the selected CUDA runtime: {exc}") from exc
+
+
+def validate_score_options(args):
+    positive_int(args.input_cap, "input cap")
+    positive_int(args.batch_size, "batch size")
+    positive_int(args.chunk_size, "chunk size")
+
+
 def _config(args, digest):
+    validate_score_options(args)
     spec = model_spec(args.backend)
+    if args.backend == "kev":
+        require_kev_source()
+    runtime = _runtime_identity(args.device, args.backend)
     revision, hub_revision, model = spec["revision"], spec["revision"], spec["model"]
-    local_base_digest = None
+    base = None
     if args.checkpoint is not None:
         path = args.checkpoint.resolve()
-        revision, hub_revision, model = tree_hash(path), None, str(path)
-        if args.backend == "kev" and (path / "adapter_config.json").is_file():
-            base = read_json(path / "adapter_config.json").get("base_model_name_or_path")
-            if base and Path(base).is_dir():
-                local_base_digest = tree_hash(Path(base))
+        revision, base = _local_identity(args.backend, path)
+        hub_revision, model = None, str(path)
     return {"backend": args.backend, "model": model, "revision": revision, "hub_revision": hub_revision,
-            "readout": spec["readout"], "source_commit": spec.get("source_commit"), "local_base_sha256": local_base_digest,
-            "pairs_sha256": digest, "device": args.device,
+            "readout": spec["readout"], "source_commit": spec.get("source_commit"), "local_kev_base": base,
+            "pairs_sha256": digest, "device": args.device, "runtime": runtime,
             "precision": args.precision or (spec["cuda_precision"] if args.device == "cuda" else "fp32"),
-            "input_cap": positive_int(args.input_cap, "input cap"), "batch_size": positive_int(args.batch_size, "batch size"),
-            "chunk_size": positive_int(args.chunk_size, "chunk size"), "environment": _environment(args.backend),
+            "input_cap": args.input_cap, "batch_size": args.batch_size, "chunk_size": args.chunk_size,
+            "environment": _environment(args.backend),
             "code": sha256_file(__file__)}
+
+
+def _claim_chunks(chunks, config):
+    chunks.mkdir(parents=True, exist_ok=True)
+    claim = chunks / ".jev-config"
+    run_path = claim / "config.json"
+    if not run_path.is_file():
+        leftovers = any(p != claim and not p.name.startswith(".jev-claim-") for p in chunks.iterdir())
+        if leftovers and not run_path.is_file():
+            raise ValueError(f"chunk directory {chunks} contains files from another run; use a fresh --chunks directory")
+        with TemporaryDirectory(dir=chunks, prefix=".jev-claim-") as temp:
+            staged = Path(temp) / "config"
+            write_json(staged / "config.json", config)
+            # A same-filesystem rename publishes a complete, nonempty directory. It cannot replace the winner.
+            try:
+                staged.rename(claim)
+            except OSError:
+                if not run_path.is_file():
+                    raise
+    if read_json(run_path) != config:
+        raise ValueError(f"stale scoring configuration in {chunks}; use a fresh --chunks directory")
 
 
 def _check_chunk(row, fingerprint, start, stop):
@@ -215,16 +318,11 @@ def score_file(args):
         if args.checkpoint and any(p.is_relative_to(args.checkpoint.resolve()) for p in [*inputs_outputs, chunks.resolve()]):
             raise ValueError("keep scoring files outside the model checkpoint directory")
         config = _config(args, digest)
+        base = config["local_kev_base"]
+        if base and base["path"] is not None and any(p.is_relative_to(Path(base["path"])) for p in [*inputs_outputs, chunks.resolve()]):
+            raise ValueError("keep scoring files outside the model backbone directory")
         fingerprint = sha256(encode_json(config)).hexdigest()
-        chunks.mkdir(parents=True, exist_ok=True)
-        run_path = chunks / "config.json"
-        if run_path.exists():
-            if read_json(run_path) != config:
-                raise ValueError(f"stale scoring configuration in {chunks}; use a fresh --chunks directory")
-        elif any(chunks.iterdir()):
-            raise ValueError(f"chunk directory {chunks} contains files without a scoring configuration")
-        else:
-            write_json(run_path, config)
+        _claim_chunks(chunks, config)
         adapter, scores, reused, tokens, seconds, peaks = None, [], 0, 0, 0.0, []
         pairs = bundle["pairs"]
         for start in range(0, len(pairs), args.chunk_size):
@@ -238,6 +336,8 @@ def score_file(args):
                 try:
                     if adapter is None:
                         adapter = load_adapter(config)
+                        if args.checkpoint is not None and _local_identity(args.backend, Path(config["model"])) != (config["revision"], base):
+                            raise ValueError("local checkpoint or backbone changed during model load")
                     started = time.perf_counter()
                     for offset in range(start, stop, args.batch_size):
                         batch = [(bundle["queries"][q], bundle["pages"][p])

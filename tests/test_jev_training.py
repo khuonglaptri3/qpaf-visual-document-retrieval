@@ -1,15 +1,19 @@
 """Exercise the train-only export and the two controlled training commands."""
 import json
+import contextlib
+import io
 from pathlib import Path
 import subprocess
 import sys
 from tempfile import TemporaryDirectory
 import unittest
+from unittest.mock import patch
 
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 from qpaf.jev.contracts import write_json
+from qpaf.jev.cli import main
 
 
 def dataset(root):
@@ -94,3 +98,48 @@ class TrainingTest(unittest.TestCase):
         result = cli(self.root, "train", "--init", "base", "--data", "train.jsonl", "--out", "new", "--execute")
         self.assertIn("sha256", result.stderr)
         self.assertFalse((self.root / "new").exists())
+
+    def execute_args(self, out):
+        return ["train", "--init", "base", "--data", str(self.root / "train.jsonl"), "--out", str(out),
+                "--epochs", "2", "--max-steps", "1", "--execute"]
+
+    def test_run_provenance_separates_context_drops_from_budgeted_visits(self):
+        self.export("--unjudged-as-negative")
+        out = self.root / "new"
+
+        def run(*_, **__):
+            out.mkdir()
+            for name in ("adapter_config.json", "adapter_model.safetensors", "head.pt", "training_config.json"):
+                (out / name).write_bytes(b"checkpoint")
+            write_json(out / "training_metrics.json", {"requested_records": 4, "records_seen": 1, "optimizer_steps": 1})
+            return subprocess.CompletedProcess([], 0)
+
+        with patch("qpaf.jev.training.require_kev_source"), patch("qpaf.jev.training.subprocess.run", side_effect=run):
+            self.assertEqual(main(self.execute_args(out)), 0)
+        manifest = json.loads((out / "jev-run.json").read_bytes())
+        self.assertEqual(manifest.get("training_records"), {"exported": 3, "admitted": 2, "dropped_for_context": 1,
+                         "scheduled_visits": 4, "actual_visits": 1, "unvisited": 3, "optimizer_steps": 1})
+
+    def test_failed_snapshot_write_leaves_no_partial_snapshot(self):
+        self.export()
+        open_path = Path.open
+
+        @contextlib.contextmanager
+        def broken_stream(stream):
+            with stream:
+                class FailedWrite:
+                    def write(self, data):
+                        stream.write(data[:1])
+                        raise OSError("snapshot write failed")
+
+                yield FailedWrite()
+
+        def open_file(path, mode="r", *args, **kwargs):
+            stream = open_path(path, mode, *args, **kwargs)
+            return broken_stream(stream) if mode == "xb" else stream
+
+        with patch("qpaf.jev.training.require_kev_source"), patch.object(Path, "open", open_file), \
+             contextlib.redirect_stderr(io.StringIO()) as stderr:
+            self.assertNotEqual(main(self.execute_args(self.root / "new")), 0)
+        self.assertIn("snapshot write failed", stderr.getvalue())
+        self.assertFalse(list(self.root.glob(".*.input.jsonl")))

@@ -36,12 +36,21 @@ def main():
     parser.add_argument("options", nargs=argparse.REMAINDER, help="Arguments for run_jev.py score or train")
     args = parser.parse_args()
     sys.path.insert(0, str(ROOT / "src"))
+    from qpaf.jev.backends import validate_score_options
     from qpaf.jev.cli import build_parser
+    from qpaf.jev.training import validate_train_options
 
     argv = [args.command, *args.options]
     options = build_parser()[0].parse_args(argv)
     if options.device != "cuda" or getattr(options, "backend", None) in ("baseline", "lexical"):
         parser.error("the Modal worker runs real CUDA models only")
+    try:
+        if args.command == "train":
+            validate_train_options(options)
+        else:
+            validate_score_options(options)
+    except ValueError as exc:
+        parser.error(str(exc))
     for key, value in vars(options).items():
         if isinstance(value, Path) and (PureWindowsPath(value).anchor or ".." in PureWindowsPath(value).parts):
             parser.error(f"--{key} must be relative to the Volume root")

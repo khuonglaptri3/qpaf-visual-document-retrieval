@@ -67,21 +67,28 @@ def export_training(args):
     return 0
 
 
-def build_train_command(args, data_path):
-    spec = model_spec("kev")
+def validate_train_options(args):
     for field in ("epochs", "batch_size", "accum", "head_dim", "lora"):
         positive_int(getattr(args, field), field)
     if args.max_steps < 0 or not 384 <= args.max_state <= 65536:
         raise ValueError("max-steps must be nonnegative and max-state must be in [384,65536]")
     if number(args.lr, "lr") <= 0 or number(args.head_lr, "head-lr") < 0:
         raise ValueError("lr must be positive and head-lr nonnegative")
-    if args.base is not None and not args.base.is_dir():
-        raise ValueError("--base requires an existing local backbone directory")
-    if args.init_checkpoint is not None and (args.init != "kev" or not args.init_checkpoint.is_dir()):
-        raise ValueError("--init-checkpoint requires --init kev and an existing local checkpoint directory")
+    if args.init_checkpoint is not None and args.init != "kev":
+        raise ValueError("--init-checkpoint requires --init kev")
     dtype = args.dtype or ("bf16" if args.device == "cuda" else "fp32")
     if dtype == "bf16" and args.device != "cuda":
         raise ValueError("training with bf16 autocast requires --device cuda")
+    return dtype
+
+
+def build_train_command(args, data_path):
+    dtype = validate_train_options(args)
+    spec = model_spec("kev")
+    if args.base is not None and not args.base.is_dir():
+        raise ValueError("--base requires an existing local backbone directory")
+    if args.init_checkpoint is not None and not args.init_checkpoint.is_dir():
+        raise ValueError("--init-checkpoint requires an existing local checkpoint directory")
     launcher = [sys.executable, "-m", "kev.train"]
     if sys.platform == "win32":
         script = Path(__file__).resolve().parents[3] / "scripts/train_jev_reranker.py"
@@ -103,6 +110,21 @@ def build_train_command(args, data_path):
         init = str(args.init_checkpoint.resolve()) if args.init_checkpoint else f"{spec['model']}@{spec['revision']}"
         argv += ["--init_from", init]
     return argv
+
+
+def _training_record_counts(path, exported, epochs):
+    metrics = read_json(path)
+    scheduled = positive_int(metrics.get("requested_records"), "trainer requested_records")
+    visited = positive_int(metrics.get("records_seen"), "trainer records_seen")
+    steps = positive_int(metrics.get("optimizer_steps"), "trainer optimizer_steps")
+    # The pinned trainer writes epochs * len(reqs) after context filtering. Its rejected_records
+    # counter excludes this filter. Our command disables replay and custom record augmentation.
+    admitted, remainder = divmod(scheduled, epochs)
+    if remainder or not 0 < admitted <= exported or visited > scheduled:
+        raise ValueError("trainer visit counts disagree with the export or epoch settings")
+    return {"exported": exported, "admitted": admitted, "dropped_for_context": exported - admitted,
+            "scheduled_visits": scheduled, "actual_visits": visited, "unvisited": scheduled - visited,
+            "optimizer_steps": steps}
 
 
 def train(args):
@@ -137,9 +159,10 @@ def train(args):
     if args.init_checkpoint:
         info["local_init_sha256"] = tree_hash(args.init_checkpoint)
     snapshot.parent.mkdir(parents=True, exist_ok=True)
-    with snapshot.open("xb") as stream:
-        stream.write(raw)
+    stream = snapshot.open("xb")
     try:
+        with stream as owned_snapshot:
+            owned_snapshot.write(raw)
         started = time.perf_counter()
         result = subprocess.run(command, check=False)
         info.update(returncode=result.returncode, trainer_seconds=time.perf_counter() - started)
@@ -147,6 +170,7 @@ def train(args):
             raise ValueError(f"official kev.train exited {result.returncode}; inspect its stderr and output directory")
         info["checkpoint_sha256"] = {name: sha256_file(args.out / name) for name in
                                      ("adapter_config.json", "adapter_model.safetensors", "head.pt", "training_config.json")}
+        info["training_records"] = _training_record_counts(args.out / "training_metrics.json", len(rows), args.epochs)
         write_json(args.out / "jev-run.json", info)
     finally:
         snapshot.unlink(missing_ok=True)

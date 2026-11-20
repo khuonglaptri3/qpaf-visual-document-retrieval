@@ -1,5 +1,6 @@
 """CLI and no-download runtime tests for the actual rerankers and Kev trainer."""
 import contextlib
+from concurrent.futures import ThreadPoolExecutor
 import io
 import json
 import math
@@ -8,6 +9,8 @@ from pathlib import Path
 import subprocess
 import sys
 from tempfile import TemporaryDirectory
+from threading import Barrier
+from types import SimpleNamespace
 import unittest
 from unittest.mock import patch
 
@@ -26,6 +29,112 @@ class ScoringTest(unittest.TestCase):
         self.addCleanup(temp.cleanup)
         self.root = Path(temp.name)
         dataset(self.root)
+        runtime = patch("qpaf.jev.backends._runtime_identity", create=True, return_value={"hardware": "test"})
+        self.runtime = runtime.start()
+        self.addCleanup(runtime.stop)
+
+    def model_args(self, backend="bge"):
+        return ["score", "--backend", backend, "--pairs", str(self.root / "pairs"),
+                "--out", str(self.root / "scores"), "--chunks", str(self.root / "chunks"), "--device", "cpu"]
+
+    @staticmethod
+    def adapter():
+        return SimpleNamespace(score=lambda batch: ([1] * len(batch), 12), peak_bytes=lambda: None)
+
+    def test_cached_scores_reject_a_changed_runtime(self):
+        with patch("qpaf.jev.backends.load_adapter", return_value=self.adapter()):
+            self.assertEqual(main(self.model_args()), 0)
+        self.runtime.return_value = {"hardware": "different"}
+        self.assertNotEqual(main(self.model_args()), 0)
+
+    def test_cached_kev_scores_validate_source_pin(self):
+        with patch("qpaf.jev.backends.require_kev_source"), patch("qpaf.jev.backends.load_adapter", return_value=self.adapter()):
+            self.assertEqual(main(self.model_args("kev")), 0)
+        with patch("qpaf.jev.backends.require_kev_source", side_effect=ValueError("wrong official Kev commit")):
+            self.assertNotEqual(main(self.model_args("kev")), 0)
+
+    def test_local_kev_scores_bind_the_base_declared_by_the_head(self):
+        checkpoint = self.root / "checkpoint"
+        checkpoint.mkdir()
+        actual, decoy = self.root / "actual", self.root / "decoy"
+        for base in (actual, decoy):
+            base.mkdir()
+            (base / "tokenizer.json").write_text("initial")
+        write_json(checkpoint / "adapter_config.json", {"base_model_name_or_path": str(decoy)})
+        official = SimpleNamespace(meta=SimpleNamespace(base=str(actual), base_revision=None))
+        args = self.model_args("kev") + ["--checkpoint", str(checkpoint)]
+        with patch("qpaf.jev.backends.require_kev_source"), \
+             patch("qpaf.jev.backends._open_kev_checkpoint", create=True, return_value=official), \
+             patch("qpaf.jev.backends.load_adapter", return_value=self.adapter()):
+            self.assertEqual(main(args), 0)
+            (actual / "tokenizer.json").write_text("changed")
+            self.assertNotEqual(main(args), 0)
+
+    def test_local_kev_rejects_an_unpinned_hub_backbone_before_scoring(self):
+        checkpoint = self.root / "checkpoint"
+        checkpoint.mkdir()
+        write_json(checkpoint / "adapter_config.json", {"base_model_name_or_path": "org/base"})
+        official = SimpleNamespace(meta=SimpleNamespace(base="org/base", base_revision="main"))
+        with patch("qpaf.jev.backends.require_kev_source"), \
+             patch("qpaf.jev.backends._open_kev_checkpoint", create=True, return_value=official), \
+             patch("qpaf.jev.backends.load_adapter", return_value=self.adapter()):
+            self.assertNotEqual(main(self.model_args("kev") + ["--checkpoint", str(checkpoint)]), 0)
+        self.assertFalse((self.root / "scores").exists())
+
+    def test_local_kev_rejects_changes_during_model_load_before_caching(self):
+        checkpoint, base = self.root / "checkpoint", self.root / "base"
+        checkpoint.mkdir()
+        base.mkdir()
+        write_json(checkpoint / "adapter_config.json", {"base_model_name_or_path": str(base)})
+        tokenizer = base / "tokenizer.json"
+        tokenizer.write_text("initial")
+        official = SimpleNamespace(meta=SimpleNamespace(base=str(base), base_revision=None))
+
+        def load(_):
+            tokenizer.write_text("changed during load")
+            return self.adapter()
+
+        with patch("qpaf.jev.backends.require_kev_source"), \
+             patch("qpaf.jev.backends._open_kev_checkpoint", create=True, return_value=official), \
+             patch("qpaf.jev.backends.load_adapter", side_effect=load):
+            self.assertNotEqual(main(self.model_args("kev") + ["--checkpoint", str(checkpoint)]), 0)
+        self.assertFalse(list((self.root / "chunks").glob("chunk-*.json")))
+
+    def test_different_configurations_cannot_both_claim_a_shared_chunk_directory(self):
+        publication = Barrier(2)
+        rename_path = Path.rename
+
+        def write(path, row):
+            if path == self.root / "chunks/config.json":
+                publication.wait(timeout=10)
+            return write_json(path, row)
+
+        def rename(path, target):
+            if target == self.root / "chunks/.jev-config":
+                publication.wait(timeout=10)
+            return rename_path(path, target)
+
+        with patch("qpaf.jev.backends.write_json", side_effect=write), \
+             patch.object(Path, "rename", rename), patch("qpaf.jev.backends.load_adapter", return_value=self.adapter()), \
+             ThreadPoolExecutor(2) as pool:
+            jobs = [pool.submit(main, self.model_args() + ["--input-cap", str(cap), "--out", str(self.root / f"scores-{cap}")])
+                    for cap in (64, 128)]
+            results = [job.result() for job in jobs]
+        self.assertEqual(results.count(0), 1, results)
+        self.assertEqual(len(list(self.root.glob("scores-*"))), 1)
+
+    def test_modal_plans_reject_invalid_numeric_settings_before_loading_the_sdk(self):
+        script = ROOT / "scripts/modal_jev_rerank.py"
+        for argv, diagnostic in (
+            (["score", "--backend", "kev", "--pairs", "pairs", "--out", "scores", "--batch-size", "0"], "batch size"),
+            (["train", "--data", "data", "--out", "run", "--lr", "nan"], "lr"),
+        ):
+            for outer in ([], ["--execute"]):
+                with self.subTest(argv=argv, outer=outer):
+                    result = subprocess.run([sys.executable, "-I", "-S", str(script), "--volume", "test-volume", *outer, *argv],
+                                            cwd=self.root, capture_output=True, text=True)
+                    self.assertEqual(result.returncode, 2, result.stdout)
+                    self.assertIn(diagnostic, result.stderr)
 
     def test_cpu_score_from_arbitrary_cwd(self):
         result = cli(self.root, "score", "--backend", "baseline", "--pairs", "pairs", "--out", "scores")
@@ -46,6 +155,15 @@ class ScoringTest(unittest.TestCase):
         self.assertEqual(plan["worker_cwd"], "/data")
         self.assertIn("pools/pairs.json", plan["argv"])
         self.assertFalse((self.root / "scores").exists())
+        result = subprocess.run([sys.executable, "-I", "-S", str(script), "--volume", "test-volume", "train",
+                                 "--data", "input/train.jsonl", "--out", "trained", "--base", "models/base",
+                                 "--init-checkpoint", "models/init"], cwd=self.root, capture_output=True, text=True)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        plan = json.loads(result.stdout)
+        self.assertEqual(plan["requirements"], "jev-kev.txt")
+        self.assertIn("models/base", plan["argv"])
+        self.assertIn("models/init", plan["argv"])
+        self.assertEqual(plan["argv"][-1], "--execute")
 
     def test_model_failure_then_resume_preserves_order_and_rejects_stale_chunks(self):
         args = ["score", "--backend", "bge", "--pairs", str(self.root / "pairs"),
@@ -92,7 +210,7 @@ class ActualRuntimeTest(unittest.TestCase):
         torch.manual_seed(17)
         with TemporaryDirectory() as tmp:
             root = Path(tmp)
-            dataset(root)
+            bundle = dataset(root)
             words = ["[UNK]", "[PAD]", "yes", "no", "fruit", "car", "apple", "held", "out", *SPECIAL,
                      "<|im_start|>", "<|im_end|>"]
             tokenizer = Tokenizer(models.WordLevel({w: i for i, w in enumerate(words)}, unk_token="[UNK]"))
@@ -136,17 +254,23 @@ class ActualRuntimeTest(unittest.TestCase):
                     logits = causal(**inputs).logits[0, -1].detach()
                     self.assertAlmostEqual(cache["scores"][0], float(logits[2] - logits[3]), places=5)
                 print(f"{name} real scores: {cache['scores']}, tokens={cache['manifest']['input_tokens']}")
-            result = cli(root, *EXPORT)
+            bundle["pages"]["c"] = "apple " * 512
+            write_json(root / "pairs", bundle)
+            result = cli(root, *EXPORT, "--unjudged-as-negative")
             self.assertEqual(result.returncode, 0, result.stderr)
             result = cli(root, "train", "--data", "train.jsonl", "--init", "base", "--base", qwen_dir,
                          "--out", "trained", "--device", "cpu", "--max-steps", 1, "--accum", 1,
-                         "--batch-size", 1, "--lora", 2, "--head-dim", 8, "--execute", isolated=False)
+                         "--batch-size", 1, "--max-state", 384, "--lora", 2, "--head-dim", 8, "--execute", isolated=False)
             print(result.stdout)
             self.assertEqual(result.returncode, 0, result.stderr)
             for name in ("adapter_model.safetensors", "adapter_config.json", "head.pt", "jev-run.json"):
                 self.assertTrue((root / "trained" / name).is_file(), name)
             metrics = json.loads((root / "trained/training_metrics.json").read_bytes())
             self.assertEqual(metrics["optimizer_steps"], 1)
+            run = json.loads((root / "trained/jev-run.json").read_bytes())
+            self.assertEqual(run.get("training_records"), {"exported": 3, "admitted": 2, "dropped_for_context": 1,
+                             "scheduled_visits": 2, "actual_visits": 1, "unvisited": 1, "optimizer_steps": 1})
+            print(f"Training record provenance: {run['training_records']}")
             print(f"Optimizer steps={metrics['optimizer_steps']}, forward tokens={metrics['forward_tokens']}")
             result = cli(root, "score", "--backend", "kev", "--checkpoint", "trained", "--pairs", "pairs",
                          "--out", "kev", "--device", "cpu", "--batch-size", 2, "--input-cap", 128, isolated=False)
@@ -154,4 +278,5 @@ class ActualRuntimeTest(unittest.TestCase):
             cache = load_scores(root / "kev", root / "pairs")
             self.assertTrue(all(0 <= p <= 1 for p in cache["scores"]))
             self.assertTrue(any(p != round(p, 4) for p in cache["scores"]))
+            self.assertEqual(Path(cache["manifest"]["local_kev_base"]["path"]), qwen_dir)
             print(f"Kev reloaded scores: {cache['scores']}, tokens={cache['manifest']['input_tokens']}")
