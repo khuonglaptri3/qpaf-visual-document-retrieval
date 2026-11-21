@@ -1,0 +1,5 @@
+metric,synthetic,ranking_scope,label_unit,delta,ci95_low,ci95_high,win,tie,loss
+ndcg@10,False,provided_candidate_pool,mapped,-0.020060749118925986,-0.03556266623368565,-0.005178406261673744,16,354,30
+mrr@10,False,provided_candidate_pool,mapped,-0.025615079365079365,-0.04569920634920634,-0.006369047619047619,16,354,30
+recall@10,False,provided_candidate_pool,mapped,-0.0025,-0.0075,0.0,0,399,1
+recall@20,False,provided_candidate_pool,mapped,0.0,0.0,0.0,0,400,0

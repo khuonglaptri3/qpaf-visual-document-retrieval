@@ -1,0 +1,213 @@
+{
+  "schema": "qpaf-jev-thanh-validation-v1",
+  "generated_utc": "2026-11-21T08:43:11.061838+00:00",
+  "source_commit": "64d982234bf80759ea2e2f58bb2b91777ffdbc06",
+  "phat_handoff_commit": "2843c6827108e5453a28d48aff9e26c179d82014",
+  "input_archive_sha256": "93f376361cc565f9ebafa03d4ea50c4d5286ed7196c4dee675dec2fd7a4cdedb",
+  "input_pairs_sha256": {
+    "vidoseek": "b1cb9f569e3673e69889eb17fb3588b9ae5b0421b3611416d786948f2a6aba3f",
+    "vimdoc": "a748fe3a4e457bad6ed8ded177c8e871c0bd37c74028d22d34506453032cfb42"
+  },
+  "qrels_sha256": {
+    "vidoseek": "691b6bc4ada3bc64fe3c408fe32498b04c7f30900eadb39ae09ddbe29aea302c",
+    "vimdoc": "aab40d996476fe297be8d000e17bfd6b326b3c318879321f45583cd8bdc42017"
+  },
+  "modal_apps": {
+    "vidoseek_bge": "ap-izlM7Fz66PKzj4zXhPyIm1",
+    "vidoseek_qwen": "ap-0APhICpzAf7MPbvgE72E9v",
+    "vimdoc_bge": "ap-cN3pa7zrAD9JycutSGAQLa",
+    "vimdoc_qwen": "ap-f1jQD7pTcRE5jcSuUf9uTd"
+  },
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 7394,
+      "sha256": "1474448fc43210a25f6660e749edd0aacf2fb6ca8eb9b02ddc6b547d8aa94724"
+    },
+    {
+      "path": "vidoseek-bge-blend05-vs-gate.json",
+      "bytes": 27491,
+      "sha256": "c29f001b672a81cdf0cb355b2385cfe8260cd3078b4ad138fe3c0ffb494cb4a9"
+    },
+    {
+      "path": "vidoseek-bge-blend05.json",
+      "bytes": 28242,
+      "sha256": "ffb0c5dd9c6c7a7f26df61f2e24e02b64141c4193c10b3b47b8203bcb2db0894"
+    },
+    {
+      "path": "vidoseek-bge-scores.json",
+      "bytes": 58627,
+      "sha256": "e37093b19acdf594b389cd166ef2aedece6587dbf82562819da99148eafbea38"
+    },
+    {
+      "path": "vidoseek-bge-vs-gate.csv",
+      "bytes": 474,
+      "sha256": "40c5a2d1cc0f7b825c321a5d580212a323659e7a46f030d978eb9d681bde1aef"
+    },
+    {
+      "path": "vidoseek-bge-vs-gate.json",
+      "bytes": 27724,
+      "sha256": "c08c512f0946b689804fde67598a5533f67286a0c9e10a7277d96c5ecf0f0dbe"
+    },
+    {
+      "path": "vidoseek-bge.csv",
+      "bytes": 16654,
+      "sha256": "77abf9f94a5c0a070e74f30b8a38a0e274444758a2cfc1d89102ee7cd5fb5daa"
+    },
+    {
+      "path": "vidoseek-bge.json",
+      "bytes": 28239,
+      "sha256": "f218b95c789f222a825a417025b0b0cfbf5353f05ddfe483ac08118d043d4a91"
+    },
+    {
+      "path": "vidoseek-gate.csv",
+      "bytes": 16877,
+      "sha256": "178a9299a2e397725f43b232ffd6b5fc9430f72fbccd0fe6a610b44779c01661"
+    },
+    {
+      "path": "vidoseek-gate.json",
+      "bytes": 27029,
+      "sha256": "199199d4f96b36845ed04d961434b523f6ca112748dd99b3a7e0832cbcf301a8"
+    },
+    {
+      "path": "vidoseek-qwen-blend09-vs-gate.json",
+      "bytes": 27615,
+      "sha256": "c7e23ba02a3986897bf3e5b600a408c5d6be2a3fda5de315434c0cd7ddc7a796"
+    },
+    {
+      "path": "vidoseek-qwen-blend09.json",
+      "bytes": 28134,
+      "sha256": "130671ed75e4262a8da0ea3ecf1fd2fbc83c31405a5972b75a97eb12ac3fff34"
+    },
+    {
+      "path": "vidoseek-qwen-scores.json",
+      "bytes": 44050,
+      "sha256": "1e21e0be50a78a131743195e189e8f45aa0c9fb0df09533d33d72cc9868463be"
+    },
+    {
+      "path": "vidoseek-qwen-vs-bge.csv",
+      "bytes": 442,
+      "sha256": "38d26cab997a62724158996673a48ba5c3e7bdd22bbf7f1aea89f14a4df5050a"
+    },
+    {
+      "path": "vidoseek-qwen-vs-bge.json",
+      "bytes": 27420,
+      "sha256": "676288304ab24bf185cc69593df4ba1f9b2138d72c4dc47b0abb63cda6a0cd10"
+    },
+    {
+      "path": "vidoseek-qwen-vs-gate.csv",
+      "bytes": 472,
+      "sha256": "c37b55e6a8a9575de32ec4bb215c04811fd531c1ba4ecb22f509b2d96a4db322"
+    },
+    {
+      "path": "vidoseek-qwen-vs-gate.json",
+      "bytes": 27769,
+      "sha256": "5dcc318e0ecf86c644b519ca3f081cb6ce245a3ce41643a3566fd5f9af53035f"
+    },
+    {
+      "path": "vidoseek-qwen.csv",
+      "bytes": 16611,
+      "sha256": "2ee2e7f9c2bcded93cfb23267a7bfb950e22f42d9fb5e125fcdba26162c91bd0"
+    },
+    {
+      "path": "vidoseek-qwen.json",
+      "bytes": 28189,
+      "sha256": "2a4ff7f8aa6c4d35055f685180aadf1986ae4bb654852c68a896de16ca096108"
+    },
+    {
+      "path": "vimdoc-bge-blend05-vs-gate.json",
+      "bytes": 46232,
+      "sha256": "1782943139d5743fbda09cf3f40d6169c2e62e08c2571bb4a903a709f79aee9b"
+    },
+    {
+      "path": "vimdoc-bge-blend05.json",
+      "bytes": 47043,
+      "sha256": "df1c28cb9e6fbe5debb32c8d38994342545e2adbb874541c4ed3a3c82accfae4"
+    },
+    {
+      "path": "vimdoc-bge-scores.json",
+      "bytes": 137684,
+      "sha256": "b93d4c8730746f922f69ed5f08c621a6199e9dc5cd04c65aae0673996a328003"
+    },
+    {
+      "path": "vimdoc-bge-vs-gate.csv",
+      "bytes": 461,
+      "sha256": "85071153ba635454fe1f35849c24737abc4107425d934764fbecb8656e5b28b0"
+    },
+    {
+      "path": "vimdoc-bge-vs-gate.json",
+      "bytes": 46679,
+      "sha256": "7c504de475a890da5a38aa77235f73afe93fed745393d2d62229edf20c24b903"
+    },
+    {
+      "path": "vimdoc-bge.csv",
+      "bytes": 23961,
+      "sha256": "5be9c96bb6f8b4ad92c31175e922c14fa4f40954f655fd15d08d5666cf0908eb"
+    },
+    {
+      "path": "vimdoc-bge.json",
+      "bytes": 47364,
+      "sha256": "636c862c267de7c07606c7632e321c413763413856bd140ca3f526fd3e451465"
+    },
+    {
+      "path": "vimdoc-gate.csv",
+      "bytes": 23656,
+      "sha256": "77c915e0b5d6eff3e0dbb79c8c45d8a62b2f154b655753585012c767acf1870f"
+    },
+    {
+      "path": "vimdoc-gate.json",
+      "bytes": 45626,
+      "sha256": "418ce437bc11cc6f6d4b2b202d20a074acec751c7578c95fb8498a6ba3449d8b"
+    },
+    {
+      "path": "vimdoc-qwen-blend05-vs-gate.csv",
+      "bytes": 447,
+      "sha256": "7d6afd1ec92154be5e01b86b16899ec63e005cefef94d1fccb1578159ac9372c"
+    },
+    {
+      "path": "vimdoc-qwen-blend05-vs-gate.json",
+      "bytes": 46104,
+      "sha256": "574cdc3a46e2e6960bc414fd53f1565b9017f87bb8367f9ad2e7f121bca91450"
+    },
+    {
+      "path": "vimdoc-qwen-blend05.json",
+      "bytes": 46945,
+      "sha256": "14214dd5b4ef1700213d3fe3c653908be4be4b4ce7baf7a0ec46c8b9fce54636"
+    },
+    {
+      "path": "vimdoc-qwen-scores.json",
+      "bytes": 97874,
+      "sha256": "f6d01f0a9fffd00408f580a984ea28aa7f624f93d04ac82ba80061b21070f335"
+    },
+    {
+      "path": "vimdoc-qwen-vs-bge.csv",
+      "bytes": 453,
+      "sha256": "73ce43d165c4388da5268d5d42a03796eb23a7e431de4e66ae017f87b0e27e4e"
+    },
+    {
+      "path": "vimdoc-qwen-vs-bge.json",
+      "bytes": 46507,
+      "sha256": "579913e1e851332c6e08482b4be62a5d07292322c8f3c71baa5ae93e74a5af73"
+    },
+    {
+      "path": "vimdoc-qwen-vs-gate.csv",
+      "bytes": 451,
+      "sha256": "62cb065fe1fe64c160e09831f56a113d7dde0d84746ffefcd66d01cb79722cf7"
+    },
+    {
+      "path": "vimdoc-qwen-vs-gate.json",
+      "bytes": 46389,
+      "sha256": "ed5e717335bb1ea4be4aed440da0fe456ca937ad36d017492fe8aa87d08fd4b4"
+    },
+    {
+      "path": "vimdoc-qwen.csv",
+      "bytes": 23759,
+      "sha256": "abf9ea7a3af47cc12231357b82615ae5901269b7fef21a437a7b0acad587d311"
+    },
+    {
+      "path": "vimdoc-qwen.json",
+      "bytes": 47149,
+      "sha256": "7c66c6c01b709e1f2d57bb0016307c035dff8235dd59092d6229b59c0283798e"
+    }
+  ]
+}
